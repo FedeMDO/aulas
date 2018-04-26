@@ -9,7 +9,8 @@ use Yii;
  *
  * @property int $ID_COMISION
  * @property int $ID_MATERIA
- * @property int $NUMERO
+ * @property int $CARGA_HORARIA_SEMANAL
+ * @property string $DESCRIPCION
  *
  * @property AgendaAula[] $agendaAulas
  * @property Materia $mATERIA
@@ -30,8 +31,9 @@ class Comision extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ID_MATERIA', 'NUMERO'], 'required'],
-            [['ID_MATERIA', 'NUMERO'], 'integer'],
+            [['ID_MATERIA', 'CARGA_HORARIA_SEMANAL'], 'required'],
+            [['ID_MATERIA', 'CARGA_HORARIA_SEMANAL'], 'integer'],
+            [['DESCRIPCION'], 'string', 'max' => 30],
             [['ID_MATERIA'], 'exist', 'skipOnError' => true, 'targetClass' => Materia::className(), 'targetAttribute' => ['ID_MATERIA' => 'ID_MATERIA']],
         ];
     }
@@ -44,7 +46,8 @@ class Comision extends \yii\db\ActiveRecord
         return [
             'ID_COMISION' => 'Id  Comision',
             'ID_MATERIA' => 'Id  Materia',
-            'NUMERO' => 'Numero',
+            'CARGA_HORARIA_SEMANAL' => 'Carga  Horaria  Semanal',
+            'DESCRIPCION' => 'Descripcion',
         ];
     }
 
