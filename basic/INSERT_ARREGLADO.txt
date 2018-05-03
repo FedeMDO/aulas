@@ -1,0 +1,170 @@
+INSERT INTO `institucion_educativa` (`ID_INSTITUCION`, `NOMBRE`) 
+VALUES (NULL, 'Unaj'), 
+       (NULL, 'Unqui')
+;
+INSERT INTO `instituto` (`ID_INSTITUTO`, `ID_INSTITUCION`, `NOMBRE`, `DESCRIPCION`) 
+VALUES ('100', '1', 'INGENIRIA', 'una descripcion'), 
+        (NULL, '1', 'SALUD', 'medicina'), 
+        (NULL, '2', 'SOCIALES', 'HIPPIES')
+
+;
+
+INSERT INTO `sede` (`ID_SEDE`, `ID_INSTITUCION`, `NOMBRE`, `CALLEYNUM`, `LOCALIDAD`, `DISPONIBLE_DESDE`, `DISPONIBLE_HASTA`) 
+VALUES ('300', '1', 'HEC', 'direccion real', 'florencio varela', '08:00:00', '22:00:00'), 
+    (NULL, '1', 'SEDE UNICA', 'CACHAQUI 2222', 'FLORENCIO VARELA', '08:00:00', '22:00:00')
+;
+
+INSERT INTO `edificio` (`ID_EDIFICIO`, `ID_SEDE`, `NOMBRE`, `CANTIDAD_AULAS`) 
+VALUES ('400', '300', 'EDIFICIO 1', '10'), 
+    (NULL, '301', 'PRIMERO', '20'), 
+    (NULL, '301', 'SEGUNDO', '9'), 
+    (NULL, '301', 'TERCERO', '4'), 
+    (NULL, '300', 'EDIFICIO2', '11')
+;
+
+INSERT INTO `aula` (`ID_AULA`, `ID_EDIFICIO`, `PISO`, `CAPACIDAD`) 
+VALUES ('500', '400', '0', '23'), 
+    (NULL, '400', '0', '23'), 
+    (NULL, '400', '0', '23'), 
+    (NULL, '400', '1', '23'), 
+    (NULL, '404', '0', '33'), 
+    (NULL, '404', '1', '33'), 
+    (NULL, '401', '0', '20'), 
+    (NULL, '402', '1', '45'), 
+    (NULL, '403', '0', '20'), 
+    (NULL, '400', '1', '23'), 
+    (NULL, '402', '1', '20'), 
+    (NULL, '401', '1', '20'), 
+    (NULL, '402', '1', '22'), 
+    (NULL, '404', '1', '30'), 
+    (NULL, '400', '0', '22'), 
+    (NULL, '401', '1', '20'), 
+    (NULL, '402', '0', '10'), 
+    (NULL, '403', '0', '43'), 
+    (NULL, '404', '1', '15'), 
+    (NULL, '401', '0', '60')
+;
+
+INSERT INTO `tramo` (`ID_TRAMO`, `INICIO`, `FIN`, `DURACION`) 
+VALUES ('600', TIME('06:00:00'), TIME('06:30:00'), '00:30:00'),
+    (NULL, TIME('06:00:00'), TIME('06:30:00'), '00:30:00'),
+    (NULL, TIME('06:30:00'), TIME('07:00:00'), '00:30:00'),
+    (NULL, TIME('07:00:00'), TIME('07:30:00'), '00:30:00'),
+    (NULL, TIME('07:30:00'), TIME('08:00:00'), '00:30:00'),
+    (NULL, TIME('08:00:00'), TIME('08:30:00'), '00:30:00'),
+    (NULL, TIME('08:30:00'), TIME('09:00:00'), '00:30:00'),
+    (NULL, TIME('09:00:00'), TIME('09:30:00'), '00:30:00'),
+    (NULL, TIME('09:30:00'), TIME('10:00:00'), '00:30:00'),
+    (NULL, TIME('10:00:00'), TIME('10:30:00'), '00:30:00'),
+    (NULL, TIME('10:30:00'), TIME('11:00:00'), '00:30:00'),
+    (NULL, TIME('11:00:00'), TIME('11:30:00'), '00:30:00'),
+    (NULL, TIME('11:30:00'), TIME('12:00:00'), '00:30:00'),
+    (NULL, TIME('12:00:00'), TIME('12:30:00'), '00:30:00'),
+    (NULL, TIME('12:30:00'), TIME('13:00:00'), '00:30:00'),
+    (NULL, TIME('13:00:00'), TIME('13:30:00'), '00:30:00'),
+    (NULL, TIME('13:30:00'), TIME('14:00:00'), '00:30:00'),
+    (NULL, TIME('14:00:00'), TIME('14:30:00'), '00:30:00'),
+    (NULL, TIME('14:30:00'), TIME('15:00:00'), '00:30:00'),
+    (NULL, TIME('15:00:00'), TIME('15:30:00'), '00:30:00'),
+    (NULL, TIME('15:30:00'), TIME('16:00:00'), '00:30:00'),
+    (NULL, TIME('16:00:00'), TIME('16:30:00'), '00:30:00'),
+    (NULL, TIME('16:30:00'), TIME('17:00:00'), '00:30:00'),
+    (NULL, TIME('17:00:00'), TIME('17:30:00'), '00:30:00'),
+    (NULL, TIME('17:30:00'), TIME('18:00:00'), '00:30:00'),
+    (NULL, TIME('18:00:00'), TIME('18:30:00'), '00:30:00'),
+    (NULL, TIME('18:30:00'), TIME('19:00:00'), '00:30:00'),
+    (NULL, TIME('19:00:00'), TIME('19:30:00'), '00:30:00'),
+    (NULL, TIME('19:30:00'), TIME('20:00:00'), '00:30:00'),
+    (NULL, TIME('20:00:00'), TIME('20:30:00'), '00:30:00'),
+    (NULL, TIME('20:30:00'), TIME('21:00:00'), '00:30:00'),
+    (NULL, TIME('21:00:00'), TIME('21:30:00'), '00:30:00'),
+    (NULL, TIME('21:30:00'), TIME('22:00:00'), '00:30:00'),
+    (NULL, TIME('22:00:00'), TIME('22:30:00'), '00:30:00'),
+    (NULL, TIME('22:30:00'), TIME('23:00:00'), '00:30:00'),
+    (NULL, TIME('23:00:00'), TIME('23:30:00'), '00:30:00')
+;
+
+INSERT INTO `recurso` (`ID_RECURSO`, `NOMBRE`, `DESCRIPCION`) 
+VALUES ('700', 'INFROMATIZADA', 'CONECCION A INTERNET'), 
+       (NULL, 'PROYECTOR', 'PROYECTA IMAGENES EN UNA PARED JAAJ')
+;
+
+INSERT INTO `dia_semana` (`ID_DIA`, `NOMBRE`, `NOM_ABREV`) 
+VALUES ('800', 'LUNES', 'LUN'), 
+    (NULL, 'MARTES', 'MAR'), 
+    (NULL, 'MIERCOLES', 'MIER'), 
+    (NULL, 'JUEVES', 'JUE'), 
+    (NULL, 'VIERNES', 'VIE'), 
+    (NULL, 'SABADO', 'SAB'), 
+    (NULL, 'DOMINGO', 'DOM')
+;
+
+INSERT INTO `carrera` (`ID_CARRERA`, `ID_INSTITUTO`, `NOMBRE`) 
+VALUES ('900', '100', 'INFORMATICA'),   
+    (NULL, '100', 'ELECTROMECNICA'), 
+    (NULL, '101', 'ENFERMERIA'), 
+    (NULL, '102', 'PSICOLOGIA'), 
+    (NULL, '101', 'MEDICINA')
+;
+
+INSERT INTO `materia` (`ID_MATERIA`, `NOMBRE`, `DESCRIPCION`) 
+VALUES ('1000', 'MATEMATICA', '2+2'), 
+    (NULL, 'FISICA', 'NEWTON'), 
+    (NULL, 'INTRODUCCION A LA ENFERMERIA', 'ALGUNA DESCRIPCION'), 
+    (NULL, 'INTRODUCCION A LA PSICOLOGIA', 'ALGUNA DESCRIPCION'), 
+    (NULL, 'FUNDAMENTOS EN INFORMATICA', 'ALGUNA DESCRIPCION')
+;
+
+INSERT INTO `comision` (`ID_COMISION`, `ID_MATERIA`, `CARGA_HORARIA_SEMANAL`)  
+VALUES ('1100', '1001', '5'), 
+    (NULL, '1004', '9'), 
+    (NULL, '1002', '6'), 
+    (NULL, '1003', '4'), 
+    (NULL, '1000', '9'), 
+    (NULL, '1000', '6'), 
+    (NULL, '1001', '5'), 
+    (NULL, '1002', '5'), 
+    (NULL, '1003', '6'), 
+    (NULL, '1004', '8')
+;
+
+INSERT INTO `aula_recurso` (`ID_RECURSO`, `ID_AULA`) 
+VALUES ('700', '500'), 
+    ('700', '501'), 
+    ('700', '503'),
+    ('700', '504'), 
+    ('700', '508'),
+    ('700', '509'), 
+    ('700', '510'),
+    ('700', '517'), 
+    ('700', '519'),
+    ('700', '514'), 
+    ('700', '506'),
+    ('701', '501'), 
+    ('701', '502'),
+    ('701', '503'), 
+    ('701', '504'),
+    ('701', '505'), 
+    ('701', '506'),
+    ('701', '507'), 
+    ('701', '508'),
+    ('701', '509'),
+    ('701', '510'),
+    ('701', '511'), 
+    ('701', '512'),
+    ('701', '513'), 
+    ('701', '514')
+;
+
+INSERT INTO `carrera_materia` (`ID_MATERIA`, `ID_CARRERA`) 
+VALUES ('1001', '901'), 
+    ('1001', '900'), 
+    ('1004', '900'), 
+    ('1002', '902'), 
+    ('1003', '903'), 
+    ('1000', '901'), 
+    ('1000', '902'), 
+    ('1000', '900'), 
+    ('1000', '904'), 
+    ('1000', '903')
+;
