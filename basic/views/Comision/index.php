@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ComisionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Comisions';
+$this->title = 'Comisiones';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="comision-index">
