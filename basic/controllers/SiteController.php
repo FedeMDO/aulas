@@ -12,6 +12,12 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
+
+    public function actionSay($message = 'Hola')
+    {
+        return $this->render('say', ['message' => $message]);
+    }
+
     /**
      * {@inheritdoc}
      */
