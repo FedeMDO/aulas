@@ -1,5 +1,6 @@
 <?php
-
-return [
-    'adminEmail' => 'admin@example.com',
+return[
+'adminEmail' => 'gabri.bentez@gmail.com',
+'title' => 'MIRAMEEEEEEEEEEEEEEEEEE',
+'salt' => 'marck45',
 ];
