@@ -15,6 +15,7 @@ use yii\widgets\LinkPager;
         <hr>
 
     </li>
+    <p class=holam >hola mundo<p/>
 <?php endforeach; ?>
 </ul>
 
