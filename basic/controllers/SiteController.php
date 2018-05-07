@@ -13,6 +13,7 @@ use app\models\FormRegister;
 use app\models\Users;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
+use yii\helpers\Html;
 
 class SiteController extends Controller
 {   
@@ -28,54 +29,8 @@ class SiteController extends Controller
         }
         return $key;
     }
-  
-    public function actionConfirm()
-    {
-    $table = new Users;
-    if (Yii::$app->request->get())
-    {
-   
-        //Obtenemos el valor de los parámetros get
-        $id = Html::encode($_GET["id"]);
-        $authKey = $_GET["authKey"];
-    
-        if ((int) $id)
-        {
-            //Realizamos la consulta para obtener el registro
-            $model = $table
-            ->find()
-            ->where("id=:id", [":id" => $id])
-            ->andWhere("authKey=:authKey", [":authKey" => $authKey]);
- 
-            //Si el registro existe
-            if ($model->count() == 1)
-            {
-                $activar = Users::findOne($id);
-                $activar->activate = 1;
-                if ($activar->update())
-                {
-                    echo "Grande te registraste, redireccionando ...";
-                    echo "<meta http-equiv='refresh' content='8; ".Url::toRoute("site/login")."'>";
-                }
-                else
-                {
-                    echo "algo malo paso al realizar el registro, redireccionando ...";
-                    echo "<meta http-equiv='refresh' content='8; ".Url::toRoute("site/login")."'>";
-                }
-             }
-            else //Si no existe redireccionamos a login
-            {
-                return $this->redirect(["site/login"]);
-            }
-        }
-        else //Si id no es un número entero redireccionamos a login
-        {
-            return $this->redirect(["site/login"]);
-        }
-    }
- }
- 
- public function actionRegister()
+
+    public function actionRegister()
  {
   //Creamos la instancia con el model de validación
   $model = new FormRegister;
@@ -121,7 +76,7 @@ class SiteController extends Controller
       
      $subject = "Confirmar registro";
      $body = "<h1>Haga click en el siguiente enlace para finalizar tu registro</h1>";
-     $body .= "<a href='http://yii.local/index.php?r=site/confirm&id=".$id."&authKey=".$authKey."'>Confirmar</a>";
+     $body .= "<a href='http://yii.local/site/confirm?id=".$id."&authKey=".$authKey."'>Confirmar</a>";
       
      //Enviamos el correo
      Yii::$app->mailer->compose()
@@ -154,7 +109,58 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
+    public function actionConfirm()
+    {
+        $table = new Users;
+    
+    if (Yii::$app->request->get())
+    {
+        
+        //Obtenemos el valor de los parámetros get
+        $id = Html::encode($_GET["id"]);
+        $authKey = $_GET["authKey"];
+        
+        if ((int) $id)
+        {
+             //Realizamos la consulta para obtener el registro
+            $model = $table
+            ->find()
+            ->where("id=:id", [":id" => $id])
+            ->andWhere("authKey=:authKey", [":authKey" => $authKey]);
+ 
+            //Si el registro existe
+            if ($model->count() == 1)
+            {
+                $activar = Users::findOne($id);
+                $activar->activate = 1;
+                if ($activar->update())
+                {
+                    echo "Grande te registraste, redireccionando ...";
+                    echo "<meta http-equiv='refresh' content='8; ".Url::toRoute("site/login")."'>";
+                }
+                else
+                {
+                    echo "algo malo paso al realizar el registro, redireccionando ...";
+                    echo "<meta http-equiv='refresh' content='8; ".Url::toRoute("site/login")."'>";
+                }
+             }
+            else //Si no existe redireccionamos a login
+            {
+                return $this->redirect(["site/login"]);
+            }
+        }
+        else //Si id no es un número entero redireccionamos a login
+        {
+            return $this->redirect(["site/login"]);
+        }
+    }
+ }
+ 
+    
+    
+    
+    
+     public function behaviors()
     {
         return [
             'access' => [

@@ -4,7 +4,7 @@ namespace app\models;
 use yii\web\IdentityInterface;
 
 
-class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
+class User extends \yii\base\baseObject implements \yii\web\IdentityInterface
 {
     
     public $id;
