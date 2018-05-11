@@ -1,8 +1,12 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
+
+
 ?>
 <h1>SEDES</h1>
+
+
 <ul>
 <?php foreach ($sede as $sede): ?>
     <li>
@@ -16,6 +20,9 @@ use yii\widgets\LinkPager;
 
     </li>
 <?php endforeach; ?>
+
+
 </ul>
 
 <?= LinkPager::widget(['pagination' => $pagination]) ?>
+
