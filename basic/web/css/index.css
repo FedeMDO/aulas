@@ -1,0 +1,29 @@
+.iniciocs{
+    background-image: url(../image/index_background_desenfoque.jpg);
+    background-size: cover; 
+    -ms-background-size: cover; 
+    -o-background-size: cover;
+    -moz-background-size: cover; 
+    -webkit-background-size: cover; 
+}
+
+.jumbotron
+{
+  background: -webkit-linear-gradient(rgb(41, 128, 185),rgb(52, 152, 219));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+ 
+    
+font-family: "Arial Black", Gadget, sans-serif;
+font-size: 30px;
+letter-spacing: 2.8px;
+word-spacing: 5.8px;
+color: #01AEF0;
+font-weight: 700;
+text-decoration: none;
+font-style: normal;
+font-variant: normal;
+text-transform: uppercase;
+
+}
+

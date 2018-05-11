@@ -26,7 +26,7 @@ AppAsset::register($this);
     
 </head>
 
-<body>
+<body class="iniciocs" >
 <?php $this->beginBody() ?>
 
 <div class="wrap">
