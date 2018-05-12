@@ -15,7 +15,7 @@ class SiteController extends Controller
 
     public function actionSay($message = 'Hola')
     {
-        return $this->render('say', ['message' => $message]);
+        return $this->render('gallery_sede', ['message' => $message]);
     }
 
     /**

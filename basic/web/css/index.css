@@ -1,5 +1,8 @@
+
+
+
 .iniciocs{
-    background-image: url(../image/index_background_desenfoque.jpg);
+  background-image: url(../image/index_background_desenfoque.jpg);
     background-size: cover; 
     -ms-background-size: cover; 
     -o-background-size: cover;
@@ -26,4 +29,42 @@ font-variant: normal;
 text-transform: uppercase;
 
 }
+
+
+
+
+
+.img-responsive
+{
+  background-image: url(../image/unaj1.png);  
+  
+}
+
+
+.gallery{
+  margin: 10px 50px;
+}
+
+.gallery img{
+  width: 340px;
+  height: 240px;
+
+  transition: 0.5s;
+
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+  
+}
+
+
+.gallery img:hover{
+  transform: scale(1.2);
+}
+
+
+
+
+
+
+
 

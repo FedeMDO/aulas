@@ -6,10 +6,13 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Sede */
 
+
+
 $this->title = $model->ID_SEDE;
 $this->params['breadcrumbs'][] = ['label' => 'Sedes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="sede-view">
 
     <h1><?= Html::encode($this->title) ?></h1>

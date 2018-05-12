@@ -16,6 +16,14 @@ use yii\data\Pagination;
 class SedeController extends Controller
 {
 
+    public function actionGallery_sede()
+    {
+        return $this->render('gallery_sede',[]);
+            
+       
+    }
+
+    
     public function actionVistav()
     {
        

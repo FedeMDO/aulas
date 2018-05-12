@@ -7,14 +7,22 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
+
+$this->registerCssFile("@web/css/login.css", [
+    'depends' => [\yii\bootstrap\BootstrapAsset::className()],
+    
+], 'css-print-theme');
+
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
+
+<div id="box_login">
+<div class="loginc">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>Please fill out the following fields to login:</p>
-
+  
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
         'layout' => 'horizontal',
@@ -39,9 +47,11 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
     <?php ActiveForm::end(); ?>
-
+    
     <div class="col-lg-offset-1" style="color:#999;">
         You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>
         To modify the username/password, please check out the code <code>app\models\User::$users</code>.
+    </div>
+
     </div>
 </div>
