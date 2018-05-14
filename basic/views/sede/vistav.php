@@ -19,9 +19,6 @@ $this->registerCssFile("@web/css/index.css", [
 <h1>SEDES</h1>
 
 
-
-
-
 <div class="gallery">
     <a href="../site/index">
      <img src="../image/sede_unaj.jpeg" alt="Avatar" class="image" >
@@ -30,19 +27,3 @@ $this->registerCssFile("@web/css/index.css", [
   <img src="../image/sede_generic.jpg" alt="Avatar" class="image" >
 </div>
 
-
-
-
-
-
- 
-
-
-
-
-       
-       
-
-       
-        
-    

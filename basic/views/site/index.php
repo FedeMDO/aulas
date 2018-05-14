@@ -3,19 +3,8 @@
 /* @var $this yii\web\View */
 
 
-$this->registerCssFile("@web/css/index.css", [
-    'depends' => [\yii\bootstrap\BootstrapAsset::className()],
-    
-], 'css-print-theme');
-
-
-$this->title = 'My Yii Application';
-
-
-
+$this->title = 'Universidad Nacional Arturo Jauretche';
 ?>
-
-
 
 
 <div class="site-index">
