@@ -11,6 +11,7 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 
+
 $this->registerCssFile("@web/css/index.css", [
     'depends' => [\yii\bootstrap\BootstrapAsset::className()],
     
@@ -69,15 +70,13 @@ AppAsset::register($this);
 
         
     </div>
-
-           
-
-
-
 </div>
 
 
-<div></div>
+
+
+<?php $this->endBody() ?>
+
 
 <footer class="footer">
     <div class="container">
@@ -86,9 +85,6 @@ AppAsset::register($this);
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
-
-<?php $this->endBody() ?>
-
 
 
 

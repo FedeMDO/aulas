@@ -1,13 +1,11 @@
-
-
-
 .iniciocs{
   background-image: url(../image/index_background_desenfoque.jpg);
     background-size: cover; 
     -ms-background-size: cover; 
     -o-background-size: cover;
     -moz-background-size: cover; 
-    -webkit-background-size: cover; 
+    -webkit-background-size: cover;
+
 }
 
 .jumbotron
@@ -30,9 +28,11 @@ text-transform: uppercase;
 
 }
 
-
-
-
+.wrap
+{
+  width: 100%;
+  height: 100%;
+}
 
 .img-responsive
 {
