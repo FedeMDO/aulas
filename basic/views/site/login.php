@@ -8,13 +8,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 
-
-$this->registerCssFile("@web/css/login.css", [
-    'depends' => [\yii\bootstrap\BootstrapAsset::className()],
-    
-], 'css-print-theme');
-
-$this->title = 'Login';
+$this->title = 'Ingresar';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -30,6 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <br></br>
 
+    <p>Please fill out the following fields to login:</p>
+  
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
         'layout' => 'horizontal',
