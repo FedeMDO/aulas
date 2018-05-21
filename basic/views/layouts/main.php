@@ -47,8 +47,7 @@ AppAsset::register($this);
    
     echo Nav::widget([
         'items' => [
-            ['label' => 'Iniciar Sesion', 'url' => ['/site/login']],
-           
+        
             ['label' => 'Sedes', 'url' => ['/sede/vistav']],
 
             

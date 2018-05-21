@@ -34,6 +34,8 @@ text-transform: uppercase;
   height: 100%;
 }
 
+
+
 .img-responsive
 {
   background-image: url(../image/unaj1.png);  
@@ -64,7 +66,26 @@ text-transform: uppercase;
 
 
 
+h4 { 
+  border:0 solid #fff; 
+  border-bottom-width:1px;
+  padding-bottom:10px;
+  text-align: center;
+  color: white;
+ }
 
+
+.form-login {
+  background-color: rgb(41, 128, 185);
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 15px;
+  border-color:#d2d2d2;
+  border-width: 5px;
+  box-shadow:0 1px 0 #cfcfcf;
+}
 
 
 
