@@ -1,0 +1,96 @@
+.iniciocs{
+  background-image: url(../image/index_background_desenfoque.jpg);
+    background-size: cover; 
+    -ms-background-size: cover; 
+    -o-background-size: cover;
+    -moz-background-size: cover; 
+    -webkit-background-size: cover;
+
+}
+
+.jumbotron
+{
+  background: -webkit-linear-gradient(rgb(41, 128, 185),rgb(52, 152, 219));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+ 
+    
+font-family: "Arial Black", Gadget, sans-serif;
+font-size: 30px;
+letter-spacing: 2.8px;
+word-spacing: 5.8px;
+color: #01AEF0;
+font-weight: 700;
+text-decoration: none;
+font-style: normal;
+font-variant: normal;
+text-transform: uppercase;
+
+}
+
+.wrap
+{
+  width: 100%;
+  height: 100%;
+}
+
+
+
+.img-responsive
+{
+  background-image: url(../image/unaj1.png);  
+  
+}
+
+
+.gallery{
+  margin: 10px 50px;
+}
+
+.gallery img{
+  width: 340px;
+  height: 240px;
+
+  transition: 0.5s;
+
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+  
+}
+
+
+.gallery img:hover{
+  transform: scale(1.2);
+}
+
+
+
+
+h4 { 
+  border:0 solid #fff; 
+  border-bottom-width:1px;
+  padding-bottom:10px;
+  text-align: center;
+  color: white;
+ }
+
+
+.form-login {
+  background-color: rgb(41, 128, 185);
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 15px;
+  border-color:#d2d2d2;
+  border-width: 5px;
+  box-shadow:0 1px 0 #cfcfcf;
+
+  -webkit-box-shadow: 10px 10px 20px -8px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 10px 20px -8px rgba(0,0,0,0.75);
+box-shadow: 10px 10px 20px -8px rgba(0,0,0,0.75);
+}
+
+
+
+

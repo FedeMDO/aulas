@@ -8,10 +8,18 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Ingresar';
+
+$this->registerCssFile("@web/css/login.css", [
+    'depends' => [\yii\bootstrap\BootstrapAsset::className()],
+    
+], 'css-print-theme');
+
+$this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
+
+<div id="box_login">
+<div class="loginc">
     <h1><?= Html::encode($this->title) ?></h1>
 
 
