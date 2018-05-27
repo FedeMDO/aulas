@@ -2,6 +2,12 @@
 
 /* @var $this yii\web\View */
 
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\bootstrap\ActiveForm;
+
+
+
 
 $this->title = 'Universidad Nacional Arturo Jauretche';
 ?>
@@ -16,9 +22,10 @@ $this->title = 'Universidad Nacional Arturo Jauretche';
     </div>
             
 
+    <div class="col-md-offset-5 col-md-3">
 
 
-<div class="col-md-offset-5 col-md-3">
+
             <div class="form-login">
             <h4>Bienvenido</h4>
             <input type="text" id="userName" class="form-control input-sm chat-input" placeholder="Usuario" />
@@ -34,9 +41,13 @@ $this->title = 'Universidad Nacional Arturo Jauretche';
     
 
             </div>
-            </div>
+ </div>
         
-    </div>
+</div>
+
+
+
+
 
       
 </div>

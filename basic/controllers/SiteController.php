@@ -18,10 +18,11 @@ use yii\helpers\Html;
 class SiteController extends Controller
 {
 
-    public function actionSay($message = 'Hola')
+    public function actionAdmin()
     {
-        return $this->render('gallery_sede', ['message' => $message]);
+       return $this->render('admin');
     }
+
 
     /**
      * {@inheritdoc}
@@ -156,6 +157,7 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
+         
 
         return $this->goHome();
     }

@@ -20,7 +20,7 @@ $this->registerCssFile("@web/css/index.css", [
 
 
 <div class="gallery">
-    <a href="../site/index">
+    <a href="../edificio/edificiov">
      <img src="../image/sede_unaj.jpeg" alt="Avatar" class="image" >
     </a>
   <img src="../image/sede_hec.jpg" alt="Avatar" class="image" >

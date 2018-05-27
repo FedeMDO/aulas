@@ -14,6 +14,12 @@ use yii\filters\VerbFilter;
  */
 class EdificioController extends Controller
 {
+    public function actionEdificiov()
+    {
+        return $this->render('edificiov');
+    }
+
+
     /**
      * @inheritdoc
      */

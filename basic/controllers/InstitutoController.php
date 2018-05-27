@@ -14,6 +14,11 @@ use yii\filters\VerbFilter;
  */
 class InstitutoController extends Controller
 {
+
+    public function actionInstitutov()
+    {
+        return $this->render('institutov');
+    }
     /**
      * @inheritdoc
      */
