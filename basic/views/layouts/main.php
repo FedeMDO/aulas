@@ -60,6 +60,14 @@ AppAsset::register($this);
         'items' => [
         
             ['label' => 'Sedes', 'url' => ['/sede/vistav']],
+
+
+            ['label' => 'About', 'url' => ['/site/about']],
+            
+            ['label' => 'About', 'url' => ['/site/about']],
+
+
+            ['label' => 'About', 'url' => ['/site/about']],
             
 
             
@@ -67,7 +75,6 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav'],
     ]);
 
-    
     NavBar::end();
     ?>
 
@@ -83,7 +90,6 @@ AppAsset::register($this);
         
     </div>
 </div>
-
 
 
 

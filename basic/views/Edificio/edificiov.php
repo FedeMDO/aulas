@@ -7,10 +7,10 @@ use yii\bootstrap\ActiveForm;
 
 
 
-<div>ESTOS SON LOS EDIFICIOS DISPONIBLES</div>
 
 
-<h1>EDIFICIOS</h1>
+
+<h1>Edificios Disponibles</h1>
 
 
 <div class="gallery">
