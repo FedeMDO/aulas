@@ -49,32 +49,37 @@ AppAsset::register($this);
 
 <?php $this->beginBody() ?>
 
+
+
+
+
 <div class="wrap">
+
 
 
     <?php
     NavBar::begin([
         'brandLabel' => '<img src="../image/iconUnaj.jpg" height=30 width=30 ; class="img-responsive">'.'',]);
    
-    echo Nav::widget([
-        'items' => [
-        
-            ['label' => 'Sedes', 'url' => ['/sede/vistav']],
-
-
-            ['label' => 'About', 'url' => ['/site/about']],
-            
-            ['label' => 'About', 'url' => ['/site/about']],
-
-
-            ['label' => 'About', 'url' => ['/site/about']],
-            
-
-            
-        ],
-        'options' => ['class' => 'navbar-nav'],
-    ]);
-
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-right'],
+            'items' => [
+                ['label' => 'Home', 'url' => ['/site/index']],
+                
+                Yii::$app->user->isGuest ? (
+                    ['label' => 'Login', 'url' => ['/site/login']]
+                ) : (
+                    '<li>'
+                    . Html::beginForm(['/site/logout'], 'post')
+                    . Html::submitButton(
+                        'Logout (' . Yii::$app->user->identity->username . ')',
+                        ['class' => 'btn btn-link logout']
+                    )
+                    . Html::endForm()
+                    . '</li>'
+                )
+            ],
+        ]);
     NavBar::end();
     ?>
 

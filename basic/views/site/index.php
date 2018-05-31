@@ -42,13 +42,8 @@ $this->title = 'Universidad Nacional Arturo Jauretche';
 
 
 
-      
+
 </div>
-
-
-
-
-
-
-
+ 
+ 
 
