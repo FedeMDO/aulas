@@ -10,42 +10,59 @@ $this->registerCssFile("@web/css/inicio.css",
 
 
 
-$this->title = 'My Yii Application';
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\bootstrap\ActiveForm;
+
+
+
+
+$this->title = 'Universidad Nacional Arturo Jauretche';
 ?>
+
+
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
+  
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+        
     </div>
+            
 
-    <div class="body-content">
+    <div class="col-md-offset-5 col-md-3">
 
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading </h2>
 
-                
+            <div class="form-login">
+            <h4>Bienvenido</h4>
+            <input type="text" id="userName" class="form-control input-sm chat-input" placeholder="Usuario" />
+            </br>
+            <input type="text" id="userPassword" class="form-control input-sm chat-input" placeholder="Contraseña" />
+            </br>
+            <div class="wrapper">
+            <span class="group-btn">     
+                <a href="#" class="btn btn-success btn-md">Ingresar<i class="fa fa-sign-in"></i></a>
+                <button type="button" class="btn btn-warning">Registrarse</button>
+            </span>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+    
+
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-             
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
-
-    </div>
+ </div>
+        
 </div>
+
+
+
+
+
+      
+</div>
+
+
+
+
+
+
+
+

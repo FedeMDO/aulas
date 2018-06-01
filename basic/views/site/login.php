@@ -11,7 +11,10 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Ingresar';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
+
+<div id="box_login">
+
+<div class="loginc">
     <h1><?= Html::encode($this->title) ?></h1>
 
 
@@ -22,6 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <br></br>
 
+    <p>Please fill out the following fields to login:</p>
+  
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
         'layout' => 'horizontal',
@@ -31,6 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
+        
+
         <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('nombre') ?>
 
         <?= $form->field($model, 'password')->passwordInput()->label('contraseña') ?>
@@ -38,6 +45,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'rememberMe')->checkbox([
             'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
         ])->label('recordarme') ?>
+
+
 
         <div class="form-group">
             <div class="col-lg-offset-1 col-lg-11">
@@ -49,3 +58,5 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 </div>
+
+
