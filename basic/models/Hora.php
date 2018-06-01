@@ -5,23 +5,22 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "dia_semana".
+ * This is the model class for table "hora".
  *
  * @property int $ID
- * @property string $NOMBRE
- * @property string $NOM_ABREV
+ * @property string $HORA
  *
  * @property AgendaAsigComision[] $agendaAsigComisions
  * @property AgendaAsigHoras[] $agendaAsigHoras
  */
-class DiaSemana extends \yii\db\ActiveRecord
+class Hora extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'dia_semana';
+        return 'hora';
     }
 
     /**
@@ -30,8 +29,7 @@ class DiaSemana extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['NOMBRE'], 'string', 'max' => 10],
-            [['NOM_ABREV'], 'string', 'max' => 5],
+            [['HORA'], 'safe'],
         ];
     }
 
@@ -42,8 +40,7 @@ class DiaSemana extends \yii\db\ActiveRecord
     {
         return [
             'ID' => 'ID',
-            'NOMBRE' => 'Nombre',
-            'NOM_ABREV' => 'Nom  Abrev',
+            'HORA' => 'Hora',
         ];
     }
 
@@ -52,7 +49,7 @@ class DiaSemana extends \yii\db\ActiveRecord
      */
     public function getAgendaAsigComisions()
     {
-        return $this->hasMany(AgendaAsigComision::className(), ['ID_DIA' => 'ID']);
+        return $this->hasMany(AgendaAsigComision::className(), ['ID_HORA' => 'ID']);
     }
 
     /**
@@ -60,6 +57,6 @@ class DiaSemana extends \yii\db\ActiveRecord
      */
     public function getAgendaAsigHoras()
     {
-        return $this->hasMany(AgendaAsigHoras::className(), ['ID_DIA' => 'ID']);
+        return $this->hasMany(AgendaAsigHoras::className(), ['ID_HORA' => 'ID']);
     }
 }

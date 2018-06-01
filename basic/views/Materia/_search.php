@@ -15,11 +15,9 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'ID_MATERIA') ?>
+    <?= $form->field($model, 'ID') ?>
 
     <?= $form->field($model, 'NOMBRE') ?>
-
-    <?= $form->field($model, 'DESCRIPCION') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

@@ -32,8 +32,8 @@ class AulaRecurso extends \yii\db\ActiveRecord
             [['ID_RECURSO', 'ID_AULA'], 'required'],
             [['ID_RECURSO', 'ID_AULA'], 'integer'],
             [['ID_RECURSO', 'ID_AULA'], 'unique', 'targetAttribute' => ['ID_RECURSO', 'ID_AULA']],
-            [['ID_RECURSO'], 'exist', 'skipOnError' => true, 'targetClass' => Recurso::className(), 'targetAttribute' => ['ID_RECURSO' => 'ID_RECURSO']],
-            [['ID_AULA'], 'exist', 'skipOnError' => true, 'targetClass' => Aula::className(), 'targetAttribute' => ['ID_AULA' => 'ID_AULA']],
+            [['ID_RECURSO'], 'exist', 'skipOnError' => true, 'targetClass' => Recurso::className(), 'targetAttribute' => ['ID_RECURSO' => 'ID']],
+            [['ID_AULA'], 'exist', 'skipOnError' => true, 'targetClass' => Aula::className(), 'targetAttribute' => ['ID_AULA' => 'ID']],
         ];
     }
 
@@ -53,7 +53,7 @@ class AulaRecurso extends \yii\db\ActiveRecord
      */
     public function getRECURSO()
     {
-        return $this->hasOne(Recurso::className(), ['ID_RECURSO' => 'ID_RECURSO']);
+        return $this->hasOne(Recurso::className(), ['ID' => 'ID_RECURSO']);
     }
 
     /**
@@ -61,6 +61,6 @@ class AulaRecurso extends \yii\db\ActiveRecord
      */
     public function getAULA()
     {
-        return $this->hasOne(Aula::className(), ['ID_AULA' => 'ID_AULA']);
+        return $this->hasOne(Aula::className(), ['ID' => 'ID_AULA']);
     }
 }

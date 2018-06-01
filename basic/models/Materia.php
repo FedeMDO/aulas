@@ -7,9 +7,8 @@ use Yii;
 /**
  * This is the model class for table "materia".
  *
- * @property int $ID_MATERIA
+ * @property int $ID
  * @property string $NOMBRE
- * @property string $DESCRIPCION
  *
  * @property CarreraMateria[] $carreraMaterias
  * @property Carrera[] $cARRERAs
@@ -31,9 +30,8 @@ class Materia extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['NOMBRE', 'DESCRIPCION'], 'required'],
+            [['NOMBRE'], 'required'],
             [['NOMBRE'], 'string', 'max' => 40],
-            [['DESCRIPCION'], 'string', 'max' => 50],
         ];
     }
 
@@ -43,9 +41,8 @@ class Materia extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'ID_MATERIA' => 'Id  Materia',
+            'ID' => 'ID',
             'NOMBRE' => 'Nombre',
-            'DESCRIPCION' => 'Descripcion',
         ];
     }
 
@@ -54,7 +51,7 @@ class Materia extends \yii\db\ActiveRecord
      */
     public function getCarreraMaterias()
     {
-        return $this->hasMany(CarreraMateria::className(), ['ID_MATERIA' => 'ID_MATERIA']);
+        return $this->hasMany(CarreraMateria::className(), ['ID_MATERIA' => 'ID']);
     }
 
     /**
@@ -62,7 +59,7 @@ class Materia extends \yii\db\ActiveRecord
      */
     public function getCARRERAs()
     {
-        return $this->hasMany(Carrera::className(), ['ID_CARRERA' => 'ID_CARRERA'])->viaTable('carrera_materia', ['ID_MATERIA' => 'ID_MATERIA']);
+        return $this->hasMany(Carrera::className(), ['ID' => 'ID_CARRERA'])->viaTable('carrera_materia', ['ID_MATERIA' => 'ID']);
     }
 
     /**
@@ -70,6 +67,6 @@ class Materia extends \yii\db\ActiveRecord
      */
     public function getComisions()
     {
-        return $this->hasMany(Comision::className(), ['ID_MATERIA' => 'ID_MATERIA']);
+        return $this->hasMany(Comision::className(), ['ID_MATERIA' => 'ID']);
     }
 }

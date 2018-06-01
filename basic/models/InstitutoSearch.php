@@ -18,8 +18,8 @@ class InstitutoSearch extends Instituto
     public function rules()
     {
         return [
-            [['ID_INSTITUTO', 'ID_INSTITUCION'], 'integer'],
-            [['NOMBRE', 'DESCRIPCION'], 'safe'],
+            [['ID', 'ID_INSTITUCION'], 'integer'],
+            [['NOMBRE', 'COLOR_HEXA'], 'safe'],
         ];
     }
 
@@ -59,12 +59,12 @@ class InstitutoSearch extends Instituto
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'ID_INSTITUTO' => $this->ID_INSTITUTO,
+            'ID' => $this->ID,
             'ID_INSTITUCION' => $this->ID_INSTITUCION,
         ]);
 
         $query->andFilterWhere(['like', 'NOMBRE', $this->NOMBRE])
-            ->andFilterWhere(['like', 'DESCRIPCION', $this->DESCRIPCION]);
+            ->andFilterWhere(['like', 'COLOR_HEXA', $this->COLOR_HEXA]);
 
         return $dataProvider;
     }
