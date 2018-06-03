@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Aula;
-use app\models\AulaSearch;
+use app\models\Notificacion;
+use app\models\NotificacionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AulaController implements the CRUD actions for Aula model.
+ * NotificacionController implements the CRUD actions for Notificacion model.
  */
-class AulaController extends Controller
+class NotificacionController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class AulaController extends Controller
     }
 
     /**
-     * Lists all Aula models.
+     * Lists all Notificacion models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AulaSearch();
+        $searchModel = new NotificacionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class AulaController extends Controller
     }
 
     /**
-     * Displays a single Aula model.
+     * Displays a single Notificacion model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class AulaController extends Controller
     }
 
     /**
-     * Creates a new Aula model.
+     * Creates a new Notificacion model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Aula();
+        $model = new Notificacion();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->ID]);
@@ -76,7 +76,7 @@ class AulaController extends Controller
     }
 
     /**
-     * Updates an existing Aula model.
+     * Updates an existing Notificacion model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class AulaController extends Controller
     }
 
     /**
-     * Deletes an existing Aula model.
+     * Deletes an existing Notificacion model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class AulaController extends Controller
     }
 
     /**
-     * Finds the Aula model based on its primary key value.
+     * Finds the Notificacion model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Aula the loaded model
+     * @return Notificacion the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Aula::findOne($id)) !== null) {
+        if (($model = Notificacion::findOne($id)) !== null) {
             return $model;
         }
 

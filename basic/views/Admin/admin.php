@@ -8,7 +8,7 @@ use yii\bootstrap\ActiveForm;
 
 <head>
 
-<h1>VISTA ADMINISTRADOR</h1>
+
 
 </head>
 
@@ -17,4 +17,6 @@ use yii\bootstrap\ActiveForm;
   <a href="../instituto/institutov" class="btn btn-primary">INSTITUTOS</a>
   <a href="#" class="btn btn-primary">EDITAR PERFIL</a>
 </div>
+
+
 

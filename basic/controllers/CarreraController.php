@@ -67,7 +67,7 @@ class CarreraController extends Controller
         $model = new Carrera();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID_CARRERA]);
+            return $this->redirect(['view', 'id' => $model->ID]);
         }
 
         return $this->render('create', [
@@ -87,7 +87,7 @@ class CarreraController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID_CARRERA]);
+            return $this->redirect(['view', 'id' => $model->ID]);
         }
 
         return $this->render('update', [

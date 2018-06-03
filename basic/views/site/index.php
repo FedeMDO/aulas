@@ -30,24 +30,18 @@ $this->title = 'Universidad Nacional Arturo Jauretche';
     </div>
             
 
-    <div class="col-md-offset-5 col-md-3">
+    <div class="col-md-offset-4 col-md-4">
+    <br></br>
 
-
+           
             <div class="form-login">
             <h4>Bienvenido</h4>
-            <input type="text" id="userName" class="form-control input-sm chat-input" placeholder="Usuario" />
-            </br>
-            <input type="text" id="userPassword" class="form-control input-sm chat-input" placeholder="Contraseña" />
-            </br>
-            <div class="wrapper">
             <span class="group-btn">     
-                <a href="#" class="btn btn-success btn-md">Ingresar<i class="fa fa-sign-in"></i></a>
-                <button type="button" class="btn btn-warning">Registrarse</button>
-            </span>
-
-    
-
-            </div>
+                <a href="../site/login" class="btn btn-success btn-md">Iniciar Sesion<i class="fa fa-sign-in"></i></a>
+                <a href="../site/register" class="btn btn-warning btn-md">Registrarse<i class="fa fa-sign-in"></i></a>
+            </span></div>
+            
+        </div>
  </div>
         
 </div>
@@ -56,13 +50,8 @@ $this->title = 'Universidad Nacional Arturo Jauretche';
 
 
 
-      
+
 </div>
-
-
-
-
-
-
-
+ 
+ 
 

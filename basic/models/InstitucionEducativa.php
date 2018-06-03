@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "institucion_educativa".
  *
- * @property int $ID_INSTITUCION
+ * @property int $ID
  * @property string $NOMBRE
  *
  * @property Instituto[] $institutos
@@ -40,7 +40,7 @@ class InstitucionEducativa extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'ID_INSTITUCION' => 'Id  Institucion',
+            'ID' => 'ID',
             'NOMBRE' => 'Nombre',
         ];
     }
@@ -50,7 +50,7 @@ class InstitucionEducativa extends \yii\db\ActiveRecord
      */
     public function getInstitutos()
     {
-        return $this->hasMany(Instituto::className(), ['ID_INSTITUCION' => 'ID_INSTITUCION']);
+        return $this->hasMany(Instituto::className(), ['ID_INSTITUCION' => 'ID']);
     }
 
     /**
@@ -58,6 +58,6 @@ class InstitucionEducativa extends \yii\db\ActiveRecord
      */
     public function getSedes()
     {
-        return $this->hasMany(Sede::className(), ['ID_INSTITUCION' => 'ID_INSTITUCION']);
+        return $this->hasMany(Sede::className(), ['ID_INSTITUCION' => 'ID']);
     }
 }

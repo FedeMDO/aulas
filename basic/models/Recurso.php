@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "recurso".
  *
- * @property int $ID_RECURSO
+ * @property int $ID
  * @property string $NOMBRE
  * @property string $DESCRIPCION
  *
@@ -42,7 +42,7 @@ class Recurso extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'ID_RECURSO' => 'Id  Recurso',
+            'ID' => 'ID',
             'NOMBRE' => 'Nombre',
             'DESCRIPCION' => 'Descripcion',
         ];
@@ -53,7 +53,7 @@ class Recurso extends \yii\db\ActiveRecord
      */
     public function getAulaRecursos()
     {
-        return $this->hasMany(AulaRecurso::className(), ['ID_RECURSO' => 'ID_RECURSO']);
+        return $this->hasMany(AulaRecurso::className(), ['ID_RECURSO' => 'ID']);
     }
 
     /**
@@ -61,6 +61,6 @@ class Recurso extends \yii\db\ActiveRecord
      */
     public function getAULAs()
     {
-        return $this->hasMany(Aula::className(), ['ID_AULA' => 'ID_AULA'])->viaTable('aula_recurso', ['ID_RECURSO' => 'ID_RECURSO']);
+        return $this->hasMany(Aula::className(), ['ID' => 'ID_AULA'])->viaTable('aula_recurso', ['ID_RECURSO' => 'ID']);
     }
 }

@@ -106,11 +106,74 @@ th, td {
 
 
 
-th {
-  background-color: #A63322;
-  color: white;
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
 }
 
 
+.regis
+{
+  background-color: #ecf0f1;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 9px;
+  border-color:#d2d2d2;
+  border-width: 5px;
+  box-shadow:0 1px 0 #cfcfcf;
+
+}
 
 
+.loginc
+{
+  background-color: #ecf0f1;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 9px;
+  border-color:#d2d2d2;
+  border-width: 5px;
+  box-shadow:0 1px 0 #cfcfcf;
+}
+
+
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+  z-index: 2;
+  color: #fff;
+  background-color: #A63322;
+  border-color: #A63322;
+}
+
+
+.maininsti
+ {
+  width: 100%;
+  height: 100%;
+ }
+
+
+.imgsede1
+{
+  height: 500px;
+  width: 500px;
+}
+
+.imgsede2
+{
+  height: 500px;
+  width: 500px;
+}
+
+.imgsede3
+{
+  height: 500px;
+  width: 500px;
+}

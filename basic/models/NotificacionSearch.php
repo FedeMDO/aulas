@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Carrera;
+use app\models\Notificacion;
 
 /**
- * CarreraSearch represents the model behind the search form of `app\models\Carrera`.
+ * NotificacionSearch represents the model behind the search form of `app\models\Notificacion`.
  */
-class CarreraSearch extends Carrera
+class NotificacionSearch extends Notificacion
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class CarreraSearch extends Carrera
     public function rules()
     {
         return [
-            [['ID', 'ID_INSTITUTO'], 'integer'],
-            [['NOMBRE'], 'safe'],
+            [['ID', 'ID_USER_EMISOR', 'ID_USER_RECEPTOR'], 'integer'],
+            [['NOTIFICACION'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class CarreraSearch extends Carrera
      */
     public function search($params)
     {
-        $query = Carrera::find();
+        $query = Notificacion::find();
 
         // add conditions that should always apply here
 
@@ -60,10 +60,11 @@ class CarreraSearch extends Carrera
         // grid filtering conditions
         $query->andFilterWhere([
             'ID' => $this->ID,
-            'ID_INSTITUTO' => $this->ID_INSTITUTO,
+            'ID_USER_EMISOR' => $this->ID_USER_EMISOR,
+            'ID_USER_RECEPTOR' => $this->ID_USER_RECEPTOR,
         ]);
 
-        $query->andFilterWhere(['like', 'NOMBRE', $this->NOMBRE]);
+        $query->andFilterWhere(['like', 'NOTIFICACION', $this->NOTIFICACION]);
 
         return $dataProvider;
     }

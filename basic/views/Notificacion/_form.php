@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Instituto */
+/* @var $model app\models\Notificacion */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="instituto-form">
+<div class="notificacion-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'ID_INSTITUCION')->textInput() ?>
+    <?= $form->field($model, 'ID_USER_EMISOR')->textInput() ?>
 
-    <?= $form->field($model, 'NOMBRE')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'ID_USER_RECEPTOR')->textInput() ?>
 
-    <?= $form->field($model, 'COLOR_HEXA')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'NOTIFICACION')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

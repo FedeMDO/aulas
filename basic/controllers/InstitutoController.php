@@ -14,11 +14,6 @@ use yii\filters\VerbFilter;
  */
 class InstitutoController extends Controller
 {
-
-    public function actionInstitutov()
-    {
-        return $this->render('institutov');
-    }
     /**
      * @inheritdoc
      */
@@ -72,7 +67,7 @@ class InstitutoController extends Controller
         $model = new Instituto();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID_INSTITUTO]);
+            return $this->redirect(['view', 'id' => $model->ID]);
         }
 
         return $this->render('create', [
@@ -92,7 +87,7 @@ class InstitutoController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID_INSTITUTO]);
+            return $this->redirect(['view', 'id' => $model->ID]);
         }
 
         return $this->render('update', [

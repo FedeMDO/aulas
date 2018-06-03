@@ -32,8 +32,8 @@ class CarreraMateria extends \yii\db\ActiveRecord
             [['ID_MATERIA', 'ID_CARRERA'], 'required'],
             [['ID_MATERIA', 'ID_CARRERA'], 'integer'],
             [['ID_MATERIA', 'ID_CARRERA'], 'unique', 'targetAttribute' => ['ID_MATERIA', 'ID_CARRERA']],
-            [['ID_MATERIA'], 'exist', 'skipOnError' => true, 'targetClass' => Materia::className(), 'targetAttribute' => ['ID_MATERIA' => 'ID_MATERIA']],
-            [['ID_CARRERA'], 'exist', 'skipOnError' => true, 'targetClass' => Carrera::className(), 'targetAttribute' => ['ID_CARRERA' => 'ID_CARRERA']],
+            [['ID_MATERIA'], 'exist', 'skipOnError' => true, 'targetClass' => Materia::className(), 'targetAttribute' => ['ID_MATERIA' => 'ID']],
+            [['ID_CARRERA'], 'exist', 'skipOnError' => true, 'targetClass' => Carrera::className(), 'targetAttribute' => ['ID_CARRERA' => 'ID']],
         ];
     }
 
@@ -53,7 +53,7 @@ class CarreraMateria extends \yii\db\ActiveRecord
      */
     public function getMATERIA()
     {
-        return $this->hasOne(Materia::className(), ['ID_MATERIA' => 'ID_MATERIA']);
+        return $this->hasOne(Materia::className(), ['ID' => 'ID_MATERIA']);
     }
 
     /**
@@ -61,6 +61,6 @@ class CarreraMateria extends \yii\db\ActiveRecord
      */
     public function getCARRERA()
     {
-        return $this->hasOne(Carrera::className(), ['ID_CARRERA' => 'ID_CARRERA']);
+        return $this->hasOne(Carrera::className(), ['ID' => 'ID_CARRERA']);
     }
 }

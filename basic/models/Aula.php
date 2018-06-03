@@ -7,12 +7,13 @@ use Yii;
 /**
  * This is the model class for table "aula".
  *
- * @property int $ID_AULA
+ * @property int $ID
  * @property int $ID_EDIFICIO
  * @property int $PISO
  * @property int $CAPACIDAD
  *
- * @property AgendaAula[] $agendaAulas
+ * @property AgendaAsigComision[] $agendaAsigComisions
+ * @property AgendaAsigHoras[] $agendaAsigHoras
  * @property Edificio $eDIFICIO
  * @property AulaRecurso[] $aulaRecursos
  * @property Recurso[] $rECURSOs
@@ -35,7 +36,7 @@ class Aula extends \yii\db\ActiveRecord
         return [
             [['ID_EDIFICIO'], 'required'],
             [['ID_EDIFICIO', 'PISO', 'CAPACIDAD'], 'integer'],
-            [['ID_EDIFICIO'], 'exist', 'skipOnError' => true, 'targetClass' => Edificio::className(), 'targetAttribute' => ['ID_EDIFICIO' => 'ID_EDIFICIO']],
+            [['ID_EDIFICIO'], 'exist', 'skipOnError' => true, 'targetClass' => Edificio::className(), 'targetAttribute' => ['ID_EDIFICIO' => 'ID']],
         ];
     }
 
@@ -45,7 +46,7 @@ class Aula extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'ID_AULA' => 'Id  Aula',
+            'ID' => 'ID',
             'ID_EDIFICIO' => 'Id  Edificio',
             'PISO' => 'Piso',
             'CAPACIDAD' => 'Capacidad',
@@ -55,9 +56,17 @@ class Aula extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAgendaAulas()
+    public function getAgendaAsigComisions()
     {
-        return $this->hasMany(AgendaAula::className(), ['ID_AULA' => 'ID_AULA']);
+        return $this->hasMany(AgendaAsigComision::className(), ['ID_AULA' => 'ID']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAgendaAsigHoras()
+    {
+        return $this->hasMany(AgendaAsigHoras::className(), ['ID_AULA' => 'ID']);
     }
 
     /**
@@ -65,7 +74,7 @@ class Aula extends \yii\db\ActiveRecord
      */
     public function getEDIFICIO()
     {
-        return $this->hasOne(Edificio::className(), ['ID_EDIFICIO' => 'ID_EDIFICIO']);
+        return $this->hasOne(Edificio::className(), ['ID' => 'ID_EDIFICIO']);
     }
 
     /**
@@ -73,7 +82,7 @@ class Aula extends \yii\db\ActiveRecord
      */
     public function getAulaRecursos()
     {
-        return $this->hasMany(AulaRecurso::className(), ['ID_AULA' => 'ID_AULA']);
+        return $this->hasMany(AulaRecurso::className(), ['ID_AULA' => 'ID']);
     }
 
     /**
@@ -81,6 +90,6 @@ class Aula extends \yii\db\ActiveRecord
      */
     public function getRECURSOs()
     {
-        return $this->hasMany(Recurso::className(), ['ID_RECURSO' => 'ID_RECURSO'])->viaTable('aula_recurso', ['ID_AULA' => 'ID_AULA']);
+        return $this->hasMany(Recurso::className(), ['ID' => 'ID_RECURSO'])->viaTable('aula_recurso', ['ID_AULA' => 'ID']);
     }
 }

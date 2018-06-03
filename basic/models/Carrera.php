@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "carrera".
  *
- * @property int $ID_CARRERA
+ * @property int $ID
  * @property int $ID_INSTITUTO
  * @property string $NOMBRE
  *
@@ -34,7 +34,7 @@ class Carrera extends \yii\db\ActiveRecord
             [['ID_INSTITUTO', 'NOMBRE'], 'required'],
             [['ID_INSTITUTO'], 'integer'],
             [['NOMBRE'], 'string', 'max' => 40],
-            [['ID_INSTITUTO'], 'exist', 'skipOnError' => true, 'targetClass' => Instituto::className(), 'targetAttribute' => ['ID_INSTITUTO' => 'ID_INSTITUTO']],
+            [['ID_INSTITUTO'], 'exist', 'skipOnError' => true, 'targetClass' => Instituto::className(), 'targetAttribute' => ['ID_INSTITUTO' => 'ID']],
         ];
     }
 
@@ -44,7 +44,7 @@ class Carrera extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'ID_CARRERA' => 'Id  Carrera',
+            'ID' => 'ID',
             'ID_INSTITUTO' => 'Id  Instituto',
             'NOMBRE' => 'Nombre',
         ];
@@ -55,7 +55,7 @@ class Carrera extends \yii\db\ActiveRecord
      */
     public function getINSTITUTO()
     {
-        return $this->hasOne(Instituto::className(), ['ID_INSTITUTO' => 'ID_INSTITUTO']);
+        return $this->hasOne(Instituto::className(), ['ID' => 'ID_INSTITUTO']);
     }
 
     /**
@@ -63,7 +63,7 @@ class Carrera extends \yii\db\ActiveRecord
      */
     public function getCarreraMaterias()
     {
-        return $this->hasMany(CarreraMateria::className(), ['ID_CARRERA' => 'ID_CARRERA']);
+        return $this->hasMany(CarreraMateria::className(), ['ID_CARRERA' => 'ID']);
     }
 
     /**
@@ -71,6 +71,6 @@ class Carrera extends \yii\db\ActiveRecord
      */
     public function getMATERIAs()
     {
-        return $this->hasMany(Materia::className(), ['ID_MATERIA' => 'ID_MATERIA'])->viaTable('carrera_materia', ['ID_CARRERA' => 'ID_CARRERA']);
+        return $this->hasMany(Materia::className(), ['ID' => 'ID_MATERIA'])->viaTable('carrera_materia', ['ID_CARRERA' => 'ID']);
     }
 }

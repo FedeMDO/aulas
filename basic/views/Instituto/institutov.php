@@ -14,38 +14,18 @@ $this->registerCssFile("@web/css/index.css", [
 
 ?>
 
+<div class="maininsti">
 
-<div class=table1>
-<table>
-  <tr>
-    <th>Instituto de Ingenieria</th>
-    <th>Mail</th>
-    <th>id</th>
-  </tr>
- 
-  <tr>
-    <td>Ingenieria Informatica</td>
-    <td>informatica@unaj.edu.ar</td>
-    <td>01</td>
-  </tr>
-  <tr>
-    <td>Ingenieria Petroleo</td>
-    <td>petroleo@unaj.edu.ar</td>
-    <td>02</td>
-  </tr>
-  <tr>
-    <td>Ingenieria Industrial</td>
-    <td>industrial@unaj.edu.ar</td>
-    <td>03</td>
-  </tr>
-</table>
-</div>
 
-<div>
-    <br>
-</br>
+ <div class="list-group">
+  <a href="#" class="list-group-item active">Instituto De Ingenieria</a>
+  <a href="#" class="list-group-item">Informatica</a>
+  <a href="#" class="list-group-item">Petroleo</a>
+  <a href="#" class="list-group-item">Electromecanica</a>
+  <a href="#" class="list-group-item">Industrial</a>
+  <a href="#" class="list-group-item">Transporte</a>
 </div>
 
 
 
-
+</div>

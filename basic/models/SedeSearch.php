@@ -18,7 +18,7 @@ class SedeSearch extends Sede
     public function rules()
     {
         return [
-            [['ID_SEDE', 'ID_INSTITUCION'], 'integer'],
+            [['ID', 'ID_INSTITUCION'], 'integer'],
             [['NOMBRE', 'CALLEYNUM', 'LOCALIDAD', 'DISPONIBLE_DESDE', 'DISPONIBLE_HASTA'], 'safe'],
         ];
     }
@@ -59,7 +59,7 @@ class SedeSearch extends Sede
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'ID_SEDE' => $this->ID_SEDE,
+            'ID' => $this->ID,
             'ID_INSTITUCION' => $this->ID_INSTITUCION,
             'DISPONIBLE_DESDE' => $this->DISPONIBLE_DESDE,
             'DISPONIBLE_HASTA' => $this->DISPONIBLE_HASTA,

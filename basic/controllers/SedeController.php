@@ -8,45 +8,12 @@ use app\models\SedeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\data\Pagination;
 
 /**
  * SedeController implements the CRUD actions for Sede model.
  */
 class SedeController extends Controller
 {
-
-    public function actionGallery_sede()
-    {
-        return $this->render('gallery_sede',[]);
-            
-       
-    }
-
-    
-    public function actionVistav()
-    {
-       
-        $query = Sede::find();
-
-        $pagination = new Pagination([
-            'defaultPageSize' => 5,
-            'totalCount' => $query->count(),
-        ]);
-
-    
-        $sede = $query->orderBy('ID_SEDE')
-            ->offset($pagination->offset)
-            ->limit($pagination->limit)
-            ->all();
-
-        return $this->render('vistav', [
-            'sede' => $sede,
-            'pagination' => $pagination,
-        ]);
-    }
-
-
     /**
      * @inheritdoc
      */
@@ -100,7 +67,7 @@ class SedeController extends Controller
         $model = new Sede();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID_SEDE]);
+            return $this->redirect(['view', 'id' => $model->ID]);
         }
 
         return $this->render('create', [
@@ -120,7 +87,7 @@ class SedeController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID_SEDE]);
+            return $this->redirect(['view', 'id' => $model->ID]);
         }
 
         return $this->render('update', [

@@ -18,7 +18,7 @@ class AulaSearch extends Aula
     public function rules()
     {
         return [
-            [['ID_AULA', 'ID_EDIFICIO', 'PISO', 'CAPACIDAD'], 'integer'],
+            [['ID', 'ID_EDIFICIO', 'PISO', 'CAPACIDAD'], 'integer'],
         ];
     }
 
@@ -58,7 +58,7 @@ class AulaSearch extends Aula
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'ID_AULA' => $this->ID_AULA,
+            'ID' => $this->ID,
             'ID_EDIFICIO' => $this->ID_EDIFICIO,
             'PISO' => $this->PISO,
             'CAPACIDAD' => $this->CAPACIDAD,
