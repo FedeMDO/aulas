@@ -8,6 +8,7 @@ use app\models\SedeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\Pagination;
 
 /**
  * SedeController implements the CRUD actions for Sede model.
