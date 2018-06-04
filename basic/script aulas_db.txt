@@ -1,0 +1,275 @@
+﻿/*   SCRIPT SQL  - Tablas con Restricciones -   */
+
+CREATE TABLE INSTITUCION_EDUCATIVA
+       (
+       ID_INSTITUCION INT NOT NULL AUTO_INCREMENT,                              
+       NOMBRE VARCHAR(30) NOT NULL,
+       PRIMARY KEY
+               (
+               ID_INSTITUCION
+               )
+       );
+
+
+
+CREATE TABLE MATERIA
+       (
+       ID_MATERIA INT NOT NULL AUTO_INCREMENT,                              
+       NOMBRE VARCHAR(40) NOT NULL,                              
+       DESCRIPCION VARCHAR(50) NOT NULL,                              
+       PRIMARY KEY
+               (
+               ID_MATERIA
+               )
+       );
+
+
+/*   ver que tablas hay que eliminar de acuerdo al cambio del 23-04 -   */
+CREATE TABLE INSTITUTO
+       (
+       ID_INSTITUTO INT NOT NULL AUTO_INCREMENT,                              
+       ID_INSTITUCION INT NOT NULL,                              
+       NOMBRE VARCHAR(40) NOT NULL,                              
+       DESCRIPCION VARCHAR(50) NOT NULL,                              
+       PRIMARY KEY
+               (
+               ID_INSTITUTO
+               ),
+       FOREIGN KEY
+               (
+               ID_INSTITUCION
+               )
+          REFERENCES INSTITUCION_EDUCATIVA
+               (
+               ID_INSTITUCION
+               )
+       );
+
+
+
+CREATE TABLE SEDE
+       (
+       ID_SEDE INT NOT NULL AUTO_INCREMENT,                              
+       ID_INSTITUCION INT NOT NULL,
+       NOMBRE VARCHAR(50) NOT NULL,
+       CALLEYNUM VARCHAR(100) NOT NULL,
+       LOCALIDAD VARCHAR(50) NOT NULL,
+       DISPONIBLE_DESDE TIME NOT NULL,                              
+       DISPONIBLE_HASTA TIME NOT NULL,   
+       PRIMARY KEY
+               (
+               ID_SEDE
+               ),
+       FOREIGN KEY
+               (
+               ID_INSTITUCION
+               )
+          REFERENCES INSTITUCION_EDUCATIVA
+               (
+               ID_INSTITUCION
+               )
+       );
+
+
+
+CREATE TABLE EDIFICIO 
+       (
+       ID_EDIFICIO INT NOT NULL AUTO_INCREMENT,                              
+       ID_SEDE INT NOT NULL,                              
+       NOMBRE VARCHAR(40) NOT NULL,                              
+       CANTIDAD_AULAS INT NULL,                              
+       PRIMARY KEY
+               (
+               ID_EDIFICIO
+               ),
+       FOREIGN KEY
+               (
+               ID_SEDE
+               )
+          REFERENCES SEDE
+               (
+               ID_SEDE
+               )
+       );
+
+
+CREATE TABLE AULA
+       (
+       ID_AULA INT NOT NULL AUTO_INCREMENT,                              
+       ID_EDIFICIO INT NOT NULL,                              
+       PISO INT NULL,                              
+       CAPACIDAD INT NULL,
+       PRIMARY KEY
+               (
+               ID_AULA
+               ),
+       FOREIGN KEY
+               (
+               ID_EDIFICIO
+               )
+          REFERENCES EDIFICIO
+               (
+               ID_EDIFICIO
+               )
+       );
+
+CREATE TABLE RECURSO
+       (
+       ID_RECURSO INT NOT NULL AUTO_INCREMENT,                              
+       NOMBRE VARCHAR(100) NOT NULL,
+       DESCRIPCION VARCHAR(120) NULL,
+       PRIMARY KEY
+               (
+               ID_RECURSO
+               )
+       );
+
+CREATE TABLE AULA_RECURSO
+       (
+       ID_RECURSO INT NOT NULL,                              
+       ID_AULA INT NOT NULL,                              
+       PRIMARY KEY
+               (
+               ID_RECURSO,
+               ID_AULA
+               ),
+       FOREIGN KEY
+               (
+               ID_RECURSO
+               )
+          REFERENCES RECURSO
+               (
+               ID_RECURSO
+               ),
+       FOREIGN KEY
+               (
+               ID_AULA
+               )
+          REFERENCES AULA
+               (
+               ID_AULA
+               )
+       );
+
+CREATE TABLE CARRERA
+       (
+       ID_CARRERA INT NOT NULL AUTO_INCREMENT,                              
+       ID_INSTITUTO INT NOT NULL,                              
+       NOMBRE VARCHAR(40) NOT NULL,
+       PRIMARY KEY
+               (
+               ID_CARRERA
+               ),
+       FOREIGN KEY
+               (
+               ID_INSTITUTO
+               )
+          REFERENCES INSTITUTO
+               (
+               ID_INSTITUTO
+               )
+       );
+
+CREATE TABLE COMISION
+       (
+       ID_COMISION INT NOT NULL AUTO_INCREMENT,                              
+       ID_MATERIA INT NOT NULL,                              
+       CARGA_HORARIA_SEMANAL INT NOT NULL,
+       DESCRIPCION VARCHAR(30) NULL,
+       PRIMARY KEY
+               (
+               ID_COMISION
+               ),
+       FOREIGN KEY
+               (
+               ID_MATERIA
+               )
+          REFERENCES MATERIA
+               (
+               ID_MATERIA
+               )
+       );
+
+
+
+CREATE TABLE CARRERA_MATERIA
+       (
+       ID_MATERIA INT NOT NULL,                              
+       ID_CARRERA INT NOT NULL,                              
+       PRIMARY KEY
+               (
+               ID_MATERIA,
+               ID_CARRERA
+               ),
+       FOREIGN KEY
+               (
+               ID_MATERIA
+               )
+          REFERENCES MATERIA
+               (
+               ID_MATERIA
+               ),
+       FOREIGN KEY
+               (
+               ID_CARRERA
+               )
+          REFERENCES CARRERA
+               (
+               ID_CARRERA
+               )
+       );
+
+
+
+/*falta crear tablas de dia_semana, tramo y AULA_AGENDA */
+
+CREATE TABLE DIA_SEMANA
+       (
+       ID_DIA INT NOT NULL AUTO_INCREMENT,                              
+       NOMBRE VARCHAR(10) NULL,                              
+       NOM_ABREV VARCHAR(5) NULL,                              
+       PRIMARY KEY
+               (
+               ID_DIA
+               )
+       );
+
+CREATE TABLE TRAMO
+       (
+       ID_TRAMO INT NOT NULL AUTO_INCREMENT,                              
+       INICIO DATETIME NULL,                              
+       FIN DATETIME NULL,                              
+       DURACION DATETIME NULL,                              
+       PRIMARY KEY
+               (
+               ID_TRAMO
+               )
+       );
+CREATE TABLE AGENDA_AULA
+(
+        ID_AGENDA_AULA INT NOT NULL AUTO_INCREMENT,
+        ID_AULA INT NOT NULL,
+        ID_COMISION INT NOT NULL,
+        ID_DIA INT NOT NULL,
+        PERIODO_LECTIVO INT NOT NULL,
+        ID_TRAMO INT NOT NULL,
+        primary key (id_agenda_aula),
+        FOREIGN KEY (ID_AULA)REFERENCES AULA (ID_AULA),
+        FOREIGN KEY (ID_COMISION)REFERENCES COMISION (ID_COMISION),
+        FOREIGN KEY (ID_TRAMO)REFERENCES TRAMO (ID_TRAMO),
+        FOREIGN KEY (ID_DIA) REFERENCES DIA_SEMANA(ID_DIA)
+
+);
+
+
+/*ver si esta bien eliminar esta redundancia
+    CREATE TABLE TRAMO_AGENDA
+(
+    ID_AGENDA_AULA INT NOT NULL,
+    ID_TRAMO INT NOT NULL,
+    PRIMARY KEY(ID_AGENDA_AULA,ID_TRAMO),
+    FOREIGN KEY (ID_AGENDA_AULA) REFERENCES AGENDA_AULA(ID_AGENDA_AULA),
+    FOREIGN KEY (ID_TRAMO) REFERENCES TRAMO(ID_TRAMO)
+);       
+*
+/*alter table para generar los autoincrementales*/
