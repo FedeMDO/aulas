@@ -2,31 +2,46 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
+use yii\data\Pagination;
+
+
+$this->registerCssFile("@web/css/index.css", [
+  'depends' => [\yii\bootstrap\BootstrapAsset::className()],
+  
+], 'css-print-theme');
+
+
 
 ?>
 
-
-
-
-
-
 <h1>Edificios Disponibles</h1>
 
+<ul>
 
-<div class="gallery">
-    <a href="../edificio/edificiov">
-     <img src="../image/edificios/edi1.png" alt="Avatar" class="image" >
-    </a>
-    <a href="../edificio/edificiov">
-     <img src="../image/edificios/edi2.png" alt="Avatar" class="image" >
-    </a>
-    <a href="../edificio/edificiov">
-     <img src="../image/edificios/edi3.png" alt="Avatar" class="image" >
-    </a>
-    <a href="../edificio/edificiov">
-     <img src="../image/edificios/edi4.png" alt="Avatar" class="image" >
-    </a>
-    
+
+
+<?php foreach ($edificio as $edificio): ?>
+
+<div class="row3">
+  <div class="col-sm-8 col-md-4">
+    <div class="thumbnail">
+      <img src="../image/sede_generic.jpg" alt="...">
+      <div class="caption">
+
+        <?= Html::encode("{$edificio->NOMBRE} ") ?>
+        <br></br> 
+         <img  src="../image/aulaicon.png" alt="  height="42" width="42"">
+        <?= Html::encode("{$edificio->CANTIDAD_AULAS} ") ?>
+        <p><a href="#" class="btn btn-primary" role="button">Entrar</a> <a href="../sede/update?id=2" class="btn btn-default" role="button">Modificar</a></p>
+      </div>
+    </div>
+  </div>
 </div>
+<?php endforeach; ?>
 
+
+
+
+
+</ul>
 

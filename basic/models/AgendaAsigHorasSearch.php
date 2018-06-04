@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Edificio;
+use app\models\AgendaAsigHoras;
 
 /**
- * EdificioSearch represents the model behind the search form of `app\models\Edificio`.
+ * AgendaAsigHorasSearch represents the model behind the search form of `app\models\AgendaAsigHoras`.
  */
-class EdificioSearch extends Edificio
+class AgendaAsigHorasSearch extends AgendaAsigHoras
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class EdificioSearch extends Edificio
     public function rules()
     {
         return [
-            [['ID', 'ID_SEDE', 'CANTIDAD_AULAS'], 'integer'],
-            [['NOMBRE'], 'safe'],
+            [['ID', 'ID_HORA', 'ID_DIA', 'ID_AULA', 'ID_USER_ASIGNA', 'ID_USER_RECIBE'], 'integer'],
+            [['COMISION_ASIGNADA', 'PERIODO_LECTIVO'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class EdificioSearch extends Edificio
      */
     public function search($params)
     {
-        $query = Edificio::find();
+        $query = AgendaAsigHoras::find();
 
         // add conditions that should always apply here
 
@@ -60,11 +60,15 @@ class EdificioSearch extends Edificio
         // grid filtering conditions
         $query->andFilterWhere([
             'ID' => $this->ID,
-            'ID_SEDE' => $this->ID_SEDE,
-            'CANTIDAD_AULAS' => $this->CANTIDAD_AULAS,
+            'ID_HORA' => $this->ID_HORA,
+            'ID_DIA' => $this->ID_DIA,
+            'ID_AULA' => $this->ID_AULA,
+            'ID_USER_ASIGNA' => $this->ID_USER_ASIGNA,
+            'ID_USER_RECIBE' => $this->ID_USER_RECIBE,
         ]);
 
-        $query->andFilterWhere(['like', 'NOMBRE', $this->NOMBRE]);
+        $query->andFilterWhere(['like', 'COMISION_ASIGNADA', $this->COMISION_ASIGNADA])
+            ->andFilterWhere(['like', 'PERIODO_LECTIVO', $this->PERIODO_LECTIVO]);
 
         return $dataProvider;
     }

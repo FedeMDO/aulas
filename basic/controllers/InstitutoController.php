@@ -8,12 +8,39 @@ use app\models\InstitutoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\Pagination;
 
 /**
  * InstitutoController implements the CRUD actions for Instituto model.
  */
 class InstitutoController extends Controller
 {
+
+    public function actionInstitutov()
+    {
+
+        $query = Instituto::find();
+
+        $pagination = new Pagination([
+            'defaultPageSize' => 5,
+            'totalCount' => $query->count(),
+        ]);
+
+    
+        $instituto = $query->orderBy('ID')
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+
+        return $this->render('institutov', [
+            'instituto' => $instituto,
+            'pagination' => $pagination,
+        ]);
+    
+       
+    }
+
+   
     /**
      * @inheritdoc
      */
@@ -124,4 +151,7 @@ class InstitutoController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+   
+
 }

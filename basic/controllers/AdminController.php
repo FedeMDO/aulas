@@ -28,6 +28,12 @@ class AdminController extends Controller
         return $this->render('sedesv');
     }
 
+    public function actionNoti()
+    {
+       
+        return $this->render('noti');
+    }
+
 
 
 

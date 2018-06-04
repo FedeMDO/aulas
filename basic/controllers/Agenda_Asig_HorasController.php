@@ -3,49 +3,17 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Sede;
-use app\models\SedeSearch;
+use app\models\Agenda_Asig_Horas;
+use app\models\Agenda_Asig_HorasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\data\Pagination;
 
 /**
- * SedeController implements the CRUD actions for Sede model.
+ * Agenda_Asig_HorasController implements the CRUD actions for Agenda_Asig_Horas model.
  */
-class SedeController extends Controller
+class Agenda_Asig_HorasController extends Controller
 {
-
-
-
-    public function actionVistav()
-    {
-       
-        $query = Sede::find();
-
-        $pagination = new Pagination([
-            'defaultPageSize' => 5,
-            'totalCount' => $query->count(),
-        ]);
-
-    
-        $sede = $query->orderBy('ID')
-            ->offset($pagination->offset)
-            ->limit($pagination->limit)
-            ->all();
-
-        return $this->render('vistav', [
-            'sede' => $sede,
-            'pagination' => $pagination,
-        ]);
-    }
-
-
-
-
-
-
-
     /**
      * @inheritdoc
      */
@@ -62,12 +30,12 @@ class SedeController extends Controller
     }
 
     /**
-     * Lists all Sede models.
+     * Lists all Agenda_Asig_Horas models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new SedeSearch();
+        $searchModel = new Agenda_Asig_HorasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -77,7 +45,7 @@ class SedeController extends Controller
     }
 
     /**
-     * Displays a single Sede model.
+     * Displays a single Agenda_Asig_Horas model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -90,13 +58,13 @@ class SedeController extends Controller
     }
 
     /**
-     * Creates a new Sede model.
+     * Creates a new Agenda_Asig_Horas model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Sede();
+        $model = new Agenda_Asig_Horas();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->ID]);
@@ -108,7 +76,7 @@ class SedeController extends Controller
     }
 
     /**
-     * Updates an existing Sede model.
+     * Updates an existing Agenda_Asig_Horas model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -128,7 +96,7 @@ class SedeController extends Controller
     }
 
     /**
-     * Deletes an existing Sede model.
+     * Deletes an existing Agenda_Asig_Horas model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -142,15 +110,15 @@ class SedeController extends Controller
     }
 
     /**
-     * Finds the Sede model based on its primary key value.
+     * Finds the Agenda_Asig_Horas model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Sede the loaded model
+     * @return Agenda_Asig_Horas the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Sede::findOne($id)) !== null) {
+        if (($model = Agenda_Asig_Horas::findOne($id)) !== null) {
             return $model;
         }
 
