@@ -25,14 +25,14 @@ $this->registerCssFile("@web/css/index.css", [
 <div class="row3">
   <div class="col-sm-8 col-md-4">
     <div class="thumbnail">
-      <img src="../image/sede_generic.jpg" alt="...">
+      <img src="../image/edi4.png" alt="...">
       <div class="caption">
 
         <?= Html::encode("{$edificio->NOMBRE} ") ?>
         <br></br> 
          <img  src="../image/aulaicon.png" alt="  height="42" width="42"">
         <?= Html::encode("{$edificio->CANTIDAD_AULAS} ") ?>
-        <p><a href="#" class="btn btn-primary" role="button">Entrar</a> <a href="../sede/update?id=2" class="btn btn-default" role="button">Modificar</a></p>
+        <p><a href="#" class="btn btn-primary" role="button">Entrar</a> <a href="../edificio/update?id=<?= Html::encode("{$edificio->ID}") ?>" class="btn btn-default" role="button">Modificar</a></p>
       </div>
     </div>
   </div>
