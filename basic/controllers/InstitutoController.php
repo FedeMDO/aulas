@@ -19,7 +19,7 @@ class InstitutoController extends Controller
     public function actionInstitutov()
     {
 
-        $query = Instituto::find();
+        $query = Instituto::find(); 
 
         $pagination = new Pagination([
             'defaultPageSize' => 5,

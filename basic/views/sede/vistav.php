@@ -13,10 +13,12 @@ $this->registerCssFile("@web/css/index.css", [
 
 
 ?>
+<a href="../sede/create" class="btn btn-success btn-md" role="button">Crear Nueva Sede</a>
+
+  <center><h3>Sedes Disponibles</h3></center>
 
 
 
-<h3>Sedes</h3>
 
 <ul>
 
@@ -44,5 +46,8 @@ $this->registerCssFile("@web/css/index.css", [
 
 
 </ul>
+
+
+
 
 <?= LinkPager::widget(['pagination' => $pagination]) ?>
