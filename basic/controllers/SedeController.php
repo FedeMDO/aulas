@@ -34,9 +34,12 @@ class SedeController extends Controller
             ->limit($pagination->limit)
             ->all();
 
+       
+
         return $this->render('vistav', [
             'sede' => $sede,
             'pagination' => $pagination,
+            
         ]);
     }
 
