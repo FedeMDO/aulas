@@ -14,22 +14,14 @@ $this->registerCssFile("@web/css/inicio.css",
 ], 'css-print-theme');
 
     
-$this->title = 'Universidad Nacional Arturo Jauretche';
+$this->title = 'pobre';
 ?>
-<div class='jumbotron'>
+<div class='jumbotron2' >
 
-<H1>BIENVENIDOS AL SISTEMA DE GESTION DE AULAS UNAJ</H1>
+<H1>Solo eres un pobre y simple user</H1>
 <a href= "user" >aaaaaaaaaa</href>
 <a href="admin" >BBBBBBBBBBBBBBBBBBB</href>
-<a href="aula" >CCCCC</href>
+<a href="views/aula" >CCCCC</href>
 
 </div>
-
-
-
-
-
-
- 
- 
 

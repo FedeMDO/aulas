@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'ID_EDIFICIO',
             'PISO',
             'CAPACIDAD',
+            
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

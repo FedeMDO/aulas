@@ -17,11 +17,33 @@ class User extends \yii\base\baseObject implements \yii\web\IdentityInterface
     public $idInstituto;
     public $rol;
 
+
     /**
      * @inheritdoc
      */
     
     /* busca la identidad del usuario a través de su $id */
+    //comprueba si el USER es ADmin retorna un bool
+    public static function isUserAdmin($id)
+    {
+       if (Users::findOne(['id' => $id, 'activate' => '1', 'rol' => 20])){
+        return true;
+       } else {
+
+        return false;
+       }
+
+    }
+//comprueba si el USER es simple retorna un bool
+    public static function isUserSimple($id)
+    {
+       if (Users::findOne(['id' => $id, 'activate' => '1', 'rol' => 10])){
+       return true;
+       } else {
+
+       return false;
+       }
+    }
 
     public static function findIdentity($id)
     {

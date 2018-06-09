@@ -178,4 +178,25 @@ th, td {
   height: 500px;
   width: 500px;
 }
+/*no se como cambiarle el color a las letras de de <H1> de la vista user y admin */
 
+
+.jumbotron2
+{
+  background: -webkit-linear-gradient(rgb(41, 128, 185),rgb(52, 152, 219));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+ 
+    
+font-family: "Arial Black", Gadget, sans-serif;
+font-size: 30px;
+letter-spacing: 2.8px;
+word-spacing: 5.8px;
+color: rgb(236, 17, 10);
+font-weight: 700;
+text-decoration: none;
+font-style: normal;
+font-variant: normal;
+text-transform: uppercase;
+
+}
