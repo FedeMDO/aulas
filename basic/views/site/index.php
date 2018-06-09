@@ -19,9 +19,6 @@ $this->title = 'Universidad Nacional Arturo Jauretche';
 <div class='jumbotron'>
 
 <H1>BIENVENIDOS AL SISTEMA DE GESTION DE AULAS UNAJ</H1>
-<a href= "user" >aaaaaaaaaa</href>
-<a href="admin" >BBBBBBBBBBBBBBBBBBB</href>
-<a href="aula" >CCCCC</href>
 
 </div>
 
