@@ -19,6 +19,7 @@ class AulaSearch extends Aula
     {
         return [
             [['ID', 'ID_EDIFICIO', 'PISO', 'CAPACIDAD'], 'integer'],
+            [['NOMBRE'], 'safe'],
         ];
     }
 
@@ -63,6 +64,8 @@ class AulaSearch extends Aula
             'PISO' => $this->PISO,
             'CAPACIDAD' => $this->CAPACIDAD,
         ]);
+
+        $query->andFilterWhere(['like', 'NOMBRE', $this->NOMBRE]);
 
         return $dataProvider;
     }

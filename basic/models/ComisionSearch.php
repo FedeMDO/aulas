@@ -18,8 +18,8 @@ class ComisionSearch extends Comision
     public function rules()
     {
         return [
-            [['ID_COMISION', 'ID_MATERIA', 'CARGA_HORARIA_SEMANAL'], 'integer'],
-            [['DESCRIPCION'], 'safe'],
+            [['ID', 'ID_MATERIA', 'CARGA_HORARIA_SEMANAL'], 'integer'],
+            [['NOMBRE'], 'safe'],
         ];
     }
 
@@ -59,12 +59,12 @@ class ComisionSearch extends Comision
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'ID_COMISION' => $this->ID_COMISION,
+            'ID' => $this->ID,
             'ID_MATERIA' => $this->ID_MATERIA,
             'CARGA_HORARIA_SEMANAL' => $this->CARGA_HORARIA_SEMANAL,
         ]);
 
-        $query->andFilterWhere(['like', 'DESCRIPCION', $this->DESCRIPCION]);
+        $query->andFilterWhere(['like', 'NOMBRE', $this->NOMBRE]);
 
         return $dataProvider;
     }

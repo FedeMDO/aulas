@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ComisionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Comisiones';
+$this->title = 'Comisions';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="comision-index">
@@ -25,10 +25,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'ID_COMISION',
-            'ID_MATERIA',
+            'ID',
+            'NOMBRE',
+            'mATERIA.NOMBRE',
             'CARGA_HORARIA_SEMANAL',
-            'DESCRIPCION',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

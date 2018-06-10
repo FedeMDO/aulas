@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "aula".
  *
  * @property int $ID
+ * @property string $NOMBRE
  * @property int $ID_EDIFICIO
  * @property int $PISO
  * @property int $CAPACIDAD
@@ -34,8 +35,9 @@ class Aula extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ID_EDIFICIO'], 'required'],
+            [['NOMBRE', 'ID_EDIFICIO'], 'required'],
             [['ID_EDIFICIO', 'PISO', 'CAPACIDAD'], 'integer'],
+            [['NOMBRE'], 'string', 'max' => 40],
             [['ID_EDIFICIO'], 'exist', 'skipOnError' => true, 'targetClass' => Edificio::className(), 'targetAttribute' => ['ID_EDIFICIO' => 'ID']],
         ];
     }
@@ -47,6 +49,7 @@ class Aula extends \yii\db\ActiveRecord
     {
         return [
             'ID' => 'ID',
+            'NOMBRE' => 'Aula',
             'ID_EDIFICIO' => 'Id  Edificio',
             'PISO' => 'Piso',
             'CAPACIDAD' => 'Capacidad',

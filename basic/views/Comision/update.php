@@ -7,7 +7,7 @@ use yii\helpers\Html;
 
 $this->title = 'Update Comision: {nameAttribute}';
 $this->params['breadcrumbs'][] = ['label' => 'Comisions', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->ID_COMISION, 'url' => ['view', 'id' => $model->ID_COMISION]];
+$this->params['breadcrumbs'][] = ['label' => $model->ID, 'url' => ['view', 'id' => $model->ID]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="comision-update">
