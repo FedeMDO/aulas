@@ -25,11 +25,12 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'user', 'admin','aula'],
+                'only' => ['logout', 'user', 'admin','register'], //acciones que solamente va a verificar permisos
+                //notar que index no esta por ende un Guest (visitante) puede acceder al index y ver la pagina
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['user','logout','admin','aula'],
+                        'actions' => ['logout','admin','register'],
                         //Esta propiedad establece que tiene permisos
                         'allow' => true,
                         //Usuarios autenticados, el signo ? es para invitados
@@ -63,6 +64,8 @@ class SiteController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'logout' => ['post'],
+                    'user' => ['post'],
+                    'admin' => ['post'],
                 ],
             ],
         ];
