@@ -20,7 +20,7 @@ use yii\bootstrap\ActiveForm;
     </div>
      <a href="../sede/vistav" class="btn btn-primary">Sedes</a>
      <a href="../instituto/institutov" class="btn btn-primary btn-info">Institutos</a>
-     <a href="../admin/noti" class="btn btn-primary btn-success">Notificaciones</a>
+     <a href="../user/noti" class="btn btn-primary btn-success">Notificaciones</a>
 
     <button class="btn btn-danger navbar-btn">Configuracion</button>
   </div>
