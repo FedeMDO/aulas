@@ -72,7 +72,7 @@ class SiteController extends Controller
     public function actionUser(){
 
 
-        return $this->render('user');
+        return $this->render('@app/views/User/user.php');
     }
 
     private function actionAdmin(){
@@ -245,7 +245,19 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        if (!\Yii::$app->user->isGuest) {
+   
+            if (User::isUserAdmin(Yii::$app->user->identity->id))
+               {
+                   return $this->actionAdmin();
+               }
+               else
+               {
+                   return $this->actionUser();
+               }
+        
+           }//return $this->render('index');
+        else return $this->render('index');
     }
 
     /**
