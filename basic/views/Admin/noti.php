@@ -16,9 +16,9 @@ $this->registerCssFile("@web/css/index.css", [
 <div class="btn-group btn-group-justified">
 
   <a href="../notificacion/create" class="btn btn-success">Crear Notificacion</a>
-  <a href="../notificacion/create" class="btn btn-primary">Eliminar</a>
-  <a href="../notificacion/create" class="btn btn-primary">Modificar</a>
-  <a href="../notificacion/create" class="btn btn-primary">Ver Notificaciones</a>
+  <a href="../notificacion/delete" class="btn btn-primary">Eliminar</a>
+  <a href="../notificacion/update" class="btn btn-primary">Modificar</a>
+  <a href="../notificacion/index" class="btn btn-primary">Ver Notificaciones</a>
 
 
 

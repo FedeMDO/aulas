@@ -5,12 +5,15 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "Edificio".
+ * This is the model class for table "edificio".
  *
  * @property int $ID
  * @property int $ID_SEDE
  * @property string $NOMBRE
  * @property int $CANTIDAD_AULAS
+ *
+ * @property Aula[] $aulas
+ * @property Sede $sEDE
  */
 class Edificio extends \yii\db\ActiveRecord
 {
@@ -19,7 +22,7 @@ class Edificio extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Edificio';
+        return 'edificio';
     }
 
     /**
@@ -43,8 +46,24 @@ class Edificio extends \yii\db\ActiveRecord
         return [
             'ID' => 'ID',
             'ID_SEDE' => 'Id  Sede',
-            'NOMBRE' => 'Edificio',
+            'NOMBRE' => 'Nombre',
             'CANTIDAD_AULAS' => 'Cantidad  Aulas',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAulas()
+    {
+        return $this->hasMany(Aula::className(), ['ID_EDIFICIO' => 'ID']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSEDE()
+    {
+        return $this->hasOne(Sede::className(), ['ID' => 'ID_SEDE']);
     }
 }

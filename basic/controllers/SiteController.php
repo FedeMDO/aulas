@@ -77,7 +77,7 @@ class SiteController extends Controller
 
     private function actionAdmin(){
 
-        return $this->render('admin');
+        return $this->render('@app/views/Admin/admin.php');
     }
 
 
