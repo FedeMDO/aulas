@@ -31,8 +31,8 @@ text-transform: uppercase;
 
 .wrap
 {
-  width: 100%;
-  height: 100%;
+  width: auto; /*ambos en auto van bien */
+  height: auto;
 }
 
 
