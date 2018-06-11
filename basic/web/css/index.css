@@ -7,6 +7,9 @@
     -moz-background-size: cover; 
     -webkit-background-size: cover;
 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
 }
 
 .jumbotron
