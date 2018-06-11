@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\ComisionSearch */
+/* @var $searchModel app\models\AgendaAsigHorasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Comisions';
+$this->title = 'Agenda Asig Horas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="comision-index">
+<div class="agenda-asig-horas-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Comision', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Agenda Asig Horas', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,8 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'ID',
-            'ID_MATERIA',
-            'CARGA_HORARIA_SEMANAL',
+            'ID_HORA',
+            'ID_DIA',
+            'ID_AULA',
+            'ID_USER_ASIGNA',
+            //'ID_USER_RECIBE',
+            //'COMISION_ASIGNADA',
+            //'PERIODO_LECTIVO',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

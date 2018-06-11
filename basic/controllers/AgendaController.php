@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Comision;
-use app\models\ComisionSearch;
+use app\models\AgendaAsigHoras;
+use app\models\AgendaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ComisionController implements the CRUD actions for Comision model.
+ * AgendaController implements the CRUD actions for AgendaAsigHoras model.
  */
-class ComisionController extends Controller
+class AgendaController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class ComisionController extends Controller
     }
 
     /**
-     * Lists all Comision models.
+     * Lists all AgendaAsigHoras models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ComisionSearch();
+        $searchModel = new AgendaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class ComisionController extends Controller
     }
 
     /**
-     * Displays a single Comision model.
+     * Displays a single AgendaAsigHoras model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class ComisionController extends Controller
     }
 
     /**
-     * Creates a new Comision model.
+     * Creates a new AgendaAsigHoras model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Comision();
+        $model = new AgendaAsigHoras();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->ID]);
@@ -76,7 +76,7 @@ class ComisionController extends Controller
     }
 
     /**
-     * Updates an existing Comision model.
+     * Updates an existing AgendaAsigHoras model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class ComisionController extends Controller
     }
 
     /**
-     * Deletes an existing Comision model.
+     * Deletes an existing AgendaAsigHoras model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class ComisionController extends Controller
     }
 
     /**
-     * Finds the Comision model based on its primary key value.
+     * Finds the AgendaAsigHoras model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Comision the loaded model
+     * @return AgendaAsigHoras the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Comision::findOne($id)) !== null) {
+        if (($model = AgendaAsigHoras::findOne($id)) !== null) {
             return $model;
         }
 

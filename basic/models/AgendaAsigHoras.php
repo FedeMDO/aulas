@@ -25,7 +25,7 @@ use Yii;
 class AgendaAsigHoras extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -33,14 +33,13 @@ class AgendaAsigHoras extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
             [['ID_HORA', 'ID_DIA', 'ID_AULA', 'ID_USER_ASIGNA', 'ID_USER_RECIBE', 'PERIODO_LECTIVO'], 'required'],
-            [['ID_HORA', 'ID_DIA', 'ID_AULA', 'ID_USER_ASIGNA', 'ID_USER_RECIBE'], 'integer'],
-            [['COMISION_ASIGNADA'], 'string', 'max' => 1],
+            [['ID_HORA', 'ID_DIA', 'ID_AULA', 'ID_USER_ASIGNA', 'ID_USER_RECIBE', 'COMISION_ASIGNADA'], 'integer'],
             [['PERIODO_LECTIVO'], 'string', 'max' => 6],
             [['ID_HORA'], 'exist', 'skipOnError' => true, 'targetClass' => Hora::className(), 'targetAttribute' => ['ID_HORA' => 'ID']],
             [['ID_DIA'], 'exist', 'skipOnError' => true, 'targetClass' => DiaSemana::className(), 'targetAttribute' => ['ID_DIA' => 'ID']],
@@ -51,7 +50,7 @@ class AgendaAsigHoras extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {

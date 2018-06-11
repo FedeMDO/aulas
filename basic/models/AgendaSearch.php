@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Comision;
+use app\models\AgendaAsigHoras;
 
 /**
- * ComisionSearch represents the model behind the search form of `app\models\Comision`.
+ * AgendaSearch represents the model behind the search form of `app\models\AgendaAsigHoras`.
  */
-class ComisionSearch extends Comision
+class AgendaSearch extends AgendaAsigHoras
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,8 @@ class ComisionSearch extends Comision
     public function rules()
     {
         return [
-            [['ID', 'ID_MATERIA', 'CARGA_HORARIA_SEMANAL'], 'integer'],
+            [['ID', 'ID_HORA', 'ID_DIA', 'ID_AULA', 'ID_USER_ASIGNA', 'ID_USER_RECIBE', 'COMISION_ASIGNADA'], 'integer'],
+            [['PERIODO_LECTIVO'], 'safe'],
         ];
     }
 
@@ -40,7 +41,7 @@ class ComisionSearch extends Comision
      */
     public function search($params)
     {
-        $query = Comision::find();
+        $query = AgendaAsigHoras::find();
 
         // add conditions that should always apply here
 
@@ -59,9 +60,15 @@ class ComisionSearch extends Comision
         // grid filtering conditions
         $query->andFilterWhere([
             'ID' => $this->ID,
-            'ID_MATERIA' => $this->ID_MATERIA,
-            'CARGA_HORARIA_SEMANAL' => $this->CARGA_HORARIA_SEMANAL,
+            'ID_HORA' => $this->ID_HORA,
+            'ID_DIA' => $this->ID_DIA,
+            'ID_AULA' => $this->ID_AULA,
+            'ID_USER_ASIGNA' => $this->ID_USER_ASIGNA,
+            'ID_USER_RECIBE' => $this->ID_USER_RECIBE,
+            'COMISION_ASIGNADA' => $this->COMISION_ASIGNADA,
         ]);
+
+        $query->andFilterWhere(['like', 'PERIODO_LECTIVO', $this->PERIODO_LECTIVO]);
 
         return $dataProvider;
     }

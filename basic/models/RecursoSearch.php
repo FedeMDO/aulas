@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Comision;
+use app\models\Recurso;
 
 /**
- * ComisionSearch represents the model behind the search form of `app\models\Comision`.
+ * RecursoSearch represents the model behind the search form of `app\models\Recurso`.
  */
-class ComisionSearch extends Comision
+class RecursoSearch extends Recurso
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,8 @@ class ComisionSearch extends Comision
     public function rules()
     {
         return [
-            [['ID', 'ID_MATERIA', 'CARGA_HORARIA_SEMANAL'], 'integer'],
+            [['ID'], 'integer'],
+            [['NOMBRE', 'DESCRIPCION'], 'safe'],
         ];
     }
 
@@ -40,7 +41,7 @@ class ComisionSearch extends Comision
      */
     public function search($params)
     {
-        $query = Comision::find();
+        $query = Recurso::find();
 
         // add conditions that should always apply here
 
@@ -59,9 +60,10 @@ class ComisionSearch extends Comision
         // grid filtering conditions
         $query->andFilterWhere([
             'ID' => $this->ID,
-            'ID_MATERIA' => $this->ID_MATERIA,
-            'CARGA_HORARIA_SEMANAL' => $this->CARGA_HORARIA_SEMANAL,
         ]);
+
+        $query->andFilterWhere(['like', 'NOMBRE', $this->NOMBRE])
+            ->andFilterWhere(['like', 'DESCRIPCION', $this->DESCRIPCION]);
 
         return $dataProvider;
     }

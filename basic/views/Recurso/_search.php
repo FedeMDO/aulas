@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\ComisionSearch */
+/* @var $model app\models\RecursoSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="comision-search">
+<div class="recurso-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,9 +17,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ID') ?>
 
-    <?= $form->field($model, 'ID_MATERIA') ?>
+    <?= $form->field($model, 'NOMBRE') ?>
 
-    <?= $form->field($model, 'CARGA_HORARIA_SEMANAL') ?>
+    <?= $form->field($model, 'DESCRIPCION') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

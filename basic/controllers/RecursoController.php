@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Comision;
-use app\models\ComisionSearch;
+use app\models\Recurso;
+use app\models\RecursoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ComisionController implements the CRUD actions for Comision model.
+ * RecursoController implements the CRUD actions for Recurso model.
  */
-class ComisionController extends Controller
+class RecursoController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class ComisionController extends Controller
     }
 
     /**
-     * Lists all Comision models.
+     * Lists all Recurso models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ComisionSearch();
+        $searchModel = new RecursoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class ComisionController extends Controller
     }
 
     /**
-     * Displays a single Comision model.
+     * Displays a single Recurso model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class ComisionController extends Controller
     }
 
     /**
-     * Creates a new Comision model.
+     * Creates a new Recurso model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Comision();
+        $model = new Recurso();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->ID]);
@@ -76,7 +76,7 @@ class ComisionController extends Controller
     }
 
     /**
-     * Updates an existing Comision model.
+     * Updates an existing Recurso model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class ComisionController extends Controller
     }
 
     /**
-     * Deletes an existing Comision model.
+     * Deletes an existing Recurso model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class ComisionController extends Controller
     }
 
     /**
-     * Finds the Comision model based on its primary key value.
+     * Finds the Recurso model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Comision the loaded model
+     * @return Recurso the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Comision::findOne($id)) !== null) {
+        if (($model = Recurso::findOne($id)) !== null) {
             return $model;
         }
 
