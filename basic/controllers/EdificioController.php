@@ -8,12 +8,44 @@ use app\models\EdificioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\Pagination;
 
 /**
  * EdificioController implements the CRUD actions for Edificio model.
  */
 class EdificioController extends Controller
 {
+
+    public function actionEdificiov()
+    {
+
+        $query = Edificio::find();
+
+
+        $pagination = new Pagination([
+            'defaultPageSize' => 5,
+            'totalCount' => $query->count(),
+        ]);
+
+    
+        $edificio = $query->orderBy('ID')
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+
+       
+
+        return $this->render('edificiov', [
+            'edificio' => $edificio,
+            'pagination' => $pagination,
+            
+        ]);
+
+
+
+    }
+
+
     /**
      * @inheritdoc
      */
