@@ -14,8 +14,14 @@
 
 .jumbotron
 {
-  background: -webkit-linear-gradient(rgb(41, 128, 185),rgb(52, 152, 219));
+  font-family: "Arial Black", Gadget, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
   -webkit-background-clip: text;
+  color: #2f3640;
+
+  /* background: -webkit-linear-gradient(rgb(41, 128, 185),rgb(52, 152, 219));
+  -webkit-background-clip: text; 
   -webkit-text-fill-color: transparent;
  
     
@@ -23,15 +29,17 @@ font-family: "Arial Black", Gadget, sans-serif;
 font-size: 30px;
 letter-spacing: 2.8px;
 word-spacing: 5.8px;
-color: #01AEF0;
+color: rgb(255, 255, 255);
 font-weight: 700;
 text-decoration: none;
 font-style: normal;
 font-variant: normal;
-text-transform: uppercase;
+text-transform: uppercase; */
 
 }
-
+.jumbutron #textoBienvenida{
+  color: red;
+}
 .wrap
 {
   width: 100%;

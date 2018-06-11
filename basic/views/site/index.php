@@ -17,9 +17,9 @@ $this->registerCssFile("@web/css/inicio.css",
 $this->title = 'Universidad Nacional Arturo Jauretche';
 ?>
 <div class='jumbotron'>
-
-<H1>BIENVENIDOS AL SISTEMA DE GESTION DE AULAS UNAJ</H1>
-
+    <div class ='textoBienvenida'>
+    <H1>BIENVENIDOS AL SISTEMA DE GESTION DE AULAS UNAJ</H1>
+    </div>
 </div>
 
 

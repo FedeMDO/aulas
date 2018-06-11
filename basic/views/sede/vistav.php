@@ -36,7 +36,8 @@ $this->registerCssFile("@web/css/index.css", [
         <?= Html::encode(" {$sede->CALLEYNUM} ") ?>
         
         <?= Html::encode("{$sede->LOCALIDAD}") ?>
-        <p><a href="#" class="btn btn-primary" role="button">Entrar</a> <a href="../sede/update?id=<?= Html::encode("{$sede->ID}") ?>"  class="btn btn-default" role="button">Modificar</a></p>
+        <p><a href="../edificio?EdificioSearch[ID_SEDE]=<?= Html::encode("{$sede->ID}") ?>&EdificioSearch[CANTIDAD_AULAS]=" class="btn btn-primary" role="button">Entrar</a> 
+        <a href="../sede/update?id=<?= Html::encode("{$sede->ID}") ?>"  class="btn btn-default" role="button">Modificar</a></p>
       </div>
     </div>
   </div>
