@@ -11,6 +11,7 @@ use yii\bootstrap\Modal;
 $this->title = 'Agenda Asig Horas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+  <div class="thumbnail">
 <div class="evento-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -19,7 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
     Modal::begin([
                         'header' => '<h4>eventos nico</h4>'
                         
-,                        'id'     => 'model',
+                        ,
+                            'id'     => 'model',
                         'size'   => 'model-lg',
                 ]);
                 
@@ -60,4 +62,5 @@ $this->params['breadcrumbs'][] = $this->title;
 }}
         '));
  ?>
+</div>
 </div>
