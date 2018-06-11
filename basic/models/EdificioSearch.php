@@ -18,7 +18,7 @@ class EdificioSearch extends Edificio
     public function rules()
     {
         return [
-            [['ID_EDIFICIO', 'ID_SEDE', 'CANTIDAD_AULAS'], 'integer'],
+            [['ID', 'ID_SEDE', 'CANTIDAD_AULAS'], 'integer'],
             [['NOMBRE'], 'safe'],
         ];
     }
@@ -59,7 +59,7 @@ class EdificioSearch extends Edificio
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'ID_EDIFICIO' => $this->ID_EDIFICIO,
+            'ID' => $this->ID,
             'ID_SEDE' => $this->ID_SEDE,
             'CANTIDAD_AULAS' => $this->CANTIDAD_AULAS,
         ]);

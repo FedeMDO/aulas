@@ -3,11 +3,13 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Agenda;
 use app\models\AgendaAsigHoras;
 use app\models\AgendaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
 
 /**
  * AgendaController implements the CRUD actions for AgendaAsigHoras model.
@@ -35,13 +37,24 @@ class AgendaController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new AgendaSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new Agenda();
+        $searchModel->find()->all();
+        foreach ($searchModel as $eve) {
+            $event = new \yii2fullcalendar\Models\Event();
+            $event->id = '1';
+            $event->title ='nico';
+            $event->start ='2018-06-11';
+
+           
+            $tasks[] = $event;
+        }
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+          'events'=>$tasks,
         ]);
+      
+
+     
     }
 
     /**

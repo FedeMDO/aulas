@@ -13,18 +13,18 @@ use app\models\AgendaAsigHoras;
 class AgendaAsigHorasSearch extends AgendaAsigHoras
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['ID', 'ID_HORA', 'ID_DIA', 'ID_AULA', 'ID_USER_ASIGNA', 'ID_USER_RECIBE', 'COMISION_ASIGNADA'], 'integer'],
-            [['PERIODO_LECTIVO'], 'safe'],
+            [['ID', 'ID_HORA', 'ID_DIA', 'ID_AULA', 'ID_USER_ASIGNA', 'ID_USER_RECIBE'], 'integer'],
+            [['COMISION_ASIGNADA', 'PERIODO_LECTIVO'], 'safe'],
         ];
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function scenarios()
     {
@@ -65,10 +65,10 @@ class AgendaAsigHorasSearch extends AgendaAsigHoras
             'ID_AULA' => $this->ID_AULA,
             'ID_USER_ASIGNA' => $this->ID_USER_ASIGNA,
             'ID_USER_RECIBE' => $this->ID_USER_RECIBE,
-            'COMISION_ASIGNADA' => $this->COMISION_ASIGNADA,
         ]);
 
-        $query->andFilterWhere(['like', 'PERIODO_LECTIVO', $this->PERIODO_LECTIVO]);
+        $query->andFilterWhere(['like', 'COMISION_ASIGNADA', $this->COMISION_ASIGNADA])
+            ->andFilterWhere(['like', 'PERIODO_LECTIVO', $this->PERIODO_LECTIVO]);
 
         return $dataProvider;
     }

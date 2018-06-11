@@ -48,8 +48,8 @@ class Instituto extends \yii\db\ActiveRecord
         return [
             'ID' => 'ID',
             'ID_INSTITUCION' => 'Id  Institucion',
-            'NOMBRE' => 'Nombre',
-            'COLOR_HEXA' => 'Color  Hexa',
+            'NOMBRE' => 'Instituto',
+            'COLOR_HEXA' => 'Color',
         ];
     }
 

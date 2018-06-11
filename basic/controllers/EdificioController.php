@@ -14,12 +14,6 @@ use yii\filters\VerbFilter;
  */
 class EdificioController extends Controller
 {
-    public function actionEdificiov()
-    {
-        return $this->render('edificiov');
-    }
-
-
     /**
      * @inheritdoc
      */
@@ -73,7 +67,7 @@ class EdificioController extends Controller
         $model = new Edificio();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID_EDIFICIO]);
+            return $this->redirect(['view', 'id' => $model->ID]);
         }
 
         return $this->render('create', [
@@ -93,7 +87,7 @@ class EdificioController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID_EDIFICIO]);
+            return $this->redirect(['view', 'id' => $model->ID]);
         }
 
         return $this->render('update', [

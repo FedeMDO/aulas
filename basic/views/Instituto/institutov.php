@@ -2,7 +2,9 @@
 
 
 use yii\helpers\Html;
-use yii\widgets\LinkPager;
+use yii\helpers\Url;
+use yii\bootstrap\ActiveForm;
+use yii\data\Pagination;
 
 
 
@@ -14,18 +16,19 @@ $this->registerCssFile("@web/css/index.css", [
 
 ?>
 
-<div class="maininsti">
 
 
- <div class="list-group">
-  <a href="#" class="list-group-item active">Instituto De Ingenieria</a>
-  <a href="#" class="list-group-item">Informatica</a>
-  <a href="#" class="list-group-item">Petroleo</a>
-  <a href="#" class="list-group-item">Electromecanica</a>
-  <a href="#" class="list-group-item">Industrial</a>
-  <a href="#" class="list-group-item">Transporte</a>
+
+
+<?php foreach ($instituto as $instituto): ?>
+
+
+<div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active">
+  <?= Html::encode("{$instituto->NOMBRE} ") ?>
+  </a>
+  <a href="../carrera/" class="list-group-item list-group-item-action"><?= Html::encode("{$instituto->COLOR_HEXA} ") ?></a>
 </div>
-
-
-
-</div>
+        <br></br>
+    
+<?php endforeach; ?>

@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "comision".
  *
  * @property int $ID
+ * @property string $NOMBRE
  * @property int $ID_MATERIA
  * @property int $CARGA_HORARIA_SEMANAL
  *
@@ -30,8 +31,9 @@ class Comision extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ID_MATERIA', 'CARGA_HORARIA_SEMANAL'], 'required'],
+            [['NOMBRE', 'ID_MATERIA', 'CARGA_HORARIA_SEMANAL'], 'required'],
             [['ID_MATERIA', 'CARGA_HORARIA_SEMANAL'], 'integer'],
+            [['NOMBRE'], 'string', 'max' => 40],
             [['ID_MATERIA'], 'exist', 'skipOnError' => true, 'targetClass' => Materia::className(), 'targetAttribute' => ['ID_MATERIA' => 'ID']],
         ];
     }
@@ -43,6 +45,7 @@ class Comision extends \yii\db\ActiveRecord
     {
         return [
             'ID' => 'ID',
+            'NOMBRE' => 'Comision',
             'ID_MATERIA' => 'Id  Materia',
             'CARGA_HORARIA_SEMANAL' => 'Carga  Horaria  Semanal',
         ];

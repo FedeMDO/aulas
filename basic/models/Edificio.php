@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "edificio".
  *
- * @property int $ID_EDIFICIO
+ * @property int $ID
  * @property int $ID_SEDE
  * @property string $NOMBRE
  * @property int $CANTIDAD_AULAS
@@ -34,7 +34,7 @@ class Edificio extends \yii\db\ActiveRecord
             [['ID_SEDE', 'NOMBRE'], 'required'],
             [['ID_SEDE', 'CANTIDAD_AULAS'], 'integer'],
             [['NOMBRE'], 'string', 'max' => 40],
-            [['ID_SEDE'], 'exist', 'skipOnError' => true, 'targetClass' => Sede::className(), 'targetAttribute' => ['ID_SEDE' => 'ID_SEDE']],
+            [['ID_SEDE'], 'exist', 'skipOnError' => true, 'targetClass' => Sede::className(), 'targetAttribute' => ['ID_SEDE' => 'ID']],
         ];
     }
 
@@ -44,7 +44,7 @@ class Edificio extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'ID_EDIFICIO' => 'Id  Edificio',
+            'ID' => 'ID',
             'ID_SEDE' => 'Id  Sede',
             'NOMBRE' => 'Nombre',
             'CANTIDAD_AULAS' => 'Cantidad  Aulas',
@@ -56,7 +56,7 @@ class Edificio extends \yii\db\ActiveRecord
      */
     public function getAulas()
     {
-        return $this->hasMany(Aula::className(), ['ID_EDIFICIO' => 'ID_EDIFICIO']);
+        return $this->hasMany(Aula::className(), ['ID_EDIFICIO' => 'ID']);
     }
 
     /**
@@ -64,6 +64,6 @@ class Edificio extends \yii\db\ActiveRecord
      */
     public function getSEDE()
     {
-        return $this->hasOne(Sede::className(), ['ID_SEDE' => 'ID_SEDE']);
+        return $this->hasOne(Sede::className(), ['ID' => 'ID_SEDE']);
     }
 }

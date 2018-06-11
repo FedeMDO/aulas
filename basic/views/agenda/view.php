@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'ID',
-            'ID_HORA',
+            'hORA.HORA',
             'ID_DIA',
             'ID_AULA',
             'ID_USER_ASIGNA',

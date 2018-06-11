@@ -12,6 +12,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'NOMBRE')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'ID_MATERIA')->textInput() ?>
 
     <?= $form->field($model, 'CARGA_HORARIA_SEMANAL')->textInput() ?>

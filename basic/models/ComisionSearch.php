@@ -19,6 +19,7 @@ class ComisionSearch extends Comision
     {
         return [
             [['ID', 'ID_MATERIA', 'CARGA_HORARIA_SEMANAL'], 'integer'],
+            [['NOMBRE'], 'safe'],
         ];
     }
 
@@ -62,6 +63,8 @@ class ComisionSearch extends Comision
             'ID_MATERIA' => $this->ID_MATERIA,
             'CARGA_HORARIA_SEMANAL' => $this->CARGA_HORARIA_SEMANAL,
         ]);
+
+        $query->andFilterWhere(['like', 'NOMBRE', $this->NOMBRE]);
 
         return $dataProvider;
     }

@@ -4,10 +4,18 @@ body {
 }
 
 .footer {
-    height: 60px;
-    background-color: #f5f5f5;
+/*  height: 60px;
+    background-color: #f5f5f5; 
     border-top: 1px solid #ddd;
-    padding-top: 20px;
+    padding-top: 20px; hasta aca desde arriba es la config vieja
+    position: bottom; left: 0; right: 0; bottom: 0; agregue esta y la saqué*/
+    clear: both;
+    position: bottom;
+    padding-top: 10px;
+    background-color: #f5f5f5;
+    z-index: 10;
+    height: 3em;
+    margin-top: -3em;
 }
 
 
