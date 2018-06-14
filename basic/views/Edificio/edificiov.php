@@ -10,8 +10,6 @@ $this->registerCssFile("@web/css/index.css", [
   
 ], 'css-print-theme');
 
-
-
 ?>
 
 <h1>Edificios Disponibles</h1>
@@ -27,7 +25,6 @@ $this->registerCssFile("@web/css/index.css", [
     <div class="thumbnail">
       <img src="../image/edi4.png" alt="...">
       <div class="caption">
-
         <?= Html::encode("{$edificio->NOMBRE} ") ?>
         <br></br> 
          <img  src="../image/aulaicon.png" alt="  height="42" width="42"">

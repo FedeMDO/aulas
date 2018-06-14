@@ -10,7 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\User;
-
+use yii\data\Pagination;
 /**
  * NotificacionController implements the CRUD actions for Notificacion model.
  */
@@ -71,12 +71,25 @@ class NotificacionController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new NotificacionSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $query = Notificacion::find();
+
+        $pagination = new Pagination([
+            'defaultPageSize' => 5,
+            'totalCount' => $query->count(),
+        ]);
+
+    
+        $notificacion = $query->orderBy('ID')
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+
+       
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'notificacion' => $notificacion,
+            'pagination' => $pagination,
+            
         ]);
     }
 

@@ -1,35 +1,54 @@
 <?php
 
+
 use yii\helpers\Html;
-use yii\grid\GridView;
+use yii\helpers\Url;
+use yii\bootstrap\ActiveForm;
+use yii\data\Pagination;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\models\NotificacionSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Notificacions';
-$this->params['breadcrumbs'][] = $this->title;
+
+$this->registerCssFile("@web/css/index.css", [
+    'depends' => [\yii\bootstrap\BootstrapAsset::className()],
+    
+], 'css-print-theme');
+
+
 ?>
-<div class="notificacion-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Notificacion', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
-            'ID_USER_EMISOR',
-            'ID_USER_RECEPTOR',
-            'NOTIFICACION',
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+<?php foreach ($notificacion as $notificacion): ?>
+
+
+<div class="panel panel-primary">
+      <div class="panel-heading">ADMIN<?= Html::encode("{$notificacion->ID_USER_EMISOR} ") ?></div>
+
+
+      
+    <div class="panel-body">
+      
+      
+     <div class="media">
+    <div class="media-left">
+        <img src="../image/iconUnaj.jpg" class="media-object" style="width:60px">
+    </div>
+    <div class="media-body">
+           
+    <?= Html::encode("{$notificacion->NOTIFICACION} ") ?>
+    </div>
+    </div>
+      
+      
+      
+    </div>
 </div>
+    
+<?php endforeach; ?>
+
+
+
+
+
