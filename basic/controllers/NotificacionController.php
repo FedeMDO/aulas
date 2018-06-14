@@ -71,8 +71,17 @@ class NotificacionController extends Controller
      */
     public function actionIndex()
     {
-        $query = Notificacion::find()
-            ->where(['ID_USER_EMISOR' => Yii::$app->user->identity->id]);
+        if (User::isUserAdmin(Yii::$app->user->identity->id)) #si es admin, recibe los enviados y recibidos
+        {
+            $query = Notificacion::find()
+            ->where(['ID_USER_EMISOR' => Yii::$app->user->identity->id])
+            ->orWhere(['ID_USER_RECEPTOR' => Yii::$app->user->identity->id]);
+        }
+        elseif (User::isUserSimple(Yii::$app->user->identity->id)) #si es user. recibe los recibidos (no tiene enviados)
+        {
+            $query = Notificacion::find()
+            ->where(['ID_USER_RECEPTOR' => Yii::$app->user->identity->id]);
+        }
 
         $pagination = new Pagination([
             'defaultPageSize' => 5,
