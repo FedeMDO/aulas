@@ -29,15 +29,15 @@ $this->title = 'Universidad Nacional Arturo Jauretche';
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
     <div class="item active">
-      <img src="../image/sede_1.png" alt="Los Angeles">
+      <img src="../image/banner_site1.png" alt="Los Angeles">
     </div>
 
     <div class="item">
-      <img src="../image/sede_2.png" alt="Chicago">
+      <img src="../image/banner_site2.png" alt="Chicago">
     </div>
 
     <div class="item">
-      <img src="../image/sede_3.png" alt="New York">
+      <img src="../image/banner_site3.png" alt="New York">
     </div>
   </div>
 

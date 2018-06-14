@@ -33,7 +33,7 @@ $this->registerCssFile("@web/css/index.css", [
       
      <div class="media">
     <div class="media-left">
-        <img src="../image/iconUnaj.jpg" class="media-object" style="width:60px">
+        <img src="../image/admin_icon.png" class="media-object" style="width:60px">
     </div>
     <div class="media-body">
            
