@@ -55,7 +55,15 @@ class User extends \yii\base\baseObject implements \yii\web\IdentityInterface
         
         return isset($user) ? new static($user) : null;
     }
-
+    public static function getUsername($id)
+    {
+        $user = Users::find()
+                ->where("activate=:activate", [":activate" => 1])
+                ->andWhere("id=:id", ["id" => $id])
+                ->one();
+        
+        return $user->username;
+    }
     /**
      * @inheritdoc
      */

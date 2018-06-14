@@ -1,6 +1,5 @@
 <?php
 
-
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
@@ -19,12 +18,12 @@ $this->registerCssFile("@web/css/index.css", [
 
 
 
-
 <?php foreach ($notificacion as $notificacion): ?>
 
 
 <div class="panel panel-primary">
-      <div class="panel-heading">ADMIN<?= Html::encode("{$notificacion->ID_USER_EMISOR} ") ?></div>
+      <div class="panel-heading">De: <?= Html::encode("{$notificacion->uSEREMISOR->username} ") ?></div>
+      <div class="panel-heading">Para: <?= Html::encode("{$notificacion->uSERRECEPTOR->username} ") ?></div>
 
 
       

@@ -71,7 +71,8 @@ class NotificacionController extends Controller
      */
     public function actionIndex()
     {
-        $query = Notificacion::find();
+        $query = Notificacion::find()
+            ->where(['ID_USER_EMISOR' => Yii::$app->user->identity->id]);
 
         $pagination = new Pagination([
             'defaultPageSize' => 5,

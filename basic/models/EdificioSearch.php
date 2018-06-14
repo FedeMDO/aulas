@@ -67,5 +67,5 @@ class EdificioSearch extends Edificio
         $query->andFilterWhere(['like', 'NOMBRE', $this->NOMBRE]);
 
         return $dataProvider;
-    }
+        }
 }
