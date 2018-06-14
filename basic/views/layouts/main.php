@@ -83,14 +83,14 @@ AppAsset::register($this);
         ]);
     NavBar::end();
     ?>
-    <?php
+    <?php //NAV FIJO E INAMOBIBLE SEGUN ROL............
         if(Yii::$app->user->isGuest)
         {
             
         }
         else{
-            if(User::isUserAdmin(Yii::$app->user->identity->id))
-            {
+            if(User::isUserAdmin(Yii::$app->user->identity->id)) 
+            {//---------------ADMIN PANEL-------------------
             ?>
             <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -108,7 +108,7 @@ AppAsset::register($this);
             <?php
         }
         if(User::isUserSimple(Yii::$app->user->identity->id))
-        {
+        {//---------------ADMIN PANEL-------------------
             ?>
             <nav class="navbar navbar-default">
   <div class="container-fluid">
