@@ -72,16 +72,16 @@ class SiteController extends Controller
     }
 
 
-    public function actionUser(){
+    // public function actionUser(){
 
 
-        return $this->render('@app/views/User/user.php');
-    }
+    //     return $this->render('@app/views/User/user.php');
+    // }
 
-    private function actionAdmin(){
+    // private function actionAdmin(){
 
-        return $this->render('@app/views/Admin/admin.php');
-    }
+    //     return $this->render('@app/views/Admin/admin.php');
+    // }
 
 
 
@@ -248,19 +248,20 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        if (!\Yii::$app->user->isGuest) {
+        // if (!\Yii::$app->user->isGuest) {
    
-            if (User::isUserAdmin(Yii::$app->user->identity->id))
-               {
-                   return $this->actionAdmin();
-               }
-               else
-               {
-                   return $this->actionUser();
-               }
+        //     if (User::isUserAdmin(Yii::$app->user->identity->id))
+        //        {
+        //            return $this->actionAdmin();
+        //        }
+        //        else
+        //        {
+        //            return $this->actionUser();
+        //        }
         
-           }//return $this->render('index');
-        else return $this->render('index');
+        //    }//return $this->render('index');
+        // else 
+        return $this->render('index');
     }
 
     /**
@@ -288,11 +289,11 @@ class SiteController extends Controller
    
             if (User::isUserAdmin(Yii::$app->user->identity->id))
             {
-                return $this->actionAdmin();
+                return $this->actionIndex();
             }
             else
             {
-                 return $this->actionUser();
+                 return $this->actionIndex();
             }
    
         } else 
