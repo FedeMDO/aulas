@@ -30,13 +30,4 @@ $this->registerCssFile("@web/css/index.css", [
   </div>
 </nav>
 
-
-
-
- 
-
-  
-
-
-
 <h1>HOLA ESTOY EN NOTIFICACIONES </h1>

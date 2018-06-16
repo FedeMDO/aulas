@@ -92,7 +92,10 @@ AppAsset::register($this);
             if(User::isUserAdmin(Yii::$app->user->identity->id)) 
             {//---------------ADMIN PANEL-------------------
             ?>
+
+            <div class="navbarsize">
             <nav class="navbar navbar-default">
+
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Admin Panel</a>
@@ -105,12 +108,14 @@ AppAsset::register($this);
     <button class="btn btn-danger navbar-btn">Configuracion</button>
   </div>
 </nav>
+</div>
             <?php
         }
         if(User::isUserSimple(Yii::$app->user->identity->id))
         {//---------------ADMIN PANEL-------------------
             ?>
-            <nav class="navbar navbar-default">
+<div class="navbarsize">
+<nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">User Panel</a>
@@ -122,6 +127,8 @@ AppAsset::register($this);
     <button class="btn btn-danger navbar-btn">Configuracion</button>
   </div>
 </nav>
+</div>
+
             <?php
         }
     }

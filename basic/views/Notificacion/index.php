@@ -22,7 +22,7 @@ $this->registerCssFile("@web/css/index.css", [
 
 
 <div class="panel panel-primary">
-      <div class="panel-heading">De: <?= Html::encode("{$notificacion->uSEREMISOR->username} ") ?></div>
+     
       <div class="panel-heading">Para: <?= Html::encode("{$notificacion->uSERRECEPTOR->username} ") ?></div>
 
 
@@ -33,6 +33,7 @@ $this->registerCssFile("@web/css/index.css", [
      <div class="media">
     <div class="media-left">
         <img src="../image/admin_icon.png" class="media-object" style="width:60px">
+        <div class="panel-heading"><?= Html::encode("{$notificacion->uSEREMISOR->username} ") ?></div>
     </div>
     <div class="media-body">
            

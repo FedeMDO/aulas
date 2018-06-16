@@ -17,9 +17,6 @@ $this->registerCssFile("@web/css/index.css", [
     
 ]);
 
-
-
-
 ?>
 
     
@@ -27,17 +24,7 @@ $this->registerCssFile("@web/css/index.css", [
 
 <div class="loginc">
     <h1><?= Html::encode($this->title) ?></h1>
-
-
-    <div class="alert alert-info">
-     <strong>ATENCION!</strong> Igresa tu nomobre de usuario y contraseña 
-    si no tenes conseguite uno. Donde? <a href=<?=Url::toRoute("site/register")?>>aca</a>
-    </div>
-
-
-
-    
-
+  
     <p>Please fill out the following fields to login:</p>
   
     <?php $form = ActiveForm::begin([
@@ -49,8 +36,6 @@ $this->registerCssFile("@web/css/index.css", [
             'labelOptions' => ['class' => 'col-lg-1 control-label'],
         ],
     ]); ?>
-
-        
 
         <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Usuario') ?>
 
@@ -69,7 +54,7 @@ $this->registerCssFile("@web/css/index.css", [
         </div>
 
     <?php ActiveForm::end(); ?>
-
+    
 
 </div>
 

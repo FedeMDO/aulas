@@ -4,8 +4,7 @@ use yii\widgets\ActiveForm;
 ?>
 
 <br></br>
-<br></br>
-<br></br>
+
 <div class="col-md-offset-4 col-md-5">
 <div class="regis">
     
