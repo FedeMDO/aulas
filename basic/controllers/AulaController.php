@@ -49,7 +49,27 @@ class AulaController extends Controller
         'pagination' => $pagination,
         
     ]);
+    }
+    public function actionRecursos($id)
+    {
+        $query = Aula::find()
+        ->where(['ID' =>$id]);
+        
+            $pagination = new Pagination([
+            'defaultPageSize' => 5,
+            'totalCount' => $query->count(),
+        ]);
 
+        $aula = $query->orderBy('ID')
+        ->offset($pagination->offset)
+        ->limit($pagination->limit)
+        ->all();
+   
+
+    return $this->render('recursos', [
+        'aula' => $aula,
+        'pagination' => $pagination,
+        ]);
 
     }
     /**

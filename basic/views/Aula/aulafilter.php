@@ -36,7 +36,7 @@ $this->registerCssFile("@web/css/index.css", [
                   <td><?= Html::encode("{$aula->NOMBRE} ") ?> N°<?= Html::encode("{$aula->ID} ") ?></td>
                   <td><?= Html::encode("{$aula->PISO} ") ?></td>
                   <td><?= Html::encode("{$aula->CAPACIDAD} ") ?>
-                  <td><a href=""  class="btn btn-info" role="button">Ver</a></td>
+                  <td><a href="../aula/recursos?id=<?= Html::encode("{$aula->ID}") ?>"  class="btn btn-info" role="button">Ver</a></td>
                  
                   </td>
                   
