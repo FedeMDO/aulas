@@ -3,8 +3,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use yii\data\Pagination;
-use app\models\User;
-use yii\filters\AccessControl;
 
 
 $this->registerCssFile("@web/css/index.css", [
@@ -19,7 +17,6 @@ $this->registerCssFile("@web/css/index.css", [
 <ul>
 
 
-
 <?php foreach ($edificio as $edificio): ?>
 
 <div class="row3">
@@ -31,7 +28,7 @@ $this->registerCssFile("@web/css/index.css", [
         <br></br> 
          <img  src="../image/aulaicon.png" alt="  height="42" width="42"">
         <?= Html::encode("{$edificio->CANTIDAD_AULAS} ") ?>
-        <p><a href="../aulafilter?id=<?= Html::encode("{$edificio->ID}") ?>" class="btn btn-primary" role="button">Entrar</a> <a href="../edificio/update?id=<?= Html::encode("{$edificio->ID}") ?>" class="btn btn-default" role="button">Modificar</a></p>
+        <p><a href="../aula/aulafilter?id=<?= Html::encode("{$edificio->ID}") ?>" class="btn btn-primary" role="button">Entrar</a> <a href="../edificio/update?id=<?= Html::encode("{$edificio->ID}") ?>" class="btn btn-default" role="button">Modificar</a></p>
       </div>
     </div>
   </div>
@@ -39,7 +36,7 @@ $this->registerCssFile("@web/css/index.css", [
 <?php endforeach; ?>
 
 
-<?= LinkPager::widget(['pagination' => $pagination]) ?>
+
 
 
 </ul>

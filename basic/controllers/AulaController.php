@@ -10,12 +10,48 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\User;
-
+use yii\data\Pagination;
 /**
  * AulaController implements the CRUD actions for Aula model.
  */
 class AulaController extends Controller
 {
+
+
+    public function actionAulafilter($id)
+    {
+       
+        if (User::isUserAdmin(Yii::$app->user->identity->id)) #si es admin, recibe los enviados y recibidos
+        {
+            $query = Aula::find()
+            ->where(['ID_EDIFICIO' =>$id]);
+        }
+        elseif (User::isUserSimple(Yii::$app->user->identity->id)) #si es user. recibe los recibidos (no tiene enviados)
+        {
+            $query = Aula::find()
+            ->where(['ID_EDIFICIO' =>$id]);
+        }
+
+        $pagination = new Pagination([
+            'defaultPageSize' => 5,
+            'totalCount' => $query->count(),
+        ]);
+
+        $aula = $query->orderBy('ID')
+        ->offset($pagination->offset)
+        ->limit($pagination->limit)
+        ->all();
+
+   
+
+    return $this->render('aulafilter', [
+        'aula' => $aula,
+        'pagination' => $pagination,
+        
+    ]);
+
+
+    }
     /**
      * @inheritdoc
      */

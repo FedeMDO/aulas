@@ -35,4 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+
+
+
+    <h1>HOLASS</h1>
 </div>

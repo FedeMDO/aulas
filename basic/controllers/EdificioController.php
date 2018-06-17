@@ -4,17 +4,56 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Edificio;
+use app\models\Aula;
 use app\models\EdificioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\Pagination;
+use app\models\User;
+use yii\filters\AccessControl;
 
 /**
  * EdificioController implements the CRUD actions for Edificio model.
  */
 class EdificioController extends Controller
 {
+
+    public function actionEdifilter($id)
+    {
+       
+        if (User::isUserAdmin(Yii::$app->user->identity->id)) #si es admin, recibe los enviados y recibidos
+        {
+            $query = Edificio::find()
+            ->where(['ID_SEDE' =>$id]);
+        }
+        elseif (User::isUserSimple(Yii::$app->user->identity->id)) #si es user. recibe los recibidos (no tiene enviados)
+        {
+            $query = Edificio::find()
+            ->where(['ID_SEDE' =>$id]);
+        }
+
+        $pagination = new Pagination([
+            'defaultPageSize' => 5,
+            'totalCount' => $query->count(),
+        ]);
+
+        $edificio = $query->orderBy('ID')
+        ->offset($pagination->offset)
+        ->limit($pagination->limit)
+        ->all();
+
+   
+
+    return $this->render('edifilter', [
+        'edificio' => $edificio,
+        'pagination' => $pagination,
+        
+    ]);
+
+
+    }
+
 
     public function actionEdificiov()
     {

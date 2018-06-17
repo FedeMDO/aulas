@@ -18,8 +18,6 @@ use app\models\User;
 class SedeController extends Controller
 {
 
-
-
     public function actionVistav()
     {
        
