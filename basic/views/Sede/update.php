@@ -5,10 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Sede */
 
-$this->title = 'Update Sede: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Sedes', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->ID, 'url' => ['view', 'id' => $model->ID]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Actualizacion Sede';
+
 ?>
 <div class="loginc">
 <div class="sede-update">
