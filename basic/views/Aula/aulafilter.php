@@ -29,7 +29,7 @@ $this->registerCssFile("@web/css/index.css", [
          <img  src="../image/aulaicon.png" alt="  height="42" width="42"">
         <?= Html::encode("{$aula->CAPACIDAD} ") ?>
         <?= Html::encode("{$aula->PISO} ") ?>
-        <p><a href="../aulafilter?id=<?= Html::encode("{$aula->ID}") ?>" class="btn btn-primary" role="button">Entrar</a> <a href="../edificio/update?id=<?= Html::encode("{$edificio->ID}") ?>" class="btn btn-default" role="button">Modificar</a></p>
+        <p><a href="#" class="btn btn-primary" role="button">Agenda</a> <p><a href="../aulafilter?id=<?= Html::encode("{$aula->eDIFICIO->ID}") ?>" class="btn btn-primary" role="button">Entrar</a> <a href="../aula/update?id=<?= Html::encode("{$aula->eDIFICIO->ID}") ?>" class="btn btn-default" role="button">Modificar</a></p>
       </div>
     </div>
   </div>

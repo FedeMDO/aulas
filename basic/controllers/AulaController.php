@@ -60,11 +60,11 @@ class AulaController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                //'only' => ['logout', 'user'],
+                'only' => ['index','view','create','update','delete','aulafilter'],
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['index','view','create','update','delete'],
+                        'actions' => ['index','view','create','update','delete','aulafilter'],
                         //Esta propiedad establece que tiene permisos
                         'allow' => true,
                         //Usuarios autenticados, el signo ? es para invitados
@@ -78,7 +78,7 @@ class AulaController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['index','view'],
+                       'actions' => ['index','view','aulafilter'],
                        //Esta propiedad establece que tiene permisos
                        'allow' => true,
                        //Usuarios autenticados, el signo ? es para invitados
@@ -96,6 +96,7 @@ class AulaController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'index' => ['GET']
                 ],
             ],
         ];
