@@ -12,33 +12,38 @@ $this->registerCssFile("@web/css/index.css", [
 
 ?>
 
-<h1>Aulas Disponibles</h1>
+<center><h1>Aulas Disponibles</h1></center>
 
-<ul>
-
-
-<?php foreach ($aula as $aula): ?>
-
-<div class="row3">
-  <div class="col-sm-8 col-md-4">
-    <div class="thumbnail">
-      <img src="../image/edi4.png" alt="...">
-      <div class="caption">
-        <?= Html::encode("{$aula->NOMBRE} ") ?>
-        <br></br> 
-         <img  src="../image/aulaicon.png" alt="  height="42" width="42"">
-        <?= Html::encode("{$aula->CAPACIDAD} ") ?>
-        <?= Html::encode("{$aula->PISO} ") ?>
-        <p><a href="../aulafilter?id=<?= Html::encode("{$aula->ID}") ?>" class="btn btn-primary" role="button">Entrar</a> <a href="../edificio/update?id=<?= Html::encode("{$aula->ID}") ?>" class="btn btn-default" role="button">Modificar</a></p>
-      </div>
-    </div>
-  </div>
+ <div class="loginc">
+<div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>AGENDA</th>
+                  <th>N°</th>
+                  <th>NOMBRE</th>
+                  <th>PISO</th>
+                  <th>CAPACIDAD</th>
+                  <th>RECURSOS</th>
+                  <th>EDITAR</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($aula as $aula): ?>
+                <tr>
+                  <td><button href= type="button" class="btn btn-success">AGENDA</button></td>
+                  <td><?= Html::encode("{$aula->ID} ") ?></td>
+                  <td><?= Html::encode("{$aula->NOMBRE} ") ?> N°<?= Html::encode("{$aula->ID} ") ?></td>
+                  <td><?= Html::encode("{$aula->PISO} ") ?></td>
+                  <td><?= Html::encode("{$aula->CAPACIDAD} ") ?>
+                  <td><a href=""  class="btn btn-info" role="button">Ver</a></td>
+                 
+                  </td>
+                  
+                  <td><a href="../aula/update?id=<?= Html::encode("{$aula->ID}") ?>"  class="btn btn-danger" role="button">Modificar</a></p></td>
+                
+                </tr>
+                <?php endforeach; ?>
+              </table>
+            </div>
 </div>
-<?php endforeach; ?>
-
-<H1>HOLA ESTOY EN AULA FILTER</H1>
-
-
-
-</ul>
-

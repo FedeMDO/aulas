@@ -44,3 +44,40 @@ $this->registerCssFile("@web/css/index.css", [
 
 </ul>
 
+
+
+
+
+<div class="loginc">
+<div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>AGENDA</th>
+                  <th>N°</th>
+                  <th>NOMBRE</th>
+                  <th>PISO</th>
+                  <th>CAPACIDAD</th>
+                  <th>RECURSOS</th>
+                  <th>EDITAR</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($aula as $aula): ?>
+                <tr>
+                  <td><button href= type="button" class="btn btn-success">AGENDA</button></td>
+                  <td><?= Html::encode("{$aula->ID} ") ?></td>
+                  <td><?= Html::encode("{$aula->NOMBRE} ") ?> N°<?= Html::encode("{$aula->ID} ") ?></td>
+                  <td><?= Html::encode("{$aula->PISO} ") ?></td>
+                  <td><?= Html::encode("{$aula->CAPACIDAD} ") ?>
+                  <td><a href=""  class="btn btn-info" role="button">Ver</a></td>
+                 
+                  </td>
+                  
+                  <td><a href="../aula/update?id=<?= Html::encode("{$aula->ID}") ?>"  class="btn btn-danger" role="button">Modificar</a></p></td>
+                
+                </tr>
+                <?php endforeach; ?>
+              </table>
+            </div>
+</div>
