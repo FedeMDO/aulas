@@ -33,7 +33,7 @@ class AulaController extends Controller
         }
 
         $pagination = new Pagination([
-            'defaultPageSize' => 5,
+            'defaultPageSize' => 19,
             'totalCount' => $query->count(),
         ]);
 

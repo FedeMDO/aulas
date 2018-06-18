@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Edificios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->ID, 'url' => ['view', 'id' => $model->ID]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-
+<div class="col-md-offset-4 col-md-5">
 <div class="loginc">
 <div class="edificio-update">
 
@@ -20,5 +20,6 @@ $this->params['breadcrumbs'][] = 'Update';
         'model' => $model,
     ]) ?>
 
+</div>
 </div>
 </div>
