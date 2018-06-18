@@ -14,6 +14,9 @@ use app\models\Users;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 use yii\helpers\Html;
+use app\models\Notificacion;
+use app\models\User;
+use yii\data\Pagination;
 
 class UserController extends Controller
 {
@@ -30,7 +33,25 @@ class UserController extends Controller
 
     public function actionNoti()
     {
+        $query = Notificacion::find()
+        ->where(['ID_USER_RECEPTOR' => Yii::$app->user->identity->id]);
+
+        $pagination = new Pagination([
+            'defaultPageSize' => 20,
+            'totalCount' => $query->count(),
+        ]);
+    
+        $notificacion = $query->orderBy('ID')
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
        
-        return $this->render('noti');
+
+        return $this->render('noti', [
+            'notificacion' => $notificacion,
+            'pagination' => $pagination,
+            
+        ]);
     }
+
 }
