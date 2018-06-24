@@ -8,9 +8,7 @@ use app\models\NotificacionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use app\models\User;
-use yii\data\Pagination;
+
 /**
  * NotificacionController implements the CRUD actions for Notificacion model.
  */
@@ -71,35 +69,12 @@ class NotificacionController extends Controller
      */
     public function actionIndex()
     {
-        if (User::isUserAdmin(Yii::$app->user->identity->id)) #si es admin, recibe los enviados y recibidos
-        {
-            $query = Notificacion::find()
-            ->where(['ID_USER_EMISOR' => Yii::$app->user->identity->id])
-            ->orWhere(['ID_USER_RECEPTOR' => Yii::$app->user->identity->id]);
-        }
-        elseif (User::isUserSimple(Yii::$app->user->identity->id)) #si es user. recibe los recibidos (no tiene enviados)
-        {
-            $query = Notificacion::find()
-            ->where(['ID_USER_RECEPTOR' => Yii::$app->user->identity->id]);
-        }
-
-        $pagination = new Pagination([
-            'defaultPageSize' => 5,
-            'totalCount' => $query->count(),
-        ]);
-
-    
-        $notificacion = $query->orderBy('ID')
-            ->offset($pagination->offset)
-            ->limit($pagination->limit)
-            ->all();
-
-       
+        $searchModel = new NotificacionSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'notificacion' => $notificacion,
-            'pagination' => $pagination,
-            
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

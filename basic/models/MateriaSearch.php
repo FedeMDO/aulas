@@ -19,7 +19,7 @@ class MateriaSearch extends Materia
     {
         return [
             [['ID'], 'integer'],
-            [['NOMBRE'], 'safe'],
+            [['NOMBRE', 'DESC_CORTA'], 'safe'],
         ];
     }
 
@@ -62,7 +62,8 @@ class MateriaSearch extends Materia
             'ID' => $this->ID,
         ]);
 
-        $query->andFilterWhere(['like', 'NOMBRE', $this->NOMBRE]);
+        $query->andFilterWhere(['like', 'NOMBRE', $this->NOMBRE])
+            ->andFilterWhere(['like', 'DESC_CORTA', $this->DESC_CORTA]);
 
         return $dataProvider;
     }

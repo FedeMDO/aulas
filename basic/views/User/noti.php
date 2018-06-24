@@ -49,7 +49,7 @@ endif; ?>
     if ($n->uSERRECEPTOR->id == Yii::$app->user->identity->id):?>
 <div class="panel panel-primary">
      
-      <div class="panel-heading">Para: <?= Html::encode("{$n->uSERRECEPTOR->username} ") ?></div>
+<?= Html::encode("{$n->FECHA} ") ?></div>
 
 
       

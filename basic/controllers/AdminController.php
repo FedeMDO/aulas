@@ -50,13 +50,14 @@ class AdminController extends Controller
             'totalCount' => $query->count(),
         ]);
     
-        $notificacion = $query->orderBy('ID')
+        $notificacion = $query->orderBy(['Fecha'=>SORT_DESC])
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
         
             $model = new Notificacion();
-
+            $model->ID_USER_EMISOR = Yii::$app->user->identity->id;
+            $model->FECHA = new \yii\db\Expression('NOW()');
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 $session = Yii::$app->session;
                 $session->setFlash('notificacionEnviada', 'Has enviado correctamente la notificacion');

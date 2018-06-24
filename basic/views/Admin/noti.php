@@ -48,10 +48,7 @@ endif; ?>
   <?php foreach ($notificacion as $n):
     if ($n->uSERRECEPTOR->id == Yii::$app->user->identity->id):?>
 <div class="panel panel-primary">
-     
-      <div class="panel-heading">Para: <?= Html::encode("{$n->uSERRECEPTOR->username} ") ?></div>
-
-
+      <?= Html::encode("{$n->FECHA} ") ?></div>
       
     <div class="panel-body">
       
@@ -80,9 +77,8 @@ endif; ?>
   <?php foreach ($notificacion as $n):
     if ($n->uSEREMISOR->id == Yii::$app->user->identity->id):?>
 <div class="panel panel-primary">
-     
-      <div class="panel-heading">Para: <?= Html::encode("{$n->uSERRECEPTOR->username} ") ?></div>
-
+<div class="panel-heading">Para: <?= Html::encode("{$n->uSERRECEPTOR->username} ") ?><?= Html::encode("{$n->FECHA} ") ?></div>
+      
 
       
     <div class="panel-body">

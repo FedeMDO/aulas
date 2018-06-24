@@ -19,7 +19,7 @@ class NotificacionSearch extends Notificacion
     {
         return [
             [['ID', 'ID_USER_EMISOR', 'ID_USER_RECEPTOR'], 'integer'],
-            [['NOTIFICACION'], 'safe'],
+            [['NOTIFICACION', 'FECHA'], 'safe'],
         ];
     }
 
@@ -62,6 +62,7 @@ class NotificacionSearch extends Notificacion
             'ID' => $this->ID,
             'ID_USER_EMISOR' => $this->ID_USER_EMISOR,
             'ID_USER_RECEPTOR' => $this->ID_USER_RECEPTOR,
+            'FECHA' => $this->FECHA,
         ]);
 
         $query->andFilterWhere(['like', 'NOTIFICACION', $this->NOTIFICACION]);

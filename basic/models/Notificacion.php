@@ -11,6 +11,7 @@ use Yii;
  * @property int $ID_USER_EMISOR
  * @property int $ID_USER_RECEPTOR
  * @property string $NOTIFICACION
+ * @property string $FECHA
  *
  * @property Users $uSEREMISOR
  * @property Users $uSERRECEPTOR
@@ -31,8 +32,9 @@ class Notificacion extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ID_USER_EMISOR', 'ID_USER_RECEPTOR'], 'required'],
+            [['ID_USER_EMISOR', 'ID_USER_RECEPTOR', 'FECHA'], 'required'],
             [['ID_USER_EMISOR', 'ID_USER_RECEPTOR'], 'integer'],
+            [['FECHA'], 'safe'],
             [['NOTIFICACION'], 'string', 'max' => 300],
             [['ID_USER_EMISOR'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['ID_USER_EMISOR' => 'id']],
             [['ID_USER_RECEPTOR'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['ID_USER_RECEPTOR' => 'id']],
@@ -49,6 +51,7 @@ class Notificacion extends \yii\db\ActiveRecord
             'ID_USER_EMISOR' => 'Id  User  Emisor',
             'ID_USER_RECEPTOR' => 'Id  User  Receptor',
             'NOTIFICACION' => 'Notificacion',
+            'FECHA' => 'Fecha',
         ];
     }
 

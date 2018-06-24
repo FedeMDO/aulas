@@ -18,6 +18,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'NOTIFICACION')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'FECHA')->textInput() ?>
+
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
