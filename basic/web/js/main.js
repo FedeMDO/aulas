@@ -1,7 +1,7 @@
 $(function(){
     $(document).on('click','.fc-day', function(){
         var date = $(this).attr('data-date');
-        $.get('/agenda/create',{'date':date}, function(data){
+        $.get('/restri/create',{'date':date}, function(data){
             $('.modal').modal('show')
             .find('#modelContent')
             .html(data);

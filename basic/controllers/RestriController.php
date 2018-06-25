@@ -3,18 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Agenda;
-use app\models\AgendaAsigHoras;
-use app\models\AgendaSearch;
+use app\models\RestriCalendar;
+use app\models\RestriCalendarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-
 /**
- * AgendaController implements the CRUD actions for AgendaAsigHoras model.
+ * RestriController implements the CRUD actions for RestriCalendar model.
  */
-class AgendaController extends Controller
+class RestriController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -32,70 +30,57 @@ class AgendaController extends Controller
     }
 
     /**
-     * Lists all AgendaAsigHoras models.
+     * Lists all RestriCalendar models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel =  Agenda::find()->all();
     
-        foreach ($searchModel as $eve) {
-            $event = new \yii2fullcalendar\Models\Event();
-            $event->id = '1';
-            
-            $event->title ='nico';
-            $event->rendering="background";
-            $event->start ='2018-06-11';
-
-            $tasks[] = $event;
-        }
-
-        return $this->render('index', [
-          'events'=>$tasks
-        ]);
-      
-
+    $const= RestriCalendar::find()->all();
+  
+     // foreach ($events as $eve) {
+     //     $event = new \yii2fullcalendar\Models\Event();
      
+     //     $event->id = $eve->id;
+     //     $event->title =$eve->nombre;
+     //     $event->start =$eve->fecini;
+         
+     //     $tasks[] = $event;
+     // }
+     $event = new \yii2fullcalendar\Models\Event();
+     
+         $event->id =1;
+         $event->title ="nicolas";
+         $event->start ='2018-06-24';
+         
+         $tasks[] = $event;
+ 
+ 
+     return $this->render('index', [
+       'events'=>$tasks,
+     ]);
     }
 
     /**
-     * Displays a single AgendaAsigHoras model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
-     * Creates a new AgendaAsigHoras model.
+     * Creates a new RestriCalendar model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($date)
+    public function actionCreate()
     {
-        $model = new Agenda();
-        
-
-        $request=Yii::$app->request->post();
-       ;
-
+        $model = new RestriCalendar();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect('index');
-        } else {
-            return $this->renderAjax('create', [
-                'model' => $model,
-            ]);
+            return $this->redirect(['view', 'id' => $model->ID]);
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
-     * Updates an existing AgendaAsigHoras model.
+     * Updates an existing RestriCalendar model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -115,7 +100,7 @@ class AgendaController extends Controller
     }
 
     /**
-     * Deletes an existing AgendaAsigHoras model.
+     * Deletes an existing RestriCalendar model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -129,15 +114,15 @@ class AgendaController extends Controller
     }
 
     /**
-     * Finds the AgendaAsigHoras model based on its primary key value.
+     * Finds the RestriCalendar model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return AgendaAsigHoras the loaded model
+     * @return RestriCalendar the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = AgendaAsigHoras::findOne($id)) !== null) {
+        if (($model = RestriCalendar::findOne($id)) !== null) {
             return $model;
         }
 
