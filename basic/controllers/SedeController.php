@@ -24,7 +24,7 @@ class SedeController extends Controller
         $query = Sede::find();
 
         $pagination = new Pagination([
-            'defaultPageSize' => 5,
+            'defaultPageSize' => 6,
             'totalCount' => $query->count(),
         ]);
 

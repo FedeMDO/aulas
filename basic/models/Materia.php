@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $ID
  * @property string $NOMBRE
+ * @property string $DESC_CORTA
  *
  * @property CarreraMateria[] $carreraMaterias
  * @property Carrera[] $cARRERAs
@@ -30,8 +31,9 @@ class Materia extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['NOMBRE'], 'required'],
+            [['NOMBRE', 'DESC_CORTA'], 'required'],
             [['NOMBRE'], 'string', 'max' => 40],
+            [['DESC_CORTA'], 'string', 'max' => 20],
         ];
     }
 
@@ -42,7 +44,8 @@ class Materia extends \yii\db\ActiveRecord
     {
         return [
             'ID' => 'ID',
-            'NOMBRE' => 'Materia',
+            'NOMBRE' => 'Nombre',
+            'DESC_CORTA' => 'Desc  Corta',
         ];
     }
 

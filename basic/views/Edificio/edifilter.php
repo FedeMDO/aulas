@@ -11,8 +11,10 @@ $this->registerCssFile("@web/css/index.css", [
 ], 'css-print-theme');
 
 ?>
+<a href="../edificio/create" class="btn btn-success btn-md" role="button">Crear Edificio</a>
 
-<h1>Edificios Disponibles</h1>
+<center><h3>Edificios Disponibles</h3></center>
+
 
 <ul>
 

@@ -6,6 +6,7 @@ use yii\widgets\LinkPager;
 
 
 
+
 $this->registerCssFile("@web/css/index.css", [
     'depends' => [\yii\bootstrap\BootstrapAsset::className()],
     
@@ -13,7 +14,7 @@ $this->registerCssFile("@web/css/index.css", [
 
 
 ?>
-<a href="../sede/create" class="btn btn-success btn-md" role="button">Crear Nueva Sede</a>
+<a href="../sede/create" class="btn btn-success btn-md" role="button">Crear Sede</a>
 
   <center><h3>Sedes Disponibles</h3></center>
 
@@ -45,10 +46,5 @@ $this->registerCssFile("@web/css/index.css", [
 <?php endforeach; ?>
 
 
-
 </ul>
-
-
-
-
-<?= LinkPager::widget(['pagination' => $pagination]) ?>
+<div class=""><?= LinkPager::widget(['pagination' => $pagination]) ?></div>

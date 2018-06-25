@@ -4,17 +4,17 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Materia */
+/* @var $model app\models\Notificacion */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="materia-form">
+<div class="notificacion-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'NOMBRE')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'ID_USER_RECEPTOR')->textInput() ?>
 
-    <?= $form->field($model, 'DESC_CORTA')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'NOTIFICACION')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

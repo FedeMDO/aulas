@@ -11,8 +11,10 @@ $this->registerCssFile("@web/css/index.css", [
 ], 'css-print-theme');
 
 ?>
+<a href="../aula/create" class="btn btn-success btn-md" role="button">Crear Aula</a>
 
-<center><h1>Aulas Disponibles</h1></center>
+
+<center><h3>Aulas Disponibles</h3></center>
 
  <div class="loginc">
 <div class="box-body">
@@ -46,4 +48,5 @@ $this->registerCssFile("@web/css/index.css", [
                 <?php endforeach; ?>
               </table>
             </div>
+            
 </div>

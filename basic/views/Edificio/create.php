@@ -10,6 +10,8 @@ $this->title = 'Create Edificio';
 $this->params['breadcrumbs'][] = ['label' => 'Edificios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="col-md-offset-4 col-md-5">
+<div class="loginc">
 <div class="edificio-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -18,4 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
     ]) ?>
 
+</div>
+</div>
 </div>
