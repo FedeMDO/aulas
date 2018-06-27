@@ -51,7 +51,7 @@ class Sede extends \yii\db\ActiveRecord
         return [
             'ID' => 'ID',
             'ID_INSTITUCION' => 'Id  Institucion',
-            'NOMBRE' => 'Sede',
+            'NOMBRE' => 'Nombre Sede',
             'CALLEYNUM' => 'Calle',
             'LOCALIDAD' => 'Localidad',
             'DISPONIBLE_DESDE' => 'Disponible  Desde',

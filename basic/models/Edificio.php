@@ -45,8 +45,8 @@ class Edificio extends \yii\db\ActiveRecord
     {
         return [
             'ID' => 'ID',
-            'ID_SEDE' => 'Id  Sede',
-            'NOMBRE' => 'Edificio',
+            'ID_SEDE' => 'Sede',
+            'NOMBRE' => 'Nombre Edificio',
             'CANTIDAD_AULAS' => 'Cantidad  Aulas',
         ];
     }

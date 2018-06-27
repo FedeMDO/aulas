@@ -110,6 +110,7 @@ endif; ?>
 
     <?= $this->render('_form', [
         'model' => $model,
+        'usuarios' => $usuarios,
     ]) ?>
 
 </div>

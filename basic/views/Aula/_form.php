@@ -2,7 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use yii\helpers\ArrayHelper;
+use app\models\Edificio;
 /* @var $this yii\web\View */
 /* @var $model app\models\Aula */
 /* @var $form yii\widgets\ActiveForm */
@@ -14,7 +15,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'NOMBRE')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'ID_EDIFICIO')->textInput() ?>
+        <?php $edificios = Edificio::find()->asArray()->all();
+         $result = ArrayHelper::map($edificios, 'ID', 'NOMBRE'); ?>
+    
+    <?php echo $form->field($model, 'ID_EDIFICIO')->dropDownList(
+            $result, 
+			['prompt'=>'Choose...']
+			); ?>
 
     <?= $form->field($model, 'PISO')->textInput() ?>
 

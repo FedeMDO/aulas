@@ -45,7 +45,7 @@ class Comision extends \yii\db\ActiveRecord
     {
         return [
             'ID' => 'ID',
-            'NOMBRE' => 'Comision',
+            'NOMBRE' => ' Nombre Comision',
             'ID_MATERIA' => 'Id  Materia',
             'CARGA_HORARIA_SEMANAL' => 'Carga  Horaria  Semanal',
         ];

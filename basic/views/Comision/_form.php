@@ -2,7 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use yii\helpers\ArrayHelper;
+use app\models\Materia;
 /* @var $this yii\web\View */
 /* @var $model app\models\Comision */
 /* @var $form yii\widgets\ActiveForm */
@@ -14,7 +15,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'NOMBRE')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'ID_MATERIA')->textInput() ?>
+    <?php $materias = Materia::find()->asArray()->all();
+    $result = ArrayHelper::map($materias, 'ID', 'NOMBRE'); ?>
+
+    <?php echo $form->field($model, 'ID_MATERIA')->dropDownList(
+        $result, 
+        ['prompt'=>'Choose...']
+        ); ?>
 
     <?= $form->field($model, 'CARGA_HORARIA_SEMANAL')->textInput() ?>
 

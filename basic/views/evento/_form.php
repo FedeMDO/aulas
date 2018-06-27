@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use app\models\Comision;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\EventoCalendar */
@@ -14,7 +16,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ID_Restri')->textInput() ?>
 
-    <?= $form->field($model, 'ID_Comision')->textInput() ?>
+    <?= $form->field($model, 'NOMBRE')->textInput(['maxlength' => true]) ?>
+
+    <?php $comisiones = Comision::find()->asArray()->all();
+    $result = ArrayHelper::map($comisiones, 'ID', 'NOMBRE'); ?>
+
+    <?php echo $form->field($model, 'ID_COMISION')->dropDownList(
+        $result, 
+        ['prompt'=>'Choose...']
+        ); ?>
 
     <?= $form->field($model, 'ID_Hora')->textInput() ?>
 
