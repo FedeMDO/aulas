@@ -116,7 +116,23 @@ class User extends \yii\base\baseObject implements \yii\web\IdentityInterface
     /**
      * @inheritdoc
      */
+
+    public function getEventoCalendars()
+    {
+        return $this->hasMany(EventoCalendar::className(), ['ID_User_Asigna' => 'id']);
+    }
+
+    public function getRestriCalendars()
+    {
+        return $this->hasMany(RestriCalendar::className(), ['ID_User_Recibe' => 'id']);
+    }
     
+    public function getInstituto()
+    {
+        return $this->hasOne(Instituto::className(), ['ID' => 'idInstituto']);
+    }
+
+
     /* Regresa el id del usuario */
     public function getId()
     {

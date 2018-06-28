@@ -48,8 +48,8 @@ class Notificacion extends \yii\db\ActiveRecord
     {
         return [
             'ID' => 'ID',
-            'ID_USER_EMISOR' => 'Id  User  Emisor',
-            'ID_USER_RECEPTOR' => 'Id  User  Receptor',
+            'ID_USER_EMISOR' => 'Usuario emisor',
+            'ID_USER_RECEPTOR' => 'Usuario receptor',
             'NOTIFICACION' => 'Notificacion',
             'FECHA' => 'Fecha',
         ];

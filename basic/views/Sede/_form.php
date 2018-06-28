@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Sede */
@@ -11,8 +12,6 @@ use yii\widgets\ActiveForm;
 <div class="sede-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'ID_INSTITUCION')->textInput() ?>
 
     <?= $form->field($model, 'NOMBRE')->textInput(['maxlength' => true]) ?>
 

@@ -64,11 +64,13 @@ class AdminController extends Controller
                 return $this->redirect('noti');
             }        
        
-
+        $usuarios = Users::find()->where(['not', ['username' => Yii::$app->user->identity->username]])
+        ->andWhere(['activate' =>1])->asArray()->all();
         return $this->render('noti', [
             'notificacion' => $notificacion,
             'pagination' => $pagination,
             'model' => $model,
+            'usuarios' => $usuarios
             
         ]);
     }
