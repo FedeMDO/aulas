@@ -37,7 +37,7 @@ Modal::begin([
     'editable' => true,
     'droppable'=> true,
  
-],
+],'select'=>'function(){alert("holamundo");}',
 'eventDrop' => 'function( event, delta, revertFunc, jsEvent, ui, view ) { 
 
 var id =event.id;

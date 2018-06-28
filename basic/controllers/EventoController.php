@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use Yii;
 use app\models\EventoCalendar;
+use app\models\Users;
+use app\models\Instituto;
 use app\models\EventoCalendarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -35,8 +37,8 @@ class EventoController extends Controller
      */
     public function actionIndex()
     {
-        $events = EventoCalendar::find()->all();
-       $const= RestriCalendar::find()->all();
+    $events = EventoCalendar::find()->all();
+    //    $const= RestriCalendar::find()->all();
     //    foreach ($const as $cons) {
     //     $event1 = new \yii2fullcalendar\Models\Event();
     //     $event1->id = $cons->id;
@@ -45,22 +47,28 @@ class EventoController extends Controller
     //     $event1->color='#ff9f89';
     //     $tasks[] = $event1;
     // }
-    // foreach ($events as $eve) {
-    //     $event = new \yii2fullcalendar\Models\Event();
+    foreach ($events as $eve) {
+
+        $id_user= $eve->ID_User_Asigna;
+        $usuario= Users::findOne($id_user)->idInstituto;
+        $instituto= Instituto::findOne($usuario)->NOMBRE; 
+        $event = new \yii2fullcalendar\Models\Event();
+        $event->title= $instituto;
+        $event->start=$eve->Fecha_ini;
     
-    //     $event->id = $eve->id;
-    //     $event->title =$eve->nombre;
-    //     $event->start =$eve->fecini;
-        
-    //     $tasks[] = $event;
-    // }
-    $event = new \yii2fullcalendar\Models\Event();
-    
-        $event->id =1;
-        $event->title ="nicolas";
-        $event->start ='2018-06-24';
+        // $event->id = $eve->id;
+        // $event->title =$eve->nombre;
+        // $event->start =$eve->fecini;
         
         $tasks[] = $event;
+    }
+    // $event = new \yii2fullcalendar\Models\Event();
+    
+    //     $event->id =1;
+    //     $event->title ="nicolas";
+    //     $event->start ='2018-06-24';
+        
+    //     $tasks[] = $event;
 
 
     return $this->render('index', [
