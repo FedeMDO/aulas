@@ -16,12 +16,12 @@ use app\models\Comision;
 
     <?= $form->field($model, 'ID_Restri')->textInput() ?>
 
-    <?= $form->field($model, 'NOMBRE')->textInput(['maxlength' => true]) ?>
+   
 
     <?php $comisiones = Comision::find()->asArray()->all();
     $result = ArrayHelper::map($comisiones, 'ID', 'NOMBRE'); ?>
 
-    <?php echo $form->field($model, 'ID_COMISION')->dropDownList(
+    <?php echo $form->field($model, 'ID_Comision')->dropDownList(
         $result, 
         ['prompt'=>'Choose...']
         ); ?>
