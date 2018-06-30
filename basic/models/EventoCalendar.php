@@ -14,7 +14,8 @@ use Yii;
  * @property int $ID_User_Asigna
  * @property int $ID_Dia
  * @property string $Fecha_ini
- * @property string $Fecha_fin
+ * @property string $Hora_ini
+ * @property string $Hora_fin
  * @property string $title
  *
  * @property RestriCalendar $restri
@@ -39,9 +40,9 @@ class EventoCalendar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ID_Restri', 'ID_Comision', 'ID_Hora', 'ID_User_Asigna', 'ID_Dia', 'Fecha_ini', 'Fecha_fin', 'title'], 'required'],
             [['ID_Restri', 'ID_Comision', 'ID_Hora', 'ID_User_Asigna', 'ID_Dia'], 'integer'],
-            [['Fecha_ini', 'Fecha_fin'], 'safe'],
+            [['ID_Comision', 'ID_User_Asigna', 'Fecha_ini', 'Hora_ini', 'Hora_fin', 'title'], 'required'],
+            [['Fecha_ini', 'Hora_ini', 'Hora_fin'], 'safe'],
             [['title'], 'string', 'max' => 40],
             [['ID_Restri'], 'exist', 'skipOnError' => true, 'targetClass' => RestriCalendar::className(), 'targetAttribute' => ['ID_Restri' => 'ID']],
             [['ID_Comision'], 'exist', 'skipOnError' => true, 'targetClass' => Comision::className(), 'targetAttribute' => ['ID_Comision' => 'ID']],
@@ -64,7 +65,8 @@ class EventoCalendar extends \yii\db\ActiveRecord
             'ID_User_Asigna' => 'Id  User  Asigna',
             'ID_Dia' => 'Id  Dia',
             'Fecha_ini' => 'Fecha Ini',
-            'Fecha_fin' => 'Fecha Fin',
+            'Hora_ini' => 'Hora Ini',
+            'Hora_fin' => 'Hora Fin',
             'title' => 'Title',
         ];
     }

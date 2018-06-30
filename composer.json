@@ -21,8 +21,7 @@
         "dmstr/yii2-adminlte-asset": "^2.1",
         "philippfrenzel/yii2fullcalendar":"*",
         "almasaeed2010/adminlte": "~2.4",
-        "socialist/yii2-admin-lte": "*",
-        "bower-asset/moment": "*"
+        "socialist/yii2-admin-lte": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

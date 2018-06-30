@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\RestriCalendar;
+use app\models\Instituto;
 use app\models\RestriCalendarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -38,24 +39,19 @@ class RestriController extends Controller
     
     $const= RestriCalendar::find()->all();
   
-     // foreach ($events as $eve) {
-     //     $event = new \yii2fullcalendar\Models\Event();
+     foreach ($const as $eve) {
+         $event = new \yii2fullcalendar\Models\Event();
      
-     //     $event->id = $eve->id;
-     //     $event->title =$eve->nombre;
-     //     $event->start =$eve->fecini;
-         
-     //     $tasks[] = $event;
-     // }
-     $event = new \yii2fullcalendar\Models\Event();
-     
-         $event->id =1;
-         $event->title ="nicolas";
-         $event->start ='2018-06-24';
-         
+         $event->id =Instituto::findOne($eve->ID_Instituto_Recibe)->NOMBRE;
+         $event->title =Instituto::findOne($eve->ID_Instituto_Recibe)->NOMBRE;
+         $event->start =$eve->Fecha_ini;
+         $event->end=$eve->Fecha_fin;
+    
+         $event->backgroundColor=Instituto::findOne($eve->ID_Instituto_Recibe)->COLOR_HEXA;
+         $event->borderColor=Instituto::findOne($eve->ID_Instituto_Recibe)->COLOR_HEXA;
          $tasks[] = $event;
- 
- 
+     }
+   
      return $this->render('index', [
        'events'=>$tasks,
      ]);

@@ -4,8 +4,14 @@ namespace app\controllers;
 
 use Yii;
 use app\models\EventoCalendar;
+use app\models\RestriCalendar;
+
 use app\models\Users;
 use app\models\Instituto;
+use app\models\Comision;
+use app\models\Materia;
+use app\models\Hora;
+
 use app\models\EventoCalendarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -38,39 +44,33 @@ class EventoController extends Controller
     public function actionIndex()
     {
     $events = EventoCalendar::find()->all();
-    //    $const= RestriCalendar::find()->all();
-    //    foreach ($const as $cons) {
-    //     $event1 = new \yii2fullcalendar\Models\Event();
-    //     $event1->id = $cons->id;
-    //     $event1->start =$cons->fecini;
-    //     $event1->rendering='background';
-    //     $event1->color='#ff9f89';
-    //     $tasks[] = $event1;
-    // }
+    $const= RestriCalendar::find()->all();
+    foreach ($const as $cons) {
+         $event1 = new \yii2fullcalendar\Models\Event();
+       
+         $event1->id =Instituto::findOne($cons->ID_Instituto_Recibe)->NOMBRE;
+      
+         $event1->start =$cons->Fecha_ini;
+         $event1->end=$cons->Fecha_fin;
+         $event1->rendering='background';
+        $event1->color=Instituto::findOne($cons->ID_Instituto_Recibe)->COLOR_HEXA;;
+         $tasks[] = $event1;
+     }
     foreach ($events as $eve) {
 
         $id_user= $eve->ID_User_Asigna;
         $usuario= Users::findOne($id_user)->idInstituto;
         $instituto= Instituto::findOne($usuario)->NOMBRE; 
+        $comision=Comision::findOne($eve->ID_Comision);
+        $materia=Materia::findOne($comision->ID_MATERIA)->NOMBRE;
+       
         $event = new \yii2fullcalendar\Models\Event();
-        $event->title= $instituto;
-        $event->start=$eve->Fecha_ini;
-    
-        // $event->id = $eve->id;
-        // $event->title =$eve->nombre;
-        // $event->start =$eve->fecini;
-        
+        $event->title=$materia;
+        $event->start=$eve->Fecha_ini.'T'.Hora::FindOne($eve->Hora_ini)->HORA;
+        $event->end=$eve->Fecha_ini.'T'.Hora::FindOne($eve->Hora_fin)->HORA;
+        $event->constraint=Instituto::findOne($usuario)->NOMBRE;
         $tasks[] = $event;
     }
-    // $event = new \yii2fullcalendar\Models\Event();
-    
-    //     $event->id =1;
-    //     $event->title ="nicolas";
-    //     $event->start ='2018-06-24';
-        
-    //     $tasks[] = $event;
-
-
     return $this->render('index', [
       'events'=>$tasks,
     ]);
@@ -94,17 +94,20 @@ class EventoController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($date)
     {
         $model = new EventoCalendar();
-
+        $model->Fecha_ini=$date;
+        $request=Yii::$app->request->post();
+      
+        $model->save();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID]);
+            return $this->redirect('index');
+        } else {
+            return $this->renderAjax('create', [
+                'model' => $model,
+            ]);
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**

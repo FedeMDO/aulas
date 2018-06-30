@@ -104,7 +104,7 @@ Modal::begin([
   
  
 ],'eventResize'=>'function(){alert("hola mundo");}',
-// 'eventReceive'=>'function(){alert("recive bien");}',
+'eventReceive'=>'function(){alert("recive bien");}',
 'eventDrop' => 'function( event, delta, revertFunc, jsEvent, ui, view ) { 
 
 var id =event.id;
