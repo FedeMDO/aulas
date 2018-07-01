@@ -18,8 +18,8 @@ class RestriCalendarSearch extends RestriCalendar
     public function rules()
     {
         return [
-            [['ID', 'ID_Aula', 'ID_Instituto_Recibe', 'ID_Tipo_Repeticion', 'ID_User_Recibe'], 'integer'],
-            [['Fecha_ini', 'Fecha_fin', 'Periodo_Academico'], 'safe'],
+            [['ID', 'ID_Aula', 'ID_Instituto_Recibe', 'ID_Tipo_Repeticion', 'ID_User_Recibe', 'Hora_ini', 'Hora_fin'], 'integer'],
+            [['Fecha_ini', 'Periodo_Academico'], 'safe'],
         ];
     }
 
@@ -65,7 +65,8 @@ class RestriCalendarSearch extends RestriCalendar
             'ID_Tipo_Repeticion' => $this->ID_Tipo_Repeticion,
             'ID_User_Recibe' => $this->ID_User_Recibe,
             'Fecha_ini' => $this->Fecha_ini,
-            'Fecha_fin' => $this->Fecha_fin,
+            'Hora_ini' => $this->Hora_ini,
+            'Hora_fin' => $this->Hora_fin,
         ]);
 
         $query->andFilterWhere(['like', 'Periodo_Academico', $this->Periodo_Academico]);

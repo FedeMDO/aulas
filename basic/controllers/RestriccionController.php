@@ -3,8 +3,12 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\EventoCalendar;
 use app\models\RestriCalendar;
+use app\models\RestriCalendarSearch;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
+use app\models\EventoCalendar;
 
 use app\models\Users;
 use app\models\Instituto;
@@ -12,15 +16,10 @@ use app\models\Comision;
 use app\models\Materia;
 use app\models\Hora;
 
-use app\models\EventoCalendarSearch;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-
 /**
- * EventoController implements the CRUD actions for EventoCalendar model.
+ * RestriccionController implements the CRUD actions for RestriCalendar model.
  */
-class EventoController extends Controller
+class RestriccionController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -38,73 +37,38 @@ class EventoController extends Controller
     }
 
     /**
-     * Lists all EventoCalendar models.
+     * Lists all RestriCalendar models.
      * @return mixed
      */
     public function actionIndex()
     {
-
-    $events = EventoCalendar::find()->all();
-    $const= RestriCalendar::find()->all();
-    foreach ($const as $cons) {
-         $event1 = new \yii2fullcalendar\Models\Event();
-       
-         $event1->id =Instituto::findOne($cons->ID_Instituto_Recibe)->NOMBRE;
-      
-         $event1->start =$cons->Fecha_ini.'T'.Hora::FindOne($cons->Hora_ini)->HORA;
-        $event1->end=$cons->Fecha_ini.'T'.Hora::FindOne($cons->Hora_fin)->HORA;
-         $event1->rendering='background';
-        $event1->color=Instituto::findOne($cons->ID_Instituto_Recibe)->COLOR_HEXA;
-         $tasks[] = $event1;
-     }
+    $events= RestriCalendar::find()->all();
     foreach ($events as $eve) {
-
-        $id_user= $eve->ID_User_Asigna;
-        $usuario= Users::findOne($id_user)->idInstituto;
-        $instituto= Instituto::findOne($usuario)->NOMBRE; 
-        $comision=Comision::findOne($eve->ID_Comision);
-        $materia=Materia::findOne($comision->ID_MATERIA)->NOMBRE;
-       
+        $instituto= Instituto::findOne($eve->ID_Instituto_Recibe)->NOMBRE;        
         $event = new \yii2fullcalendar\Models\Event();
-        $event->id=$eve->ID;
-        $event->title=$materia;
+        $event->title=$instituto;
         $event->start=$eve->Fecha_ini.'T'.Hora::FindOne($eve->Hora_ini)->HORA;
         $event->end=$eve->Fecha_ini.'T'.Hora::FindOne($eve->Hora_fin)->HORA;
-        $event->constraint=Instituto::findOne($usuario)->NOMBRE;
+        $event->backgroundColor=Instituto::findOne($eve->ID_Instituto_Recibe)->COLOR_HEXA;
         $tasks[] = $event;
     }
-  
     return $this->render('index', [
       'events'=>$tasks,
     ]);
 }
 
     /**
-     * Displays a single EventoCalendar model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
-     * Creates a new EventoCalendar model.
+     * Creates a new RestriCalendar model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate($date)
     {
-        $model = new EventoCalendar();
+        $model = new RestriCalendar();
         $model->Fecha_ini=$date;
-        $model->ID_User_Asigna=Yii::$app->user->identity->id;
-        
+        $model->ID_User_Recibe=Yii::$app->user->identity->id;
+        $model->ID_Instituto_Recibe=Instituto::findOne($model->ID_User_Recibe)->ID;
         $request=Yii::$app->request->post();
-      
         $model->save();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect('index');
@@ -116,7 +80,7 @@ class EventoController extends Controller
     }
 
     /**
-     * Updates an existing EventoCalendar model.
+     * Updates an existing RestriCalendar model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -136,7 +100,7 @@ class EventoController extends Controller
     }
 
     /**
-     * Deletes an existing EventoCalendar model.
+     * Deletes an existing RestriCalendar model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -150,15 +114,15 @@ class EventoController extends Controller
     }
 
     /**
-     * Finds the EventoCalendar model based on its primary key value.
+     * Finds the RestriCalendar model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return EventoCalendar the loaded model
+     * @return RestriCalendar the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = EventoCalendar::findOne($id)) !== null) {
+        if (($model = RestriCalendar::findOne($id)) !== null) {
             return $model;
         }
 

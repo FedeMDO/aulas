@@ -19,7 +19,7 @@ use app\models\Hora;
 
     <?php echo $form->field($model, 'ID_Comision')->dropDownList(
         $result, 
-        ['prompt'=>'Choose...']
+        ['prompt'=>'SELECCIONE LA COMISION...']
         ); ?> 
    
     <?= $form->field($model, 'ID_User_Asigna')->textInput() ?>
@@ -30,19 +30,19 @@ use app\models\Hora;
     $result = ArrayHelper::map($comisiones, 'ID', 'HORA'); ?>
        <?php echo $form->field($model, 'Hora_ini')->dropDownList(
         $result, 
-        ['prompt'=>'Choose...']
+        ['prompt'=>'SELECCIONE LA HORA DE INICIO......']
         ); ?> 
 
           <?php echo $form->field($model,'Hora_fin')->dropDownList(
         $result, 
-        ['prompt'=>'Choose...']
+        ['prompt'=>'SELECCIONE LA HORA DE FIN.......']
         ); ?> 
 
  
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('GUARDAR', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

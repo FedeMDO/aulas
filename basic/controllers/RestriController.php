@@ -36,27 +36,26 @@ class RestriController extends Controller
      */
     public function actionIndex()
     {
-    
+
+        
     $const= RestriCalendar::find()->all();
-  
-     foreach ($const as $eve) {
-         $event = new \yii2fullcalendar\Models\Event();
-     
-         $event->id =Instituto::findOne($eve->ID_Instituto_Recibe)->NOMBRE;
-         $event->title =Instituto::findOne($eve->ID_Instituto_Recibe)->NOMBRE;
-         $event->start =$eve->Fecha_ini;
-         $event->end=$eve->Fecha_fin;
-    
-         $event->backgroundColor=Instituto::findOne($eve->ID_Instituto_Recibe)->COLOR_HEXA;
-         $event->borderColor=Instituto::findOne($eve->ID_Instituto_Recibe)->COLOR_HEXA;
-         $tasks[] = $event;
+    foreach ($const as $cons) {
+         $event1 = new \yii2fullcalendar\Models\Event();
+       
+         $event1->id =Instituto::findOne($cons->ID_Instituto_Recibe)->NOMBRE;
+      
+         $event1->start =$cons->Fecha_ini;
+         $event1->end=$cons->Fecha_fin;
+         $event1->rendering='background';
+        $event1->color=Instituto::findOne($cons->ID_Instituto_Recibe)->COLOR_HEXA;
+         $tasks[] = $event1;
      }
    
-     return $this->render('index', [
-       'events'=>$tasks,
-     ]);
-    }
-
+  
+    return $this->render('index', [
+      'events'=>$tasks
+    ]);
+}
     /**
      * Creates a new RestriCalendar model.
      * If creation is successful, the browser will be redirected to the 'view' page.

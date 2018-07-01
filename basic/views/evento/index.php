@@ -8,14 +8,12 @@ use yii\bootstrap\Modal;
 /* @var $searchModel app\models\EventoCalendarSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Evento Calendars';
+$this->title = 'ASIGNACION COMISIONES A AULA';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="content-wrapper">
+<div class="thumbnail">
+<div class="content-wrapper" >
   
-
-  </section>
-
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
@@ -23,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-3">
           <div class="card">
             <div class="card-header">
-              <h4 class="card-title">Draggable Events</h4>
+              <h4 class="card-title">Materias</h4>
             </div>
             <div class="card-body">
               <!-- the events -->
@@ -72,7 +70,14 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
           </div>
         </div>
- <div class="thumbnail">
+        <!-- /.col -->
+        <div class="col-md-9">
+          <div class="card card-primary">
+            <div class="card-body p-0">
+              <!-- THE CALENDAR -->
+              <div class="evento-index">
+
+
 <div class="evento-calendar-index">
 <div class="evento-index">
 
@@ -136,7 +141,13 @@ function(data)
 </div>
 </div>
 <?php
+
+
 $this->registerJsFile(
     '@web/js/dragable.js',
+    ['depends' => [\yii\web\JqueryAsset::className()]]
+);
+$this->registerJsFile(
+    '@web/js/main.js',
     ['depends' => [\yii\web\JqueryAsset::className()]]
 );

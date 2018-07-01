@@ -8,6 +8,8 @@ use yii\data\Pagination;
 $this->registerCssFile("@web/css/index.css", [
   'depends' => [\yii\bootstrap\BootstrapAsset::className()],
   
+
+  
 ], 'css-print-theme');
 
 ?>
@@ -33,8 +35,8 @@ $this->registerCssFile("@web/css/index.css", [
                 <tbody>
                 <?php foreach ($aula as $aula): ?>
                 <tr>
-                  <td><button href= type="button" class="btn btn-success">AGENDA</button></td>
-                  <td><?= Html::encode("{$aula->ID} ") ?></td>
+                  <td><button href="/evento/index" type="button" class="btn btn-success" >AGENDA</button></td>
+                  <td ><?= Html::encode("{$aula->ID} ")?></span></td>
                   <td><?= Html::encode("{$aula->NOMBRE} ") ?> N°<?= Html::encode("{$aula->ID} ") ?></td>
                   <td><?= Html::encode("{$aula->PISO} ") ?></td>
                   <td><?= Html::encode("{$aula->CAPACIDAD} ") ?>
@@ -50,3 +52,4 @@ $this->registerCssFile("@web/css/index.css", [
             </div>
             
 </div>
+
