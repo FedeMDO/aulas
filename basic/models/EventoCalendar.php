@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "evento_calendar".
  *
  * @property int $ID
+ * @property int $ID_Aula
  * @property int $ID_Restri
  * @property int $ID_Comision
  * @property int $ID_Hora
@@ -25,6 +26,7 @@ use Yii;
  * @property DiaSemana $dia
  * @property Hora $horaFin
  * @property Hora $horaIni
+ * @property Aula $aula
  */
 class EventoCalendar extends \yii\db\ActiveRecord
 {
@@ -42,7 +44,7 @@ class EventoCalendar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ID_Restri', 'ID_Comision', 'ID_Hora', 'ID_User_Asigna', 'ID_Dia', 'Hora_ini', 'Hora_fin'], 'integer'],
+            [['ID_Aula', 'ID_Restri', 'ID_Comision', 'ID_Hora', 'ID_User_Asigna', 'ID_Dia', 'Hora_ini', 'Hora_fin'], 'integer'],
             [['ID_Comision', 'ID_User_Asigna', 'Fecha_ini', 'title'], 'required'],
             [['Fecha_ini'], 'safe'],
             [['title'], 'string', 'max' => 40],
@@ -53,6 +55,7 @@ class EventoCalendar extends \yii\db\ActiveRecord
             [['ID_Dia'], 'exist', 'skipOnError' => true, 'targetClass' => DiaSemana::className(), 'targetAttribute' => ['ID_Dia' => 'ID']],
             [['Hora_fin'], 'exist', 'skipOnError' => true, 'targetClass' => Hora::className(), 'targetAttribute' => ['Hora_fin' => 'ID']],
             [['Hora_ini'], 'exist', 'skipOnError' => true, 'targetClass' => Hora::className(), 'targetAttribute' => ['Hora_ini' => 'ID']],
+            [['ID_Aula'], 'exist', 'skipOnError' => true, 'targetClass' => Aula::className(), 'targetAttribute' => ['ID_Aula' => 'ID']],
         ];
     }
 
@@ -63,14 +66,15 @@ class EventoCalendar extends \yii\db\ActiveRecord
     {
         return [
             'ID' => 'ID',
+            'ID_Aula' => 'Id  Aula',
             'ID_Restri' => 'Id  Restri',
-            'ID_Comision' => 'COMISION',
+            'ID_Comision' => 'Id  Comision',
             'ID_Hora' => 'Id  Hora',
             'ID_User_Asigna' => 'Id  User  Asigna',
             'ID_Dia' => 'Id  Dia',
             'Fecha_ini' => 'Fecha Ini',
-            'Hora_ini' => 'HORA DE INICIO',
-            'Hora_fin' => 'HORA DE FIN',
+            'Hora_ini' => 'Hora Ini',
+            'Hora_fin' => 'Hora Fin',
             'title' => 'Title',
         ];
     }
@@ -129,5 +133,13 @@ class EventoCalendar extends \yii\db\ActiveRecord
     public function getHoraIni()
     {
         return $this->hasOne(Hora::className(), ['ID' => 'Hora_ini']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAula()
+    {
+        return $this->hasOne(Aula::className(), ['ID' => 'ID_Aula']);
     }
 }

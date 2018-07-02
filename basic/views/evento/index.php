@@ -108,13 +108,40 @@ Modal::begin([
     'droppable'=> true,
   
  
-],'eventResize'=>'function(){alert("hola mundo");}',
+],'eventResize'=>'function(event, delta, revertFunc) {
+  var id =event.id;
+  var ini=event.start.format();
+  var fin=event.end.format(); 
+  
+  if (!confirm("Esta seguro??")) {
+      revertFunc();}
+      else
+      {
+  $.post("/evento/upd",
+  { 
+      id:id,
+      fecini:ini,
+      fin:fin
+  
+  },
+  function(data)
+  {
+      if (data){
+          alert("se actulaizo bien");
+      }
+      else {
+          alert("error");
+          }
+  });
+}}',
 'eventReceive'=>'function(){alert("recive bien");}',
+'eventClick'=>'function(){alert("haciendo click");}',
 'eventDrop' => 'function( event, delta, revertFunc, jsEvent, ui, view ) { 
 
 var id =event.id;
-var ini=event.start.format(); 
-alert(id);
+var ini=event.start.format();
+var fin=event.end.format(); 
+
 if (!confirm("Esta seguro??")) {
     revertFunc();}
     else
@@ -122,7 +149,8 @@ if (!confirm("Esta seguro??")) {
 $.post("/evento/upd",
 { 
     id:id,
-    fecini:ini
+    fecini:ini,
+    fin:fin
 
 },
 function(data)

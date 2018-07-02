@@ -134,6 +134,23 @@ class EventoController extends Controller
             'model' => $model,
         ]);
     }
+    public function actionUpd()
+    {
+        $request = Yii::$app->request;
+        $id=$request->post('id');
+        $fecha=substr($request->post('fecini'),0,10);
+        $horaini=substr($request->post('fecini'),11);
+        $horafin=substr($request->post('fin'),11);
+        $evento= EventoCalendar::findONe($id);
+        $hora1=Hora::findOne(['HORA'=>$horaini])->ID;
+        $hora2=Hora::findOne(['HORA'=>$horafin])->ID;
+        $evento->Fecha_ini=$fecha;
+        $evento->Hora_ini=$hora1;
+        $evento->Hora_fin=$hora2;
+        $evento->save();
+        echo $hora1; 
+      
+    }
 
     /**
      * Deletes an existing EventoCalendar model.
