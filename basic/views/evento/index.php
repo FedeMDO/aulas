@@ -26,7 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card-body">
               <!-- the events -->
               <div id="external-events">
-                <div class="external-event bg-success">Lunch</div>
+                <div class="external-event bg-success"><?php foreach ($filter as $cons) {
+                 echo $cons;}?></div>
                 <div class="external-event bg-warning">Go home</div>
                 <div class="external-event bg-info">Do homework</div>
                 <div class="external-event bg-primary">Work on UI design</div>
@@ -112,7 +113,7 @@ Modal::begin([
   var id =event.id;
   var ini=event.start.format();
   var fin=event.end.format(); 
-  
+  alert(ini);
   if (!confirm("Esta seguro??")) {
       revertFunc();}
       else

@@ -18,8 +18,6 @@ use yii\helpers\ArrayHelper;
     <?php $comisiones = Hora::find()->asArray()->all();
     $horario = ArrayHelper::map($comisiones, 'ID', 'HORA'); ?>
 
-    
-
     <?= $form->field($model, 'ID_Aula')->textInput() ?>
 
     <?= $form->field($model, 'ID_Instituto_Recibe')->textInput() ?>

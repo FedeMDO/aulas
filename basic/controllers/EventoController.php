@@ -11,6 +11,8 @@ use app\models\Instituto;
 use app\models\Comision;
 use app\models\Materia;
 use app\models\Hora;
+use app\models\Carrera;
+use app\models\CarreraMateria;
 
 use app\models\EventoCalendarSearch;
 use yii\web\Controller;
@@ -43,7 +45,21 @@ class EventoController extends Controller
      */
     public function actionIndex()
     {
+    $id_usuario=Yii::$app->user->identity->id;
+    $id_instituto=Instituto::findOne($id_usuario)->ID;
+    $id_carrera= Carrera::findOne($id_instituto)->ID;
+    $carrera_materia= CarreraMateria::findAll([
+        'ID_CARRERA' => $id_carrera,
+    ]);
+    
+    foreach ($carrera_materia as $cons) {
+        $materias=Materia::findOne($cons->ID_MATERIA)->NOMBRE;
+        
+        $filter_mate[]=$materias;
+    }
 
+  
+    
     $events = EventoCalendar::find()->all();
     $const= RestriCalendar::find()->all();
     foreach ($const as $cons) {
@@ -75,7 +91,7 @@ class EventoController extends Controller
     }
   
     return $this->render('index', [
-      'events'=>$tasks,
+      'events'=>$tasks,'filter'=> $filter_mate
     ]);
 }
 
@@ -98,7 +114,7 @@ class EventoController extends Controller
      * @return mixed
      */
     public function actionCreate($date)
-    {
+    {   
         $model = new EventoCalendar();
         $model->Fecha_ini=$date;
         $model->ID_User_Asigna=Yii::$app->user->identity->id;
