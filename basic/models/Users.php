@@ -15,5 +15,9 @@ class Users extends ActiveRecord{
     {
         return 'users';
     }
-    
+    public function getInstituto()
+    {
+        return $this->hasOne(Instituto::className(), ['ID' => 'idInstituto']);
+    }
+
 }

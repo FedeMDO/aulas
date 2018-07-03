@@ -45,21 +45,28 @@ class EventoController extends Controller
      */
     public function actionIndex()
     {
-    $id_usuario=Yii::$app->user->identity->id;
-    $id_instituto=Instituto::findOne($id_usuario)->ID;
-    $id_carrera= Carrera::findOne($id_instituto)->ID;
-    $carrera_materia= CarreraMateria::findAll([
-        'ID_CARRERA' => $id_carrera,
-    ]);
+    // $id_usuario=Yii::$app->user->identity->id;
+    // $id_instituto=Instituto::findOne($id_usuario)->ID;
+    // $id_carrera= Carrera::findOne($id_instituto)->ID;
+    // $carrera_materia= CarreraMateria::findAll([
+    //     'ID_CARRERA' => $id_carrera,
+    // ]);
     
-    foreach ($carrera_materia as $cons) {
-        $materias=Materia::findOne($cons->ID_MATERIA)->NOMBRE;
+    // foreach ($carrera_materia as $cons) {
+    //     $materias=Materia::findOne($cons->ID_MATERIA)->NOMBRE;
         
-        $filter_mate[]=$materias;
+    //     $filter_mate[]=$materias;
+    // }
+    // REFACTORIZO Y CAPTO COMISIONES, NO NOMBRES
+    $carreras = Users::findOne(Yii::$app->user->identity->id)->instituto->carreras;
+    foreach ($carreras as $carrera) {
+        foreach ($carrera->mATERIAs as $materia) {            
+            foreach ($materia->comisions as $comi) {            
+                
+                $filter_comis[]=$comi;
+            }
+        }
     }
-
-  
-    
     $events = EventoCalendar::find()->all();
     $const= RestriCalendar::find()->all();
     foreach ($const as $cons) {
@@ -89,9 +96,9 @@ class EventoController extends Controller
         $event->constraint=Instituto::findOne($usuario)->NOMBRE;
         $tasks[] = $event;
     }
-  
+    $comi = new Comision();
     return $this->render('index', [
-      'events'=>$tasks,'filter'=> $filter_mate
+      'events'=>$tasks,'filter'=> $filter_comis, 'comi' => $comi
     ]);
 }
 
@@ -197,4 +204,5 @@ class EventoController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+    
 }

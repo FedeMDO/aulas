@@ -26,12 +26,12 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card-body">
               <!-- the events -->
               <div id="external-events">
-                <div class="external-event bg-success"><?php foreach ($filter as $cons) {
-                 echo $cons;}?></div>
-                <div class="external-event bg-warning">Go home</div>
-                <div class="external-event bg-info">Do homework</div>
-                <div class="external-event bg-primary">Work on UI design</div>
-                <div class="external-event bg-danger">Sleep tight</div>
+                <?php foreach ($filter as $cons) {?>
+                  
+                <div class="external-event bg-warning" value="<?= Html::encode("{$cons->ID} ") ?>"> <?= Html::encode("{$cons->NOMBRE} ") ?></div>
+                <?php
+                }
+              ?>
                 <div class="checkbox">
                   <label for="drop-remove">
                     <input type="checkbox" id="drop-remove">
