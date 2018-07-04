@@ -26,14 +26,14 @@ $this->title = 'Institutos';
   <?= Html::encode("{$ins->NOMBRE} ") ?>
   </a>
   <?php if (count($ins->users) == 0){ ?> <!-- ME FIJO SI NO TIENE USUARIOS -->
-
     <a href="#" class="list-group-item list-group-item-action">Sin usuarios de este instituto</a> <!-- ACA HACER LAS COSAS QUE HAY QUE HACER SI INSTITUTO NO TIENE USER-->
-  <?php
+  <br><br> 
+ <?php
   } ?>
   <?php foreach ($ins->users as $user): ?> <!-- ITERO LOS USUARIOS DE CADA INSTITUTO Y SACO SUS DATOS -->
 
   <a href="#" class="list-group-item list-group-item-action"><?= Html::encode("{$user->username} ") ?> - <?= Html::encode("{$user->email} ") ?></a>
 </div>
-        <br></br>
+       
   <?php endforeach; ?>
 <?php endforeach; ?>
