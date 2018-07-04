@@ -51,14 +51,13 @@ class EventoController extends Controller
     $carrera_materia= CarreraMateria::findAll([
         'ID_CARRERA' => $id_carrera,
     ]);
-    
+
     foreach ($carrera_materia as $cons) {
         $materias=Materia::findOne($cons->ID_MATERIA)->NOMBRE;
         
         $filter_mate[]=$materias;
     }
 
-  
     
     $events = EventoCalendar::find()->all();
     $const= RestriCalendar::find()->all();
