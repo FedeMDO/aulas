@@ -12,6 +12,7 @@ $this->registerCssFile("@web/css/index.css", [
   
 ], 'css-print-theme');
 
+$this->title = 'Edificios';
 ?>
 
 <h1>TEST COMMIT</h1>

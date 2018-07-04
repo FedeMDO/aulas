@@ -27,7 +27,7 @@ $this->title = 'Institutos';
   </a>
   <?php if (count($ins->users) == 0){ ?> <!-- ME FIJO SI NO TIENE USUARIOS -->
 
-    <a href="#" class="list-group-item list-group-item-action"></a> <!-- ACA HACER LAS COSAS QUE HAY QUE HACER SI INSTITUTO NO TIENE USER-->
+    <a href="#" class="list-group-item list-group-item-action">Sin usuarios de este instituto</a> <!-- ACA HACER LAS COSAS QUE HAY QUE HACER SI INSTITUTO NO TIENE USER-->
   <?php
   } ?>
   <?php foreach ($ins->users as $user): ?> <!-- ITERO LOS USUARIOS DE CADA INSTITUTO Y SACO SUS DATOS -->

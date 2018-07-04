@@ -11,7 +11,7 @@ $this->registerCssFile("@web/css/index.css", [
 
   
 ], 'css-print-theme');
-
+$this->title = 'Aulas';
 ?>
 <a href="../aula/create" class="btn btn-success btn-md" role="button">Crear Aula</a>
 
