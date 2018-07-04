@@ -12,7 +12,7 @@ $this->registerCssFile("@web/css/index.css", [
     
 ], 'css-print-theme');
 
-
+$this->title = 'Sedes';
 ?>
 <a href="../sede/create" class="btn btn-success btn-md" role="button">Crear Sede</a>
 
