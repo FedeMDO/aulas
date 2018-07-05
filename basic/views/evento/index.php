@@ -19,6 +19,7 @@ $this->registerCssFile("@web/css/index.css", [
 $this->title = '';
 
 $this->params['breadcrumbs'][] = $this->title;
+$indexMaterias = 1;
 ?>
 <div class="loginc">
 <center><h3>ASIGNACION COMISIONES A AULA</h3></center>
@@ -39,17 +40,23 @@ $this->params['breadcrumbs'][] = $this->title;
               <div id="external-events">
                 <?php foreach ($filter as $cons) {
                   ?>
+<<<<<<< HEAD
                   <div class="loginc2">
                     <h5><?= Html::encode("{$cons->NOMBRE} ") ?></h5>
                     </div>
                     <?php foreach ($cons->comisions as $comision) {
                   ?>
 
+=======
+                  <h5><?= Html::encode("{$cons->NOMBRE} ") ?></h5>
+                  <?php foreach ($cons->comisions as $comision) {
+                    ?>
+>>>>>>> c54cbe428bae95074d126bb7cc9d50a870b98651
                 <div class="external-event bg-warning" value="<?= Html::encode("{$comision->ID} ") ?>"> <?= Html::encode("{$comision->NOMBRE} ") ?></div>
                 <?php
                 }
               ?>
-                  <?php
+                              <?php
                 }
               ?>
                 <div class="checkbox">
