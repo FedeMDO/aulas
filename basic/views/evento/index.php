@@ -44,7 +44,7 @@ $indexMaterias = 1;
                   <h5><?= Html::encode("{$cons->NOMBRE} ") ?></h5>
                   <?php foreach ($cons->comisions as $comision) {
                     ?>
-                <div class="external-event bg-warning" value="<?= Html::encode("{$comision->ID} ") ?>"> <?= Html::encode("{$comision->NOMBRE} ") ?></div>
+                <div class="external-event bg-primary" value="<?= Html::encode("{$comision->ID} ") ?>"> <?= Html::encode("{$comision->NOMBRE} ") ?></div>
                 <?php
                 }
               ?>

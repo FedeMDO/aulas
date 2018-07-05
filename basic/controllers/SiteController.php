@@ -124,6 +124,9 @@ class SiteController extends Controller
    {
     //Preparamos la consulta para guardar el usuario
     $table = new Users;
+    if($model->idInstituto == null){ #si no pertenece a un instituto , lo hago admin
+        $table->rol = 20;
+    }
     $table->username = $model->username;
     $table->email = $model->email;
     //instituto
