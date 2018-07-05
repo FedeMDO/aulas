@@ -17,11 +17,11 @@ $this->registerCssFile("@web/css/index.css", [
 
 ?>
 
-  <center><h3>Buscador de aula</h3></center>
+  
 
-
-
-
+<div class="">
+<div class="loginc">
+<center><h3>Buscador de aula</h3></center>
 <ul>
 
 <?php $form = ActiveForm::begin([
@@ -38,6 +38,7 @@ $resulta = ArrayHelper::map($recurso2, 'ID', 'NOMBRE');
 
 ?>
 <div class="form-group">
+
 <?= $form->field($model, "ID")->checkboxList(
         $result, 
         ['Label'=>'seleccione...']
@@ -61,5 +62,6 @@ $resulta = ArrayHelper::map($recurso2, 'ID', 'NOMBRE');
 </div>
 
 
+</div>
 
-
+</div>
