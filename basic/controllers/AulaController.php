@@ -224,13 +224,22 @@ class AulaController extends Controller
     public function actionBuscador()
     {
         if($_POST!= null){
-            $recursos =$_POST['NOMBRE'];
+            $ID_recursos =$_POST['Recurso'];
+            $ID_edificio =$_POST['Edificio'];
+
             //$request = Yii::$app->request;
             //$edificio = $request->post(); 
             //$result = ArrayHelper::map($edificio, 'ID', 'NOMBRE');
 
             //return $this->render('BuscadorResultado');
-            VarDumper::dump ($recursos);
+            $edi= Edificio::findOne($ID_edificio);
+            $aulasEdificio = $edi->aulas;
+
+
+            VarDumper::dump ($aulasEdificio);
+           
+
+
         }
 
         $recursos= new Recurso();

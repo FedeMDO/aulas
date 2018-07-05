@@ -38,18 +38,18 @@ $resulta = ArrayHelper::map($recurso2, 'ID', 'NOMBRE');
 
 ?>
 <div class="form-group">
-<?= $form->field($model, "NOMBRE")->checkboxList(
+<?= $form->field($model, "ID")->checkboxList(
         $result, 
         ['Label'=>'seleccione...']
-        );
+        )->label('Nombre de Recurso');
 
 
 ?>
 
- <?php echo $form->field($edificio, 'NOMBRE')->dropDownList(
+ <?php echo $form->field($edificio, 'ID')->dropDownList(
         $resulta, 
         ['prompt'=>'seleccione...']
-        );
+        )->label('Nombre de Edificio');
 
     
 ?>
