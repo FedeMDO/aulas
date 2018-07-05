@@ -13,7 +13,7 @@ use app\models\Materia;
 use app\models\Hora;
 use app\models\Carrera;
 use app\models\CarreraMateria;
-
+use yii\helpers\VarDumper;
 use app\models\EventoCalendarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -60,12 +60,15 @@ class EventoController extends Controller
     // REFACTORIZO Y CAPTO COMISIONES, NO NOMBRES
     $carreras = Users::findOne(Yii::$app->user->identity->id)->instituto->carreras;
     foreach ($carreras as $carrera) {
-        foreach ($carrera->mATERIAs as $materia) {            
-            foreach ($materia->comisions as $comi) {            
+        foreach ($carrera->mATERIAs as $materia) {     
+            $filter_comis[]=$materia;       
+            // foreach ($materia->comisions as $comi) {            
                 
-                $filter_comis[]=$comi;
-            }
+            //     $filter_comis[]=$comi;
+            // }
         }
+
+    //VarDumper::dump($filter_comis);
     }
     $events = EventoCalendar::find()->all();
     $const= RestriCalendar::find()->all();
