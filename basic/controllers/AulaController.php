@@ -14,6 +14,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\User;
 use yii\data\Pagination;
+use yii\helpers\VarDumper;
 /**
  * AulaController implements the CRUD actions for Aula model.
  */
@@ -222,20 +223,25 @@ class AulaController extends Controller
     }
     public function actionBuscador()
     {
-        $recursos= new recurso();
+        if($_POST!= null){
+            $recursos =$_POST['NOMBRE'];
+            //$request = Yii::$app->request;
+            //$edificio = $request->post(); 
+            //$result = ArrayHelper::map($edificio, 'ID', 'NOMBRE');
+
+            //return $this->render('BuscadorResultado');
+            VarDumper::dump ($recursos);
+        }
+
+        $recursos= new Recurso();
         $edificio = new Edificio();
-        $query = $recursos::find();
+        $query = Recurso::find();
         
             $pagination = new Pagination([
             'defaultPageSize' => 5,
             'totalCount' => $query->count(),
         ]);
 
-        $aula = $query->orderBy('ID')
-        ->offset($pagination->offset)
-        ->limit($pagination->limit)
-        ->all();
-   
 
     return $this->render('Buscador', [
         'model' => $recursos,
