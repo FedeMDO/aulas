@@ -15,7 +15,7 @@ $this->registerCssFile("@web/css/index.css", [
 $this->title = 'Sedes';
 ?>
 <a href="../sede/create" class="btn btn-success btn-md" role="button">Crear Sede</a>
-
+<a href="../aula/buscador" class="btn btn-primary btn-md" role="button">Buscar aulas por edificio y por recurso</a>
   <center><h3>Sedes Disponibles</h3></center>
 
 

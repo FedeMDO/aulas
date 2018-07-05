@@ -225,6 +225,7 @@ class AulaController extends Controller
     {
         if($_POST!= null){
             $ID_recursos =$_POST['Recurso'];
+            $ID_recursos =$ID_recursos['ID'];
             $ID_edificio =$_POST['Edificio'];
 
             //$request = Yii::$app->request;
@@ -234,12 +235,22 @@ class AulaController extends Controller
             //return $this->render('BuscadorResultado');
             $edi= Edificio::findOne($ID_edificio);
             $aulasEdificio = $edi->aulas;
-
-
-            VarDumper::dump ($aulasEdificio);
+            foreach($aulasEdificio as $aula){
+                foreach($aula->rECURSOs as $r){
+                    $ids[]= (string)$r->ID;
+                }
+                //comparo los arrays
+                $arrayInter = array_intersect($ids, $ID_recursos);
+                if(count($arrayInter) == count($ID_recursos)){
+                    $aulasCumplen[]=$aula;
+                }
+                
+            }
+            return $this->render('BuscadorResultado', [
+                'aulasCumplen' => $aulasCumplen,
+                'edi' => $edi
+            ]);
            
-
-
         }
 
         $recursos= new Recurso();
