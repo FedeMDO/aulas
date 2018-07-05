@@ -262,3 +262,17 @@ text-transform: uppercase;
 {
     margin-top:-20px;
 }
+
+
+.fondoca
+{
+  background-color: #ff0000;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 9px;
+  border-color:#ff0000;
+  border-width: 5px;
+  box-shadow:0 1px 0 #ff0000;
+}

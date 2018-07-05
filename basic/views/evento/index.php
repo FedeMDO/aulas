@@ -8,10 +8,20 @@ use yii\bootstrap\Modal;
 /* @var $searchModel app\models\EventoCalendarSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'ASIGNACION COMISIONES A AULA';
+$this->registerCssFile("@web/css/index.css", [
+  'depends' => [\yii\bootstrap\BootstrapAsset::className()],
+  
+
+  
+], 'css-print-theme');
+
+
+$this->title = '';
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="thumbnail">
+<div class="loginc">
+<center><h3>ASIGNACION COMISIONES A AULA</h3></center>
 <div class="content-wrapper" >
   
   <!-- Main content -->
@@ -19,16 +29,19 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-3">
+        
           <div class="card">
             <div class="card-header">
-              <h4 class="card-title">Materias</h4>
+              <center><h3>Materias</h3></center>
             </div>
             <div class="card-body">
               <!-- the events -->
               <div id="external-events">
                 <?php foreach ($filter as $cons) {
                   ?>
+                  <div class="loginc2">
                     <h5><?= Html::encode("{$cons->NOMBRE} ") ?></h5>
+                    </div>
                     <?php foreach ($cons->comisions as $comision) {
                   ?>
 
@@ -48,30 +61,22 @@ $this->params['breadcrumbs'][] = $this->title;
               </div>
             </div>
             <!-- /.card-body -->
+          
+
           </div>
           <!-- /. box -->
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Create Event</h3>
+              <h3 class="card-title"></h3>
             </div>
             <div class="card-body">
               <div class="btn-group" style="width: 100%; margin-bottom: 10px;">
                 <!--<button type="button" id="color-chooser-btn" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">Color <span class="caret"></span></button>-->
-                <ul class="fc-color-picker" id="color-chooser">
-                  <li><a class="text-primary" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-warning" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-success" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-danger" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-muted" href="#"><i class="fa fa-square"></i></a></li>
-                </ul>
+                
               </div>
               <!-- /btn-group -->
               <div class="input-group">
-                <input id="new-event" type="text" class="form-control" placeholder="Event Title">
-
-                <div class="input-group-append">
-                  <button id="add-new-event" type="button" class="btn btn-primary btn-flat">Add</button>
-                </div>
+               
                 <!-- /btn-group -->
               </div>
               <!-- /input-group -->
