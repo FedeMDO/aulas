@@ -10,6 +10,7 @@ use yii\bootstrap\Modal;
 
 $this->title = 'ASIGNACION COMISIONES A AULA';
 $this->params['breadcrumbs'][] = $this->title;
+$indexMaterias = 1;
 ?>
 <div class="thumbnail">
 <div class="content-wrapper" >
@@ -28,15 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
               <div id="external-events">
                 <?php foreach ($filter as $cons) {
                   ?>
-                    <h5><?= Html::encode("{$cons->NOMBRE} ") ?></h5>
-                    <?php foreach ($cons->comisions as $comision) {
-                  ?>
-
+                  <h5><?= Html::encode("{$cons->NOMBRE} ") ?></h5>
+                  <?php foreach ($cons->comisions as $comision) {
+                    ?>
                 <div class="external-event bg-warning" value="<?= Html::encode("{$comision->ID} ") ?>"> <?= Html::encode("{$comision->NOMBRE} ") ?></div>
                 <?php
                 }
               ?>
-                  <?php
+                              <?php
                 }
               ?>
                 <div class="checkbox">
