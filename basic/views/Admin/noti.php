@@ -104,7 +104,8 @@ endif; ?>
 </div>
 
 <div id="Enviar notificacion" class="tabcontent">
-  <h3>Enviar notificacion</h3>
+<div class="loginc">
+<center><h3>Enviar notificacion</h3></center>
 
 <div class="notificacion-create">
 
@@ -116,7 +117,7 @@ endif; ?>
 </div>
 
 </div>
-
+</div>
 <script>
 
 function openCity(evt, cityName) {
