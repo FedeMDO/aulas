@@ -32,6 +32,7 @@ $indexMaterias = 1;
         <div class="col-md-3">
         
           <div class="card">
+          
             <div class="card-header">
               <center><h3>Materias</h3></center>
             </div>
@@ -40,18 +41,9 @@ $indexMaterias = 1;
               <div id="external-events">
                 <?php foreach ($filter as $cons) {
                   ?>
-<<<<<<< HEAD
-                  <div class="loginc2">
-                    <h5><?= Html::encode("{$cons->NOMBRE} ") ?></h5>
-                    </div>
-                    <?php foreach ($cons->comisions as $comision) {
-                  ?>
-
-=======
                   <h5><?= Html::encode("{$cons->NOMBRE} ") ?></h5>
                   <?php foreach ($cons->comisions as $comision) {
                     ?>
->>>>>>> c54cbe428bae95074d126bb7cc9d50a870b98651
                 <div class="external-event bg-warning" value="<?= Html::encode("{$comision->ID} ") ?>"> <?= Html::encode("{$comision->NOMBRE} ") ?></div>
                 <?php
                 }
@@ -67,10 +59,10 @@ $indexMaterias = 1;
                 </div>
               </div>
             </div>
-            <!-- /.card-body -->
-          
-
+            <!-- <!aca termina el body de materias/>/.card-body -->
           </div>
+
+         
           <!-- /. box -->
           <div class="card">
             <div class="card-header">

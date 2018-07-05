@@ -205,8 +205,8 @@ th, td {
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
   z-index: 2;
   color: #fff;
-  background-color: #A63322;
-  border-color: #A63322;
+  background-color: #2980b9;
+  border-color: #2980b9;
 }
 
 
@@ -264,15 +264,3 @@ text-transform: uppercase;
 }
 
 
-.fondoca
-{
-  background-color: #ff0000;
-  padding-top: 10px;
-  padding-bottom: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-radius: 9px;
-  border-color:#ff0000;
-  border-width: 5px;
-  box-shadow:0 1px 0 #ff0000;
-}
