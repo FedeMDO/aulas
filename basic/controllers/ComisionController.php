@@ -42,7 +42,7 @@ class ComisionController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['index','view'],
+                       'actions' => ['index','view','create'],
                        //Esta propiedad establece que tiene permisos
                        'allow' => true,
                        //Usuarios autenticados, el signo ? es para invitados
