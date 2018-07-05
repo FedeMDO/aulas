@@ -5,6 +5,9 @@ namespace app\controllers;
 use Yii;
 use app\models\Aula;
 use app\models\AulaSearch;
+use app\models\Recurso;
+use app\models\RecursoSearch;
+use app\models\Edificio;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -216,5 +219,31 @@ class AulaController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    public function actionBuscador()
+    {
+        $recursos= new recurso();
+        $edificio = new Edificio();
+        $query = $recursos::find();
+        
+            $pagination = new Pagination([
+            'defaultPageSize' => 5,
+            'totalCount' => $query->count(),
+        ]);
+
+        $aula = $query->orderBy('ID')
+        ->offset($pagination->offset)
+        ->limit($pagination->limit)
+        ->all();
+   
+
+    return $this->render('Buscador', [
+        'model' => $recursos,
+        'pagination' => $pagination,
+        'edificio'=> $edificio,
+
+        
+        ]);
+
     }
 }
