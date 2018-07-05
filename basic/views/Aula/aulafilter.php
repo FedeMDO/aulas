@@ -16,9 +16,12 @@ $this->title = 'Aulas';
 <a href="../aula/create" class="btn btn-success btn-md" role="button">Crear Aula</a>
 
 
-<center><h3>Aulas Disponibles</h3></center>
+<center><?php if(count($aula) != 0){
 
- <div class="loginc">
+?>
+<center><h3>Aulas Disponibles en <?=Html::encode("{$aula[0]->eDIFICIO->NOMBRE}")?></h3></center>
+
+<div class="loginc">
 <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
@@ -52,4 +55,31 @@ $this->title = 'Aulas';
             </div>
             
 </div>
+
+
+
+
+
+<?php
+}
+else{?>
+
+<div class="alert alert-danger" role="alert">
+  <h4 class="alert-heading">ATENCION!</h4>
+  <p>NO HAY EDIFICIOS CREADOS EN ESTA SEDE</p>
+  <hr>
+
+  <a href="../edificio/create" class="btn btn-danger btn-md" role="button">CREA EDIFICIO</a>
+</div>
+
+
+<?php } ?></h3></center>
+
+
+
+
+
+
+
+
 

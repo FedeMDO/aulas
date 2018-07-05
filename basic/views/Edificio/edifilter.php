@@ -16,7 +16,24 @@ $this->title = 'Edificios disponibles';
 
 <center><h3><?php if(count($edificio) != 0){
 echo("Edificios Disponibles en la sede "); echo (Html::encode("{$edificio[0]->sEDE->NOMBRE}"));}
-else{echo("No hay edificios disponibles en la sede seleccionada");} ?></h3></center>
+else{?>
+
+<div class="alert alert-danger" role="alert">
+  <h4 class="alert-heading">ATENCION!</h4>
+  <p>NO HAY EDIFICIOS CREADOS EN ESTA SEDE</p>
+  <hr>
+
+  <a href="../edificio/create" class="btn btn-danger btn-md" role="button">CREA EDIFICIO</a>
+</div>
+
+
+<?php } ?></h3></center>
+
+
+
+
+
+
 
 
 <ul>

@@ -152,13 +152,7 @@ AppAsset::register($this);
 <?php $this->endBody() ?>
 
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; Proyecto de Software <?= date('Y') ?></p>
-        <p class="pull-right"> Ingeniería Informatica </p>
 
-    </div>
-</footer>
 
 
 

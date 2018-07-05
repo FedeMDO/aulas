@@ -9,6 +9,7 @@ use app\models\RestriCalendarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Hora;
 
 /**
  * RestriController implements the CRUD actions for RestriCalendar model.
@@ -36,24 +37,18 @@ class RestriController extends Controller
      */
     public function actionIndex()
     {
-
-        
-    $const= RestriCalendar::find()->all();
-    foreach ($const as $cons) {
-         $event1 = new \yii2fullcalendar\Models\Event();
-       
-         $event1->id =Instituto::findOne($cons->ID_Instituto_Recibe)->NOMBRE;
-      
-         $event1->start =$cons->Fecha_ini;
-         $event1->end=$cons->Fecha_fin;
-         $event1->rendering='background';
-        $event1->color=Instituto::findOne($cons->ID_Instituto_Recibe)->COLOR_HEXA;
-         $tasks[] = $event1;
-     }
-   
-  
+    $events= RestriCalendar::find()->all();
+    foreach ($events as $eve) {
+        $instituto= Instituto::findOne($eve->ID_Instituto_Recibe)->NOMBRE;        
+        $event = new \yii2fullcalendar\Models\Event();
+        $event->title=$instituto;
+        $event->start=$eve->Fecha_ini.'T'.Hora::FindOne($eve->Hora_ini)->HORA;
+        $event->end=$eve->Fecha_ini.'T'.Hora::FindOne($eve->Hora_fin)->HORA;
+        $event->backgroundColor=Instituto::findOne($eve->ID_Instituto_Recibe)->COLOR_HEXA;
+        $tasks[] = $event;
+    }
     return $this->render('index', [
-      'events'=>$tasks
+      'events'=>$tasks,
     ]);
 }
     /**
