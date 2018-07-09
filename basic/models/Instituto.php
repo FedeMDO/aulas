@@ -74,6 +74,6 @@ class Instituto extends \yii\db\ActiveRecord
      */
     public function getUsers()
     {
-        return $this->hasMany(Users::className(), ['ID_INSTITUTO' => 'ID']);
+        return $this->hasMany(Users::className(), ['idInstituto' => 'ID']);
     }
 }

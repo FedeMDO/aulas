@@ -10,10 +10,30 @@ $this->registerCssFile("@web/css/index.css", [
   
 ], 'css-print-theme');
 
+$this->title = 'Edificios disponibles';
 ?>
 <a href="../edificio/create" class="btn btn-success btn-md" role="button">Crear Edificio</a>
 
-<center><h3>Edificios Disponibles</h3></center>
+<center><h3><?php if(count($edificio) != 0){
+echo("Edificios Disponibles en la sede "); echo (Html::encode("{$edificio[0]->sEDE->NOMBRE}"));}
+else{?>
+
+<div class="alert alert-danger" role="alert">
+  <h4 class="alert-heading">ATENCION!</h4>
+  <p>NO HAY EDIFICIOS CREADOS EN ESTA SEDE</p>
+  <hr>
+
+  <a href="../edificio/create" class="btn btn-danger btn-md" role="button">CREA EDIFICIO</a>
+</div>
+
+
+<?php } ?></h3></center>
+
+
+
+
+
+
 
 
 <ul>

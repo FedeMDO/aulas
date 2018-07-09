@@ -4,22 +4,19 @@ use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use yii\data\Pagination;
 
-
 $this->registerCssFile("@web/css/index.css", [
   'depends' => [\yii\bootstrap\BootstrapAsset::className()],
   
 
   
 ], 'css-print-theme');
-$this->title = 'Aulas';
+$this->title = 'Aulas por recurso';
 ?>
-<a href="../aula/create" class="btn btn-success btn-md" role="button">Crear Aula</a>
 
-
-<center><?php if(count($aula) != 0){
+<center><?php if(count($aulasCumplen) != 0){
 
 ?>
-<center><h3>Aulas Disponibles en <?=Html::encode("{$aula[0]->eDIFICIO->NOMBRE}")?></h3></center>
+<center><h3>Aulas Disponibles con los recursos seleccionados en el edificio <?= Html::encode("{$edi->NOMBRE} ")?></h3></center>
 
 <div class="loginc">
 <div class="box-body">
@@ -36,15 +33,15 @@ $this->title = 'Aulas';
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($aula as $aula): ?>
+                <?php foreach ($aulasCumplen as $aula): ?>
                 <tr>
-                
-                  <td><a href="../evento/index?id=<?= Html::encode("{$aula->ID}") ?>" class="btn btn-primary" role="button">AGENDA</a></td>
+                  <td><button href="/evento/index" type="button" class="btn btn-success" >AGENDA</button></td>
                   <td ><?= Html::encode("{$aula->ID} ")?></span></td>
                   <td><?= Html::encode("{$aula->NOMBRE} ") ?> N°<?= Html::encode("{$aula->ID} ") ?></td>
                   <td><?= Html::encode("{$aula->PISO} ") ?></td>
                   <td><?= Html::encode("{$aula->CAPACIDAD} ") ?>
                   <td><a href="../aula/recursos?id=<?= Html::encode("{$aula->ID}") ?>"  class="btn btn-info" role="button">Ver</a></td>
+                 
                   </td>
                   
                   <td><a href="../aula/update?id=<?= Html::encode("{$aula->ID}") ?>"  class="btn btn-danger" role="button">Modificar</a></p></td>

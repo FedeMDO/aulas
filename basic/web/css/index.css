@@ -205,8 +205,8 @@ th, td {
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
   z-index: 2;
   color: #fff;
-  background-color: #A63322;
-  border-color: #A63322;
+  background-color: #2980b9;
+  border-color: #2980b9;
 }
 
 
@@ -262,3 +262,5 @@ text-transform: uppercase;
 {
     margin-top:-20px;
 }
+
+

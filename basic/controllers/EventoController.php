@@ -11,9 +11,10 @@ use app\models\Instituto;
 use app\models\Comision;
 use app\models\Materia;
 use app\models\Hora;
+use app\models\Aula;
 use app\models\Carrera;
 use app\models\CarreraMateria;
-
+use yii\helpers\VarDumper;
 use app\models\EventoCalendarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -43,22 +44,33 @@ class EventoController extends Controller
      * Lists all EventoCalendar models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($id)
     {
-    $id_usuario=Yii::$app->user->identity->id;
-    $id_instituto=Instituto::findOne($id_usuario)->ID;
-    $id_carrera= Carrera::findOne($id_instituto)->ID;
-    $carrera_materia= CarreraMateria::findAll([
-        'ID_CARRERA' => $id_carrera,
-    ]);
-
-    foreach ($carrera_materia as $cons) {
-        $materias=Materia::findOne($cons->ID_MATERIA)->NOMBRE;
-        
-        $filter_mate[]=$materias;
-    }
-
+    // $id_usuario=Yii::$app->user->identity->id;
+    // $id_instituto=Instituto::findOne($id_usuario)->ID;
+    // $id_carrera= Carrera::findOne($id_instituto)->ID;
+    // $carrera_materia= CarreraMateria::findAll([
+    //     'ID_CARRERA' => $id_carrera,
+    // ]);
     
+    // foreach ($carrera_materia as $cons) {
+    //     $materias=Materia::findOne($cons->ID_MATERIA)->NOMBRE;
+        
+    //     $filter_mate[]=$materias;
+    // }
+    // REFACTORIZO Y CAPTO COMISIONES, NO NOMBRES
+    $carreras = Users::findOne(Yii::$app->user->identity->id)->instituto->carreras;
+    foreach ($carreras as $carrera) {
+        foreach ($carrera->mATERIAs as $materia) {     
+            $filter_comis[]=$materia;       
+            // foreach ($materia->comisions as $comi) {            
+                
+            //     $filter_comis[]=$comi;
+            // }
+        }
+
+    //VarDumper::dump($filter_comis);
+    }
     $events = EventoCalendar::find()->all();
     $const= RestriCalendar::find()->all();
     foreach ($const as $cons) {
@@ -88,9 +100,9 @@ class EventoController extends Controller
         $event->constraint=Instituto::findOne($usuario)->NOMBRE;
         $tasks[] = $event;
     }
-  
+    $comi = new Comision();
     return $this->render('index', [
-      'events'=>$tasks,'filter'=> $filter_mate
+      'events'=>$tasks,'filter'=> $filter_comis, 'comi' => $comi, 'id_aula'=>$id
     ]);
 }
 
@@ -112,20 +124,24 @@ class EventoController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($date)
+    public function actionCreate($date,$date2)
     {   
+        $aula1= Aula::findOne($date2)->NOMBRE;
+        $nombreusuario=Yii::$app->user->identity->username;
+      
         $model = new EventoCalendar();
         $model->Fecha_ini=$date;
         $model->ID_User_Asigna=Yii::$app->user->identity->id;
-        
+       
+        $model->ID_Aula=$date2;
         $request=Yii::$app->request->post();
       
         $model->save();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect('index');
+            return $this->redirect(['index','id' =>$date2]);
         } else {
             return $this->renderAjax('create', [
-                'model' => $model,
+                'model' => $model,'aula1'=>$aula1,'nombreusuario'=>$nombreusuario,
             ]);
         }
     }
@@ -196,4 +212,5 @@ class EventoController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+    
 }

@@ -13,22 +13,27 @@ $this->registerCssFile("@web/css/index.css", [
     
 ], 'css-print-theme');
 
-
+$this->title = 'Institutos';
 ?>
 
-
-
-
-
-<?php foreach ($instituto as $instituto): ?>
-
-
+<div class="col-md-offset-4 col-md-5">
+<div class="loginc">
+  <center><h3>Informacion Institutos</h3></center>
+ <br>
+<?php foreach ($instituto as $ins): ?> <!-- ITERO LOS INSTITUTOS -->
 <div class="list-group">
   <a href="#" class="list-group-item list-group-item-action active">
-  <?= Html::encode("{$instituto->NOMBRE} ") ?>
+  <?= Html::encode("{$ins->NOMBRE} ") ?>
   </a>
-  <a href="../carrera/" class="list-group-item list-group-item-action"><?= Html::encode("{$instituto->COLOR_HEXA} ") ?></a>
+  <?php if (count($ins->users) == 0){ ?> <!-- ME FIJO SI NO TIENE USUARIOS -->
+    <a href="#" class="list-group-item list-group-item-action">Sin usuarios de este instituto</a> <!-- ACA HACER LAS COSAS QUE HAY QUE HACER SI INSTITUTO NO TIENE USER-->
+ <?php
+  } ?>
+  <?php foreach ($ins->users as $user): ?> <!-- ITERO LOS USUARIOS DE CADA INSTITUTO Y SACO SUS DATOS -->
+  <a href="#" class="list-group-item list-group-item-action"><?= Html::encode("{$user->username} ") ?> - <?= Html::encode("{$user->email} ") ?></a>
 </div>
-        <br></br>
-    
+       
+  <?php endforeach; ?>
 <?php endforeach; ?>
+</div>
+</div>

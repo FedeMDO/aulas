@@ -8,10 +8,21 @@ use yii\bootstrap\Modal;
 /* @var $searchModel app\models\EventoCalendarSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'ASIGNACION COMISIONES A AULA';
+$this->registerCssFile("@web/css/index.css", [
+  'depends' => [\yii\bootstrap\BootstrapAsset::className()],
+  
+
+  
+], 'css-print-theme');
+
+
+$this->title = '';
+
 $this->params['breadcrumbs'][] = $this->title;
+$indexMaterias = 1;
 ?>
-<div class="thumbnail">
+<div class="loginc">
+<center><h3>ASIGNACION COMISIONES DE AULA   <em id:"id_aula"><?=Html::encode("{$id_aula}")?></em></h3></center>
 <div class="content-wrapper" >
   
   <!-- Main content -->
@@ -19,19 +30,27 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-3">
+        
           <div class="card">
+          
             <div class="card-header">
-              <h4 class="card-title">Materias</h4>
+              <center><h3>Materias</h3></center>
             </div>
             <div class="card-body">
               <!-- the events -->
               <div id="external-events">
-                <div class="external-event bg-success"><?php foreach ($filter as $cons) {
-                 echo $cons;}?></div>
-                <div class="external-event bg-warning">Go home</div>
-                <div class="external-event bg-info">Do homework</div>
-                <div class="external-event bg-primary">Work on UI design</div>
-                <div class="external-event bg-danger">Sleep tight</div>
+                <?php foreach ($filter as $cons) {
+                  ?>
+                  <h5><?= Html::encode("{$cons->NOMBRE} ") ?></h5>
+                  <?php foreach ($cons->comisions as $comision) {
+                    ?>
+                <div class="external-event bg-primary" value="<?= Html::encode("{$comision->ID} ") ?>"> <?= Html::encode("{$comision->NOMBRE} ") ?></div>
+                <?php
+                }
+              ?>
+                              <?php
+                }
+              ?>
                 <div class="checkbox">
                   <label for="drop-remove">
                     <input type="checkbox" id="drop-remove">
@@ -40,31 +59,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
               </div>
             </div>
-            <!-- /.card-body -->
+            <!-- <!aca termina el body de materias/>/.card-body -->
           </div>
+
+         
           <!-- /. box -->
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Create Event</h3>
+              <h3 class="card-title"></h3>
             </div>
             <div class="card-body">
               <div class="btn-group" style="width: 100%; margin-bottom: 10px;">
                 <!--<button type="button" id="color-chooser-btn" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">Color <span class="caret"></span></button>-->
-                <ul class="fc-color-picker" id="color-chooser">
-                  <li><a class="text-primary" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-warning" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-success" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-danger" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-muted" href="#"><i class="fa fa-square"></i></a></li>
-                </ul>
+                
               </div>
               <!-- /btn-group -->
               <div class="input-group">
-                <input id="new-event" type="text" class="form-control" placeholder="Event Title">
-
-                <div class="input-group-append">
-                  <button id="add-new-event" type="button" class="btn btn-primary btn-flat">Add</button>
-                </div>
+               
                 <!-- /btn-group -->
               </div>
               <!-- /input-group -->
@@ -113,7 +124,7 @@ Modal::begin([
   var id =event.id;
   var ini=event.start.format();
   var fin=event.end.format(); 
-  alert(ini);
+  
   if (!confirm("Esta seguro??")) {
       revertFunc();}
       else
@@ -122,7 +133,9 @@ Modal::begin([
   { 
       id:id,
       fecini:ini,
-      fin:fin
+      fin:fin,
+      
+
   
   },
   function(data)
@@ -152,6 +165,7 @@ $.post("/evento/upd",
     id:id,
     fecini:ini,
     fin:fin
+    
 
 },
 function(data)

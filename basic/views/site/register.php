@@ -1,6 +1,9 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use app\models\Instituto;
+$this->title = 'Registro de usuario';
 ?>
 
 <br></br>
@@ -24,6 +27,15 @@ use yii\widgets\ActiveForm;
 
 <div class="form-group">
  <?= $form->field($model, "email")->input("email")->label('E-mail') ?>   
+</div>
+<!-- despliego institutos  -->
+<?php $institutos = Instituto::find()->asArray()->all();
+         $result = ArrayHelper::map($institutos, 'ID', 'NOMBRE'); ?>
+<div class="form-group">
+ <?= $form->field($model, "idInstituto")->dropDownList(
+            $result, 
+            ['prompt'=>'Seleccione un Instituto...']
+    )->label('Instituto (dejar vacío si pertenece a CPE/CPyT)'); ?>
 </div>
 
 <div class="form-group">

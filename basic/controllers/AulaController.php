@@ -5,12 +5,16 @@ namespace app\controllers;
 use Yii;
 use app\models\Aula;
 use app\models\AulaSearch;
+use app\models\Recurso;
+use app\models\RecursoSearch;
+use app\models\Edificio;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\User;
 use yii\data\Pagination;
+use yii\helpers\VarDumper;
 /**
  * AulaController implements the CRUD actions for Aula model.
  */
@@ -216,5 +220,56 @@ class AulaController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    public function actionBuscador()
+    {
+        if($_POST!= null){
+            $ID_recursos =$_POST['Recurso'];
+            $ID_recursos =$ID_recursos['ID'];
+            $ID_edificio =$_POST['Edificio'];
+
+            //$request = Yii::$app->request;
+            //$edificio = $request->post(); 
+            //$result = ArrayHelper::map($edificio, 'ID', 'NOMBRE');
+
+            //return $this->render('BuscadorResultado');
+            $edi= Edificio::findOne($ID_edificio);
+            $aulasEdificio = $edi->aulas;
+            foreach($aulasEdificio as $aula){
+                foreach($aula->rECURSOs as $r){
+                    $ids[]= (string)$r->ID;
+                }
+                //comparo los arrays
+                $arrayInter = array_intersect($ids, $ID_recursos);
+                if(count($arrayInter) == count($ID_recursos)){
+                    $aulasCumplen[]=$aula;
+                }
+                
+            }
+            return $this->render('BuscadorResultado', [
+                'aulasCumplen' => $aulasCumplen,
+                'edi' => $edi
+            ]);
+           
+        }
+
+        $recursos= new Recurso();
+        $edificio = new Edificio();
+        $query = Recurso::find();
+        
+            $pagination = new Pagination([
+            'defaultPageSize' => 5,
+            'totalCount' => $query->count(),
+        ]);
+
+
+    return $this->render('Buscador', [
+        'model' => $recursos,
+        'pagination' => $pagination,
+        'edificio'=> $edificio,
+
+        
+        ]);
+
     }
 }
