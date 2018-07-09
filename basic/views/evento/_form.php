@@ -12,19 +12,14 @@ use app\models\Hora;
 ?>
 
 <div class="evento-calendar-form">
-
     <?php $form = ActiveForm::begin(); ?>
     <?php $comisiones = Comision::find()->asArray()->all();
     $result = ArrayHelper::map($comisiones, 'ID', 'NOMBRE'); ?>
-
     <?php echo $form->field($model, 'ID_Comision')->dropDownList(
         $result, 
         ['prompt'=>'SELECCIONE LA COMISION...']
         ); ?> 
-   
     <?= $form->field($model, 'ID_User_Asigna')->textInput() ?>
-   
-     
     <?= $form->field($model, 'Fecha_ini')->textInput() ?>
     <?php $comisiones = Hora::find()->asArray()->all();
     $result = ArrayHelper::map($comisiones, 'ID', 'HORA'); ?>
@@ -37,10 +32,7 @@ use app\models\Hora;
         $result, 
         ['prompt'=>'SELECCIONE LA HORA DE FIN.......']
         ); ?> 
-
- 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
     <div class="form-group">
         <?= Html::submitButton('GUARDAR', ['class' => 'btn btn-success']) ?>
     </div>
