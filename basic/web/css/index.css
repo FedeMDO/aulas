@@ -235,7 +235,9 @@ th, td {
   width: 500px;
 }
 /*no se como cambiarle el color a las letras de de <H1> de la vista user y admin */
-
+.btn btn-link logout{
+  color:#ecf0f1;
+}
 
 .jumbotron2
 {
