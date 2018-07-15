@@ -4,23 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f167806ace2c9b046c673ec0a2e14bf9",
+    "content-hash": "a4a0caa3e4bed240144b560ab44d3c93",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
-            "version": "v2.4.3",
+            "version": "v2.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/almasaeed2010/AdminLTE.git",
-                "reference": "b3acb63ac56b13eb45b36e628b384a9a2507b50e"
+                "reference": "89d24bd77817b28649052e2cf3740eb91d08ff08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/almasaeed2010/AdminLTE/zipball/b3acb63ac56b13eb45b36e628b384a9a2507b50e",
-                "reference": "b3acb63ac56b13eb45b36e628b384a9a2507b50e",
+                "url": "https://api.github.com/repos/almasaeed2010/AdminLTE/zipball/89d24bd77817b28649052e2cf3740eb91d08ff08",
+                "reference": "89d24bd77817b28649052e2cf3740eb91d08ff08",
                 "shasum": ""
             },
             "require": {
+                "bower-asset/jquery": ">=1.9.0 <4.0.0",
                 "composer/installers": "1.*"
             },
             "type": "template",
@@ -47,7 +48,7 @@
                 "theme",
                 "web"
             ],
-            "time": "2018-02-04T12:54:57+00:00"
+            "time": "2018-07-14T21:47:25+00:00"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -76,7 +77,7 @@
             "version": "v3.9.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fullcalendar/fullcalendar.git",
+                "url": "git@github.com:fullcalendar/fullcalendar.git",
                 "reference": "3ddb3c8d1461c6b841aed3487ba07d8ba338adb6"
             },
             "dist": {
@@ -212,22 +213,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/bestiejs/punycode.js/zipball/38c8d3131a82567bfef18da09f7f4db68c84f8a3",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3",
-                "shasum": null
-            },
-            "type": "bower-asset"
-        },
-        {
-            "name": "bower-asset/summernote",
-            "version": "v0.8.10",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/summernote/summernote.git",
-                "reference": "810f1944d5678881cc5a06bd45075e98b50366a0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/summernote/summernote/zipball/810f1944d5678881cc5a06bd45075e98b50366a0",
-                "reference": "810f1944d5678881cc5a06bd45075e98b50366a0",
                 "shasum": null
             },
             "type": "bower-asset"
@@ -479,16 +464,16 @@
         },
         {
             "name": "dmstr/yii2-adminlte-asset",
-            "version": "2.6.0",
+            "version": "2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dmstr/yii2-adminlte-asset.git",
-                "reference": "1a7649cfd493faf10e797eaa8eb19ac5e81523af"
+                "reference": "613821a6b0b805aa8fddc0d47b0ab6bb3a3e0456"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dmstr/yii2-adminlte-asset/zipball/1a7649cfd493faf10e797eaa8eb19ac5e81523af",
-                "reference": "1a7649cfd493faf10e797eaa8eb19ac5e81523af",
+                "url": "https://api.github.com/repos/dmstr/yii2-adminlte-asset/zipball/613821a6b0b805aa8fddc0d47b0ab6bb3a3e0456",
+                "reference": "613821a6b0b805aa8fddc0d47b0ab6bb3a3e0456",
                 "shasum": ""
             },
             "require": {
@@ -535,7 +520,7 @@
                 "theme",
                 "yii2"
             ],
-            "time": "2017-12-05T15:17:33+00:00"
+            "time": "2018-07-06T08:48:15+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -733,53 +718,6 @@
                 "yii"
             ],
             "time": "2017-01-11T14:05:47+00:00"
-        },
-        {
-            "name": "socialist/yii2-admin-lte",
-            "version": "0.5.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/socialist/yii2-admin-lte.git",
-                "reference": "08e5796c3913949baeb1434f02f6722142d0a2ea"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/socialist/yii2-admin-lte/zipball/08e5796c3913949baeb1434f02f6722142d0a2ea",
-                "reference": "08e5796c3913949baeb1434f02f6722142d0a2ea",
-                "shasum": ""
-            },
-            "require": {
-                "almasaeed2010/adminlte": "^2.4.0",
-                "bower-asset/summernote": "*",
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "bootstrap": "socialist\\adminlte\\Bootstrap"
-            },
-            "autoload": {
-                "psr-4": {
-                    "socialist\\adminlte\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Skripnichenko <socialist> Sergey",
-                    "email": "Skripnichenko.s.a@gmail.com"
-                }
-            ],
-            "description": "Admin LTE themr for Yii2",
-            "keywords": [
-                "AdminLTE",
-                "admin",
-                "theme",
-                "yii2"
-            ],
-            "time": "2017-12-06T09:36:29+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -997,16 +935,16 @@
         },
         {
             "name": "yiisoft/yii2-composer",
-            "version": "2.0.6",
+            "version": "2.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-composer.git",
-                "reference": "163419f1f197e02f015713b0d4f85598d8f8aa80"
+                "reference": "1439e78be1218c492e6cde251ed87d3f128b9534"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/163419f1f197e02f015713b0d4f85598d8f8aa80",
-                "reference": "163419f1f197e02f015713b0d4f85598d8f8aa80",
+                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/1439e78be1218c492e6cde251ed87d3f128b9534",
+                "reference": "1439e78be1218c492e6cde251ed87d3f128b9534",
                 "shasum": ""
             },
             "require": {
@@ -1047,7 +985,7 @@
                 "extension installer",
                 "yii2"
             ],
-            "time": "2018-03-21T16:15:55+00:00"
+            "time": "2018-07-05T15:44:47+00:00"
         },
         {
             "name": "yiisoft/yii2-jui",
@@ -1522,16 +1460,16 @@
         },
         {
             "name": "fzaninotto/faker",
-            "version": "v1.7.1",
+            "version": "v1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d"
+                "reference": "f72816b43e74063c8b10357394b6bba8cb1c10de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
-                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/f72816b43e74063c8b10357394b6bba8cb1c10de",
+                "reference": "f72816b43e74063c8b10357394b6bba8cb1c10de",
                 "shasum": ""
             },
             "require": {
@@ -1539,7 +1477,7 @@
             },
             "require-dev": {
                 "ext-intl": "*",
-                "phpunit/phpunit": "^4.0 || ^5.0",
+                "phpunit/phpunit": "^4.8.35 || ^5.7",
                 "squizlabs/php_codesniffer": "^1.5"
             },
             "type": "library",
@@ -1568,7 +1506,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2017-08-15T16:48:10+00:00"
+            "time": "2018-07-12T10:23:15+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -2520,16 +2458,16 @@
         },
         {
             "name": "sebastian/comparator",
-            "version": "3.0.1",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "591a30922f54656695e59b1f39501aec513403da"
+                "reference": "5de4fc177adf9bce8df98d8d141a7559d7ccf6da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/591a30922f54656695e59b1f39501aec513403da",
-                "reference": "591a30922f54656695e59b1f39501aec513403da",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/5de4fc177adf9bce8df98d8d141a7559d7ccf6da",
+                "reference": "5de4fc177adf9bce8df98d8d141a7559d7ccf6da",
                 "shasum": ""
             },
             "require": {
@@ -2580,7 +2518,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2018-06-14T15:05:28+00:00"
+            "time": "2018-07-12T15:12:46+00:00"
         },
         {
             "name": "sebastian/diff",

@@ -148,7 +148,33 @@ Modal::begin([
           }
   });
 }}',
-'eventReceive'=>'function(){alert("recive bien");}',
+'eventReceive'=>'function(event){
+  var titulo=event.title;
+  var inicio=event.start.format();
+  var date2 =$("em").text();
+  alert(date2);
+  if (!confirm("Esta seguro??")) {
+    revertFunc();}
+    else
+    {
+$.post("/evento/upd2",
+{ 
+    titulo:titulo,
+    fecini:inicio,
+    date2:date2
+},
+function(data)
+{
+    if (data){
+         }
+    else {
+        alert("error");
+        }
+});
+}
+  
+  
+  }',
 'eventClick'=>'function(){alert("haciendo click");}',
 'eventDrop' => 'function( event, delta, revertFunc, jsEvent, ui, view ) { 
 

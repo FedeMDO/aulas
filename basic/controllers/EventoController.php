@@ -77,12 +77,16 @@ class EventoController extends Controller
          $event1 = new \yii2fullcalendar\Models\Event();
        
          $event1->id =Instituto::findOne($cons->ID_Instituto_Recibe)->NOMBRE;
-      
-         $event1->start =$cons->Fecha_ini.'T'.Hora::FindOne($cons->Hora_ini)->HORA;
+      if(!$cons->Hora_ini==null){
+        $event1->start =$cons->Fecha_ini.'T'.Hora::FindOne($cons->Hora_ini)->HORA;
         $event1->end=$cons->Fecha_ini.'T'.Hora::FindOne($cons->Hora_fin)->HORA;
-         $event1->rendering='background';
+      }
+      else{
+        $event1->start =$cons->Fecha_ini;
+      }
+        $event1->rendering='background';
         $event1->color=Instituto::findOne($cons->ID_Instituto_Recibe)->COLOR_HEXA;
-         $tasks[] = $event1;
+        $tasks[] = $event1;
      }
     foreach ($events as $eve) {
 
@@ -95,8 +99,14 @@ class EventoController extends Controller
         $event = new \yii2fullcalendar\Models\Event();
         $event->id=$eve->ID;
         $event->title=$materia;
-        $event->start=$eve->Fecha_ini.'T'.Hora::FindOne($eve->Hora_ini)->HORA;
-        $event->end=$eve->Fecha_ini.'T'.Hora::FindOne($eve->Hora_fin)->HORA;
+        if(!$eve->Hora_ini==null){
+            $event->start=$eve->Fecha_ini.'T'.Hora::FindOne($eve->Hora_ini)->HORA;
+            $event->end=$eve->Fecha_ini.'T'.Hora::FindOne($eve->Hora_fin)->HORA;
+        }
+        else{
+            $event->start=$eve->Fecha_ini
+            ;
+        }
         $event->constraint=Instituto::findOne($usuario)->NOMBRE;
         $tasks[] = $event;
     }
@@ -180,6 +190,40 @@ class EventoController extends Controller
         $evento->Hora_fin=$hora2;
         $evento->save();
         echo $hora1; 
+        
+      
+    }
+    public function actionUpd2()
+    {
+        $request = Yii::$app->request;
+       $date2=$request->post('date2');
+        var_dump($request->post('date2'));
+        var_dump($date2);
+        $request = Yii::$app->request;
+        $titulo=$request->post('titulo');
+        $fecha=substr($request->post('fecini'),0,10);
+        if(!$horaini=substr($request->post('fecini'),11)==null){
+            $horaini=substr($request->post('fecini'),11);
+            $horafin=substr($request->post('fecini'),11);
+            $hora1=Hora::findOne(['HORA'=>$horaini])->ID;
+            $hora2=Hora::findOne(['HORA'=>$horafin])->ID;
+        }
+        else{
+            $hora1= null;
+            $hora2= null;
+        }
+        $evento= new EventoCalendar;
+        $comision=Comision::findOne(['NOMBRE'=>$titulo])->ID;
+        $evento->ID_User_Asigna=Yii::$app->user->identity->id;
+        $evento->title=$titulo;
+        $evento->ID_Comision=$comision;
+        $evento->Fecha_ini=$fecha;
+        $evento->Hora_ini=$hora1;
+        $evento->Hora_fin=$hora2;
+        $evento->save();
+        echo $hora1;
+       ; 
+       return $this->redirect(['index','id' =>$date2]);
       
     }
 
