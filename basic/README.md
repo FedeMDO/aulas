@@ -230,5 +230,6 @@ vendor/bin/codecept run unit -- --coverage-html --coverage-xml
 vendor/bin/codecept run functional,unit -- --coverage-html --coverage-xml
 ```
 Ejemplo desde clase
+EJemplo desde el Navegador
 
 You can see code coverage output under the `tests/_output` directory.
