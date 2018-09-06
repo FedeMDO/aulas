@@ -43,7 +43,7 @@ class RestriCalendar extends \yii\db\ActiveRecord
         return [
             [['ID_Aula', 'ID_Instituto_Recibe', 'ID_Tipo_Repeticion', 'ID_User_Recibe', 'Fecha_ini', 'Hora_ini', 'Hora_fin', 'Periodo_Academico'], 'required'],
             [['ID_Aula', 'ID_Instituto_Recibe', 'ID_Tipo_Repeticion', 'ID_User_Recibe', 'Hora_ini', 'Hora_fin'], 'integer'],
-            [['Fecha_ini'], 'safe'],
+            [['Fecha_ini'], 'safe',],
             [['Periodo_Academico'], 'string', 'max' => 50],
             [['ID_Aula'], 'exist', 'skipOnError' => true, 'targetClass' => Aula::className(), 'targetAttribute' => ['ID_Aula' => 'ID']],
             [['ID_Instituto_Recibe'], 'exist', 'skipOnError' => true, 'targetClass' => Instituto::className(), 'targetAttribute' => ['ID_Instituto_Recibe' => 'ID']],

@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $indexMaterias = 1;
 ?>
 <div class="loginc">
-<center><h3>ASIGNACION COMISIONES A AULA</h3></center>
+<center><h3>ASIGNACION COMISIONES DE AULA   <em id:"id_aula"><?=Html::encode("{$id_aula}")?></em></h3></center>
 <div class="content-wrapper" >
   
   <!-- Main content -->
@@ -39,10 +39,10 @@ $indexMaterias = 1;
             <div class="card-body">
               <!-- the events -->
               <div id="external-events">
-                <?php foreach ($filter as $cons) {
+                <?php foreach ($filter as $materia) {
                   ?>
-                  <h5><?= Html::encode("{$cons->NOMBRE} ") ?></h5>
-                  <?php foreach ($cons->comisions as $comision) {
+                  <h5><?= Html::encode("{$materia->NOMBRE} ") ?></h5>
+                  <?php foreach ($materia->comisions as $comision) {
                     ?>
                 <div class="external-event bg-primary" value="<?= Html::encode("{$comision->ID} ") ?>"> <?= Html::encode("{$comision->NOMBRE} ") ?></div>
                 <?php
@@ -124,7 +124,7 @@ Modal::begin([
   var id =event.id;
   var ini=event.start.format();
   var fin=event.end.format(); 
-  alert(ini);
+  
   if (!confirm("Esta seguro??")) {
       revertFunc();}
       else
@@ -133,7 +133,9 @@ Modal::begin([
   { 
       id:id,
       fecini:ini,
-      fin:fin
+      fin:fin,
+      
+
   
   },
   function(data)
@@ -146,7 +148,33 @@ Modal::begin([
           }
   });
 }}',
-'eventReceive'=>'function(){alert("recive bien");}',
+'eventReceive'=>'function(event){
+  var titulo=event.title;
+  var inicio=event.start.format();
+  var date2 =$("em").text();
+  alert(date2);
+  if (!confirm("Esta seguro??")) {
+    revertFunc();}
+    else
+    {
+$.post("/evento/upd2",
+{ 
+    titulo:titulo,
+    fecini:inicio,
+    date2:date2
+},
+function(data)
+{
+    if (data){
+         }
+    else {
+        alert("error");
+        }
+});
+}
+  
+  
+  }',
 'eventClick'=>'function(){alert("haciendo click");}',
 'eventDrop' => 'function( event, delta, revertFunc, jsEvent, ui, view ) { 
 
@@ -163,6 +191,7 @@ $.post("/evento/upd",
     id:id,
     fecini:ini,
     fin:fin
+    
 
 },
 function(data)

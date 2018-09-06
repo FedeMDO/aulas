@@ -60,7 +60,10 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => '<img src="../image/iconUnaj.jpg" height=30 width=30 ; class="img-responsive">'.'',]);
-   
+        // Preguntar aca si user es admin o simple y hacer un echo Nav del q corresponda
+        // SI ES GUEST
+        if(Yii::$app->user->isGuest)
+        {
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
@@ -71,70 +74,82 @@ AppAsset::register($this);
                     ['label' => 'Login', 'url' => ['/site/login']]
                 ) : (
                     '<li>'
-                    . Html::beginForm(['/site/logout'], 'post')
+                    . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
                     . Html::submitButton(
                         'Logout (' . Yii::$app->user->identity->username . ')',
-                        ['class' => 'btn btn-link logout']
+                        ['class' => 'btn btn-link']
                     )
                     . Html::endForm()
                     . '</li>'
                 )
             ],
         ]);
+        }
+        else
+        {
+                    //SI ES ADMIN
+        if(User::isUserAdmin(Yii::$app->user->identity->id)) 
+        {
+            echo Nav::widget([
+                'options' => ['class' => 'navbar-nav navbar-default'],
+                'items' => [
+                    
+                    ['label' => 'Inicio', 'url' => ['/site/index']],
+                    ['label' => 'Sedes', 'url' => ['/sede/vistav']],
+                    ['label' => 'Institutos', 'url' => ['/instituto/institutov']],
+                    ['label' => 'Notificaciones', 'url' => ['/admin/noti']],
+                    ['label' => 'Registrar nuevo usuario', 'url' => ['/site/register']],
+                    ['label' => 'Configuracion', 'url' => ['#']],
+
+                    Yii::$app->user->isGuest ? (
+                        ['label' => 'Login', 'url' => ['/site/login']]
+                    ) : (
+                        '<li>'
+                        . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
+                        . Html::submitButton(
+                            'Logout (' . Yii::$app->user->identity->username . ')',
+                            ['class' => 'btn btn-link']
+                        )
+                        . Html::endForm()
+                        . '</li>'
+                    )
+                ],
+            ]);
+        }
+    //si es user
+    if(User::isUserSimple(Yii::$app->user->identity->id))
+        {
+            echo Nav::widget([
+                'options' => ['class' => 'navbar-nav navbar-default'],
+                'items' => [
+                    
+                    ['label' => 'Inicio', 'url' => ['/site/index']],
+                    ['label' => 'Sedes', 'url' => ['/sede/vistav']],
+                    ['label' => 'Institutos', 'url' => ['/instituto/institutov']],
+                    ['label' => 'Notificaciones', 'url' => ['/admin/noti']],
+                    ['label' => 'Crear Comision', 'url' => ['/comision/create']],
+                    ['label' => 'Configuracion', 'url' => ['#']],
+
+                    Yii::$app->user->isGuest ? (
+                        ['label' => 'Login', 'url' => ['/site/login']]
+                    ) : (
+                        '<li>'
+                        . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
+                        . Html::submitButton(
+                            'Logout (' . Yii::$app->user->identity->username . ')',
+                            ['class' => 'btn btn-link']
+                        )
+                        . Html::endForm()
+                        . '</li>'
+                    )
+                ],
+            ]);
+        }
+        }
+
     NavBar::end();
     ?>
-    <?php //NAV FIJO E INAMOBIBLE SEGUN ROL............
-        if(Yii::$app->user->isGuest)
-        {
-            
-        }
-        else{
-            if(User::isUserAdmin(Yii::$app->user->identity->id)) 
-            {//---------------ADMIN PANEL-------------------
-            ?>
-
-            <div class="navbarsize">
-            <nav class="navbar navbar-default">
-
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Panel de Administrador</a>
-    </div>
-     <a href="../sede/vistav" class="btn btn-primary">Sedes</a>
-     <a href="../instituto/institutov" class="btn btn-primary btn-info">Institutos</a>
-     <a href="../admin/noti" class="btn btn-primary btn-success">Notificaciones</a>
-     <a href="../site/register" class="btn btn-warning btn-md">Registrar Nuevo Usuario<i class="fa fa-sign-in"></i></a>
-
-    <button class="btn btn-danger navbar-btn">Configuracion</button>
-  </div>
-</nav>
-</div>
-            <?php
-        }
-        if(User::isUserSimple(Yii::$app->user->identity->id))
-        {//---------------ADMIN PANEL-------------------
-            ?>
-<div class="navbarsize">
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Panel de usuario</a>
-    </div>
-     <a href="../sede/vistav" class="btn btn-primary">Sedes</a>
-     <a href="../instituto/institutov" class="btn btn-primary btn-info">Institutos</a>
-     <a href="../user/noti" class="btn btn-primary btn-success">Notificaciones</a>
-     <a href="../comision/create" class="btn btn-primary btn-warning">Crear comision</a>
-    <button class="btn btn-danger navbar-btn">Configuracion</button>
-  </div>
-</nav>
-</div>
-
-            <?php
-        }
-    }
-    ?>
-    
-
+    <!-- SLIDER -->
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
@@ -146,8 +161,10 @@ AppAsset::register($this);
         
     </div>
 </div>
-
-
+<!-- footer comentado -->
+<!-- <div class="footer">
+  <p>Proyecto de Software - Universidad Nacional Arturo Jauretche</p>
+</div> -->
 
 <?php $this->endBody() ?>
 
@@ -157,5 +174,9 @@ AppAsset::register($this);
 
 
 </body>
+
+
+
 </html>
 <?php $this->endPage() ?>
+

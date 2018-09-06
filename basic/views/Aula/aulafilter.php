@@ -38,13 +38,13 @@ $this->title = 'Aulas';
                 <tbody>
                 <?php foreach ($aula as $aula): ?>
                 <tr>
-                  <td><button href="../evento/index" type="button" class="btn btn-success" >AGENDA</button></td>
+                
+                  <td><a href="../evento/index?id=<?= Html::encode("{$aula->ID}") ?>" class="btn btn-primary" role="button">AGENDA</a></td>
                   <td ><?= Html::encode("{$aula->ID} ")?></span></td>
                   <td><?= Html::encode("{$aula->NOMBRE} ") ?> N°<?= Html::encode("{$aula->ID} ") ?></td>
                   <td><?= Html::encode("{$aula->PISO} ") ?></td>
                   <td><?= Html::encode("{$aula->CAPACIDAD} ") ?>
                   <td><a href="../aula/recursos?id=<?= Html::encode("{$aula->ID}") ?>"  class="btn btn-info" role="button">Ver</a></td>
-                 
                   </td>
                   
                   <td><a href="../aula/update?id=<?= Html::encode("{$aula->ID}") ?>"  class="btn btn-danger" role="button">Modificar</a></p></td>

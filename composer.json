@@ -19,9 +19,9 @@
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "dmstr/yii2-adminlte-asset": "^2.1",
-        "philippfrenzel/yii2fullcalendar":"*",
-        "almasaeed2010/adminlte": "~2.4",
-        "socialist/yii2-admin-lte": "*"
+        "philippfrenzel/yii2fullcalendar":"*"
+       
+      
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
