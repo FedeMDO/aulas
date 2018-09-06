@@ -1,6 +1,6 @@
 <?php
 return[
-'adminEmail' => 'gabri.bentez@gmail.com',
-'title' => 'MIRAMEEEEEEEEEEEEEEEEEE',
+'adminEmail' => 'pds2018unaj@gmail.com',
+'title' => 'Sistema de Gestión de Aulas - Confirmar correo',
 'salt' => 'marck45',
 ];

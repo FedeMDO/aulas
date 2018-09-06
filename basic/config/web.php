@@ -40,8 +40,8 @@ $config = [
    'transport' => [
             'class' => 'Swift_SmtpTransport',
             'host' => 'smtp.gmail.com',
-            'username' => 'gabri.bentez@gmail.com',
-            'password' => 'notelavoyadar',
+            'username' => 'pds2018unaj@gmail.com',
+            'password' => 'gestiondeaulas',
             'port' => '587',
             'encryption' => 'tls',
                 ],
