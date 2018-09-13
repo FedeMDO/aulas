@@ -35,72 +35,60 @@ endif; ?>
 
     
   ?>
-<p>NOTIFICACIONES:</p>
+<p style="color:white; margin-left:5px";>Notificaciones:</p>
 
-<div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'Recibido')" id="defaultOpen">Recibido</button>
-  <button class="tablinks" onclick="openCity(event, 'Enviado')">Enviado</button>
-  <button class="tablinks" onclick="openCity(event, 'Enviar notificacion')">Enviar notificacion</button>
-</div>
+<ul class="nav nav-pills nav-stacked">
+  <li class="active"></li>
+  <li><a href="#"onclick="openCity(event, 'Recibido')" id="defaultOpen" class="notiboton">Recibidas</a></li>
+  <li><a href="#"onclick="openCity(event, 'Enviado')"class="notiboton">Enviadas</a></li>
+  <li><a href="#"onclick="openCity(event, 'Enviar notificacion')"class="notiboton">Enviar notificacion</a></li>
+</ul>
+
 
 <div id="Recibido" class="tabcontent">
-  <h3>Recibido</h3>
   <?php foreach ($notificacion as $n):
     if ($n->uSERRECEPTOR->id == Yii::$app->user->identity->id):?>
+
 <div class="panel panel-primary">
-      <?= Html::encode("{$n->FECHA} ") ?></div>
-      
-    <div class="panel-body">
-      
-      
-     <div class="media">
-    <div class="media-left">
-        <img src="../image/admin_icon.png" class="media-object" style="width:60px">
-        <div class="panel-heading"><?= Html::encode("{$n->uSEREMISOR->username} ") ?></div>
+    <div class="panel-heading">
+    De: <?= Html::encode("{$n->uSEREMISOR->username} ")?> <br>Fecha: <?= Html::encode("{$n->FECHA} ") ?><br/>
     </div>
-    <div class="media-body">
-           
-    <?= Html::encode("{$n->NOTIFICACION} ") ?>
+
+    <div class="media">
+        <div class="media-left">
+            <img src="../image/admin_icon.png" class="media-object" style="width:60px; margin-left:10px ;margin-bottom:10px";>
+        </div>
+        <div class="media-body">
+            <?= Html::encode("{$n->NOTIFICACION} ") ?>
+        </div>
     </div>
-    </div>
-      
-      
-      
-    </div>
+
 </div>
-<?php endif; ?>
-<?php endforeach; ?>
+    <?php endif; ?>
+    <?php endforeach; ?>
 </div>
 
 <div id="Enviado" class="tabcontent">
-  <h3>Enviado</h3>
   <?php foreach ($notificacion as $n):
     if ($n->uSEREMISOR->id == Yii::$app->user->identity->id):?>
-<div class="panel panel-primary">
-<div class="panel-heading">Para: <?= Html::encode("{$n->uSERRECEPTOR->username} ") ?><?= Html::encode("{$n->FECHA} ") ?></div>
-      
 
-      
-    <div class="panel-body">
-      
-      
-     <div class="media">
-    <div class="media-left">
-        <img src="../image/admin_icon.png" class="media-object" style="width:60px">
-        <div class="panel-heading"><?= Html::encode("{$n->uSEREMISOR->username} ") ?></div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Para: <?= Html::encode("{$n->uSERRECEPTOR->username} ")?> <br>Fecha: <?= Html::encode("{$n->FECHA} ") ?><br/>
     </div>
-    <div class="media-body">
-           
-    <?= Html::encode("{$n->NOTIFICACION} ") ?>
+
+    <div class="media">
+        <div class="media-left">
+            <img src="../image/admin_icon.png" class="media-object" style="width:60px; margin-left:10px; margin-bottom:10px";>
+        </div>
+        <div class="media-body">
+            <?= Html::encode("{$n->NOTIFICACION} ") ?>
+        </div>
     </div>
-    </div>
-      
-      
-      
-    </div>
+
 </div>
-<?php endif; ?>
-<?php endforeach; ?>
+    <?php endif; ?>
+    <?php endforeach; ?>
 </div>
 
 <div id="Enviar notificacion" class="tabcontent">

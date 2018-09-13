@@ -52,7 +52,6 @@ text-transform: uppercase; */
 /* Style the tab */
 .tab {
     float: left;
-    border: 1px solid #ccc;
     background-color: #f1f1f1;
     width: 30%;
     height: relative;
@@ -87,18 +86,11 @@ text-transform: uppercase; */
 .tabcontent {
     float: left;
     padding: 0px 12px;
-    border: 1px solid #ccc;
+
     width: 70%;
     border-left: none;
     height: 300px;
 }
-
-.img-responsive
-{
-  background-image: url(../image/unaj1.png);  
-  
-}
-
 
 .gallery{
   margin: 10px 50px;
@@ -258,11 +250,28 @@ font-variant: normal;
 text-transform: uppercase;
 
 }
-
-
 .navbarsize
 {
     margin-top:-20px;
 }
-
-
+.nav-stacked{
+  width: 20%;
+  float: left;
+}
+.notiboton{
+  background-color: #2980b9;
+}
+a{
+  color:white;
+}
+.navbar-brand {
+  padding: 0px; /* firefox bug fix */
+}
+.navbar-brand>img {
+  float: top;
+  height: 130%;
+  padding: 15px; /* firefox bug fix */
+  width: auto;
+  position: relative;
+  bottom: 10px;
+}

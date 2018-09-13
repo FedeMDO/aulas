@@ -59,7 +59,7 @@ AppAsset::register($this);
 
     <?php
     NavBar::begin([
-        'brandLabel' => '<img src="../image/iconUnaj.jpg" height=30 width=30 ; class="img-responsive">'.'',]);
+        'brandLabel' => '<img src="../image/logo3.png"; class="img-responsive">'.'',]);
         // Preguntar aca si user es admin o simple y hacer un echo Nav del q corresponda
         // SI ES GUEST
         if(Yii::$app->user->isGuest)
@@ -91,7 +91,7 @@ AppAsset::register($this);
         if(User::isUserAdmin(Yii::$app->user->identity->id)) 
         {
             echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-default'],
+                'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
                     
                     ['label' => 'Inicio', 'url' => ['/site/index']],
@@ -120,7 +120,7 @@ AppAsset::register($this);
     if(User::isUserSimple(Yii::$app->user->identity->id))
         {
             echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-default'],
+                'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
                     
                     ['label' => 'Inicio', 'url' => ['/site/index']],
