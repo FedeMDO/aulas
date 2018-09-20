@@ -55,16 +55,36 @@ class AdminController extends Controller
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
-        
-            $model = new Notificacion();
+            
+            if ($_POST != null){
+                $ID_Usuarios =$_POST['Notificacion'];
+                $mensaje = $_POST['Notificacion'];
+                $ID_Usuarios =$ID_Usuarios['ID_USER_RECEPTOR'];
+                $mensaje = $mensaje['NOTIFICACION'];
+                foreach ($ID_Usuarios as $user1){
+                    $model1 = new Notificacion();
+                    $model1->ID_USER_EMISOR = Yii::$app->user->identity->id;
+                    $model1 ->ID_USER_RECEPTOR = $user1;
+                    $model1->NOTIFICACION = $mensaje;
+                    $model1->FECHA = new \yii\db\Expression('NOW()');
+                    $model1->save();       
+                }
+                if ($model1->save()){
+                    $session = Yii::$app->session;
+                    $session->setFlash('notificacionEnviada', 'Has enviado correctamente la notificacion');
+                    return $this->redirect('noti');
+              }
+            }
+         /*   $model = new Notificacion();
             $model->ID_USER_EMISOR = Yii::$app->user->identity->id;
             $model->FECHA = new \yii\db\Expression('NOW()');
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 $session = Yii::$app->session;
                 $session->setFlash('notificacionEnviada', 'Has enviado correctamente la notificacion');
                 return $this->redirect('noti');
-            }        
+            }        */
        
+        $model = new Notificacion();
         $usuarios = Users::find()->where(['not', ['username' => Yii::$app->user->identity->username]])
         ->andWhere(['activate' =>1])->asArray()->all();
         return $this->render('noti', [
@@ -73,7 +93,7 @@ class AdminController extends Controller
             'model' => $model,
             'usuarios' => $usuarios
             
-        ]);
+        ]);  
     }
 
 

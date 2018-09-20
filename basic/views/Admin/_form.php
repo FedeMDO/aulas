@@ -14,7 +14,7 @@ use yii\helpers\ArrayHelper;
     <?php $form = ActiveForm::begin(); ?>
     <?php $result = ArrayHelper::map($usuarios, 'id', 'username'); ?>
     
-    <?php echo $form->field($model, 'ID_USER_RECEPTOR')->dropDownList(
+    <?php echo $form->field($model, 'ID_USER_RECEPTOR')->checkboxList(
             $result, 
 			['prompt'=>'Choose...']
 			); ?>
