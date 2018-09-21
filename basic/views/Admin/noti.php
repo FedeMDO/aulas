@@ -35,14 +35,13 @@ endif; ?>
 
     
   ?>
-<p style="color:white; margin-left:5px";>Notificaciones:</p>
+<nav class="nav navbar-inverse navbar-left">
+  <a class="active"></a>
+  <li><a href="#"onclick="openCity(event, 'Recibido')" id="defaultOpen" class="notiboton"><i class="glyphicon glyphicon-inbox"></i>  Recibidas</a></li>
+  <li><a href="#"onclick="openCity(event, 'Enviado')"class="notiboton"><i class="glyphicon glyphicon-envelope"></i>  Enviadas</a></li>
+  <li><a href="#"onclick="openCity(event, 'Enviar notificacion')"class="notiboton"><i class="glyphicon glyphicon-plus"></i> Nueva notificacion</a></li>
+</nav>
 
-<ul class="nav nav-pills nav-stacked">
-  <li class="active"></li>
-  <li><a href="#"onclick="openCity(event, 'Recibido')" id="defaultOpen" class="notiboton">Recibidas</a></li>
-  <li><a href="#"onclick="openCity(event, 'Enviado')"class="notiboton">Enviadas</a></li>
-  <li><a href="#"onclick="openCity(event, 'Enviar notificacion')"class="notiboton">Enviar notificacion</a></li>
-</ul>
 
 
 <div id="Recibido" class="tabcontent">
@@ -51,6 +50,7 @@ endif; ?>
 
 <div class="panel panel-primary">
     <div class="panel-heading">
+
     De: <?= Html::encode("{$n->uSEREMISOR->username} ")?> <br>Fecha: <?= Html::encode("{$n->FECHA} ") ?><br/>
     </div>
 
@@ -71,7 +71,6 @@ endif; ?>
 <div id="Enviado" class="tabcontent">
   <?php foreach ($notificacion as $n):
     if ($n->uSEREMISOR->id == Yii::$app->user->identity->id):?>
-
 <div class="panel panel-primary">
     <div class="panel-heading">
         Para: <?= Html::encode("{$n->uSERRECEPTOR->username} ")?> <br>Fecha: <?= Html::encode("{$n->FECHA} ") ?><br/>

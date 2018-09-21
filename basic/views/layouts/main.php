@@ -59,19 +59,21 @@ AppAsset::register($this);
 
     <?php
     NavBar::begin([
-        'brandLabel' => '<img src="../image/logo3.png"; class="img-responsive">'.'',]);
+        'brandLabel' => '<img src="../image/logo3.png"; class="img-responsive">'.'',
+        "innerContainerOptions" => ['class' => 'container-fluid']]);
         // Preguntar aca si user es admin o simple y hacer un echo Nav del q corresponda
         // SI ES GUEST
         if(Yii::$app->user->isGuest)
         {
         echo Nav::widget([
+            'encodeLabels' => false,
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
                 
-                ['label' => 'Home', 'url' => ['/site/index']],
+                ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-home']).' INICIO', 'url' => ['/site/index']],
                 
                 Yii::$app->user->isGuest ? (
-                    ['label' => 'Login', 'url' => ['/site/login']]
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login']]
                 ) : (
                     '<li>'
                     . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
@@ -91,18 +93,22 @@ AppAsset::register($this);
         if(User::isUserAdmin(Yii::$app->user->identity->id)) 
         {
             echo Nav::widget([
+                'encodeLabels' => false,
+                'options' => ['class' => 'navbar-nav navbar-default'],
+                'items' => [
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-home']).' INICIO', 'url' => ['/site/index']],
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' SEDES', 'url' => ['/sede/vistav']],
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' INSTITUTOS', 'url' => ['/instituto/institutov']],
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' REGISTRAR USUARIO', 'url' => ['/site/register']],
+                ],
+            ]);
+            echo Nav::widget([
+                'encodeLabels' => false,
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    
-                    ['label' => 'Inicio', 'url' => ['/site/index']],
-                    ['label' => 'Sedes', 'url' => ['/sede/vistav']],
-                    ['label' => 'Institutos', 'url' => ['/instituto/institutov']],
-                    ['label' => 'Notificaciones', 'url' => ['/admin/noti']],
-                    ['label' => 'Registrar nuevo usuario', 'url' => ['/site/register']],
-                    ['label' => 'Configuracion', 'url' => ['#']],
-
+                    ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/admin/noti']],
                     Yii::$app->user->isGuest ? (
-                        ['label' => 'Login', 'url' => ['/site/login']]
+                        ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login']]
                     ) : (
                         '<li>'
                         . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
@@ -120,18 +126,22 @@ AppAsset::register($this);
     if(User::isUserSimple(Yii::$app->user->identity->id))
         {
             echo Nav::widget([
+                'encodeLabels' => false, //Esto permite poner los iconos
+                'options' => ['class' => 'navbar-nav navbar-default'],
+                'items' => [
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-home']).' INICIO', 'url' => ['/site/index']],
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' SEDES', 'url' => ['/sede/vistav']],
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' INSTITUTOS', 'url' => ['/instituto/institutov']],
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' CREAR COMISION', 'url' => ['/comision/create']],
+                ],
+            ]);
+            echo Nav::widget([
+                'encodeLabels' => false,
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    
-                    ['label' => 'Inicio', 'url' => ['/site/index']],
-                    ['label' => 'Sedes', 'url' => ['/sede/vistav']],
-                    ['label' => 'Institutos', 'url' => ['/instituto/institutov']],
-                    ['label' => 'Notificaciones', 'url' => ['/admin/noti']],
-                    ['label' => 'Crear Comision', 'url' => ['/comision/create']],
-                    ['label' => 'Configuracion', 'url' => ['#']],
-
+                            ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/admin/noti']],
                     Yii::$app->user->isGuest ? (
-                        ['label' => 'Login', 'url' => ['/site/login']]
+                        ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login']]
                     ) : (
                         '<li>'
                         . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
@@ -150,7 +160,6 @@ AppAsset::register($this);
     NavBar::end();
     ?>
     <!-- SLIDER -->
-    <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
@@ -159,7 +168,7 @@ AppAsset::register($this);
        
 
         
-    </div>
+
 </div>
 <!-- footer comentado -->
 <!-- <div class="footer">

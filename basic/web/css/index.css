@@ -259,10 +259,10 @@ text-transform: uppercase;
   float: left;
 }
 .notiboton{
-  background-color: #2980b9;
+  background-color:white;
 }
 a{
-  color:white;
+  color:black;
 }
 .navbar-brand {
   padding: 0px; /* firefox bug fix */
@@ -274,4 +274,14 @@ a{
   width: auto;
   position: relative;
   bottom: 10px;
+}
+.navbar-inverse{
+  position: relative;
+  bottom: 20px;
+  background-color: white;
+  height:100%;
+  width: 10%;
+}
+.carousel-inner > .item > img {
+  margin: 0 auto;
 }
