@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-use dosamigos\multiselect\MultiSelect;
 use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
@@ -17,7 +16,9 @@ use kartik\select2\Select2;
     <?php $result = ArrayHelper::map($usuarios, 'id', 'username'); ?>
     <?php echo $form->field($model, 'ID_USER_RECEPTOR')->widget(Select2::className(),[
         'data' => $result,
-        "options" => ['multiple'=>"multiple"]
+        "options" => ['multiple'=> true, 
+        'placeholder' => 'Seleccione un usuario...'
+        ]
     ]);
 
 	 ?>
