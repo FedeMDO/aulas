@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use dosamigos\multiselect\MultiSelect;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Notificacion */
@@ -13,12 +15,12 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
     <?php $result = ArrayHelper::map($usuarios, 'id', 'username'); ?>
-    
-    <?php echo $form->field($model, 'ID_USER_RECEPTOR')->checkboxList(
-            $result, 
-			['prompt'=>'Choose...']
-			); ?>
+    <?php echo $form->field($model, 'ID_USER_RECEPTOR')->widget(Select2::className(),[
+        'data' => $result,
+        "options" => ['multiple'=>"multiple"]
+    ]);
 
+	 ?>
     <?= $form->field($model, 'NOTIFICACION')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
