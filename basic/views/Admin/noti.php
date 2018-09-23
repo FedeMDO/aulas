@@ -23,7 +23,7 @@ $this->title = 'Notificaciones';
 <?php if(Yii::$app->session->hasFlash('notificacionEnviada')):
     Alert::begin([
       'options' => [
-          'class' => 'alert-success',
+          'class' => 'w3-panel w3-green',
       ],
   ]);
   
@@ -57,7 +57,9 @@ endif; ?>
   <?php endif; ?>
   <?php endforeach; ?>  
   <?php if ($entro==false):?>
+  <div class="alert alert-danger">
   <p>No tienes mensajes recibidos.</p>
+  </div>
   <?php endif;?> 
 </div>
 
@@ -74,7 +76,9 @@ endif; ?>
   <?php endif; ?>
   <?php endforeach; ?>
   <?php if ($entro==false):?>
+  <div class="alert alert-danger">
   <p>No tienes mensajes enviados.</p>
+  </div>
   <?php endif;?>  
 </div>
 
