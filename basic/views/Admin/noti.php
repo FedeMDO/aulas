@@ -44,50 +44,28 @@ endif; ?>
 
 
 
-<div id="Recibido" class="tabcontent">
-  <?php foreach ($notificacion as $n):
+<div id="Recibido" class="tabcontent media border p-3">
+ <?php foreach ($notificacion as $n):
     if ($n->uSERRECEPTOR->id == Yii::$app->user->identity->id):?>
-
-<div class="panel panel-primary">
-    <div class="panel-heading">
-
-    De: <?= Html::encode("{$n->uSEREMISOR->username} ")?> <br>Fecha: <?= Html::encode("{$n->FECHA} ") ?><br/>
-    </div>
-
-    <div class="media">
-        <div class="media-left">
-            <img src="../image/admin_icon.png" class="media-object" style="width:60px; margin-left:10px ;margin-bottom:10px";>
-        </div>
-        <div class="media-body">
-            <?= Html::encode("{$n->NOTIFICACION} ") ?>
-        </div>
-    </div>
-
-</div>
-    <?php endif; ?>
-    <?php endforeach; ?>
+  <img src="../image/admin_icon.png" class="admin" style="width:60px; margin-left:10px; margin-bottom:10px;";>
+  <div class="media-body">
+    <h4><?= Html::encode("{$n->uSEREMISOR->username} ")?> <small><i>Fecha: <?= Html::encode("{$n->FECHA} ") ?></i></small></h4>
+    <p><?= Html::encode("{$n->NOTIFICACION} ") ?></p>
+  </div>
+  <?php endif; ?>
+  <?php endforeach; ?>  
 </div>
 
-<div id="Enviado" class="tabcontent">
-  <?php foreach ($notificacion as $n):
+<div id="Enviado" class="tabcontent media border p-3">
+ <?php foreach ($notificacion as $n):
     if ($n->uSEREMISOR->id == Yii::$app->user->identity->id):?>
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        Para: <?= Html::encode("{$n->uSERRECEPTOR->username} ")?> <br>Fecha: <?= Html::encode("{$n->FECHA} ") ?><br/>
-    </div>
-
-    <div class="media">
-        <div class="media-left">
-            <img src="../image/admin_icon.png" class="media-object" style="width:60px; margin-left:10px; margin-bottom:10px";>
-        </div>
-        <div class="media-body">
-            <?= Html::encode("{$n->NOTIFICACION} ") ?>
-        </div>
-    </div>
-
-</div>
-    <?php endif; ?>
-    <?php endforeach; ?>
+  <img src="../image/admin_icon.png" class="admin" style="width:60px; margin-left:10px; margin-bottom:10px;";>
+  <div class="media-body">
+    <h4>Para: <?=Html::encode("{$n->uSERRECEPTOR->username} ")?> <small><i>Fecha: <?= Html::encode("{$n->FECHA} ") ?></i></small></h4>
+    <p><?= Html::encode("{$n->NOTIFICACION} ") ?></p>
+ </div>
+  <?php endif; ?>
+  <?php endforeach; ?>  
 </div>
 
 <div id="Enviar notificacion" class="tabcontent">

@@ -1,5 +1,5 @@
 .iniciocs{
-  background-image: url(../image/index_background_desenfoque.jpg);
+  background-image: url(../image/background-blur-6.png);
  
     background-size: cover; 
     -ms-background-size: cover; 
@@ -85,8 +85,7 @@ text-transform: uppercase; */
 /* Style the tab content */
 .tabcontent {
     float: left;
-    padding: 0px 12px;
-
+    padding: 20px 12px;
     width: 70%;
     border-left: none;
     height: 300px;
@@ -141,7 +140,9 @@ box-shadow: 10px 10px 20px -8px rgba(0,0,0,0.75);
 }
 
 
-
+.navbar-default {
+  margin-bottom: 0px;
+}
 
 table {
   border-collapse: collapse;
@@ -182,6 +183,7 @@ th, td {
 
 .loginc
 {
+  margin-top:20px;
   background-color: #ecf0f1;
   padding-top: 10px;
   padding-bottom: 20px;
@@ -250,10 +252,7 @@ font-variant: normal;
 text-transform: uppercase;
 
 }
-.navbarsize
-{
-    margin-top:-20px;
-}
+
 .nav-stacked{
   width: 20%;
   float: left;
@@ -261,8 +260,10 @@ text-transform: uppercase;
 .notiboton{
   background-color:white;
 }
+
 a{
   color:black;
+  padding-top: 20px;
 }
 .navbar-brand {
   padding: 0px; /* firefox bug fix */
@@ -277,11 +278,63 @@ a{
 }
 .navbar-inverse{
   position: relative;
-  bottom: 20px;
+  border-top: 2px solid white ;
   background-color: white;
   height:100%;
   width: 10%;
+ 
 }
 .carousel-inner > .item > img {
   margin: 0 auto;
 }
+
+.media{
+  position: relative;
+  left:10px;
+  width: 30%;
+  height:auto;
+}
+.media-body{
+  position: relative;
+  left: 100px;
+  bottom: 80px;
+}
+.admin{
+  border-radius: 250px;
+}
+
+.media-body >h4{
+  color:white;
+  text-transform: capitalize;
+  border-bottom: 1px solid white;
+  padding-bottom: 5px;
+  text-align: left;
+}
+.recibidos{
+  border: 1px solid white;
+}
+/* arregla margen de aulas*/
+.btn-vistav{
+  margin-top: 10px;
+}
+
+/*Estilo del placeholder*/
+
+::-webkit-input-placeholder { /* Chrome */
+  opacity: 0.2;
+  font-style: italic;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  opacity: 0.2;
+  font-style: italic;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  opacity: 0.2 !important;
+  font-style: italic;
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  opacity: 0.2;
+  font-style: italic;
+}
+
+
