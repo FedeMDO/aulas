@@ -23,7 +23,7 @@ $this->title = 'Notificaciones';
 <?php if(Yii::$app->session->hasFlash('notificacionEnviada')):
     Alert::begin([
       'options' => [
-          'class' => 'w3-panel w3-green',
+          'class' => 'alert-success',
       ],
   ]);
   
