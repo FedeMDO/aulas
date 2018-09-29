@@ -8,7 +8,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Ingresar';
+$this->title = 'Bienvenido';
 $this->params['breadcrumbs'][] = $this->title;
 
 
@@ -22,34 +22,28 @@ $this->registerCssFile("@web/css/index.css", [
     
 <div id="box_login">
 
-<div class="loginc">
+<div class="loginc log">
     <h1><?= Html::encode($this->title) ?></h1>
   
-    <p>Please fill out the following fields to login:</p>
+    <p>Por favor complete los siguientes campos:</p>
   
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
         'layout' => 'horizontal',
-
-        'fieldConfig' => [
-            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-            'labelOptions' => ['class' => 'col-lg-1 control-label'],
-        ],
     ]); ?>
 
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Usuario') ?>
+       <?= $form->field($model, 'username', ['labelOptions'=>['style'=>'color:white'],'inputTemplate' => '<div class="input-group"><span class="input-group-addon"><i class="fa fa-user"></i></span>{input}</div>'
+])->textInput()->label('') ?>
+        <?= $form->field($model, 'password', ['labelOptions'=>['style'=>'color:white'],'inputTemplate' => '<div class="input-group"><span class="input-group-addon"><i class="fa fa-lock"></i></span>{input}</div>'] )->passwordInput()->label('') ?>
 
-        <?= $form->field($model, 'password')->passwordInput()->label('Contraseña') ?>
-
-        <?= $form->field($model, 'rememberMe')->checkbox([
-            'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
-        ])->label('Recordarme') ?>
+        <?= $form->field($model, 'rememberMe', ['labelOptions'=>['style'=>'color:white']] )->checkbox([
+        ])->label('Recordar contraseña') ?>
 
 
 
         <div class="form-group">
             <div class="">
-                <?= Html::submitButton('Ingresar', ['class' => 'btn btn-primary btn-md', 'name' => 'login-button']) ?>
+                <?= Html::submitButton('Ingresar', ['class' => 'btn btn-success btn-block', 'name' => 'login-button']) ?>
             </div>
         </div>
 
