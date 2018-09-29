@@ -82,9 +82,9 @@ endif; ?>
   <?php endif;?>  
 </div>
 
-<div id="Enviar notificacion" class="tabcontent">
-<div class="loginc">
-<center><h3>Enviar notificacion</h3></center>
+<div id="Enviar notificacion" class="tabcontent mensaje">
+
+<h3>Enviar notificacion</h3>
 
 <div class="notificacion-create">
 

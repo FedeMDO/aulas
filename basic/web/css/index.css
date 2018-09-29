@@ -89,6 +89,9 @@ text-transform: uppercase; */
     width: 70%;
     border-left: none;
     height: 300px;
+    max-height: 850px;
+    overflow: auto;
+    overflow-x: hidden;
 }
 
 .gallery{
@@ -292,6 +295,7 @@ a{
   position: relative;
   left:10px;
   width: 30%;
+  padding-right: 50px;
   height:auto;
 }
 .media-body{
@@ -337,4 +341,36 @@ a{
   font-style: italic;
 }
 
+.mensaje{
+  min-height: 420px;
+  width: 30%;
+  overflow: hidden;
+  position: relative;
+  left: 20px;
+}
+
+/*Estilo de scroll solo funciona en crome*/
+
+/* width */
+.tabcontent::-webkit-scrollbar {
+  width: 10px;
+  
+}
+
+/* Track */
+.tabcontent::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 10px;
+}
+
+/* Handle */
+.tabcontent::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.tabcontent::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
 
