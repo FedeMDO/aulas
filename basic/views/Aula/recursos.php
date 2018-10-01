@@ -20,7 +20,7 @@ $this->registerCssFile("@web/css/index.css", [
                 <thead>
                 <tr>
                   <th>NOMBRE</th>
-                  <th>DESCRIPCION</th>
+                  <th>OBSERVACION</th>
                 </tr>
                 </thead>
                 <tbody>
