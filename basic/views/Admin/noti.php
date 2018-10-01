@@ -63,7 +63,7 @@ endif; ?>
   <?php endif;?> 
 </div>
 
-<div id="Enviado" class="tabcontent media border p-3">
+<div id="Enviado" class="tabcontent media border p-3 enviado">
 <?php $entro=false; ?>
  <?php foreach ($notificacion as $n):
     if ($n->uSEREMISOR->id == Yii::$app->user->identity->id):?>

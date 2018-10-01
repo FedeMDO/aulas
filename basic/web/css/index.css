@@ -88,8 +88,7 @@ text-transform: uppercase; */
     padding: 20px 12px;
     width: 70%;
     border-left: none;
-    height: 300px;
-    max-height: 600px;
+    max-height: 650px;
     overflow: auto;
     overflow-x: hidden;
 }
@@ -113,8 +112,6 @@ text-transform: uppercase; */
 .gallery img:hover{
   transform: scale(1.2);
 }
-
-
 
 
 h4 { 
@@ -156,8 +153,6 @@ th, td {
   text-align: left;
   padding: 8px;
 }
-
-
 
 
 .form-control {
@@ -307,12 +302,14 @@ a{
   border-radius: 250px;
 }
 
+/*esto es el texto de arriba de notificaciones*/
 .media-body >h4{
   color:white;
   text-transform: capitalize;
   border-bottom: 1px solid white;
   padding-bottom: 5px;
   text-align: left;
+  width: 400px;
 }
 .recibidos{
   border: 1px solid white;
@@ -411,4 +408,7 @@ a{
   margin: auto; 
   margin-top: 20px;
   text-align: center;
+}
+.enviado{
+  width: 80%;
 }
