@@ -44,7 +44,7 @@ endif; ?>
 
 
 
-<div id="Recibido" class="tabcontent media border p-3">
+<div id="Recibido" class="tabcontent media border p-3 enviado">
 <?php $entro=false; ?>
  <?php foreach ($notificacion as $n):
     if ($n->uSERRECEPTOR->id == Yii::$app->user->identity->id):?>
@@ -52,7 +52,7 @@ endif; ?>
   <img src="../image/admin_icon.png" class="admin" style="width:60px; margin-left:10px; margin-bottom:10px;";>
   <div class="media-body">
     <h4><?= Html::encode("{$n->uSEREMISOR->username} ")?> <small><i>Fecha: <?= Html::encode("{$n->FECHA} ") ?></i></small></h4>
-    <p><?= Html::encode("{$n->NOTIFICACION} ") ?></p>
+    <p><?=$n->NOTIFICACION ?></p>
   </div>
   <?php endif; ?>
   <?php endforeach; ?>  
