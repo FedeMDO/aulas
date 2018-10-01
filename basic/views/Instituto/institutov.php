@@ -14,26 +14,27 @@ $this->registerCssFile("@web/css/index.css", [
 ], 'css-print-theme');
 
 $this->title = 'Institutos';
+
 ?>
 
-<div class="col-md-offset-4 col-md-5">
-<div class="loginc">
-  <center><h3>Informacion Institutos</h3></center>
- <br>
-<?php foreach ($instituto as $ins): ?> <!-- ITERO LOS INSTITUTOS -->
-<div class="list-group">
-  <a href="#" class="list-group-item list-group-item-action active">
-  <?= Html::encode("{$ins->NOMBRE} ") ?>
-  </a>
-  <?php if (count($ins->users) == 0){ ?> <!-- ME FIJO SI NO TIENE USUARIOS -->
-    <a href="#" class="list-group-item list-group-item-action">Sin usuarios de este instituto</a> <!-- ACA HACER LAS COSAS QUE HAY QUE HACER SI INSTITUTO NO TIENE USER-->
- <?php
-  } ?>
-  <?php foreach ($ins->users as $user): ?> <!-- ITERO LOS USUARIOS DE CADA INSTITUTO Y SACO SUS DATOS -->
-  <a href="#" class="list-group-item list-group-item-action"><?= Html::encode("{$user->username} ") ?> - <?= Html::encode("{$user->email} ") ?></a>
-</div>
-       
-  <?php endforeach; ?>
-<?php endforeach; ?>
-</div>
+<div class="loginc ins">
+  <h3>Informacion Institutos</h3>
+  <div class="panel-group">  
+    <!-- ITERO LOS INSTITUTOS -->
+    <?php foreach ($instituto as $ins): ?>
+    <div class= "panel panel-primary"> 
+      <div class="panel-heading headingins" style="text-transform: uppercase;"><?= Html::encode("{$ins->NOMBRE} ")?></div>
+    </div>
+  
+    <!-- ME FIJO SI NO TIENE USUARIOS -->
+    <?php if (count($ins->users) == 0){ ?>
+      <p>Sin usuarios de este instituto</p>
+    <?php
+    } ?>
+    <!-- ITERO LOS USUARIOS DE CADA INSTITUTO Y SACO SUS DATOS -->
+    <?php foreach ($ins->users as $user): ?></p>
+      <p><?= Html::encode("{$user->username} ") ?> - <?= Html::encode("{$user->email} ") ?></p> 
+    <?php endforeach; ?>
+    <?php endforeach; ?>
+  </div>
 </div>
