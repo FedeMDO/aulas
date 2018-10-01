@@ -38,5 +38,5 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-    <h1>HOLASS</h1>
+   <!--<h1>HOLASS</h1>-->
 </div>

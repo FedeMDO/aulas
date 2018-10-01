@@ -275,3 +275,15 @@ a{
   position: relative;
   bottom: 10px;
 }
+.btn-vertical,.btn-vertical:hover, .btn-vertical:Active{
+  position: none;
+}
+
+.btn-crear,.btn-crear:hover,.btn-crear:active{
+  background: red;
+  border-radius: 10%;
+}
+.btn-buscar,.btn-buscar:hover,.btn-buscar:active{
+  background-color:black;
+  border: radius 10%;; 
+}

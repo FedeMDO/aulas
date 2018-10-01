@@ -8,8 +8,7 @@ use yii\bootstrap\ActiveForm;
 
 $this->registerCssFile("@web/css/inicio.css", 
 [
-    'depends' => [\yii\bootstrap\BootstrapAsset::className()
-]
+    'depends' => [\yii\bootstrap\BootstrapAsset::className()]
     ,
 ], 'css-print-theme');
 
