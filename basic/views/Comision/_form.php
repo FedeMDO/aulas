@@ -37,12 +37,10 @@ endif; ?>
         ); ?>
 
     <?= $form->field($model, 'CARGA_HORARIA_SEMANAL')->textInput() ?>
-
-    <div class='formu'><b>Selecciona la cantidad de comisiones que desea crear</b><div>
-    <?= Html::textInput('cant_comisiones') ?>
+    <?= $form->field($model, 'cant_comisiones')->textInput()->label("Selecciona la cantidad de comisiones que desea crear") ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success formu']) ?>
+        <?= Html::submitButton('Crear', ['class' => 'btn btn-success formu']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

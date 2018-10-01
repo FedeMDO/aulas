@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Comision */
 
-$this->title = 'Create Comision';
+$this->title = 'Crear comison';
 $this->params['breadcrumbs'][] = ['label' => 'Comisions', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

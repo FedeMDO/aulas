@@ -1,36 +1,31 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e33d3b1318a9ae0ff3fc0e992d94467d",
+    "content-hash": "33259f85fd82b95a62860a19e4c5f23a",
     "packages": [
         {
-            "name": "2amigos/yii2-multi-select-widget",
-            "version": "1.0.0",
+            "name": "2amigos/yii2-ckeditor-widget",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/2amigos/yii2-multi-select-widget.git",
-                "reference": "e9ae0b23aa5a96230f26a37b121efc726b635ed1"
+                "url": "https://github.com/2amigos/yii2-ckeditor-widget.git",
+                "reference": "2ba96ec670d0745b5616d2aa94d720cc7288bc08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/2amigos/yii2-multi-select-widget/zipball/e9ae0b23aa5a96230f26a37b121efc726b635ed1",
-                "reference": "e9ae0b23aa5a96230f26a37b121efc726b635ed1",
+                "url": "https://api.github.com/repos/2amigos/yii2-ckeditor-widget/zipball/2ba96ec670d0745b5616d2aa94d720cc7288bc08",
+                "reference": "2ba96ec670d0745b5616d2aa94d720cc7288bc08",
                 "shasum": ""
             },
             "require": {
-                "bower-asset/bootstrap-multiselect": "0.9.*",
-                "bower-asset/multiselect": "0.9.*",
-                "yiisoft/yii2": "*",
-                "yiisoft/yii2-bootstrap": "*"
+                "ckeditor/ckeditor": "~4.7.0+full",
+                "yiisoft/yii2": "^2.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.0",
-                "phpmd/phpmd": "@stable",
-                "phpunit/phpunit": "~6.0",
-                "squizlabs/php_codesniffer": "*"
+                "phpunit/phpunit": "4.*"
             },
             "type": "yii2-extension",
             "extra": {
@@ -40,7 +35,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "dosamigos\\multiselect\\": "src"
+                    "dosamigos\\ckeditor\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -55,15 +50,18 @@
                     "role": "Developer"
                 }
             ],
-            "description": "Multiselect Bootstrap widget for Yii2.",
-            "homepage": "https://github.com/2amigos/yii2-multi-select-widget",
+            "description": "CKEditor widget for Yii2.",
+            "homepage": "http://yiiwheels.com/extension/ckeditor-widget",
             "keywords": [
+                "2amigos",
+                "CKEditor",
                 "extension",
-                "multiselect",
                 "widget",
-                "yii"
+                "yii",
+                "yii 2",
+                "yii2"
             ],
-            "time": "2017-12-10T12:35:01+00:00"
+            "time": "2017-06-12T18:51:26+00:00"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -86,26 +84,6 @@
             "license": [
                 "MIT"
             ]
-        },
-        {
-            "name": "bower-asset/bootstrap-multiselect",
-            "version": "v0.9.15",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/davidstutz/bootstrap-multiselect.git",
-                "reference": "4749da211e6d39644ef164cd709cfeae5ccba579"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/davidstutz/bootstrap-multiselect/zipball/4749da211e6d39644ef164cd709cfeae5ccba579",
-                "reference": "4749da211e6d39644ef164cd709cfeae5ccba579",
-                "shasum": null
-            },
-            "require": {
-                "bower-asset/bootstrap": ">=2.3.2",
-                "bower-asset/jquery": ">=1.11.0"
-            },
-            "type": "bower-asset"
         },
         {
             "name": "bower-asset/fullcalendar",
@@ -237,28 +215,6 @@
             ]
         },
         {
-            "name": "bower-asset/multiselect",
-            "version": "0.9.12",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:lou/multi-select.git",
-                "reference": "344dc6cfe0f9c3b3ee66e88bed7bfc7cc1adbb3a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lou/multi-select/zipball/344dc6cfe0f9c3b3ee66e88bed7bfc7cc1adbb3a",
-                "reference": "344dc6cfe0f9c3b3ee66e88bed7bfc7cc1adbb3a",
-                "shasum": null
-            },
-            "require": {
-                "bower-asset/jquery": ">=1.7.1"
-            },
-            "type": "bower-asset",
-            "license": [
-                "WTFPL"
-            ]
-        },
-        {
             "name": "bower-asset/punycode",
             "version": "v1.3.2",
             "source": {
@@ -355,6 +311,47 @@
                 "markdown-extra"
             ],
             "time": "2017-07-16T21:13:23+00:00"
+        },
+        {
+            "name": "ckeditor/ckeditor",
+            "version": "4.7.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ckeditor/ckeditor-releases.git",
+                "reference": "97b8f412f6b36985c734daf0717e81009a885dba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ckeditor/ckeditor-releases/zipball/97b8f412f6b36985c734daf0717e81009a885dba",
+                "reference": "97b8f412f6b36985c734daf0717e81009a885dba",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+",
+                "LGPL-2.1+",
+                "MPL-1.1+"
+            ],
+            "authors": [
+                {
+                    "name": "CKSource",
+                    "homepage": "http://cksource.com"
+                }
+            ],
+            "description": "JavaScript WYSIWYG web text editor.",
+            "homepage": "http://ckeditor.com",
+            "keywords": [
+                "CKEditor",
+                "editor",
+                "fckeditor",
+                "html",
+                "javascript",
+                "richtext",
+                "text",
+                "wysiwyg"
+            ],
+            "time": "2017-09-13T13:09:47+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -506,77 +503,6 @@
                 "yii2"
             ],
             "time": "2018-09-07T08:11:16+00:00"
-        },
-        {
-            "name": "life2016/bootstrap-tagsinput",
-            "version": "1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ran1990/bootstrap-tagsinput.git",
-                "reference": "4e3fcb2a9a37e3a263476dede23ea813aa6f9b05"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ran1990/bootstrap-tagsinput/zipball/4e3fcb2a9a37e3a263476dede23ea813aa6f9b05",
-                "reference": "4e3fcb2a9a37e3a263476dede23ea813aa6f9b05",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "ran.",
-                    "email": "r503948796@163.com"
-                }
-            ],
-            "time": "2016-09-26T03:51:06+00:00"
-        },
-        {
-            "name": "life2016/yii2-tagsinput",
-            "version": "1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ran1990/yii2-tagsinput.git",
-                "reference": "cb330a2163dae820803a4531925207d2babdbbc0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ran1990/yii2-tagsinput/zipball/cb330a2163dae820803a4531925207d2babdbbc0",
-                "reference": "cb330a2163dae820803a4531925207d2babdbbc0",
-                "shasum": ""
-            },
-            "require": {
-                "life2016/bootstrap-tagsinput": "*",
-                "yiisoft/yii2": "~2.0",
-                "yiisoft/yii2-bootstrap": "~2.0.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~5.0"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "wbraganca\\tagsinput\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "ran",
-                    "email": "r503948796@163.com"
-                }
-            ],
-            "homepage": "https://github.com/ran1990/yii2-tagsinput.git",
-            "keywords": [
-                "extension",
-                "yii2",
-                "yii2 tags input",
-                "yii2-tagsinput"
-            ],
-            "time": "2016-09-26T06:36:35+00:00"
         },
         {
             "name": "philippfrenzel/yii2fullcalendar",
@@ -995,6 +921,65 @@
     ],
     "packages-dev": [
         {
+            "name": "2amigos/yii2-multi-select-widget",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/2amigos/yii2-multi-select-widget.git",
+                "reference": "e9ae0b23aa5a96230f26a37b121efc726b635ed1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/2amigos/yii2-multi-select-widget/zipball/e9ae0b23aa5a96230f26a37b121efc726b635ed1",
+                "reference": "e9ae0b23aa5a96230f26a37b121efc726b635ed1",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/bootstrap-multiselect": "0.9.*",
+                "bower-asset/multiselect": "0.9.*",
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-bootstrap": "*"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.0",
+                "phpmd/phpmd": "@stable",
+                "phpunit/phpunit": "~6.0",
+                "squizlabs/php_codesniffer": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "dosamigos\\multiselect\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "2amigOS! Consulting Group",
+                    "email": "hola@2amigos.us",
+                    "homepage": "http://2amigos.us",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Multiselect Bootstrap widget for Yii2.",
+            "homepage": "https://github.com/2amigos/yii2-multi-select-widget",
+            "keywords": [
+                "extension",
+                "multiselect",
+                "widget",
+                "yii"
+            ],
+            "time": "2017-12-10T12:35:01+00:00"
+        },
+        {
             "name": "behat/gherkin",
             "version": "v4.5.1",
             "source": {
@@ -1052,6 +1037,48 @@
                 "parser"
             ],
             "time": "2017-08-30T11:04:43+00:00"
+        },
+        {
+            "name": "bower-asset/bootstrap-multiselect",
+            "version": "v0.9.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/davidstutz/bootstrap-multiselect.git",
+                "reference": "4749da211e6d39644ef164cd709cfeae5ccba579"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/davidstutz/bootstrap-multiselect/zipball/4749da211e6d39644ef164cd709cfeae5ccba579",
+                "reference": "4749da211e6d39644ef164cd709cfeae5ccba579",
+                "shasum": null
+            },
+            "require": {
+                "bower-asset/bootstrap": ">=2.3.2",
+                "bower-asset/jquery": ">=1.11.0"
+            },
+            "type": "bower-asset"
+        },
+        {
+            "name": "bower-asset/multiselect",
+            "version": "0.9.12",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:lou/multi-select.git",
+                "reference": "344dc6cfe0f9c3b3ee66e88bed7bfc7cc1adbb3a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lou/multi-select/zipball/344dc6cfe0f9c3b3ee66e88bed7bfc7cc1adbb3a",
+                "reference": "344dc6cfe0f9c3b3ee66e88bed7bfc7cc1adbb3a",
+                "shasum": null
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.7.1"
+            },
+            "type": "bower-asset",
+            "license": [
+                "WTFPL"
+            ]
         },
         {
             "name": "bower-asset/typeahead.js",
@@ -1478,6 +1505,77 @@
                 "url"
             ],
             "time": "2017-03-20T17:10:46+00:00"
+        },
+        {
+            "name": "life2016/bootstrap-tagsinput",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ran1990/bootstrap-tagsinput.git",
+                "reference": "4e3fcb2a9a37e3a263476dede23ea813aa6f9b05"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ran1990/bootstrap-tagsinput/zipball/4e3fcb2a9a37e3a263476dede23ea813aa6f9b05",
+                "reference": "4e3fcb2a9a37e3a263476dede23ea813aa6f9b05",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "ran.",
+                    "email": "r503948796@163.com"
+                }
+            ],
+            "time": "2016-09-26T03:51:06+00:00"
+        },
+        {
+            "name": "life2016/yii2-tagsinput",
+            "version": "1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ran1990/yii2-tagsinput.git",
+                "reference": "cb330a2163dae820803a4531925207d2babdbbc0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ran1990/yii2-tagsinput/zipball/cb330a2163dae820803a4531925207d2babdbbc0",
+                "reference": "cb330a2163dae820803a4531925207d2babdbbc0",
+                "shasum": ""
+            },
+            "require": {
+                "life2016/bootstrap-tagsinput": "*",
+                "yiisoft/yii2": "~2.0",
+                "yiisoft/yii2-bootstrap": "~2.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "wbraganca\\tagsinput\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "ran",
+                    "email": "r503948796@163.com"
+                }
+            ],
+            "homepage": "https://github.com/ran1990/yii2-tagsinput.git",
+            "keywords": [
+                "extension",
+                "yii2",
+                "yii2 tags input",
+                "yii2-tagsinput"
+            ],
+            "time": "2016-09-26T06:36:35+00:00"
         },
         {
             "name": "myclabs/deep-copy",

@@ -89,7 +89,7 @@ text-transform: uppercase; */
     width: 70%;
     border-left: none;
     height: 300px;
-    max-height: 850px;
+    max-height: 600px;
     overflow: auto;
     overflow-x: hidden;
 }
@@ -345,8 +345,9 @@ a{
 }
 
 .mensaje{
-  min-height: 420px;
-  width: 30%;
+  padding-top: 5px;
+  min-height: 650px;
+  width: 50%;
   overflow: hidden;
   position: relative;
   left: 20px;

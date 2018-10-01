@@ -71,7 +71,7 @@ endif; ?>
   <img src="../image/admin_icon.png" class="admin" style="width:60px; margin-left:10px; margin-bottom:10px;";>
   <div class="media-body">
     <h4>Para: <?=Html::encode("{$n->uSERRECEPTOR->username} ")?> <small><i>Fecha: <?= Html::encode("{$n->FECHA} ") ?></i></small></h4>
-    <p><?= Html::encode("{$n->NOTIFICACION} ") ?></p>
+    <p><?=$n->NOTIFICACION ?></p>
  </div>
   <?php endif; ?>
   <?php endforeach; ?>
@@ -83,9 +83,6 @@ endif; ?>
 </div>
 
 <div id="Enviar notificacion" class="tabcontent mensaje">
-
-<h3>Enviar notificacion</h3>
-
 <div class="notificacion-create">
 
     <?= $this->render('_form', [
