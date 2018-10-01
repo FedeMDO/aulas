@@ -102,9 +102,20 @@ class ComisionController extends Controller
     {
         $model = new Comision();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID]);
+        if ($_POST != NULL){
+            $cantidad = $_POST['cant_comisiones'];
+            for( $i=0; $i<$cantidad; $i++){
+                $comi = new Comision();
+                $comi->load(Yii::$app->request->post());
+                $comi->save();
+                $session = Yii::$app->session;
+                $session->setFlash('comisionesCreadas', "Se han creado correctamente $cantidad comisiones");
+            }
         }
+
+     /*   if ($model->load(Yii::$app->request->post()) && $model->slave()) {
+            return $this->redirect(['view', 'id' => $model->ID]);
+        }   */
 
         return $this->render('create', [
             'model' => $model,

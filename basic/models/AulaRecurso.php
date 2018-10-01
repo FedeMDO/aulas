@@ -17,7 +17,7 @@ class AulaRecurso extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
-     */
+     */    
     public static function tableName()
     {
         return 'aula_recurso';

@@ -1,5 +1,5 @@
 .iniciocs{
-  background-image: url(../image/index_background_desenfoque.jpg);
+  background-image: url(../image/background-blur-6.png);
  
     background-size: cover; 
     -ms-background-size: cover; 
@@ -85,11 +85,13 @@ text-transform: uppercase; */
 /* Style the tab content */
 .tabcontent {
     float: left;
-    padding: 0px 12px;
-
+    padding: 20px 12px;
     width: 70%;
     border-left: none;
     height: 300px;
+    max-height: 850px;
+    overflow: auto;
+    overflow-x: hidden;
 }
 
 .gallery{
@@ -141,7 +143,9 @@ box-shadow: 10px 10px 20px -8px rgba(0,0,0,0.75);
 }
 
 
-
+.navbar-default {
+  margin-bottom: 0px;
+}
 
 table {
   border-collapse: collapse;
@@ -182,6 +186,7 @@ th, td {
 
 .loginc
 {
+  margin-top:20px;
   background-color: #ecf0f1;
   padding-top: 10px;
   padding-bottom: 20px;
@@ -250,19 +255,18 @@ font-variant: normal;
 text-transform: uppercase;
 
 }
-.navbarsize
-{
-    margin-top:-20px;
-}
+
 .nav-stacked{
   width: 20%;
   float: left;
 }
 .notiboton{
-  background-color: #2980b9;
+  background-color:white;
 }
+
 a{
-  color:white;
+  color:black;
+  padding-top: 20px;
 }
 .navbar-brand {
   padding: 0px; /* firefox bug fix */
@@ -275,6 +279,7 @@ a{
   position: relative;
   bottom: 10px;
 }
+<<<<<<< HEAD
 .btn-vertical,.btn-vertical:hover, .btn-vertical:Active{
   position: none;
 }
@@ -287,3 +292,137 @@ a{
   background-color:black;
   border: radius 10%;; 
 }
+=======
+.navbar-inverse{
+  position: relative;
+  border-top: 2px solid white ;
+  background-color: white;
+  height:100%;
+  width: 10%;
+ 
+}
+.carousel-inner > .item > img {
+  margin: 0 auto;
+}
+
+.media{
+  position: relative;
+  left:10px;
+  width: 30%;
+  padding-right: 50px;
+  height:auto;
+}
+.media-body{
+  position: relative;
+  left: 100px;
+  bottom: 80px;
+}
+.admin{
+  border-radius: 250px;
+}
+
+.media-body >h4{
+  color:white;
+  text-transform: capitalize;
+  border-bottom: 1px solid white;
+  padding-bottom: 5px;
+  text-align: left;
+}
+.recibidos{
+  border: 1px solid white;
+}
+/* arregla margen de aulas*/
+.btn-vistav{
+  margin-top: 10px;
+}
+.formu{
+  margin-top :20px;
+}
+
+/*Estilo del placeholder*/
+
+::-webkit-input-placeholder { /* Chrome */
+  opacity: 0.2;
+  font-style: italic;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  opacity: 0.2;
+  font-style: italic;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  opacity: 0.2 !important;
+  font-style: italic;
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  opacity: 0.2;
+  font-style: italic;
+}
+
+.mensaje{
+  min-height: 420px;
+  width: 30%;
+  overflow: hidden;
+  position: relative;
+  left: 20px;
+}
+
+/*Estilo de scroll solo funciona en crome*/
+
+/* width */
+.tabcontent::-webkit-scrollbar {
+  width: 10px;
+  
+}
+
+/* Track */
+.tabcontent::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 10px;
+}
+
+/* Handle */
+.tabcontent::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.tabcontent::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+/*login*/
+.log {
+  background-color: rgb(41, 128, 185);
+  border-radius: 15px;
+  border-color:#d2d2d2;
+  border-width: 5px;
+  box-shadow:0 1px 0 #cfcfcf;
+  width: 30%;
+  float: center;
+  margin: auto; 
+  text-align: center;
+}
+
+
+.log>p{
+  color: white;
+}
+.log>h1{
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+/*panel de instituto*/
+
+.ins{
+  border-color:#d2d2d2;
+  border-width: 5px;
+  box-shadow:0 1px 0 #cfcfcf;
+  width: 30%;
+  float: center;
+  margin: auto; 
+  margin-top: 20px;
+  text-align: center;
+}
+>>>>>>> dc97db1dda10664ca547f45563bec7647554251e
