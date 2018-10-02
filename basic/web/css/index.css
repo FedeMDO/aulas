@@ -84,11 +84,14 @@ text-transform: uppercase; */
 
 /* Style the tab content */
 .tabcontent {
+    position: relative !important;
+    margin-left: 10%;
+    border-collapse: separate;
     float: left;
     padding: 20px 12px;
     width: 70%;
     border-left: none;
-    max-height: 650px;
+    max-height: 900px;
     overflow: auto;
     overflow-x: hidden;
 }
@@ -275,7 +278,8 @@ a{
   bottom: 10px;
 }
 .navbar-inverse{
-  position: relative;
+  position: fixed;
+  
   border-top: 2px solid white ;
   background-color: white;
   height:100%;

@@ -17,6 +17,13 @@ $this->registerCssFile("@web/css/index.css", [
 
 $this->title = 'Notificaciones';
 ?>
+<!--Esto saca el scroll principal-->
+
+<style type="text/css">
+body {
+    overflow:hidden;
+}
+</style>
 
 <body>
 <!-- // lanzando alerta bootstrap -->
@@ -32,8 +39,6 @@ $this->title = 'Notificaciones';
   Alert::end();
 endif; ?>
 <?php
-
-    
   ?>
 <nav class="nav navbar-inverse navbar-left">
   <a class="active"></a>
@@ -62,6 +67,7 @@ endif; ?>
   </div>
   <?php endif;?> 
 </div>
+
 
 <div id="Enviado" class="tabcontent media border p-3 enviado">
 <?php $entro=false; ?>
