@@ -63,6 +63,7 @@ class UserController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->changePassword()) {
             Yii::$app->session->setFlash('success', 'La contraseña se ha cambiado correctamente');
+            $model->current_password = null;
             $model->password = null;
             $model->confirm_password = null;
         }

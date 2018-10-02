@@ -357,12 +357,12 @@ class SiteController extends Controller
                 $activar->activate = 1;
                 if ($activar->update())
                 {
-                    echo "Grande te registraste, redireccionando ...";
+                    echo "Registro realizado correctamente, redireccionando ...";
                     echo "<meta http-equiv='refresh' content='8; ".Url::toRoute("site/login")."'>";
                 }
                 else
                 {
-                    echo "algo malo paso al realizar el registro, redireccionando ...";
+                    echo "Ha ocurrido un error, redireccionando ...";
                     echo "<meta http-equiv='refresh' content='8; ".Url::toRoute("site/login")."'>";
                 }
              }

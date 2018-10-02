@@ -13,6 +13,7 @@ use app\models\User;
 class FormChangePassword extends Model
 {
     public $id;
+    public $current_password;
     public $password;
     public $confirm_password;
  
@@ -46,10 +47,20 @@ class FormChangePassword extends Model
     public function rules()
     {
         return [
-            [['password','confirm_password'], 'required', 'message' => 'Campo requerido'],
+            [['current_password', 'password','confirm_password'], 'required', 'message' => 'Campo requerido'],
             [['password','confirm_password'], 'match', 'pattern' => "/^.{8,16}$/", 'message' => 'Mínimo 6 y máximo 16 caracteres'],
             ['confirm_password', 'compare', 'compareAttribute' => 'password', 'message' => 'Las contraseñas no coinciden'],
+            ['current_password', 'validatePassword'],
         ];
+    }
+
+    public function validatePassword($attribute, $params)
+    {
+        $user = User::findIdentity($this->id);
+
+        if (!$user->validatePassword($this->current_password)) {
+            $this->addError($attribute,'Contraseña incorrecta');
+        }
     }
  
     public function changePassword()

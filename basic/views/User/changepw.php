@@ -15,6 +15,7 @@ $this->title = 'Cambiar contraseña';
  
     <?php $form = ActiveForm::begin(); ?>
  
+        <?= $form->field($model, 'current_password')->passwordInput()->label('Contraseña actual') ?>
         <?= $form->field($model, 'password')->passwordInput()->label('Nueva contraseña') ?>
         <?= $form->field($model, 'confirm_password')->passwordInput()->label('Confirmar contraseña') ?>
  
