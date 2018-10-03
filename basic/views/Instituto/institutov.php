@@ -18,7 +18,7 @@ $this->title = 'Institutos';
 ?>
 <div class="col-md-offset-4 col-md-5">
 <div class="loginc azul">
-  <h3 style="color:white">Informacion Institutos</h3>
+  <h3 style="color:white; border-bottom: 1px solid white;">Informacion Institutos</h3>
   <div class="panel-group">  
     <!-- ITERO LOS INSTITUTOS -->
     <?php foreach ($instituto as $ins): ?>

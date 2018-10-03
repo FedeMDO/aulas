@@ -21,8 +21,8 @@ $this->title = 'Registro de usuario';
 ]);
 ?>
 
-<h2 style="color:white">Registrar usuario</h2>
-<?= $form->field($model, "username",['labelOptions'=>['style'=>'color:white']])->input("text")->label('Nombre de usuario') ?>   
+<h2 style="color:white; border-bottom: 1px solid white;">Registrar usuario</h2>
+<?= $form->field($model, "username",['labelOptions'=>['style'=>'color:white; padding-top:10px']])->input("text")->label('Nombre de usuario') ?>   
 <?= $form->field($model, "email",['labelOptions'=>['style'=>'color:white']])->input("email")->label('E-mail') ?>   
 <!-- despliego institutos  -->
 <?php $institutos = Instituto::find()->asArray()->all();
