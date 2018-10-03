@@ -17,23 +17,23 @@ $this->title = 'Institutos';
 
 ?>
 <div class="col-md-offset-4 col-md-5">
-<div class="loginc ins">
-  <h3>Informacion Institutos</h3>
+<div class="loginc azul">
+  <h3 style="color:white; border-bottom: 1px solid white;">Informacion Institutos</h3>
   <div class="panel-group">  
     <!-- ITERO LOS INSTITUTOS -->
     <?php foreach ($instituto as $ins): ?>
-    <div class= "panel panel-primary"> 
+    <div class= "panel panel-default"> 
       <div class="panel-heading headingins" style="text-transform: uppercase;"><?= Html::encode("{$ins->NOMBRE} ")?></div>
     </div>
   
     <!-- ME FIJO SI NO TIENE USUARIOS -->
     <?php if (count($ins->users) == 0){ ?>
-      <p>Sin usuarios de este instituto</p>
+      <p style="color:white">Sin usuarios de este instituto</p>
     <?php
     } ?>
     <!-- ITERO LOS USUARIOS DE CADA INSTITUTO Y SACO SUS DATOS -->
     <?php foreach ($ins->users as $user): ?></p>
-      <p><?= Html::encode("{$user->username} ") ?> - <?= Html::encode("{$user->email} ") ?></p> 
+      <p style="color:white"><?= Html::encode("{$user->username} ") ?> - <?= Html::encode("{$user->email} ") ?></p> 
     <?php endforeach; ?>
     <?php endforeach; ?>
   </div>

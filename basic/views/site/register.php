@@ -6,14 +6,13 @@ use app\models\Instituto;
 $this->title = 'Registro de usuario';
 ?>
 
-<br></br>
+<br>
 
 <div class="col-md-offset-4 col-md-5">
-<div class="regis">
+<div class="loginc azul">
     
 <h3><?= $msg ?></h3>
 
-<h2>Registro Usuario</h2>
 <?php $form = ActiveForm::begin([
     'method' => 'post',
  'id' => 'formulario',
@@ -21,19 +20,17 @@ $this->title = 'Registro de usuario';
  'enableAjaxValidation' => true,
 ]);
 ?>
-<div class="form-group">
- <?= $form->field($model, "username")->input("text")->label('Nombre de usuario') ?>   
-</div>
 
-<div class="form-group">
- <?= $form->field($model, "email")->input("email")->label('E-mail') ?>   
-</div>
+<h2 style="color:white; border-bottom: 1px solid white;">Registrar usuario</h2>
+<?= $form->field($model, "username",['labelOptions'=>['style'=>'color:white; padding-top:10px']])->input("text")->label('Nombre de usuario') ?>   
+<?= $form->field($model, "email",['labelOptions'=>['style'=>'color:white']])->input("email")->label('E-mail') ?>   
 <!-- despliego institutos  -->
 <?php $institutos = Instituto::find()->asArray()->all();
          $result = ArrayHelper::map($institutos, 'ID', 'NOMBRE'); ?>
-<div class="form-group">
- <?= $form->field($model, "idInstituto")->dropDownList(
+
+ <?= $form->field($model, "idInstituto",['labelOptions'=>['style'=>'color:white']])->dropDownList(
             $result, 
+<<<<<<< HEAD
             ['prompt'=>'Seleccione un instituto...']
     )->label('Instituto'); ?>
 </div>
@@ -56,8 +53,14 @@ $this->title = 'Registro de usuario';
 </div>
 
 <?= Html::submitButton("Finalizar Registro", ["class" => "btn btn-primary"]) ?>
+=======
+            ['prompt'=>'Seleccione un Instituto...']
+    )->label('Instituto (dejar vacío si pertenece a CPE/CPyT)'); ?>
+>>>>>>> 6d54c4cc39ba3bd6fbf6bec7dbd4e7714c4b1d3a
 
+ <?= $form->field($model, "password",['labelOptions'=>['style'=>'color:white']])->input("password")->label('Contraseña') ?>   
+ <?= $form->field($model, "password_repeat",['labelOptions'=>['style'=>'color:white']])->input("password")->label('Confirme la Contraseña') ?>   
+<?= Html::submitButton("Finalizar Registro", ["class" => "btn btn-suces btn-success btn-block"]) ?>
 <?php $form->end() ?>
 </div>
-
 </div>
