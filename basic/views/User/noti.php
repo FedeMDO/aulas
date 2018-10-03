@@ -20,16 +20,10 @@ $this->title = 'Notificaciones';
 
 <body>
 <!-- // lanzando alerta bootstrap -->
-<?php if(Yii::$app->session->hasFlash('notificacionEnviada')):
-    Alert::begin([
-      'options' => [
-          'class' => 'alert-success',
-      ],
-  ]);
-  
-  echo Yii::$app->session->getFlash('notificacionEnviada');
-  
-  Alert::end();
+<?php if(Yii::$app->session->hasFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS)):
+
+\dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
+ 
 endif; ?>
 <?php
 
