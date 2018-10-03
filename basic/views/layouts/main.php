@@ -112,10 +112,10 @@ AppAsset::register($this);
                     ) : 
                     ['label' =>  Yii::$app->user->identity->username,
                     'items' => [
-                    ['label' => 'Cambiar contraseña', 'url' => '/user/changepw'],
-                    ['label' => 'Manual de usuario', 'url' => '#'],
-                    ['label' => 'Acerca de...', 'url' => '#',],
-                    ['label' =>' Salir (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
+                    ['label' => '<span class="fa fa-key"></span> Cambiar contraseña', 'url' => '/user/changepw','icon'=> 'cog'],
+                    ['label' => '<span class="fa fa-book"> Manual de usuario', 'url' => '#'],
+                    ['label' => '<span class="fa fa-info-circle"> Acerca de...', 'url' => '#',],
+                    ['label' =>'<span class="fa fa-sign-out"></span> Salir (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
                             ],
                         ]                  
                 ],
@@ -132,7 +132,6 @@ AppAsset::register($this);
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' SEDES', 'url' => ['/sede/vistav']],
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' INSTITUTOS', 'url' => ['/instituto/institutov']],
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' CREAR COMISION', 'url' => ['/comision/create']],
-                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' CONFIGURACION', 'url' => ['/user/changepw']]
                 ],
             ]);
             echo Nav::widget([
@@ -145,10 +144,10 @@ AppAsset::register($this);
                     ) : 
                     ['label' =>  Yii::$app->user->identity->username,
                     'items' => [
-                    ['label' => 'Cambiar contraseña', 'url' => '/user/changepw'],
-                    ['label' => 'Manual de usuario', 'url' => '#'],
-                    ['label' => 'Acerca de...', 'url' => '#',],
-                    ['label' =>' Salir (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
+                    ['label' => '<span class="fa fa-key"></span> Cambiar contraseña', 'url' => '/user/changepw','icon'=> 'cog'],
+                    ['label' => '<span class="fa fa-book"> Manual de usuario', 'url' => '#'],
+                    ['label' => '<span class="fa fa-info-circle"> Acerca de...', 'url' => '#',],
+                    ['label' =>'<span class="fa fa-sign-out"></span> Salir (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
                             ],
                         ]                  
                 ],
