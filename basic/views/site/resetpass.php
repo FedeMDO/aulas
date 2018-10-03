@@ -11,7 +11,7 @@ use yii\bootstrap\Alert;
     'enableClientValidation' => true,
 ]);
 ?>
-
+<div class="col-md-offset-4 col-md-5">
 <div class="loginc log">
 <h1>Recuperar contraseña</h1>
  <?= $form->field($model, "email",['labelOptions'=>['style'=>'color:white']])->input("email")->label("E-mail:") ?>  
@@ -21,5 +21,5 @@ use yii\bootstrap\Alert;
  <?= $form->field($model, "recover",['labelOptions'=>['style'=>'color:white']])->input("hidden")->label(false) ?>  
  <?= Html::submitButton("Recuperar contraseña", ["class" => "btn btn-success btn-block"]) ?>  
 </div>
- 
+</div>
 <?php $form->end() ?>

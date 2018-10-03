@@ -65,8 +65,8 @@ class SiteController extends Controller
      $table->save();
      
      //Creamos el mensaje que será enviado a la cuenta de correo del usuario
-     $subject = "Recuperar password";
-     $body = "<p>Copie el siguiente código de verificación para restablecer su password ... ";
+     $subject = "Recuperar contraseña";
+     $body = "<p>Copie el siguiente código de verificación para restablecer su contraseña ... ";
      $body .= "<strong>".$verification_code."</strong></p>";
      $body .= "<p><a href='http://yii.local/site/resetpass'>Recuperar password</a></p>";
 

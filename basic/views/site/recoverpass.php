@@ -15,13 +15,14 @@ $this->title = 'Recuperar contraseña';
     'enableClientValidation' => true,
 ]);
 ?>
-
+<div class="col-md-offset-4 col-md-5">
 <div class="loginc log">
 <h1>Recuperar contraseña</h1>
 <p>Por favor ingrese su email:</p>
  <?= $form->field($model, "email",['labelOptions'=>['style'=>'color:white']])->textinput() ?>
 
  <?= Html::submitButton("Recuperar contraseña", ["class" => "btn btn-success btn-block"]) ?>  
+</div>
 </div>
  
 
