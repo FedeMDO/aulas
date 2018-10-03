@@ -110,16 +110,10 @@ AppAsset::register($this);
                     ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/admin/noti']],
                     Yii::$app->user->isGuest ? (
                         ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login']]
-                    ) : (
-                        '<li>'
-                        . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
-                        . Html::submitButton(
-                            'Logout (' . Yii::$app->user->identity->username . ')',
-                            ['class' => 'btn btn-link']
-                        )
-                        . Html::endForm()
-                        . '</li>'
-                    )
+                    ) :
+                        
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-out']).
+                        'LOGOUT (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']]                       
                 ],
             ]);
         }
@@ -141,19 +135,13 @@ AppAsset::register($this);
                 'encodeLabels' => false,
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                            ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/admin/noti']],
+                    ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/admin/noti']],
                     Yii::$app->user->isGuest ? (
                         ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login']]
-                    ) : (
-                        '<li>'
-                        . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
-                        . Html::submitButton(
-                            'Logout (' . Yii::$app->user->identity->username . ')',
-                            ['class' => 'btn btn-link']
-                        )
-                        . Html::endForm()
-                        . '</li>'
-                    )
+                    ) :
+                        
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-out']).
+                        'LOGOUT (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']]                       
                 ],
             ]);
         }

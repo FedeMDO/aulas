@@ -1,6 +1,8 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+
+$this->title = 'Recuperar contraseña';
 ?>
  
  <div class="alert alert-success">
@@ -16,7 +18,7 @@ use yii\widgets\ActiveForm;
 
 <div class="loginc log">
 <h1>Recuperar contraseña</h1>
-<p>Por favor complete los siguientes campos:</p>
+<p>Por favor ingrese su email:</p>
  <?= $form->field($model, "email",['labelOptions'=>['style'=>'color:white']])->textinput() ?>
 
  <?= Html::submitButton("Recuperar contraseña", ["class" => "btn btn-success btn-block"]) ?>  

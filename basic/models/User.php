@@ -114,6 +114,21 @@ class User extends \yii\base\baseObject implements \yii\web\IdentityInterface
         return null;
     }
 
+    public static function findByEmail($email){
+        $users = Users::find()
+                ->where("activate=:activate", ["activate" => 1])
+                ->andWhere("email=:email", [":email" => $email])
+                ->all();
+        
+        foreach ($users as $user) {
+            if (strcasecmp($user->email, $email) === 0) {
+                return new static($user);
+            }
+        }
+
+        return null;
+    }
+
     /**
      * @inheritdoc
      */

@@ -37,7 +37,7 @@ $this->registerCssFile("@web/css/index.css", [
         <?= $form->field($model, 'password', ['labelOptions'=>['style'=>'color:white'],'inputTemplate' => '<div class="input-group"><span class="input-group-addon"><i class="fa fa-lock"></i></span>{input}</div>'] )->passwordInput()->label('') ?>
         <a href="/site/recoverpass" style="color:white">¿Olvidaste tu contraseña?</a>
         <?= $form->field($model, 'rememberMe', ['labelOptions'=>['style'=>'color:white']] )->checkbox([
-        ])->label('Recordar contraseña') ?>
+        ])->label('Recordarme') ?>
         
 
 
