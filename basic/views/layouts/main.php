@@ -89,7 +89,7 @@ AppAsset::register($this);
         }
         else
         {
-                    //SI ES ADMIN
+        //SI ES ADMIN
         if(User::isUserAdmin(Yii::$app->user->identity->id)) 
         {
             echo Nav::widget([
@@ -100,7 +100,6 @@ AppAsset::register($this);
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' SEDES', 'url' => ['/sede/vistav']],
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' INSTITUTOS', 'url' => ['/instituto/institutov']],
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' REGISTRAR USUARIO', 'url' => ['/site/register']],
-                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' CONFIGURACION', 'url' => ['/user/changepw']]
                 ],
             ]);
             echo Nav::widget([
@@ -110,10 +109,15 @@ AppAsset::register($this);
                     ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/admin/noti']],
                     Yii::$app->user->isGuest ? (
                         ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login']]
-                    ) :
-                        
-                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-out']).
-                        ' LOGOUT (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']]                       
+                    ) : 
+                    ['label' =>  Yii::$app->user->identity->username,
+                    'items' => [
+                    ['label' => 'Cambiar contraseña', 'url' => '/user/changepw'],
+                    ['label' => 'Manual de usuario', 'url' => '#'],
+                    ['label' => 'Acerca de...', 'url' => '#',],
+                    ['label' =>' Salir (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
+                            ],
+                        ]                  
                 ],
             ]);
         }
@@ -138,14 +142,19 @@ AppAsset::register($this);
                     ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/admin/noti']],
                     Yii::$app->user->isGuest ? (
                         ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login']]
-                    ) :
-                        
-                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-out']).
-                        ' LOGOUT (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']]                       
+                    ) : 
+                    ['label' =>  Yii::$app->user->identity->username,
+                    'items' => [
+                    ['label' => 'Cambiar contraseña', 'url' => '/user/changepw'],
+                    ['label' => 'Manual de usuario', 'url' => '#'],
+                    ['label' => 'Acerca de...', 'url' => '#',],
+                    ['label' =>' Salir (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
+                            ],
+                        ]                  
                 ],
             ]);
         }
-        }
+    }
 
     NavBar::end();
     ?>
@@ -155,10 +164,6 @@ AppAsset::register($this);
         ]) ?>
         <?= Alert::widget() ?>
         <?= $content ?>
-       
-
-        
-
 </div>
 <!-- footer comentado -->
 <!-- <div class="footer">
@@ -169,13 +174,11 @@ AppAsset::register($this);
 
 
 
-
-
-
 </body>
 
 
 
 </html>
+
 <?php $this->endPage() ?>
 
