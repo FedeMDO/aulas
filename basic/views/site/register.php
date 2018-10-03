@@ -34,8 +34,17 @@ $this->title = 'Registro de usuario';
 <div class="form-group">
  <?= $form->field($model, "idInstituto")->dropDownList(
             $result, 
-            ['prompt'=>'Seleccione un Instituto...']
-    )->label('Instituto (dejar vacío si pertenece a CPE/CPyT)'); ?>
+            ['prompt'=>'Seleccione un instituto...']
+    )->label('Instituto'); ?>
+</div>
+
+<?php $roles = ['Administrador', 'Usuario', 'Guest'];
+ ?>
+<div class="form-group">
+ <?= $form->field($model, "rol")->dropDownList(
+            $roles, 
+            ['prompt'=>'Seleccione...']
+    )->label('Permisos del usuario'); ?>
 </div>
 
 <div class="form-group">
