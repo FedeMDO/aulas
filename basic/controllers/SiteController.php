@@ -271,13 +271,14 @@ class SiteController extends Controller
    {
     //Preparamos la consulta para guardar el usuario
     $table = new Users;
-    if($model->rol == 1){
+    //Si no se elige ningun rol, por defecto es el rol de usuario normal
+    if($model->rol == 1 || $model->rol == null){
         $table->rol = 10;
     }
-    if($model->rol == 0){
+    if($model->rol == 0){ //rol admin
         $table->rol = 20;
     }
-    if($model->rol == 2){
+    if($model->rol == 2){ //rol guest
         $table->rol = 30;
     }
     $table->username = $model->username;
@@ -314,12 +315,15 @@ class SiteController extends Controller
      ->setHtmlBody($body)
      ->send();
      
+     $session = Yii::$app->session;
+     $session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, "Usuario registrado. Sólo falta que confirme desde su correo electrónico");
      $model->username = null;
      $model->email = null;
+     $model->idInstituto = null;
+     $model->rol = null;
      $model->password = null;
      $model->password_repeat = null;
      
-     $msg = "Usuario registrado. Sólo falta que confirme desde su correo electrónico";
     }
     else
     {

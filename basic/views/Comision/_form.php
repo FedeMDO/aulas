@@ -8,6 +8,8 @@ use yii\bootstrap\Alert;
 /* @var $this yii\web\View */
 /* @var $model app\models\Comision */
 /* @var $form yii\widgets\ActiveForm */
+$this->title = 'Crear comision';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <h2 style="color:white; border-bottom: 1px solid white; ">Crear comision</h2>
 <div class="comision-form">

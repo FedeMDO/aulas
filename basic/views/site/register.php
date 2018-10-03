@@ -11,7 +11,11 @@ $this->title = 'Registro de usuario';
 <div class="col-md-offset-4 col-md-5">
 <div class="loginc azul">
     
-<h3><?= $msg ?></h3>
+<?php if(Yii::$app->session->hasFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS)):
+  
+  \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
+
+endif; ?>
 
 <?php $form = ActiveForm::begin([
     'method' => 'post',
@@ -30,33 +34,13 @@ $this->title = 'Registro de usuario';
 
  <?= $form->field($model, "idInstituto",['labelOptions'=>['style'=>'color:white']])->dropDownList(
             $result, 
-<<<<<<< HEAD
             ['prompt'=>'Seleccione un instituto...']
     )->label('Instituto'); ?>
-</div>
-
-<?php $roles = ['Administrador', 'Usuario', 'Guest'];
- ?>
-<div class="form-group">
- <?= $form->field($model, "rol")->dropDownList(
+<?php $roles = ['Administrador', 'Usuario', 'Guest']; ?>
+ <?= $form->field($model, "rol", ['labelOptions'=>['style'=>'color:white']])->dropDownList(
             $roles, 
             ['prompt'=>'Seleccione...']
     )->label('Permisos del usuario'); ?>
-</div>
-
-<div class="form-group">
- <?= $form->field($model, "password")->input("password")->label('Contraseña') ?>   
-</div>
-
-<div class="form-group">
- <?= $form->field($model, "password_repeat")->input("password")->label('Confirme la Contraseña') ?>   
-</div>
-
-<?= Html::submitButton("Finalizar Registro", ["class" => "btn btn-primary"]) ?>
-=======
-            ['prompt'=>'Seleccione un Instituto...']
-    )->label('Instituto (dejar vacío si pertenece a CPE/CPyT)'); ?>
->>>>>>> 6d54c4cc39ba3bd6fbf6bec7dbd4e7714c4b1d3a
 
  <?= $form->field($model, "password",['labelOptions'=>['style'=>'color:white']])->input("password")->label('Contraseña') ?>   
  <?= $form->field($model, "password_repeat",['labelOptions'=>['style'=>'color:white']])->input("password")->label('Confirme la Contraseña') ?>   
