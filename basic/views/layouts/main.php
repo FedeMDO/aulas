@@ -113,7 +113,7 @@ AppAsset::register($this);
                     ) :
                         
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-out']).
-                        'LOGOUT (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']]                       
+                        ' LOGOUT (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']]                       
                 ],
             ]);
         }
@@ -141,7 +141,7 @@ AppAsset::register($this);
                     ) :
                         
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-out']).
-                        'LOGOUT (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']]                       
+                        ' LOGOUT (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']]                       
                 ],
             ]);
         }

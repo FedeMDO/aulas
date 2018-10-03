@@ -10,6 +10,7 @@ use yii\widgets\ActiveForm;
  
 $this->title = 'Cambiar contraseña';
 ?>
+<div class="col-md-offset-4 col-md-5">
 <div class="user-changePassword ins loginc">
     
  
@@ -23,4 +24,5 @@ $this->title = 'Cambiar contraseña';
             <?= Html::submitButton('Confirmar', ['class' => 'btn btn btn-success btn-block']) ?>
         </div>
     <?php ActiveForm::end(); ?>
+</div>
 </div>

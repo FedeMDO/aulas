@@ -21,7 +21,7 @@ $this->registerCssFile("@web/css/index.css", [
 
     
 <div id="box_login">
-
+<div class="col-md-offset-4 col-md-5">
 <div class="loginc log">
     <h1><?= Html::encode($this->title) ?></h1>
   
@@ -38,10 +38,6 @@ $this->registerCssFile("@web/css/index.css", [
         <a href="/site/recoverpass" style="color:white">¿Olvidaste tu contraseña?</a>
         <?= $form->field($model, 'rememberMe', ['labelOptions'=>['style'=>'color:white']] )->checkbox([
         ])->label('Recordarme') ?>
-        
-
-
-
         <div class="form-group">
             <div class="">
                 <?= Html::submitButton('Ingresar', ['class' => 'btn btn-success btn-block', 'name' => 'login-button']) ?>
@@ -52,7 +48,6 @@ $this->registerCssFile("@web/css/index.css", [
     
 
 </div>
-
 </div>
 
 
