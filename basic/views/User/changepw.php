@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
  
 $this->title = 'Cambiar contraseña';
 ?>
-<div class="col-md-offset-4 col-md-5">
+<div class="col-md-offset-4 col-md-4">
 <div class="user-changePassword ins loginc">
     
  

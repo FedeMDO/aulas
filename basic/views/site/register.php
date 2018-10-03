@@ -8,7 +8,7 @@ $this->title = 'Registro de usuario';
 
 <br>
 
-<div class="col-md-offset-4 col-md-5">
+<div class="col-md-offset-4 col-md-4">
 <div class="loginc azul">
     
 <?php if(Yii::$app->session->hasFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS)):

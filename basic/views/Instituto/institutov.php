@@ -16,7 +16,7 @@ $this->registerCssFile("@web/css/index.css", [
 $this->title = 'Institutos';
 
 ?>
-<div class="col-md-offset-4 col-md-5">
+<div class="col-md-offset-4 col-md-4">
 <div class="loginc azul">
   <h3 style="color:white; border-bottom: 1px solid white;">Informacion Institutos</h3>
   <div class="panel-group">  

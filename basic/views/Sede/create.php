@@ -10,7 +10,7 @@ $this->title = 'Create Sede';
 $this->params['breadcrumbs'][] = ['label' => 'Sedes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="col-md-offset-4 col-md-5">
+<div class="col-md-offset-4 col-md-4">
 <div class="loginc">
 <div class="sede-create">
 
