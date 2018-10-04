@@ -35,16 +35,38 @@ $recurso2 = Edificio::find()->asArray()->all();
 $resulta = ArrayHelper::map($recurso2, 'ID', 'NOMBRE');
 
 $recurso3 = Sede::find()->asArray()->all();
+<<<<<<< HEAD
 $resultado = ArrayHelper::map($recurso3, 'ID','NOMBRE');
+=======
+$resultado = ArrayHelper::map($recurso3, 'ID', 'NOMBRE');
+
+>>>>>>> 594eac210bd8001173439050a9bbf5f50eee8ec2
 
 ?>
 
+<<<<<<< HEAD
 <?php echo $form->field($model,'ID')->widget(Select2::Classname(),
     [
         'data' =>$resultado,
         'options'=> ['placeholder' => 'seleccione Sede'
         ]
     ])->label('Nombre de Sede');
+=======
+<?php echo $form->field($sedes, 'ID')->widget(Select2::className(),[
+        'data'=>$resultado, 
+        "options" =>[
+        'placeholder'=> 'Seleccione sede',
+        ]
+        ])->label('Nombre de Sede');
+?>
+
+<?php echo $form->field($model, "ID")->widget(Select2::className(),[
+        'data' => $result, 
+        "options" => ['multiple'=> true, 
+        'placeholder' => 'Seleccione recurso'
+        ]
+    ])->label("Nombre de recurso");
+>>>>>>> 594eac210bd8001173439050a9bbf5f50eee8ec2
 ?>
 
 <?php echo $form->field($edificio, 'ID')->widget(Select2::classNAme(),[
@@ -54,12 +76,23 @@ $resultado = ArrayHelper::map($recurso3, 'ID','NOMBRE');
     ])->label('Nombre de Edificio');    
 ?>
 
+<<<<<<< HEAD
 <div class="form-group">
 <?php echo $form->field($model, "ID")->widget(Select2::className(),[
         'data' => $result, 
         'options' => [ 'placeholder' => 'Seleccione recurso'
         ]
     ])->label('Nombre recurso');
+=======
+ <?php echo $form->field($edificio, 'ID')->widget(Select2::className(),[
+        'data'=>$resulta, 
+        "options" =>[
+        'placeholder'=> 'Seleccione edificio',
+        ]
+        ])->label('Nombre de Edificio');
+
+    
+>>>>>>> 594eac210bd8001173439050a9bbf5f50eee8ec2
 ?>
 
 </div>

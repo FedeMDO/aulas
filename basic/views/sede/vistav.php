@@ -13,6 +13,12 @@ $this->registerCssFile("@web/css/index.css", [
 
 $this->title = 'Sedes';
 ?>
+<<<<<<< HEAD
+=======
+<a href="../sede/create" class="btn btn-success btn-md btn-vistav1" role="button">Crear Sede</a>
+<a href="../aula/buscador" class="btn btn-primary btn-md btn-vistav2" role="button">Buscar aulas por edificio y por recurso</a>
+  <center><h3>Sedes Disponibles</h3></center>
+>>>>>>> 594eac210bd8001173439050a9bbf5f50eee8ec2
 
 
   <a href="../sede/create" class="btn btn-success btn-md btn-vistav1" role="button">Crear Sede</a>
