@@ -22,7 +22,7 @@ use yii\bootstrap\ActiveForm;
      <a href="../instituto/institutov" class="btn btn-primary btn-info">Institutos</a>
      <a href="../admin/noti" class="btn btn-primary btn-success">Notificaciones</a>
      <a href="../site/register" class="btn btn-warning btn-md">Registrar Nuevo Usuario<i class="fa fa-sign-in"></i></a>
-
+    
     <button class="btn btn-danger navbar-btn">Configuracion</button>
   </div>
 </nav>

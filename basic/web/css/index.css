@@ -265,7 +265,7 @@ text-transform: uppercase;
 }
 
 a{
-  color:black;
+  color:white;
   padding-top: 20px;
 }
 .navbar-brand {
@@ -279,20 +279,6 @@ a{
   position: relative;
   bottom: 10px;
 }
-<<<<<<< HEAD
-.btn-vertical,.btn-vertical:hover, .btn-vertical:Active{
-  position: none;
-}
-
-.btn-crear,.btn-crear:hover,.btn-crear:active{
-  background: red;
-  border-radius: 10%;
-}
-.btn-buscar,.btn-buscar:hover,.btn-buscar:active{
-  background-color:black;
-  border: radius 10%;; 
-}
-=======
 .navbar-inverse{
   position: relative;
   border-top: 2px solid white ;
@@ -425,4 +411,38 @@ a{
   margin-top: 20px;
   text-align: center;
 }
->>>>>>> dc97db1dda10664ca547f45563bec7647554251e
+
+.btn-group-ve,.btn-group-ve:hover,.btn-group-ve:active{
+  margin-right: 40px;
+  list-style: inherit;
+}
+
+.button{
+    border: none;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 2px 2px;
+    cursor: pointer;
+
+}
+
+.button1{
+  border-radius: 8px;
+  background-color: lightseagreen;
+  margin-right: 40px;
+  }
+.button1:hover{
+  background-color: #555;
+}
+.button2{
+  border-radius: 8px;
+  background-color: #4CAF50;
+  margin-right: 15px;
+}
+.button2:hover{
+  background-color: #4CAF70
+}

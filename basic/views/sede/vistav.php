@@ -13,21 +13,25 @@ $this->registerCssFile("@web/css/index.css", [
 
 $this->title = 'Sedes';
 ?>
-<<<<<<< HEAD
-
-
-
+<!--
+<div class="col-md-offset-4 col-md-5">
+  <a href="../sede/create" class="btn btn-success btn-md" role="button">Crear Sede</a>
+  <a href="../aula/buscador" class="btn btn-primary btn-md" role="button">Buscar aulas</a>
+</div>
+-->
+ <!--
 <div class="btn-group">
   <a href="../sede/create" class="btn btn-success btn-md" role="button">Crear Sede</a>
   <a href="../aula/buscador" class="btn btn-primary btn-md" role="button">Buscar aulas</a>
 </div>
-=======
-<a href="../sede/create" class="btn btn-success btn-md btn-vistav" role="button">Crear Sede</a>
-<a href="../aula/buscador" class="btn btn-primary btn-md btn-vistav" role="button">Buscar aulas por edificio y por recurso</a>
->>>>>>> dc97db1dda10664ca547f45563bec7647554251e
+-->
+
+<div class="botones">
+  <button class="button button1" role="button"><a href="../sede/create">Crear Sede</a></button>
+  <button class="button button2" role="button"><a href="../aula/buscador">Buscar Aula</a></button>
+</div>
+
   <center><h3>Sedes Disponibles</h3></center>
-
-
 
 <ul>
 
@@ -41,7 +45,7 @@ $this->title = 'Sedes';
       <img src="../image/sede_<?= Html::encode("{$sede->ID}") ?>.png" alt="...">
       <div class="caption">
         <?= Html::encode("{$sede->NOMBRE} ") ?>
-        <br></br>
+        <br>
         <?= Html::encode(" {$sede->CALLEYNUM} ") ?>
         
         <?= Html::encode("{$sede->LOCALIDAD}") ?>

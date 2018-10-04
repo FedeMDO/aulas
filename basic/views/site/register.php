@@ -6,7 +6,7 @@ use app\models\Instituto;
 $this->title = 'Registro de usuario';
 ?>
 
-<br></br>
+<br>
 
 <div class="col-md-offset-4 col-md-5">
 <div class="regis">
@@ -32,12 +32,11 @@ $this->title = 'Registro de usuario';
 <?php $institutos = Instituto::find()->asArray()->all();
          $result = ArrayHelper::map($institutos, 'ID', 'NOMBRE'); ?>
 <div class="form-group">
- <?= $form->field($model, "idInstituto")->dropDownList(
-            $result, 
-            ['prompt'=>'Seleccione un Instituto...']
+    <?= $form->field($model, "idInstituto")->dropDownList(
+                $result, 
+                ['prompt'=>'Seleccione un Instituto...']
     )->label('Instituto (dejar vacío si pertenece a CPE/CPyT)'); ?>
 </div>
-
 <div class="form-group">
  <?= $form->field($model, "password")->input("password")->label('Contraseña') ?>   
 </div>
