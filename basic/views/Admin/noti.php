@@ -8,6 +8,7 @@ use yii\widgets\LinkPager;
 use app\controllers\NotificacionController;
 use app\views\Notificacion\create;
 use yii\bootstrap\Alert;
+use dominus77\sweetalert2;
 
 
 $this->registerCssFile("@web/css/index.css", [

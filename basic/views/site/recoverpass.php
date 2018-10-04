@@ -1,13 +1,25 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dominus77\sweetalert2;
 
 $this->title = 'Recuperar contraseña';
+
 ?>
- 
- <div class="alert alert-success">
-<p><?= Html::encode("{$msg} ") ?></p>
-</div>
+
+
+<?php if(Yii::$app->session->hasFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS)):
+  
+  \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
+
+endif; ?>
+<?php if(Yii::$app->session->hasFlash(\dominus77\sweetalert2\Alert::TYPE_ERROR)):
+  
+  \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
+
+endif; ?>
+
+
  
 
 <?php $form = ActiveForm::begin([

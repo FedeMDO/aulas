@@ -18,17 +18,19 @@ use app\models\User;
 use yii\web\Session;
 use app\models\FormRecoverPass;
 use app\models\FormResetPass;
+use dominus77\sweetalert2;
 
 
 class SiteController extends Controller
 {   
-     public function actionRecoverpass()
+public function actionRecoverpass()
  {
   //Instancia para validar el formulario
   $model = new FormRecoverPass;
   
   //Mensaje que será mostrado al usuario en la vista
   $msg = null;
+  $msgi=null;
   
   if ($model->load(Yii::$app->request->post()))
   {
@@ -82,11 +84,14 @@ class SiteController extends Controller
      $model->email = null;
      
      //Mostrar el mensaje al usuario
-     $msg = "Le hemos enviado un mensaje a su cuenta de correo para que pueda cambiar su contraseña";
+     $alert=\dominus77\sweetalert2\Alert::TYPE_SUCCESS;
+     
+     $msgi = Yii::$app->session->setFlash($alert, 'Solicitud enviada!');;
     }
     else //El usuario no existe
     {
-     $msg = "Ha ocurrido un error";
+     $error=\dominus77\sweetalert2\Alert::TYPE_ERROR;
+     $msg = Yii::$app->session->setFlash($error, 'Error, correo no encontrado.');;
     }
    }
    else
@@ -94,7 +99,7 @@ class SiteController extends Controller
     $model->getErrors();
    }
   }
-  return $this->render("recoverpass", ["model" => $model, "msg" => $msg]);
+  return $this->render("recoverpass", ["model" => $model, "msg" => $msg,"msgi" => $msgi]);
  }
  
  public function actionResetpass()
