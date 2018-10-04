@@ -72,7 +72,8 @@ class AdminController extends Controller
                 if ($model1->save()){
                     $session = Yii::$app->session;
                     
-                    $session->setFlash('notificacionEnviada', 'Has enviado correctamente la notificacion');
+                    //$session->setFlash('notificacionEnviada', 'Has enviado correctamente la notificacion');
+                    Yii::$app->session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, 'Mensaje enviado!');
                     return $this->redirect('noti');
               }
             }

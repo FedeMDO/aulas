@@ -17,6 +17,7 @@ use Yii;
  */
 class Comision extends \yii\db\ActiveRecord
 {
+    public $cant_comisiones;
     /**
      * {@inheritdoc}
      */
@@ -31,10 +32,11 @@ class Comision extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['NOMBRE', 'ID_MATERIA', 'CARGA_HORARIA_SEMANAL'], 'required'],
+            [['NOMBRE', 'ID_MATERIA', 'CARGA_HORARIA_SEMANAL', 'cant_comisiones'], 'required'],
             [['ID_MATERIA', 'CARGA_HORARIA_SEMANAL'], 'integer'],
             [['NOMBRE'], 'string', 'max' => 40],
             [['ID_MATERIA'], 'exist', 'skipOnError' => true, 'targetClass' => Materia::className(), 'targetAttribute' => ['ID_MATERIA' => 'ID']],
+            [['cant_comisiones'],'integer']
         ];
     }
 
@@ -48,6 +50,7 @@ class Comision extends \yii\db\ActiveRecord
             'NOMBRE' => ' Nombre Comision',
             'ID_MATERIA' => 'Materia',
             'CARGA_HORARIA_SEMANAL' => 'Carga  Horaria  Semanal',
+            'cant_comisiones' => 'Cantidad de comisiones'
         ];
     }
 

@@ -18,17 +18,19 @@ use app\models\User;
 use yii\web\Session;
 use app\models\FormRecoverPass;
 use app\models\FormResetPass;
+use dominus77\sweetalert2;
 
 
 class SiteController extends Controller
 {   
-     public function actionRecoverpass()
+public function actionRecoverpass()
  {
   //Instancia para validar el formulario
   $model = new FormRecoverPass;
   
   //Mensaje que será mostrado al usuario en la vista
   $msg = null;
+  $msgi=null;
   
   if ($model->load(Yii::$app->request->post()))
   {
@@ -65,8 +67,8 @@ class SiteController extends Controller
      $table->save();
      
      //Creamos el mensaje que será enviado a la cuenta de correo del usuario
-     $subject = "Recuperar password";
-     $body = "<p>Copie el siguiente código de verificación para restablecer su password ... ";
+     $subject = "Recuperar contraseña";
+     $body = "<p>Copie el siguiente código de verificación para restablecer su contraseña ... ";
      $body .= "<strong>".$verification_code."</strong></p>";
      $body .= "<p><a href='http://yii.local/site/resetpass'>Recuperar password</a></p>";
 
@@ -82,19 +84,23 @@ class SiteController extends Controller
      $model->email = null;
      
      //Mostrar el mensaje al usuario
-     $msg = "Le hemos enviado un mensaje a su cuenta de correo para que pueda cambiar su contraseña";
+     $alert=\dominus77\sweetalert2\Alert::TYPE_SUCCESS;
+     
+     $msgi = Yii::$app->session->setFlash($alert, 'Solicitud enviada!');;
     }
     else //El usuario no existe
     {
-     $msg = "Ha ocurrido un error";
+     $error=\dominus77\sweetalert2\Alert::TYPE_ERROR;
+     $msg = Yii::$app->session->setFlash($error, 'Error, correo no encontrado.');;
     }
    }
+   
    else
    {
     $model->getErrors();
    }
   }
-  return $this->render("recoverpass", ["model" => $model, "msg" => $msg]);
+  return $this->render("recoverpass", ["model" => $model, "msg" => $msg,"msgi" => $msgi]);
  }
  
  public function actionResetpass()
@@ -271,8 +277,15 @@ class SiteController extends Controller
    {
     //Preparamos la consulta para guardar el usuario
     $table = new Users;
-    if($model->idInstituto == null){ #si no pertenece a un instituto , lo hago admin
+    //Si no se elige ningun rol, por defecto es el rol de usuario normal
+    if($model->rol == 1 || $model->rol == null){
+        $table->rol = 10;
+    }
+    if($model->rol == 0){ //rol admin
         $table->rol = 20;
+    }
+    if($model->rol == 2){ //rol guest
+        $table->rol = 30;
     }
     $table->username = $model->username;
     $table->email = $model->email;
@@ -308,12 +321,15 @@ class SiteController extends Controller
      ->setHtmlBody($body)
      ->send();
      
+     $session = Yii::$app->session;
+     $session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, "Usuario registrado. Sólo falta que confirme desde su correo electrónico");
      $model->username = null;
      $model->email = null;
+     $model->idInstituto = null;
+     $model->rol = null;
      $model->password = null;
      $model->password_repeat = null;
      
-     $msg = "Usuario registrado. Sólo falta que confirme desde su correo electrónico";
     }
     else
     {
@@ -357,12 +373,12 @@ class SiteController extends Controller
                 $activar->activate = 1;
                 if ($activar->update())
                 {
-                    echo "Grande te registraste, redireccionando ...";
+                    echo "Registro realizado correctamente, redireccionando ...";
                     echo "<meta http-equiv='refresh' content='8; ".Url::toRoute("site/login")."'>";
                 }
                 else
                 {
-                    echo "algo malo paso al realizar el registro, redireccionando ...";
+                    echo "Ha ocurrido un error, redireccionando ...";
                     echo "<meta http-equiv='refresh' content='8; ".Url::toRoute("site/login")."'>";
                 }
              }

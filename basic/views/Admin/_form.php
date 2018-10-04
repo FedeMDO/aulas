@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use kartik\select2\Select2;
+use dosamigos\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Notificacion */
@@ -27,7 +28,10 @@ use kartik\select2\Select2;
         ]
     ]);
 	 ?>
-    <?= $form->field($model, 'NOTIFICACION')->textArea(['rows' => 6]) ?>
+   <?= $form->field($model, 'NOTIFICACION')->widget(CKEditor::className(), [
+        'options' => ['rows' => 6],
+        'preset' => 'advanced'
+    ]) ?>
     <div class="form-group">
         <?= Html::submitButton('Enviar', ['class' => 'btn btn-success']) ?>
     </div>

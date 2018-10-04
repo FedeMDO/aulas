@@ -84,12 +84,14 @@ text-transform: uppercase; */
 
 /* Style the tab content */
 .tabcontent {
+    position: relative !important;
+    margin-left: 10%;
+    border-collapse: separate;
     float: left;
     padding: 20px 12px;
     width: 70%;
     border-left: none;
-    height: 300px;
-    max-height: 850px;
+    max-height: 900px;
     overflow: auto;
     overflow-x: hidden;
 }
@@ -113,8 +115,6 @@ text-transform: uppercase; */
 .gallery img:hover{
   transform: scale(1.2);
 }
-
-
 
 
 h4 { 
@@ -156,8 +156,6 @@ th, td {
   text-align: left;
   padding: 8px;
 }
-
-
 
 
 .form-control {
@@ -280,7 +278,8 @@ a{
   bottom: 10px;
 }
 .navbar-inverse{
-  position: relative;
+  position: fixed;
+  
   border-top: 2px solid white ;
   background-color: white;
   height:100%;
@@ -307,12 +306,14 @@ a{
   border-radius: 250px;
 }
 
+/*esto es el texto de arriba de notificaciones*/
 .media-body >h4{
   color:white;
   text-transform: capitalize;
   border-bottom: 1px solid white;
   padding-bottom: 5px;
   text-align: left;
+  width: 400px;
 }
 .recibidos{
   border: 1px solid white;
@@ -345,8 +346,9 @@ a{
 }
 
 .mensaje{
-  min-height: 420px;
-  width: 30%;
+  padding-top: 5px;
+  min-height: 650px;
+  width: 50%;
   overflow: hidden;
   position: relative;
   left: 20px;
@@ -377,14 +379,14 @@ a{
   background: #555; 
 }
 
-/*login*/
+/*panel de log*/
 .log {
   background-color: rgb(41, 128, 185);
   border-radius: 15px;
   border-color:#d2d2d2;
   border-width: 5px;
   box-shadow:0 1px 0 #cfcfcf;
-  width: 30%;
+  width: 90%;
   float: center;
   margin: auto; 
   text-align: center;
@@ -399,50 +401,24 @@ a{
   border-bottom: 1px solid white;
 }
 
-/*panel de instituto*/
+/*panel azul generico*/
 
-.ins{
+.azul{
+  background-color: #2980b9;
   border-color:#d2d2d2;
   border-width: 5px;
   box-shadow:0 1px 0 #cfcfcf;
-  width: 30%;
-  float: center;
   margin: auto; 
   margin-top: 20px;
   text-align: center;
 }
-
-.btn-group-ve,.btn-group-ve:hover,.btn-group-ve:active{
-  margin-right: 40px;
-  list-style: inherit;
+.enviado{
+  width: 80%;
 }
 
-.button{
-    border: none;
-    color: white;
-    padding: 12px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    margin: 2px 2px;
-    cursor: pointer;
-
+.btn-vistav1{
+  margin-right: 50px;
 }
-
-.button1{
-  border-radius: 8px;
-  background-color: lightseagreen;
-  margin-right: 40px;
-  }
-.button1:hover{
-  background-color: #555;
-}
-.button2{
-  border-radius: 8px;
-  background-color: #4CAF50;
-  margin-right: 15px;
-}
-.button2:hover{
-  background-color: #4CAF70
+.btn-vistav2{
+  margin-right: 50px;
 }

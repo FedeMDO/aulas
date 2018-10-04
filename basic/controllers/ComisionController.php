@@ -103,7 +103,8 @@ class ComisionController extends Controller
         $model = new Comision();
 
         if ($_POST != NULL){
-            $cantidad = $_POST['cant_comisiones'];
+            $cantidad = $_POST['Comision'];
+            $cantidad =$cantidad['cant_comisiones'];
             for( $i=0; $i<$cantidad; $i++){
                 $comi = new Comision();
                 $comi->load(Yii::$app->request->post());

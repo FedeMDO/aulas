@@ -11,6 +11,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\FormRegister;
 use app\models\Users;
+use app\models\FormChangePassword;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 use yii\helpers\Html;
@@ -51,6 +52,24 @@ class UserController extends Controller
             'notificacion' => $notificacion,
             'pagination' => $pagination,
             
+        ]);
+    }
+
+    public function actionChangepw(){
+
+        $id = Yii::$app->user->identity->id;
+ 
+        $model = new FormChangePassword($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->changePassword()) {
+            Yii::$app->session->setFlash('success', 'La contraseña se ha cambiado correctamente');
+            $model->current_password = null;
+            $model->password = null;
+            $model->confirm_password = null;
+        }
+ 
+        return $this->render('changepw', [
+            'model' => $model,
         ]);
     }
 

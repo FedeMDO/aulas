@@ -8,6 +8,7 @@ use yii\widgets\LinkPager;
 use app\controllers\NotificacionController;
 use app\views\Notificacion\create;
 use yii\bootstrap\Alert;
+use dominus77\sweetalert2;
 
 
 $this->registerCssFile("@web/css/index.css", [
@@ -17,23 +18,21 @@ $this->registerCssFile("@web/css/index.css", [
 
 $this->title = 'Notificaciones';
 ?>
+<!--Esto saca el scroll principal-->
+
+<style type="text/css">
+body {
+    overflow:hidden;
+}
+</style>
 
 <body>
-<!-- // lanzando alerta bootstrap -->
-<?php if(Yii::$app->session->hasFlash('notificacionEnviada')):
-    Alert::begin([
-      'options' => [
-          'class' => 'alert-success',
-      ],
-  ]);
+<?php if(Yii::$app->session->hasFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS)):
   
-  echo Yii::$app->session->getFlash('notificacionEnviada');
-  
-  Alert::end();
+  \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
+
 endif; ?>
 <?php
-
-    
   ?>
 <nav class="nav navbar-inverse navbar-left">
   <a class="active"></a>
@@ -44,7 +43,7 @@ endif; ?>
 
 
 
-<div id="Recibido" class="tabcontent media border p-3">
+<div id="Recibido" class="tabcontent media border p-3 enviado">
 <?php $entro=false; ?>
  <?php foreach ($notificacion as $n):
     if ($n->uSERRECEPTOR->id == Yii::$app->user->identity->id):?>
@@ -52,7 +51,7 @@ endif; ?>
   <img src="../image/admin_icon.png" class="admin" style="width:60px; margin-left:10px; margin-bottom:10px;";>
   <div class="media-body">
     <h4><?= Html::encode("{$n->uSEREMISOR->username} ")?> <small><i>Fecha: <?= Html::encode("{$n->FECHA} ") ?></i></small></h4>
-    <p><?= Html::encode("{$n->NOTIFICACION} ") ?></p>
+    <p><?=$n->NOTIFICACION ?></p>
   </div>
   <?php endif; ?>
   <?php endforeach; ?>  
@@ -63,7 +62,8 @@ endif; ?>
   <?php endif;?> 
 </div>
 
-<div id="Enviado" class="tabcontent media border p-3">
+
+<div id="Enviado" class="tabcontent media border p-3 enviado">
 <?php $entro=false; ?>
  <?php foreach ($notificacion as $n):
     if ($n->uSEREMISOR->id == Yii::$app->user->identity->id):?>
@@ -71,7 +71,7 @@ endif; ?>
   <img src="../image/admin_icon.png" class="admin" style="width:60px; margin-left:10px; margin-bottom:10px;";>
   <div class="media-body">
     <h4>Para: <?=Html::encode("{$n->uSERRECEPTOR->username} ")?> <small><i>Fecha: <?= Html::encode("{$n->FECHA} ") ?></i></small></h4>
-    <p><?= Html::encode("{$n->NOTIFICACION} ") ?></p>
+    <p><?=$n->NOTIFICACION ?></p>
  </div>
   <?php endif; ?>
   <?php endforeach; ?>
@@ -83,9 +83,6 @@ endif; ?>
 </div>
 
 <div id="Enviar notificacion" class="tabcontent mensaje">
-
-<h3>Enviar notificacion</h3>
-
 <div class="notificacion-create">
 
     <?= $this->render('_form', [
