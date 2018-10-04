@@ -116,7 +116,6 @@ text-transform: uppercase; */
   transform: scale(1.2);
 }
 
-
 h4 { 
   border:0 solid #fff; 
   border-bottom-width:1px;
@@ -423,3 +422,7 @@ a{
   width: 80%;
 }
 
+/* baja el boton de buscar en la vista buscador*/
+.btn-buscador1{
+  margin-top: 10px;
+}

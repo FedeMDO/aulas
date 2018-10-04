@@ -48,6 +48,14 @@ $resultado = ArrayHelper::map($recurso3, 'ID', 'NOMBRE');
         ])->label('Nombre de Sede');
 ?>
 
+ <?php echo $form->field($edificio, 'ID')->widget(Select2::className(),[
+        'data'=>$resulta, 
+        "options" =>[
+        'placeholder'=> 'Seleccione edificio',
+        ]
+        ])->label('Nombre de Edificio');
+?>
+
 <?php echo $form->field($model, "ID")->widget(Select2::className(),[
         'data' => $result, 
         "options" => ['multiple'=> true, 
@@ -55,27 +63,11 @@ $resultado = ArrayHelper::map($recurso3, 'ID', 'NOMBRE');
         ]
     ])->label("Nombre de recurso");
 ?>
-
-<?php echo $form->field($edificio, 'ID')->widget(Select2::classNAme(),[
-        'data' => $resulta,
-        'options' => ['placeholder'=> 'Seleccione edificio'
-        ]
-    ])->label('Nombre de Edificio');    
-?>
-
- <?php echo $form->field($edificio, 'ID')->widget(Select2::className(),[
-        'data'=>$resulta, 
-        "options" =>[
-        'placeholder'=> 'Seleccione edificio',
-        ]
-        ])->label('Nombre de Edificio');
-
     
-?>
 
 </div>
 
-<?= Html::submitButton("buscar aulas", ["class" => "btn btn-primary"]) ?>
+<center><?= Html::submitButton("buscar aulas", ["class" => "btn btn-primary btn-buscador1"]) ?></center>
 
 <?php $form->end() ?>
 </div>

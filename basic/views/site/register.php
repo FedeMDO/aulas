@@ -4,6 +4,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Instituto;
 use dominus77\sweetalert2\Alert;
+
 $this->title = 'Registro de usuario';
 ?>
 
