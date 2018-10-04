@@ -269,12 +269,7 @@ class AulaController extends Controller
         'model' => $recursos,
         'pagination' => $pagination,
         'edificio'=> $edificio,
-<<<<<<< HEAD
-=======
         'sedes'=> $sedes,
-
-        
->>>>>>> 594eac210bd8001173439050a9bbf5f50eee8ec2
         ]);
 
     }
