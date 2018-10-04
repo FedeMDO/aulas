@@ -27,7 +27,7 @@ endif; ?>
     'enableClientValidation' => true,
 ]);
 ?>
-<div class="col-md-offset-4 col-md-5">
+<div class="col-md-offset-4 col-md-4">
 <div class="loginc log">
 <h1>Recuperar contraseña</h1>
 <p>Por favor ingrese su email:</p>

@@ -11,7 +11,7 @@ use yii\bootstrap\Alert;
     'enableClientValidation' => true,
 ]);
 ?>
-<div class="col-md-offset-4 col-md-5">
+<div class="col-md-offset-4 col-md-4">
 <div class="loginc log">
 <h1>Recuperar contraseña</h1>
  <?= $form->field($model, "email",['labelOptions'=>['style'=>'color:white']])->input("email")->label("E-mail:") ?>  

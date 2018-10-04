@@ -27,7 +27,6 @@ body {
 </style>
 
 <body>
-<!-- // lanzando alerta bootstrap -->
 <?php if(Yii::$app->session->hasFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS)):
   
   \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);

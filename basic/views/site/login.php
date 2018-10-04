@@ -8,7 +8,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Bienvenido';
+$this->title = 'Ingresar';
 $this->params['breadcrumbs'][] = $this->title;
 
 
@@ -21,9 +21,9 @@ $this->registerCssFile("@web/css/index.css", [
 
     
 <div id="box_login">
-<div class="col-md-offset-4 col-md-5">
+<div class="col-md-offset-4 col-md-4">
 <div class="loginc log">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode('Bienvenido') ?></h1>
   
     <p>Por favor complete los siguientes campos:</p>
   
