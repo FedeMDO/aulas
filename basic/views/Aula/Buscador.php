@@ -7,6 +7,7 @@ use yii\widgets\LinkPager;
 use yii\helpers\ArrayHelper;
 use app\models\recurso;
 use app\models\Edificio;
+use kartik\select2\Select2;
 
 
 $this->registerCssFile("@web/css/index.css", [
@@ -39,13 +40,14 @@ $resulta = ArrayHelper::map($recurso2, 'ID', 'NOMBRE');
 ?>
 <div class="form-group">
 
-<?= $form->field($model, "ID")->checkboxList(
-        $result, 
-        ['Label'=>'seleccione...']
-        )->label('Nombre de Recurso');
-
-
+<?php echo $form->field($model, "ID")->widget(Select2::className(),[
+        'data' => $result, 
+        "options" => ['multiple'=> true, 
+        'placeholder' => 'Seleccione recurso'
+        ]
+    ]);
 ?>
+
 
  <?php echo $form->field($edificio, 'ID')->dropDownList(
         $resulta, 

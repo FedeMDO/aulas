@@ -94,6 +94,7 @@ public function actionRecoverpass()
      $msg = Yii::$app->session->setFlash($error, 'Error, correo no encontrado.');;
     }
    }
+   
    else
    {
     $model->getErrors();
