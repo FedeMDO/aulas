@@ -15,6 +15,7 @@ use yii\filters\AccessControl;
 use app\models\User;
 use yii\data\Pagination;
 use yii\helpers\VarDumper;
+use app\models\Sede;
 /**
  * AulaController implements the CRUD actions for Aula model.
  */
@@ -255,6 +256,7 @@ class AulaController extends Controller
 
         $recursos= new Recurso();
         $edificio = new Edificio();
+        $sedes= new Sede();
         $query = Recurso::find();
         
             $pagination = new Pagination([
@@ -267,6 +269,7 @@ class AulaController extends Controller
         'model' => $recursos,
         'pagination' => $pagination,
         'edificio'=> $edificio,
+        'sedes'=> $sedes,
 
         
         ]);

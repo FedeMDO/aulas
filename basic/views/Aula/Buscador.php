@@ -7,6 +7,7 @@ use yii\widgets\LinkPager;
 use yii\helpers\ArrayHelper;
 use app\models\recurso;
 use app\models\Edificio;
+use app\models\Sede;
 use kartik\select2\Select2;
 
 
@@ -36,26 +37,40 @@ $result = ArrayHelper::map($recurso, 'ID', 'NOMBRE');
 $recurso2 = Edificio::find()->asArray()->all();
 $resulta = ArrayHelper::map($recurso2, 'ID', 'NOMBRE');
 
+$recurso3 = Sede::find()->asArray()->all();
+$resultado = ArrayHelper::map($recurso3, 'ID', 'NOMBRE');
+
 
 ?>
 <div class="form-group">
+
+<?php echo $form->field($sedes, 'ID')->widget(Select2::className(),[
+        'data'=>$resultado, 
+        "options" =>[
+        'placeholder'=> 'Seleccione sede',
+        ]
+        ])->label('Nombre de Sede');
+?>
 
 <?php echo $form->field($model, "ID")->widget(Select2::className(),[
         'data' => $result, 
         "options" => ['multiple'=> true, 
         'placeholder' => 'Seleccione recurso'
         ]
-    ]);
+    ])->label("Nombre de recurso");
 ?>
 
 
- <?php echo $form->field($edificio, 'ID')->dropDownList(
-        $resulta, 
-        ['prompt'=>'seleccione...']
-        )->label('Nombre de Edificio');
+ <?php echo $form->field($edificio, 'ID')->widget(Select2::className(),[
+        'data'=>$resulta, 
+        "options" =>[
+        'placeholder'=> 'Seleccione edificio',
+        ]
+        ])->label('Nombre de Edificio');
 
     
 ?>
+
 </div>
 
 <?= Html::submitButton("buscar aulas", ["class" => "btn btn-primary"]) ?>
