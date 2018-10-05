@@ -261,10 +261,6 @@ text-transform: uppercase;
   background-color:white;
 }
 
-a{
-  color:white;
-  padding-top: 20px;
-}
 .navbar-brand {
   padding: 0px; /* firefox bug fix */
 }
@@ -278,12 +274,16 @@ a{
 }
 .navbar-inverse{
   position: fixed;
-  
   border-top: 2px solid white ;
   background-color: white;
   height:100%;
   width: 10%;
- 
+}
+
+.navbar-inverse>a{
+    color:black;
+    padding-top: 20px;
+  
 }
 .carousel-inner > .item > img {
   margin: 0 auto;
