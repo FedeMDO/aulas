@@ -83,21 +83,20 @@ class EventoController extends Controller
       else{
         $event1->start =$cons->Fecha_ini;
       }
-        $event1->rendering='background';
-        $event1->color=Instituto::findOne($cons->ID_Instituto_Recibe)->COLOR_HEXA;
         $tasks[] = $event1;
      }
     foreach ($events as $eve) {
 
         $id_user= $eve->ID_User_Asigna;
         $usuario= Users::findOne($id_user)->idInstituto;
-        $instituto= Instituto::findOne($usuario)->NOMBRE; 
+        $instituto= Instituto::findOne($usuario)->NOMBRE;
+        $institutocolor= Instituto::findOne($usuario)->COLOR_HEXA;
         $comision=Comision::findOne($eve->ID_Comision);
         $materia=Materia::findOne($comision->ID_MATERIA)->NOMBRE;
-       
         $event = new \yii2fullcalendar\Models\Event();
         $event->id=$eve->ID;
         $event->title=$materia;
+        $event->backgroundColor=$institutocolor;
         if(!$eve->Hora_ini==null){
             $event->start=$eve->Fecha_ini.'T'.Hora::FindOne($eve->Hora_ini)->HORA;
             $event->end=$eve->Fecha_ini.'T'.Hora::FindOne($eve->Hora_fin)->HORA;
