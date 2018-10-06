@@ -1,0 +1,12 @@
+Ir a phpmyadmin y crear una base de datos
+llamada (por convencion) 'aulas_db'
+
+corresponde al comando:
+CREATE DATABASE aulas_db;
+
+Luego copiar el texto de aulas_db 06-10.sql y ya estaría la base funcionando.
+
+Para ingresar al sistema hay un usuario por defecto:
+
+user: defaultUser
+pass: 12345678
