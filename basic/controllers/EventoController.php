@@ -59,6 +59,12 @@ class EventoController extends Controller
     //     $filter_mate[]=$materias;
     // }
     // REFACTORIZO Y CAPTO COMISIONES, NO NOMBRES
+
+    //*esto es para cambiar el color de las materias en la vista
+    $id_user= Yii::$app->user->identity->id;
+    $usuario= Users::findOne($id_user)->idInstituto;
+    $institutocolor2= Instituto::findOne($usuario)->COLOR_HEXA;
+    ///
     $carreras = Users::findOne(Yii::$app->user->identity->id)->instituto->carreras;
     foreach ($carreras as $carrera) {
         foreach ($carrera->mATERIAs as $materia) {     
@@ -86,7 +92,6 @@ class EventoController extends Controller
         $tasks[] = $event1;
      }
     foreach ($events as $eve) {
-
         $id_user= $eve->ID_User_Asigna;
         $usuario= Users::findOne($id_user)->idInstituto;
         $instituto= Instituto::findOne($usuario)->NOMBRE;
@@ -110,7 +115,7 @@ class EventoController extends Controller
     }
     $comi = new Comision();
     return $this->render('index', [
-      'events'=>$tasks,'filter'=> $filter_comis, 'comi' => $comi, 'id_aula'=>$id
+      'events'=>$tasks,'filter'=> $filter_comis, 'comi' => $comi, 'id_aula'=>$id ,"color"=>$institutocolor2
     ]);
 }
 
