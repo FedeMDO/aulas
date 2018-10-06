@@ -118,6 +118,8 @@ Modal::begin([
     'weekends' => true,
     'editable' => true,
     'droppable'=> true,
+    'minTime' => '08:00:00',
+    'maxTime' => '23:00:00',
   
  
 ],'eventResize'=>'function(event, delta, revertFunc) {
