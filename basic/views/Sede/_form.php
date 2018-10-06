@@ -13,18 +13,18 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'NOMBRE')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'NOMBRE',['labelOptions'=>['style'=>'color:white']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'CALLEYNUM')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'CALLEYNUM',['labelOptions'=>['style'=>'color:white']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'LOCALIDAD')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'LOCALIDAD',['labelOptions'=>['style'=>'color:white']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'DISPONIBLE_DESDE')->textInput() ?>
+    <?= $form->field($model, 'DISPONIBLE_DESDE',['labelOptions'=>['style'=>'color:white']])->textInput() ?>
 
-    <?= $form->field($model, 'DISPONIBLE_HASTA')->textInput() ?>
+    <?= $form->field($model, 'DISPONIBLE_HASTA',['labelOptions'=>['style'=>'color:white']])->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Actualizar', ['class' => 'btn btn-success btn-block']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

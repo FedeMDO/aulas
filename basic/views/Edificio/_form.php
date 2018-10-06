@@ -15,17 +15,17 @@ use app\models\Sede;
     <?php $sedes = Sede::find()->asArray()->all();
         $result = ArrayHelper::map($sedes, 'ID', 'NOMBRE');
     ?>
-    <?php echo $form->field($model, 'ID_SEDE')->dropDownList(
+    <?php echo $form->field($model, 'ID_SEDE',['labelOptions'=>['style'=>'color:white']])->dropDownList(
             $result, 
 			['prompt'=>'Choose...']
 			); ?>
 
-    <?= $form->field($model, 'NOMBRE')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'NOMBRE',['labelOptions'=>['style'=>'color:white']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'CANTIDAD_AULAS')->textInput() ?>
+    <?= $form->field($model, 'CANTIDAD_AULAS',['labelOptions'=>['style'=>'color:white']])->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success btn-block']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
