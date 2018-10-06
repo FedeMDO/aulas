@@ -18,10 +18,10 @@ $this->registerCssFile("@web/css/index.css", [
 
 
 ?>
-<div class="">
-<div class="loginc">
-<center><h3>Buscador de aula</h3></center>
-<ul>
+<div class="col-md-offset-4 col-md-4">
+<div class="loginc azul">
+<h2 style="color:white; border-bottom: 1px solid white;">Buscador de aula</h2>
+
 
 <?php $form = ActiveForm::begin([
     'method' => 'post',
@@ -40,7 +40,7 @@ $resultado = ArrayHelper::map($recurso3, 'ID', 'NOMBRE');
 
 ?>
 
-<?php echo $form->field($sedes, 'ID')->widget(Select2::className(),[
+<?php echo $form->field($sedes, 'ID',['labelOptions'=>['style'=>'color:white']])->widget(Select2::className(),[
         'data'=>$resultado, 
         "options" =>[
         'placeholder'=> 'Seleccione sede',
@@ -48,26 +48,27 @@ $resultado = ArrayHelper::map($recurso3, 'ID', 'NOMBRE');
         ])->label('Nombre de Sede');
 ?>
 
- <?php echo $form->field($edificio, 'ID')->widget(Select2::className(),[
+ <?php echo $form->field($edificio, 'ID',['labelOptions'=>['style'=>'color:white']])->widget(Select2::className(),[
         'data'=>$resulta, 
         "options" =>[
         'placeholder'=> 'Seleccione edificio',
         ]
         ])->label('Nombre de Edificio');
+
 ?>
 
-<?php echo $form->field($model, "ID")->widget(Select2::className(),[
+<?php echo $form->field($model, "ID",['labelOptions'=>['style'=>'color:white']])->widget(Select2::className(),[
         'data' => $result, 
         "options" => ['multiple'=> true, 
         'placeholder' => 'Seleccione recurso'
         ]
     ])->label("Nombre de recurso");
 ?>
-    
+<?= Html::submitButton("buscar aulas", ["class" => "btn btn-success btn-block"]) ?>  
 
 </div>
 
-<center><?= Html::submitButton("buscar aulas", ["class" => "btn btn-primary btn-buscador1"]) ?></center>
+
 
 <?php $form->end() ?>
 </div>

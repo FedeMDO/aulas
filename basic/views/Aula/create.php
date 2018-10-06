@@ -11,11 +11,9 @@ $this->params['breadcrumbs'][] = ['label' => 'Aulas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="col-md-offset-4 col-md-4">
-<div class="loginc">
+<div class="loginc azul">
 <div class="aula-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
+    <h1 style="color:white; border-bottom: 1px solid white;">Crear aula</h1>
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>

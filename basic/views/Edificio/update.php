@@ -11,10 +11,10 @@ $this->params['breadcrumbs'][] = ['label' => $model->ID, 'url' => ['view', 'id' 
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="col-md-offset-4 col-md-4">
-<div class="loginc">
+<div class="loginc azul">
 <div class="edificio-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 style="color:white; border-bottom: 1px solid white;">Actualizacion edificio</h1>
 
     <?= $this->render('_form', [
         'model' => $model,

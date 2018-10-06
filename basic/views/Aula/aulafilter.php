@@ -13,14 +13,15 @@ $this->registerCssFile("@web/css/index.css", [
 ], 'css-print-theme');
 $this->title = 'Aulas';
 ?>
-<a href="../aula/create" class="btn btn-success btn-md" role="button">Crear Aula</a>
 
 
-<center><?php if(count($aula) != 0){
+
+<?php if(count($aula) != 0){
 
 ?>
-<center><h3>Aulas Disponibles en <?=Html::encode("{$aula[0]->eDIFICIO->NOMBRE}")?></h3></center>
-
+<div class="col-md-offset-1 col-md-10">
+<h3 style="color:white; text-align:center;">Aulas Disponibles en <?=Html::encode("{$aula[0]->eDIFICIO->NOMBRE}")?></h3>
+<a style= "" href="../aula/create" class="btn btn-success btn-md" role="button">Crear Aula</a>
 <div class="loginc">
 <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
@@ -48,7 +49,6 @@ $this->title = 'Aulas';
                   </td>
                   
                   <td><a href="../aula/update?id=<?= Html::encode("{$aula->ID}") ?>"  class="btn btn-danger" role="button">Modificar</a></p></td>
-                
                 </tr>
                 <?php endforeach; ?>
               </table>

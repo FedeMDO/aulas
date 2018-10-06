@@ -11,8 +11,8 @@ $this->registerCssFile("@web/css/index.css", [
 ], 'css-print-theme');
 
 ?>
-
-<center><h1>Recursos de aula</h1></center>
+<div class="col-md-offset-4 col-md-4">
+<h1 style="color:white; text-align:center;">Recursos de aula</h1>
 
  <div class="loginc">
 <div class="box-body">
@@ -34,4 +34,5 @@ $this->registerCssFile("@web/css/index.css", [
                 <?php endforeach; ?>
               </table>
             </div>
+</div>
 </div>
