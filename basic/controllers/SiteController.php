@@ -178,7 +178,7 @@ public function actionRecoverpass()
         return [
             'access' => [
                 'class' => AccessControl::className(),
-            'only' => ['logout', 'user', 'admin','aula',/*'register'*/], //acciones que solamente va a verificar permisos
+            'only' => ['logout', 'user', 'admin','aula', 'register'], //acciones que solamente va a verificar permisos
                 //notar que index no esta por ende un Guest (visitante) puede acceder al index y ver la pagina
                 'rules' => [
                     [
