@@ -21,8 +21,9 @@ $this->title = '';
 $this->params['breadcrumbs'][] = $this->title;
 $indexMaterias = 1;
 ?>
+<div class="col-md-offset-1 col-md-10">
 <div class="loginc">
-<center><h3>ASIGNACION COMISIONES DE AULA   <em id:"id_aula"><?=Html::encode("{$id_aula}")?></em></h3></center>
+<h3 style="text-align: center; font-weight: bold;">ASIGNACION COMISIONES DE AULA   <em id:"id_aula"><?=Html::encode("{$id_aula}")?></em></h3>
 <div class="content-wrapper" >
   
   <!-- Main content -->
@@ -30,18 +31,16 @@ $indexMaterias = 1;
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-3">
-        
           <div class="card">
-          
             <div class="card-header">
-              <center><h3>Materias</h3></center>
+              <h3 style="text-align: center; font-weight: bold;">Materias</h3>
             </div>
             <div class="card-body">
               <!-- the events -->
               <div id="external-events">
                 <?php foreach ($filter as $materia) {
                   ?>
-                  <h5><?= Html::encode("{$materia->NOMBRE} ") ?></h5>
+                  <h5 style="font-weight: bold;"><?= Html::encode("{$materia->NOMBRE} ") ?></h5>
                   <?php foreach ($materia->comisions as $comision) {
                     ?>
                 <div class="external-event bg-primary" style="background-color:<?php echo $color;?>"value="<?= Html::encode("{$comision->ID} ") ?>"> <?= Html::encode("{$comision->NOMBRE} ") ?></div>
@@ -118,8 +117,9 @@ Modal::begin([
     'weekends' => true,
     'editable' => true,
     'droppable'=> true,
-    'minTime' => '08:00:00',
+    'minTime' => '08:00:00', 
     'maxTime' => '23:00:00',
+    'height' => 'auto',
   
  
 ],'eventResize'=>'function(event, delta, revertFunc) {
