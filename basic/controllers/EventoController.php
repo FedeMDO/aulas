@@ -207,7 +207,7 @@ class EventoController extends Controller
         $fecha=substr($request->post('fecini'),0,10);
         if(!$horaini=substr($request->post('fecini'),11)==null){
             $horaini=substr($request->post('fecini'),11);
-            $horafin=substr($request->post('fecini'),11);
+            $horafin=substr($request->post('fin'),11);
             $hora1=Hora::findOne(['HORA'=>$horaini])->ID;
             $hora2=Hora::findOne(['HORA'=>$horafin])->ID;
         }

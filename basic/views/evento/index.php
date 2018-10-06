@@ -110,7 +110,7 @@ Modal::begin([
  <?= yii2fullcalendar\yii2fullcalendar::widget(array(
 'events'=>$events,
 'options' => [
-  'lang' => 'es',
+  'lang' => 'en',
   //... more options to be defined here!
 ],
 'id'=>'evento',
@@ -125,7 +125,7 @@ Modal::begin([
   var ini=event.start.format();
   var fin=event.end.format(); 
   
-  if (!confirm("Esta seguro??")) {
+  if (!confirm("Confirmar cambios")) {
       revertFunc();}
       else
       {
@@ -149,33 +149,30 @@ Modal::begin([
   });
 }}',
 'eventReceive'=>'function(event){
+  alert("Por favor elija un intervalo de horas");
   var titulo=event.title;
   var inicio=event.start.format();
   var date2 =$("em").text();
-  alert(date2);
-  if (!confirm("Esta seguro??")) {
-    revertFunc();}
-    else
+  
+}',
+'eventClick'=>'function(event){
+  var titulo = event.title;
+  var inicio = event.start.format();
+  var fin = event.end.format();
+  var date2 = $("em").text();
+  if (!confirm("Guardar cambios en base de datos?")){
+    revertFunc();
+  }
+  else{
+    $.post("/evento/upd2",
     {
-$.post("/evento/upd2",
-{ 
-    titulo:titulo,
-    fecini:inicio,
-    date2:date2
-},
-function(data)
-{
-    if (data){
-         }
-    else {
-        alert("error");
-        }
-});
-}
-  
-  
-  }',
-'eventClick'=>'function(){alert("haciendo click");}',
+      titulo:titulo,
+      fecini:inicio,
+      fin:fin,
+      date2:date2
+    });
+  }
+}',
 'eventDrop' => 'function( event, delta, revertFunc, jsEvent, ui, view ) { 
 
 var id =event.id;
@@ -205,6 +202,7 @@ function(data)
 });
 }}
     '));
+
 ?>
 </div>
 </div>
