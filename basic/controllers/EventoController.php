@@ -92,6 +92,8 @@ class EventoController extends Controller
         $tasks[] = $event1;
      }
     foreach ($events as $eve) {
+        $usuarioLogiado = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
+        $usuarioLogiadoColor = Instituto::findOne($usuarioLogiado)->COLOR_HEXA;
         $id_user= $eve->ID_User_Asigna;
         $usuario= Users::findOne($id_user)->idInstituto;
         $instituto= Instituto::findOne($usuario)->NOMBRE;
@@ -102,6 +104,13 @@ class EventoController extends Controller
         $event->id=$eve->ID;
         $event->title=$materia;
         $event->backgroundColor=$institutocolor;
+        $event->editable=true;
+        if ($usuarioLogiadoColor != $institutocolor){
+            $event->editable=false;
+        }
+        else{
+            $event->editable=true;
+        }
         if(!$eve->Hora_ini==null){
             $event->start=$eve->Fecha_ini.'T'.Hora::FindOne($eve->Hora_ini)->HORA;
             $event->end=$eve->Fecha_ini.'T'.Hora::FindOne($eve->Hora_fin)->HORA;
@@ -110,7 +119,7 @@ class EventoController extends Controller
             $event->start=$eve->Fecha_ini
             ;
         }
-        $event->constraint=Instituto::findOne($usuario)->NOMBRE;
+        //$event->constraint=Instituto::findOne($usuario)->NOMBRE;
         $tasks[] = $event;
     }
     $comi = new Comision();
