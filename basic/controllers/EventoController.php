@@ -82,6 +82,8 @@ class EventoController extends Controller
          $event1 = new \yii2fullcalendar\Models\Event();
        
          $event1->id =Instituto::findOne($cons->ID_Instituto_Recibe)->NOMBRE;
+         $event1->backgroundColor = Instituto::findOne($cons->ID_Instituto_Recibe)->COLOR_HEXA;
+         $event1->rendering = 'background';
       if(!$cons->Hora_ini==null){
         $event1->start =$cons->Fecha_ini.'T'.Hora::FindOne($cons->Hora_ini)->HORA;
         $event1->end=$cons->Fecha_ini.'T'.Hora::FindOne($cons->Hora_fin)->HORA;
@@ -119,7 +121,7 @@ class EventoController extends Controller
             $event->start=$eve->Fecha_ini
             ;
         }
-        //$event->constraint=Instituto::findOne($usuario)->NOMBRE;
+        $event->constraint=Instituto::findOne($usuario)->NOMBRE;
         $tasks[] = $event;
     }
     $comi = new Comision();
