@@ -86,8 +86,8 @@ class EventoController extends Controller
          $finalString = $cons->Fecha_ini.'T'.$cons->Hora_fin;
         $event1->start =$comienzoString;
         $event1->end=$finalString;
-      
-      
+        $event1->backgroundColor = Instituto::findOne($cons->ID_Instituto_Recibe)->COLOR_HEXA;
+        $event1->rendering = 'background';
         $event1->start =$cons->Fecha_ini;
       
         $tasks[] = $event1;
