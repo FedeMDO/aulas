@@ -94,32 +94,31 @@ $indexMaterias = 1;
 
 <h1><?= Html::encode($this->title) ?></h1>
 
-<?php   
-Modal::begin([
-                    'header' => '<h4>eventos nico</h4>'
-                    
-,                        'id'     => 'model',
-                    'size'   => 'model-lg',
-            ]);
+  <?php Modal::begin([
+          'header' => '<h4>eventos nico</h4>',                        
+          'id'     => 'model',
+          'size'   => 'model-lg',
+          ]);
             
-            echo "<div id='modelContent'></div>";
-            Modal::end();
+      echo "<div id='modelContent'></div>";
+  Modal::end();
 ?>
 
  <?= yii2fullcalendar\yii2fullcalendar::widget(array(
-'events'=>$events,
-'options' => [
-  'lang' => 'en',
-  //... more options to be defined here!
-],
-'id'=>'evento',
-'clientOptions'=>[
-    'weekends' => true,
-    'editable' => true,
-    'droppable'=> true,
-    'minTime' => '08:00:00', 
-    'maxTime' => '23:00:00',
-    'height' => 'auto',
+    'events'=>$events,
+    'options' => [
+      'lang' => 'es',
+      //... more options to be defined here!
+    ],
+    'id'=>'evento',
+    'clientOptions'=>[
+        'weekends' => true,
+        'days' => true,
+        'editable' => true,
+        'droppable'=> true,
+        'minTime' => '08:00:00', 
+        'maxTime' => '23:00:00',
+        'height' => 'auto',
   
  
 ],'eventResize'=>'function(event, delta, revertFunc) {
