@@ -15,8 +15,8 @@ use Yii;
  * @property int $ID_User_Asigna
  * @property int $ID_Dia
  * @property string $Fecha_ini
- * @property int $Hora_ini
- * @property int $Hora_fin
+ * @property string $Hora_ini
+ * @property string $Hora_fin
  * @property string $title
  *
  * @property RestriCalendar $restri
@@ -24,8 +24,6 @@ use Yii;
  * @property Hora $hora
  * @property Users $userAsigna
  * @property DiaSemana $dia
- * @property Hora $horaFin
- * @property Hora $horaIni
  * @property Aula $aula
  */
 class EventoCalendar extends \yii\db\ActiveRecord
@@ -44,17 +42,15 @@ class EventoCalendar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ID_Aula', 'ID_Restri', 'ID_Comision', 'ID_Hora', 'ID_User_Asigna', 'ID_Dia', 'Hora_ini', 'Hora_fin'], 'integer'],
-            [['ID_Comision', 'ID_User_Asigna', 'Fecha_ini', 'title'], 'required'],
-            [['Fecha_ini'], 'safe'],
+            [['ID_Aula', 'ID_Restri', 'ID_Comision', 'ID_Hora', 'ID_User_Asigna', 'ID_Dia'], 'integer'],
+            [['ID_Comision', 'ID_User_Asigna', 'Fecha_ini', 'Hora_ini', 'Hora_fin', 'title'], 'required'],
+            [['Fecha_ini', 'Hora_ini', 'Hora_fin'], 'safe'],
             [['title'], 'string', 'max' => 40],
             [['ID_Restri'], 'exist', 'skipOnError' => true, 'targetClass' => RestriCalendar::className(), 'targetAttribute' => ['ID_Restri' => 'ID']],
             [['ID_Comision'], 'exist', 'skipOnError' => true, 'targetClass' => Comision::className(), 'targetAttribute' => ['ID_Comision' => 'ID']],
             [['ID_Hora'], 'exist', 'skipOnError' => true, 'targetClass' => Hora::className(), 'targetAttribute' => ['ID_Hora' => 'ID']],
             [['ID_User_Asigna'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['ID_User_Asigna' => 'id']],
             [['ID_Dia'], 'exist', 'skipOnError' => true, 'targetClass' => DiaSemana::className(), 'targetAttribute' => ['ID_Dia' => 'ID']],
-            [['Hora_fin'], 'exist', 'skipOnError' => true, 'targetClass' => Hora::className(), 'targetAttribute' => ['Hora_fin' => 'ID']],
-            [['Hora_ini'], 'exist', 'skipOnError' => true, 'targetClass' => Hora::className(), 'targetAttribute' => ['Hora_ini' => 'ID']],
             [['ID_Aula'], 'exist', 'skipOnError' => true, 'targetClass' => Aula::className(), 'targetAttribute' => ['ID_Aula' => 'ID']],
         ];
     }
@@ -117,22 +113,6 @@ class EventoCalendar extends \yii\db\ActiveRecord
     public function getDia()
     {
         return $this->hasOne(DiaSemana::className(), ['ID' => 'ID_Dia']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getHoraFin()
-    {
-        return $this->hasOne(Hora::className(), ['ID' => 'Hora_fin']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getHoraIni()
-    {
-        return $this->hasOne(Hora::className(), ['ID' => 'Hora_ini']);
     }
 
     /**

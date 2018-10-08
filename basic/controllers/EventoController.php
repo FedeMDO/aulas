@@ -76,21 +76,20 @@ class EventoController extends Controller
         }
 
     }
-    $events = EventoCalendar::find()->all();
-    $const= RestriCalendar::find()->all();
+    $events = EventoCalendar::find()->where(['ID_Aula' => $id])->all();
+    $const= RestriCalendar::find()->where(['ID_Aula' => $id])->all();
     foreach ($const as $cons) {
          $event1 = new \yii2fullcalendar\Models\Event();
        
          $event1->id =Instituto::findOne($cons->ID_Instituto_Recibe)->NOMBRE;
-         $event1->backgroundColor = Instituto::findOne($cons->ID_Instituto_Recibe)->COLOR_HEXA;
-         $event1->rendering = 'background';
-      if(!$cons->Hora_ini==null){
-        $event1->start =$cons->Fecha_ini.'T'.Hora::FindOne($cons->Hora_ini)->HORA;
-        $event1->end=$cons->Fecha_ini.'T'.Hora::FindOne($cons->Hora_fin)->HORA;
-      }
-      else{
+         $comienzoString = $cons->Fecha_ini.'T'.$cons->Hora_ini;
+         $finalString = $cons->Fecha_ini.'T'.$cons->Hora_fin;
+        $event1->start =$comienzoString;
+        $event1->end=$finalString;
+        $event1->backgroundColor = Instituto::findOne($cons->ID_Instituto_Recibe)->COLOR_HEXA;
+        $event1->rendering = 'background';
         $event1->start =$cons->Fecha_ini;
-      }
+      
         $tasks[] = $event1;
      }
     foreach ($events as $eve) {
@@ -110,18 +109,11 @@ class EventoController extends Controller
         if ($usuarioLogiadoColor != $institutocolor){
             $event->editable=false;
         }
-        else{
-            $event->editable=true;
-        }
-        if(!$eve->Hora_ini==null){
-            $event->start=$eve->Fecha_ini.'T'.Hora::FindOne($eve->Hora_ini)->HORA;
-            $event->end=$eve->Fecha_ini.'T'.Hora::FindOne($eve->Hora_fin)->HORA;
-        }
-        else{
-            $event->start=$eve->Fecha_ini
-            ;
-        }
-        $event->constraint=Instituto::findOne($usuario)->NOMBRE;
+        $comienzoString = (string)$eve->Fecha_ini.'T'.(string)$eve->Hora_ini;
+         $finalString = (string)$eve->Fecha_ini.'T'.(string)$eve->Hora_fin;
+        $event->start =$comienzoString;
+        $event->end=$finalString;
+        //$event->constraint=Instituto::findOne($usuario)->NOMBRE;
         $tasks[] = $event;
     }
     $comi = new Comision();
@@ -156,10 +148,10 @@ class EventoController extends Controller
         $model = new EventoCalendar();
         $model->Fecha_ini=$date;
         $model->ID_User_Asigna=Yii::$app->user->identity->id;
-       
+        
         $model->ID_Aula=$date2;
         $request=Yii::$app->request->post();
-      
+        
         $model->save();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index','id' =>$date2]);
@@ -192,20 +184,15 @@ class EventoController extends Controller
     public function actionUpd()
     {
         $request = Yii::$app->request;
-        $id=$request->post('id');
-        $fecha=substr($request->post('fecini'),0,10);
-        $horaini=substr($request->post('fecini'),11);
-        $horafin=substr($request->post('fin'),11);
-        $evento= EventoCalendar::findONe($id);
-        $hora1=Hora::findOne(['HORA'=>$horaini])->ID;
-        $hora2=Hora::findOne(['HORA'=>$horafin])->ID;
-        $evento->Fecha_ini=$fecha;
-        $evento->Hora_ini=$hora1;
-        $evento->Hora_fin=$hora2;
+
+        $evento= EventoCalendar::findONe($request->post('id'));
+
+        $evento->Fecha_ini = substr($request->post('fecini'),0,10);
+        $evento->Hora_ini = substr($request->post('fecini'),11);
+        $evento->Hora_fin = substr($request->post('fin'),11);
+
         $evento->save();
         echo $hora1; 
-        
-      
     }
     public function actionUpd2()
     {
@@ -219,8 +206,8 @@ class EventoController extends Controller
         if(!$horaini=substr($request->post('fecini'),11)==null){
             $horaini=substr($request->post('fecini'),11);
             $horafin=substr($request->post('fin'),11);
-            $hora1=Hora::findOne(['HORA'=>$horaini])->ID;
-            $hora2=Hora::findOne(['HORA'=>$horafin])->ID;
+            $hora1=$horaini;
+            $hora2=$horafin;
         }
         else{
             $hora1= null;

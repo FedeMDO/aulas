@@ -14,24 +14,42 @@ use app\models\Hora;
 <div class="evento-calendar-form">
 
     <?php $form = ActiveForm::begin(); ?>
+
     <?php $comisiones = Comision::find()->asArray()->all();
     $result = ArrayHelper::map($comisiones, 'ID', 'NOMBRE'); ?>
     <?php echo $form->field($model, 'ID_Comision')->dropDownList(
         $result, 
         ['prompt'=>'SELECCIONE LA COMISION...']
         )->label(' COMISION '); ?> 
+
     <?= $form->field($model, 'ID_User_Asigna')->textInput(['class' => 'form-control class-content-title_series', 'placeholder' => 'Title', 'disabled' => 'true','value'=>$nombreusuario])->label(' USUARIO '); ?>
     <?= $form->field($model, 'ID_Aula')->textInput(['class' => 'form-control class-content-title_series', 'placeholder' => 'Title', 'disabled' => 'true' ,'value'=>$aula1])->label(' AULA '); ?>
     <?= $form->field($model, 'Fecha_ini')->textInput(['disabled' => 'true']) ?>
-    <?php $comisiones = Hora::find()->asArray()->all();
-    $result = ArrayHelper::map($comisiones, 'ID', 'HORA'); ?>
+
+    <?php 
+         $horas = ['08:00:00' => '08:00',
+         '09:00:00' => '09:00',
+         '10:00:00' => '10:00',
+         '11:00:00' => '11:00',
+         '12:00:00' => '12:00',
+         '13:00:00' => '13:00',
+         '14:00:00' => '14:00',
+         '15:00:00' => '15:00',
+         '16:00:00' => '16:00',
+         '17:00:00' => '17:00',
+         '18:00:00' => '18:00',
+         '19:00:00' => '19:00',
+         '20:00:00' => '20:00',
+         '21:00:00' => '21:00',
+         '22:00:00' => '22:00'];
+         ?>
        <?php echo $form->field($model, 'Hora_ini')->dropDownList(
-        $result, 
+        $horas, 
         ['prompt'=>'SELECCIONE LA HORA DE INICIO......']
         ); ?> 
 
           <?php echo $form->field($model,'Hora_fin')->dropDownList(
-        $result, 
+                $horas, 
         ['prompt'=>'SELECCIONE LA HORA DE FIN.......']
         ); ?> 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
