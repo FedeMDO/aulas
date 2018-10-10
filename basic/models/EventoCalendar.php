@@ -17,6 +17,7 @@ use Yii;
  * @property string $Fecha_ini
  * @property string $Hora_ini
  * @property string $Hora_fin
+ * @property string $dow
  * @property string $title
  *
  * @property RestriCalendar $restri
@@ -45,6 +46,7 @@ class EventoCalendar extends \yii\db\ActiveRecord
             [['ID_Aula', 'ID_Restri', 'ID_Comision', 'ID_Hora', 'ID_User_Asigna', 'ID_Dia'], 'integer'],
             [['ID_Comision', 'ID_User_Asigna', 'Fecha_ini', 'Hora_ini', 'Hora_fin', 'title'], 'required'],
             [['Fecha_ini', 'Hora_ini', 'Hora_fin'], 'safe'],
+            [['dow'], 'string', 'max' => 13],
             [['title'], 'string', 'max' => 40],
             [['ID_Restri'], 'exist', 'skipOnError' => true, 'targetClass' => RestriCalendar::className(), 'targetAttribute' => ['ID_Restri' => 'ID']],
             [['ID_Comision'], 'exist', 'skipOnError' => true, 'targetClass' => Comision::className(), 'targetAttribute' => ['ID_Comision' => 'ID']],
@@ -71,6 +73,7 @@ class EventoCalendar extends \yii\db\ActiveRecord
             'Fecha_ini' => 'Fecha Ini',
             'Hora_ini' => 'Hora Ini',
             'Hora_fin' => 'Hora Fin',
+            'dow' => 'Dow',
             'title' => 'Title',
         ];
     }

@@ -13,8 +13,9 @@ use Yii;
  * @property int $ID_Tipo_Repeticion
  * @property int $ID_User_Recibe
  * @property string $Fecha_ini
- * @property int $Hora_ini
- * @property int $Hora_fin
+ * @property string $Hora_ini
+ * @property string $Hora_fin
+ * @property string $dow
  * @property string $Periodo_Academico
  *
  * @property EventoCalendar[] $eventoCalendars
@@ -22,8 +23,6 @@ use Yii;
  * @property Instituto $institutoRecibe
  * @property TipoRepeticion $tipoRepeticion
  * @property Users $userRecibe
- * @property Hora $horaFin
- * @property Hora $horaIni
  */
 class RestriCalendar extends \yii\db\ActiveRecord
 {
@@ -42,15 +41,14 @@ class RestriCalendar extends \yii\db\ActiveRecord
     {
         return [
             [['ID_Aula', 'ID_Instituto_Recibe', 'ID_Tipo_Repeticion', 'ID_User_Recibe', 'Fecha_ini', 'Hora_ini', 'Hora_fin', 'Periodo_Academico'], 'required'],
-            [['ID_Aula', 'ID_Instituto_Recibe', 'ID_Tipo_Repeticion', 'ID_User_Recibe', 'Hora_ini', 'Hora_fin'], 'integer'],
-            [['Fecha_ini'], 'safe',],
+            [['ID_Aula', 'ID_Instituto_Recibe', 'ID_Tipo_Repeticion', 'ID_User_Recibe'], 'integer'],
+            [['Fecha_ini', 'Hora_ini', 'Hora_fin'], 'safe'],
+            [['dow'], 'string', 'max' => 13],
             [['Periodo_Academico'], 'string', 'max' => 50],
             [['ID_Aula'], 'exist', 'skipOnError' => true, 'targetClass' => Aula::className(), 'targetAttribute' => ['ID_Aula' => 'ID']],
             [['ID_Instituto_Recibe'], 'exist', 'skipOnError' => true, 'targetClass' => Instituto::className(), 'targetAttribute' => ['ID_Instituto_Recibe' => 'ID']],
             [['ID_Tipo_Repeticion'], 'exist', 'skipOnError' => true, 'targetClass' => TipoRepeticion::className(), 'targetAttribute' => ['ID_Tipo_Repeticion' => 'ID']],
             [['ID_User_Recibe'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['ID_User_Recibe' => 'id']],
-            [['Hora_fin'], 'exist', 'skipOnError' => true, 'targetClass' => Hora::className(), 'targetAttribute' => ['Hora_fin' => 'ID']],
-            [['Hora_ini'], 'exist', 'skipOnError' => true, 'targetClass' => Hora::className(), 'targetAttribute' => ['Hora_ini' => 'ID']],
         ];
     }
 
@@ -68,6 +66,7 @@ class RestriCalendar extends \yii\db\ActiveRecord
             'Fecha_ini' => 'Fecha Ini',
             'Hora_ini' => 'Hora Ini',
             'Hora_fin' => 'Hora Fin',
+            'dow' => 'Dow',
             'Periodo_Academico' => 'Periodo  Academico',
         ];
     }
@@ -110,21 +109,5 @@ class RestriCalendar extends \yii\db\ActiveRecord
     public function getUserRecibe()
     {
         return $this->hasOne(Users::className(), ['id' => 'ID_User_Recibe']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getHoraFin()
-    {
-        return $this->hasOne(Hora::className(), ['ID' => 'Hora_fin']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getHoraIni()
-    {
-        return $this->hasOne(Hora::className(), ['ID' => 'Hora_ini']);
     }
 }
