@@ -79,46 +79,62 @@ class EventoController extends Controller
     $events = EventoCalendar::find()->where(['ID_Aula' => $id])->all();
     $const= RestriCalendar::find()->where(['ID_Aula' => $id])->all();
     foreach ($const as $cons) {
-         $event1 = new \yii2fullcalendar\Models\Event();
-       
-         $event1->id =Instituto::findOne($cons->ID_Instituto_Recibe)->NOMBRE;
-         $comienzoString = $cons->Fecha_ini.'T'.$cons->Hora_ini;
-         $finalString = $cons->Fecha_ini.'T'.$cons->Hora_fin;
-        $event1->start =$comienzoString;
-        $event1->end=$finalString;
+
+        $event1 = new \yii2fullcalendar\Models\Event();
+
+        $event1->id =Instituto::findOne($cons->ID_Instituto_Recibe)->NOMBRE;
+        $event1->start = $cons->Fecha_ini.'T'.$cons->Hora_ini;
+        $event1->end= $cons->Fecha_ini.'T'.$cons->Hora_fin;
         $event1->backgroundColor = Instituto::findOne($cons->ID_Instituto_Recibe)->COLOR_HEXA;
         $event1->rendering = 'background';
-        $event1->start =$cons->Fecha_ini;
+        $event1->dow = array(3,5);
+        // if (!empty($cons->dow)) {
+        //     $event1->dow = json_decode('[' . $cons->dow . ']', true);
+             var_dump($event1->dow);
+        // }
+        
       
         $tasks[] = $event1;
      }
+    
     foreach ($events as $eve) {
-        $usuarioLogiado = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
-        $usuarioLogiadoColor = Instituto::findOne($usuarioLogiado)->COLOR_HEXA;
-        $id_user= $eve->ID_User_Asigna;
-        $usuario= Users::findOne($id_user)->idInstituto;
-        $instituto= Instituto::findOne($usuario)->NOMBRE;
-        $institutocolor= Instituto::findOne($usuario)->COLOR_HEXA;
-        $comision=Comision::findOne($eve->ID_Comision);
-        $materia=Materia::findOne($comision->ID_MATERIA)->NOMBRE;
+        
+        $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
+
+        $userWhoRegistered = $eve->ID_User_Asigna;
+        $institutocolor = Instituto::findOne(Users::findOne($userWhoRegistered)->idInstituto)->COLOR_HEXA;
+
+        $comision = Comision::findOne($eve->ID_Comision);
+        $materiaName = Materia::findOne($comision->ID_MATERIA)->NOMBRE;
+
         $event = new \yii2fullcalendar\Models\Event();
-        $event->id=$eve->ID;
-        $event->title=$materia;
-        $event->backgroundColor=$institutocolor;
-        $event->editable=true;
-        if ($usuarioLogiadoColor != $institutocolor){
-            $event->editable=false;
+
+        $event->id = $eve->ID;
+        $event->title = $materiaName;
+        $event->backgroundColor = $institutocolor;
+        $event->editable = true;
+        $event->constraint = Instituto::findOne(Users::findOne($userWhoRegistered)->idInstituto)->NOMBRE;
+
+        //user en session no edita eventos de otros institutos
+        if ($instIdOnSessionUser != Users::findOne($userWhoRegistered)->idInstituto){
+            $event->editable = false;
         }
-        $comienzoString = (string)$eve->Fecha_ini.'T'.(string)$eve->Hora_ini;
-         $finalString = (string)$eve->Fecha_ini.'T'.(string)$eve->Hora_fin;
-        $event->start =$comienzoString;
-        $event->end=$finalString;
-        //$event->constraint=Instituto::findOne($usuario)->NOMBRE;
+
+        $event->start = (string)$eve->Fecha_ini.'T'.(string)$eve->Hora_ini;
+        $event->end = (string)$eve->Fecha_ini.'T'.(string)$eve->Hora_fin;
+        
+        $event->dow ='';
+        
+        // if (!empty($eve->dow)) {
+        //     $event->dow = json_decode('[' . $eve->dow . ']', true);
+             var_dump($event->dow);
+        // }
+        
         $tasks[] = $event;
     }
-    $comi = new Comision();
+    
     return $this->render('index', [
-      'events'=>$tasks,'filter'=> $filter_comis, 'comi' => $comi, 'id_aula'=>$id ,"color"=>$institutocolor2
+      'events'=>$tasks,'filter'=> $filter_comis, 'id_aula'=>$id ,"color"=>$institutocolor2
     ]);
 }
 
