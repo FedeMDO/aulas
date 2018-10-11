@@ -84,16 +84,11 @@ text-transform: uppercase; */
 
 /* Style the tab content */
 .tabcontent {
-    position: relative !important;
-    margin-left: 10%;
-    border-collapse: separate;
     float: left;
     padding: 20px 12px;
     width: 70%;
     border-left: none;
-    max-height: 900px;
-    overflow: auto;
-    overflow-x: hidden;
+    height: 300px;
 }
 
 .gallery{
@@ -115,6 +110,9 @@ text-transform: uppercase; */
 .gallery img:hover{
   transform: scale(1.2);
 }
+
+
+
 
 h4 { 
   border:0 solid #fff; 
@@ -155,6 +153,8 @@ th, td {
   text-align: left;
   padding: 8px;
 }
+
+
 
 
 .form-control {
@@ -261,6 +261,10 @@ text-transform: uppercase;
   background-color:white;
 }
 
+a{
+  color:black;
+  padding-top: 20px;
+}
 .navbar-brand {
   padding: 0px; /* firefox bug fix */
 }
@@ -273,17 +277,12 @@ text-transform: uppercase;
   bottom: 10px;
 }
 .navbar-inverse{
-  position: fixed;
+  position: relative;
   border-top: 2px solid white ;
   background-color: white;
   height:100%;
   width: 10%;
-}
-
-.navbar-inverse>a{
-    color:black;
-    padding-top: 20px;
-  
+ 
 }
 .carousel-inner > .item > img {
   margin: 0 auto;
@@ -293,7 +292,6 @@ text-transform: uppercase;
   position: relative;
   left:10px;
   width: 30%;
-  padding-right: 50px;
   height:auto;
 }
 .media-body{
@@ -305,14 +303,12 @@ text-transform: uppercase;
   border-radius: 250px;
 }
 
-/*esto es el texto de arriba de notificaciones*/
 .media-body >h4{
   color:white;
   text-transform: capitalize;
   border-bottom: 1px solid white;
   padding-bottom: 5px;
   text-align: left;
-  width: 400px;
 }
 .recibidos{
   border: 1px solid white;
@@ -320,16 +316,6 @@ text-transform: uppercase;
 /* arregla margen de aulas*/
 .btn-vistav{
   margin-top: 10px;
-}
-.btn-vistav1{
-  margin-top: 10px;
-  margin-left: 55px;
-}
-.btn-vistav2{
-  margin-top: 10px;
-}
-.formu{
-  margin-top :20px;
 }
 
 /*Estilo del placeholder*/
@@ -351,78 +337,45 @@ text-transform: uppercase;
   font-style: italic;
 }
 
-.mensaje{
-  padding-top: 5px;
-  min-height: 650px;
-  width: 50%;
-  overflow: hidden;
-  position: relative;
-  left: 20px;
+* {
+  margin: 0px;
+  padding: 0px;
 }
 
-/*Estilo de scroll solo funciona en crome*/
-
-/* width */
-.tabcontent::-webkit-scrollbar {
-  width: 10px;
-  
+#sidebar {
+  position: absolute;
+  width: 200px;
+  height: 145%;
+  background: #1475b9;
+  left: 0px;
+  transition: all 500ms linear;
+  top: 50px;
 }
 
-/* Track */
-.tabcontent::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-  border-radius: 10px;
+#sidebar.active {
+  left: -200px;
 }
 
-/* Handle */
-.tabcontent::-webkit-scrollbar-thumb {
-  background: #888; 
-  border-radius: 10px;
-}
-
-/* Handle on hover */
-.tabcontent::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-}
-
-/*panel de log*/
-.log {
-  background-color: rgb(41, 128, 185);
-  border-radius: 15px;
-  border-color:#d2d2d2;
-  border-width: 5px;
-  box-shadow:0 1px 0 #cfcfcf;
-  width: 90%;
-  float: center;
-  margin: auto; 
+#sidebar ul li {
+  color: rgba(230, 230, 230, .9);
+  list-style: none;
+  padding: 15px 10px;
+  border-bottom: 1px solid rgba(100, 100, 100, .3);
   text-align: center;
 }
 
-
-.log>p{
-  color: white;
-}
-.log>h1{
-  color: white;
-  border-bottom: 1px solid white;
+#sidebar .toggle-btn {
+  position: absolute;
+  left: 200px;
+  top: 0px;
+  cursor: pointer;
 }
 
-/*panel azul generico*/
-
-.azul{
-  background-color: #2980b9;
-  border-color:#d2d2d2;
-  border-width: 5px;
-  box-shadow:0 1px 0 #cfcfcf;
-  margin: auto; 
-  margin-top: 20px;
+#sidebar .toggle-btn span {
+  background-color: #1475b9;
+  display: block;
+  width: 30px;
   text-align: center;
-}
-.enviado{
-  width: 80%;
-}
-
-/* baja el boton de buscar en la vista buscador*/
-.btn-buscador1{
-  margin-top: 10px;
-}
+  font-size: 18px;
+  border: 1px solid #000;
+} 
