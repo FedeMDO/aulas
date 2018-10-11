@@ -38,9 +38,9 @@ $this->title = 'Sedes';
   </div>
       <ul>
         <li>
-        <a href="../sede/create" class="btn btn-success btn-md btn-vistav" role="button">Crear Sede</a>
+        <a href="../sede/create" class="btn miBoton btn-md btn-vistav" role="button">Crear Sede</a>
         </li>
-        <li><a href="../aula/buscador" class="btn btn-primary btn-md btn-vistav" role="button">Filtar Aulas</a>
+        <li><a href="../aula/buscador" class="btn miBoton btn-md btn-vistav" role="button">Filtar Aulas</a>
         </li>
       </ul>
 </div>
