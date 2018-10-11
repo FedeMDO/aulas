@@ -18,7 +18,7 @@ $this->title = 'Edificios disponibles';
 
 
 
-<center><h3 style="color:white;"><?php if(count($edificio) != 0){
+<center><h3 style="color:black;"><?php if(count($edificio) != 0){
 echo("Edificios Disponibles en la sede "); echo (Html::encode("{$edificio[0]->sEDE->NOMBRE}"));}
 else{?>
 
