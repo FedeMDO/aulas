@@ -13,8 +13,8 @@ $this->registerCssFile("@web/css/index.css", [
 $this->title = 'Edificios disponibles';
 ?>
 <br>
-
-<a href="../edificio/create" class="btn btn-success btn-md btn-vistav1" role="button">Crear Edificio</a>
+<br>
+<a href="../edificio/create" class="btn btn-success d-flex justify-content-around btn-edificio0" role="button">Crear Edificio</a>
 
 
 
