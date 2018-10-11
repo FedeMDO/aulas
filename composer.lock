@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a4a0caa3e4bed240144b560ab44d3c93",
+    "content-hash": "a0478459b285d80383c64b23ef25d62d",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -216,6 +216,25 @@
                 "shasum": null
             },
             "type": "bower-asset"
+        },
+        {
+            "name": "bower-asset/sweetalert2",
+            "version": "v7.28.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sweetalert2/sweetalert2.git",
+                "reference": "229aa4fb39d7105dd47b2af40c92d0982675b224"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sweetalert2/sweetalert2/zipball/229aa4fb39d7105dd47b2af40c92d0982675b224",
+                "reference": "229aa4fb39d7105dd47b2af40c92d0982675b224",
+                "shasum": null
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
         },
         {
             "name": "bower-asset/yii2-pjax",
@@ -463,6 +482,24 @@
             "time": "2018-08-27T06:10:37+00:00"
         },
         {
+            "name": "daneden/animate.css",
+            "version": "3.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ange187/animate.css.git",
+                "reference": "79a73464c3424b4f17a64d78092800d676e25b25"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ange187/animate.css/zipball/79a73464c3424b4f17a64d78092800d676e25b25",
+                "reference": "79a73464c3424b4f17a64d78092800d676e25b25",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2017-04-21T12:02:21+00:00"
+        },
+        {
             "name": "dmstr/yii2-adminlte-asset",
             "version": "2.6.2",
             "source": {
@@ -521,6 +558,55 @@
                 "yii2"
             ],
             "time": "2018-07-24T14:47:13+00:00"
+        },
+        {
+            "name": "dominus77/yii2-sweetalert2-widget",
+            "version": "v1.3.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Dominus77/yii2-sweetalert2-widget.git",
+                "reference": "50e4fb947f721109480d1c8b3cfd98cbdebfbbfc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Dominus77/yii2-sweetalert2-widget/zipball/50e4fb947f721109480d1c8b3cfd98cbdebfbbfc",
+                "reference": "50e4fb947f721109480d1c8b3cfd98cbdebfbbfc",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/sweetalert2": "^7.6",
+                "daneden/animate.css": "^3.5",
+                "yiisoft/yii2": "~2.0",
+                "yiisoft/yii2-bootstrap": "~2.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "6.*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "dominus77\\sweetalert2\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexey Schevchenko",
+                    "email": "ivanovosity@gmail.com"
+                }
+            ],
+            "description": "Renders a SweetAlert2 widget for Yii2.",
+            "keywords": [
+                "Dominus77",
+                "extension",
+                "sweetalert2",
+                "widget",
+                "yii2"
+            ],
+            "time": "2018-02-14T06:31:54+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -1255,16 +1341,16 @@
         },
         {
             "name": "codeception/phpunit-wrapper",
-            "version": "7.3.1",
+            "version": "7.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/phpunit-wrapper.git",
-                "reference": "1967be130082effb3c30510cf8f8397fbd9d8b84"
+                "reference": "a5633c736e0e0022bc5065b27c63f2d1aa97b69f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/phpunit-wrapper/zipball/1967be130082effb3c30510cf8f8397fbd9d8b84",
-                "reference": "1967be130082effb3c30510cf8f8397fbd9d8b84",
+                "url": "https://api.github.com/repos/Codeception/phpunit-wrapper/zipball/a5633c736e0e0022bc5065b27c63f2d1aa97b69f",
+                "reference": "a5633c736e0e0022bc5065b27c63f2d1aa97b69f",
                 "shasum": ""
             },
             "require": {
@@ -1294,7 +1380,7 @@
                 }
             ],
             "description": "PHPUnit classes used by Codeception",
-            "time": "2018-09-28T15:36:26+00:00"
+            "time": "2018-10-07T21:30:01+00:00"
         },
         {
             "name": "codeception/specify",
