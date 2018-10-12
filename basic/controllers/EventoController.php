@@ -90,7 +90,7 @@ class EventoController extends Controller
         $event1->dow = array(3,5);
         // if (!empty($cons->dow)) {
         //     $event1->dow = json_decode('[' . $cons->dow . ']', true);
-             var_dump($event1->dow);
+             //var_dump($event1->dow);
         // }
         
       
@@ -214,8 +214,8 @@ class EventoController extends Controller
     {
         $request = Yii::$app->request;
        $date2=$request->post('date2');
-        var_dump($request->post('date2'));
-        var_dump($date2);
+        //var_dump($request->post('date2'));
+        //var_dump($date2);
         $request = Yii::$app->request;
         $titulo=$request->post('titulo');
         $fecha=substr($request->post('fecini'),0,10);

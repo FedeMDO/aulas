@@ -4,7 +4,7 @@ use yii\widgets\ActiveForm;
 use dominus77\sweetalert2;
 
 $this->title = 'Recuperar contraseña';
-
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 
@@ -28,7 +28,7 @@ endif; ?>
 ]);
 ?>
 <div class="col-md-offset-4 col-md-4">
-<div class="loginc log">
+<div class="loginc log azul">
 <h1>Recuperar contraseña</h1>
 <p>Por favor ingrese su email:</p>
  <?= $form->field($model, "email",['labelOptions'=>['style'=>'color:white']])->textinput() ?>
