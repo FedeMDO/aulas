@@ -236,6 +236,7 @@ class EventoController extends Controller
         $evento->Fecha_ini=$fecha;
         $evento->Hora_ini=$hora1;
         $evento->Hora_fin=$hora2;
+        $evento->ID_Aula = $date2;
         $evento->save();
         echo $hora1;
        

@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use Yii;
 use app\models\RestriCalendar;
+use app\models\Aula;
+use app\models\Users;
 use app\models\Instituto;
 use app\models\RestriCalendarSearch;
 use yii\web\Controller;
@@ -35,20 +37,21 @@ class RestriController extends Controller
      * Lists all RestriCalendar models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($id)
     {
-    $events= RestriCalendar::find()->all();
+    $events = RestriCalendar::find()->all();
+    $institutos = Instituto::find()->all();
     foreach ($events as $eve) {
-        $instituto= Instituto::findOne($eve->ID_Instituto_Recibe)->NOMBRE;        
+        $instituto= Instituto::findOne($eve->ID_Instituto_Recibe)->NOMBRE;
         $event = new \yii2fullcalendar\Models\Event();
         $event->title=$instituto;
-        $event->start=$eve->Fecha_ini.'T'.Hora::FindOne($eve->Hora_ini)->HORA;
-        $event->end=$eve->Fecha_ini.'T'.Hora::FindOne($eve->Hora_fin)->HORA;
+        $event->start = (string)$eve->Fecha_ini.'T'.(string)$eve->Hora_ini;
+        $event->end = (string)$eve->Fecha_ini.'T'.(string)$eve->Hora_fin;
         $event->backgroundColor=Instituto::findOne($eve->ID_Instituto_Recibe)->COLOR_HEXA;
         $tasks[] = $event;
     }
     return $this->render('index', [
-      'events'=>$tasks,
+      'events'=>$tasks, 'institutos' => $institutos, 'id_aula'=> $id,
     ]);
 }
     /**
@@ -56,17 +59,27 @@ class RestriController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($date, $date2)
     {
+        //$date2 = 1;
+        //$date = '2018-10-10';
         $model = new RestriCalendar();
+        $aula1= Aula::findOne($date2)->NOMBRE;
+        $model->Fecha_ini = $date;
+        $model->ID_Aula = $date2;
+        $model->Periodo_Academico = '2018';
+        $institutos = Instituto::find()->all();
+        $usuarios = Users::find()->where(['not', ['username' => Yii::$app->user->identity->username]])
+        ->andWhere(['activate' =>1])->asArray()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID]);
+            return $this->redirect(['index', 'id' => $date2]);
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        else{
+            return $this->renderAjax('create', [
+                'model' => $model, 'aula1' => $aula1, 'institutos' => $institutos, 'usuarios' => $usuarios,
+            ]);
+        }
     }
 
     /**
@@ -101,6 +114,32 @@ class RestriController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionRestri(){
+        $request = Yii::$app->request;
+        $aula = $request->post('aula');
+        var_dump($request->post('aula'));
+        var_dump($aula);
+        $fecha = substr($request->post('fecini'), 0, 10);
+        $ini = substr($request->post('fecini'), 11);
+        $fin = substr($request->post('fin'), 11);
+        $user = Yii::$app->$user->identity->id;
+        $instituto = Instituto::findOne($user)->ID;
+        $rep = 1;
+        $per = '2018';
+        $restri = new RestriCalendar();
+        $restri->ID_Aula = $aula;
+        $restri->ID_Instituto_Recibe = $instituto;
+        $restri->ID_Tipo_Repeticion = $rep;
+        $restri->ID_User_Recibe = $user;
+        $restri->Fecha_ini = $fecha;
+        $restri->Hora_ini = $ini;
+        $restri->Hora_fin = $fin;
+        $restri->Periodo_Academico = $per;
+        $restri->save();
+
+        return $this->redirect(['index','id' =>$aula]);
     }
 
     /**
