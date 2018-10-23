@@ -64,14 +64,27 @@ class AdminController extends Controller
                 foreach ($ID_Usuarios as $user1){
                     $model1 = new Notificacion();
                     $model1->ID_USER_EMISOR = Yii::$app->user->identity->id;
-                    $model1 ->ID_USER_RECEPTOR = $user1;
+                    $model1->ID_USER_RECEPTOR = $user1;
                     $model1->NOTIFICACION = $mensaje;
                     $model1->FECHA = new \yii\db\Expression('NOW()');
                     $model1->save();       
                 }
                 if ($model1->save()){
+                    //Enviamos correo
+                    $receptor = Users::findOne($model1->ID_USER_RECEPTOR)->username;
+                    $emisor = Users::findOne($model1->ID_USER_EMISOR)->username;
+                    $mail = Users::findOne($model1->ID_USER_RECEPTOR)->email;
+                    $subject = "Nueva notificación";
+                    $body = "<p>Hola <strong>".$receptor."</strong>, tenes una nueva notificación de <strong>".$emisor."</strong>.</p>" ;
+                    $body .= "<p> Notificación: <i>".$model1->NOTIFICACION."</i></p>";
+                    $body .= "<p><a href='http://yii.local/admin/noti'>Ver notificación</a></p>";
+                    Yii::$app->mailer->compose()
+                        ->setTo($mail)
+                        ->setFrom([Yii::$app->params["adminEmail"] => Yii::$app->params["title"]])
+                        ->setSubject($subject)
+                        ->setHtmlBody($body)
+                        ->send();
                     $session = Yii::$app->session;
-                    
                     //$session->setFlash('notificacionEnviada', 'Has enviado correctamente la notificacion');
                     Yii::$app->session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, 'Mensaje enviado!');
                     return $this->redirect('noti');
