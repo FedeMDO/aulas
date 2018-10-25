@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "content-hash": "8cb90a61a21071f357996dfc29f6aed8",
@@ -232,16 +232,16 @@
         },
         {
             "name": "bower-asset/sweetalert2",
-            "version": "v7.28.2",
+            "version": "v7.28.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sweetalert2/sweetalert2.git",
-                "reference": "0e0cc77af4cae08775ec1c2280dba869a924c832"
+                "reference": "229aa4fb39d7105dd47b2af40c92d0982675b224"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sweetalert2/sweetalert2/zipball/0e0cc77af4cae08775ec1c2280dba869a924c832",
-                "reference": "0e0cc77af4cae08775ec1c2280dba869a924c832",
+                "url": "https://api.github.com/repos/sweetalert2/sweetalert2/zipball/229aa4fb39d7105dd47b2af40c92d0982675b224",
+                "reference": "229aa4fb39d7105dd47b2af40c92d0982675b224",
                 "shasum": null
             },
             "type": "bower-asset",

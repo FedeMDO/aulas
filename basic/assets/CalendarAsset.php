@@ -13,12 +13,12 @@ class CalendarAsset extends AssetBundle
     ];
     public $js = [
       
-      'js/jquery-3.3.1.min.js',
-      'js/moment.min.js',
-      'js/fullcalendar.min.js',
-      'js/es-us.js',
-      'js/main.js',
-
+        'js/jquery-3.3.1.min.js',
+        'js/moment.min.js',
+        'js/fullcalendar.min.js',
+        'js/es-us.js',
+        'js/main.js',
+        'js/main2.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
