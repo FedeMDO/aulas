@@ -3,24 +3,25 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\bootstrap\Modal;
-
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\EventoCalendarSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+use app\assets\CalendarAsset;
+
+CalendarASset::register($this);
+
 $this->registerCssFile("@web/css/index.css", [
   'depends' => [\yii\bootstrap\BootstrapAsset::className()],
-  
-
-  
 ], 'css-print-theme');
 
-
-$this->title = '';
+$this->title = 'Calendario de asignacion';
 
 $this->params['breadcrumbs'][] = $this->title;
 $indexMaterias = 1;
 ?>
+
 <div class="col-md-offset-1 col-md-10">
 <div class="loginc">
 <h3 style="text-align: center; font-weight: bold;">ASIGNACION COMISIONES DE AULA   <em id:"id_aula"><?=Html::encode("{$id_aula}")?></em></h3>
@@ -103,119 +104,10 @@ $indexMaterias = 1;
       echo "<div id='modelContent'></div>";
   Modal::end();
 ?>
-
- <?= yii2fullcalendar\yii2fullcalendar::widget(array(
-    'events'=>$events,
-    'options' => [
-      'lang' => 'es',
-      //... more options to be defined here!
-    ],
-    'id'=>'evento',
-    'clientOptions'=>[
-        'weekends' => true,
-        'days' => true,
-        'editable' => true,
-        'droppable'=> true,
-        'minTime' => '08:00:00', 
-        'maxTime' => '23:00:00',
-        'height' => 'auto',
-  
+<div id='calendar'></div>
  
-],'eventResize'=>'function(event, delta, revertFunc) {
-  var id =event.id;
-  var ini=event.start.format();
-  var fin=event.end.format(); 
-  
-  if (!confirm("Confirmar cambios")) {
-      revertFunc();}
-      else
-      {
-  $.post("/evento/upd",
-  { 
-      id:id,
-      fecini:ini,
-      fin:fin,
-      
-
-  
-  },
-  function(data)
-  {
-      if (data){
-          alert("se actulaizo bien");
-      }
-      else {
-          alert("error");
-          }
-  });
-}}',
-'eventReceive'=>'function(event){
-  alert("Por favor elija un intervalo de horas");
-  var titulo=event.title;
-  var inicio=event.start.format();
-  var date2 =$("em").text();
-  
-}',
-'eventClick'=>'function(event){
-  var titulo = event.title;
-  var inicio = event.start.format();
-  var fin = event.end.format();
-  var date2 = $("em").text();
-  if (!confirm("Guardar cambios en base de datos?")){
-    revertFunc();
-  }
-  else{
-    $.post("/evento/upd2",
-    {
-      titulo:titulo,
-      fecini:inicio,
-      fin:fin,
-      date2:date2
-    });
-  }
-}',
-'eventDrop' => 'function( event, delta, revertFunc, jsEvent, ui, view ) { 
-
-var id =event.id;
-var ini=event.start.format();
-var fin=event.end.format(); 
-
-if (!confirm("Esta seguro??")) {
-    revertFunc();}
-    else
-    {
-$.post("/evento/upd",
-{ 
-    id:id,
-    fecini:ini,
-    fin:fin
-    
-
-},
-function(data)
-{
-    if (data){
-        alert("se actulaizo conrrectamente");
-    }
-    else {
-        alert("error");
-        }
-});
-}}
-    '));
-
-?>
 </div>
 </div>
 </div>
 <?php
 
-
-$this->registerJsFile(
-    '@web/js/dragable.js',
-    ['depends' => [\yii\web\JqueryAsset::className()]]
-);
-$this->registerJsFile(
-    '@web/js/main.js',
-    ['depends' => [\yii\web\JqueryAsset::className()]]
-);
