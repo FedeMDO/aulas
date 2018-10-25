@@ -12,9 +12,13 @@ $this->registerCssFile("@web/css/index.css", [
 
 $this->title = 'Edificios disponibles';
 ?>
-<a href="../edificio/create" class="btn btn-success btn-md" role="button">Crear Edificio</a>
+<br>
+<br>
+<a href="../edificio/create" class="btn btn-success d-flex justify-content-around btn-edificio0" role="button">Crear Edificio</a>
 
-<center><h3 style="color:white;"><?php if(count($edificio) != 0){
+
+
+<center><h3 style="color:black;"><?php if(count($edificio) != 0){
 echo("Edificios Disponibles en la sede "); echo (Html::encode("{$edificio[0]->sEDE->NOMBRE}"));}
 else{?>
 

@@ -1,6 +1,6 @@
 <?php
 return[
 'adminEmail' => 'pds2018unaj@gmail.com',
-'title' => 'Gestión de Aulas - Confirmar correo',
+'title' => 'Sistema de Gestión de Aulas',
 'salt' => 'marck45',
 ];

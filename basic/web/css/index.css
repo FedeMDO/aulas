@@ -426,3 +426,58 @@ text-transform: uppercase;
 .btn-buscador1{
   margin-top: 10px;
 }
+
+.miBoton {
+	background-color: #1475b9;
+	color: #fff;
+}
+
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+#sidebar {
+  position: absolute;
+  width: 200px;
+  height: 145%;
+  background: #1475b9;
+  left: 0px;
+  transition: all 500ms linear;
+  top: 50px;
+}
+
+#sidebar.active {
+  left: -200px;
+}
+
+#sidebar ul li {
+  color: rgba(230, 230, 230, .9);
+  list-style: none;
+  padding: 15px 10px;
+  border-bottom: 1px solid rgba(100, 100, 100, .3);
+  text-align: center;
+}
+
+#sidebar .toggle-btn {
+  position: absolute;
+  left: 200px;
+  top: 0px;
+  cursor: pointer;
+}
+
+#sidebar .toggle-btn span {
+  background-color: #1475b9;
+  display: block;
+  width: 30px;
+  text-align: center;
+  font-size: 18px;
+  border: 1px solid #000;
+} 
+
+.btn-edificio0{
+ 
+  margin-left: 1%;
+  
+}

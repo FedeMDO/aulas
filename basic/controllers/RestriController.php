@@ -119,8 +119,8 @@ class RestriController extends Controller
     public function actionRestri(){
         $request = Yii::$app->request;
         $aula = $request->post('aula');
-        var_dump($request->post('aula'));
-        var_dump($aula);
+        //var_dump($request->post('aula'));
+        //var_dump($aula);
         $fecha = substr($request->post('fecini'), 0, 10);
         $ini = substr($request->post('fecini'), 11);
         $fin = substr($request->post('fin'), 11);
