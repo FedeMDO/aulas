@@ -45,6 +45,7 @@ $(document).ready(function(){
 
             }).length)>0; //if it isn't in one of the ranges, don't render it (by returning false)
         },
+
         eventResize: function(event, delta, revertFunc) {
             var id =event.id;
             var ini=event.start.format();
@@ -83,16 +84,16 @@ $(document).ready(function(){
             var fin = event.end.format();
             var id_aula = $("em").text();
             if (!confirm("Guardar cambios en base de datos?")){
-              revertFunc();
+                $.post("/evento/upd2",
+                    {
+                        id:id,
+                        ini:inicio,
+                        fin:fin,
+                        id_aula:id_aula
+                    });
             }
             else{
-              $.post("/evento/upd2",
-              {
-                  id:id,
-                ini:inicio,
-                fin:fin,
-                id_aula:id_aula
-              });
+                revertFunc();
             }
           },
         eventDrop: function( event, delta, revertFunc, jsEvent, ui, view ) { 
@@ -123,23 +124,4 @@ $(document).ready(function(){
             }}                                
         
       });
-    });
-
-
-    $(document).on('click','.fc-day', function(){
-        var date = $(this).attr('data-date');
-        
-      var id_aula =$('em').text();
-        $.get('/evento/create',{'date':date,'id_aula':id_aula}, function(data){
-            $('.modal').modal('show')
-            .find('#modelContent')
-            .html(data);
-        });
-    });
-
-    $('#modelButton').click(function(){
-       
-        $('.modal').modal('show')
-            .find('#modelContent')
-            .load($(this).attr('value'));
     });

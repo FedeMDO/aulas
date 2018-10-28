@@ -93,17 +93,6 @@ $indexMaterias = 1;
 <div class="evento-calendar-index">
 <div class="evento-index">
 
-<h1><?= Html::encode($this->title) ?></h1>
-
-  <?php Modal::begin([
-          'header' => '<h4>eventos nico</h4>',                        
-          'id'     => 'model',
-          'size'   => 'model-lg',
-          ]);
-            
-      echo "<div id='modelContent'></div>";
-  Modal::end();
-?>
 <div id='calendar'></div>
  
 </div>

@@ -101,26 +101,19 @@ class EventoController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($date,$id_aula)
-    {   
-        $aula1= Aula::findOne($id_aula)->NOMBRE;
-        $nombreusuario=Yii::$app->user->identity->username;
-      
+    public function actionCreate()
+    {
+
         $model = new EventoCalendar();
-        $model->Fecha_ini=$date;
         $model->ID_User_Asigna=Yii::$app->user->identity->id;
-        
-        $model->ID_Aula=$id_aula;
-        $request=Yii::$app->request->post();
-        
-        $model->save();
+        $model->ID_Instituto = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index','id' =>$id_aula]);
-        } else {
-            return $this->renderAjax('create', [
-                'model' => $model,'aula1'=>$aula1,'nombreusuario'=>$nombreusuario,
-            ]);
+            return $this->redirect(['index','id' =>1]);
         }
+        return $this->render('create', [
+            'model' => $model, 'id_aula' => 1,
+        ]);
     }
 
     /**

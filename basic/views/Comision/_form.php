@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Materia;
+use app\models\Instituto;
+use app\models\Carrera;
 use yii\bootstrap\Alert;
 /* @var $this yii\web\View */
 /* @var $model app\models\Comision */
@@ -28,18 +30,40 @@ endif; ?>
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'NOMBRE',['labelOptions'=>['style'=>'color:white; padding-top:10px;']])->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'NUMERO' ,['labelOptions'=>['style'=>'color:white; padding-top:10px;']])->textInput(['maxlength' => true]) ?>
+
+    <?php $institutos = Instituto::find()->asArray()->all();
+    $resultIns = ArrayHelper::map($institutos, 'ID', 'NOMBRE'); ?>
+
+    <?php echo $form->field($instituto, 'ID',['labelOptions'=>['style'=>'color:white']])->dropDownList($resultIns,
+        ['prompt'=>'Seleccione instituto...',
+            'onchange'=>'
+				$.post( "'.Yii::$app->urlManager->createUrl('comision/listcarrera?id=').'"+$(this).val(), function( data ) {
+				  $( "select#carrera-id" ).html( data );
+				});
+			'])->label('Instituto');  ?>
+
+    <?php $carreras = Carrera::find()->asArray()->all();
+    $resultCarr = ArrayHelper::map($carreras, 'ID', 'NOMBRE'); ?>
+
+    <?php echo $form->field($carrera, 'ID',['labelOptions'=>['style'=>'color:white']])->dropDownList(
+        $resultCarr,
+        ['prompt'=>'Seleccione Carrera...',
+            'onchange'=>'
+				$.post( "'.Yii::$app->urlManager->createUrl('comision/listmateria?id=').'"+$(this).val(), function( data ) {
+				  $( "select#comision-id_materia" ).html( data );
+				});
+			'])->label('Carrera'); ?>
 
     <?php $materias = Materia::find()->asArray()->all();
-    $result = ArrayHelper::map($materias, 'ID', 'NOMBRE'); ?>
+    $resultMat = ArrayHelper::map($materias, 'ID', 'NOMBRE'); ?>
 
     <?php echo $form->field($model, 'ID_MATERIA',['labelOptions'=>['style'=>'color:white']])->dropDownList(
-        $result, 
-        ['prompt'=>'Choose...']
-        ); ?>
+        $resultMat,
+        ['prompt'=>'Seleccione Materia...']
+        )->label('Materia'); ?>
 
     <?= $form->field($model, 'CARGA_HORARIA_SEMANAL',['labelOptions'=>['style'=>'color:white']])->textInput() ?>
-    <?= $form->field($model, 'cant_comisiones',['labelOptions'=>['style'=>'color:white']])->textInput()->label("Selecciona la cantidad de comisiones que desea crear") ?>
 
     <div class="form-group">
         <?= Html::submitButton('Crear', ['class' => 'btn btn-success btn-block']) ?>
