@@ -2,10 +2,6 @@ $(document).ready(function(){
     $('#calendar').fullCalendar({
         defaultView:'agendaWeek',
         lang: 'es-us',
-        validRange: {
-            start: '2018-08-01',
-            end: '2018-12-01'
-          },
         weekends: true, // will hide Saturdays and Sundays
         editable: true,
         droppable: true,
@@ -41,10 +37,18 @@ $(document).ready(function(){
             // any other sources...
         
           ],
+        eventRender: function(event){
+            return (event.ranges.filter(function(range){ // test event against all the ranges
+
+                return (event.start.isBefore(range.end) &&
+                    event.end.isAfter(range.start));
+
+            }).length)>0; //if it isn't in one of the ranges, don't render it (by returning false)
+        },
         eventResize: function(event, delta, revertFunc) {
             var id =event.id;
             var ini=event.start.format();
-            var fin=event.end.format(); 
+            var fin=event.end.format();
             
             if (!confirm("Confirmar cambios")) {
                 revertFunc();}
@@ -53,7 +57,7 @@ $(document).ready(function(){
                     $.post("/evento/upd",
                         { 
                             id:id,
-                            fecini:ini,
+                            ini:ini,
                             fin:fin,
                         },
             function(data)
@@ -68,26 +72,26 @@ $(document).ready(function(){
           }},
         eventReceive: function(event){
             alert("Por favor elija un intervalo de horas");
-            var titulo=event.title;
+            var id=event.id;
             var inicio=event.start.format();
-            var date2 =$("em").text();
+            var id_aula =$("em").text();
             
           },
         eventClick: function(event){
-            var titulo = event.title;
+            var id = event.id;
             var inicio = event.start.format();
             var fin = event.end.format();
-            var date2 = $("em").text();
+            var id_aula = $("em").text();
             if (!confirm("Guardar cambios en base de datos?")){
               revertFunc();
             }
             else{
               $.post("/evento/upd2",
               {
-                titulo:titulo,
-                fecini:inicio,
+                  id:id,
+                ini:inicio,
                 fin:fin,
-                date2:date2
+                id_aula:id_aula
               });
             }
           },
@@ -95,7 +99,7 @@ $(document).ready(function(){
 
             var id =event.id;
             var ini=event.start.format();
-            var fin=event.end.format(); 
+            var fin=event.end.format();
             
             if (!confirm("Esta seguro??")) {
                 revertFunc();}
@@ -104,7 +108,7 @@ $(document).ready(function(){
                     $.post("/evento/upd",
                 { 
                     id:id,
-                    fecini:ini,
+                    ini:ini,
                     fin:fin
                 },
             function(data)
@@ -125,8 +129,8 @@ $(document).ready(function(){
     $(document).on('click','.fc-day', function(){
         var date = $(this).attr('data-date');
         
-      var date2 =$('em').text();
-        $.get('/evento/create',{'date':date,'date2':date2}, function(data){
+      var id_aula =$('em').text();
+        $.get('/evento/create',{'date':date,'id_aula':id_aula}, function(data){
             $('.modal').modal('show')
             .find('#modelContent')
             .html(data);

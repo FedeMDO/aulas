@@ -11,6 +11,7 @@ use Yii;
  * @property string $nombre
  * @property string $fecha_inicio
  * @property string $fecha_fin
+ * @property string $estado
  *
  * @property EventoCalendar[] $eventoCalendars
  * @property RestriCalendar[] $restriCalendars
@@ -33,7 +34,7 @@ class CicloLectivo extends \yii\db\ActiveRecord
         return [
             [['nombre'], 'required'],
             [['fecha_inicio', 'fecha_fin'], 'safe'],
-            [['nombre'], 'string', 'max' => 30],
+            [['nombre', 'estado'], 'string', 'max' => 30],
         ];
     }
 
@@ -47,6 +48,7 @@ class CicloLectivo extends \yii\db\ActiveRecord
             'nombre' => 'Nombre',
             'fecha_inicio' => 'Fecha Inicio',
             'fecha_fin' => 'Fecha Fin',
+            'estado' => 'Estado',
         ];
     }
 

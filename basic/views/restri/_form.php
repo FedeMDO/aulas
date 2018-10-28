@@ -12,9 +12,8 @@ use yii\helpers\ArrayHelper;
 <div class="restri-calendar-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    <?php $result = ArrayHelper::map($institutos, 'ID', 'NOMBRE');
-        $users = ArrayHelper::map($usuarios, 'id', 'username'); ?>
-     <?php //$comisiones = \app\models\Hora::find()->asArray()->all();
+    <?php $result = ArrayHelper::map($institutos, 'ID', 'NOMBRE');?>
+     <?php
     $horas = ['08:00:00' => '08:00',
     '09:00:00' => '09:00',
     '10:00:00' => '10:00',
@@ -31,10 +30,6 @@ use yii\helpers\ArrayHelper;
     '21:00:00' => '21:00',
     '22:00:00' => '22:00']; ?>
 
-    
-
-    <?= $form->field($model, 'ID_Aula')->textInput(['class' => 'form-control class-content-title_series', 'placeholder' => 'Title', 'disabled' => 'true' ,'value'=>$aula1])->label(' Aula '); ?>
-
     <?= $form->field($model, 'ID_Instituto_Recibe')->dropDownList(
         $result,
         ['prompt' => 'SELECCIONE UN INSTITUTO...']
@@ -47,8 +42,6 @@ use yii\helpers\ArrayHelper;
         ['prompt' => 'SELECIONE UN USUARIO...']
         ); ?>
 
-    <?= $form->field($model, 'Fecha_ini')->textInput(['disabled' => 'true']) ?>
-
     <?php echo $form->field($model, 'Hora_ini')->dropDownList(
         $horas, 
         ['prompt'=>'SELECCIONE HORA DE INICIO...']
@@ -59,7 +52,7 @@ use yii\helpers\ArrayHelper;
         ['prompt'=>'SELECCIONE HORA DE fin...']
         ); ?> 
 
-    <?= $form->field($model, 'Periodo_Academico')->textInput([/*'maxlength' => true]*/ 'disabled' => 'true']) ?>
+    <?= $form->field($model, 'ID_Ciclo')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>

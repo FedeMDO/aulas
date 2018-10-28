@@ -19,7 +19,7 @@ class CicloLectivoSearch extends CicloLectivo
     {
         return [
             [['id'], 'integer'],
-            [['nombre', 'fecha_inicio', 'fecha_fin'], 'safe'],
+            [['nombre', 'fecha_inicio', 'fecha_fin', 'estado'], 'safe'],
         ];
     }
 
@@ -64,7 +64,8 @@ class CicloLectivoSearch extends CicloLectivo
             'fecha_fin' => $this->fecha_fin,
         ]);
 
-        $query->andFilterWhere(['like', 'nombre', $this->nombre]);
+        $query->andFilterWhere(['like', 'nombre', $this->nombre])
+            ->andFilterWhere(['like', 'estado', $this->estado]);
 
         return $dataProvider;
     }

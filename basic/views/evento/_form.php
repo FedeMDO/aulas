@@ -52,7 +52,6 @@ use app\models\Hora;
                 $horas, 
         ['prompt'=>'SELECCIONE LA HORA DE FIN.......']
         ); ?> 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
     <div class="form-group">
         <?= Html::submitButton('GUARDAR', ['class' => 'btn btn-success']) ?>
     </div>
