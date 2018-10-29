@@ -40,6 +40,7 @@ $this->title = 'Sedes';
         <li>
         <a href="../sede/create" class="btn miBoton btn-md btn-vistav" role="button">Crear Sede</a>
         </li>
+
         <li><a href="../aula/buscador" class="btn miBoton btn-md btn-vistav" role="button">Filtrar Aulas</a>
         </li>
       </ul>

@@ -5,7 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\EventoCalendar;
 use app\models\RestriCalendar;
-
+use app\models\Sede;
 use app\models\Users;
 use app\models\Instituto;
 use app\models\Comision;
@@ -200,8 +200,41 @@ class EventoController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+    public function actionJsonresources($id_sede, $start=NULL,$end=NULL,$_=NULL){
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $resources = array();
+        $sede = Sede::findOne($id_sede);
+        $aulas = array();
+        if(!empty($sede->edificios)){
+            foreach($sede->edificios as $edi)
+            {
+                if(!empty($edi->aulas))
+                {
+                    foreach($edi->aulas as $aula)
+                    {
+                        $aulas [] = $aula;
+                    }
+                }
 
-    public function actionJsoncalendar($id, $start=NULL,$end=NULL,$_=NULL){
+            }
+        }
+        if(!empty($aulas))
+        {
+            foreach ($aulas as $aula)
+            {
+                $resource = array();
+                $resource['id'] = $aula->ID;
+                $resource['title'] = $aula->NOMBRE;
+                $resource['edificio'] = $aula->eDIFICIO->NOMBRE;
+                $obj = (object) $resource;
+
+                $resources [] = $obj;
+            }
+        }
+
+        return $resources;
+    }
+    public function actionJsoncalendar($id=NULL, $start=NULL,$end=NULL,$_=NULL){
 
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $tasks = array();
@@ -230,6 +263,7 @@ class EventoController extends Controller
                         $restri->end = $dia->format('Y-m-d').'T'.$cons->Hora_fin;
                         $restri->backgroundColor = $cons->instituto->COLOR_HEXA;
                         $restri->rendering = 'background';
+                        $restri->resourceId = $cons->ID_Aula;
                         $tasks[] = $restri;
                     }
                 }
@@ -271,6 +305,7 @@ class EventoController extends Controller
                             }
                             $event->start = $dia->format('Y-m-d').'T'.$eve->Hora_ini;
                             $event->end = $dia->format('Y-m-d').'T'.$eve->Hora_fin;
+                            $event->resourceId = $eve->ID_Aula;
                             $tasks[] = $event;
                         }
                     }
@@ -279,4 +314,104 @@ class EventoController extends Controller
         }
         return $tasks;
       }
+
+    public function actionJsonschedulersede($id_sede, $start=NULL,$end=NULL,$_=NULL){
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $resources = array();
+        $sede = Sede::findOne($id_sede);
+        $aulas = array();
+        if(!empty($sede->edificios)){
+            foreach($sede->edificios as $edi)
+            {
+                if(!empty($edi->aulas))
+                {
+                    foreach($edi->aulas as $aula)
+                    {
+                        $aulas [] = $aula;
+                    }
+                }
+
+            }
+        }
+
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $tasks = array();
+
+        foreach($aulas as $aula){
+            //RESTRICCIONES
+            $const= RestriCalendar::find()->where(['ID_Aula' => $aula->ID])->all();
+            foreach ($const as $cons) {
+
+                $dowArray = explode(',', $cons->dow);
+                $begin = new DateTime($cons->ciclo->fecha_inicio);
+                $end = new DateTime($cons->ciclo->fecha_fin);
+
+                $interval = DateInterval::createFromDateString('1 day');
+                $period = new DatePeriod($begin, $interval, $end);
+
+                foreach ($period as $dia)
+                {
+                    foreach($dowArray as $dow)
+                    {
+                        if ($dia->format('N') == $dow)
+                        {
+                            $restri = new \yii2fullcalendar\Models\Event();
+                            $restri->id = $cons->instituto->NOMBRE;
+                            $restri->ranges = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
+                            $restri->start = $dia->format('Y-m-d').'T'.$cons->Hora_ini;
+                            $restri->end = $dia->format('Y-m-d').'T'.$cons->Hora_fin;
+                            $restri->backgroundColor = $cons->instituto->COLOR_HEXA;
+                            $restri->rendering = 'background';
+                            $restri->resourceId = $cons->ID_Aula;
+                            $tasks[] = $restri;
+                        }
+                    }
+                }
+
+                //EVENTOS
+                $events = EventoCalendar::find()->where(['ID_Aula' => $aula->ID])->all();
+                foreach ($events as $eve) {
+
+                    $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
+                    $institutocolor = $eve->instituto->COLOR_HEXA;
+                    $comision = $eve->comision;
+
+                    $dowArray = explode(',', $eve->dow);
+                    $begin = new DateTime($eve->ciclo->fecha_inicio);
+                    $end = new DateTime($eve->ciclo->fecha_fin);
+
+                    $interval = DateInterval::createFromDateString('1 day');
+                    $period = new DatePeriod($begin, $interval, $end);
+
+                    foreach ($period as $dia)
+                    {
+                        foreach($dowArray as $dow)
+                        {
+                            if ($dia->format('N') == $dow)
+                            {
+                                $event = new \yii2fullcalendar\Models\Event();
+                                $event->id = $eve->id;
+                                $event->title = $comision->getName();
+                                $event->backgroundColor = $institutocolor;
+                                $event->editable = true;
+                                $event->constraint = $eve->instituto->NOMBRE;
+
+                                $event->ranges = [array('start' => $eve->ciclo->fecha_inicio, 'end' => $eve->ciclo->fecha_fin)];
+                                //user en session no edita eventos de otros institutos
+                                if ($instIdOnSessionUser != $eve->instituto->ID)
+                                {
+                                    $event->editable = false;
+                                }
+                                $event->start = $dia->format('Y-m-d').'T'.$eve->Hora_ini;
+                                $event->end = $dia->format('Y-m-d').'T'.$eve->Hora_fin;
+                                $event->resourceId = $eve->ID_Aula;
+                                $tasks[] = $event;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return $tasks;
+    }
 }

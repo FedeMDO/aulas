@@ -42,7 +42,17 @@ class SedeController extends Controller
             
         ]);
     }
+    public function actionScheduler($id_sede)
+    {
 
+        $sede = Sede::findOne($id_sede);
+
+
+
+        return $this->render('schedulerPorSede', [
+            'sede' => $sede,
+        ]);
+    }
 
 
 

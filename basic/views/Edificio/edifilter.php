@@ -16,6 +16,8 @@ $this->title = 'Edificios disponibles';
 <br>
 <a href="../edificio/create" class="btn btn-success d-flex justify-content-around btn-edificio0" role="button">Crear Edificio</a>
 
+<a href="../edificio/scheduler?id_sede=<?php echo (Html::encode($id));?>"  class="btn miBoton btn-md btn-vistav" role="button">Ver eventos por edificio</a>
+
 
 
 <center><h3 style="color:black;"><?php if(count($edificio) != 0){

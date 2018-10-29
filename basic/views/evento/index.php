@@ -10,7 +10,7 @@ use yii\helpers\Url;
 
 use app\assets\CalendarAsset;
 
-CalendarASset::register($this);
+CalendarAsset::register($this);
 
 $this->registerCssFile("@web/css/index.css", [
   'depends' => [\yii\bootstrap\BootstrapAsset::className()],

@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Edificio;
+use app\models\Sede;
 use app\models\Aula;
 use app\models\EdificioSearch;
 use yii\web\Controller;
@@ -18,7 +19,17 @@ use yii\filters\AccessControl;
  */
 class EdificioController extends Controller
 {
+    public function actionScheduler($id_sede)
+    {
 
+        $sede = Sede::findOne($id_sede);
+
+
+
+        return $this->render('schedulerPorSede', [
+            'sede' => $sede,
+        ]);
+    }
     public function actionEdifilter($id)
     {
        
@@ -48,7 +59,7 @@ class EdificioController extends Controller
     return $this->render('edifilter', [
         'edificio' => $edificio,
         'pagination' => $pagination,
-        
+        'id' => $id,
     ]);
 
 
