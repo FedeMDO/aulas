@@ -8,18 +8,21 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="materia-form">
+<div class="col-md-offset-4 col-md-4">
+<div class="materia-form loginc azul">
 
-    <?php $form = ActiveForm::begin(); ?>
+	<h2  style="color:white; border-bottom: 1px solid white; ">Crear Materia</h2>
+    <?php $form = ActiveForm::begin();?>
 
-    <?= $form->field($model, 'NOMBRE')->textInput(['maxlength' => true]) ?>
+    <?=$form->field($model, 'NOMBRE', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->textInput(['maxlength' => true])?>
 
-    <?= $form->field($model, 'DESC_CORTA')->textInput(['maxlength' => true]) ?>
+    <?=$form->field($model, 'DESC_CORTA', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->textInput(['maxlength' => true])->label("Descripcion corta")?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?=Html::submitButton('Crear', ['class' => 'btn btn-success'])?>
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <?php ActiveForm::end();?>
 
+</div>
 </div>

@@ -42,6 +42,8 @@ $this->title = 'Sedes';
         </li>
         <li><a href="../aula/buscador" class="btn miBoton btn-md btn-vistav" role="button">Filtrar Aulas</a>
         </li>
+        <li><a href="../comision/create" class="btn miBoton btn-md btn-vistav" role="button">Crear Comisiones</a></li>
+        <li><a href="../materia/create" class="btn miBoton btn-md btn-vistav" role="button">Crear Materia</a></li>
       </ul>
 </div>
 
