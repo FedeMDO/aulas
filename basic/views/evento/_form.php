@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Comision;
-use app\models\Hora;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\EventoCalendar */
@@ -15,17 +14,15 @@ use app\models\Hora;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?php $comisiones = Comision::find()->asArray()->all();
-    $result = ArrayHelper::map($comisiones, 'ID', 'NOMBRE'); ?>
+    <?php
+    $result = ArrayHelper::map($comisiones, 'ID', 'NUMERO'); ?>
     <?php echo $form->field($model, 'ID_Comision')->dropDownList(
         $result, 
         ['prompt'=>'SELECCIONE LA COMISION...']
-        )->label(' COMISION '); ?> 
-
-    <?= $form->field($model, 'ID_User_Asigna')->textInput(['class' => 'form-control class-content-title_series', 'placeholder' => 'Title', 'disabled' => 'true','value'=>$nombreusuario])->label(' USUARIO '); ?>
-    <?= $form->field($model, 'ID_Aula')->textInput(['class' => 'form-control class-content-title_series', 'placeholder' => 'Title', 'disabled' => 'true' ,'value'=>$aula1])->label(' AULA '); ?>
-    <?= $form->field($model, 'Fecha_ini')->textInput(['disabled' => 'true']) ?>
-
+        )->label(' COMISION '); ?>
+    <?= $form->field($model, 'ID_Aula') ?>
+    <?= $form->field($model, 'ID_Ciclo') ?>
+    <?= $form->field($model, 'dow') ?>
     <?php 
          $horas = ['08:00:00' => '08:00',
          '09:00:00' => '09:00',
@@ -52,7 +49,6 @@ use app\models\Hora;
                 $horas, 
         ['prompt'=>'SELECCIONE LA HORA DE FIN.......']
         ); ?> 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
     <div class="form-group">
         <?= Html::submitButton('GUARDAR', ['class' => 'btn btn-success']) ?>
     </div>

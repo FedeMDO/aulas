@@ -14,6 +14,7 @@ $this->registerCssFile("@web/css/index.css", [
 ], 'css-print-theme');
 
 $this->title = 'Institutos';
+$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="col-md-offset-4 col-md-4">

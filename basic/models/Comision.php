@@ -8,16 +8,18 @@ use Yii;
  * This is the model class for table "comision".
  *
  * @property int $ID
- * @property string $NOMBRE
+ * @property string $NUMERO
  * @property int $ID_MATERIA
  * @property int $CARGA_HORARIA_SEMANAL
+ * @property int $ID_Ciclo
  *
  * @property AgendaAsigComision[] $agendaAsigComisions
  * @property Materia $mATERIA
+ * @property CicloLectivo $ciclo
+ * @property EventoCalendar[] $eventoCalendars
  */
 class Comision extends \yii\db\ActiveRecord
 {
-    public $cant_comisiones;
     /**
      * {@inheritdoc}
      */
@@ -32,11 +34,10 @@ class Comision extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['NOMBRE', 'ID_MATERIA', 'CARGA_HORARIA_SEMANAL', 'cant_comisiones'], 'required'],
-            [['ID_MATERIA', 'CARGA_HORARIA_SEMANAL'], 'integer'],
-            [['NOMBRE'], 'string', 'max' => 40],
+            [['NUMERO', 'ID_MATERIA', 'CARGA_HORARIA_SEMANAL', 'ID_Ciclo'], 'integer'],
+            [['ID_MATERIA', 'CARGA_HORARIA_SEMANAL'], 'required'],
             [['ID_MATERIA'], 'exist', 'skipOnError' => true, 'targetClass' => Materia::className(), 'targetAttribute' => ['ID_MATERIA' => 'ID']],
-            [['cant_comisiones'],'integer']
+            [['ID_Ciclo'], 'exist', 'skipOnError' => true, 'targetClass' => CicloLectivo::className(), 'targetAttribute' => ['ID_Ciclo' => 'id']],
         ];
     }
 
@@ -47,10 +48,10 @@ class Comision extends \yii\db\ActiveRecord
     {
         return [
             'ID' => 'ID',
-            'NOMBRE' => ' Nombre Comision',
-            'ID_MATERIA' => 'Materia',
+            'NUMERO' => 'Numero',
+            'ID_MATERIA' => 'Id  Materia',
             'CARGA_HORARIA_SEMANAL' => 'Carga  Horaria  Semanal',
-            'cant_comisiones' => 'Cantidad de comisiones'
+            'ID_Ciclo' => 'Id  Ciclo',
         ];
     }
 
@@ -68,5 +69,29 @@ class Comision extends \yii\db\ActiveRecord
     public function getMATERIA()
     {
         return $this->hasOne(Materia::className(), ['ID' => 'ID_MATERIA']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCiclo()
+    {
+        return $this->hasOne(CicloLectivo::className(), ['id' => 'ID_Ciclo']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEventoCalendars()
+    {
+        return $this->hasMany(EventoCalendar::className(), ['ID_Comision' => 'ID']);
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->mATERIA->DESC_CORTA.$this->NUMERO;
     }
 }

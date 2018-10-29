@@ -442,14 +442,7 @@ public function actionRecoverpass()
     {
         if (!\Yii::$app->user->isGuest) {
    
-         if (User::isUserAdmin(Yii::$app->user->identity->id))
-            {
-                return $this->actionAdmin();
-            }
-            else
-            {
-                return $this->actionUser();
-            }
+            return $this->actionIndex();
         }   
  
         $model = new LoginForm();

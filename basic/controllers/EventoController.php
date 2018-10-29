@@ -5,7 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\EventoCalendar;
 use app\models\RestriCalendar;
-
+use app\models\Sede;
 use app\models\Users;
 use app\models\Instituto;
 use app\models\Comision;
@@ -19,6 +19,9 @@ use app\models\EventoCalendarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use DateTime;
+use DatePeriod;
+use DateInterval;
 
 /**
  * EventoController implements the CRUD actions for EventoCalendar model.
@@ -64,77 +67,19 @@ class EventoController extends Controller
     $id_user= Yii::$app->user->identity->id;
     $usuario= Users::findOne($id_user)->idInstituto;
     $institutocolor2= Instituto::findOne($usuario)->COLOR_HEXA;
+
     ///
     $carreras = Users::findOne(Yii::$app->user->identity->id)->instituto->carreras;
+
     foreach ($carreras as $carrera) {
-        foreach ($carrera->mATERIAs as $materia) {     
-            $filter_comis[]=$materia;       
-            // foreach ($materia->comisions as $comi) {            
-                
-            //     $filter_comis[]=$comi;
-            // }
+        foreach ($carrera->mATERIAs as $materia) {
+            $filter_comis[] = $materia;
         }
-
     }
-    // $events = EventoCalendar::find()->where(['ID_Aula' => $id])->all();
-    // $const= RestriCalendar::find()->where(['ID_Aula' => $id])->all();
-    // foreach ($const as $cons) {
+    $filterDistinct = array_unique($filter_comis, SORT_REGULAR);
 
-    //     $event1 = new \yii2fullcalendar\Models\Event();
-
-    //     $event1->id =Instituto::findOne($cons->ID_Instituto_Recibe)->NOMBRE;
-    //     $event1->start = $cons->Fecha_ini.'T'.$cons->Hora_ini;
-    //     $event1->end= $cons->Fecha_ini.'T'.$cons->Hora_fin;
-    //     $event1->backgroundColor = Instituto::findOne($cons->ID_Instituto_Recibe)->COLOR_HEXA;
-    //     $event1->rendering = 'background';
-    //     $event1->dow = array(3,5);
-    //     // if (!empty($cons->dow)) {
-    //     //     $event1->dow = json_decode('[' . $cons->dow . ']', true);
-    //          var_dump($event1->dow);
-    //     // }
-        
-      
-    //     $tasks[] = $event1;
-    //  }
-    
-    // foreach ($events as $eve) {
-        
-    //     $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
-
-    //     $userWhoRegistered = $eve->ID_User_Asigna;
-    //     $institutocolor = Instituto::findOne(Users::findOne($userWhoRegistered)->idInstituto)->COLOR_HEXA;
-
-    //     $comision = Comision::findOne($eve->ID_Comision);
-    //     $materiaName = Materia::findOne($comision->ID_MATERIA)->NOMBRE;
-
-    //     $event = new \yii2fullcalendar\Models\Event();
-
-    //     $event->id = $eve->ID;
-    //     $event->title = $materiaName;
-    //     $event->backgroundColor = $institutocolor;
-    //     $event->editable = true;
-    //     $event->constraint = Instituto::findOne(Users::findOne($userWhoRegistered)->idInstituto)->NOMBRE;
-
-    //     //user en session no edita eventos de otros institutos
-    //     if ($instIdOnSessionUser != Users::findOne($userWhoRegistered)->idInstituto){
-    //         $event->editable = false;
-    //     }
-
-    //     $event->start = (string)$eve->Fecha_ini.'T'.(string)$eve->Hora_ini;
-    //     $event->end = (string)$eve->Fecha_ini.'T'.(string)$eve->Hora_fin;
-        
-    //     $event->dow ='';
-        
-    //     // if (!empty($eve->dow)) {
-    //     //     $event->dow = json_decode('[' . $eve->dow . ']', true);
-    //          var_dump($event->dow);
-    //     // }
-        
-    //     $tasks[] = $event;
-    // }
-    
     return $this->render('index', [
-      'filter'=> $filter_comis, 'id_aula'=>1 ,"color"=>"red"
+      'filter'=> $filterDistinct, 'id_aula'=>1 ,"color"=>"red"
     ]);
 }
 
@@ -156,26 +101,19 @@ class EventoController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($date,$date2)
-    {   
-        $aula1= Aula::findOne($date2)->NOMBRE;
-        $nombreusuario=Yii::$app->user->identity->username;
-      
+    public function actionCreate()
+    {
+
         $model = new EventoCalendar();
-        $model->Fecha_ini=$date;
         $model->ID_User_Asigna=Yii::$app->user->identity->id;
-        
-        $model->ID_Aula=$date2;
-        $request=Yii::$app->request->post();
-        
-        $model->save();
+        $model->ID_Instituto = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index','id' =>$date2]);
-        } else {
-            return $this->renderAjax('create', [
-                'model' => $model,'aula1'=>$aula1,'nombreusuario'=>$nombreusuario,
-            ]);
+            return $this->redirect(['index','id' =>1]);
         }
+        return $this->render('create', [
+            'model' => $model, 'id_aula' => 1,
+        ]);
     }
 
     /**
@@ -200,47 +138,36 @@ class EventoController extends Controller
     public function actionUpd()
     {
         $request = Yii::$app->request;
+        $evento = $this->findModel($request->post('id'));
 
-        $evento= EventoCalendar::findONe($request->post('id'));
-
-        $evento->Fecha_ini = substr($request->post('fecini'),0,10);
-        $evento->Hora_ini = substr($request->post('fecini'),11);
-        $evento->Hora_fin = substr($request->post('fin'),11);
-
-        $evento->save();
-        echo $hora1; 
+        $evento->Hora_ini = substr($request->post('ini'), -8);
+        $evento->Hora_fin = substr($request->post('fin'), -8);
+        if($evento->save())
+        {
+            echo("Actualizacion exitosa");
+        }
     }
     public function actionUpd2()
     {
         $request = Yii::$app->request;
-        $date2=$request->post('date2');
 
-        $titulo=$request->post('titulo');
-        $fecha=substr($request->post('fecini'),0,10);
-        if(!$horaini=substr($request->post('fecini'),11)==null){
-            $horaini=substr($request->post('fecini'),11);
-            $horafin=substr($request->post('fin'),11);
-            $hora1=$horaini;
-            $hora2=$horafin;
-        }
-        else{
-            $hora1= null;
-            $hora2= null;
-        }
-        
-        $evento= new EventoCalendar;
-        $comision=Comision::findOne(['NOMBRE'=>$titulo])->ID;
+        $id_aula=$request->post('id_aula');
+
+        $id=$request->post('id');
+        $evento = $this->findModel($id);
+
+        $ini = $request->post('ini');
+        $fin = $request->post('ini');
+
         $evento->ID_User_Asigna=Yii::$app->user->identity->id;
-        $evento->title=$titulo;
-        $evento->ID_Comision=$comision;
-        $evento->Fecha_ini=$fecha;
-        $evento->Hora_ini=$hora1;
-        $evento->Hora_fin=$hora2;
-        $evento->ID_Aula = $date2;
-        $evento->save();
-        echo $hora1;
-       
-       return $this->redirect(['index','id' =>$date2]);
+        $evento->Hora_ini = substr($request->post('ini'), -8);
+        $evento->Hora_fin = substr($request->post('fin'), -8);
+        $evento->ID_Aula = $id_aula;
+        if($evento->save())
+        {
+            echo("Actualizacion exitosa");
+        }
+       return $this->redirect(['index','id' =>$id_aula]);
       
     }
 
@@ -273,69 +200,218 @@ class EventoController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+    public function actionJsonresources($id_sede, $start=NULL,$end=NULL,$_=NULL){
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $resources = array();
+        $sede = Sede::findOne($id_sede);
+        $aulas = array();
+        if(!empty($sede->edificios)){
+            foreach($sede->edificios as $edi)
+            {
+                if(!empty($edi->aulas))
+                {
+                    foreach($edi->aulas as $aula)
+                    {
+                        $aulas [] = $aula;
+                    }
+                }
 
-    public function actionJsoncalendar($id, $start=NULL,$end=NULL,$_=NULL){
+            }
+        }
+        if(!empty($aulas))
+        {
+            foreach ($aulas as $aula)
+            {
+                $resource = array();
+                $resource['id'] = $aula->ID;
+                $resource['title'] = $aula->NOMBRE;
+                $resource['edificio'] = $aula->eDIFICIO->NOMBRE;
+                $obj = (object) $resource;
+
+                $resources [] = $obj;
+            }
+        }
+
+        return $resources;
+    }
+    public function actionJsoncalendar($id=NULL, $start=NULL,$end=NULL,$_=NULL){
 
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $tasks = array();
 
-        
-        $events = EventoCalendar::find()->where(['ID_Aula' => $id])->all();
+        //RESTRICCIONES
         $const= RestriCalendar::find()->where(['ID_Aula' => $id])->all();
         foreach ($const as $cons) {
 
-            $event1 = new \yii2fullcalendar\Models\Event();
+            $dowArray = explode(',', $cons->dow);
+            $begin = new DateTime($cons->ciclo->fecha_inicio);
+            $end = new DateTime($cons->ciclo->fecha_fin);
 
-            $event1->id =Instituto::findOne($cons->ID_Instituto_Recibe)->NOMBRE;
-            $event1->start = $cons->Fecha_ini.'T'.$cons->Hora_ini;
-            $event1->end= $cons->Fecha_ini.'T'.$cons->Hora_fin;
-            $event1->backgroundColor = Instituto::findOne($cons->ID_Instituto_Recibe)->COLOR_HEXA;
-            $event1->rendering = 'background';
-            $event1->dow = array(3,5);
-            // if (!empty($cons->dow)) {
-            //     $event1->dow = json_decode('[' . $cons->dow . ']', true);
-               
-            // }
-            
-        
-            $tasks[] = $event1;
-        }
-        
-        foreach ($events as $eve) {
-            
-            $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
+            $interval = DateInterval::createFromDateString('1 day');
+            $period = new DatePeriod($begin, $interval, $end);
 
-            $userWhoRegistered = $eve->ID_User_Asigna;
-            $institutocolor = Instituto::findOne(Users::findOne($userWhoRegistered)->idInstituto)->COLOR_HEXA;
-
-            $comision = Comision::findOne($eve->ID_Comision);
-            $materiaName = Materia::findOne($comision->ID_MATERIA)->NOMBRE;
-
-            $event = new \yii2fullcalendar\Models\Event();
-
-            $event->id = $eve->ID;
-            $event->title = $materiaName;
-            $event->backgroundColor = $institutocolor;
-            $event->editable = true;
-            $event->constraint = Instituto::findOne(Users::findOne($userWhoRegistered)->idInstituto)->NOMBRE;
-
-            //user en session no edita eventos de otros institutos
-            if ($instIdOnSessionUser != Users::findOne($userWhoRegistered)->idInstituto){
-                $event->editable = false;
+            foreach ($period as $dia)
+            {
+                foreach($dowArray as $dow)
+                {
+                    if ($dia->format('N') == $dow)
+                    {
+                        $restri = new \yii2fullcalendar\Models\Event();
+                        $restri->id = $cons->instituto->NOMBRE;
+                        $restri->ranges = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
+                        $restri->start = $dia->format('Y-m-d').'T'.$cons->Hora_ini;
+                        $restri->end = $dia->format('Y-m-d').'T'.$cons->Hora_fin;
+                        $restri->backgroundColor = $cons->instituto->COLOR_HEXA;
+                        $restri->rendering = 'background';
+                        $restri->resourceId = $cons->ID_Aula;
+                        $tasks[] = $restri;
+                    }
+                }
             }
 
-            $event->start = (string)$eve->Fecha_ini.'T'.(string)$eve->Hora_ini;
-            $event->end = (string)$eve->Fecha_ini.'T'.(string)$eve->Hora_fin;
-            
-            $event->dow =array(3,5);
-            
-            // if (!empty($eve->dow)) {
-            //     $event->dow = json_decode('[' . $eve->dow . ']', true);
-               
-            // }
-            
-            $tasks[] = $event;
+            //EVENTOS
+            $events = EventoCalendar::find()->where(['ID_Aula' => $id])->all();
+            foreach ($events as $eve) {
+
+                $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
+                $institutocolor = $eve->instituto->COLOR_HEXA;
+                $comision = $eve->comision;
+
+                $dowArray = explode(',', $eve->dow);
+                $begin = new DateTime($eve->ciclo->fecha_inicio);
+                $end = new DateTime($eve->ciclo->fecha_fin);
+
+                $interval = DateInterval::createFromDateString('1 day');
+                $period = new DatePeriod($begin, $interval, $end);
+
+                foreach ($period as $dia)
+                {
+                    foreach($dowArray as $dow)
+                    {
+                        if ($dia->format('N') == $dow)
+                        {
+                            $event = new \yii2fullcalendar\Models\Event();
+                            $event->id = $eve->id;
+                            $event->title = $comision->getName();
+                            $event->backgroundColor = $institutocolor;
+                            $event->editable = true;
+                            $event->constraint = $eve->instituto->NOMBRE;
+
+                            $event->ranges = [array('start' => $eve->ciclo->fecha_inicio, 'end' => $eve->ciclo->fecha_fin)];
+                            //user en session no edita eventos de otros institutos
+                            if ($instIdOnSessionUser != $eve->instituto->ID)
+                            {
+                                $event->editable = false;
+                            }
+                            $event->start = $dia->format('Y-m-d').'T'.$eve->Hora_ini;
+                            $event->end = $dia->format('Y-m-d').'T'.$eve->Hora_fin;
+                            $event->resourceId = $eve->ID_Aula;
+                            $tasks[] = $event;
+                        }
+                    }
+                }
+            }
         }
-    
         return $tasks;
       }
+
+    public function actionJsonschedulersede($id_sede, $start=NULL,$end=NULL,$_=NULL){
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $resources = array();
+        $sede = Sede::findOne($id_sede);
+        $aulas = array();
+        if(!empty($sede->edificios)){
+            foreach($sede->edificios as $edi)
+            {
+                if(!empty($edi->aulas))
+                {
+                    foreach($edi->aulas as $aula)
+                    {
+                        $aulas [] = $aula;
+                    }
+                }
+
+            }
+        }
+
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $tasks = array();
+
+        foreach($aulas as $aula){
+            //RESTRICCIONES
+            $const= RestriCalendar::find()->where(['ID_Aula' => $aula->ID])->all();
+            foreach ($const as $cons) {
+
+                $dowArray = explode(',', $cons->dow);
+                $begin = new DateTime($cons->ciclo->fecha_inicio);
+                $end = new DateTime($cons->ciclo->fecha_fin);
+
+                $interval = DateInterval::createFromDateString('1 day');
+                $period = new DatePeriod($begin, $interval, $end);
+
+                foreach ($period as $dia)
+                {
+                    foreach($dowArray as $dow)
+                    {
+                        if ($dia->format('N') == $dow)
+                        {
+                            $restri = new \yii2fullcalendar\Models\Event();
+                            $restri->id = $cons->instituto->NOMBRE;
+                            $restri->ranges = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
+                            $restri->start = $dia->format('Y-m-d').'T'.$cons->Hora_ini;
+                            $restri->end = $dia->format('Y-m-d').'T'.$cons->Hora_fin;
+                            $restri->backgroundColor = $cons->instituto->COLOR_HEXA;
+                            $restri->rendering = 'background';
+                            $restri->resourceId = $cons->ID_Aula;
+                            $tasks[] = $restri;
+                        }
+                    }
+                }
+
+                //EVENTOS
+                $events = EventoCalendar::find()->where(['ID_Aula' => $aula->ID])->all();
+                foreach ($events as $eve) {
+
+                    $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
+                    $institutocolor = $eve->instituto->COLOR_HEXA;
+                    $comision = $eve->comision;
+
+                    $dowArray = explode(',', $eve->dow);
+                    $begin = new DateTime($eve->ciclo->fecha_inicio);
+                    $end = new DateTime($eve->ciclo->fecha_fin);
+
+                    $interval = DateInterval::createFromDateString('1 day');
+                    $period = new DatePeriod($begin, $interval, $end);
+
+                    foreach ($period as $dia)
+                    {
+                        foreach($dowArray as $dow)
+                        {
+                            if ($dia->format('N') == $dow)
+                            {
+                                $event = new \yii2fullcalendar\Models\Event();
+                                $event->id = $eve->id;
+                                $event->title = $comision->getName();
+                                $event->backgroundColor = $institutocolor;
+                                $event->editable = true;
+                                $event->constraint = $eve->instituto->NOMBRE;
+
+                                $event->ranges = [array('start' => $eve->ciclo->fecha_inicio, 'end' => $eve->ciclo->fecha_fin)];
+                                //user en session no edita eventos de otros institutos
+                                if ($instIdOnSessionUser != $eve->instituto->ID)
+                                {
+                                    $event->editable = false;
+                                }
+                                $event->start = $dia->format('Y-m-d').'T'.$eve->Hora_ini;
+                                $event->end = $dia->format('Y-m-d').'T'.$eve->Hora_fin;
+                                $event->resourceId = $eve->ID_Aula;
+                                $tasks[] = $event;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return $tasks;
+    }
 }

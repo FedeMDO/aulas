@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Comision;
+use app\models\Instituto;
+use app\models\Carrera;
 use app\models\ComisionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -28,7 +30,7 @@ class ComisionController extends Controller
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['index','view','create','update','delete'],
+                        'actions' => ['index','view','create','update','delete','listcarrera','listmateria'],
                         //Esta propiedad establece que tiene permisos
                         'allow' => true,
                         //Usuarios autenticados, el signo ? es para invitados
@@ -42,7 +44,7 @@ class ComisionController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['index','view','create'],
+                       'actions' => ['index','view','create','listcarrera', 'listmateria'],
                        //Esta propiedad establece que tiene permisos
                        'allow' => true,
                        //Usuarios autenticados, el signo ? es para invitados
@@ -101,25 +103,27 @@ class ComisionController extends Controller
     public function actionCreate()
     {
         $model = new Comision();
-
         if ($_POST != NULL){
-            $cantidad = $_POST['Comision'];
-            $cantidad =$cantidad['cant_comisiones'];
-            for( $i=0; $i<$cantidad; $i++){
+            $request = Yii::$app->request;
+            $help = $request->post('NUMERO');
+            var_dump ($help);
+            for( $i=0; $i<$help; $i++){
                 $comi = new Comision();
-                $comi->load(Yii::$app->request->post());
-                $comi->save();
-                $session = Yii::$app->session;
-                $session->setFlash('comisionesCreadas', "Se han creado correctamente $cantidad comisiones");
+                $comi->NUMERO = $i + 1;
+                $comi->ID_MATERIA = $request->post('ID_MATERIA');
+                $comi->ID_Ciclo = 1;
+                var_dump($comi);
+                if($comi->save())
+                {
+                    $session = Yii::$app->session;
+                    $session->setFlash('comisionesCreadas', "Se han creado correctamente $help comisiones");
+                }
             }
         }
-
-     /*   if ($model->load(Yii::$app->request->post()) && $model->slave()) {
-            return $this->redirect(['view', 'id' => $model->ID]);
-        }   */
-
+        $instituto = new Instituto();
+        $carrera = new Carrera();
         return $this->render('create', [
-            'model' => $model,
+            'model' => $model,'instituto' => $instituto,'carrera' => $carrera,
         ]);
     }
 
@@ -171,5 +175,35 @@ class ComisionController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    public function actionListcarrera($id)
+    {
+        $carreras = Carrera::find()
+            ->where(['ID_INSTITUTO' => $id])
+            ->orderBy('id DESC')
+            ->all();
+
+        if (!empty($carreras)) {
+            foreach($carreras as $carrera) {
+                echo "<option value='".$carrera->ID."'>".$carrera->NOMBRE."</option>";
+            }
+        } else {
+            echo "<option>-</option>";
+        }
+
+    }
+    public function actionListmateria($id)
+    {
+        $carrera = Carrera::findone($id);
+        $materias = $carrera->mATERIAs;
+
+        if (!empty($materias)) {
+            foreach($materias as $materia) {
+                echo "<option value='".$materia->ID."'>".$materia->NOMBRE."</option>";
+            }
+        } else {
+            echo "<option>-</option>";
+        }
+
     }
 }

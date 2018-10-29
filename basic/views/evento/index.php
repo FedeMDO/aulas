@@ -10,7 +10,7 @@ use yii\helpers\Url;
 
 use app\assets\CalendarAsset;
 
-CalendarASset::register($this);
+CalendarAsset::register($this);
 
 $this->registerCssFile("@web/css/index.css", [
   'depends' => [\yii\bootstrap\BootstrapAsset::className()],
@@ -44,7 +44,7 @@ $indexMaterias = 1;
                   <h5 style="font-weight: bold;"><?= Html::encode("{$materia->NOMBRE} ") ?></h5>
                   <?php foreach ($materia->comisions as $comision) {
                     ?>
-                <div class="external-event bg-primary" style="background-color:<?php echo $color;?>"value="<?= Html::encode("{$comision->ID} ") ?>"> <?= Html::encode("{$comision->NOMBRE} ") ?></div>
+                <div class="external-event bg-primary" style="background-color:<?php echo $color;?>"value="<?= Html::encode("{$comision->ID} ") ?>"> <?= Html::encode("{$comision->getName()} ") ?></div>
                 <?php
                 }
               ?>
@@ -93,17 +93,6 @@ $indexMaterias = 1;
 <div class="evento-calendar-index">
 <div class="evento-index">
 
-<h1><?= Html::encode($this->title) ?></h1>
-
-  <?php Modal::begin([
-          'header' => '<h4>eventos nico</h4>',                        
-          'id'     => 'model',
-          'size'   => 'model-lg',
-          ]);
-            
-      echo "<div id='modelContent'></div>";
-  Modal::end();
-?>
 <div id='calendar'></div>
  
 </div>
