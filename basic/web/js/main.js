@@ -7,28 +7,17 @@ $(document).ready(function(){
         },
         defaultView:'timelineDay',
         lang: 'es-us',
-        weekends: true, // will hide Saturdays and Sundays
-        editable: true,
-        droppable: true,
-        selectable: true,
         minTime: '08:00:00',
         maxTime: '23:00:00',
         schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
         height: 'auto',
-        // events: [
-        //     {
-        //       title: 'Event Title1',
-        //       start: '13:13:55.008',
-        //       end: '16:13:55.008',
-        //       dow: [ 1, 2, 3, 4 ]
-        //     },
-        //     {
-        //       title: 'Event Title2',
-        //       start: '2018-10-20T13:13:55-0400',
-        //       end: '2018-10-20T16:13:55-0400'
-        //     }
-        // ],
+
         resourceGroupField: 'edificio',
+        resourceAreaWidth: '23%',
+        resourceRender: function resourceRenderCallback(resourceObj, labelTds, bodyTds){
+            var title = 'Recursos: ' + '\n' + resourceObj.recursos;
+            labelTds.attr('title', title);
+        },
         resources:
 
             // your event source
@@ -40,7 +29,7 @@ $(document).ready(function(){
                 }
             },
         // use the `url` property
-        resourcesInitiallyExpanded:false,
+        resourcesInitiallyExpanded:true,
         eventSources: [
 
             // your event source
@@ -58,7 +47,7 @@ $(document).ready(function(){
             // any other sources...
         
           ],
-
+        resourceLabelText: 'Aula por edificio',
         eventRender: function(event){
             return (event.ranges.filter(function(range){ // test event against all the ranges
 
@@ -72,16 +61,18 @@ $(document).ready(function(){
             var id =event.id;
             var ini=event.start.format();
             var fin=event.end.format();
+            var aula_id= event.resourceId;
             
             if (!confirm("Confirmar cambios")) {
                 revertFunc();}
                 else
                 {
-                    $.post("/evento/upd",
+                    $.post("/evento/updscheduler",
                         { 
                             id:id,
                             ini:ini,
                             fin:fin,
+                            aula_id:aula_id,
                         },
             function(data)
             {
@@ -100,6 +91,9 @@ $(document).ready(function(){
             var id_aula =event.resourceId;
             
           },
+        eventOverlap: function(stillEvent, movingEvent) {
+            return stillEvent.rendering == "background";
+        },
         eventClick: function(event){
             var id = event.id;
             var inicio = event.start.format();
@@ -123,16 +117,18 @@ $(document).ready(function(){
             var id =event.id;
             var ini=event.start.format();
             var fin=event.end.format();
+            var aula_id = event.resourceId;
             
             if (!confirm("Esta seguro??")) {
                 revertFunc();}
                 else
                 {
-                    $.post("/evento/upd",
+                    $.post("/evento/updscheduler",
                 { 
                     id:id,
                     ini:ini,
-                    fin:fin
+                    fin:fin,
+                    aula_id:aula_id,
                 },
             function(data)
             {
