@@ -1018,7 +1018,7 @@ NOTE: use percentage font sizes or else old IE chokes
 /* TimeGrid Slats (lines that run horizontally)
 --------------------------------------------------------------------------------------------------*/
 .fc-time-grid .fc-slats td {
-  height: 1.5em;
+  height: 2em;
   border-bottom: 0;
   /* each cell is responsible for its top border */ }
 

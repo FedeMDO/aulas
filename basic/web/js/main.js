@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $('#calendar').fullCalendar({
+        //VIEW
         header: {
             left: 'today prev,next',
             center: 'title',
@@ -9,9 +10,11 @@ $(document).ready(function(){
         lang: 'es-us',
         minTime: '08:00:00',
         maxTime: '23:00:00',
-        schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
         height: 'auto',
-
+        nowIndicator: true,
+        slotDuration: '01:00:00',
+        //SCHEDULER
+        schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
         resourceGroupField: 'edificio',
         resourceAreaWidth: '23%',
         resourceRender: function resourceRenderCallback(resourceObj, labelTds, bodyTds){
@@ -19,8 +22,6 @@ $(document).ready(function(){
             labelTds.attr('title', title);
         },
         resources:
-
-            // your event source
             {
                 url: '/evento/jsonresources',
                 type: 'GET',
@@ -28,8 +29,10 @@ $(document).ready(function(){
                     id_sede: $("em").text(),
                 }
             },
-        // use the `url` property
         resourcesInitiallyExpanded:true,
+        resourceLabelText: 'Aula por edificio',
+
+        //EVENTOS
         eventSources: [
 
             // your event source
@@ -47,7 +50,7 @@ $(document).ready(function(){
             // any other sources...
         
           ],
-        resourceLabelText: 'Aula por edificio',
+
         eventRender: function(event){
             return (event.ranges.filter(function(range){ // test event against all the ranges
 
@@ -121,8 +124,7 @@ $(document).ready(function(){
             
             if (!confirm("Esta seguro??")) {
                 revertFunc();}
-                else
-                {
+                else{
                     $.post("/evento/updscheduler",
                 { 
                     id:id,
@@ -130,16 +132,14 @@ $(document).ready(function(){
                     fin:fin,
                     aula_id:aula_id,
                 },
-            function(data)
-            {
-                if (data){
-                    alert("se actulaizo conrrectamente");
-                }
-                else {
-                    alert("error");
+                function(data){
+                    if (data){
+                        alert("se actulaizo conrrectamente");
                     }
-            });
-            }}                                
-        
+                    else {
+                        alert("error");
+                    }
+                });
+            }}
       });
     });

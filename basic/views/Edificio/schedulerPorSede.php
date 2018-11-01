@@ -28,20 +28,14 @@ $this->params['breadcrumbs'][] = $this->title;
 <em id:"id_sede"><?=Html::encode("{$sede->ID}")?></em>
 <div class="col-md-offset-1 col-md-10">
     <div class="loginc">
-
         <!-- THE CALENDAR -->
         <div class="evento-index">
-
-
             <div class="evento-calendar-index">
                 <div class="evento-index">
-
                     <div id='calendar'></div>
-
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 
