@@ -1,37 +1,20 @@
 $(document).ready(function(){
     $('#calendar').fullCalendar({
+        //VIEW
         header: {
             left: 'today prev,next',
             center: 'title',
-            right: 'agendaDay,agendaWeek'
+            right: 'agendaDay,agendaWeek,month'
         },
         defaultView:'agendaWeek',
         lang: 'es-us',
-        weekends: true, // will hide Saturdays and Sundays
-        editable: true,
-        droppable: true,
-        selectable: true,
         minTime: '08:00:00',
         maxTime: '23:00:00',
-        schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
         height: 'auto',
-        // events: [
-        //     {
-        //       title: 'Event Title1',
-        //       start: '13:13:55.008',
-        //       end: '16:13:55.008',
-        //       dow: [ 1, 2, 3, 4 ]
-        //     },
-        //     {
-        //       title: 'Event Title2',
-        //       start: '2018-10-20T13:13:55-0400',
-        //       end: '2018-10-20T16:13:55-0400'
-        //     }
-        // ],
-
+        nowIndicator: true,
+        slotDuration: '01:00:00',
+        //EVENTOS
         eventSources: [
-
-            // your event source
             {
                 url: '/evento/jsoncalendar', // use the `url` property
                 type: 'GET',
@@ -41,10 +24,9 @@ $(document).ready(function(){
                     },
                 },
             }
-
-            // any other sources...
-
         ],
+        //licencia scheduler
+        schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
 
         eventRender: function(event){
             return (event.ranges.filter(function(range){ // test event against all the ranges
@@ -54,7 +36,6 @@ $(document).ready(function(){
 
             }).length)>0; //if it isn't in one of the ranges, don't render it (by returning false)
         },
-
         eventResize: function(event, delta, revertFunc) {
             var id =event.id;
             var ini=event.start.format();
@@ -129,7 +110,7 @@ $(document).ready(function(){
                         else {
                             alert("error");
                         }
-                    });
+                });
             }}
 
     });

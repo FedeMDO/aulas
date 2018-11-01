@@ -16,7 +16,7 @@ class SchedulerAsset extends AssetBundle
 
         'js/jquery-3.3.1.min.js',
         'js/moment.min.js',
-        'js/fullcalendar.min.js',
+        'js/fullcalendar.js',
         'js/scheduler.js',
         'js/es-us.js',
         'js/main.js',
