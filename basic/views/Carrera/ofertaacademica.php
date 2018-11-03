@@ -26,7 +26,7 @@ $indexMaterias = 1;
         
         <div class="loginc">
         <h3 style="text-align: center; font-weight: bold;">OFERTA ACADEMICA</h3>
-        <table id="example" class="cell-border compact stripe" style="width:100%">
+        <table id="example" class="cell-border compact stripe hover" style="width:100%">
         <thead>
             <tr>
                 <th>Carrera</th>
