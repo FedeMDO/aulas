@@ -10,11 +10,11 @@ use Yii;
  * @property int $ID
  * @property string $NOMBRE
  * @property string $DESC_CORTA
+ * @property int $ID_Carrera
  * @property int $anio
  *
- * @property CarreraMateria[] $carreraMaterias
- * @property Carrera[] $cARRERAs
  * @property Comision[] $comisions
+ * @property Carrera $carrera
  */
 class Materia extends \yii\db\ActiveRecord
 {
@@ -33,9 +33,10 @@ class Materia extends \yii\db\ActiveRecord
     {
         return [
             [['NOMBRE', 'DESC_CORTA'], 'required'],
-            [['anio'], 'integer'],
+            [['ID_Carrera', 'anio'], 'integer'],
             [['NOMBRE'], 'string', 'max' => 40],
             [['DESC_CORTA'], 'string', 'max' => 20],
+            [['ID_Carrera'], 'exist', 'skipOnError' => true, 'targetClass' => Carrera::className(), 'targetAttribute' => ['ID_Carrera' => 'ID']],
         ];
     }
 
@@ -48,24 +49,9 @@ class Materia extends \yii\db\ActiveRecord
             'ID' => 'ID',
             'NOMBRE' => 'Nombre',
             'DESC_CORTA' => 'Desc  Corta',
+            'ID_Carrera' => 'Id  Carrera',
             'anio' => 'Anio',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCarreraMaterias()
-    {
-        return $this->hasMany(CarreraMateria::className(), ['ID_MATERIA' => 'ID']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCARRERAs()
-    {
-        return $this->hasMany(Carrera::className(), ['ID' => 'ID_CARRERA'])->viaTable('carrera_materia', ['ID_MATERIA' => 'ID']);
     }
 
     /**
@@ -74,5 +60,13 @@ class Materia extends \yii\db\ActiveRecord
     public function getComisions()
     {
         return $this->hasMany(Comision::className(), ['ID_MATERIA' => 'ID']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCarrera()
+    {
+        return $this->hasOne(Carrera::className(), ['ID' => 'ID_Carrera']);
     }
 }

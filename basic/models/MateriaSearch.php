@@ -18,7 +18,7 @@ class MateriaSearch extends Materia
     public function rules()
     {
         return [
-            [['ID', 'anio'], 'integer'],
+            [['ID', 'ID_Carrera', 'anio'], 'integer'],
             [['NOMBRE', 'DESC_CORTA'], 'safe'],
         ];
     }
@@ -60,6 +60,7 @@ class MateriaSearch extends Materia
         // grid filtering conditions
         $query->andFilterWhere([
             'ID' => $this->ID,
+            'ID_Carrera' => $this->ID_Carrera,
             'anio' => $this->anio,
         ]);
 

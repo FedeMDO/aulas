@@ -16,7 +16,7 @@ $comisiones = array();
 
 foreach($carreras as $carrera)
 {
-    foreach($carrera->mATERIAs as $mater)
+    foreach($carrera->materias as $mater)
     {
         $materias [] = $mater;
     }

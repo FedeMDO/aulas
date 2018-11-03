@@ -72,7 +72,7 @@ class EventoController extends Controller
     $carreras = Users::findOne(Yii::$app->user->identity->id)->instituto->carreras;
 
     foreach ($carreras as $carrera) {
-        foreach ($carrera->mATERIAs as $materia) {
+        foreach ($carrera->materias as $materia) {
             $filter_comis[] = $materia;
         }
     }

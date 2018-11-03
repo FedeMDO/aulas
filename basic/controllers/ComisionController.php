@@ -194,8 +194,7 @@ class ComisionController extends Controller
     }
     public function actionListmateria($id)
     {
-        $carrera = Carrera::findone($id);
-        $materias = $carrera->mATERIAs;
+        $materias = Carrera::findone($id)->materias;
 
         if (!empty($materias)) {
             foreach($materias as $materia) {
