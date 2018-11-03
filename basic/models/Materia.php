@@ -10,6 +10,7 @@ use Yii;
  * @property int $ID
  * @property string $NOMBRE
  * @property string $DESC_CORTA
+ * @property int $anio
  *
  * @property CarreraMateria[] $carreraMaterias
  * @property Carrera[] $cARRERAs
@@ -18,7 +19,7 @@ use Yii;
 class Materia extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -26,19 +27,20 @@ class Materia extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
             [['NOMBRE', 'DESC_CORTA'], 'required'],
+            [['anio'], 'integer'],
             [['NOMBRE'], 'string', 'max' => 40],
             [['DESC_CORTA'], 'string', 'max' => 20],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -46,6 +48,7 @@ class Materia extends \yii\db\ActiveRecord
             'ID' => 'ID',
             'NOMBRE' => 'Nombre',
             'DESC_CORTA' => 'Desc  Corta',
+            'anio' => 'Anio',
         ];
     }
 

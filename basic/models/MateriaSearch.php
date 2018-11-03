@@ -13,18 +13,18 @@ use app\models\Materia;
 class MateriaSearch extends Materia
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['ID'], 'integer'],
+            [['ID', 'anio'], 'integer'],
             [['NOMBRE', 'DESC_CORTA'], 'safe'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -60,6 +60,7 @@ class MateriaSearch extends Materia
         // grid filtering conditions
         $query->andFilterWhere([
             'ID' => $this->ID,
+            'anio' => $this->anio,
         ]);
 
         $query->andFilterWhere(['like', 'NOMBRE', $this->NOMBRE])
