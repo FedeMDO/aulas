@@ -71033,7 +71033,7 @@ this.pdfMake = this.pdfMake || {}; this.pdfMake.vfs = {
 				 *      } );
 				 *    } );
 				 */
-				"sNext": "Next",
+				"sNext": "Siguiente",
 	
 	
 				/**
@@ -71056,7 +71056,7 @@ this.pdfMake = this.pdfMake || {}; this.pdfMake.vfs = {
 				 *      } );
 				 *    } );
 				 */
-				"sPrevious": "Previous"
+				"sPrevious": "Anterior"
 			},
 	
 			/**
@@ -71111,7 +71111,7 @@ this.pdfMake = this.pdfMake || {}; this.pdfMake.vfs = {
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+			"sInfo": "Mostrando del _START_ al _END_ de _TOTAL_",
 	
 	
 			/**
@@ -71352,7 +71352,7 @@ this.pdfMake = this.pdfMake || {}; this.pdfMake.vfs = {
 			 *      } );
 			 *    } );
 			 */
-			"sSearch": "Search:",
+			"sSearch": "Buscar:",
 	
 	
 			/**

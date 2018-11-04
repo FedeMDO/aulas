@@ -34,7 +34,7 @@ foreach($materias as $m)
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
-        'model' => $model,'id_aula'=>$id_aula, 'comisiones' => $comisiones
+        'model' => $model,'materia' => $materia,'carrera' => $carrera,
     ]) ?>
 
 </div>

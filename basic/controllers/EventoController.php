@@ -6,15 +6,17 @@ use Yii;
 use app\models\EventoCalendar;
 use app\models\RestriCalendar;
 use app\models\Sede;
+use app\models\Comision;
+use app\models\Carrera;
 use app\models\Users;
 use app\models\Instituto;
-use app\models\Comision;
 use app\models\Materia;
 use app\models\Hora;
+use yii\bootstrap\Modal;
 use app\models\Aula;
-use app\models\Carrera;
 use app\models\CarreraMateria;
 use yii\helpers\VarDumper;
+use yii\helpers\Url;
 use app\models\EventoCalendarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -49,37 +51,8 @@ class EventoController extends Controller
      */
     public function actionIndex($id)
     {
-    // $id_usuario=Yii::$app->user->identity->id;
-    // $id_instituto=Instituto::findOne($id_usuario)->ID;
-    // $id_carrera= Carrera::findOne($id_instituto)->ID;
-    // $carrera_materia= CarreraMateria::findAll([
-    //     'ID_CARRERA' => $id_carrera,
-    // ]);
-    
-    // foreach ($carrera_materia as $cons) {
-    //     $materias=Materia::findOne($cons->ID_MATERIA)->NOMBRE;
-        
-    //     $filter_mate[]=$materias;
-    // }
-    // REFACTORIZO Y CAPTO COMISIONES, NO NOMBRES
-
-    //*esto es para cambiar el color de las materias en la vista
-    $id_user= Yii::$app->user->identity->id;
-    $usuario= Users::findOne($id_user)->idInstituto;
-    $institutocolor2= Instituto::findOne($usuario)->COLOR_HEXA;
-
-    ///
-    $carreras = Users::findOne(Yii::$app->user->identity->id)->instituto->carreras;
-
-    foreach ($carreras as $carrera) {
-        foreach ($carrera->materias as $materia) {
-            $filter_comis[] = $materia;
-        }
-    }
-    $filterDistinct = array_unique($filter_comis, SORT_REGULAR);
-
-    return $this->render('index', [
-      'filter'=> $filterDistinct, 'id_aula'=>$id ,"color"=>"red"
+        return $this->render('index', [
+        'id_aula'=>$id 
     ]);
 }
 
@@ -101,20 +74,33 @@ class EventoController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id_aula)
     {
-
+        $materia = new Materia();
+        $carrera = new Carrera();
         $model = new EventoCalendar();
         $model->ID_User_Asigna=Yii::$app->user->identity->id;
-
         //ESTA MAL, BUSCAR ID DE INSTITUTO POR COMISION ASIGNADA, NO POR USER QUE ASIGNA.
-        $model->ID_Instituto = Users::findOne(Yii::$app->user->identity->id)->idInstituto; 
+        
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index','id' =>1]);
+        if ($model->load(Yii::$app->request->post())) {
+            $institutoID = $model->comision->mATERIA->carrera->iNSTITUTO->ID;
+            $ciclo = $model->comision->ID_Ciclo;
+            $model->ID_Instituto = $institutoID;
+            $model->ID_Ciclo = $ciclo;
+            $model->ID_Aula = $id_aula;
+            if($model->save())
+            {
+                return $this->redirect(['index','id' =>$model->ID_Aula]);
+            }
+            else
+            {
+                return $this->renderAjax('create', [ 'model' => $model , 'materia' => $materia, 'carrera' => $carrera]);
+            }
         }
-        return $this->render('create', [
-            'model' => $model, 'id_aula' => 1,
+
+        return $this->renderAjax('create', [
+            'model' => $model, 'materia' => $materia, 'carrera' => $carrera,
         ]);
     }
 
@@ -256,7 +242,7 @@ class EventoController extends Controller
                 $resource['id'] = $aula->ID;
                 $resource['title'] = $aula->NOMBRE;
                 $resource['edificio'] = $aula->eDIFICIO->NOMBRE;
-                
+                $resource['url'] = URL::toRoute('evento/index?id=').$aula->ID;
                 $obj = (object) $resource;
 
                 $resources [] = $obj;
@@ -269,182 +255,198 @@ class EventoController extends Controller
 
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
-        $tasks = array();
-
+        $aula = Aula::findOne($id);
         //RESTRICCIONES
-        $const= RestriCalendar::find()->where(['ID_Aula' => $id])->all();
-        foreach ($const as $cons) {
-
-            $dowArray = explode(',', $cons->dow);
+        foreach ($aula->restriCalendars as $cons) 
+        {
+                
             $begin = new DateTime($cons->ciclo->fecha_inicio);
             $end = new DateTime($cons->ciclo->fecha_fin);
+
+            $interval = DateInterval::createFromDateString('1 day');
+            $period = new DatePeriod($begin, $interval, $end);
+            
+            foreach ($period as $dia)
+            {
+                if ($dia->format('N') ==  $cons->dow)
+                {
+
+                    $restri = array();
+                    $restri['id'] = intval($cons->id).'R';
+                    $restri['title'] = $cons->instituto->ID;
+                    $restri['ranges'] = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
+                    $restri['start'] = $dia->format('Y-m-d').'T'.$cons->Hora_ini;
+                    $restri['end'] = $dia->format('Y-m-d').'T'.$cons->Hora_fin;
+                    $restri['backgroundColor'] = $cons->instituto->COLOR_HEXA;
+                    $restri['rendering'] = 'background';
+                    $restri['resourceId'] = $cons->ID_Aula;
+                    if ($instIdOnSessionUser != $cons->instituto->ID)
+                        {
+                            $restri['overlap'] = false;
+                        }
+                    $tasks[] = (object) $restri;
+                }
+            }
+        }
+        //EVENTOS
+        foreach ($aula->eventoCalendars as $eve) 
+        {
+            $begin = new DateTime($eve->ciclo->fecha_inicio);
+            $end = new DateTime($eve->ciclo->fecha_fin);
 
             $interval = DateInterval::createFromDateString('1 day');
             $period = new DatePeriod($begin, $interval, $end);
 
             foreach ($period as $dia)
             {
-                foreach($dowArray as $dow)
+                if ($dia->format('N') == $eve->dow)
                 {
-                    if ($dia->format('N') == $dow)
+                    $event = array();
+                        
+                    $event['id'] = intval($eve->id).'E';
+                    $event['title'] = $eve->comision->getName();
+                    $event['color'] = $eve->instituto->COLOR_HEXA;                             
+                    $event['ranges'] = [array('start' => $eve->ciclo->fecha_inicio, 'end' => $eve->ciclo->fecha_fin)];
+                    $event['editable'] = true;
+                    //user en session no edita eventos de otros institutos
+                    if ($instIdOnSessionUser != $eve->instituto->ID)
                     {
-                        $restri = new \yii2fullcalendar\Models\Event();
-                        $restri->id = intval($cons->id).'R';
-                        $restri->title = $cons->instituto->ID;
-                        $restri->ranges = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
-                        $restri->start = $dia->format('Y-m-d').'T'.$cons->Hora_ini;
-                        $restri->end = $dia->format('Y-m-d').'T'.$cons->Hora_fin;
-                        $restri->backgroundColor = $cons->instituto->COLOR_HEXA;
-                        $restri->rendering = 'background';
-                        $restri->resourceId = $cons->ID_Aula;
-                        if ($instIdOnSessionUser != $cons->instituto->ID)
-                            {
-                                $restri->overlap = false;
-                            }
-                        $tasks[] = $restri;
+                        $event['editable'] = false;
                     }
-                }
-            }
-
-            //EVENTOS
-            $events = EventoCalendar::find()->where(['ID_Aula' => $id])->all();
-            foreach ($events as $eve) {
-
-                $dowArray = explode(',', $eve->dow);
-                $begin = new DateTime($eve->ciclo->fecha_inicio);
-                $end = new DateTime($eve->ciclo->fecha_fin);
-
-                $interval = DateInterval::createFromDateString('1 day');
-                $period = new DatePeriod($begin, $interval, $end);
-
-                foreach ($period as $dia)
-                {
-                    foreach($dowArray as $dow)
-                    {
-                        if ($dia->format('N') == $dow)
-                        {
-                            $event = new \yii2fullcalendar\Models\Event();
-                            $event->id = $eve->id.'E';
-                            $event->title = $eve->comision->getName();
-                            $event->color = $eve->instituto->COLOR_HEXA;
-                            $event->rendering = null;
-                            $event->editable = true;
-                            $event->ranges = [array('start' => $eve->ciclo->fecha_inicio, 'end' => $eve->ciclo->fecha_fin)];
-                            //user en session no edita eventos de otros institutos
-                            if ($instIdOnSessionUser != $eve->instituto->ID)
-                            {
-                                $event->editable = false;
-                            }
-                            $event->start = $dia->format('Y-m-d').'T'.$eve->Hora_ini;
-                            $event->end = $dia->format('Y-m-d').'T'.$eve->Hora_fin;
-                            $event->resourceId = $eve->ID_Aula;
-                            $tasks[] = $event;
-                        }
-                    }
+                    $event['start'] = $dia->format('Y-m-d').'T'.$eve->Hora_ini;
+                    $event['end'] = $dia->format('Y-m-d').'T'.$eve->Hora_fin;
+                    $event['resourceId'] = $eve->ID_Aula;
+                    $tasks[] = (object) $event;
                 }
             }
         }
         return $tasks;
       }
 
-    public function actionJsonschedulersede($id_sede, $start=NULL,$end=NULL,$_=NULL){
+    public function actionJsonschedulersede($id_sede, $start,$end=NULL,$_=NULL){
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
-        $resources = array();
+        $tasks = array();
         $sede = Sede::findOne($id_sede);
         $aulas = array();
-        if(!empty($sede->edificios)){
+        if(!empty($sede->edificios))
+        {
             foreach($sede->edificios as $edi)
             {
+                
                 if(!empty($edi->aulas))
                 {
                     foreach($edi->aulas as $aula)
-                    {
-                        $aulas [] = $aula;
-                    }
-                }
-
-            }
-        }
-
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $tasks = array();
-
-        foreach($aulas as $aula){
-            //RESTRICCIONES
-            $const= RestriCalendar::find()->where(['ID_Aula' => $aula->ID])->all();
-            foreach ($const as $cons) {
-
-                $dowArray = explode(',', $cons->dow);
-                $begin = new DateTime($cons->ciclo->fecha_inicio);
-                $end = new DateTime($cons->ciclo->fecha_fin);
-
-                $interval = DateInterval::createFromDateString('1 day');
-                $period = new DatePeriod($begin, $interval, $end);
-
-                foreach ($period as $dia)
-                {
-                    foreach($dowArray as $dow)
-                    {
-                        if ($dia->format('N') == $dow)
+                    {                        
+                        //RESTRICCIONES
+                        foreach ($aula->restriCalendars as $cons) 
                         {
-                            $restri = new \yii2fullcalendar\Models\Event();
-                            $restri->id = intval($cons->id).'R';
-                            $restri->title = $cons->instituto->NOMBRE;
-                            $restri->ranges = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
-                            $restri->start = $dia->format('Y-m-d').'T'.$cons->Hora_ini;
-                            $restri->end = $dia->format('Y-m-d').'T'.$cons->Hora_fin;
-                            $restri->backgroundColor = $cons->instituto->COLOR_HEXA;
-                            $restri->rendering = 'background';
-                            $restri->resourceId = $cons->ID_Aula;
-                            //user en session no edita eventos de otros institutos
-                            if ($instIdOnSessionUser != $cons->instituto->ID)
+                            $begin = new DateTime($cons->ciclo->fecha_inicio);
+                            $end = new DateTime($cons->ciclo->fecha_fin);
+
+                            $interval = DateInterval::createFromDateString('1 day');
+                            $period = new DatePeriod($begin, $interval, $end);
+
+                            foreach ($period as $dia)
                             {
-                                $restri->overlap = false;
-                            }
-                            $tasks[] = $restri;
-                        }
-                    }
-                }
-
-                //EVENTOS
-                $events = EventoCalendar::find()->where(['ID_Aula' => $aula->ID])->all();
-                foreach ($events as $eve) {
-                    
-                    $dowArray = explode(',', $eve->dow);
-                    $begin = new DateTime($eve->ciclo->fecha_inicio);
-                    $end = new DateTime($eve->ciclo->fecha_fin);
-
-                    $interval = DateInterval::createFromDateString('1 day');
-                    $period = new DatePeriod($begin, $interval, $end);
-
-                    foreach ($period as $dia)
-                    {
-                        foreach($dowArray as $dow)
-                        {
-                            if ($dia->format('N') == $dow)
-                            {
-                                $event = new \yii2fullcalendar\Models\Event();
-                                $event->id = $eve->id.'E';
-                                $event->title = $eve->comision->getName();
-                                $event->color = $eve->instituto->COLOR_HEXA;                             
-                                $event->ranges = [array('start' => $eve->ciclo->fecha_inicio, 'end' => $eve->ciclo->fecha_fin)];
-                                $event->editable = true;
-                                //user en session no edita eventos de otros institutos
-                                if ($instIdOnSessionUser != $eve->instituto->ID)
+                                if ($dia->format('N') == intval($cons->dow))
                                 {
-                                    $event->editable = false;
+                                    $restri = array();
+                                    $restri['id'] = intval($cons->id).'R';
+                                    $restri['title'] = $cons->instituto->ID;
+                                    $restri['ranges'] = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
+                                    $restri['start'] = $dia->format('Y-m-d').'T'.$cons->Hora_ini;
+                                    $restri['end'] = $dia->format('Y-m-d').'T'.$cons->Hora_fin;
+                                    $restri['backgroundColor'] = $cons->instituto->COLOR_HEXA;
+                                    $restri['rendering'] = 'background';
+                                    $restri['resourceId'] = $cons->ID_Aula;
+                                    if ($instIdOnSessionUser != $cons->instituto->ID)
+                                        {
+                                            $restri['overlap'] = false;
+                                        }
+                                    $tasks[] = (object) $restri;
                                 }
-                                $event->start = $dia->format('Y-m-d').'T'.$eve->Hora_ini;
-                                $event->end = $dia->format('Y-m-d').'T'.$eve->Hora_fin;
-                                $event->resourceId = $eve->ID_Aula;
-                                $tasks[] = $event;
+                            }
+                        }
+                        //EVENTOS
+                        foreach ($aula->eventoCalendars as $eve) 
+                        {
+                            $begin = new DateTime($eve->ciclo->fecha_inicio);
+                            $end = new DateTime($eve->ciclo->fecha_fin);
+                            $interval = DateInterval::createFromDateString('1 day');
+                            $period = new DatePeriod($begin, $interval, $end);
+
+                            foreach ($period as $dia)
+                            {
+                                if ($dia->format('N') == intval($eve->dow))
+                                {
+                                    $event = array();
+                                    
+                                    $event['id'] = intval($eve->id).'E';
+                                    $event['title'] = $eve->comision->getName();
+                                    $event['color'] = $eve->instituto->COLOR_HEXA;                             
+                                    $event['ranges'] = [array('start' => $eve->ciclo->fecha_inicio, 'end' => $eve->ciclo->fecha_fin)];
+                                    $event['editable'] = true;
+                                    //user en session no edita eventos de otros institutos
+                                    if ($instIdOnSessionUser != $eve->instituto->ID)
+                                    {
+                                        $event['editable'] = false;
+                                    }
+                                    $event['start'] = $dia->format('Y-m-d').'T'.$eve->Hora_ini;
+                                    $event['end'] = $dia->format('Y-m-d').'T'.$eve->Hora_fin;
+                                    $event['resourceId'] = $eve->ID_Aula;
+                                    
+                                    $tasks[] = (object) $event;
+                                }
                             }
                         }
                     }
                 }
             }
         }
+        // var_dump($x);
         return $tasks;
+    }
+    public function actionListcarrera($id)
+    {
+        $carreras = Carrera::find()
+            ->where(['ID_INSTITUTO' => $id])
+            ->orderBy('id DESC')
+            ->all();
+
+        if (!empty($carreras)) {
+            foreach($carreras as $carrera) {
+                echo "<option value='".$carrera->ID."'>".$carrera->NOMBRE."</option>";
+            }
+        } else {
+            echo "<option>-</option>";
+        }
+
+    }
+    public function actionListmateria($id)
+    {
+        $materias = Carrera::findone($id)->materias;
+
+        if (!empty($materias)) {
+            foreach($materias as $materia) {
+                echo "<option value='".$materia->ID."'>".$materia->NOMBRE."</option>";
+            }
+        } else {
+            echo "<option>-</option>";
+        }
+    }
+    public function actionListcomision($id)
+    {
+        $materia = Materia::findOne($id);
+        $comisiones = $materia->comisions;
+
+        if (!empty($comisiones)) {
+            foreach($comisiones as $comision) {
+                echo "<option value='".$comision->ID."'>".$materia->DESC_CORTA.$comision->NUMERO."</option>";
+            }
+        } else {
+            echo "<option>-</option>";
+        }
+
     }
 }

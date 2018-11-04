@@ -31,11 +31,8 @@ $(document).ready(function(){
             },
         resourcesInitiallyExpanded:true,
         resourceLabelText: 'Aula por edificio',
-
         //EVENTOS
         eventSources: [
-
-            // your event source
             {
               url: '/evento/jsonschedulersede', // use the `url` property
               type: 'GET',
@@ -46,11 +43,7 @@ $(document).ready(function(){
                     alert('there was an error while fetching events!');
                 },
             }
-        
-            // any other sources...
-        
-          ],
-
+        ],
         eventRender: function(event){
             return (event.ranges.filter(function(range){ // test event against all the ranges
 

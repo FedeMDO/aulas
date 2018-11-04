@@ -23,9 +23,14 @@ $indexMaterias = 1;
 ?>
     <h3 style="text-align: center; font-weight: bold;">ASIGNACION COMISIONES DE AULA   <em id:"id_aula"><?=Html::encode("{$id_aula}")?></em></h3>
     <div class="col-md-offset-1 col-md-10">
+    <?= Html::button('Nuevo evento', ['value' => Url::to(['evento/create', 'id_aula' => $id_aula]), 'title' => $id_aula, 'class' => 'showModalButton btn btn-success']); ?>
+
         <div class="loginc">
+        
             <div class="evento-index">
+
                 <div class="evento-calendar-index">
+                
                     <div class="evento-index">
                             <div id='calendar'></div>
                     </div>
@@ -33,5 +38,16 @@ $indexMaterias = 1;
             </div>
         </div>
     </div>
+    <?php
+        yii\bootstrap\Modal::begin([
+            'headerOptions' => ['id' => 'modalHeader'],
+            'id' => 'modal',
+            'size' => 'modal-lg',
+            //keeps from closing modal with esc key or by clicking out of the modal.
+            // user must click cancel or X to close
+            'clientOptions' => ['backdrop' => True, 'keyboard' => True]
+        ]);        echo "<div id='modalContent'></div>";
+        yii\bootstrap\Modal::end();
+    ?>
 <?php
 

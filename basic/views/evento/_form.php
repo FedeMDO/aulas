@@ -4,25 +4,62 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Comision;
+use app\models\Carrera;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\EventoCalendar */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
+<div class='loginc'>
 <div class="evento-calendar-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+                'options' => [
+                    'id' => 'crear-evento-form'
+                ]
+            ]); 
+    $carreras = Carrera::find()->asArray()->all();
+    $resultCarr = ArrayHelper::map($carreras, 'ID', 'NOMBRE');
+    ?>
 
-    <?php
-    $result = ArrayHelper::map($comisiones, 'ID', 'NUMERO'); ?>
+    <?php echo $form->field($carrera, 'ID')->dropDownList(
+        $resultCarr,
+        ['prompt'=>'Seleccione Cerrera...',
+            'onchange'=>'
+				$.post( "'.Yii::$app->urlManager->createUrl('evento/listmateria?id=').'"+$(this).val(), function( data ) {
+				  $( "select#materia-id" ).html( data );
+				});
+			'])->label('Carrera');  ?>
+
+    <?php echo $form->field($materia, 'ID')->dropDownList(
+        array(),
+        ['prompt'=>'Seleccione Materia...',
+            'onchange'=>'
+				$.post( "'.Yii::$app->urlManager->createUrl('evento/listcomision?id=').'"+$(this).val(), function( data ) {
+				  $( "select#eventocalendar-id_comision" ).html( data );
+				});
+			'])->label('Materia'); ?>
+
     <?php echo $form->field($model, 'ID_Comision')->dropDownList(
-        $result, 
+        array(), 
         ['prompt'=>'SELECCIONE LA COMISION...']
         )->label(' COMISION '); ?>
-    <?= $form->field($model, 'ID_Aula') ?>
-    <?= $form->field($model, 'ID_Ciclo') ?>
-    <?= $form->field($model, 'dow') ?>
+
+    <?php $diasdelasemana = ['1' => 'Lunes',
+                            '2' => 'Martes',
+                            '3' => 'Miercoles',
+                            '4' => 'Jueves',
+                            '5' => 'Viernes',
+                            '6' => 'Sabado',
+                            '7' => 'Domingo',
+                        ];
+    ?>
+    <?php echo $form->field($model, 'dow')->dropDownList(
+        $diasdelasemana, 
+        ['prompt'=>'SELECCIONE EL DIA......']
+        )->label('Dia');
+        ?>
     <?php 
          $horas = ['08:00:00' => '08:00',
          '09:00:00' => '09:00',
@@ -43,16 +80,17 @@ use app\models\Comision;
        <?php echo $form->field($model, 'Hora_ini')->dropDownList(
         $horas, 
         ['prompt'=>'SELECCIONE LA HORA DE INICIO......']
-        ); ?> 
+        )->label("Desde las"); ?> 
 
           <?php echo $form->field($model,'Hora_fin')->dropDownList(
-                $horas, 
+        $horas, 
         ['prompt'=>'SELECCIONE LA HORA DE FIN.......']
-        ); ?> 
+        )->label("Hasta las"); ?> 
     <div class="form-group">
         <?= Html::submitButton('GUARDAR', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
 
+</div>
 </div>
