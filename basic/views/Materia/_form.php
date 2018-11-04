@@ -18,6 +18,8 @@ use yii\widgets\ActiveForm;
 
     <?=$form->field($model, 'DESC_CORTA', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->textInput(['maxlength' => true])->label("Descripcion corta")?>
 
+    <?=$form->field($model, 'COD_MATERIA', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->textInput(['maxlength' => true])->label("Codigo de materia")?>
+
     <div class="form-group">
         <?=Html::submitButton('Crear', ['class' => 'btn btn-success'])?>
     </div>
