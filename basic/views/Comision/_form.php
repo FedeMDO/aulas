@@ -7,26 +7,21 @@ use app\models\Materia;
 use app\models\Instituto;
 use app\models\Carrera;
 use yii\bootstrap\Alert;
+use dominus77\sweetalert2;
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Comision */
 /* @var $form yii\widgets\ActiveForm */
 $this->title = 'Crear comision';
 $this->params['breadcrumbs'][] = $this->title;
+
+if(Yii::$app->session->hasFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS)):
+    \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
+endif;
 ?>
+
 <h2 style="color:white; border-bottom: 1px solid white; ">Crear comision</h2>
 <div class="comision-form">
-
-    <?php if(Yii::$app->session->hasFlash('comisionesCreadas')):
-    Alert::begin([
-      'options' => [
-          'class' => 'alert-success',
-      ],
-  ]);
-  
-  echo Yii::$app->session->getFlash('comisionesCreadas');
-  
-  Alert::end();
-endif; ?>
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -56,7 +51,10 @@ endif; ?>
 			'])->label('Carrera'); ?>
 
     <?php $materias = Materia::find()->asArray()->all();
-    $resultMat = ArrayHelper::map($materias, 'ID', 'NOMBRE'); ?>
+    $resultMat = ArrayHelper::map($materias, 'ID', 'NOMBRE');
+    $resultCod = ArrayHelper::map($materias, 'ID', 'COD_MATERIA');
+    $lista = Materia::getMateriaCodigo($resultMat, $resultCod);
+    /*var_dump($lista);*/ ?>
 
     <?php echo $form->field($model, 'ID_MATERIA',['labelOptions'=>['style'=>'color:white']])->dropDownList(
         $resultMat,
