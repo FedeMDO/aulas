@@ -104,19 +104,23 @@ class ComisionController extends Controller
     {
         $model = new Comision();
         if ($_POST != NULL){
-            $request = Yii::$app->request;
-            $help = $request->post('NUMERO');
-            var_dump ($help);
+            $request = $_POST['Comision'];
+            $help = $request['NUMERO'];
+            $materia = $request['ID_MATERIA'];
+            $horas = $request['CARGA_HORARIA_SEMANAL'];
+            //$request = Yaii::$app->request;
+            //$help = $request->post('NUMERO');
+            //var_dump ($help);
             for( $i=0; $i<$help; $i++){
                 $comi = new Comision();
                 $comi->NUMERO = $i + 1;
-                $comi->ID_MATERIA = $request->post('ID_MATERIA');
+                $comi->ID_MATERIA = $materia;
+                $comi->CARGA_HORARIA_SEMANAL = $horas;
                 $comi->ID_Ciclo = 1;
-                var_dump($comi);
-                if($comi->save())
-                {
+                $comi->save();
+                if ($comi->save()){
                     $session = Yii::$app->session;
-                    $session->setFlash('comisionesCreadas', "Se han creado correctamente $help comisiones");
+                    $session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, "Se han creado correctamente $help comisiones");
                 }
             }
         }
