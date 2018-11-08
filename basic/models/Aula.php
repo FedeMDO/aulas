@@ -13,16 +13,16 @@ use Yii;
  * @property int $PISO
  * @property int $CAPACIDAD
  *
- * @property AgendaAsigComision[] $agendaAsigComisions
- * @property AgendaAsigHoras[] $agendaAsigHoras
  * @property Edificio $eDIFICIO
  * @property AulaRecurso[] $aulaRecursos
  * @property Recurso[] $rECURSOs
+ * @property EventoCalendar[] $eventoCalendars
+ * @property RestriCalendar[] $restriCalendars
  */
 class Aula extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -30,7 +30,7 @@ class Aula extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -43,33 +43,17 @@ class Aula extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
             'ID' => 'ID',
-            'NOMBRE' => 'Aula',
-            'ID_EDIFICIO' => 'Edificio',
+            'NOMBRE' => 'Nombre',
+            'ID_EDIFICIO' => 'Id  Edificio',
             'PISO' => 'Piso',
             'CAPACIDAD' => 'Capacidad',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAgendaAsigComisions()
-    {
-        return $this->hasMany(AgendaAsigComision::className(), ['ID_AULA' => 'ID']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAgendaAsigHoras()
-    {
-        return $this->hasMany(AgendaAsigHoras::className(), ['ID_AULA' => 'ID']);
     }
 
     /**
@@ -94,5 +78,21 @@ class Aula extends \yii\db\ActiveRecord
     public function getRECURSOs()
     {
         return $this->hasMany(Recurso::className(), ['ID' => 'ID_RECURSO'])->viaTable('aula_recurso', ['ID_AULA' => 'ID']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEventoCalendars()
+    {
+        return $this->hasMany(EventoCalendar::className(), ['ID_Aula' => 'ID']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRestriCalendars()
+    {
+        return $this->hasMany(RestriCalendar::className(), ['ID_Aula' => 'ID']);
     }
 }

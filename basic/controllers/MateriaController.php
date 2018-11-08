@@ -15,7 +15,7 @@ use yii\filters\VerbFilter;
 class MateriaController extends Controller
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {

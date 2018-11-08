@@ -28,7 +28,7 @@ class CarreraController extends Controller
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['index','view','create','update','delete'],
+                        'actions' => ['index','view','create','update','delete','ofertaacademica'],
                         //Esta propiedad establece que tiene permisos
                         'allow' => true,
                         //Usuarios autenticados, el signo ? es para invitados
@@ -42,7 +42,7 @@ class CarreraController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['index','view'],
+                       'actions' => ['index','view','ofertaacademica'],
                        //Esta propiedad establece que tiene permisos
                        'allow' => true,
                        //Usuarios autenticados, el signo ? es para invitados
@@ -64,7 +64,10 @@ class CarreraController extends Controller
             ],
         ];
     }
-
+    public function actionOfertaacademica()
+    {
+        return $this->render('ofertaacademica');
+    }
     /**
      * Lists all Carrera models.
      * @return mixed
