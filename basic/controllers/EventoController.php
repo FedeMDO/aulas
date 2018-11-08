@@ -103,6 +103,7 @@ class EventoController extends Controller
             'model' => $model, 'materia' => $materia, 'carrera' => $carrera,
         ]);
     }
+    
 
     /**
      * Updates an existing EventoCalendar model.
@@ -119,7 +120,7 @@ class EventoController extends Controller
             return $this->redirect(['view', 'id' => $model->ID]);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
         ]);
     }
@@ -127,7 +128,7 @@ class EventoController extends Controller
     {
         $request = Yii::$app->request;
         $evento = $this->findModel($request->post('id'));
-
+        $evento ->dow = $request->post('dow');
         $evento->Hora_ini = substr($request->post('ini'), -8);
         $evento->Hora_fin = substr($request->post('fin'), -8);
         if($evento->save())
@@ -137,12 +138,8 @@ class EventoController extends Controller
     }
     public function actionUpd2()
     {
-        $request = Yii::$app->request;
-
-        $id_aula=$request->post('id_aula');
-
-        $id=$request->post('id');
-        $evento = $this->findModel($id);
+        $request = Yii::$app->request;        
+        $evento = $this->findModel($request->post('id'));
 
         $ini = $request->post('ini');
         $fin = $request->post('ini');
@@ -150,12 +147,12 @@ class EventoController extends Controller
         $evento->ID_User_Asigna=Yii::$app->user->identity->id;
         $evento->Hora_ini = substr($request->post('ini'), -8);
         $evento->Hora_fin = substr($request->post('fin'), -8);
-        $evento->ID_Aula = $id_aula;
+        $evento->ID_Aula = $request->post('id_aula');
         if($evento->save())
         {
             echo("Actualizacion exitosa");
         }
-       return $this->redirect(['index','id' =>$id_aula]);
+       return $this->redirect(['index','id_aula' =>$id_aula]);
       
     }
     public function actionUpdscheduler()
@@ -179,11 +176,12 @@ class EventoController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete()
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        $request = Yii::$app->request;
+        $this->findModel($request->post('id'))->delete();
+        $id_aula =  $request->post('id_aula');
+        return $this->redirect(['index','id' =>$id_aula]);
     }
 
     /**
@@ -280,6 +278,7 @@ class EventoController extends Controller
                     $restri['backgroundColor'] = $cons->instituto->COLOR_HEXA;
                     $restri['rendering'] = 'background';
                     $restri['resourceId'] = $cons->ID_Aula;
+                    $restri['usermodifico'] = $cons->ID_User_Asigna;
                     if ($instIdOnSessionUser != $cons->instituto->ID)
                         {
                             $restri['overlap'] = false;
@@ -315,6 +314,7 @@ class EventoController extends Controller
                     }
                     $event['start'] = $dia->format('Y-m-d').'T'.$eve->Hora_ini;
                     $event['end'] = $dia->format('Y-m-d').'T'.$eve->Hora_fin;
+                    $event['usermodifico'] = $eve->ID_User_Asigna;
                     $event['resourceId'] = $eve->ID_Aula;
                     $tasks[] = (object) $event;
                 }

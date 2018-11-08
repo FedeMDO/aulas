@@ -16,3 +16,23 @@ $(function(){
         }
     });
 });
+
+$('#btnBorrarEvento').click(function()
+{
+    let idEvento = parseInt($('#idevento').val());
+    var id_aula = $("em").text();
+    
+    if (confirm("¿Esta seguro?")) 
+    {
+        $.post("/evento/delete",
+        {
+            id: idEvento,
+            id_aula: id_aula,
+        },
+        )
+        $('#myModal').hide();
+    }
+    else{
+        revertFunc();
+    }
+})
