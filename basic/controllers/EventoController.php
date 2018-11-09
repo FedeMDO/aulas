@@ -429,7 +429,7 @@ class EventoController extends Controller
 
         if (!empty($materias)) {
             foreach($materias as $materia) {
-                echo "<option value='".$materia->ID."'>".$materia->NOMBRE."</option>";
+                echo "<option value='".$materia->ID."'>".$materia->NOMBRE." (".$materia->COD_MATERIA.")</option>";
             }
         } else {
             echo "<option>-</option>";
