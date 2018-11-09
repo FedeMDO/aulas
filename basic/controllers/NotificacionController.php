@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
+use app\models\User;
 use app\models\Notificacion;
 use app\models\NotificacionSearch;
 use yii\web\Controller;
@@ -40,7 +42,7 @@ class NotificacionController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['index','view'],
+                       'actions' => [''],
                        //Esta propiedad establece que tiene permisos
                        'allow' => true,
                        //Usuarios autenticados, el signo ? es para invitados

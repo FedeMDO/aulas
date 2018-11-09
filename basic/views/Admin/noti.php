@@ -9,6 +9,7 @@ use app\controllers\NotificacionController;
 use app\views\Notificacion\create;
 use yii\bootstrap\Alert;
 use dominus77\sweetalert2;
+use app\models\Notificacion;
 
 
 $this->registerCssFile("@web/css/index.css", [
@@ -70,7 +71,9 @@ endif; ?>
     <?php $entro= true; ?>
   <img src="../image/admin_icon.png" class="admin" style="width:60px; margin-left:10px; margin-bottom:10px;";>
   <div class="media-body">
-    <h4>Para: <?=Html::encode("{$n->uSERRECEPTOR->username} ")?> <small><i>Fecha: <?= Html::encode("{$n->FECHA} ") ?></i></small></h4>
+    <h4>Para: <?=Html::encode("{$n->uSERRECEPTOR->username} ")?> 
+    <small><i>Fecha: <?= Html::encode("{$n->FECHA} ") ?></i></small>
+    <small><?= Html::a('borrar', Url::to(['admin/noti']), ['data' => ['confirm' => 'Estas seguro?', 'method' => 'post', 'params' => ['Notificacion' => 'borrar', 'id' => $n->ID]]]) ?></small></h4>
     <p><?=$n->NOTIFICACION ?></p>
  </div>
   <?php endif; ?>
