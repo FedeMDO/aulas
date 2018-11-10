@@ -21,6 +21,20 @@ $this->title = 'Notificaciones';
 ?>
 <!--Esto saca el scroll principal-->
 
+
+
+
+
+
+<!-- Side navigation -->
+<div class="sidenav">
+<a href="#"onclick="openCity(event, 'Recibido')" id="defaultOpen" class="notiboton"><i class="glyphicon glyphicon-inbox"></i>  Recibidas</a>
+<a href="#"onclick="openCity(event, 'Enviado')"class="notiboton"><i class="glyphicon glyphicon-envelope"></i>  Enviadas</a>
+<a href="#"onclick="openCity(event, 'Enviar notificacion')"class="notiboton"><i class="glyphicon glyphicon-plus"></i> Nueva notificacion</a>
+</div>
+
+<!-- Page content -->
+<div class="main">
 <style type="text/css">
 body {
     overflow:hidden;
@@ -35,14 +49,6 @@ body {
 endif; ?>
 <?php
   ?>
-<nav class="nav navbar-inverse navbar-left">
-  <a class="active"></a>
-  <li><a href="#"onclick="openCity(event, 'Recibido')" id="defaultOpen" class="notiboton"><i class="glyphicon glyphicon-inbox"></i>  Recibidas</a></li>
-  <li><a href="#"onclick="openCity(event, 'Enviado')"class="notiboton"><i class="glyphicon glyphicon-envelope"></i>  Enviadas</a></li>
-  <li><a href="#"onclick="openCity(event, 'Enviar notificacion')"class="notiboton"><i class="glyphicon glyphicon-plus"></i> Nueva notificacion</a></li>
-</nav>
-
-
 
 <div id="Recibido" class="tabcontent media border p-3 enviado">
 <?php $entro=false; ?>
@@ -120,6 +126,8 @@ document.getElementById("defaultOpen").click();
 
 
 </body>
+</div>
+
 
 <!-- <nav class="navbar navbar-default">
   <div class="container-fluid">
