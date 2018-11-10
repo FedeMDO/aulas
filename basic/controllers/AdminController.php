@@ -17,6 +17,7 @@ use yii\helpers\Html;
 use app\models\User;
 use yii\data\Pagination;
 use app\models\Notificacion;
+use yii\base\Exception;
 
 class AdminController extends Controller
 {
@@ -76,12 +77,16 @@ class AdminController extends Controller
                         $body = "<p>Hola <strong>".$receptor."</strong>, tenes una nueva notificación de <strong>".$emisor."</strong>.</p>" ;
                         $body .= "<p> Notificación: <i>".$model1->NOTIFICACION."</i></p>";
                         $body .= "<p><a href='http://yii.local/admin/noti'>Ver notificación</a></p>";
+                        try {
                         Yii::$app->mailer->compose()
                             ->setTo($mail)
                             ->setFrom([Yii::$app->params["adminEmail"] => Yii::$app->params["title"]])
                             ->setSubject($subject)
                             ->setHtmlBody($body)
                             ->send();
+                        }
+                        catch (\Swift_TransportException $e) {
+                        }
                         $session = Yii::$app->session;
                         //$session->setFlash('notificacionEnviada', 'Has enviado correctamente la notificacion');
                         Yii::$app->session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, 'Mensaje enviado!');

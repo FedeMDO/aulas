@@ -84,11 +84,10 @@ text-transform: uppercase; */
 
 /* Style the tab content */
 .tabcontent {
-    position: relative !important;
-    margin-left: 10%;
+    /*position: relative !important;*/
     border-collapse: separate;
     float: left;
-    padding: 20px 12px;
+    padding: 10px;
     width: 70%;
     border-left: none;
     max-height: 900px;
@@ -272,7 +271,9 @@ text-transform: uppercase;
   position: relative;
   bottom: 10px;
 }
-.navbar-inverse{
+
+/* Barra lateral de notificaciones vieja actualmente sin uso
+/*.navbar-inverse{
   position: fixed;
   border-top: 2px solid white ;
   background-color: white;
@@ -285,6 +286,7 @@ text-transform: uppercase;
     padding-top: 20px;
   
 }
+*/
 .carousel-inner > .item > img {
   margin: 0 auto;
 }
@@ -481,3 +483,41 @@ text-transform: uppercase;
   margin-left: 1%;
   
 }
+
+/* Barra lateral nueva de notificaciones*/
+.sidenav {
+  position: absolute;
+  width: 180px;
+  height: 145%;
+  left: 0px;
+  top: 50px;
+  background-color: white;
+  overflow-x: hidden; 
+  padding-top: 10px;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: black;
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidebar */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.error{
+  text-align: center;
+  color: white;
+}
+
