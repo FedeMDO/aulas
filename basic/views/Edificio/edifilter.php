@@ -10,12 +10,13 @@ $this->registerCssFile("@web/css/index.css", [
   
 ], 'css-print-theme');
 
-$this->title = 'Edificios disponibles';
+$this->title = 'Edificios';
 ?>
 <br>
 <br>
+<?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
 <a href="../edificio/create" class="btn btn-success d-flex justify-content-around btn-edificio0" role="button">Crear Edificio</a>
-
+<?php endif; ?>
 
 
 <center><h3 style="color:black;"><?php if(count($edificio) != 0){
@@ -24,10 +25,11 @@ else{?>
 
 <div class="alert alert-danger" role="alert">
   <h4 class="alert-heading">ATENCION!</h4>
-  <p>NO HAY EDIFICIOS CREADOS EN ESTA SEDE</p>
+  <p class="text-center">NO HAY EDIFICIOS CREADOS EN ESTA SEDE</p>
   <hr>
-
-  <a href="../edificio/create" class="btn btn-danger btn-md" role="button">CREA EDIFICIO</a>
+  <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
+  <a href="../edificio/create" class="btn btn-danger btn-md" role="button">CREAR EDIFICIO</a>
+  <?php endif; ?>
 </div>
 
 

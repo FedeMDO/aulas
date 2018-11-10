@@ -153,6 +153,36 @@ AppAsset::register($this);
                 ],
             ]);
         }
+        if(User::isUserGuest(Yii::$app->user->identity->id))
+        {
+            echo Nav::widget([
+                'encodeLabels' => false, //Esto permite poner los iconos
+                'options' => ['class' => 'navbar-nav navbar-default'],
+                'items' => [
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-home']).' INICIO', 'url' => ['/site/index'], 'options' => ['style' => 'font-weight: bold;']],
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' SEDES', 'url' => ['/sede/vistav'], 'options' => ['style' => 'font-weight: bold;']],
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' INSTITUTOS', 'url' => ['/instituto/institutov'], 'options' => ['style' => 'font-weight: bold;']],
+                ],
+            ]);
+            echo Nav::widget([
+                'encodeLabels' => false,
+                'options' => ['class' => 'navbar-nav navbar-right'],
+                'items' => [
+                    ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/admin/noti'], 'options' => ['style' => 'font-weight: bold;']],
+                    Yii::$app->user->isGuest ? (
+                        ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login'], 'options' => ['style' => 'font-weight: bold;']]
+                    ) : 
+                    ['label' =>  Yii::$app->user->identity->username, 'options' => ['style' => 'font-weight: bold;'],
+                    'items' => [
+                    ['label' => '<span class="fa fa-key"></span> Cambiar contraseña', 'url' => '/user/changepw'],
+                    ['label' => '<span class="fa fa-book"> Manual de usuario', 'url' => '#'],
+                    ['label' => '<span class="fa fa-info-circle"> Acerca de...', 'url' => '#',],
+                    ['label' =>'<span class="fa fa-sign-out"></span> Salir (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
+                            ],
+                        ]                  
+                ],
+            ]);
+        }
     }
 
     NavBar::end();

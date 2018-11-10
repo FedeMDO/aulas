@@ -18,20 +18,72 @@ use yii\filters\AccessControl;
  */
 class EdificioController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        //El administrador tiene permisos sobre las siguientes acciones
+                        'actions' => ['edifilter','index','view','create','update','delete'],
+                        //Esta propiedad establece que tiene permisos
+                        'allow' => true,
+                        //Usuarios autenticados, el signo ? es para invitados
+                        'roles' => ['@'],
+                        //Este método nos permite crear un filtro sobre la identidad del usuario
+                        //y así establecer si tiene permisos o no
+                        'matchCallback' => function ($rule, $action) {
+                            //Llamada al método que comprueba si es un administrador
+                            return User::isUserAdmin(Yii::$app->user->identity->id);
+                        },
+                    ],
+                    [
+                       //Los usuarios simples tienen permisos sobre las siguientes acciones
+                       'actions' => ['edifilter'],
+                       //Esta propiedad establece que tiene permisos
+                       'allow' => true,
+                       //Usuarios autenticados, el signo ? es para invitados
+                       'roles' => ['@'],
+                       //Este método nos permite crear un filtro sobre la identidad del usuario
+                       //y así establecer si tiene permisos o no
+                       'matchCallback' => function ($rule, $action) {
+                          //Llamada al método que comprueba si es un usuario simple
+                          return User::isUserSimple(Yii::$app->user->identity->id);
+                      },
+                   ],
+                   [
+                        //Los usuarios guest tienen permisos sobre las siguientes acciones
+                        'actions' => ['edifilter'],
+                        //Esta propiedad establece que tiene permisos
+                        'allow' => true,
+                        //Usuarios autenticados, el signo ? es para invitados
+                        'roles' => ['@'],
+                        //Este método nos permite crear un filtro sobre la identidad del usuario
+                        //y así establecer si tiene permisos o no
+                        'matchCallback' => function ($rule, $action) {
+                        //Llamada al método que comprueba si es un usuario guest
+                            return User::isUserGuest(Yii::$app->user->identity->id);
+                        },
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ];
+    }
 
     public function actionEdifilter($id)
     {
-       
-        if (User::isUserAdmin(Yii::$app->user->identity->id)) #si es admin, recibe los enviados y recibidos
-        {
-            $query = Edificio::find()
-            ->where(['ID_SEDE' =>$id]);
-        }
-        elseif (User::isUserSimple(Yii::$app->user->identity->id)) #si es user. recibe los recibidos (no tiene enviados)
-        {
-            $query = Edificio::find()
-            ->where(['ID_SEDE' =>$id]);
-        }
+        $query = Edificio::find()
+        ->where(['ID_SEDE' =>$id]);
 
         $pagination = new Pagination([
             'defaultPageSize' => 5,
@@ -82,22 +134,6 @@ class EdificioController extends Controller
 
 
 
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
     }
 
     /**

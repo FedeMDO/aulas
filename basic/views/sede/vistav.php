@@ -32,6 +32,7 @@ $this->title = 'Sedes';
   </div>
 <?php endforeach;?>
 
+<?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
 <div id="sidebar" class="active">
   <div class="toggle-btn">
       <span>&#9776;</span>
@@ -49,6 +50,7 @@ $this->title = 'Sedes';
 
 
 <div class=""><?=LinkPager::widget(['pagination' => $pagination])?></div>
+<?php endif; ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 </script>
 <script src="my_jquery_functions.js"></script>

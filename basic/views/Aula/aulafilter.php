@@ -20,8 +20,10 @@ $this->title = 'Aulas';
 
 ?>
 <div class="col-md-offset-1 col-md-10">
-<h3 style="color:white; text-align:center;">Aulas Disponibles en <?=Html::encode("{$aula[0]->eDIFICIO->NOMBRE}")?></h3>
+<h3 style="color:white; text-align:center;">Aulas disponibles en <?=Html::encode("{$aula[0]->eDIFICIO->NOMBRE}")?></h3>
+<?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
 <a style= "" href="../aula/create" class="btn btn-success btn-md" role="button">Crear Aula</a>
+<?php endif; ?>
 <div class="loginc">
 <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
@@ -66,14 +68,17 @@ else{?>
 
 <div class="alert alert-danger" role="alert">
   <h4 class="alert-heading">ATENCION!</h4>
-  <p>NO HAY EDIFICIOS CREADOS EN ESTA SEDE</p>
+  <p class="text-center">NO HAY AULAS CREADAS EN ESTE EDIFICIO</p>
   <hr>
-
-  <a href="../edificio/create" class="btn btn-danger btn-md" role="button">CREA EDIFICIO</a>
+  <div class="text-center">
+  <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
+  <a href="../aula/create" class="btn btn-danger btn-md" role="button">CREAR AULA</a>
+  <?php endif; ?>
+  </div>
 </div>
 
 
-<?php } ?></h3></center>
+<?php } ?></h3>
 
 
 

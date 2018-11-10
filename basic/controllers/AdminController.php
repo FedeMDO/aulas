@@ -33,18 +33,9 @@ class AdminController extends Controller
 
     public function actionNoti()
     {
-        if (User::isUserAdmin(Yii::$app->user->identity->id))
-        {
-            $query = Notificacion::find()
-            ->where(['ID_USER_EMISOR' => Yii::$app->user->identity->id])
-            ->orWhere(['ID_USER_RECEPTOR' => Yii::$app->user->identity->id]);
-        }
-        elseif (User::isUserSimple(Yii::$app->user->identity->id))
-        {
-            $query = Notificacion::find()
-            ->where(['ID_USER_EMISOR' => Yii::$app->user->identity->id])
-            ->orwhere(['ID_USER_RECEPTOR' => Yii::$app->user->identity->id]);
-        }
+        $query = Notificacion::find()
+        ->where(['ID_USER_EMISOR' => Yii::$app->user->identity->id])
+         ->orwhere(['ID_USER_RECEPTOR' => Yii::$app->user->identity->id]);
 
         $pagination = new Pagination([
             'defaultPageSize' => 20,

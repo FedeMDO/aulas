@@ -81,6 +81,20 @@ class InstitutoController extends Controller
                           return User::isUserSimple(Yii::$app->user->identity->id);
                       },
                    ],
+                   [
+                    //Los usuarios guest tienen permisos sobre las siguientes acciones
+                    'actions' => ['institutov'],
+                    //Esta propiedad establece que tiene permisos
+                    'allow' => true,
+                    //Usuarios autenticados, el signo ? es para invitados
+                    'roles' => ['@'],
+                    //Este método nos permite crear un filtro sobre la identidad del usuario
+                    //y así establecer si tiene permisos o no
+                    'matchCallback' => function ($rule, $action) {
+                    //Llamada al método que comprueba si es un usuario guest
+                        return User::isUserGuest(Yii::$app->user->identity->id);
+                    },
+                ],
                 ],
             ],
             'verbs' => [
