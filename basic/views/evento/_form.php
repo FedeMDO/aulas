@@ -22,7 +22,6 @@ use app\models\Carrera;
     $carreras = Carrera::find()->asArray()->all();
     $resultCarr = ArrayHelper::map($carreras, 'ID', 'NOMBRE');
     ?>
-
     <?php echo $form->field($carrera, 'ID')->dropDownList(
         $resultCarr,
         ['prompt'=>'Seleccione Cerrera...',
@@ -43,7 +42,7 @@ use app\models\Carrera;
 
     <?php echo $form->field($model, 'ID_Comision')->dropDownList(
         array(), 
-        ['prompt'=>'SELECCIONE LA COMISION...']
+        ['prompt'=>'Seleccione comision...']
         )->label(' COMISION '); ?>
 
     <?php $diasdelasemana = ['1' => 'Lunes',
@@ -88,6 +87,7 @@ use app\models\Carrera;
         )->label("Hasta las"); ?> 
     <div class="form-group">
         <?= Html::submitButton('GUARDAR', ['class' => 'btn btn-success']) ?>
+        <button type="button" class="btn btn-default"  data-dismiss="modal">Cerrar</button>
     </div>
 
     <?php ActiveForm::end(); ?>
