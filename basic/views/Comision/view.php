@@ -12,14 +12,14 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="comision-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
+    <h1 class=titulo><?= Html::encode($this->title) ?></h1>
+    <div class="col-md-offset-1 col-md-10">
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->ID], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->ID], [
+        <?= Html::a('Actualizar', ['update', 'id' => $model->ID], ['class' => 'btn btn-info']) ?>
+        <?= Html::a('Borrar', ['delete', 'id' => $model->ID], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Estas seguro?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -27,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
+        'options'=>['class'=>'table-bordered table-condensed  grid'],
         'attributes' => [
             'NOMBRE',
             'mATERIA.NOMBRE',

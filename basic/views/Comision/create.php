@@ -5,11 +5,10 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Comision */
-
+$this->title = 'Crear comision: '
 ?>
 <div class="col-md-offset-4 col-md-4">
-<div class="loginc azul">
-<div class="comision-create">
+<div class="comision-create loginc azul">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

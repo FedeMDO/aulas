@@ -12,16 +12,19 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="comision-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 class=titulo>Panel de comisiones</h1>
+    <div class="col-md-offset-1 col-md-10">
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Comision', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Crear comision', ['create'], ['class' => 'btn btn-success']) ?>
+        
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'tableOptions'=>['class'=>'table-bordered table-condensed  grid'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

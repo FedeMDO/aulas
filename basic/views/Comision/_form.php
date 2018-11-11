@@ -12,7 +12,6 @@ use yii\widgets\ActiveForm;
 $this->title = 'Crear comision';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h2 style="color:white; border-bottom: 1px solid white; ">Crear comision</h2>
 <div class="comision-form">
 
     <?php if (Yii::$app->session->hasFlash('comisionesCreadas')):
@@ -70,7 +69,7 @@ $lista = arrayhelper2($result, $result1);
     <?=$form->field($model, 'cant_comisiones', ['labelOptions' => ['style' => 'color:white']])->textInput()->label("Selecciona la cantidad de comisiones que desea crear")?>
 
     <div class="form-group">
-        <?=Html::submitButton('Crear', ['class' => 'btn btn-success btn-block'])?>
+        <?=Html::submitButton('Guardar', ['class' => 'btn btn-success btn-block'])?>
     </div>
 
     <?php ActiveForm::end();?>

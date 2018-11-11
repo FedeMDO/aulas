@@ -5,13 +5,13 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Recurso */
 
-$this->title = 'Update Recurso: ' . $model->ID;
+$this->title = 'Actualizar recurso: ' . $model->ID;
 $this->params['breadcrumbs'][] = ['label' => 'Recursos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->ID, 'url' => ['view', 'id' => $model->ID]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="loginc">
-<div class="recurso-update">
+<div class="col-md-offset-4 col-md-4">
+<div class="recurso-update loginc azul">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
