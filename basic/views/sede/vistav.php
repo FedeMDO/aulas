@@ -11,21 +11,20 @@ $this->registerCssFile("@web/css/index.css", [
 $this->title = 'Sedes';
 ?>
 
-          <center><h3>Sedes Disponibles</h3></center>
+          <center><h2 class=titulo>Sedes disponibles</h2></center>
 
 
 <?php foreach ($sede as $sede): ?>
   <div class="row3">
         <div id="columna" class="col-sm-8 col-md-4 active">
-          <div class="thumbnail">
-            <img src="../image/sede_<?=Html::encode("{$sede->ID}")?>.png" alt="...">
+          <div class="thumbnail sede">
+            <img src="../image/sede_<?=Html::encode("{$sede->ID}")?>.png" alt="..." style="width=50px">
             <div class="caption">
-              <?=Html::encode("{$sede->NOMBRE} ")?>
-              <br></br>
-              <?=Html::encode(" {$sede->CALLEYNUM} ")?>
-              <?=Html::encode("{$sede->LOCALIDAD}")?>
-              <p><a href="../edificio/edifilter?id=<?=Html::encode("{$sede->ID}")?>" class="btn btn-primary" role="button">Entrar</a>
-              <a href="../sede/update?id=<?=Html::encode("{$sede->ID}")?>"  class="btn btn-default" role="button">Modificar</a></p>
+            <h4><?=Html::encode("{$sede->NOMBRE} ")?> </h4>
+            <p><?=Html::encode("{$sede->LOCALIDAD}")?> -<?=Html::encode(" {$sede->CALLEYNUM} ")?></p>
+            <p></p>
+            <a href="../edificio/edifilter?id=<?=Html::encode("{$sede->ID}")?>" class="btn btn-info" role="button">Entrar</a>
+            <a href="../sede/update?id=<?=Html::encode("{$sede->ID}")?>"  class="btn btn-primary" role="button">Modificar</a>
             </div>
           </div>
         </div>
@@ -34,17 +33,17 @@ $this->title = 'Sedes';
 
 <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
 <div id="sidebar" class="active">
-  <div class="toggle-btn">
+  <div class="toggle-btn miBoton">
       <span>&#9776;</span>
   </div>
       <ul>
+        <li><a href="../aula/buscador" class="btn miBoton btn-md btn-vistav " role="button">Filtrar aulas <span class="glyphicon glyphicon-search"></span></a>
+        </li>
         <li>
-        <a href="../sede/create" class="btn miBoton btn-md btn-vistav" role="button">Crear Sede</a>
+        <a href="../sede/create" class="btn miBoton btn-md btn-vistav" role="button">Crear sede <span class="glyphicon glyphicon-plus"></span></a>
         </li>
-        <li><a href="../aula/buscador" class="btn miBoton btn-md btn-vistav" role="button">Filtrar Aulas</a>
-        </li>
-        <li><a href="../comision/create" class="btn miBoton btn-md btn-vistav" role="button">Crear Comisiones</a></li>
-        <li><a href="../materia/create" class="btn miBoton btn-md btn-vistav" role="button">Crear Materia</a></li>
+        <li><a href="../comision/create" class="btn miBoton btn-md btn-vistav" role="button">Crear comisiones <span class="glyphicon glyphicon-plus"></span></a></li>
+        <li><a href="../materia/create" class="btn miBoton btn-md btn-vistav" role="button">Crear materia <span class="glyphicon glyphicon-plus"></span></a></li>
       </ul>
 </div>
 
@@ -70,4 +69,6 @@ $this->title = 'Sedes';
       }
     });
   });
+</script>
+<script type=’text/javascript’>
 </script>

@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use yii\data\Pagination;
-
+use yii\widgets\LinkPager;
 
 $this->registerCssFile("@web/css/index.css", [
   'depends' => [\yii\bootstrap\BootstrapAsset::className()],
@@ -20,9 +20,8 @@ $this->title = 'Aulas';
 
 ?>
 <div class="col-md-offset-1 col-md-10">
-<h3 style="color:white; text-align:center;">Aulas disponibles en <?=Html::encode("{$aula[0]->eDIFICIO->NOMBRE}")?></h3>
+<h2 class=titulo style="text-align:center;">Aulas disponibles en <?=Html::encode("{$aula[0]->eDIFICIO->NOMBRE}")?></h2>
 <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
-<a style= "" href="../aula/create" class="btn btn-success btn-md" role="button">Crear Aula</a>
 <?php endif; ?>
 <div class="loginc">
 <div class="box-body">
@@ -57,7 +56,7 @@ $this->title = 'Aulas';
             </div>
             
 </div>
-
+</div>
 
 
 
@@ -72,7 +71,6 @@ else{?>
   <hr>
   <div class="text-center">
   <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
-  <a href="../aula/create" class="btn btn-danger btn-md" role="button">CREAR AULA</a>
   <?php endif; ?>
   </div>
 </div>
@@ -80,11 +78,46 @@ else{?>
 
 <?php } ?></h3>
 
+<?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
+<div id="sidebar" class="active">
+  <div class="toggle-btn miBoton">
+      <span>&#9776;</span>
+  </div>
+      <ul>
+        <li><a href="../aula/buscador" class="btn miBoton btn-md btn-vistav " role="button">Filtrar aulas <span class="glyphicon glyphicon-search"></span></a>
+        </li>
+        <li>
+        <a href="../aula/create" class="btn miBoton btn-md btn-vistav" role="button">Crear aula <span class="glyphicon glyphicon-plus"></span></a>
+        </li>
+      </ul>
+</div>
 
 
+<div class=""><?=LinkPager::widget(['pagination' => $pagination])?></div>
+<?php endif; ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+</script>
+<script src="my_jquery_functions.js"></script>
+ <script>
+  const btnToggle = document.querySelector('.toggle-btn');
 
-
-
+  btnToggle.addEventListener('click', function () {
+  document.getElementById("sidebar").classList.toggle('active');});
+ </script>
+<script>
+  $(document).ready(function(){
+    $("#sidebar").click(function(){
+      if ($(this).hasClass('active')){
+        $(".col-sm-8").css({"left": "0px", "transition": "all 500ms linear"});
+      }else{
+        $(".col-sm-8").css({"left": "200px", "transition": "all 500ms linear"});
+      }
+    });
+  });
+</script>
+<script type=’text/javascript’>
+</script>
+</ul>
 
 
 

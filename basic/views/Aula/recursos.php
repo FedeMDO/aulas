@@ -8,7 +8,7 @@ $this->registerCssFile("@web/css/index.css", [
 
 ?>
 <div class="col-md-offset-4 col-md-4">
-<h1 style="color:white; text-align:center;">Recursos de aula</h1>
+<h1 class=titulo style="text-align:center;">Recursos de aula</h1>
 
  <div class="loginc">
 <div class="box-body">

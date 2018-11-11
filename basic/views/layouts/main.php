@@ -99,9 +99,19 @@ AppAsset::register($this);
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-home']).' INICIO', 'url' => ['/site/index'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' SEDES', 'url' => ['/sede/vistav'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' INSTITUTOS', 'url' => ['/instituto/institutov'], 'options' => ['style' => 'font-weight: bold;']],
-                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' REGISTRAR USUARIO', 'url' => ['/site/register'], 'options' => ['style' => 'font-weight: bold;']],
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).'ADMINISTRACION', 'url' => ['/site/register'], 'options' => ['style' => 'font-weight: bold;'],
+
+                    'items' => [
+                    ['label' => '<span></span> Registrar usuario', 'url' => '/site/register'],
+                    ['label' => '<span> Item2', 'url' => '#'],
+                    ['label' => '<span> Item3', 'url' => '#',],
+                            ],
+                        ]                  
                 ],
             ]);
+        
+
+
             echo Nav::widget([
                 'encodeLabels' => false,
                 'options' => ['class' => 'navbar-nav navbar-right'],
