@@ -66,13 +66,11 @@ class AdminController extends Controller
                         $model1->ID_USER_RECEPTOR = $user1;
                         $model1->NOTIFICACION = $mensaje;
                         $model1->FECHA = new \yii\db\Expression('NOW()');
-                        $model1->save();       
-                    }
-                    if ($model1->save()){
+                        $model1->save();
                         //Enviamos correo
-                        $receptor = Users::findOne($model1->ID_USER_RECEPTOR)->username;
+                        $receptor = Users::findOne($user1)->username;
                         $emisor = Users::findOne($model1->ID_USER_EMISOR)->username;
-                        $mail = Users::findOne($model1->ID_USER_RECEPTOR)->email;
+                        $mail = Users::findOne($user1)->email;
                         $subject = "Nueva notificación";
                         $body = "<p>Hola <strong>".$receptor."</strong>, tenes una nueva notificación de <strong>".$emisor."</strong>.</p>" ;
                         $body .= "<p> Notificación: <i>".$model1->NOTIFICACION."</i></p>";
@@ -87,6 +85,8 @@ class AdminController extends Controller
                         }
                         catch (\Swift_TransportException $e) {
                         }
+                    }
+                    if ($model1->save()){
                         $session = Yii::$app->session;
                         //$session->setFlash('notificacionEnviada', 'Has enviado correctamente la notificacion');
                         Yii::$app->session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, 'Mensaje enviado!');
