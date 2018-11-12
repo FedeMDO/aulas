@@ -63,7 +63,7 @@ class MateriaSearch extends Materia
         ]);
 
         $query->andFilterWhere(['like', 'NOMBRE', $this->NOMBRE])
-            ->andFilterWhere(['like', 'DESC_CORTA', $this->DESC_CORTA]->andFilterWhere(['like', 'DESC_CORTA', $this->DESC_CORTA])
+            ->andFilterWhere(['like', 'DESC_CORTA', $this->DESC_CORTA]
         );
 
         return $dataProvider;
