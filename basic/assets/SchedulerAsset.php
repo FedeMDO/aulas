@@ -19,7 +19,6 @@ class SchedulerAsset extends AssetBundle
         'js/scheduler.js',
         'js/es-us.js',
         'js/main.js',
-        'js/crearEventosAjax.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
