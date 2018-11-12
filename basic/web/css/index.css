@@ -370,7 +370,7 @@ text-transform: uppercase;
 /* width */
 .tabcontent::-webkit-scrollbar {
   width: 10px;
-  
+
 }
 
 /* Track */
@@ -592,4 +592,9 @@ text-transform: uppercase;
   color: #fff;
 }
 */
-
+.float-right{
+  text-align: right;
+}
+.notificacion-create{
+  color: white;
+}

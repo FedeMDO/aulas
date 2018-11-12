@@ -1,20 +1,14 @@
 <?php
 
-use yii\helpers\Url;
-use yii\bootstrap\ActiveForm;
-use yii\data\Pagination;
-use yii\helpers\Html;
-use yii\widgets\LinkPager;
-use app\controllers\NotificacionController;
-use app\views\Notificacion\create;
-use yii\bootstrap\Alert;
-use dominus77\sweetalert2;
 use app\models\Notificacion;
-
+use dominus77\sweetalert2;
+use yii\bootstrap\Alert;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->registerCssFile("@web/css/index.css", [
-    'depends' => [\yii\bootstrap\BootstrapAsset::className()],
-    
+	'depends' => [\yii\bootstrap\BootstrapAsset::className()],
+
 ], 'css-print-theme');
 
 $this->title = 'Notificaciones';
@@ -42,62 +36,60 @@ body {
 </style>
 
 <body>
-<?php if(Yii::$app->session->hasFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS)):
-  
-  \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
+<?php if (Yii::$app->session->hasFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS)):
 
-endif; ?>
+	\dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
+
+endif;?>
 <?php
-  ?>
+?>
 
 <div id="Recibido" class="tabcontent media border p-3 enviado">
-<?php $entro=false; ?>
+<?php $entro = false;?>
  <?php foreach ($notificacion as $n):
-    if ($n->uSERRECEPTOR->id == Yii::$app->user->identity->id):?>
-    <?php $entro= true; ?>
-  <img src="../image/admin_icon.png" class="admin" style="width:60px; margin-left:10px; margin-bottom:10px;";>
-  <div class="media-body">
-    <h4><?= Html::encode("{$n->uSEREMISOR->username} ")?> <small><i>Fecha: <?= Html::encode("{$n->FECHA} ") ?></i></small></h4>
-    <p><?=$n->NOTIFICACION ?></p>
-  </div>
-  <?php endif; ?>
-  <?php endforeach; ?>  
-  <?php if ($entro==false):?>
+	if ($n->uSERRECEPTOR->id == Yii::$app->user->identity->id): ?>
+					    <?php $entro = true;?>
+					  <img src="../image/admin_icon.png" class="admin" style="width:60px; margin-left:10px; margin-bottom:10px;";>
+					  <div class="media-body">
+					    <h4><?=Html::encode("{$n->uSEREMISOR->username} ")?> <small><i>Fecha: <?=Html::encode("{$n->FECHA} ")?></i></small></h4>
+					    <p><?=$n->NOTIFICACION?></p>
+					  </div>
+					  <?php endif;?>
+  <?php endforeach;?>
+  <?php if ($entro == false): ?>
   <div class="alert alert-danger">
   <p>No tienes mensajes recibidos.</p>
   </div>
-  <?php endif;?> 
+  <?php endif;?>
 </div>
 
 
 <div id="Enviado" class="tabcontent media border p-3 enviado">
-<?php $entro=false; ?>
+<?php $entro = false;?>
  <?php foreach ($notificacion as $n):
-    if ($n->uSEREMISOR->id == Yii::$app->user->identity->id):?>
-    <?php $entro= true; ?>
-  <img src="../image/admin_icon.png" class="admin" style="width:60px; margin-left:10px; margin-bottom:10px;";>
-  <div class="media-body">
-    <h4>Para: <?=Html::encode("{$n->uSERRECEPTOR->username} ")?> 
-    <small><i>Fecha: <?= Html::encode("{$n->FECHA} ") ?></i></small>
-    <small><?= Html::a('borrar', Url::to(['admin/noti']), ['data' => ['confirm' => 'Estas seguro?', 'method' => 'post', 'params' => ['Notificacion' => 'borrar', 'id' => $n->ID]]]) ?></small></h4>
-    <p><?=$n->NOTIFICACION ?></p>
- </div>
-  <?php endif; ?>
-  <?php endforeach; ?>
-  <?php if ($entro==false):?>
+	if ($n->uSEREMISOR->id == Yii::$app->user->identity->id): ?>
+					    <?php $entro = true;?>
+					  <img src="../image/admin_icon.png" class="admin" style="width:60px; margin-left:10px; margin-bottom:10px;";>
+					  <div class="media-body">
+					    <h4>Para: <?=Html::encode("{$n->uSERRECEPTOR->username} ")?>
+					    <small><i>Fecha: <?=Html::encode("{$n->FECHA} ")?></i></small>
+					    <small><?=Html::a('borrar', Url::to(['admin/noti']), ['data' => ['confirm' => 'Estas seguro?', 'method' => 'post', 'params' => ['Notificacion' => 'borrar', 'id' => $n->ID]]])?></small></h4>
+					    <p><?=$n->NOTIFICACION?></p>
+					 </div>
+					  <?php endif;?>
+  <?php endforeach;?>
+  <?php if ($entro == false): ?>
   <div class="alert alert-danger">
   <p>No tienes mensajes enviados.</p>
   </div>
-  <?php endif;?>  
+  <?php endif;?>
 </div>
 
 <div id="Enviar notificacion" class="tabcontent mensaje">
 <div class="notificacion-create">
-
-    <?= $this->render('_form', [
-        'model' => $model,
-        'usuarios' => $usuarios,
-    ]) ?>
+        <?=$this->render('_form', [
+	'model' => $model,
+	'usuarios' => $usuarios])?>
 
 </div>
 
