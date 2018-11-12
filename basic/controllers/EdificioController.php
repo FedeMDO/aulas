@@ -30,6 +30,17 @@ class EdificioController extends Controller
             'sede' => $sede,
         ]);
     }
+    public function actionRestrischeduler($id_sede)
+    {
+
+        $sede = Sede::findOne($id_sede);
+
+
+
+        return $this->render('schedulerPorSedeRestricciones', [
+            'sede' => $sede,
+        ]);
+    }
     public function actionEdifilter($id)
     {
        
