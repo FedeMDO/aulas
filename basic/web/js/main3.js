@@ -1,3 +1,4 @@
+//MAIN VISTA CALENDARIO DE RESTRICCIONES
 $(document).ready(function(){
     $('#calendar').fullCalendar({
         //VIEW
@@ -19,7 +20,7 @@ $(document).ready(function(){
         //EVENTOS
         eventSources: [
             {
-                url: '/evento/jsoncalendar', // use the `url` property
+                url: '/restri/jsoncalendar', // use the `url` property
                 type: 'GET',
                 data: {
                     id: function(){
@@ -54,7 +55,7 @@ $(document).ready(function(){
                 revertFunc();}
             else
             {
-                $.post("/evento/upd",
+                $.post("/restri/upd",
                     {
                         id: id,
                         ini: ini,
@@ -76,7 +77,7 @@ $(document).ready(function(){
                     return;
                 }
 
-            let url = "/evento/create?id_aula=" + $("em").text();
+            let url = "/restri/create?id_aula=" + $("em").text();
             $("#modalContent").load(url, function () {
             $("#modal").modal("show");
             //DIA
@@ -136,7 +137,7 @@ $(document).ready(function(){
                 revertFunc();}
             else
             {
-                $.post("/evento/upd",
+            $.post("/restri/upd",
                     {
                         id: id,
                         ini: ini,

@@ -1,3 +1,4 @@
+//MAIN VISTA SCHEDULER DE RESTRICCIONES
 $(document).ready(function(){
     $('#calendar').fullCalendar({
         //VIEW
@@ -25,7 +26,7 @@ $(document).ready(function(){
         },
         resources:
             {
-                url: '/evento/jsonresources',
+                url: '/restri/jsonresources',
                 type: 'GET',
                 data: {
                     id_sede: $("em").text(),
@@ -36,7 +37,7 @@ $(document).ready(function(){
         //EVENTOS
         eventSources: [
             {
-              url: '/evento/jsonschedulersede', // use the `url` property
+              url: '/restri/jsonschedulersede', // use the `url` property
               type: 'GET',
                 data: {
                     id_sede: $("em").text(),
@@ -71,7 +72,7 @@ $(document).ready(function(){
             }
                 else
                 {
-                    $.post("/evento/updscheduler",
+                    $.post("/restri/updscheduler",
                         { 
                             id:id,
                             ini:ini,
@@ -106,7 +107,7 @@ $(document).ready(function(){
                 return;
             }
 
-            let url = "/evento/create?id_aula=" + resource.id;
+            let url = "/restri/create?id_aula=" + resource.id;
             $("#modalContent").load(url, function () {
             $("#modal").modal("show");
             //DIA
@@ -166,7 +167,7 @@ $(document).ready(function(){
             if (!confirm("Esta seguro??")) {
                 revertFunc();}
                 else{
-                    $.post("/evento/updscheduler",
+                    $.post("/restri/updscheduler",
                 { 
                     id:id,
                     ini:ini,

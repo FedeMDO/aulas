@@ -4,7 +4,7 @@ namespace app\assets;
 
 use yii\web\AssetBundle;
 
-class SchedulerAsset extends AssetBundle
+class RestriSchedulerAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
@@ -18,7 +18,7 @@ class SchedulerAsset extends AssetBundle
         'js/fullcalendar.js',
         'js/scheduler.js',
         'js/es-us.js',
-        'js/main.js',
+        'js/main4.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

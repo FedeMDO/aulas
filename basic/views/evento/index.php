@@ -40,53 +40,7 @@ $indexMaterias = 1;
             </div>
         </div>
     </div>
-    <?php
-        yii\bootstrap\Modal::begin([
-            'headerOptions' => ['id' => 'modalHeader'],
-            'id' => 'modal',
-            'size' => 'modal-md',
-            'clientOptions' => ['backdrop' => True, 'keyboard' => True]
-        ]);        echo "<div id='modalContent'></div>";
-        yii\bootstrap\Modal::end();
-    ?>
     
-     <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-sm">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Informacion del evento</h4>
-        </div>
-        <div class="modal-body">
-            <input type="hidden" id="idevento" name="idevento" value="">
-            Comision:
-            <div class="well well-sm">
-                <p id="showcomision"></p>
-            </div>
-            Inicio:
-            <div class="well well-sm">
-                <p id="showini"></p>
-            </div>
-            Fin:
-            <div class="well well-sm">
-                <p id="showfin"></p>
-            </div>
-            Ultimo usuario que modifico:
-            <div class="well well-sm">
-                <p id="showusermodifico"></p>
-            </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default"  data-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-danger" id="btnBorrarEvento">Borrar</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
 
 <?php
 

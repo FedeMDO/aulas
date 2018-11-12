@@ -163,6 +163,7 @@ class EventoController extends Controller
         $evento->Hora_ini = substr($request->post('ini'), -8);
         $evento->Hora_fin = substr($request->post('fin'), -8);
         $evento->ID_Aula = $request->post('aula_id');
+        $evento->dow = $request->post('dow');
         if($evento->save())
         {
             echo("Actualizacion exitosa");
@@ -181,6 +182,12 @@ class EventoController extends Controller
         $request = Yii::$app->request;
         $this->findModel($request->post('id'))->delete();
         $id_aula =  $request->post('id_aula');
+        
+        if($request->post('scheduler') == 1)
+        {
+            $id_sede = $request->post('id_sede');
+            return $this->redirect(['edificio/scheduler','id_sede' => $id_sede]);
+        }
         return $this->redirect(['index','id' =>$id_aula]);
     }
 
@@ -359,6 +366,7 @@ class EventoController extends Controller
                                     $restri['end'] = $dia->format('Y-m-d').'T'.$cons->Hora_fin;
                                     $restri['backgroundColor'] = $cons->instituto->COLOR_HEXA;
                                     $restri['rendering'] = 'background';
+                                    $restri['usermodifico'] = $cons->ID_User_Asigna;
                                     $restri['resourceId'] = $cons->ID_Aula;
                                     if ($instIdOnSessionUser != $cons->instituto->ID)
                                         {
@@ -395,7 +403,7 @@ class EventoController extends Controller
                                     $event['start'] = $dia->format('Y-m-d').'T'.$eve->Hora_ini;
                                     $event['end'] = $dia->format('Y-m-d').'T'.$eve->Hora_fin;
                                     $event['resourceId'] = $eve->ID_Aula;
-                                    
+                                    $event['usermodifico'] = $eve->ID_User_Asigna;
                                     $tasks[] = (object) $event;
                                 }
                             }
@@ -404,7 +412,6 @@ class EventoController extends Controller
                 }
             }
         }
-        // var_dump($x);
         return $tasks;
     }
     public function actionListcarrera($id)
