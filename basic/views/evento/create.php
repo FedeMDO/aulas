@@ -6,7 +6,7 @@ use app\models\Users;
 /* @var $this yii\web\View */
 /* @var $model app\models\EventoCalendar */
 
-$this->title = 'Create Evento Calendar';
+$this->title = 'Crear evento de calendario';
 $this->params['breadcrumbs'][] = ['label' => 'Evento Calendars', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $carreras = Users::findOne(Yii::$app->user->identity->id)->instituto->carreras;

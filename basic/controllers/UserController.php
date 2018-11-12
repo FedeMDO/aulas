@@ -54,7 +54,11 @@ class UserController extends Controller
             
         ]);
     }
-
+    public function actionGetunamebyid($id){
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $username = Users::findOne($id)->username;
+        return $username;
+    }
     public function actionChangepw(){
 
         $id = Yii::$app->user->identity->id;
