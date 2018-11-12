@@ -161,4 +161,3 @@ var dows = {1: 'Lunes',
 6: 'Sabado',
 7: 'Domingo'
 }
-
