@@ -5,13 +5,26 @@ namespace app\controllers;
 use Yii;
 use app\models\RestriCalendar;
 use app\models\Aula;
-use app\models\Users;
+use app\models\Sede;
+use app\models\Comision;
+use app\models\Carrera;
 use app\models\Instituto;
+use app\models\Materia;
+use app\models\Users;
 use app\models\RestriCalendarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\Hora;
+use DateTime;
+use DatePeriod;
+use DateInterval;
+use app\models\EventoCalendar;
+use yii\bootstrap\Modal;
+use app\models\CarreraMateria;
+use yii\helpers\VarDumper;
+use yii\helpers\Url;
+use app\models\EventoCalendarSearch;
 
 /**
  * RestriController implements the CRUD actions for RestriCalendar model.
@@ -39,21 +52,10 @@ class RestriController extends Controller
      */
     public function actionIndex($id)
     {
-    $events = RestriCalendar::find()->all();
-    $institutos = Instituto::find()->all();
-    foreach ($events as $eve) {
-        $instituto= Instituto::findOne($eve->ID_Instituto_Recibe)->NOMBRE;
-        $event = new \yii2fullcalendar\Models\Event();
-        $event->title=$instituto;
-        $event->start = (string)$eve->Fecha_ini.'T'.(string)$eve->Hora_ini;
-        $event->end = (string)$eve->Fecha_ini.'T'.(string)$eve->Hora_fin;
-        $event->backgroundColor=Instituto::findOne($eve->ID_Instituto_Recibe)->COLOR_HEXA;
-        $tasks[] = $event;
+        return $this->render('index', [
+            'id_aula'=>$id 
+        ]);
     }
-    return $this->render('index', [
-      'events'=>$tasks, 'institutos' => $institutos, 'id_aula'=> $id,
-    ]);
-}
     /**
      * Creates a new RestriCalendar model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -101,6 +103,51 @@ class RestriController extends Controller
             'model' => $model,
         ]);
     }
+    public function actionUpd()
+    {
+        $request = Yii::$app->request;
+        $evento = $this->findModel($request->post('id'));
+        $evento ->dow = $request->post('dow');
+        $evento->Hora_ini = substr($request->post('ini'), -8);
+        $evento->Hora_fin = substr($request->post('fin'), -8);
+        if($evento->save())
+        {
+            echo("Actualizacion exitosa");
+        }
+    }
+    public function actionUpd2()
+    {
+        $request = Yii::$app->request;        
+        $evento = $this->findModel($request->post('id'));
+
+        $ini = $request->post('ini');
+        $fin = $request->post('ini');
+
+        $evento->ID_User_Asigna=Yii::$app->user->identity->id;
+        $evento->Hora_ini = substr($request->post('ini'), -8);
+        $evento->Hora_fin = substr($request->post('fin'), -8);
+        $evento->ID_Aula = $request->post('id_aula');
+        if($evento->save())
+        {
+            echo("Actualizacion exitosa");
+        }
+       return $this->redirect(['index','id_aula' =>$id_aula]);
+      
+    }
+    public function actionUpdscheduler()
+    {
+        $request = Yii::$app->request;
+        $evento = $this->findModel($request->post('id'));
+
+        $evento->Hora_ini = substr($request->post('ini'), -8);
+        $evento->Hora_fin = substr($request->post('fin'), -8);
+        $evento->ID_Aula = $request->post('aula_id');
+        $evento->dow = $request->post('dow');
+        if($evento->save())
+        {
+            echo("Actualizacion exitosa");
+        }
+    }
 
     /**
      * Deletes an existing RestriCalendar model.
@@ -109,37 +156,163 @@ class RestriController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete()
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        $request = Yii::$app->request;
+        $this->findModel($request->post('id'))->delete();
+        $id_aula =  $request->post('id_aula');
+        
+        if($request->post('scheduler') == 1)
+        {
+            $id_sede = $request->post('id_sede');
+            return $this->redirect(['edificio/scheduler','id_sede' => $id_sede]);
+        }
+        return $this->redirect(['index','id' =>$id_aula]);
     }
 
-    public function actionRestri(){
-        $request = Yii::$app->request;
-        $aula = $request->post('aula');
-        //var_dump($request->post('aula'));
-        //var_dump($aula);
-        $fecha = substr($request->post('fecini'), 0, 10);
-        $ini = substr($request->post('fecini'), 11);
-        $fin = substr($request->post('fin'), 11);
-        $user = Yii::$app->$user->identity->id;
-        $instituto = Instituto::findOne($user)->ID;
-        $rep = 1;
-        $per = '2018';
-        $restri = new RestriCalendar();
-        $restri->ID_Aula = $aula;
-        $restri->ID_Instituto_Recibe = $instituto;
-        $restri->ID_Tipo_Repeticion = $rep;
-        $restri->ID_User_Recibe = $user;
-        $restri->Fecha_ini = $fecha;
-        $restri->Hora_ini = $ini;
-        $restri->Hora_fin = $fin;
-        $restri->Periodo_Academico = $per;
-        $restri->save();
+    public function actionJsonresources($id_sede, $start=NULL,$end=NULL,$_=NULL){
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $resources = array();
+        $sede = Sede::findOne($id_sede);
+        $aulas = array();
+        if(!empty($sede->edificios)){
+            foreach($sede->edificios as $edi)
+            {
+                if(!empty($edi->aulas))
+                {
+                    foreach($edi->aulas as $aula)
+                    {
+                        $aulas [] = $aula;
+                    }
+                }
+            }
+        }
+        if(!empty($aulas))
+        {
+            foreach ($aulas as $aula)
+            {
+                $resource = array();
 
-        return $this->redirect(['index','id' =>$aula]);
+                $arrayRecu = array();
+                foreach($aula->rECURSOs as $recu)
+                {
+                    $arrayRecu [] = '-'.$recu->NOMBRE;
+                    
+                }
+                if(!empty($arrayRecu))
+                {
+                    $recursosAula = implode("\n", $arrayRecu);
+                    $resource['recursos'] = $recursosAula;
+                }
+                else{
+                    $resource['recursos'] = '-';
+                }
+                $resource['id'] = $aula->ID;
+                $resource['title'] = $aula->NOMBRE;
+                $resource['edificio'] = $aula->eDIFICIO->NOMBRE;
+                $resource['url'] = URL::toRoute('restri/index?id=').$aula->ID;
+                $obj = (object) $resource;
+
+                $resources [] = $obj;
+            }
+        }
+
+        return $resources;
+    }
+    public function actionJsoncalendar($id=NULL, $start=NULL,$end=NULL,$_=NULL){
+
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
+        $aula = Aula::findOne($id);
+        //RESTRICCIONES
+        foreach ($aula->restriCalendars as $cons) 
+        {
+                
+            $begin = new DateTime($cons->ciclo->fecha_inicio);
+            $end = new DateTime($cons->ciclo->fecha_fin);
+
+            $interval = DateInterval::createFromDateString('1 day');
+            $period = new DatePeriod($begin, $interval, $end);
+            
+            foreach ($period as $dia)
+            {
+                if ($dia->format('N') ==  $cons->dow)
+                {
+
+                    $restri = array();
+                    $restri['id'] = intval($cons->id).'R';
+                    $restri['title'] = $cons->instituto->ID;
+                    $restri['ranges'] = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
+                    $restri['start'] = $dia->format('Y-m-d').'T'.$cons->Hora_ini;
+                    $restri['end'] = $dia->format('Y-m-d').'T'.$cons->Hora_fin;
+                    $restri['backgroundColor'] = $cons->instituto->COLOR_HEXA;
+                    $restri["editable"] = true;
+                    $restri['resourceId'] = $cons->ID_Aula;
+                    $restri['usermodifico'] = $cons->ID_User_Asigna;
+                    if ($instIdOnSessionUser != $cons->instituto->ID)
+                        {
+                            $restri["editable"] = false;
+                            $restri['overlap'] = false;
+                        }
+                    $tasks[] = (object) $restri;
+                }
+            }
+        }
+        return $tasks;
+      }
+
+    public function actionJsonschedulersede($id_sede, $start,$end=NULL,$_=NULL){
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
+        $tasks = array();
+        $sede = Sede::findOne($id_sede);
+        $aulas = array();
+        if(!empty($sede->edificios))
+        {
+            foreach($sede->edificios as $edi)
+            {
+                
+                if(!empty($edi->aulas))
+                {
+                    foreach($edi->aulas as $aula)
+                    {                        
+                        //RESTRICCIONES
+                        foreach ($aula->restriCalendars as $cons) 
+                        {
+                            $begin = new DateTime($cons->ciclo->fecha_inicio);
+                            $end = new DateTime($cons->ciclo->fecha_fin);
+
+                            $interval = DateInterval::createFromDateString('1 day');
+                            $period = new DatePeriod($begin, $interval, $end);
+
+                            foreach ($period as $dia)
+                            {
+                                if ($dia->format('N') == intval($cons->dow))
+                                {
+                                    $restri = array();
+                                    $restri['id'] = intval($cons->id).'R';
+                                    $restri['title'] = $cons->instituto->ID;
+                                    $restri['ranges'] = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
+                                    $restri['start'] = $dia->format('Y-m-d').'T'.$cons->Hora_ini;
+                                    $restri['end'] = $dia->format('Y-m-d').'T'.$cons->Hora_fin;
+                                    $restri['backgroundColor'] = $cons->instituto->COLOR_HEXA;
+                                    $restri["editable"] = true;
+                                    $restri['usermodifico'] = $cons->ID_User_Asigna;
+                                    $restri['resourceId'] = $cons->ID_Aula;
+                                    if ($instIdOnSessionUser != $cons->instituto->ID)
+                                        {
+                                            $restri["editable"] = false;
+                                            $restri['overlap'] = false;
+                                        }
+                                    $tasks[] = (object) $restri;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return $tasks;
     }
 
     /**
