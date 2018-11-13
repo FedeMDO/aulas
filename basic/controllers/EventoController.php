@@ -285,9 +285,11 @@ class EventoController extends Controller
                     $restri['backgroundColor'] = $cons->instituto->COLOR_HEXA;
                     $restri['rendering'] = 'background';
                     $restri['resourceId'] = $cons->ID_Aula;
+                    $restri['ajeno'] = false;
                     $restri['usermodifico'] = $cons->ID_User_Asigna;
                     if ($instIdOnSessionUser != $cons->instituto->ID)
                         {
+                            $restri['ajeno'] = true;
                             $restri['overlap'] = false;
                         }
                     $tasks[] = (object) $restri;
@@ -314,9 +316,11 @@ class EventoController extends Controller
                     $event['color'] = $eve->instituto->COLOR_HEXA;                             
                     $event['ranges'] = [array('start' => $eve->ciclo->fecha_inicio, 'end' => $eve->ciclo->fecha_fin)];
                     $event['editable'] = true;
+                    $event['ajeno'] = false;
                     //user en session no edita eventos de otros institutos
                     if ($instIdOnSessionUser != $eve->instituto->ID)
                     {
+                        $event['ajeno'] = true;
                         $event['editable'] = false;
                     }
                     $event['start'] = $dia->format('Y-m-d').'T'.$eve->Hora_ini;
@@ -367,9 +371,11 @@ class EventoController extends Controller
                                     $restri['backgroundColor'] = $cons->instituto->COLOR_HEXA;
                                     $restri['rendering'] = 'background';
                                     $restri['usermodifico'] = $cons->ID_User_Asigna;
+                                    $restri['ajeno'] = false;
                                     $restri['resourceId'] = $cons->ID_Aula;
                                     if ($instIdOnSessionUser != $cons->instituto->ID)
                                         {
+                                            $restri['ajeno'] = true;
                                             $restri['overlap'] = false;
                                         }
                                     $tasks[] = (object) $restri;
@@ -395,9 +401,11 @@ class EventoController extends Controller
                                     $event['color'] = $eve->instituto->COLOR_HEXA;                             
                                     $event['ranges'] = [array('start' => $eve->ciclo->fecha_inicio, 'end' => $eve->ciclo->fecha_fin)];
                                     $event['editable'] = true;
+                                    $event['ajeno'] = false;
                                     //user en session no edita eventos de otros institutos
                                     if ($instIdOnSessionUser != $eve->instituto->ID)
                                     {
+                                        $event['ajeno'] = true;
                                         $event['editable'] = false;
                                     }
                                     $event['start'] = $dia->format('Y-m-d').'T'.$eve->Hora_ini;

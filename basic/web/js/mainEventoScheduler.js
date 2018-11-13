@@ -1,4 +1,3 @@
-//MAIN VISTA SCHEDULER DE RESTRICCIONES
 $(document).ready(function(){
     $('#calendar').fullCalendar({
         //VIEW
@@ -26,7 +25,7 @@ $(document).ready(function(){
         },
         resources:
             {
-                url: '/restri/jsonresources',
+                url: '/evento/jsonresources',
                 type: 'GET',
                 data: {
                     id_sede: $("em").text(),
@@ -37,7 +36,7 @@ $(document).ready(function(){
         //EVENTOS
         eventSources: [
             {
-              url: '/restri/jsonschedulersede', // use the `url` property
+              url: '/evento/jsonschedulersede', // use the `url` property
               type: 'GET',
                 data: {
                     id_sede: $("em").text(),
@@ -72,7 +71,7 @@ $(document).ready(function(){
             }
                 else
                 {
-                    $.post("/restri/updscheduler",
+                    $.post("/evento/updscheduler",
                         { 
                             id:id,
                             ini:ini,
@@ -107,7 +106,7 @@ $(document).ready(function(){
                 return;
             }
 
-            let url = "/restri/create?id_aula=" + resource.id;
+            let url = "/evento/create?id_aula=" + resource.id;
             $("#modalContent").load(url, function () {
             $("#modal").modal("show");
             //DIA
@@ -120,6 +119,9 @@ $(document).ready(function(){
             $('#eventocalendar-hora_fin').val(endDate.format('HH:mm:ss'));
             
             $('#carrera-id').val('');
+            
+            $("#eventocalendar-hora_ini option[value='22:00:00']").remove();
+            $("#eventocalendar-hora_fin option[value='08:00:00']").remove();
             });  
         },
 
@@ -132,29 +134,30 @@ $(document).ready(function(){
         },
 
         eventClick: function(event){
-            
-            let inicio = event.start.format('DD-MM-YYYY HH:mma').replace(" ", " a las ");
-            let fin = event.end.format('DD-MM-YYYY HH:mma').replace(" ", " a las ");
-            let dowIni = function(){
-                return dows[event.start.isoWeekday()] + ' ' + inicio;
-            }
-            let dowFin = function(){
-                return dows[event.end.isoWeekday()] + ' ' + fin;
-            }
-            	
-            $.get( "/user/getunamebyid", 
-                { id: event.usermodifico },
-                function(data)
-                {
-                    $('#myModal').find('#showusermodifico').text(data);
+            if(!event.ajeno){
+                let inicio = event.start.format('DD-MM-YYYY HH:mma').replace(" ", " a las ");
+                let fin = event.end.format('DD-MM-YYYY HH:mma').replace(" ", " a las ");
+                let dowIni = function(){
+                    return dows[event.start.isoWeekday()] + ' ' + inicio;
                 }
-            );
-            $('#myModal').modal('show');
-            $('#myModal').find('#showcomision').text(event.title);
-            $('#myModal').find('#showini').text(dowIni);
-            $('#myModal').find('#showfin').text(dowFin);
-            $('#myModal').find('#idevento').val(event.id.replace('E', '')); //amoldar para q funcione con restris
-            $('#myModal').find('#idevento').val(event.id.replace('R', ''));
+                let dowFin = function(){
+                    return dows[event.end.isoWeekday()] + ' ' + fin;
+                }
+                    
+                $.get( "/user/getunamebyid", 
+                    { id: event.usermodifico },
+                    function(data)
+                    {
+                        $('#myModal').find('#showusermodifico').text(data);
+                    }
+                );
+                $('#myModal').modal('show');
+                $('#myModal').find('#showcomision').text(event.title);
+                $('#myModal').find('#showini').text(dowIni);
+                $('#myModal').find('#showfin').text(dowFin);
+                $('#myModal').find('#idevento').val(event.id.replace('R', ''));
+            }
+
         },
 
         eventDrop: function( event, delta, revertFunc, jsEvent, ui, view ) { 
@@ -167,7 +170,7 @@ $(document).ready(function(){
             if (!confirm("Esta seguro??")) {
                 revertFunc();}
                 else{
-                    $.post("/restri/updscheduler",
+                    $.post("/evento/updscheduler",
                 { 
                     id:id,
                     ini:ini,

@@ -18,7 +18,7 @@ class CalendarAsset extends AssetBundle
         'js/fullcalendar.js',
         'js/scheduler.js',
         'js/es-us.js',
-        'js/main2.js',
+        'js/mainEventoCalendar.js',
         'js/crearEventosAjax.js'
     ];
     public $depends = [

@@ -61,28 +61,24 @@ class RestriController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($date, $date2)
+    public function actionCreate($id_aula)
     {
-        //$date2 = 1;
-        //$date = '2018-10-10';
         $model = new RestriCalendar();
-        $aula1= Aula::findOne($date2)->NOMBRE;
-        $model->Fecha_ini = $date;
-        $model->ID_Aula = $date2;
-        $model->Periodo_Academico = '2018';
-        $institutos = Instituto::find()->all();
-        $usuarios = Users::find()->where(['not', ['username' => Yii::$app->user->identity->username]])
-        ->andWhere(['activate' =>1])->asArray()->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index', 'id' => $date2]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->ID_User_Asigna = Yii::$app->user->identity->id;
+            $model->ID_Aula=$id_aula;
+            if($model->save())
+            {
+                
+                return $this->redirect(['index', 'id' => $model->ID_Aula]);
+            }
         }
-        else{
-            return $this->renderAjax('create', [
-                'model' => $model, 'aula1' => $aula1, 'institutos' => $institutos, 'usuarios' => $usuarios,
-            ]);
-        }
+        return $this->renderAjax('create', [
+            'model' => $model,
+        ]);
     }
+    
 
     /**
      * Updates an existing RestriCalendar model.
@@ -241,7 +237,7 @@ class RestriController extends Controller
 
                     $restri = array();
                     $restri['id'] = intval($cons->id).'R';
-                    $restri['title'] = $cons->instituto->ID;
+                    $restri['title'] = $cons->instituto->NOMBRE;
                     $restri['ranges'] = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
                     $restri['start'] = $dia->format('Y-m-d').'T'.$cons->Hora_ini;
                     $restri['end'] = $dia->format('Y-m-d').'T'.$cons->Hora_fin;
@@ -249,8 +245,10 @@ class RestriController extends Controller
                     $restri["editable"] = true;
                     $restri['resourceId'] = $cons->ID_Aula;
                     $restri['usermodifico'] = $cons->ID_User_Asigna;
+                    $restri['ajeno'] = false;
                     if ($instIdOnSessionUser != $cons->instituto->ID)
                         {
+                            $restri['ajeno'] = true;
                             $restri["editable"] = false;
                             $restri['overlap'] = false;
                         }
@@ -291,16 +289,18 @@ class RestriController extends Controller
                                 {
                                     $restri = array();
                                     $restri['id'] = intval($cons->id).'R';
-                                    $restri['title'] = $cons->instituto->ID;
+                                    $restri['title'] = $cons->instituto->NOMBRE;
                                     $restri['ranges'] = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
                                     $restri['start'] = $dia->format('Y-m-d').'T'.$cons->Hora_ini;
                                     $restri['end'] = $dia->format('Y-m-d').'T'.$cons->Hora_fin;
                                     $restri['backgroundColor'] = $cons->instituto->COLOR_HEXA;
                                     $restri["editable"] = true;
                                     $restri['usermodifico'] = $cons->ID_User_Asigna;
+                                    $restri['ajeno'] = false;
                                     $restri['resourceId'] = $cons->ID_Aula;
                                     if ($instIdOnSessionUser != $cons->instituto->ID)
                                         {
+                                            $restri['ajeno'] = true;
                                             $restri["editable"] = false;
                                             $restri['overlap'] = false;
                                         }
