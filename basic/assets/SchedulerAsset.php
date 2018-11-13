@@ -18,7 +18,7 @@ class SchedulerAsset extends AssetBundle
         'js/fullcalendar.js',
         'js/scheduler.js',
         'js/es-us.js',
-        'js/main.js',
+        'js/mainEventoScheduler.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

@@ -78,18 +78,19 @@ $(document).ready(function(){
                 }
 
             let url = "/restri/create?id_aula=" + $("em").text();
-            $("#modalContent").load(url, function () {
-            $("#modal").modal("show");
+            $("#modalRestriContent").load(url, function () {
+            $("#modalRestri").modal("show");
             //DIA
-            $('#eventocalendar-dow').val(startDate.isoWeekday());
+            $('#restricalendar-dow').val(startDate.isoWeekday());
 
             //HORA INI
-            $('#eventocalendar-hora_ini').val(startDate.format('HH:mm:ss'));
+            $('#restricalendar-hora_ini').val(startDate.format('HH:mm:ss'));
             
             //HORA FIN
-            $('#eventocalendar-hora_fin').val(endDate.format('HH:mm:ss'));
+            $('#restricalendar-hora_fin').val(endDate.format('HH:mm:ss'));
             
-            $('#carrera-id').val('');
+            $("#restricalendar-hora_ini option[value='22:00:00']").remove();
+            $("#restricalendar-hora_fin option[value='08:00:00']").remove();
             });  
         },
 
@@ -102,27 +103,28 @@ $(document).ready(function(){
         },
 
         eventClick: function(event){
-            
-            let inicio = event.start.format('DD-MM-YYYY HH:mma').replace(" ", " a las ");
-            let fin = event.end.format('DD-MM-YYYY HH:mma').replace(" ", " a las ");
-            let dowIni = function(){
-                return dows[event.start.isoWeekday()] + ' ' + inicio;
-            }
-            let dowFin = function(){
-                return dows[event.end.isoWeekday()] + ' ' + fin;
-            }
-            	
-            $.get( "/user/getunamebyid", { id: event.usermodifico} ,
-                function(data)
-                {
-                    $('#myModal').find('#showusermodifico').text(data);
+            if(!event.ajeno){
+                let inicio = event.start.format('DD-MM-YYYY HH:mma').replace(" ", " a las ");
+                let fin = event.end.format('DD-MM-YYYY HH:mma').replace(" ", " a las ");
+                let dowIni = function(){
+                    return dows[event.start.isoWeekday()] + ' ' + inicio;
                 }
-            );
-            $('#myModal').modal('show');
-            $('#myModal').find('#showcomision').text(event.title);
-            $('#myModal').find('#showini').text(dowIni);
-            $('#myModal').find('#showfin').text(dowFin);
-            $('#myModal').find('#idevento').val(event.id.replace('E', '')); //amoldar para q funcione con restris
+                let dowFin = function(){
+                    return dows[event.end.isoWeekday()] + ' ' + fin;
+                }
+                    
+                $.get( "/user/getunamebyid", { id: event.usermodifico} ,
+                    function(data)
+                    {
+                        $('#myModal').find('#showusermodifico').text(data);
+                    }
+                );
+                $('#myModal').modal('show');
+                $('#myModal').find('#showcomision').text(event.title);
+                $('#myModal').find('#showini').text(dowIni);
+                $('#myModal').find('#showfin').text(dowFin);
+                $('#myModal').find('#idevento').val(event.id.replace('R', ''));
+            }
             
         },
 
@@ -162,3 +164,41 @@ var dows = {1: 'Lunes',
 6: 'Sabado',
 7: 'Domingo'
 }
+$(function(){
+    $(document).on('click', '.showModalButton', function(){
+      if ($('#modalRestri').data('bs.modal').isShown) {
+          $('#modalRestri').find('#modalRestriContent')
+                  .load($(this).attr('value'));
+          document.getElementById('modalRestriHeader').innerHTML = '<h4>' + $(this).attr('title') + '</h4>';
+          $('#modalRestriHeader').hide();
+      } else {
+          //if modal isn't open; open it and load content
+          $('#modalRestri').modal('show')
+                  .find('#modalRestriContent')
+                  .load($(this).attr('value'));
+           //dynamiclly set the header for the modal
+          document.getElementById('modalRestriHeader').innerHTML = '<h4>' + $(this).attr('title') + '</h4>';
+          $('#modalRestriHeader').hide();
+      }
+  });
+});
+
+$('#btnBorrarEvento').click(function()
+{
+  let idEvento = parseInt($('#idevento').val());
+  var id_aula = $("em").text();
+  
+  if (confirm("¿Esta seguro?")) 
+  {
+      $.post("/restri/delete",
+      {
+          id: idEvento,
+          id_aula: id_aula,
+      },
+      )
+      $('#myModal').hide();
+  }
+  else{
+      revertFunc();
+  }
+})

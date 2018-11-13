@@ -15,8 +15,8 @@ $this->title = 'Edificios disponibles';
 <br>
 <br>
 <a href="../edificio/create" class="btn btn-success d-flex justify-content-around btn-edificio0" role="button">Crear Edificio</a>
-
-<a href="../edificio/scheduler?id_sede=<?php echo (Html::encode($id));?>"  class="btn miBoton btn-md btn-vistav" role="button">Ver eventos por edificio</a>
+<a href="../edificio/scheduler?id_sede=<?php echo (Html::encode($id));?>"  class="btn btn-primary d-flex justify-content-around btn-edificio0" role="button">Ver eventos por edificio</a>
+<a href="../edificio/restrischeduler?id_sede=<?php echo (Html::encode($id));?>"  class="btn btn-primary d-flex justify-content-around btn-edificio0" role="button">Ver restricciones por edificio</a>
 
 
 
