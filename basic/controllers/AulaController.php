@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Aula;
+use app\models\BuscadorModel;
 use app\models\AulaSearch;
 use app\models\Recurso;
 use app\models\RecursoSearch;
@@ -16,6 +17,8 @@ use app\models\User;
 use yii\data\Pagination;
 use yii\helpers\VarDumper;
 use app\models\Sede;
+use app\models\FormRegister;
+
 /**
  * AulaController implements the CRUD actions for Aula model.
  */
@@ -229,26 +232,32 @@ class AulaController extends Controller
     }
     public function actionBuscador()
     {
+
         if($_POST!= null){
+            $aulasCumplen = array();
             $ID_recursos =$_POST['Recurso'];
             $ID_recursos =$ID_recursos['ID'];
             $ID_edificio =$_POST['Edificio'];
-
+            $buscador =$_POST['BuscadorModel'];
+            $capacidad = (int)$buscador['CAPACIDAD'];
+            $piso=(int)$buscador["PISO"];
+            //var_dump($ID_piso);
             //$request = Yii::$app->request;
             //$edificio = $request->post(); 
             //$result = ArrayHelper::map($edificio, 'ID', 'NOMBRE');
-
             //return $this->render('BuscadorResultado');
+
             $edi= Edificio::findOne($ID_edificio);
             $aulasEdificio = $edi->aulas;
             foreach($aulasEdificio as $aula){
-                foreach($aula->rECURSOs as $r){
+            foreach($aula->rECURSOs as $r){
                     $ids[]= (string)$r->ID;
                 }
-                //comparo los arrays
                 $arrayInter = array_intersect($ids, $ID_recursos);
                 if(count($arrayInter) == count($ID_recursos)){
-                    $aulasCumplen[]=$aula;
+                    if ($aula->PISO == $piso && $aula->CAPACIDAD >= $capacidad) {
+                        $aulasCumplen[]=$aula;
+                    }
                 }
                 
             }
@@ -262,6 +271,8 @@ class AulaController extends Controller
         $recursos= new Recurso();
         $edificio = new Edificio();
         $sedes= new Sede();
+        $buscador = new BuscadorModel();
+
         $query = Recurso::find();
         
             $pagination = new Pagination([
@@ -275,6 +286,7 @@ class AulaController extends Controller
         'pagination' => $pagination,
         'edificio'=> $edificio,
         'sedes'=> $sedes,
+        'buscador'=> $buscador,
         ]);
 
     }

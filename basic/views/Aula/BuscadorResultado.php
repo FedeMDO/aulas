@@ -11,8 +11,8 @@ $this->title = 'Aulas por recurso';
 <center><?php if (count($aulasCumplen) != 0) {
 
 	?>
-<center><h3>Aulas Disponibles con los recursos seleccionados en el edificio <?=Html::encode("{$edi->NOMBRE} ")?></h3></center>
-
+<h3 class=titulo>Aulas Disponibles con los recursos seleccionados en el edificio <?=Html::encode("{$edi->NOMBRE} ")?></h3>
+<div class="col-md-offset-1 col-md-10">
 <div class="loginc">
 <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
@@ -47,7 +47,7 @@ $this->title = 'Aulas por recurso';
             </div>
 
 </div>
-
+</div>
 
 
 
@@ -55,16 +55,15 @@ $this->title = 'Aulas por recurso';
 <?php
 } else {?>
 
-<div class="alert alert-danger" role="alert">
-  <h4 class="alert-heading">ATENCION!</h4>
-  <p>NO HAY EDIFICIOS CREADOS EN ESTA SEDE</p>
-  <hr>
-
-  <a href="../edificio/create" class="btn btn-danger btn-md" role="button">CREA EDIFICIO</a>
+<div class="container">
+    <div class="row" style= "width:60%;" >
+    <img width="220px" height="220" style= "float:left; margin-lelft:50px;"src="../image/buscador.png" />
+      <h3 class="titulo" >Lo sentimos no se han encontrado resultados.</h3>
+      <br><br><br>
+      <a href="../aula/buscador"  class="btn btn-info" style="width:50%" role="button">Volver a intenter</a>
+    </div>
 </div>
-
-
-<?php }?></h3></center>
+<?php }?>
 
 
 

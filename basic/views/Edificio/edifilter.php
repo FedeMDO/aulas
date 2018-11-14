@@ -22,11 +22,17 @@ $this->title = 'Edificios';
 <center><h2 class=titulo><?php if(count($edificio) != 0){
 echo("Edificios Disponibles en la sede "); echo (Html::encode("{$edificio[0]->sEDE->NOMBRE}"));}
 else{?>
+</h2>
+<div class="container imagenrobot">
+    <div class="row" style= "width:60%;" >
+    <img width="220px" height="220" style= "float:left; margin-lelft:10px;"src="../image/error.png" />
+      <br>
+      <h3 class="titulo" >No hay edificios creados en esta sede!</h3>
+      <br><br><br>
+      <a href="../sede/vistav"  class="btn btn-info" style="width:50%" role="button">Volver atras</a>
+    </div>
+</div>
 
-<div class="alert alert-danger" role="alert">
-  <h4 class="alert-heading">ATENCION!</h4>
-  <p class="text-center">NO HAY EDIFICIOS CREADOS EN ESTA SEDE</p>
-  <hr>
   <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
   <?php endif; ?>
 </div>

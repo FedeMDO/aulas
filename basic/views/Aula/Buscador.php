@@ -8,6 +8,7 @@ use yii\helpers\ArrayHelper;
 use app\models\recurso;
 use app\models\Edificio;
 use app\models\Sede;
+use app\models\Aula;
 use kartik\select2\Select2;
 
 
@@ -28,6 +29,7 @@ $this->registerCssFile("@web/css/index.css", [
     'id' => 'formulario',
 
 ]);
+
 $recurso = recurso::find()->asArray()->all();
 $result = ArrayHelper::map($recurso, 'ID', 'NOMBRE');
 
@@ -39,6 +41,7 @@ $resultado = ArrayHelper::map($recurso3, 'ID', 'NOMBRE');
 
 
 ?>
+
 
 <?php echo $form->field($sedes, 'ID',['labelOptions'=>['style'=>'color:white']])->widget(Select2::className(),[
         'data'=>$resultado, 
@@ -64,16 +67,11 @@ $resultado = ArrayHelper::map($recurso3, 'ID', 'NOMBRE');
         ]
     ])->label("Nombre de recurso");
 ?>
+
+<?= $form->field($buscador, "PISO",['labelOptions'=>['style'=>'color:white; padding-top:10px']])->input("text")->label('Piso') ?>
+<?= $form->field($buscador, "CAPACIDAD",['labelOptions'=>['style'=>'color:white; padding-top:10px']])->input("text")->label('Capacidad minima') ?> 
+
 <?= Html::submitButton("buscar aulas", ["class" => "btn btn-success btn-block"]) ?>  
-
-</div>
-
 
 
 <?php $form->end() ?>
-</div>
-
-
-</div>
-
-</div>
