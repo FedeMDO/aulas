@@ -56,7 +56,7 @@ $this->title = 'Aulas por recurso';
 } else {?>
 
 <div class="container">
-    <div class="row" style= "width:60%;" >
+    <div class="row" style= "width:60%; margin-top:50px;" >
     <img width="220px" height="220" style= "float:left; margin-lelft:50px;"src="../image/buscador.png" />
       <h3 class="titulo" >Lo sentimos no se han encontrado resultados.</h3>
       <br><br><br>

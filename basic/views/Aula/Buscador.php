@@ -20,8 +20,8 @@ $this->registerCssFile("@web/css/index.css", [
 
 ?>
 <div class="col-md-offset-4 col-md-4">
-<div class="loginc azul">
-<h2 style="color:white; border-bottom: 1px solid white;">Buscador de aula</h2>
+<div class="loginc" style="background-color: #2980b9;">
+<h2 style="color:white; border-bottom: 1px solid white; text-align: center;">Buscador de aula</h2>
 
 
 <?php $form = ActiveForm::begin([

@@ -425,6 +425,7 @@ text-transform: uppercase;
 }
 .azul label{
   color: white;
+  float: left;
 }
 .azul h1{
   color:white; 
