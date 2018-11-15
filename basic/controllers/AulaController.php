@@ -236,7 +236,6 @@ class AulaController extends Controller
 
         if($_POST!= null){
             $aux=0;
-            $prueba=array();
             $aulasCumplen = array();
             $ID_recursos =$_POST['Recurso'];
             $ID_recursos =$ID_recursos['ID'];
@@ -247,11 +246,11 @@ class AulaController extends Controller
             $edi= Edificio::findOne($ID_edificio);
             $aulasEdificio = $edi->aulas;
             foreach($aulasEdificio as $aula){
-                $result = ArrayHelper::map($aula->rECURSOs, 'ID', 'NOMBRE');
-                foreach ($result  as $recurso => $key1){
+                foreach($aula->rECURSOs as $r){
+                    $result[]= $r->ID;
                     $contadorRecursos = count($ID_recursos)-1;
                     while ($contadorRecursos!= -1 ){
-                        if($recurso == $ID_recursos[$contadorRecursos]){
+                        if($r->ID == $ID_recursos[$contadorRecursos]){
                             $aux++;
                             }
                         //var_dump($aux);
@@ -268,7 +267,7 @@ class AulaController extends Controller
                                 }
                                 if($capacidad=="" & $piso==""){
                                     $aulasCumplen[] = $aula;
-                                    echo "entro iguales";
+                                    //echo "entro iguales";
                                 }
                                 if($capacidad=="" & $piso!=""){
                                     if ($aula->PISO == $piso){
