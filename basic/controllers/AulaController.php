@@ -18,6 +18,7 @@ use yii\data\Pagination;
 use yii\helpers\VarDumper;
 use app\models\Sede;
 use app\models\FormRegister;
+use yii\helpers\ArrayHelper;
 
 /**
  * AulaController implements the CRUD actions for Aula model.
@@ -234,37 +235,67 @@ class AulaController extends Controller
     {
 
         if($_POST!= null){
+            $aux=0;
+            $prueba=array();
             $aulasCumplen = array();
             $ID_recursos =$_POST['Recurso'];
             $ID_recursos =$ID_recursos['ID'];
             $ID_edificio =$_POST['Edificio'];
             $buscador =$_POST['BuscadorModel'];
-            $capacidad = (int)$buscador['CAPACIDAD'];
-            $piso=(int)$buscador["PISO"];
-            //var_dump($ID_piso);
-            //$request = Yii::$app->request;
-            //$edificio = $request->post(); 
-            //$result = ArrayHelper::map($edificio, 'ID', 'NOMBRE');
-            //return $this->render('BuscadorResultado');
-
+            $capacidad = $buscador['CAPACIDAD'];
+            $piso=$buscador["PISO"];
             $edi= Edificio::findOne($ID_edificio);
             $aulasEdificio = $edi->aulas;
             foreach($aulasEdificio as $aula){
-            foreach($aula->rECURSOs as $r){
-                    $ids[]= (string)$r->ID;
+                $result = ArrayHelper::map($aula->rECURSOs, 'ID', 'NOMBRE');
+                foreach ($result  as $recurso => $key1){
+                    $contadorRecursos = count($ID_recursos)-1;
+                    while ($contadorRecursos!= -1 ){
+                        if($recurso == $ID_recursos[$contadorRecursos]){
+                            $aux++;
+                            }
+                        //var_dump($aux);
+                        if($aux == count($ID_recursos)){
+                            if(count($ID_recursos) <= count($result)){
+                                $aux = 0;
+                                if($piso !="" && $capacidad !=""){
+                                    if ($aula->PISO == $piso){
+                                        if ($aula->CAPACIDAD >= $capacidad){
+                                            $aulasCumplen[] = $aula;
+                                        }
+                                    
+                                    }
+                                }
+                                if($capacidad=="" & $piso==""){
+                                    $aulasCumplen[] = $aula;
+                                    echo "entro iguales";
+                                }
+                                if($capacidad=="" & $piso!=""){
+                                    if ($aula->PISO == $piso){
+                                        $aulasCumplen[] = $aula;
+                                    }
+                                }
+                                if($capacidad!="" && $piso==""){
+                                    if ($aula->CAPACIDAD >= $capacidad){
+                                        $aulasCumplen[] = $aula;
+                                    }
+                                }
+                            }
+                            else{
+                                $aux=0;
+                            }
+                            }
+                        $contadorRecursos = $contadorRecursos -1;
+                        }
+                    
                 }
-                $arrayInter = array_intersect($ids, $ID_recursos);
-                if(count($arrayInter) == count($ID_recursos)){
-                    if ($aula->PISO == $piso && $aula->CAPACIDAD >= $capacidad) {
-                        $aulasCumplen[]=$aula;
-                    }
-                }
-                
+
             }
             return $this->render('BuscadorResultado', [
                 'aulasCumplen' => $aulasCumplen,
                 'edi' => $edi
             ]);
+            
            
         }
 

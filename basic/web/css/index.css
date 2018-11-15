@@ -193,6 +193,9 @@ th, td {
   border-width: 5px;
   box-shadow:0 1px 0 #cfcfcf;
 }
+.loginc label{
+  color:white;
+}
 
 
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {

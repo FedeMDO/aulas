@@ -17,6 +17,11 @@ $this->registerCssFile("@web/css/index.css", [
     
 ], 'css-print-theme');
 
+$this->registerJsFile(
+    '@web/js/main.js',
+    ['depends' => [\yii\web\JqueryAsset::className()]]
+);
+
 
 ?>
 <div class="col-md-offset-4 col-md-4">
@@ -68,8 +73,21 @@ $resultado = ArrayHelper::map($recurso3, 'ID', 'NOMBRE');
     ])->label("Nombre de recurso");
 ?>
 
-<?= $form->field($buscador, "PISO",['labelOptions'=>['style'=>'color:white; padding-top:10px']])->input("text")->label('Piso') ?>
-<?= $form->field($buscador, "CAPACIDAD",['labelOptions'=>['style'=>'color:white; padding-top:10px']])->input("text")->label('Capacidad minima') ?> 
+<?= $form->field($buscador, 'PISO',['labelOptions' => ['encode' => false]])->textInput(['maxlength' => true])
+                                  ->label('Piso <i class="glyphicon glyphicon-question-sign"></i>',[
+                                    'class' => 'dashed-line',
+                                    'data-toggle' => 'popover',
+                                    'data-content' => 'Por favor deje este campo vacio si quiere buscar aulas con cualquier piso',
+                                    'data-placement' => 'right',
+                                    'encode' => false,]) ?>
+
+<?= $form->field($buscador, 'CAPACIDAD',['labelOptions' => ['encode' => false]])->textInput(['maxlength' => true])
+                                  ->label('Capacidad <i class="glyphicon glyphicon-question-sign"></i>',[
+                                    'class' => 'dashed-line',
+                                    'data-toggle' => 'popover',
+                                    'data-content' => 'Por favor deje este campo vacio si quiere buscar aulas de cualquier capacidad',
+                                    'data-placement' => 'right',
+                                    'encode' => false,]) ?>
 
 <?= Html::submitButton("buscar aulas", ["class" => "btn btn-success btn-block"]) ?>  
 

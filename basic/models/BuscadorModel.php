@@ -13,8 +13,8 @@ class BuscadorModel extends model{
     public function  rules()
     {
         return [
-            [['PISO'], 'required', 'message' => 'Campo requerido'],
-            [['CAPACIDAD'], 'required', 'message' => 'Campo requerido'],
+            [['PISO'], 'safe', 'message' => 'Campo requerido'],
+            [['CAPACIDAD'], 'safe', 'message' => 'Campo requerido'],
         ];
     }
     

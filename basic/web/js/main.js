@@ -14,6 +14,12 @@
 //     });
         
 // });
+
+$(function () {
+    $('[data-toggle="popover"]').popover()
+  })
+
+
 $(function(){
 
     $(document).on('click','.fc-day', function(){
@@ -33,4 +39,6 @@ $(function(){
             .load($(this).attr('value'));
     });
         
-});
+}
+
+);
