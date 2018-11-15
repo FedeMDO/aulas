@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\User;
+use yii\data\Pagination;
 
 /**
  * CarreraController implements the CRUD actions for Carrera model.
@@ -28,7 +29,7 @@ class CarreraController extends Controller
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['index','view','create','update','delete'],
+                        'actions' => ['carrerav','index','view','create','update','delete'],
                         //Esta propiedad establece que tiene permisos
                         'allow' => true,
                         //Usuarios autenticados, el signo ? es para invitados
@@ -78,6 +79,23 @@ class CarreraController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    public function actionCarrerav()
+    {
+        $query = Carrera::find(); 
+        $pagination = new Pagination([
+            'defaultPageSize' => 5,
+        ]);
+        $carrera = $query->orderBy('ID')
+        ->offset($pagination->offset)
+        ->limit($pagination->limit)
+        ->all();
+        return $this->render('carrerav', [
+            'carrera' => $carrera,
+            'pagination' => $pagination,
+        ]);
+    
+       
     }
 
     /**

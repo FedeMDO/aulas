@@ -434,6 +434,10 @@ text-transform: uppercase;
   color:white; 
   border-bottom: 1px solid white;
 }
+.azul p{
+  color:white;
+  font-weight: bold;
+}
 .enviado{
   width: 80%;
 }
@@ -602,3 +606,15 @@ text-transform: uppercase;
 .notificacion-create{
   color: white;
 }
+.miPanel{
+  padding-top:15px;
+  padding-bottom: 15px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+  /*background-color: white;
+  color: #1475b9;*/
+}
+
+
+

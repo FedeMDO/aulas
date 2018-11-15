@@ -19,38 +19,44 @@ $this->registerJsFile(
 );
 
 
-$this->title = 'Institutos';
+$this->title = 'Carreras';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="col-md-offset-4 col-md-4">
 <div class="loginc azul">
-  <h3 style="color:white; border-bottom: 1px solid white;">Informacion Instituto</h3>
+  <h3 style="color:white; border-bottom: 1px solid white;">Informacion carreras</h3>
   <div class="panel-group">
     <?php $aux =0;
     $b="";
+    $in="collapse";
     $aux2 =false;
     ?>
-    <?php foreach ($instituto as $car):
+    <?php foreach ($carrera as $car):
       $aux++;
-      $color=" $car->COLOR_HEXA";
+      $color= $car->iNSTITUTO->COLOR_HEXA;
       $b="";
+      ?>
+      <?php if ($aux==1){
+        $in="collapse in";
+      }
+      else{
+        $in="collapse";
+      }
+      
       ?>
       <button type="button" style="background-color:<?php echo $color;?>" class="btn btn-info btn-block miPanel" data-toggle="collapse" data-target="#demo<?php echo $aux;?>"><?= Html::encode("$car->NOMBRE")?><i class="more-less glyphicon glyphicon-plus" style="float:right"></i></button>
     <!-- ME FIJO SI NO TIENE USUARIOS -->
-    <?php if (count($car->users) == 0){ 
-      $b = $b ."Sin usuarios de este instituto" ."\n";
-      ;?>
-      <p></p>
+    <?php if (count($car->mATERIAs) == 0){ ?>
+      <p style="color:white">Sin usuarios de este instituto</p>
     <?php
     } ?>
     <!-- ITERO LOS USUARIOS DE CADA INSTITUTO Y SACO SUS DATOS -->
-    <?php foreach ($car->users as $materia): ?>
+    <?php foreach ($car->mATERIAs as $materia): ?></p>
     <?php 
-      $b = $b .$materia->username. ": " .$materia->email ."\n" ?>
-      </p>
+      $b = $b .$materia->NOMBRE ."\n" ?>
     <?php endforeach; ?>
-    <div id="demo<?php echo $aux;?>" class="collapse in">
+    <div id="demo<?php echo $aux;?>" class="<?php echo $in;?>">
     <?php $b = str_replace(array("\r\n", "\r", "\n"), "<br />", $b); ?> 
     <p style="color:white;"><?php echo $b;?></p>
   </div>

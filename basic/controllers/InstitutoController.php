@@ -33,7 +33,6 @@ class InstitutoController extends Controller
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
-
         return $this->render('institutov', [
             'instituto' => $instituto,
             'pagination' => $pagination,
