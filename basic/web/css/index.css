@@ -115,15 +115,6 @@ text-transform: uppercase; */
   transform: scale(1.2);
 }
 
-h4 { 
-  border:0 solid #fff; 
-  border-bottom-width:1px;
-  padding-bottom:10px;
-  text-align: center;
-  color: white;
- }
-
-
 .form-login {
   background-color: rgb(41, 128, 185);
   padding-top: 10px;
@@ -212,32 +203,6 @@ th, td {
   height: 100%;
  }
 
-
-.imgsede1
-{
-  border-radius: 50%;
-  height: 500px;
-  width: 500px;
-}
-
-.imgsede2
-{
-  border-radius: 50%;
-  height: 500px;
-  width: 500px;
-}
-
-.imgsede3
-{
-  border-radius: 50%;
-  height: 500px;
-  width: 500px;
-}
-/*no se como cambiarle el color a las letras de de <H1> de la vista user y admin */
-.btn btn-link logout{
-  color:#ecf0f1;
-}
-
 .jumbotron2
 {
   background: -webkit-linear-gradient(rgb(41, 128, 185),rgb(52, 152, 219));
@@ -325,20 +290,12 @@ text-transform: uppercase;
 .recibidos{
   border: 1px solid white;
 }
+
 /* arregla margen de aulas*/
 .btn-vistav{
   margin-top: 10px;
 }
-.btn-vistav1{
-  margin-top: 10px;
-  margin-left: 55px;
-}
-.btn-vistav2{
-  margin-top: 10px;
-}
-.formu{
-  margin-top :20px;
-}
+
 
 /*Estilo del placeholder*/
 
@@ -429,6 +386,7 @@ text-transform: uppercase;
 .azul label{
   color: white;
   float: left;
+  
 }
 .azul h1{
   color:white; 
@@ -442,21 +400,12 @@ text-transform: uppercase;
   width: 80%;
 }
 
-/* baja el boton de buscar en la vista buscador*/
-.btn-buscador1{
-  margin-top: 10px;
-}
-
 .miBoton {
 	background-color: #1475b9;
   color: #fff;
   text-align: left;
 }
 
-* {
-  margin: 0px;
-  padding: 0px;
-}
 
 #sidebar {
   position: absolute;
@@ -496,11 +445,6 @@ text-transform: uppercase;
   border: 1px solid #000;
 } 
 
-.btn-edificio0{
- 
-  margin-left: 1%;
-  
-}
 
 /* Barra lateral nueva de notificaciones*/
 .sidenav {
@@ -615,6 +559,3 @@ text-transform: uppercase;
   /*background-color: white;
   color: #1475b9;*/
 }
-
-
-
