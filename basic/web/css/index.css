@@ -407,6 +407,13 @@ text-transform: uppercase;
 }
 
 
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+
 #sidebar {
   position: absolute;
   width: 200px;
