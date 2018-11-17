@@ -22,6 +22,8 @@ $this->registerJsFile(
     ['depends' => [\yii\web\JqueryAsset::className()]]
 );
 
+$this->title = 'Buscador de aulas';
+
 
 ?>
 <div class="col-md-offset-4 col-md-4">
@@ -47,13 +49,18 @@ $resultado = ArrayHelper::map($recurso3, 'ID', 'NOMBRE');
 
 ?>
 
-
 <?php echo $form->field($sedes, 'ID',['labelOptions'=>['style'=>'color:white']])->widget(Select2::className(),[
-        'data'=>$resultado, 
+        'data'=> $resultado,
         "options" =>[
         'placeholder'=> 'Seleccione sede',
-        ]
-        ])->label('Nombre de Sede');
+        'onchange' => 
+            '$.post( "'.Yii::$app->urlManager->createUrl('aula/listedificio?id=').'"+$(this).val(), function( data ) {
+            $( "select#edificio-id" ).html( data );
+            });'
+        ],
+        'pluginOptions' => [
+            'allowClear' => true,
+        ]])->label('Nombre de Sede');
 ?>
 
  <?php echo $form->field($edificio, 'ID',['labelOptions'=>['style'=>'color:white']])->widget(Select2::className(),[
@@ -66,7 +73,7 @@ $resultado = ArrayHelper::map($recurso3, 'ID', 'NOMBRE');
 ?>
 
 <?php echo $form->field($model, "ID",['labelOptions'=>['style'=>'color:white']])->widget(Select2::className(),[
-        'data' => $result, 
+        'data' => $result,
         "options" => ['multiple'=> true, 
         'placeholder' => 'Seleccione recurso'
         ]
@@ -89,7 +96,9 @@ $resultado = ArrayHelper::map($recurso3, 'ID', 'NOMBRE');
                                     'data-placement' => 'right',
                                     'encode' => false,]) ?>
 
-<?= Html::submitButton("buscar aulas", ["class" => "btn btn-success btn-block"]) ?>  
+<?= Html::submitButton("Buscar", [
+    "class" => "btn btn-success btn-block",
+    ]) ?>  
 
 
 <?php $form->end() ?>

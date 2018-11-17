@@ -247,6 +247,7 @@ class AulaController extends Controller
             $aulasEdificio = $edi->aulas;
             foreach($aulasEdificio as $aula){
                 $result = ArrayHelper::map($aula->rECURSOs, 'ID', 'NOMBRE');
+                if ($ID_recursos != ""){
                 foreach ($result  as $recurso => $key1){
                     for ($i = 0; $i <= $contadorRecursos = count($ID_recursos)-1; $i++) {
                         if($recurso == $ID_recursos[$i]){
@@ -265,7 +266,6 @@ class AulaController extends Controller
                                 }
                                 if($capacidad=="" & $piso==""){
                                     $aulasCumplen[] = $aula;
-                                    echo "entro iguales";
                                 }
                                 if($capacidad=="" & $piso!=""){
                                     if ($aula->PISO == $piso){
@@ -283,6 +283,22 @@ class AulaController extends Controller
                             }
                             }
                         }
+                }
+                }
+                else{
+                    if($capacidad=="" & $piso==""){
+                        $aulasCumplen[] = $aula;
+                    }
+                    if($capacidad=="" & $piso!=""){
+                        if ($aula->PISO == $piso){
+                            $aulasCumplen[] = $aula;
+                        }
+                    }
+                    if($capacidad!="" && $piso==""){
+                        if ($aula->CAPACIDAD == $capacidad){
+                            $aulasCumplen[] = $aula;
+                        }
+                    }
                 }
             }
             return $this->render('BuscadorResultado', [
@@ -315,4 +331,22 @@ class AulaController extends Controller
         ]);
 
     }
+
+    public function actionListedificio($id)
+    {
+        $edificios = Edificio::find()
+            ->where(['ID_SEDE' => $id])
+            ->orderBy('id DESC')
+            ->all();
+
+        if (!empty($edificios)) {
+            foreach($edificios as $edificio) {
+                echo "<option value='".$edificio->ID."'>".$edificio->NOMBRE."</option>";
+            }
+        } else {
+            echo "<option>-</option>";
+        }
+
+    }
+
 }

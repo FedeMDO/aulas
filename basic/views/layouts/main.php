@@ -99,7 +99,7 @@ AppAsset::register($this);
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-home']).' INICIO', 'url' => ['/site/index'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' SEDES', 'url' => ['/sede/vistav'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' INSTITUTOS', 'url' => ['/instituto/institutov'], 'options' => ['style' => 'font-weight: bold;']],
-                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' CARREARAS', 'url' => ['/carrera/carrerav'], 'options' => ['style' => 'font-weight: bold;']],
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' CARRERAS', 'url' => ['/carrera/carrerav'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).'ADMINISTRACION', 'url' => ['/site/register'], 'options' => ['style' => 'font-weight: bold;'],
 
                     'items' => [
@@ -142,7 +142,7 @@ AppAsset::register($this);
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-home']).' INICIO', 'url' => ['/site/index'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' SEDES', 'url' => ['/sede/vistav'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' INSTITUTOS', 'url' => ['/instituto/institutov'], 'options' => ['style' => 'font-weight: bold;']],
-                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' CARREARAS', 'url' => ['/carrera/carrerav'], 'options' => ['style' => 'font-weight: bold;']],
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' CARRERAS', 'url' => ['/carrera/carrerav'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' CREAR COMISION', 'url' => ['/comision/create'], 'options' => ['style' => 'font-weight: bold;']],
                 ],
             ]);
@@ -174,7 +174,7 @@ AppAsset::register($this);
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-home']).' INICIO', 'url' => ['/site/index'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' SEDES', 'url' => ['/sede/vistav'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' INSTITUTOS', 'url' => ['/instituto/institutov'], 'options' => ['style' => 'font-weight: bold;']],
-                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' CARREARAS', 'url' => ['/carrera/carrerav'], 'options' => ['style' => 'font-weight: bold;']],
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' CARRERAS', 'url' => ['/carrera/carrerav'], 'options' => ['style' => 'font-weight: bold;']],
                 ],
             ]);
             echo Nav::widget([
