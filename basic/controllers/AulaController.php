@@ -295,7 +295,7 @@ class AulaController extends Controller
                         }
                     }
                     if($capacidad!="" && $piso==""){
-                        if ($aula->CAPACIDAD == $capacidad){
+                        if ($aula->CAPACIDAD >= $capacidad){
                             $aulasCumplen[] = $aula;
                         }
                     }
@@ -347,6 +347,26 @@ class AulaController extends Controller
             echo "<option>-</option>";
         }
 
+    }
+    public function actionObserva($id){
+        $model = new Aula();
+        $aula = Aula::findOne($id);
+        if ($_POST != null){
+            if ($_POST['Aula'] == 'borrar'){
+                $aula->OBS = NULL;
+                $aula->save();
+            }
+            else{
+                $aula1 = $_POST['Aula'];
+                $obs = $aula1['OBS'];
+                $aula->OBS = $obs;
+                $aula->save();
+            }
+        }
+        return $this->render('observa', [
+            'model' => $model,
+            'aula' => $aula,
+        ]);
     }
 
 }

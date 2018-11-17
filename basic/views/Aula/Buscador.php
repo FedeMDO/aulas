@@ -89,7 +89,7 @@ $resultado = ArrayHelper::map($recurso3, 'ID', 'NOMBRE');
                                     'encode' => false,]) ?>
 
 <?= $form->field($buscador, 'CAPACIDAD',['labelOptions' => ['encode' => false]])->textInput(['maxlength' => true])
-                                  ->label('Capacidad <i class="glyphicon glyphicon-question-sign"></i>',[
+                                  ->label('Capacidad minima <i class="glyphicon glyphicon-question-sign"></i>',[
                                     'class' => 'dashed-line',
                                     'data-toggle' => 'popover',
                                     'data-content' => 'Por favor deje este campo vacio si quiere buscar aulas de cualquier capacidad',

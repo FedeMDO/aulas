@@ -46,7 +46,13 @@ $this->title = 'Buscador de aulas';
                               }
                             }
                   ?></td>
-                  <td>una observacion</td>
+                  <td><?php if ($aula->OBS != null){
+                              echo $aula->OBS;
+                            }
+                            else{
+                              echo "No hay observacion.";
+                            } 
+                  ?></td>
 
                   </td>
 
