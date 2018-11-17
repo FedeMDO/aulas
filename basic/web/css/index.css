@@ -474,17 +474,55 @@ text-transform: uppercase;
 .sidenav a:hover {
   color: black;
 }
-
 .main {
   margin-left: 160px; /* Same as the width of the sidebar */
   padding: 0px 10px;
 }
 
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
 
+/*Para hacer mas responsivo notificaciones*/
+
+@media screen and (max-width: 700px) {
+  .sidenav {
+    width: 100%;
+    height: auto;
+    position: relative;
+    top: 0px;
+    text-align: center !important;
+    left: 0px;
+  }
+  .sidenav a {
+    float: none;
+    text-align: center;
+  }
+  .enviado {
+      max-height: auto;
+      width: auto !important;
+      height: auto;
+      position: relative;
+      top: 0px;
+  }
+  .enviado a {
+      float: none;
+      text-align: center;
+  }
+  .main{
+      margin-left: 0px;
+  }
+  .mensaje{
+      margin: 0px ;
+      width: auto !important;
+      float: none !important;
+      left: 0px !important;
+  }
+  .alert{
+    text-align: center;
+  }
+  .tabcontent{
+    float: none;
+  }
+}    
+  
 .error{
   text-align: center;
   color: white;

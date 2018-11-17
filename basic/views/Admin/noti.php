@@ -33,6 +33,11 @@ $this->title = 'Notificaciones';
 body {
     overflow:hidden;
 }
+@media screen and (max-width: 700px) {
+  body{
+    overflow:scroll;
+  }
+}
 </style>
 
 <body>
