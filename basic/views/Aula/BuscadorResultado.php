@@ -46,21 +46,18 @@ $this->title = 'Buscador de aulas';
                               }
                             }
                   ?></td>
-                  <td><?php if ($aula->OBS != null){
-                              echo $aula->OBS;
-                            }
-                            else{
-                              echo "No hay observacion.";
-                            } 
-                  ?></td>
-
+                  <td>
+                  <?php if ($aula->OBS != null):?> 
+                  <?php echo $aula->OBS ?><a href="../aula/observa?id=<?=Html::encode("{$aula->ID}")?>" class="glyphicon glyphicon-pencil" style="margin-left:4px"></a>
+                  <?php else:?>
+                  <p>No hay observacion. <a href="../aula/observa?id=<?=Html::encode("{$aula->ID}")?>" class="glyphicon glyphicon-pencil"></a></p>
+                  <?php endif; ?>
                   </td>
-
+                  </td>
                 </tr>
                 <?php endforeach;?>
               </table>
             </div>
-
 </div>
 </div>
 

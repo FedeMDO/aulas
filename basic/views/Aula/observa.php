@@ -15,17 +15,16 @@ $this->registerCssFile("@web/css/index.css", [
 <div class="col-md-offset-4 col-md-4">
 <div class="aula-obs ins loginc azul">
     <?php $form = ActiveForm::begin(); ?>
-    <h1 style="color:white; border-bottom: 1px solid white;">Observacion de aula <?= Html::encode($aula->ID) ?></h1>
-        <p style="text-align:left"> Observacion actual </p>
+    <h1>Observacion de aula <?= Html::encode($aula->ID) ?></h1>
+        <p style= "text-align:left; padding-top:5px" >Observacion actual:</p> 
         <?php if ($aula->OBS != null): ?>
-        <?=  Html::encode($aula->OBS) ?>
+        <p class= "miPanel" style="font-style:italic; color:#c9d3d3; border: 1px solid white;"> <?=  Html::encode($aula->OBS) ?></p>
         <?=Html::a(' (borrar)', Url::to(['aula/observa?id='.$aula->ID]), ['data' => ['confirm' => 'Estas seguro?', 'method' => 'post', 'params' => ['Aula' => 'borrar', 'id' => $aula->ID]]])?>
         <?php endif; ?>
         <?php if ($aula->OBS == null): ?>
-          <?= Html::encode("NO HAY OBSERVACION") ?>
+        <p class= "miPanel" style="font-style:italic; color:#c9d3d3; border: 1px solid white;"> <?= Html::encode("no hay observacion.") ?> </p>
         <?php endif; ?>
         <?= $form->field($model, 'OBS', ['labelOptions'=>['style'=>'color:white']])->label('Nueva observacion') ?>
- 
         <div class="form-group">
             <?= Html::submitButton('Confirmar', ['class' => 'btn btn btn-success btn-block']) ?>
         </div>
