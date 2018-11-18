@@ -20,7 +20,6 @@ $this->registerJsFile(
 
 
 $this->title = 'Carreras';
-$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="col-md-offset-4 col-md-4">

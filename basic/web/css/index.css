@@ -360,6 +360,7 @@ text-transform: uppercase;
   width: 90%;
   float: center;
   margin: auto; 
+  margin-top: 20px;
   text-align: center;
 }
 
@@ -382,6 +383,14 @@ text-transform: uppercase;
   margin: auto; 
   margin-top: 20px;
   text-align: center;
+}
+
+.panel_a{
+  background-color: #ffffff;
+  border-width: 20px;
+  box-shadow:0 1px 0 #cfcfcf;
+  margin: auto;
+  text-align: left;
 }
 .azul label{
   color: white;

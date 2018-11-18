@@ -15,9 +15,6 @@ $this->title = 'Edificios';
 ?>
 <br>
 <br>
-<?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
-<?php endif; ?>
-
 
 <center><h2 class=titulo><?php if(count($edificio) != 0){
 echo("Edificios Disponibles en la sede "); echo (Html::encode("{$edificio[0]->sEDE->NOMBRE}"));}
@@ -27,14 +24,12 @@ else{?>
     <div class="row" style= "width:60%;" >
     <img width="220px" height="220" style= "float:left; margin-lelft:10px;"src="../image/error.png" />
       <br>
-      <h3 class="titulo" >No hay edificios creados en esta sede!</h3>
+      <h3 class="titulo" >No hay edificios creados en esta sede</h3>
       <br><br><br>
       <a href="../sede/vistav"  class="btn btn-info" style="width:50%" role="button">Volver atras</a>
     </div>
 </div>
 
-  <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
-  <?php endif; ?>
 </div>
 
 
@@ -58,7 +53,6 @@ else{?>
 </div>
 <?php endforeach; ?>
 
-<?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
 <div id="sidebar" class="active">
   <div class="toggle-btn miBoton">
       <span>&#9776;</span>
@@ -66,15 +60,16 @@ else{?>
       <ul>
         <li><a href="../aula/buscador" class="btn miBoton btn-md btn-vistav " role="button">Filtrar aulas <span class="glyphicon glyphicon-search"></span></a>
         </li>
+        <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
         <li>
         <a href="../edificio/create" class="btn miBoton btn-md btn-vistav" role="button">Crear edificio <span class="glyphicon glyphicon-plus"></span></a>
         </li>
+        <?php endif; ?>
       </ul>
 </div>
 
 
 <div class=""><?=LinkPager::widget(['pagination' => $pagination])?></div>
-<?php endif; ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 </script>
 <script src="my_jquery_functions.js"></script>

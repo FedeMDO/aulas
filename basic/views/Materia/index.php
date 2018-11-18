@@ -8,20 +8,20 @@ use yii\helpers\Html;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Materias';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="materia-index">
 
-    <h1><?=Html::encode($this->title)?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+	<h1 class='titulo'><?=Html::encode($this->title)?></h1>
+	<div class="col-md-offset-1 col-md-10">
 
     <p>
-        <?=Html::a('Create Materia', ['create'], ['class' => 'btn btn-success'])?>
+        <?=Html::a('Crear materia', ['create'], ['class' => 'btn btn-success'])?>
     </p>
 
     <?=GridView::widget([
 	'dataProvider' => $dataProvider,
 	'filterModel' => $searchModel,
+	'tableOptions'=>['class'=>'table-bordered table-condensed  grid'],
 	'columns' => [
 		['class' => 'yii\grid\SerialColumn'],
 

@@ -7,14 +7,12 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ComisionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Comisions';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Comisiones';
 ?>
 <div class="comision-index">
 
     <h1 class=titulo>Panel de comisiones</h1>
     <div class="col-md-offset-1 col-md-10">
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Crear comision', ['create'], ['class' => 'btn btn-success']) ?>

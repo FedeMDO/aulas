@@ -20,12 +20,11 @@ $this->registerJsFile(
 
 
 $this->title = 'Institutos';
-$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="col-md-offset-4 col-md-4">
 <div class="loginc azul">
-  <h3 style="color:white; border-bottom: 1px solid white;">Informacion Instituto</h3>
+  <h3 style="color:white; border-bottom: 1px solid white;">Informacion de Institutos</h3>
   <div class="panel-group">
     <?php $aux =0;
     $b="";

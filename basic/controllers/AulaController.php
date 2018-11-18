@@ -80,47 +80,32 @@ class AulaController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index','view','create','update','delete','aulafilter'],
+                'only' => ['index','view','create','update','delete','aulafilter', 'observa', 'buscador'],
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['index','view','create','update','delete','aulafilter'],
-                        //Esta propiedad establece que tiene permisos
+                        'actions' => [],
                         'allow' => true,
-                        //Usuarios autenticados, el signo ? es para invitados
                         'roles' => ['@'],
-                        //Este método nos permite crear un filtro sobre la identidad del usuario
-                        //y así establecer si tiene permisos o no
                         'matchCallback' => function ($rule, $action) {
-                            //Llamada al método que comprueba si es un administrador
                             return User::isUserAdmin(Yii::$app->user->identity->id);
-                        },
+                            },
                     ],
                     [
-                       //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['index','view','aulafilter'],
-                       //Esta propiedad establece que tiene permisos
+                        //Los usuarios simples tiene permisos sobre las siguientes acciones
+                       'actions' => ['aulafilter', 'buscador', 'observa'],
                        'allow' => true,
-                       //Usuarios autenticados, el signo ? es para invitados
                        'roles' => ['@'],
-                       //Este método nos permite crear un filtro sobre la identidad del usuario
-                       //y así establecer si tiene permisos o no
                        'matchCallback' => function ($rule, $action) {
-                          //Llamada al método que comprueba si es un usuario simple
                           return User::isUserSimple(Yii::$app->user->identity->id);
-                      },
+                        },
                    ],
                    [
                     //Los usuarios guest tienen permisos sobre las siguientes acciones
-                    'actions' => ['aulafilter'],
-                    //Esta propiedad establece que tiene permisos
+                    'actions' => ['aulafilter', 'buscador'],
                     'allow' => true,
-                    //Usuarios autenticados, el signo ? es para invitados
                     'roles' => ['@'],
-                    //Este método nos permite crear un filtro sobre la identidad del usuario
-                    //y así establecer si tiene permisos o no
                     'matchCallback' => function ($rule, $action) {
-                    //Llamada al método que comprueba si es un usuario guest
                         return User::isUserGuest(Yii::$app->user->identity->id);
                     },
                 ],

@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Sede */
 
-$this->title = 'Create Sede';
+$this->title = 'Crear sede';
 $this->params['breadcrumbs'][] = ['label' => 'Sedes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

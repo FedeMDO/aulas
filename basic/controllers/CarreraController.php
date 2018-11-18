@@ -25,34 +25,33 @@ class CarreraController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                //'only' => ['logout', 'user'],
+                'only' => ['carrerav','index','view','create','update','delete'],
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
                         'actions' => ['carrerav','index','view','create','update','delete'],
-                        //Esta propiedad establece que tiene permisos
                         'allow' => true,
-                        //Usuarios autenticados, el signo ? es para invitados
                         'roles' => ['@'],
-                        //Este método nos permite crear un filtro sobre la identidad del usuario
-                        //y así establecer si tiene permisos o no
                         'matchCallback' => function ($rule, $action) {
-                            //Llamada al método que comprueba si es un administrador
                             return User::isUserAdmin(Yii::$app->user->identity->id);
                         },
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['index','view'],
-                       //Esta propiedad establece que tiene permisos
+                       'actions' => ['carrerav'],
                        'allow' => true,
-                       //Usuarios autenticados, el signo ? es para invitados
                        'roles' => ['@'],
-                       //Este método nos permite crear un filtro sobre la identidad del usuario
-                       //y así establecer si tiene permisos o no
                        'matchCallback' => function ($rule, $action) {
-                          //Llamada al método que comprueba si es un usuario simple
                           return User::isUserSimple(Yii::$app->user->identity->id);
+                      },
+                   ],
+                   [
+                       //Los usuarios simples tienen permisos sobre las siguientes acciones
+                       'actions' => ['carrerav'],
+                       'allow' => true,
+                       'roles' => ['@'],
+                       'matchCallback' => function ($rule, $action) {
+                          return User::isUserGuest(Yii::$app->user->identity->id);
                       },
                    ],
                 ],

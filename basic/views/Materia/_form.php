@@ -7,11 +7,8 @@ use yii\widgets\ActiveForm;
 /* @var $model app\models\Materia */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+<div class='materia-form'>
 
-<div class="col-md-offset-4 col-md-4">
-<div class="materia-form loginc azul">
-
-	<h2  style="color:white; border-bottom: 1px solid white; ">Crear Materia</h2>
     <?php $form = ActiveForm::begin();?>
 
     <?=$form->field($model, 'NOMBRE', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->textInput(['maxlength' => true])?>
@@ -26,5 +23,4 @@ use yii\widgets\ActiveForm;
 
     <?php ActiveForm::end();?>
 
-</div>
 </div>

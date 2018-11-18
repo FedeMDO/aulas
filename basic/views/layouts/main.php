@@ -17,6 +17,8 @@ $this->registerCssFile("@web/css/index.css", [
     
 ], 'css-print-theme');
 
+$this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '../image/favicon_unaj.png']);
+
 
 AppAsset::register($this);
 
@@ -100,12 +102,12 @@ AppAsset::register($this);
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' SEDES', 'url' => ['/sede/vistav'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' INSTITUTOS', 'url' => ['/instituto/institutov'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' CARRERAS', 'url' => ['/carrera/carrerav'], 'options' => ['style' => 'font-weight: bold;']],
-                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).'ADMINISTRACION', 'url' => ['/site/register'], 'options' => ['style' => 'font-weight: bold;'],
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' ADMINISTRACION', 'url' => ['/site/register'], 'options' => ['style' => 'font-weight: bold;'],
 
                     'items' => [
                     ['label' => '<span></span> Registrar usuario', 'url' => '/site/register'],
-                    ['label' => '<span> Item2', 'url' => '#'],
-                    ['label' => '<span> Item3', 'url' => '#',],
+                    ['label' => '<span> Panel de administracion', 'url' => '/admin/panel'],
+                    ['label' => '<span> Gestionar usuarios', 'url' => '#',],
                             ],
                         ]                  
                 ],
@@ -125,7 +127,7 @@ AppAsset::register($this);
                     'items' => [
                     ['label' => '<span class="fa fa-key"></span> Cambiar contraseña', 'url' => '/user/changepw'],
                     ['label' => '<span class="fa fa-book"> Manual de usuario', 'url' => '#'],
-                    ['label' => '<span class="fa fa-info-circle"> Acerca de...', 'url' => '#',],
+                    ['label' => '<span class="fa fa-info-circle"> Acerca de...', 'url' => '/site/about',],
                     ['label' =>'<span class="fa fa-sign-out"></span> Salir (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
                             ],
                         ]                  
@@ -158,7 +160,7 @@ AppAsset::register($this);
                     'items' => [
                     ['label' => '<span class="fa fa-key"></span> Cambiar contraseña', 'url' => '/user/changepw'],
                     ['label' => '<span class="fa fa-book"> Manual de usuario', 'url' => '#'],
-                    ['label' => '<span class="fa fa-info-circle"> Acerca de...', 'url' => '#',],
+                    ['label' => '<span class="fa fa-info-circle"> Acerca de...', 'url' => '/site/about',],
                     ['label' =>'<span class="fa fa-sign-out"></span> Salir (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
                             ],
                         ]                  
@@ -189,7 +191,7 @@ AppAsset::register($this);
                     'items' => [
                     ['label' => '<span class="fa fa-key"></span> Cambiar contraseña', 'url' => '/user/changepw'],
                     ['label' => '<span class="fa fa-book"> Manual de usuario', 'url' => '#'],
-                    ['label' => '<span class="fa fa-info-circle"> Acerca de...', 'url' => '#',],
+                    ['label' => '<span class="fa fa-info-circle"> Acerca de...', 'url' => '/site/about',],
                     ['label' =>'<span class="fa fa-sign-out"></span> Salir (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
                             ],
                         ]                  

@@ -30,7 +30,7 @@ $this->title = 'Buscador de aulas';
                 <tbody>
                 <?php foreach ($aulasCumplen as $aula): ?>
                 <tr>
-                  <td><button href="/evento/index" type="button" class="btn btn-success" >AGENDA</button></td>
+                  <td><a href="/evento/index?id=<?= Html::encode("{$aula->ID}") ?>" type="button" class="btn btn-primary" >AGENDA</button></td>
                   <td ><?=Html::encode("{$aula->ID} ")?></span></td>
                   <td><?=Html::encode("{$aula->NOMBRE} ")?> N°<?=Html::encode("{$aula->ID} ")?></td>
                   <td><?=Html::encode("{$aula->PISO} ")?></td>

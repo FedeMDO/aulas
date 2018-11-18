@@ -8,12 +8,11 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Edificios';
-$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="edificio-index">
 
     <h1 class=titulo>Panel de edificios</h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
     <div class="col-md-offset-1 col-md-10">
 
     <p>

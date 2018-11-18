@@ -13,7 +13,7 @@ $this->registerCssFile("@web/css/inicio.css",
 ], 'css-print-theme');
 
     
-$this->title = 'Universidad Nacional Arturo Jauretche';
+$this->title = 'Sistema de Gestion de Aulas';
 ?>
 
 
