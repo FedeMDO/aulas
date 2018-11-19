@@ -10,9 +10,8 @@ use yii\grid\GridView;
 $this->title = 'Aulas';
 ?>
 <div class="aula-index">
-
+<div class="col-xs-offset-1 col-xs-10 col-xs-9 col-lg-9">
     <h1 class=titulo>Panel de <?= Html::encode($this->title) ?></h1>
-    <div class="col-md-offset-1 col-md-10">
     <p>
         <?= Html::a('Crear aula', ['create'], ['class' => 'btn btn-success']) ?>
     </p>

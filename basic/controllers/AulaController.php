@@ -127,6 +127,7 @@ class AulaController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout="LayoutAdmin";
         $searchModel = new AulaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

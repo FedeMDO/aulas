@@ -97,6 +97,7 @@ class EdificioController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout='LayoutAdmin';
         $searchModel = new EdificioSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

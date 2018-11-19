@@ -223,9 +223,13 @@ text-transform: uppercase;
 
 }
 
+.kv-sidenav{
+  height:1000px;
+}
 .nav-stacked{
-  width: 20%;
+  width: 10%;
   float: left;
+  background-color: white;
 }
 .notiboton{
   background-color:white;
@@ -243,21 +247,7 @@ text-transform: uppercase;
   bottom: 10px;
 }
 
-/* Barra lateral de notificaciones vieja actualmente sin uso
-/*.navbar-inverse{
-  position: fixed;
-  border-top: 2px solid white ;
-  background-color: white;
-  height:100%;
-  width: 10%;
-}
 
-.navbar-inverse>a{
-    color:black;
-    padding-top: 20px;
-  
-}
-*/
 .carousel-inner > .item > img {
   margin: 0 auto;
 }
@@ -612,4 +602,12 @@ text-transform: uppercase;
   font-weight: bold;
   /*background-color: white;
   color: #1475b9;*/
+}
+
+/*iconos de administracion*/
+.well{
+  width:80%;
+  text-align: center;
+  border:0px;
+  border-radius: 10px;
 }

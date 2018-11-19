@@ -49,26 +49,3 @@ $this->title = 'Sedes';
 </div>
 
 
-<div class=""><?=LinkPager::widget(['pagination' => $pagination])?></div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
-</script>
-<script src="my_jquery_functions.js"></script>
- <script>
-  const btnToggle = document.querySelector('.toggle-btn');
-
-  btnToggle.addEventListener('click', function () {
-  document.getElementById("sidebar").classList.toggle('active');});
- </script>
-<script>
-  $(document).ready(function(){
-    $("#sidebar").click(function(){
-      if ($(this).hasClass('active')){
-        $(".col-sm-8").css({"left": "0px", "transition": "all 500ms linear"});
-      }else{
-        $(".col-sm-8").css({"left": "200px", "transition": "all 500ms linear"});
-      }
-    });
-  });
-</script>
-<script type=’text/javascript’>
-</script>

@@ -13,7 +13,7 @@ $this->title = 'Edificios';
 <div class="edificio-index">
 
     <h1 class=titulo>Panel de edificios</h1>
-    <div class="col-md-offset-1 col-md-10">
+    <div class="col-xs-offset-1 col-xs-10 col-xs-9 col-lg-9">
 
     <p>
         <?= Html::a('Crear Edificio', ['create'], ['class' => 'btn btn-success']) ?>

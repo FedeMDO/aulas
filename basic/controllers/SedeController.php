@@ -102,6 +102,7 @@ class SedeController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout='LayoutAdmin';
         $searchModel = new SedeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

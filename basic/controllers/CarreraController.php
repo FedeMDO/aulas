@@ -71,6 +71,7 @@ class CarreraController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout='LayoutAdmin';
         $searchModel = new CarreraSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

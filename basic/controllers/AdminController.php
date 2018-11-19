@@ -60,7 +60,7 @@ class AdminController extends Controller
     }
 
     public function actionPanel(){
-        //
+        $this->layout='LayoutAdmin';
         return $this->render('panel');
     }
 

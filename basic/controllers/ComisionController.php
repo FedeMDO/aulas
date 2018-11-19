@@ -70,6 +70,7 @@ class ComisionController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout='LayoutAdmin';
         $searchModel = new ComisionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
