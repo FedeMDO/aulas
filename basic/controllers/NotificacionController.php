@@ -42,9 +42,9 @@ class NotificacionController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => [''],
+                       'actions' => [],
                        //Esta propiedad establece que tiene permisos
-                       'allow' => true,
+                       'allow' => false,
                        //Usuarios autenticados, el signo ? es para invitados
                        'roles' => ['@'],
                        //Este método nos permite crear un filtro sobre la identidad del usuario
