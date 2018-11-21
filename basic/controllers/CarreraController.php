@@ -10,6 +10,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\User;
+use yii\base\Model;
+
 
 /**
  * CarreraController implements the CRUD actions for Carrera model.
@@ -28,7 +30,7 @@ class CarreraController extends Controller
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['index','view','create','update','delete','ofertaacademica'],
+                        'actions' => ['index','view','create','update','delete','ofertaacademica','oferta'],
                         //Esta propiedad establece que tiene permisos
                         'allow' => true,
                         //Usuarios autenticados, el signo ? es para invitados
@@ -42,7 +44,7 @@ class CarreraController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['index','view','ofertaacademica'],
+                       'actions' => ['index','view','ofertaacademica','oferta'],
                        //Esta propiedad establece que tiene permisos
                        'allow' => true,
                        //Usuarios autenticados, el signo ? es para invitados
@@ -67,6 +69,22 @@ class CarreraController extends Controller
     public function actionOfertaacademica()
     {
         return $this->render('ofertaacademica');
+    }
+    public function actionListcarrera($id)
+    {
+        $carreras = Carrera::find()
+            ->where(['ID_INSTITUTO' => $id])
+            ->orderBy('id DESC')
+            ->all();
+
+        if (!empty($carreras)) {
+            foreach($carreras as $carrera) {
+                echo "<option value='".$carrera->ID."'>".$carrera->NOMBRE."</option>";
+            }
+        } else {
+            echo "<option>-</option>";
+        }
+
     }
     /**
      * Lists all Carrera models.
@@ -162,5 +180,56 @@ class CarreraController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionOferta()
+    {
+        
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, "http://045846bd.ngrok.io/api/ofertas");
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        $result = curl_exec($curl);
+
+        curl_close($curl);
+
+        // $result = $this->CallAPI("GET", "http://045846bd.ngrok.io/api/ofertas");
+        $json = json_decode($result);
+        return $json;
+    }
+
+    // Method: POST, PUT, GET etc
+    // Data: array("param" => "value") ==> index.php?param=value
+
+    function CallAPI($method, $url, $data = false)
+    {
+        
+
+        switch ($method)
+        {
+            case "POST":
+                curl_setopt($curl, CURLOPT_POST, 1);
+
+                if ($data)
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                break;
+            case "PUT":
+                curl_setopt($curl, CURLOPT_PUT, 1);
+                break;
+            default:
+                if ($data)
+                    $url = sprintf("%s?%s", $url, http_build_query($data));
+        }
+
+        // // Optional Authentication:
+        // curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        // curl_setopt($curl, CURLOPT_USERPWD, "username:password");
+
+        // curl_setopt($curl, CURLOPT_URL, $url);
+        // curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+
+        
+
+        return $result;
     }
 }
