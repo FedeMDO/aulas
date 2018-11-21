@@ -23,8 +23,9 @@ $indexMaterias = 1;
 ?>
     
     <div class="col-md-offset-1 col-md-10">
-        
+    <?php if (!app\models\User::isUserGuest(Yii::$app->user->identity->id)): ?>    
     <?= Html::button('Nuevo evento', ['value' => Url::to(['evento/create', 'id_aula' => $id_aula]), 'title' => $id_aula, 'class' => 'showModalButton btn btn-success']); ?>
+    <?php endif; ?>
 
         <div class="loginc">
         <h3 style="text-align: center; font-weight: bold;">ASIGNACION COMISIONES DE AULA   <em id:"id_aula"><?=Html::encode("{$id_aula}")?></em></h3>
