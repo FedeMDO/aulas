@@ -34,7 +34,7 @@ $form = ActiveForm::begin(
 ])->label('Notificacion');?>
     <div class="form-group">
         <div class="float-right">
-            <?=Html::submitButton('Enviar', ['class' => 'btn btn-success'])?>
+            <?=Html::submitButton('Enviar', ['class' => "btn btn-primary mb1 bg-blue"])?>
         </div>
     </div>
 
