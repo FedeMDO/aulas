@@ -22,7 +22,9 @@
         "bower-asset/moment": "*",
         "kartik-v/yii2-widget-select2": "@dev",
         "2amigos/yii2-ckeditor-widget": "^2.1",
-        "dominus77/yii2-sweetalert2-widget": "~1.3" 	
+        "dominus77/yii2-sweetalert2-widget": "~1.3" 
+ 	
+
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

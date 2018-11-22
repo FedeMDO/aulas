@@ -33,7 +33,9 @@ use dosamigos\ckeditor\CKEditor;
         'preset' => 'advanced'
     ]) ?>
     <div class="form-group">
-        <?= Html::submitButton('Enviar', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Enviar', ['class' => "btn btn-primary mb1 bg-blue", 'style' => 'margin-left: 584px;']) ?>
+        
+        
     </div>
     <?php ActiveForm::end(); ?>
 

@@ -364,6 +364,16 @@ text-transform: uppercase;
   position: relative;
   left: 20px;
 }
+.botton01{
+  padding-top: 5px;
+  min-height: 650px;
+  width: 50%;
+  overflow: hidden;
+  position: relative;
+  left: 20px;
+}
+
+
 
 /*Estilo de scroll solo funciona en crome*/
 
@@ -583,6 +593,16 @@ text-transform: uppercase;
   background-color: #2980b9;
   color: white;
 }
+
+
+ .button1 {
+
+
+  margin-left: 584px;
+  
+
+  }
+
 /*.grid tr:nth-child(odd){
   background-color: #4C8BF5;
   color: #fff;
