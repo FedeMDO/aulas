@@ -232,6 +232,18 @@
         },
         {
             "name": "bower-asset/sweetalert2",
+<<<<<<< HEAD
+            "version": "v7.29.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sweetalert2/sweetalert2.git",
+                "reference": "b035643b3b39441e2a94919eb4cf288faa08c0a9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sweetalert2/sweetalert2/zipball/b035643b3b39441e2a94919eb4cf288faa08c0a9",
+                "reference": "b035643b3b39441e2a94919eb4cf288faa08c0a9",
+=======
             "version": "v7.28.12",
             "source": {
                 "type": "git",
@@ -242,6 +254,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sweetalert2/sweetalert2/zipball/f929085d5b598940b69d1e0bdd82246b68bcd629",
                 "reference": "f929085d5b598940b69d1e0bdd82246b68bcd629",
+>>>>>>> a11bbf4d5c58ba2214d86ceeee4f1caa72ec96c2
                 "shasum": null
             },
             "type": "bower-asset",
@@ -590,6 +603,8 @@
                 "yii2"
             ],
             "time": "2018-11-05T12:34:42+00:00"
+<<<<<<< HEAD
+=======
         },
         {
             "name": "kartik-v/yii2-widget-sidenav",
@@ -639,6 +654,7 @@
                 "yii2"
             ],
             "time": "2014-11-09T08:07:23+00:00"
+>>>>>>> a11bbf4d5c58ba2214d86ceeee4f1caa72ec96c2
         },
         {
             "name": "philippfrenzel/yii2fullcalendar",
