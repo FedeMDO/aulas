@@ -30,7 +30,7 @@ class Recurso extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['NOMBRE','ID'], 'required'],
+            [['NOMBRE'], 'required'],
             [['NOMBRE'], 'string', 'max' => 100],
             [['DESCRIPCION'], 'string', 'max' => 120],
         ];

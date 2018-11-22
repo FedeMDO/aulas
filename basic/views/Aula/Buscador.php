@@ -8,6 +8,7 @@ use yii\helpers\ArrayHelper;
 use app\models\recurso;
 use app\models\Edificio;
 use app\models\Sede;
+use app\models\Aula;
 use kartik\select2\Select2;
 
 
@@ -16,11 +17,18 @@ $this->registerCssFile("@web/css/index.css", [
     
 ], 'css-print-theme');
 
+$this->registerJsFile(
+    '@web/js/main.js',
+    ['depends' => [\yii\web\JqueryAsset::className()]]
+);
+
+$this->title = 'Buscador de aulas';
+
 
 ?>
 <div class="col-md-offset-4 col-md-4">
-<div class="loginc azul">
-<h2 style="color:white; border-bottom: 1px solid white;">Buscador de aula</h2>
+<div class="loginc" style="background-color: #2980b9;">
+<h2 style="color:white; border-bottom: 1px solid white; text-align: center;">Buscador de aula</h2>
 
 
 <?php $form = ActiveForm::begin([
@@ -28,6 +36,7 @@ $this->registerCssFile("@web/css/index.css", [
     'id' => 'formulario',
 
 ]);
+
 $recurso = recurso::find()->asArray()->all();
 $result = ArrayHelper::map($recurso, 'ID', 'NOMBRE');
 
@@ -41,11 +50,17 @@ $resultado = ArrayHelper::map($recurso3, 'ID', 'NOMBRE');
 ?>
 
 <?php echo $form->field($sedes, 'ID',['labelOptions'=>['style'=>'color:white']])->widget(Select2::className(),[
-        'data'=>$resultado, 
+        'data'=> $resultado,
         "options" =>[
         'placeholder'=> 'Seleccione sede',
-        ]
-        ])->label('Nombre de Sede');
+        'onchange' => 
+            '$.post( "'.Yii::$app->urlManager->createUrl('aula/listedificio?id=').'"+$(this).val(), function( data ) {
+            $( "select#edificio-id" ).html( data );
+            });'
+        ],
+        'pluginOptions' => [
+            'allowClear' => true,
+        ]])->label('Nombre de Sede');
 ?>
 
  <?php echo $form->field($edificio, 'ID',['labelOptions'=>['style'=>'color:white']])->widget(Select2::className(),[
@@ -58,22 +73,32 @@ $resultado = ArrayHelper::map($recurso3, 'ID', 'NOMBRE');
 ?>
 
 <?php echo $form->field($model, "ID",['labelOptions'=>['style'=>'color:white']])->widget(Select2::className(),[
-        'data' => $result, 
+        'data' => $result,
         "options" => ['multiple'=> true, 
         'placeholder' => 'Seleccione recurso'
         ]
     ])->label("Nombre de recurso");
 ?>
-<?= Html::submitButton("buscar aulas", ["class" => "btn btn-success btn-block"]) ?>  
 
-</div>
+<?= $form->field($buscador, 'PISO',['labelOptions' => ['encode' => false]])->textInput(['maxlength' => true])
+                                  ->label('Piso <i class="glyphicon glyphicon-question-sign"></i>',[
+                                    'class' => 'dashed-line',
+                                    'data-toggle' => 'popover',
+                                    'data-content' => 'Por favor deje este campo vacio si quiere buscar aulas con cualquier piso',
+                                    'data-placement' => 'right',
+                                    'encode' => false,]) ?>
 
+<?= $form->field($buscador, 'CAPACIDAD',['labelOptions' => ['encode' => false]])->textInput(['maxlength' => true])
+                                  ->label('Capacidad minima <i class="glyphicon glyphicon-question-sign"></i>',[
+                                    'class' => 'dashed-line',
+                                    'data-toggle' => 'popover',
+                                    'data-content' => 'Por favor deje este campo vacio si quiere buscar aulas de cualquier capacidad',
+                                    'data-placement' => 'right',
+                                    'encode' => false,]) ?>
+
+<?= Html::submitButton("Buscar", [
+    "class" => "btn btn-success btn-block",
+    ]) ?>  
 
 
 <?php $form->end() ?>
-</div>
-
-
-</div>
-
-</div>

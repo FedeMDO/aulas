@@ -8,13 +8,12 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Notificaciones';
-$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="notificacion-index">
 
-    <h1 class= titulo><?= Html::encode('Panel de notificaciones') ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-    <div class="col-md-offset-1 col-md-10">
+    <h1 class= titulo>Panel de notificaciones</h1>
+    <div class="col-xs-offset-1 col-xs-10 col-xs-9 col-lg-9">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -23,8 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'ID',
-            'ID_USER_EMISOR',
-            'ID_USER_RECEPTOR',
+            'uSEREMISOR.username',
+            'uSERRECEPTOR.username',
             'NOTIFICACION',
             'FECHA',
 

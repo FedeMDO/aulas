@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Aula;
+use app\models\BuscadorModel;
 use app\models\AulaSearch;
 use app\models\Recurso;
 use app\models\RecursoSearch;
@@ -16,6 +17,9 @@ use app\models\User;
 use yii\data\Pagination;
 use yii\helpers\VarDumper;
 use app\models\Sede;
+use app\models\FormRegister;
+use yii\helpers\ArrayHelper;
+
 /**
  * AulaController implements the CRUD actions for Aula model.
  */
@@ -76,47 +80,32 @@ class AulaController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index','view','create','update','delete','aulafilter'],
+                'only' => ['index','view','create','update','delete','aulafilter', 'observa', 'buscador'],
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['index','view','create','update','delete','aulafilter'],
-                        //Esta propiedad establece que tiene permisos
+                        'actions' => [],
                         'allow' => true,
-                        //Usuarios autenticados, el signo ? es para invitados
                         'roles' => ['@'],
-                        //Este método nos permite crear un filtro sobre la identidad del usuario
-                        //y así establecer si tiene permisos o no
                         'matchCallback' => function ($rule, $action) {
-                            //Llamada al método que comprueba si es un administrador
                             return User::isUserAdmin(Yii::$app->user->identity->id);
-                        },
+                            },
                     ],
                     [
-                       //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['index','view','aulafilter'],
-                       //Esta propiedad establece que tiene permisos
+                        //Los usuarios simples tiene permisos sobre las siguientes acciones
+                       'actions' => ['aulafilter', 'buscador', 'observa'],
                        'allow' => true,
-                       //Usuarios autenticados, el signo ? es para invitados
                        'roles' => ['@'],
-                       //Este método nos permite crear un filtro sobre la identidad del usuario
-                       //y así establecer si tiene permisos o no
                        'matchCallback' => function ($rule, $action) {
-                          //Llamada al método que comprueba si es un usuario simple
                           return User::isUserSimple(Yii::$app->user->identity->id);
-                      },
+                        },
                    ],
                    [
                     //Los usuarios guest tienen permisos sobre las siguientes acciones
-                    'actions' => ['aulafilter'],
-                    //Esta propiedad establece que tiene permisos
+                    'actions' => ['aulafilter', 'buscador'],
                     'allow' => true,
-                    //Usuarios autenticados, el signo ? es para invitados
                     'roles' => ['@'],
-                    //Este método nos permite crear un filtro sobre la identidad del usuario
-                    //y así establecer si tiene permisos o no
                     'matchCallback' => function ($rule, $action) {
-                    //Llamada al método que comprueba si es un usuario guest
                         return User::isUserGuest(Yii::$app->user->identity->id);
                     },
                 ],
@@ -138,6 +127,7 @@ class AulaController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout="LayoutAdmin";
         $searchModel = new AulaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -229,39 +219,87 @@ class AulaController extends Controller
     }
     public function actionBuscador()
     {
+
         if($_POST!= null){
+            $aux=0;
+            $aulasCumplen = array();
             $ID_recursos =$_POST['Recurso'];
             $ID_recursos =$ID_recursos['ID'];
             $ID_edificio =$_POST['Edificio'];
-
-            //$request = Yii::$app->request;
-            //$edificio = $request->post(); 
-            //$result = ArrayHelper::map($edificio, 'ID', 'NOMBRE');
-
-            //return $this->render('BuscadorResultado');
+            $buscador =$_POST['BuscadorModel'];
+            $capacidad = $buscador['CAPACIDAD'];
+            $piso=$buscador["PISO"];
             $edi= Edificio::findOne($ID_edificio);
             $aulasEdificio = $edi->aulas;
             foreach($aulasEdificio as $aula){
-                foreach($aula->rECURSOs as $r){
-                    $ids[]= (string)$r->ID;
+                $result = ArrayHelper::map($aula->rECURSOs, 'ID', 'NOMBRE');
+                if ($ID_recursos != ""){
+                foreach ($result  as $recurso => $key1){
+                    for ($i = 0; $i <= $contadorRecursos = count($ID_recursos)-1; $i++) {
+                        if($recurso == $ID_recursos[$i]){
+                            $aux++;
+                            }
+                        if($aux == count($ID_recursos)){
+                            if(count($ID_recursos) <= count($result)){
+                                $aux = 0;
+                                if($piso !="" && $capacidad !=""){
+                                    if ($aula->PISO == $piso){
+                                        if ($aula->CAPACIDAD >= $capacidad){
+                                            $aulasCumplen[] = $aula;
+                                        }
+                                    
+                                    }
+                                }
+                                if($capacidad=="" & $piso==""){
+                                    $aulasCumplen[] = $aula;
+                                }
+                                if($capacidad=="" & $piso!=""){
+                                    if ($aula->PISO == $piso){
+                                        $aulasCumplen[] = $aula;
+                                    }
+                                }
+                                if($capacidad!="" && $piso==""){
+                                    if ($aula->CAPACIDAD >= $capacidad){
+                                        $aulasCumplen[] = $aula;
+                                    }
+                                }
+                            }
+                            else{
+                                $aux=0;
+                            }
+                            }
+                        }
                 }
-                //comparo los arrays
-                $arrayInter = array_intersect($ids, $ID_recursos);
-                if(count($arrayInter) == count($ID_recursos)){
-                    $aulasCumplen[]=$aula;
                 }
-                
+                else{
+                    if($capacidad=="" & $piso==""){
+                        $aulasCumplen[] = $aula;
+                    }
+                    if($capacidad=="" & $piso!=""){
+                        if ($aula->PISO == $piso){
+                            $aulasCumplen[] = $aula;
+                        }
+                    }
+                    if($capacidad!="" && $piso==""){
+                        if ($aula->CAPACIDAD >= $capacidad){
+                            $aulasCumplen[] = $aula;
+                        }
+                    }
+                }
             }
             return $this->render('BuscadorResultado', [
                 'aulasCumplen' => $aulasCumplen,
                 'edi' => $edi
             ]);
+            
            
         }
 
         $recursos= new Recurso();
         $edificio = new Edificio();
         $sedes= new Sede();
+        $buscador = new BuscadorModel();
+
         $query = Recurso::find();
         
             $pagination = new Pagination([
@@ -275,7 +313,46 @@ class AulaController extends Controller
         'pagination' => $pagination,
         'edificio'=> $edificio,
         'sedes'=> $sedes,
+        'buscador'=> $buscador,
         ]);
 
     }
+
+    public function actionListedificio($id)
+    {
+        $edificios = Edificio::find()
+            ->where(['ID_SEDE' => $id])
+            ->orderBy('id DESC')
+            ->all();
+
+        if (!empty($edificios)) {
+            foreach($edificios as $edificio) {
+                echo "<option value='".$edificio->ID."'>".$edificio->NOMBRE."</option>";
+            }
+        } else {
+            echo "<option>-</option>";
+        }
+
+    }
+    public function actionObserva($id){
+        $model = new Aula();
+        $aula = Aula::findOne($id);
+        if ($_POST != null){
+            if ($_POST['Aula'] == 'borrar'){
+                $aula->OBS = NULL;
+                $aula->save();
+            }
+            else{
+                $aula1 = $_POST['Aula'];
+                $obs = $aula1['OBS'];
+                $aula->OBS = $obs;
+                $aula->save();
+            }
+        }
+        return $this->render('observa', [
+            'model' => $model,
+            'aula' => $aula,
+        ]);
+    }
+
 }

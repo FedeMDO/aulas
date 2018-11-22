@@ -5,14 +5,14 @@ $this->registerCssFile("@web/css/index.css", [
 	'depends' => [\yii\bootstrap\BootstrapAsset::className()],
 
 ], 'css-print-theme');
-$this->title = 'Aulas por recurso';
+$this->title = 'Buscador de aulas';
 ?>
 
 <center><?php if (count($aulasCumplen) != 0) {
 
 	?>
-<center><h3>Aulas Disponibles con los recursos seleccionados en el edificio <?=Html::encode("{$edi->NOMBRE} ")?></h3></center>
-
+<h3 class=titulo>Aulas Disponibles con los parámetros seleccionados en el edificio <?=Html::encode("{$edi->NOMBRE} ")?></h3>
+<div class="col-md-offset-1 col-md-10">
 <div class="loginc">
 <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
@@ -24,30 +24,42 @@ $this->title = 'Aulas por recurso';
                   <th>PISO</th>
                   <th>CAPACIDAD</th>
                   <th>RECURSOS</th>
-                  <th>EDITAR</th>
+                  <th>OBSERVACION</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php foreach ($aulasCumplen as $aula): ?>
                 <tr>
-                  <td><button href="/evento/index" type="button" class="btn btn-success" >AGENDA</button></td>
+                  <td><a href="/evento/index?id=<?= Html::encode("{$aula->ID}") ?>" type="button" class="btn btn-primary" >AGENDA</button></td>
                   <td ><?=Html::encode("{$aula->ID} ")?></span></td>
                   <td><?=Html::encode("{$aula->NOMBRE} ")?> N°<?=Html::encode("{$aula->ID} ")?></td>
                   <td><?=Html::encode("{$aula->PISO} ")?></td>
                   <td><?=Html::encode("{$aula->CAPACIDAD} ")?>
-                  <td><a href="../aula/recursos?id=<?=Html::encode("{$aula->ID}")?>"  class="btn btn-info" role="button">Ver</a></td>
-
+                  <td><?php $n = 0;
+                            foreach ($aula->rECURSOs as $recurso){
+                              $n = $n + 1;
+                              if (count($aula->rECURSOs)==$n){
+                                echo $recurso->NOMBRE;
+                              }
+                              else{
+                                echo $recurso->NOMBRE." - ";
+                              }
+                            }
+                  ?></td>
+                  <td>
+                  <?php if ($aula->OBS != null):?> 
+                  <?php echo $aula->OBS ?><a href="../aula/observa?id=<?=Html::encode("{$aula->ID}")?>" class="glyphicon glyphicon-pencil" style="margin-left:4px"></a>
+                  <?php else:?>
+                  <p>No hay observacion. <a href="../aula/observa?id=<?=Html::encode("{$aula->ID}")?>" class="glyphicon glyphicon-pencil"></a></p>
+                  <?php endif; ?>
                   </td>
-
-                  <td><a href="../aula/update?id=<?=Html::encode("{$aula->ID}")?>"  class="btn btn-danger" role="button">Modificar</a></p></td>
-
+                  </td>
                 </tr>
                 <?php endforeach;?>
               </table>
             </div>
-
 </div>
-
+</div>
 
 
 
@@ -55,16 +67,15 @@ $this->title = 'Aulas por recurso';
 <?php
 } else {?>
 
-<div class="alert alert-danger" role="alert">
-  <h4 class="alert-heading">ATENCION!</h4>
-  <p>NO HAY EDIFICIOS CREADOS EN ESTA SEDE</p>
-  <hr>
-
-  <a href="../edificio/create" class="btn btn-danger btn-md" role="button">CREA EDIFICIO</a>
+<div class="container">
+    <div class="row" style= "width:60%; margin-top:50px;" >
+    <img width="220px" height="220" style= "float:left; margin-lelft:50px;"src="../image/buscador.png" />
+      <h3 class="titulo" >Lo sentimos no se han encontrado resultados.</h3>
+      <br><br><br>
+      <a href="../aula/buscador"  class="btn btn-info" style="width:50%" role="button">Volver a intentar</a>
+    </div>
 </div>
-
-
-<?php }?></h3></center>
+<?php }?>
 
 
 

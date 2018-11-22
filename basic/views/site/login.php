@@ -9,8 +9,7 @@ use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 
 $this->title = 'Ingresar';
-$this->params['breadcrumbs'][] = $this->title;
-
+//$this->params['breadcrumbs'][] = $this->title;
 
 $this->registerCssFile("@web/css/index.css", [
     'depends' => [\yii\bootstrap\BootstrapAsset::className()],
@@ -18,10 +17,9 @@ $this->registerCssFile("@web/css/index.css", [
 ]);
 
 ?>
-
     
-<div id="box_login">
 <div class="col-md-offset-4 col-md-4">
+<div id="box_login">
 <div class="loginc log">
     <h1><?= Html::encode('Bienvenido') ?></h1>
   

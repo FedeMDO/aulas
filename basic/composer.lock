@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8cb90a61a21071f357996dfc29f6aed8",
+    "content-hash": "f7ca80543e841d59d60c15fb9e573da0",
     "packages": [
         {
             "name": "2amigos/yii2-ckeditor-widget",
@@ -159,7 +159,7 @@
             "version": "3.2.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery-dist.git",
+                "url": "git@github.com:jquery/jquery-dist.git",
                 "reference": "77d2a51d0520d2ee44173afdf4e40a9201f5964e"
             },
             "dist": {
@@ -232,6 +232,7 @@
         },
         {
             "name": "bower-asset/sweetalert2",
+<<<<<<< HEAD
             "version": "v7.29.0",
             "source": {
                 "type": "git",
@@ -242,6 +243,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sweetalert2/sweetalert2/zipball/b035643b3b39441e2a94919eb4cf288faa08c0a9",
                 "reference": "b035643b3b39441e2a94919eb4cf288faa08c0a9",
+=======
+            "version": "v7.28.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sweetalert2/sweetalert2.git",
+                "reference": "f929085d5b598940b69d1e0bdd82246b68bcd629"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sweetalert2/sweetalert2/zipball/f929085d5b598940b69d1e0bdd82246b68bcd629",
+                "reference": "f929085d5b598940b69d1e0bdd82246b68bcd629",
+>>>>>>> a11bbf4d5c58ba2214d86ceeee4f1caa72ec96c2
                 "shasum": null
             },
             "type": "bower-asset",
@@ -590,6 +603,58 @@
                 "yii2"
             ],
             "time": "2018-11-05T12:34:42+00:00"
+<<<<<<< HEAD
+=======
+        },
+        {
+            "name": "kartik-v/yii2-widget-sidenav",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-widget-sidenav.git",
+                "reference": "02ee4f142d7dfbb316f878e538cc7b946f4502d2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-sidenav/zipball/02ee4f142d7dfbb316f878e538cc7b946f4502d2",
+                "reference": "02ee4f142d7dfbb316f878e538cc7b946f4502d2",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-krajee-base": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\sidenav\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "An enhanced side navigation menu styled for bootstrap (sub repo split from yii2-widgets)",
+            "homepage": "https://github.com/kartik-v/yii2-widget-sidenav",
+            "keywords": [
+                "bootstrap",
+                "extension",
+                "jquery",
+                "menu",
+                "navigation",
+                "plugin",
+                "sidenav",
+                "widget",
+                "yii2"
+            ],
+            "time": "2014-11-09T08:07:23+00:00"
+>>>>>>> a11bbf4d5c58ba2214d86ceeee4f1caa72ec96c2
         },
         {
             "name": "philippfrenzel/yii2fullcalendar",

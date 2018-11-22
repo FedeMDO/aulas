@@ -1,10 +1,10 @@
 <?php
 
+use dosamigos\ckeditor\CKEditor;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
-use kartik\select2\Select2;
-use dosamigos\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Notificacion */
@@ -12,31 +12,31 @@ use dosamigos\ckeditor\CKEditor;
 ?>
 <?php ?>
 <?php
-    $form = ActiveForm::begin(
-        [
-            'options' => [
-                'class' => 'activenotifi'
-             ]
-        ]
-    );
-    ?>
-    <?php $result = ArrayHelper::map($usuarios, 'id', 'username'); ?>
-    <?php echo $form->field($model, 'ID_USER_RECEPTOR')->widget(Select2::className(),[
-        'data' => $result,
-        "options" => ['multiple'=> true, 
-        'placeholder' => 'Seleccione un usuario...'
-        ]
-    ]);
-	 ?>
-   <?= $form->field($model, 'NOTIFICACION')->widget(CKEditor::className(), [
-        'options' => ['rows' => 6],
-        'preset' => 'advanced'
-    ]) ?>
+$form = ActiveForm::begin(
+	[
+		'options' => [
+			'class' => 'activenotifi',
+		],
+	]
+);
+?>
+	<?php $result = ArrayHelper::map($usuarios, 'id', 'username');?>
+    <?php echo $form->field($model, 'ID_USER_RECEPTOR', ['labelOptions'=>['style'=>'color:white']])->widget(Select2::className(), [
+	'data' => $result,
+	"options" => ['multiple' => true,
+		'placeholder' => 'Seleccione un usuario...',
+	],
+])->label('Usuario receptor');
+?>
+   <?=$form->field($model, 'NOTIFICACION', ['labelOptions'=>['style'=>'color:white']])->widget(CKEditor::className(), [
+	'options' => ['rows' => 6],
+	'preset' => 'advanced',
+])->label('Notificacion');?>
     <div class="form-group">
         <?= Html::submitButton('Enviar', ['class' => "btn btn-primary mb1 bg-blue", 'style' => 'margin-left: 584px;']) ?>
         
         
     </div>
-    <?php ActiveForm::end(); ?>
+    <?php ActiveForm::end();?>
 
 </div>

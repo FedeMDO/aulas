@@ -21,15 +21,47 @@ use yii\base\Exception;
 
 class AdminController extends Controller
 {
-    public function actionAdmin()
+    public function behaviors()
     {
-        return $this->render('admin');
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        //Los usuarios simples tienen permisos sobre las siguientes acciones
+                        'actions' => ['noti', 'panel'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserAdmin(Yii::$app->user->identity->id);
+                        },
+                    ],
+                    [
+                       //Los usuarios simples tienen permisos sobre las siguientes acciones
+                       'actions' => ['noti'],
+                       'allow' => true,
+                       'roles' => ['@'],
+                       'matchCallback' => function ($rule, $action) {
+                          return User::isUserSimple(Yii::$app->user->identity->id);
+                      },
+                   ],
+                   [
+                        //Los usuarios guest tienen permisos sobre las siguientes acciones
+                        'actions' => ['noti'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserGuest(Yii::$app->user->identity->id);
+                        },
+                    ],
+                ],
+            ],
+        ];
     }
 
-    public function actionSedesv()
-    {
-       
-        return $this->render('sedesv');
+    public function actionPanel(){
+        $this->layout='LayoutAdmin';
+        return $this->render('panel');
     }
 
     public function actionNoti()

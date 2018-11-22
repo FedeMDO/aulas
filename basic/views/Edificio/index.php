@@ -8,13 +8,12 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Edificios';
-$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="edificio-index">
 
     <h1 class=titulo>Panel de edificios</h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-    <div class="col-md-offset-1 col-md-10">
+    <div class="col-xs-offset-1 col-xs-10 col-xs-9 col-lg-9">
 
     <p>
         <?= Html::a('Crear Edificio', ['create'], ['class' => 'btn btn-success']) ?>

@@ -18,13 +18,10 @@ use yii\helpers\Html;
 use app\models\Notificacion;
 use app\models\User;
 use yii\data\Pagination;
+use yii\data\ActiveDataProvider;
 
 class UserController extends Controller
 {
-    public function actionUser()
-    {
-        return $this->render('@app/views/User/user.php');
-    }
 
     public function actionSedesv()
     {

@@ -46,7 +46,7 @@ class Carrera extends \yii\db\ActiveRecord
         return [
             'ID' => 'ID',
             'ID_INSTITUTO' => 'Instituto',
-            'NOMBRE' => 'Nombre Carrera',
+            'NOMBRE' => 'NOMBRE',
         ];
     }
 

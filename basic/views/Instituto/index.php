@@ -8,13 +8,11 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Institutos';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="instituto-index">
 
     <h1 class=titulo>Panel de <?=Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-    <div class="col-md-offset-1 col-md-10">
+    <div class="col-xs-offset-1 col-xs-10 col-xs-9 col-lg-9">
     <p>
         <?= Html::a('Crear Instituto', ['create'], ['class' => 'btn btn-success']) ?>
     </p>

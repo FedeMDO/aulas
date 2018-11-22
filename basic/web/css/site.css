@@ -3,7 +3,7 @@ body {
     height: 100%;
 }
 
-.footer {
+/*.footer {
   position: fixed;
   left: 0;
   bottom: 0;
@@ -15,6 +15,8 @@ body {
 .footer p {
   margin: 0px 0 2px;
 }
+ comento sin uso */
+
 
 /* add sorting icons to gridview sort links */
 a.asc:after, a.desc:after {
@@ -99,9 +101,9 @@ a.desc:after {
   .navbar-default .navbar-nav > .active > a,
   .navbar-default .navbar-nav > .active > a:hover,
   .navbar-default .navbar-nav > .active > a:focus {
-    color: #ecf0f1;
-    background-color: #1c2331;
-  }
+    color: white;
+    background-color:  #1a5276;
+  }  
   .navbar-default .navbar-nav > .open > a,
   .navbar-default .navbar-nav > .open > a:hover,
   .navbar-default .navbar-nav > .open > a:focus  {
