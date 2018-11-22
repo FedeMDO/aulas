@@ -46,12 +46,12 @@ $this->title = 'Carreras';
       ?>
       <button type="button" style="background-color:<?php echo $color;?>" class="btn btn-info btn-block miPanel" data-toggle="collapse" data-target="#demo<?php echo $aux;?>"><?= Html::encode("$car->NOMBRE")?><i class="more-less glyphicon glyphicon-plus" style="float:right"></i></button>
     <!-- ME FIJO SI NO TIENE USUARIOS -->
-    <?php if (count($car->mATERIAs) == 0){ ?>
+    <?php if (count($car->materias) == 0){ ?>
       <p style="color:white">Sin usuarios de este instituto</p>
     <?php
     } ?>
     <!-- ITERO LOS USUARIOS DE CADA INSTITUTO Y SACO SUS DATOS -->
-    <?php foreach ($car->mATERIAs as $materia): ?></p>
+    <?php foreach ($car->materias as $materia): ?></p>
     <?php 
       $b = $b .$materia->NOMBRE ."\n" ?>
     <?php endforeach; ?>

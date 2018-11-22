@@ -12,8 +12,7 @@ use Yii;
  * @property string $NOMBRE
  *
  * @property Instituto $iNSTITUTO
- * @property CarreraMateria[] $carreraMaterias
- * @property Materia[] $mATERIAs
+ * @property Materia[] $materias
  */
 class Carrera extends \yii\db\ActiveRecord
 {
@@ -61,16 +60,8 @@ class Carrera extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCarreraMaterias()
+    public function getMaterias()
     {
-        return $this->hasMany(CarreraMateria::className(), ['ID_CARRERA' => 'ID']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getMATERIAs()
-    {
-        return $this->hasMany(Materia::className(), ['ID' => 'ID_MATERIA'])->viaTable('carrera_materia', ['ID_CARRERA' => 'ID']);
+        return $this->hasMany(Materia::className(), ['ID_Carrera' => 'ID']);
     }
 }

@@ -1,8 +1,0 @@
-actualizar: git pull origin master
-subir:
-git add -u
-git commit -m 
-git push origin master
-
-
-
