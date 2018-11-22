@@ -18,7 +18,7 @@ class RestriSchedulerAsset extends AssetBundle
         'js/fullcalendar.js',
         'js/scheduler.js',
         'js/es-us.js',
-        'js/main4.js',
+        'js/mainRestriScheduler.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

@@ -24,7 +24,7 @@ use app\models\Carrera;
     ?>
     <?php echo $form->field($carrera, 'ID')->dropDownList(
         $resultCarr,
-        ['prompt'=>'Seleccione Cerrera...',
+        ['prompt'=>'Seleccionar',
             'onchange'=>'
 				$.post( "'.Yii::$app->urlManager->createUrl('evento/listmateria?id=').'"+$(this).val(), function( data ) {
 				  $( "select#materia-id" ).html( data );
@@ -33,7 +33,7 @@ use app\models\Carrera;
 
     <?php echo $form->field($materia, 'ID')->dropDownList(
         array(),
-        ['prompt'=>'Seleccione Materia...',
+        ['prompt'=>'Seleccionar',
             'onchange'=>'
 				$.post( "'.Yii::$app->urlManager->createUrl('evento/listcomision?id=').'"+$(this).val(), function( data ) {
 				  $( "select#eventocalendar-id_comision" ).html( data );
@@ -42,7 +42,7 @@ use app\models\Carrera;
 
     <?php echo $form->field($model, 'ID_Comision')->dropDownList(
         array(), 
-        ['prompt'=>'Seleccione comision...']
+        ['prompt'=>'Seleccionar']
         )->label(' COMISION '); ?>
 
     <?php $diasdelasemana = ['1' => 'Lunes',
@@ -56,7 +56,7 @@ use app\models\Carrera;
     ?>
     <?php echo $form->field($model, 'dow')->dropDownList(
         $diasdelasemana, 
-        ['prompt'=>'SELECCIONE EL DIA......']
+        ['prompt'=>'Seleccionar']
         )->label('Dia');
         ?>
     <?php 
@@ -78,12 +78,12 @@ use app\models\Carrera;
          ?>
        <?php echo $form->field($model, 'Hora_ini')->dropDownList(
         $horas, 
-        ['prompt'=>'SELECCIONE LA HORA DE INICIO......']
+        ['prompt'=>'Seleccionar']
         )->label("Desde las"); ?> 
 
           <?php echo $form->field($model,'Hora_fin')->dropDownList(
         $horas, 
-        ['prompt'=>'SELECCIONE LA HORA DE FIN.......']
+        ['prompt'=>'Seleccionar']
         )->label("Hasta las"); ?> 
     <div class="form-group">
         <?= Html::submitButton('GUARDAR', ['class' => 'btn btn-success']) ?>

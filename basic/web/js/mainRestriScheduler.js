@@ -108,18 +108,19 @@ $(document).ready(function(){
             }
 
             let url = "/restri/create?id_aula=" + resource.id;
-            $("#modalContent").load(url, function () {
-            $("#modal").modal("show");
+            $("#modalRestriContent").load(url, function () {
+            $("#modalRestri").modal("show");
             //DIA
-            $('#eventocalendar-dow').val(startDate.isoWeekday());
+            $('#restricalendar-dow').val(startDate.isoWeekday());
 
             //HORA INI
-            $('#eventocalendar-hora_ini').val(startDate.format('HH:mm:ss'));
+            $('#restricalendar-hora_ini').val(startDate.format('HH:mm:ss'));
             
             //HORA FIN
-            $('#eventocalendar-hora_fin').val(endDate.format('HH:mm:ss'));
+            $('#restricalendar-hora_fin').val(endDate.format('HH:mm:ss'));
             
-            $('#carrera-id').val('');
+            $("#restricalendar-hora_ini option[value='22:00:00']").remove();
+            $("#restricalendar-hora_fin option[value='08:00:00']").remove();
             });  
         },
 
@@ -132,29 +133,30 @@ $(document).ready(function(){
         },
 
         eventClick: function(event){
-            
-            let inicio = event.start.format('DD-MM-YYYY HH:mma').replace(" ", " a las ");
-            let fin = event.end.format('DD-MM-YYYY HH:mma').replace(" ", " a las ");
-            let dowIni = function(){
-                return dows[event.start.isoWeekday()] + ' ' + inicio;
-            }
-            let dowFin = function(){
-                return dows[event.end.isoWeekday()] + ' ' + fin;
-            }
-            	
-            $.get( "/user/getunamebyid", 
-                { id: event.usermodifico },
-                function(data)
-                {
-                    $('#myModal').find('#showusermodifico').text(data);
+            if(!event.ajeno){
+                let inicio = event.start.format('DD-MM-YYYY HH:mma').replace(" ", " a las ");
+                let fin = event.end.format('DD-MM-YYYY HH:mma').replace(" ", " a las ");
+                let dowIni = function(){
+                    return dows[event.start.isoWeekday()] + ' ' + inicio;
                 }
-            );
-            $('#myModal').modal('show');
-            $('#myModal').find('#showcomision').text(event.title);
-            $('#myModal').find('#showini').text(dowIni);
-            $('#myModal').find('#showfin').text(dowFin);
-            $('#myModal').find('#idevento').val(event.id.replace('E', '')); //amoldar para q funcione con restris
-            $('#myModal').find('#idevento').val(event.id.replace('R', ''));
+                let dowFin = function(){
+                    return dows[event.end.isoWeekday()] + ' ' + fin;
+                }
+                    
+                $.get( "/user/getunamebyid", 
+                    { id: event.usermodifico },
+                    function(data)
+                    {
+                        $('#myModal').find('#showusermodifico').text(data);
+                    }
+                );
+                $('#myModal').modal('show');
+                $('#myModal').find('#showcomision').text(event.title);
+                $('#myModal').find('#showini').text(dowIni);
+                $('#myModal').find('#showfin').text(dowFin);
+                $('#myModal').find('#idevento').val(event.id.replace('R', ''));
+            }
+            
         },
 
         eventDrop: function( event, delta, revertFunc, jsEvent, ui, view ) { 
@@ -163,6 +165,7 @@ $(document).ready(function(){
             var ini=event.start.format();
             var fin=event.end.format();
             var aula_id = event.resourceId;
+            var dow = event.start.isoWeekday();
             
             if (!confirm("Esta seguro??")) {
                 revertFunc();}
@@ -173,6 +176,7 @@ $(document).ready(function(){
                     ini:ini,
                     fin:fin,
                     aula_id:aula_id,
+                    dow: dow
                 },
                 function(data){
                     if (data){
@@ -197,19 +201,19 @@ $(document).ready(function(){
     
 $(function(){
     $(document).on('click', '.showModalButton', function(){
-      if ($('#modal').data('bs.modal').isShown) {
-          $('#modal').find('#modalContent')
+      if ($('#modalRestri').data('bs.modal').isShown) {
+          $('#modalRestri').find('#modalRestriContent')
                   .load($(this).attr('value'));
-          document.getElementById('modalHeader').innerHTML = '<h4>' + $(this).attr('title') + '</h4>';
-          $('#modalHeader').hide();
+          document.getElementById('modalRestriHeader').innerHTML = '<h4>' + $(this).attr('title') + '</h4>';
+          $('#modalRestriHeader').hide();
       } else {
           //if modal isn't open; open it and load content
-          $('#modal').modal('show')
-                  .find('#modalContent')
+          $('#modalRestri').modal('show')
+                  .find('#modalRestriContent')
                   .load($(this).attr('value'));
            //dynamiclly set the header for the modal
-          document.getElementById('modalHeader').innerHTML = '<h4>' + $(this).attr('title') + '</h4>';
-          $('#modalHeader').hide();
+          document.getElementById('modalRestriHeader').innerHTML = '<h4>' + $(this).attr('title') + '</h4>';
+          $('#modalRestriHeader').hide();
       }
   });
 });
@@ -221,7 +225,7 @@ $('#btnBorrarEvento').click(function()
   
   if (confirm("¿Esta seguro?")) 
   {
-      $.post("/evento/delete",
+      $.post("/restri/delete",
       {
           id: idEvento,
           id_sede: id_sede,

@@ -12,7 +12,7 @@ use Yii;
  * @property string $DESC_CORTA
  * @property int $ID_Carrera
  * @property int $anio
- * @property int $COD_MATERIA
+ * @property string $COD_MATERIA
  * @property Comision[] $comisions
  * @property Carrera $carrera
  */
