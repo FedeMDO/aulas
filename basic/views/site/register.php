@@ -37,7 +37,7 @@ endif; ?>
  <?= $form->field($model, "idInstituto",['labelOptions'=>['style'=>'color:white']])->dropDownList(
             $result, 
             ['prompt'=>'Seleccione un instituto...']
-    )->label('Instituto')->textInput(['readonly' => true]); ?>
+    )->label('Instituto'); ?>
 <?php $roles = ['Administrador', 'Usuario', 'Guest']; ?>
  <?= $form->field($model, "rol", ['labelOptions'=>['style'=>'color:white']])->dropDownList(
             $roles, 
