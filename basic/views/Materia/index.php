@@ -25,7 +25,6 @@ $this->title = 'Materias';
 	'columns' => [
 		['class' => 'yii\grid\SerialColumn'],
 
-		'ID',
 		'NOMBRE',
 		'DESC_CORTA',
 		'COD_MATERIA',

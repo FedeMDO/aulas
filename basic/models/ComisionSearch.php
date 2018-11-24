@@ -64,7 +64,7 @@ class ComisionSearch extends Comision
             'CARGA_HORARIA_SEMANAL' => $this->CARGA_HORARIA_SEMANAL,
         ]);
 
-        $query->andFilterWhere(['like', 'NOMBRE', $this->NOMBRE]);
+        $query->andFilterWhere(['like', 'NUMERO', $this->NUMERO]);
 
         return $dataProvider;
     }

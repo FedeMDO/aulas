@@ -10,6 +10,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\User;
+use app\models\Instituto;
+use app\models\Carrera;
 
 /**
  * ComisionController implements the CRUD actions for Comision model.
@@ -28,7 +30,7 @@ class ComisionController extends Controller
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['index','view','create','update','delete'],
+                        'actions' => ['index','view','create','update','delete', 'listmateria', 'listcarrera'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
@@ -37,7 +39,7 @@ class ComisionController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['create'],
+                       'actions' => ['create', 'listmateria', 'listcarrera'],
                        'allow' => true,
                        'roles' => ['@'],
                        'matchCallback' => function ($rule, $action) {
@@ -101,25 +103,31 @@ class ComisionController extends Controller
     public function actionCreate()
     {
         $model = new Comision();
-
         if ($_POST != NULL){
-            $cantidad = $_POST['Comision'];
-            $cantidad =$cantidad['cant_comisiones'];
-            for( $i=0; $i<$cantidad; $i++){
+            $request = $_POST['Comision'];
+            $help = $request['NUMERO'];
+            $materia = $request['ID_MATERIA'];
+            $horas = $request['CARGA_HORARIA_SEMANAL'];
+            //$request = Yaii::$app->request;
+            //$help = $request->post('NUMERO');
+            //var_dump ($help);
+            for( $i=0; $i<$help; $i++){
                 $comi = new Comision();
-                $comi->load(Yii::$app->request->post());
+                $comi->NUMERO = $i + 1;
+                $comi->ID_MATERIA = $materia;
+                $comi->CARGA_HORARIA_SEMANAL = $horas;
+                $comi->ID_Ciclo = 1;
                 $comi->save();
-                $session = Yii::$app->session;
-                $session->setFlash('comisionesCreadas', "Se han creado correctamente $cantidad comisiones");
+                if ($comi->save()){
+                    $session = Yii::$app->session;
+                    $session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, "Se han creado correctamente $help comisiones");
+                }
             }
         }
-
-     /*   if ($model->load(Yii::$app->request->post()) && $model->slave()) {
-            return $this->redirect(['view', 'id' => $model->ID]);
-        }   */
-
+        $instituto = new Instituto();
+        $carrera = new Carrera();
         return $this->render('create', [
-            'model' => $model,
+            'model' => $model,'instituto' => $instituto,'carrera' => $carrera,
         ]);
     }
 
@@ -138,8 +146,10 @@ class ComisionController extends Controller
             return $this->redirect(['view', 'id' => $model->ID]);
         }
 
+        $instituto = new Instituto();
+        $carrera = new Carrera();
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model, 'instituto' => $instituto,'carrera' => $carrera,
         ]);
     }
 
@@ -171,5 +181,34 @@ class ComisionController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    public function actionListcarrera($id)
+    {
+        $carreras = Carrera::find()
+            ->where(['ID_INSTITUTO' => $id])
+            ->orderBy('id DESC')
+            ->all();
+
+        if (!empty($carreras)) {
+            foreach($carreras as $carrera) {
+                echo "<option value='".$carrera->ID."'>".$carrera->NOMBRE."</option>";
+            }
+        } else {
+            echo "<option>-</option>";
+        }
+
+    }
+    public function actionListmateria($id)
+    {
+        $materias = Carrera::findone($id)->materias;
+
+        if (!empty($materias)) {
+            foreach($materias as $materia) {
+                echo "<option value='".$materia->ID."'>".$materia->NOMBRE." (".$materia->COD_MATERIA.")</option>";
+            }
+        } else {
+            echo "<option>-</option>";
+        }
+
     }
 }

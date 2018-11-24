@@ -37,7 +37,7 @@ endif; ?>
  <?= $form->field($model, "idInstituto",['labelOptions'=>['style'=>'color:white']])->dropDownList(
             $result, 
             ['prompt'=>'Seleccione un instituto...']
-    )->label('Instituto'); ?>
+    )->label('Instituto')->textInput(['readonly' => true]); ?>
 <?php $roles = ['Administrador', 'Usuario', 'Guest']; ?>
  <?= $form->field($model, "rol", ['labelOptions'=>['style'=>'color:white']])->dropDownList(
             $roles, 
@@ -46,7 +46,7 @@ endif; ?>
 
  <?= $form->field($model, "password",['labelOptions'=>['style'=>'color:white']])->input("password")->label('Contraseña') ?>   
  <?= $form->field($model, "password_repeat",['labelOptions'=>['style'=>'color:white']])->input("password")->label('Confirme la Contraseña') ?>   
-<?= Html::submitButton("Finalizar Registro", ["class" => "btn btn-suces btn-success btn-block"]) ?>
+<?= Html::submitButton("Finalizar registro", ["class" => "btn btn-suces btn-success btn-block"]) ?>
 <?php $form->end() ?>
 </div>
 </div>

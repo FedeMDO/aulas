@@ -1,77 +1,68 @@
 <?php
 
-use app\models\Materia;
-use kartik\select2\Select2;
-use yii\bootstrap\Alert;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use app\models\Materia;
+use app\models\Instituto;
+use app\models\Carrera;
+use yii\bootstrap\Alert;
+use dominus77\sweetalert2;
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Comision */
 /* @var $form yii\widgets\ActiveForm */
 $this->title = 'Crear comision';
-$this->params['breadcrumbs'][] = $this->title;
+
+if(Yii::$app->session->hasFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS)):
+    \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
+endif;
 ?>
+
 <div class="comision-form">
 
-    <?php if (Yii::$app->session->hasFlash('comisionesCreadas')):
-	Alert::begin([
-		'options' => [
-			'class' => 'alert-success',
-		],
-	]);
+    <?php $form = ActiveForm::begin(); ?>
 
-	echo Yii::$app->session->getFlash('comisionesCreadas');
+    <?= $form->field($model, 'NUMERO' ,['labelOptions'=>['style'=>'color:white; padding-top:10px;']])->textInput(['maxlength' => true]) ?>
 
-	Alert::end();
-endif;?>
+    <?php $institutos = Instituto::find()->asArray()->all();
+    $resultIns = ArrayHelper::map($institutos, 'ID', 'NOMBRE'); ?>
 
-    <?php $form = ActiveForm::begin();?>
+    <?php echo $form->field($instituto, 'ID',['labelOptions'=>['style'=>'color:white']])->dropDownList($resultIns,
+        ['prompt'=>'Seleccione instituto...',
+            'onchange'=>'
+				$.post( "'.Yii::$app->urlManager->createUrl('comision/listcarrera?id=').'"+$(this).val(), function( data ) {
+				  $( "select#carrera-id" ).html( data );
+				});
+			'])->label('Instituto');  ?>
 
-    <?=$form->field($model, 'NOMBRE', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->textInput(['maxlength' => true])?>
+    <?php $carreras = Carrera::find()->asArray()->all();
+    $resultCarr = ArrayHelper::map($carreras, 'ID', 'NOMBRE'); ?>
+
+    <?php echo $form->field($carrera, 'ID',['labelOptions'=>['style'=>'color:white']])->dropDownList(
+        $resultCarr,
+        ['prompt'=>'Seleccione Carrera...',
+            'onchange'=>'
+				$.post( "'.Yii::$app->urlManager->createUrl('comision/listmateria?id=').'"+$(this).val(), function( data ) {
+				  $( "select#comision-id_materia" ).html( data );
+				});
+			'])->label('Carrera'); ?>
 
     <?php $materias = Materia::find()->asArray()->all();
-$result = ArrayHelper::map($materias, 'ID', 'NOMBRE');
-$result1 = ArrayHelper::map($materias, 'ID', 'COD_MATERIA');
+    $resultMat = ArrayHelper::map($materias, 'ID', 'NOMBRE');
+    $resultCod = ArrayHelper::map($materias, 'ID', 'COD_MATERIA'); ?>
 
-function arrayhelper2($result, $result1) {
-	$nuevo = array();
-	foreach ($result as $key => $value) {
-		foreach ($result1 as $key1 => $value1) {
-			if ($key == $key1) {
-				$nombre = $result[$key];
-				$codigo = $result1[$key1];
-				$concatenar = $nombre . ' (' . $codigo . ')';
-				array_push($nuevo, $concatenar);
-				//var_dump($codigo);
-				//var_dump($nombre);
-				//$nuevo[] = [$key => $nombre . ' (' . $codigo . ')'];
-				//var_dump($nuevo);
+    <?php echo $form->field($model, 'ID_MATERIA',['labelOptions'=>['style'=>'color:white']])->dropDownList(
+        $resultMat,
+        ['prompt'=>'Seleccione Materia...']
+        )->label('Materia'); ?>
 
-			}
-		}
-	}
-	return $nuevo;
-}
-$lista = arrayhelper2($result, $result1);
-//$test= ArrayHelper::map($result,"COD_MATEROA",)
-//var_dump(static::getValue());
-?>
-
-    <?php echo $form->field($model, 'ID_MATERIA', ['labelOptions' => ['style' => 'color:white']])->widget(Select2::className(), [
-	'data' => $lista,
-	"options" => ['multiple' => false,
-		'placeholder' => 'Seleccione una materia...',
-	],
-]); ?>
-
-    <?=$form->field($model, 'CARGA_HORARIA_SEMANAL', ['labelOptions' => ['style' => 'color:white']])->textInput()?>
-    <?=$form->field($model, 'cant_comisiones', ['labelOptions' => ['style' => 'color:white']])->textInput()->label("Selecciona la cantidad de comisiones que desea crear")?>
+    <?= $form->field($model, 'CARGA_HORARIA_SEMANAL',['labelOptions'=>['style'=>'color:white']])->textInput() ?>
 
     <div class="form-group">
-        <?=Html::submitButton('Guardar', ['class' => 'btn btn-success btn-block'])?>
+        <?= Html::submitButton('Crear', ['class' => 'btn btn-success btn-block']) ?>
     </div>
 
-    <?php ActiveForm::end();?>
+    <?php ActiveForm::end(); ?>
 
 </div>

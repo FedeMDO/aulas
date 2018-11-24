@@ -70,6 +70,7 @@ class MateriaController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout = 'LayoutAdmin';
         $searchModel = new MateriaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

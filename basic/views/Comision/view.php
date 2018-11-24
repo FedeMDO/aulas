@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'options'=>['class'=>'table-bordered table-condensed  grid'],
         'attributes' => [
-            'NOMBRE',
+            'NUMERO',
             'mATERIA.NOMBRE',
             'CARGA_HORARIA_SEMANAL',
         ],

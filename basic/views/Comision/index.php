@@ -26,9 +26,8 @@ $this->title = 'Comisiones';
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'ID',
-            'NOMBRE',
             'mATERIA.NOMBRE',
+            'NUMERO',
             'CARGA_HORARIA_SEMANAL',
 
             ['class' => 'yii\grid\ActionColumn'],
