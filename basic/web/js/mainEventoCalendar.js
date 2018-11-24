@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $('#calendar').fullCalendar({
+        
         //VIEW
         header: {
             left: 'today prev,next',
@@ -71,29 +72,33 @@ $(document).ready(function(){
             }},
 
         select: function(startDate, endDate) {
-                
-                if(startDate.isoWeekday() != endDate.isoWeekday()){
-                    alert("Por ahora no se permiten eventos que duren mas un dia");
-                    return;
+            var esUserGuest
+            $.get( "/user/currentuserisguest", function( data ) {
+                if(data == "false"){
+                    if(startDate.isoWeekday() != endDate.isoWeekday()){
+                        alert("Por ahora no se permiten eventos que duren mas un dia");
+                        return;
+                    }
+    
+                    let url = "/evento/create?id_aula=" + $("em").text();
+                    $("#modalContent").load(url, function () {
+                    $("#modal").modal("show");
+                    //DIA
+                    $('#eventocalendar-dow').val(startDate.isoWeekday());
+    
+                    //HORA INI
+                    $('#eventocalendar-hora_ini').val(startDate.format('HH:mm:ss'));
+                    
+                    //HORA FIN
+                    $('#eventocalendar-hora_fin').val(endDate.format('HH:mm:ss'));
+                    
+                    $('#carrera-id').val('');
+                                
+                    $("#eventocalendar-hora_ini option[value='22:00:00']").remove();
+                    $("#eventocalendar-hora_fin option[value='08:00:00']").remove();
+                    });  
                 }
-
-            let url = "/evento/create?id_aula=" + $("em").text();
-            $("#modalContent").load(url, function () {
-            $("#modal").modal("show");
-            //DIA
-            $('#eventocalendar-dow').val(startDate.isoWeekday());
-
-            //HORA INI
-            $('#eventocalendar-hora_ini').val(startDate.format('HH:mm:ss'));
-            
-            //HORA FIN
-            $('#eventocalendar-hora_fin').val(endDate.format('HH:mm:ss'));
-            
-            $('#carrera-id').val('');
-                        
-            $("#eventocalendar-hora_ini option[value='22:00:00']").remove();
-            $("#eventocalendar-hora_fin option[value='08:00:00']").remove();
-            });  
+            });
         },
 
         selectAllow: function(selectInfo){
@@ -126,9 +131,7 @@ $(document).ready(function(){
                 $('#myModal').find('#showini').text(dowIni);
                 $('#myModal').find('#showfin').text(dowFin);
                 $('#myModal').find('#idevento').val(event.id.replace('E', ''));
-            }
-
-            
+            }       
         },
 
         eventDrop: function( event, delta, revertFunc, jsEvent, ui, view ) {

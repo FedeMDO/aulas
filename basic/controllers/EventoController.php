@@ -9,6 +9,7 @@ use app\models\Sede;
 use app\models\Comision;
 use app\models\Carrera;
 use app\models\Users;
+use app\models\User;
 use app\models\Instituto;
 use app\models\Materia;
 use app\models\Hora;
@@ -257,9 +258,13 @@ class EventoController extends Controller
         return $resources;
     }
     public function actionJsoncalendar($id=NULL, $start=NULL,$end=NULL,$_=NULL){
-
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
+
+        $isGuest = User::isUserGuest(Yii::$app->user->identity->id);
+        if(!$isGuest){
+            $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
+        }
+        
         $aula = Aula::findOne($id);
         //RESTRICCIONES
         foreach ($aula->restriCalendars as $cons) 
@@ -287,11 +292,15 @@ class EventoController extends Controller
                     $restri['resourceId'] = $cons->ID_Aula;
                     $restri['ajeno'] = false;
                     $restri['usermodifico'] = $cons->ID_User_Asigna;
-                    if ($instIdOnSessionUser != $cons->instituto->ID)
-                        {
-                            $restri['ajeno'] = true;
-                            $restri['overlap'] = false;
-                        }
+                    if($isGuest){
+                        $restri['ajeno'] = true;
+                        $restri['overlap'] = false;
+                    }
+                    else if ($instIdOnSessionUser != $cons->instituto->ID)
+                    {
+                        $restri['ajeno'] = true;
+                        $restri['overlap'] = false;
+                    }
                     $tasks[] = (object) $restri;
                 }
             }
@@ -317,8 +326,12 @@ class EventoController extends Controller
                     $event['ranges'] = [array('start' => $eve->ciclo->fecha_inicio, 'end' => $eve->ciclo->fecha_fin)];
                     $event['editable'] = true;
                     $event['ajeno'] = false;
+                    if($isGuest){
+                        $event['ajeno'] = true;
+                        $event['overlap'] = false;
+                    }
                     //user en session no edita eventos de otros institutos
-                    if ($instIdOnSessionUser != $eve->instituto->ID)
+                    else if ($instIdOnSessionUser != $eve->instituto->ID)
                     {
                         $event['ajeno'] = true;
                         $event['editable'] = false;
@@ -336,7 +349,10 @@ class EventoController extends Controller
 
     public function actionJsonschedulersede($id_sede, $start,$end=NULL,$_=NULL){
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
+        $isGuest = User::isUserGuest(Yii::$app->user->identity->id);
+        if(!$isGuest){
+            $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
+        }
         $tasks = array();
         $sede = Sede::findOne($id_sede);
         $aulas = array();
@@ -373,7 +389,11 @@ class EventoController extends Controller
                                     $restri['usermodifico'] = $cons->ID_User_Asigna;
                                     $restri['ajeno'] = false;
                                     $restri['resourceId'] = $cons->ID_Aula;
-                                    if ($instIdOnSessionUser != $cons->instituto->ID)
+                                    if($isGuest){
+                                        $restri['ajeno'] = true;
+                                        $restri['overlap'] = false;
+                                    }
+                                    else if ($instIdOnSessionUser != $cons->instituto->ID)
                                         {
                                             $restri['ajeno'] = true;
                                             $restri['overlap'] = false;
@@ -403,7 +423,11 @@ class EventoController extends Controller
                                     $event['editable'] = true;
                                     $event['ajeno'] = false;
                                     //user en session no edita eventos de otros institutos
-                                    if ($instIdOnSessionUser != $eve->instituto->ID)
+                                    if($isGuest){
+                                        $event['ajeno'] = true;
+                                        $event['overlap'] = false;
+                                    }
+                                    else if ($instIdOnSessionUser != $eve->instituto->ID)
                                     {
                                         $event['ajeno'] = true;
                                         $event['editable'] = false;

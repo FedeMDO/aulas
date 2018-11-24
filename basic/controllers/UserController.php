@@ -59,6 +59,16 @@ class UserController extends Controller
         $username = Users::findOne($id)->username;
         return $username;
     }
+    public function actionCurrentuserisguest(){
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        if(User::isUserGuest(Yii::$app->user->identity->id))
+        {
+            return "true";
+        }
+        return "false";
+    }
+
     public function actionChangepw(){
 
         $id = Yii::$app->user->identity->id;
