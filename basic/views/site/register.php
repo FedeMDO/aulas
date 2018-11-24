@@ -4,8 +4,10 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Instituto;
 use dominus77\sweetalert2\Alert;
+use app\assets\RegisterAsset;
 
 $this->title = 'Registro de usuario';
+RegisterAsset::register($this);
 ?>
 
 <br>
