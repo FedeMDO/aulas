@@ -107,6 +107,3 @@ else{?>
         <?php endif; ?>
       </ul>
 </div>
-
-
-
