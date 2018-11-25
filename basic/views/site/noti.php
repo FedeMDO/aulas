@@ -78,7 +78,7 @@ endif;?>
 					  <div class="media-body">
 					    <h4>Para: <?=Html::encode("{$n->uSERRECEPTOR->username} ")?>
 					    <small><i>Fecha: <?=Html::encode("{$n->FECHA} ")?></i></small>
-					    <small><?=Html::a('borrar', Url::to(['admin/noti']), ['data' => ['confirm' => 'Estas seguro?', 'method' => 'post', 'params' => ['Notificacion' => 'borrar', 'id' => $n->ID]]])?></small></h4>
+					    <small><?=Html::a('borrar', Url::to(['site/noti']), ['data' => ['confirm' => 'Estas seguro?', 'method' => 'post', 'params' => ['Notificacion' => 'borrar', 'id' => $n->ID]]])?></small></h4>
 					    <p><?=$n->NOTIFICACION?></p>
 					 </div>
 					  <?php endif;?>

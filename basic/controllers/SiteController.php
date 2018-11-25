@@ -11,6 +11,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\FormRegister;
 use app\models\Users;
+use app\models\Notificacion;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 use yii\helpers\Html;
@@ -138,11 +139,11 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-            'only' => ['logout', 'user', 'admin','aula', 'register', 'users'], //acciones que solamente va a verificar permisos
+            'only' => ['user', 'admin','aula', 'register'], //acciones que solamente va a verificar permisos
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['logout','admin','register', 'users'],
+                        'actions' => ['logout','admin','register'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
@@ -408,21 +409,78 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
-    public function actionUsers()
+    
+    public function actionNoti()
     {
-        $query = Users::find();
+        $query = Notificacion::find()
+        ->where(['ID_USER_EMISOR' => Yii::$app->user->identity->id])
+         ->orwhere(['ID_USER_RECEPTOR' => Yii::$app->user->identity->id]);
+
         $pagination = new Pagination([
-            'defaultPageSize' => 19,
+            'defaultPageSize' => 20,
             'totalCount' => $query->count(),
         ]);
-
-        $users = $query->orderBy('ID')
-        ->offset($pagination->offset)
-        ->limit($pagination->limit)
-        ->all();
-
-        return $this->render('users', [
-            'users' => $users,
-        ]);
+    
+        $notificacion = $query->orderBy(['Fecha'=>SORT_DESC])
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+            
+            if ($_POST != null){
+                if ($_POST['Notificacion'] == 'borrar'){
+                    $id = $_POST['id'];
+                    $query = Notificacion::findOne($id);
+                    $query->delete();
+                    $this->redirect('noti');
+                }
+                else{
+                    $ID_Usuarios =$_POST['Notificacion'];
+                    $mensaje = $_POST['Notificacion'];
+                    $ID_Usuarios =$ID_Usuarios['ID_USER_RECEPTOR'];
+                    $mensaje = $mensaje['NOTIFICACION'];
+                    foreach ($ID_Usuarios as $user1){
+                        $model1 = new Notificacion();
+                        $model1->ID_USER_EMISOR = Yii::$app->user->identity->id;
+                        $model1->ID_USER_RECEPTOR = $user1;
+                        $model1->NOTIFICACION = $mensaje;
+                        $model1->FECHA = new \yii\db\Expression('NOW()');
+                        $model1->save();
+                        //Enviamos correo
+                        $receptor = Users::findOne($user1)->username;
+                        $emisor = Users::findOne($model1->ID_USER_EMISOR)->username;
+                        $mail = Users::findOne($user1)->email;
+                        $subject = "Nueva notificación";
+                        $body = "<p>Hola <strong>".$receptor."</strong>, tenes una nueva notificación de <strong>".$emisor."</strong>.</p>" ;
+                        $body .= "<p> Notificación: <i>".$model1->NOTIFICACION."</i></p>";
+                        $body .= "<p><a href='http://yii.local/site/noti'>Ver notificación</a></p>";
+                        try {
+                        Yii::$app->mailer->compose()
+                            ->setTo($mail)
+                            ->setFrom([Yii::$app->params["adminEmail"] => Yii::$app->params["title"]])
+                            ->setSubject($subject)
+                            ->setHtmlBody($body)
+                            ->send();
+                        }
+                        catch (\Swift_TransportException $e) {
+                        }
+                    }
+                    if ($model1->save()){
+                        $session = Yii::$app->session;
+                        Yii::$app->session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, 'Mensaje enviado!');
+                        return $this->redirect('noti');
+                    }
+                }
+            }
+       
+        $model = new Notificacion();
+        $usuarios = Users::find()->where(['not', ['username' => Yii::$app->user->identity->username]])
+        ->andWhere(['activate' =>1])->asArray()->all();
+        return $this->render('noti', [
+            'notificacion' => $notificacion,
+            'pagination' => $pagination,
+            'model' => $model,
+            'usuarios' => $usuarios
+            
+        ]);  
     }
 }

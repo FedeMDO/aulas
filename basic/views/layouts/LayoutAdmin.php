@@ -75,7 +75,7 @@ AppAsset::register($this);
                     'items' => [
                     ['label' => '<span></span> Registrar usuario', 'url' => '/site/register'],
                     ['label' => '<span> Panel de administracion', 'url' => '/admin/panel'],
-                    ['label' => '<span> Gestionar usuarios', 'url' => '/site/users',],
+                    ['label' => '<span> Gestionar usuarios', 'url' => '/admin/users',],
                             ],
                         ]                  
                 ],
@@ -87,7 +87,7 @@ AppAsset::register($this);
                 'encodeLabels' => false,
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/admin/noti'], 'options' => ['style' => 'font-weight: bold;']],
+                    ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold;']],
                     Yii::$app->user->isGuest ? (
                         ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login'], 'options' => ['style' => 'font-weight: bold;']]
                     ) : 

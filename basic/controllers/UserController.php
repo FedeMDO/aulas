@@ -130,7 +130,7 @@ class UserController extends Controller
             $model->rol = $rol;
             $model->save();
             if ($model->save()){
-                return $this->redirect('../site/users');
+                return $this->redirect('../admin/users');
             }
         }
 
