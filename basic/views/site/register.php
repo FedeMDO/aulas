@@ -42,7 +42,7 @@ endif; ?>
         )->label("Seleccione instituto"); ?>
 
 <div class="testing">
-<?= Html::checkbox('checkbox-id', false, ['label' => 'No asignar ningún instituto a este usuario']) ?>
+<?= Html::checkbox('checkbox-id', false, ['label' => 'Sin instituto', 'id'=>'checkNoInstituto']) ?>
 </div>
 
 <?php $roles = ['Administrador', 'Usuario', 'Guest']; ?>
