@@ -21,9 +21,12 @@ $(document).ready(function(){
         schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
         resourceGroupField: 'edificio',
         resourceAreaWidth: '23%',
-        resourceRender: function resourceRenderCallback(resourceObj, labelTds, bodyTds){
+        resourceRender: function(resourceObj, $th,$body){
             var title = 'Recursos: ' + '\n' + resourceObj.recursos;
-            labelTds.attr('title', title);
+            $th.find('.fc-cell-text').text('');
+            $th.find('.fc-cell-text').append('<a href="http://yii.local' + resourceObj.url +'">'+ resourceObj.title +'</a>');
+            $th.attr('title', title);
+            
         },
         resources:
             {

@@ -20,11 +20,14 @@ $(document).ready(function(){
         schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
         resourceGroupField: 'edificio',
         resourceAreaWidth: '23%',
-        resourceRender: function(resourceObj, $th){
+        resourceRender: function(resourceObj, $th,$body){
             var title = 'Recursos: ' + '\n' + resourceObj.recursos;
+            $th.find('.fc-cell-text').text('');
+            $th.find('.fc-cell-text').append('<a href="http://yii.local' + resourceObj.url +'">'+ resourceObj.title +'</a>');
             $th.attr('title', title);
-            $th.append('<a href="http://yii.local' + resourceObj.url +'">Entrar</a>'); //falta formatear para que quede bien
+            
         },
+        
         resources:
             {
                 url: '/evento/jsonresources',
