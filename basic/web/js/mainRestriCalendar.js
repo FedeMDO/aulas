@@ -12,6 +12,7 @@ $(document).ready(function(){
         lang: 'es-us',
         minTime: '08:00:00',
         maxTime: '23:00:00',
+        hiddenDays: [0],
         height: 'auto',
         nowIndicator: true,
         slotDuration: '01:00:00',

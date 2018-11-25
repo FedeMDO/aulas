@@ -6,7 +6,7 @@ $(document).ready(function(){
             center: 'title',
             right: 'timelineDay,timelineWeek'
         },
-        defaultView:'timelineDay',
+        defaultView:'timelineWeek',
         selectable: true,
         lang: 'es-us',
         minTime: '08:00:00',
@@ -20,9 +20,10 @@ $(document).ready(function(){
         schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
         resourceGroupField: 'edificio',
         resourceAreaWidth: '23%',
-        resourceRender: function resourceRenderCallback(resourceObj, labelTds, bodyTds){
+        resourceRender: function(resourceObj, $th){
             var title = 'Recursos: ' + '\n' + resourceObj.recursos;
-            labelTds.attr('title', title);
+            $th.attr('title', title);
+            $th.append('<a href="http://yii.local' + resourceObj.url +'">Entrar</a>'); //falta formatear para que quede bien
         },
         resources:
             {
@@ -88,17 +89,9 @@ $(document).ready(function(){
             });
           }},
 
-        eventReceive: function(event){
-            alert("Por favor elija un intervalo de horas");
-            var id=event.id;
-            var inicio=event.start.format();
-            var id_aula =event.resourceId;
-            
-        },
-
-        eventOverlap: function(stillEvent, movingEvent) {
+        /*eventOverlap: function(stillEvent, movingEvent) {
             return stillEvent.rendering == "background";
-        },
+        }, */
 
         select: function(startDate, endDate, jsEvent, view, resource ) {
                 
@@ -167,23 +160,25 @@ $(document).ready(function(){
             var ini=event.start.format();
             var fin=event.end.format();
             var aula_id = event.resourceId;
+            var dow = event.start.isoWeekday();
             
-            if (!confirm("Esta seguro??")) {
+            if (!confirm("Esta seguro?")) {
                 revertFunc();}
                 else{
                     $.post("/evento/updscheduler",
                 { 
-                    id:id,
-                    ini:ini,
-                    fin:fin,
-                    aula_id:aula_id,
+                    id: id,
+                    ini: ini,
+                    fin: fin,
+                    aula_id: aula_id,
+                    dow: dow,
                 },
                 function(data){
                     if (data){
-                        alert("se actulaizo conrrectamente");
+                        alert("Se actualizó correctamente");
                     }
                     else {
-                        alert("error");
+                        alert("Error");
                     }
                 });
             }}

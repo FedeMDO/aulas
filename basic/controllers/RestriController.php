@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
 use app\models\RestriCalendar;
 use app\models\Aula;
 use app\models\Sede;
@@ -11,6 +12,7 @@ use app\models\Carrera;
 use app\models\Instituto;
 use app\models\Materia;
 use app\models\Users;
+use app\models\User;
 use app\models\RestriCalendarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -37,6 +39,39 @@ class RestriController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        //El administrador tiene permisos sobre las siguientes acciones
+                        'actions' => [],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            //Llamada al método que comprueba si es un administrador
+                            return User::isUserAdmin(Yii::$app->user->identity->id);
+                        },
+                    ],
+                    [
+                       //Los usuarios simples tienen permisos sobre las siguientes acciones
+                       'actions' => [],
+                       'allow' => false,
+                       'roles' => ['@'],
+                       'matchCallback' => function ($rule, $action) {
+                          return User::isUserSimple(Yii::$app->user->identity->id);
+                      },
+                   ],
+                   [
+                    //Los usuarios guest tienen permisos sobre las siguientes acciones
+                    'actions' => [],
+                    'allow' => false,
+                    'roles' => ['@'],
+                    'matchCallback' => function ($rule, $action) {
+                       return User::isUserGuest(Yii::$app->user->identity->id);
+                    },
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -218,7 +253,6 @@ class RestriController extends Controller
     public function actionJsoncalendar($id=NULL, $start=NULL,$end=NULL,$_=NULL){
 
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
         $aula = Aula::findOne($id);
         //RESTRICCIONES
         foreach ($aula->restriCalendars as $cons) 
@@ -246,12 +280,6 @@ class RestriController extends Controller
                     $restri['resourceId'] = $cons->ID_Aula;
                     $restri['usermodifico'] = $cons->ID_User_Asigna;
                     $restri['ajeno'] = false;
-                    if ($instIdOnSessionUser != $cons->instituto->ID)
-                        {
-                            $restri['ajeno'] = true;
-                            $restri["editable"] = false;
-                            $restri['overlap'] = false;
-                        }
                     $tasks[] = (object) $restri;
                 }
             }
@@ -261,7 +289,6 @@ class RestriController extends Controller
 
     public function actionJsonschedulersede($id_sede, $start,$end=NULL,$_=NULL){
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
         $tasks = array();
         $sede = Sede::findOne($id_sede);
         $aulas = array();
@@ -298,12 +325,6 @@ class RestriController extends Controller
                                     $restri['usermodifico'] = $cons->ID_User_Asigna;
                                     $restri['ajeno'] = false;
                                     $restri['resourceId'] = $cons->ID_Aula;
-                                    if ($instIdOnSessionUser != $cons->instituto->ID)
-                                        {
-                                            $restri['ajeno'] = true;
-                                            $restri["editable"] = false;
-                                            $restri['overlap'] = false;
-                                        }
                                     $tasks[] = (object) $restri;
                                 }
                             }

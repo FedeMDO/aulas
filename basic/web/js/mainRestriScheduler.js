@@ -7,11 +7,12 @@ $(document).ready(function(){
             center: 'title',
             right: 'timelineDay,timelineWeek'
         },
-        defaultView:'timelineDay',
+        defaultView:'timelineWeek',
         selectable: true,
         lang: 'es-us',
         minTime: '08:00:00',
         maxTime: '23:00:00',
+        hiddenDays: [0],
         height: 'auto',
         nowIndicator: true,
         selectMinDistance : 15, //el usuario tiene que mover al menos 15 pixeles el mouse para seleccionar
@@ -88,14 +89,6 @@ $(document).ready(function(){
             });
           }},
 
-        eventReceive: function(event){
-            alert("Por favor elija un intervalo de horas");
-            var id=event.id;
-            var inicio=event.start.format();
-            var id_aula =event.resourceId;
-            
-        },
-
         eventOverlap: function(stillEvent, movingEvent) {
             return stillEvent.rendering == "background";
         },
@@ -167,7 +160,7 @@ $(document).ready(function(){
             var aula_id = event.resourceId;
             var dow = event.start.isoWeekday();
             
-            if (!confirm("Esta seguro??")) {
+            if (!confirm("Esta seguro?")) {
                 revertFunc();}
                 else{
                     $.post("/restri/updscheduler",
@@ -180,10 +173,10 @@ $(document).ready(function(){
                 },
                 function(data){
                     if (data){
-                        alert("se actulaizo conrrectamente");
+                        alert("Se actualizó correctamente");
                     }
                     else {
-                        alert("error");
+                        alert("Error");
                     }
                 });
             }}

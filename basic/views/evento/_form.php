@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Comision;
 use app\models\Carrera;
+use app\models\Users;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\EventoCalendar */
@@ -19,7 +20,6 @@ use app\models\Carrera;
                     'id' => 'crear-evento-form'
                 ]
             ]); 
-    $carreras = Carrera::find()->asArray()->all();
     $resultCarr = ArrayHelper::map($carreras, 'ID', 'NOMBRE');
     ?>
     <?php echo $form->field($carrera, 'ID')->dropDownList(
@@ -29,8 +29,8 @@ use app\models\Carrera;
 				$.post( "'.Yii::$app->urlManager->createUrl('evento/listmateria?id=').'"+$(this).val(), function( data ) {
 				  $( "select#materia-id" ).html( data );
 				});
-			'])->label('Carrera');  ?>
-
+            '])->label('Carrera');  ?>
+            
     <?php echo $form->field($materia, 'ID')->dropDownList(
         array(),
         ['prompt'=>'Seleccionar',
