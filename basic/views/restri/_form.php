@@ -11,14 +11,15 @@ use app\models\CicloLectivo;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class='loginc'>
+<div class='loginc azul'>
 <div class="evento-calendar-form">
 
     <?php $form = ActiveForm::begin([
                 'options' => [
                     'id' => 'crear-evento-form'
                 ]
-            ]); 
+            ]);
+
     $insitutos = Instituto::find()->asArray()->all();
     $resultInst = ArrayHelper::map($insitutos, 'ID', 'NOMBRE');
     $ciclos = CicloLectivo::find()->asArray()->all();
