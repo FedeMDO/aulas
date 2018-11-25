@@ -39,7 +39,7 @@ class UserController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['update','getunamebyid','currentuserisguest'],
+                       'actions' => ['getunamebyid','currentuserisguest'],
                        'allow' => true,
                        'roles' => ['@'],
                        'matchCallback' => function ($rule, $action) {
@@ -48,7 +48,7 @@ class UserController extends Controller
                    ],
                    [
                     //Los usuarios guest tienen permisos sobre las siguientes acciones
-                    'actions' => ['update','getunamebyid','currentuserisguest'],
+                    'actions' => ['getunamebyid','currentuserisguest'],
                     'allow' => true,
                     'roles' => ['@'],
                     'matchCallback' => function ($rule, $action) {
@@ -66,28 +66,6 @@ class UserController extends Controller
         ];
     }
 
-    public function actionNoti()
-    {
-        $query = Notificacion::find()
-        ->where(['ID_USER_RECEPTOR' => Yii::$app->user->identity->id]);
-
-        $pagination = new Pagination([
-            'defaultPageSize' => 20,
-            'totalCount' => $query->count(),
-        ]);
-    
-        $notificacion = $query->orderBy('ID')
-            ->offset($pagination->offset)
-            ->limit($pagination->limit)
-            ->all();
-       
-
-        return $this->render('noti', [
-            'notificacion' => $notificacion,
-            'pagination' => $pagination,
-            
-        ]);
-    }
     public function actionGetunamebyid($id){
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $username = Users::findOne($id)->username;
@@ -110,7 +88,7 @@ class UserController extends Controller
         $model = new FormChangePassword($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->changePassword()) {
-            Yii::$app->session->setFlash('success', 'La contraseña se ha cambiado correctamente');
+            Yii::$app->session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, 'La contraseña se ha cambiado correctamente');
             $model->current_password = null;
             $model->password = null;
             $model->confirm_password = null;

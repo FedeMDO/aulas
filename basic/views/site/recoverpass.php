@@ -4,6 +4,7 @@ use yii\widgets\ActiveForm;
 use dominus77\sweetalert2;
 
 $this->title = 'Recuperar contraseña';
+$this->params['breadcrumbs'][] = ['label' => 'Ingresar', 'url' => ['login']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

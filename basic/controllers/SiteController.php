@@ -30,7 +30,7 @@ class SiteController extends Controller
         $model = new FormRecoverPass;
 
         $msg = null;
-        $msgi=null;
+        $msgi = null;
   
         if ($model->load(Yii::$app->request->post()))
         {

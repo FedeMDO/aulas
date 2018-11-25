@@ -18,7 +18,6 @@
         "yiisoft/yii2": "~2.0.14",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
-        "philippfrenzel/yii2fullcalendar":"*",
         "bower-asset/moment": "*",
         "kartik-v/yii2-widget-select2": "@dev",
         "2amigos/yii2-ckeditor-widget": "^2.1",
