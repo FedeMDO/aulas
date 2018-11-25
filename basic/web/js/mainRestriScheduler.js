@@ -177,7 +177,7 @@ $(document).ready(function(){
                 },
                 function(data){
                     if (data){
-                        alert("Se actualizó correctamente");
+                        
                     }
                     else {
                         alert("Error");

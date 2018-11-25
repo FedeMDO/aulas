@@ -39,8 +39,8 @@ class UserController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['update'],
-                       'allow' => false,
+                       'actions' => ['update','getunamebyid','currentuserisguest'],
+                       'allow' => true,
                        'roles' => ['@'],
                        'matchCallback' => function ($rule, $action) {
                           return User::isUserSimple(Yii::$app->user->identity->id);
@@ -48,8 +48,8 @@ class UserController extends Controller
                    ],
                    [
                     //Los usuarios guest tienen permisos sobre las siguientes acciones
-                    'actions' => ['update'],
-                    'allow' => false,
+                    'actions' => ['update','getunamebyid','currentuserisguest'],
+                    'allow' => true,
                     'roles' => ['@'],
                     'matchCallback' => function ($rule, $action) {
                        return User::isUserGuest(Yii::$app->user->identity->id);
