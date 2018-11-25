@@ -70,29 +70,29 @@ $(document).ready(function(){
                         }
                     });
             }},
-
         select: function(startDate, endDate) {
-                
+            if(esUserGuest == "false"){
                 if(startDate.isoWeekday() != endDate.isoWeekday()){
                     alert("Por ahora no se permiten eventos que duren mas un dia");
                     return;
                 }
-
-            let url = "/restri/create?id_aula=" + $("em").text();
-            $("#modalRestriContent").load(url, function () {
-            $("#modalRestri").modal("show");
-            //DIA
-            $('#restricalendar-dow').val(startDate.isoWeekday());
-
-            //HORA INI
-            $('#restricalendar-hora_ini').val(startDate.format('HH:mm:ss'));
-            
-            //HORA FIN
-            $('#restricalendar-hora_fin').val(endDate.format('HH:mm:ss'));
-            
-            $("#restricalendar-hora_ini option[value='22:00:00']").remove();
-            $("#restricalendar-hora_fin option[value='08:00:00']").remove();
-            });  
+    
+                let url = "/restri/create?id_aula=" + $("em").text();
+                $("#modalRestriContent").load(url, function () {
+                $("#modalRestri").modal("show");
+                //DIA
+                $('#restricalendar-dow').val(startDate.isoWeekday());
+    
+                //HORA INI
+                $('#restricalendar-hora_ini').val(startDate.format('HH:mm:ss'));
+                
+                //HORA FIN
+                $('#restricalendar-hora_fin').val(endDate.format('HH:mm:ss'));
+                
+                $("#restricalendar-hora_ini option[value='22:00:00']").remove();
+                $("#restricalendar-hora_fin option[value='08:00:00']").remove();
+                });  
+            }
         },
 
         selectAllow: function(selectInfo){
@@ -202,4 +202,8 @@ $('#btnBorrarEvento').click(function()
   else{
       revertFunc();
   }
+})
+var esUserGuest;
+$.get( "/user/currentuserisguest", function( data ) {
+    esUserGuest = data;
 })

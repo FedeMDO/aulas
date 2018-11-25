@@ -72,33 +72,30 @@ $(document).ready(function(){
             }},
 
         select: function(startDate, endDate) {
-            var esUserGuest
-            $.get( "/user/currentuserisguest", function( data ) {
-                if(data == "false"){
-                    if(startDate.isoWeekday() != endDate.isoWeekday()){
-                        alert("Por ahora no se permiten eventos que duren mas un dia");
-                        return;
-                    }
-    
-                    let url = "/evento/create?id_aula=" + $("em").text();
-                    $("#modalContent").load(url, function () {
-                    $("#modal").modal("show");
-                    //DIA
-                    $('#eventocalendar-dow').val(startDate.isoWeekday());
-    
-                    //HORA INI
-                    $('#eventocalendar-hora_ini').val(startDate.format('HH:mm:ss'));
-                    
-                    //HORA FIN
-                    $('#eventocalendar-hora_fin').val(endDate.format('HH:mm:ss'));
-                    
-                    $('#carrera-id').val('');
-                                
-                    $("#eventocalendar-hora_ini option[value='22:00:00']").remove();
-                    $("#eventocalendar-hora_fin option[value='08:00:00']").remove();
-                    });  
+            if(esUserGuest == "false"){
+                if(startDate.isoWeekday() != endDate.isoWeekday()){
+                    alert("Por ahora no se permiten eventos que duren mas un dia");
+                    return;
                 }
-            });
+
+                let url = "/evento/create?id_aula=" + $("em").text();
+                $("#modalContent").load(url, function () {
+                $("#modal").modal("show");
+                //DIA
+                $('#eventocalendar-dow').val(startDate.isoWeekday());
+
+                //HORA INI
+                $('#eventocalendar-hora_ini').val(startDate.format('HH:mm:ss'));
+                
+                //HORA FIN
+                $('#eventocalendar-hora_fin').val(endDate.format('HH:mm:ss'));
+                
+                $('#carrera-id').val('');
+                            
+                $("#eventocalendar-hora_ini option[value='22:00:00']").remove();
+                $("#eventocalendar-hora_fin option[value='08:00:00']").remove();
+                });  
+            }
         },
 
         selectAllow: function(selectInfo){
@@ -170,3 +167,7 @@ var dows = {1: 'Lunes',
 6: 'Sabado',
 7: 'Domingo'
 }
+var esUserGuest;
+$.get( "/user/currentuserisguest", function( data ) {
+    esUserGuest = data;
+})
