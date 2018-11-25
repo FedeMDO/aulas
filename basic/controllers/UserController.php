@@ -22,11 +22,48 @@ use yii\data\ActiveDataProvider;
 
 class UserController extends Controller
 {
-
-    public function actionSedesv()
+    public function behaviors()
     {
-       
-        return $this->render('sedesv');
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        //El administrador tiene permisos sobre las siguientes acciones
+                        'actions' => [],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserAdmin(Yii::$app->user->identity->id);
+                        },
+                    ],
+                    [
+                       //Los usuarios simples tienen permisos sobre las siguientes acciones
+                       'actions' => ['update'],
+                       'allow' => false,
+                       'roles' => ['@'],
+                       'matchCallback' => function ($rule, $action) {
+                          return User::isUserSimple(Yii::$app->user->identity->id);
+                      },
+                   ],
+                   [
+                    //Los usuarios guest tienen permisos sobre las siguientes acciones
+                    'actions' => ['update'],
+                    'allow' => false,
+                    'roles' => ['@'],
+                    'matchCallback' => function ($rule, $action) {
+                       return User::isUserGuest(Yii::$app->user->identity->id);
+                   },
+                ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
     }
 
     public function actionNoti()
@@ -66,6 +103,38 @@ class UserController extends Controller
         }
  
         return $this->render('changepw', [
+            'model' => $model,
+        ]);
+    }
+    protected function findModel($id)
+    {
+        if (($model = Users::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    public function actionUpdate($id){
+
+        $model = $this->findModel($id);
+
+        if ($_POST != NULL){
+            $user = $_POST['Users'];
+            $username = $user['username'];
+            $email = $user['email'];
+            $instituto = $user['idInstituto'];
+            $rol = $user['rol'];
+            $model->username = $username;
+            $model->email = $email;
+            $model->idInstituto = $instituto;
+            $model->rol = $rol;
+            $model->save();
+            if ($model->save()){
+                return $this->redirect('../site/users');
+            }
+        }
+
+        return $this->render('update', [
             'model' => $model,
         ]);
     }

@@ -26,7 +26,7 @@ $this->title = 'Gestionar usuarios';
                   <th>EMAIL</th>
                   <th>INSTITUTO</th>
                   <th>ROL</th>
-                  <th>MODIFICAR</th>
+                  <th>EDITAR</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -49,7 +49,7 @@ $this->title = 'Gestionar usuarios';
                             <?= Html::encode("Guest") ?>
                     <?php endif; ?>
                     </td>
-                    <td><a href="#"  class="btn btn-warning" role="button">Editar</a></td>
+                    <td><a href="/user/update?id=<?=Html::encode("{$user->id}")?>"  class="btn btn-warning" role="button">Editar</a></td>
                 </tr>
                 <?php endforeach; ?>
               </table>

@@ -138,11 +138,11 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-            'only' => ['logout', 'user', 'admin','aula', 'register'], //acciones que solamente va a verificar permisos
+            'only' => ['logout', 'user', 'admin','aula', 'register', 'users'], //acciones que solamente va a verificar permisos
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['logout','admin','register'],
+                        'actions' => ['logout','admin','register', 'users'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
@@ -151,7 +151,7 @@ class SiteController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['logout', 'user'],
+                       'actions' => ['logout'],
                        'allow' => true,
                        'roles' => ['@'],
                        'matchCallback' => function ($rule, $action) {
@@ -160,7 +160,7 @@ class SiteController extends Controller
                    ],
                    [
                     //Los usuarios guest tienen permisos sobre las siguientes acciones
-                    'actions' => ['logout', 'user'],
+                    'actions' => ['logout'],
                     'allow' => true,
                     'roles' => ['@'],
                     'matchCallback' => function ($rule, $action) {

@@ -75,7 +75,7 @@ AppAsset::register($this);
                     'items' => [
                     ['label' => '<span></span> Registrar usuario', 'url' => '/site/register'],
                     ['label' => '<span> Panel de administracion', 'url' => '/admin/panel'],
-                    ['label' => '<span> Gestionar usuarios', 'url' => '#',],
+                    ['label' => '<span> Gestionar usuarios', 'url' => '/site/users',],
                             ],
                         ]                  
                 ],
