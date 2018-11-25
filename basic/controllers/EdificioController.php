@@ -32,7 +32,7 @@ class EdificioController extends Controller
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['edifilter','index','view','create','update','delete'],
+                        'actions' => ['edifilter','index','view','create','update','delete','scheduler','restrischeduler'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
@@ -41,7 +41,7 @@ class EdificioController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['edifilter'],
+                       'actions' => ['edifilter','scheduler'],
                        'allow' => true,
                        'roles' => ['@'],
                        'matchCallback' => function ($rule, $action) {
@@ -50,7 +50,7 @@ class EdificioController extends Controller
                    ],
                    [
                         //Los usuarios guest tienen permisos sobre las siguientes acciones
-                        'actions' => ['edifilter'],
+                        'actions' => ['edifilter','scheduler'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
