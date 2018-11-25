@@ -38,9 +38,6 @@ foreach($materias as $m)
 } */
 ?>
 <div class="evento-calendar-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <?= $this->render('_form', [
         'model' => $model,'materia' => $materia,'carrera' => $carrera, 'carreras' => $carreras,
     ]) ?>

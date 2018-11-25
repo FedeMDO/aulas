@@ -218,7 +218,7 @@ AppAsset::register($this);
         yii\bootstrap\Modal::begin([
             'headerOptions' => ['id' => 'modalHeader'],
             'id' => 'modal',
-            'size' => 'modal-sm',
+            'size' => 'modal-lg',
             'clientOptions' => ['backdrop' => True, 'keyboard' => True]
         ]);        echo "<div id='modalContent'></div>";
         yii\bootstrap\Modal::end();
@@ -228,7 +228,7 @@ AppAsset::register($this);
         yii\bootstrap\Modal::begin([
             'headerOptions' => ['id' => 'modalRestriHeader'],
             'id' => 'modalRestri',
-            'size' => 'modal-sm',
+            'size' => 'modal-lg',
             'clientOptions' => ['backdrop' => True, 'keyboard' => True]
         ]);        echo "<div id='modalRestriContent'></div>";
         yii\bootstrap\Modal::end();
@@ -236,7 +236,7 @@ AppAsset::register($this);
     
      <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-lg">
     
       <!-- Modal content-->
       <div class="modal-content">

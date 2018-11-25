@@ -12,7 +12,7 @@ use app\models\Users;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class='loginc'>
+<div class='loginc azul'>
 <div class="evento-calendar-form">
 
     <?php $form = ActiveForm::begin([
@@ -22,6 +22,7 @@ use app\models\Users;
             ]); 
     $resultCarr = ArrayHelper::map($carreras, 'ID', 'NOMBRE');
     ?>
+    <h1>Crear evento calendario </h1>
     <?php echo $form->field($carrera, 'ID')->dropDownList(
         $resultCarr,
         ['prompt'=>'Seleccionar',
