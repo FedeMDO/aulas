@@ -126,7 +126,7 @@ AppAsset::register($this);
                     ['label' =>  Yii::$app->user->identity->username, 'options' => ['style' => 'font-weight: bold;'],
                     'items' => [
                     ['label' => '<span class="fa fa-key"></span> Cambiar contraseña', 'url' => '/user/changepw'],
-                    ['label' => '<span class="fa fa-book"> Manual de usuario', 'url' => '#'],
+                    ['label' => '<span class="fa fa-book"> Manual de usuario', 'url' => '/site/manual'],
                     ['label' => '<span class="fa fa-info-circle"> Acerca de...', 'url' => '/site/about',],
                     ['label' =>'<span class="fa fa-sign-out"></span> Salir (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
                             ],
@@ -159,7 +159,7 @@ AppAsset::register($this);
                     ['label' =>  Yii::$app->user->identity->username, 'options' => ['style' => 'font-weight: bold;'],
                     'items' => [
                     ['label' => '<span class="fa fa-key"></span> Cambiar contraseña', 'url' => '/user/changepw'],
-                    ['label' => '<span class="fa fa-book"> Manual de usuario', 'url' => '#'],
+                    ['label' => '<span class="fa fa-book"> Manual de usuario', 'url' => '/site/manual'],
                     ['label' => '<span class="fa fa-info-circle"> Acerca de...', 'url' => '/site/about',],
                     ['label' =>'<span class="fa fa-sign-out"></span> Salir (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
                             ],
@@ -190,7 +190,7 @@ AppAsset::register($this);
                     ['label' =>  Yii::$app->user->identity->username, 'options' => ['style' => 'font-weight: bold;'],
                     'items' => [
                     ['label' => '<span class="fa fa-key"></span> Cambiar contraseña', 'url' => '/user/changepw'],
-                    ['label' => '<span class="fa fa-book"> Manual de usuario', 'url' => '#'],
+                    ['label' => '<span class="fa fa-book"> Manual de usuario', 'url' => '/site/manual'],
                     ['label' => '<span class="fa fa-info-circle"> Acerca de...', 'url' => '/site/about',],
                     ['label' =>'<span class="fa fa-sign-out"></span> Salir (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
                             ],

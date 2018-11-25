@@ -409,6 +409,11 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionManual()
+    {
+        return $this->render('manual');
+    }
     
     public function actionNoti()
     {
