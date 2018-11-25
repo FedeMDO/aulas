@@ -23,18 +23,21 @@ $materias = Materia::find()->count();
     <h4>Usuarios registrados</h4>
     </div>
     </div>
+
     <div class="col-md-3">
     <div class="well dash-box">
     <h2><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> <?=Html::encode("{$carreras} ")?></h2>
     <h4>Carreras</h4>
     </div>
     </div>
+
     <div class="col-md-3">
     <div class="well dash-box">
     <h2><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> <?=Html::encode("{$materias} ")?></h2>
     <h4>Materias</h4>
     </div>
     </div>
+    
     <div class="col-md-offset-1 col-md-3">
     <div class="well dash-box">
     <h2><span class="glyphicon glyphicon-home" aria-hidden="true"></span> <?=Html::encode("{$institutos} ")?></h2>

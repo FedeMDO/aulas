@@ -12,6 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="col-md-offset-4 col-md-4">
 <div class="materia-create loginc azul">
 
+    
     <h1><?=Html::encode($this->title)?></h1>
 
     <?=$this->render('_form', [
