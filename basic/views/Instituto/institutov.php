@@ -13,29 +13,47 @@ $this->registerCssFile("@web/css/index.css", [
     
 ], 'css-print-theme');
 
+$this->registerJsFile(
+    '@web/js/main.js',
+    ['depends' => [\yii\web\JqueryAsset::className()]]
+);
+
+
 $this->title = 'Institutos';
-$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="col-md-offset-4 col-md-4">
 <div class="loginc azul">
-  <h3 style="color:white; border-bottom: 1px solid white;">Informacion Institutos</h3>
-  <div class="panel-group">  
-    <!-- ITERO LOS INSTITUTOS -->
-    <?php foreach ($instituto as $ins): ?>
-    <div class= "panel panel-default"> 
-      <div class="panel-heading headingins" style="text-transform: uppercase;"><?= Html::encode("{$ins->NOMBRE} ")?></div>
-    </div>
-  
+  <h3 style="color:white; border-bottom: 1px solid white;">Informacion de Institutos</h3>
+  <div class="panel-group">
+    <?php $aux =0;
+    $b="";
+    $aux2 =false;
+    ?>
+    <?php foreach ($instituto as $car):
+      $aux++;
+      $color=" $car->COLOR_HEXA";
+      $b="";
+      ?>
+      <button type="button" style="background-color:<?php echo $color;?>" class="btn btn-info btn-block miPanel" data-toggle="collapse" data-target="#demo<?php echo $aux;?>"><?= Html::encode("$car->NOMBRE")?><i class="more-less glyphicon glyphicon-plus" style="float:right"></i></button>
     <!-- ME FIJO SI NO TIENE USUARIOS -->
-    <?php if (count($ins->users) == 0){ ?>
-      <p style="color:white">Sin usuarios de este instituto</p>
+    <?php if (count($car->users) == 0){ 
+      $b = $b ."Sin usuarios de este instituto" ."\n";
+      ;?>
+      <p></p>
     <?php
     } ?>
     <!-- ITERO LOS USUARIOS DE CADA INSTITUTO Y SACO SUS DATOS -->
-    <?php foreach ($ins->users as $user): ?></p>
-      <p style="color:white"><?= Html::encode("{$user->username} ") ?> - <?= Html::encode("{$user->email} ") ?></p> 
+    <?php foreach ($car->users as $materia): ?>
+    <?php 
+      $b = $b .$materia->username. ": " .$materia->email ."\n" ?>
+      </p>
     <?php endforeach; ?>
-    <?php endforeach; ?>
+    <div id="demo<?php echo $aux;?>" class="collapse in">
+    <?php $b = str_replace(array("\r\n", "\r", "\n"), "<br />", $b); ?> 
+    <p style="color:white;"><?php echo $b;?></p>
   </div>
+  <?php endforeach; ?>
+  </div>
+  
 </div>

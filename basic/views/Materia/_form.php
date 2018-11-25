@@ -7,23 +7,24 @@ use yii\widgets\ActiveForm;
 /* @var $model app\models\Materia */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+<div class='materia-form'>
 
-<div class="materia-form">
+    <?php $form = ActiveForm::begin();?>
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?=$form->field($model, 'NOMBRE', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->textInput(['maxlength' => true])?>
 
-    <?= $form->field($model, 'NOMBRE')->textInput(['maxlength' => true]) ?>
+    <?=$form->field($model, 'DESC_CORTA', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->textInput(['maxlength' => true])->label("Descripcion corta")?>
 
-    <?= $form->field($model, 'DESC_CORTA')->textInput(['maxlength' => true]) ?>
+    <?=$form->field($model, 'COD_MATERIA', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->textInput(['maxlength' => true])->label("Codigo de materia")?>
 
     <?= $form->field($model, 'ID_Carrera')->textInput() ?>
 
     <?= $form->field($model, 'anio')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?=Html::submitButton('Crear', ['class' => 'btn btn-success'])?>
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <?php ActiveForm::end();?>
 
 </div>

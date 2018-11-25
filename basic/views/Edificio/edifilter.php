@@ -3,6 +3,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use yii\data\Pagination;
+use yii\widgets\LinkPager;
 
 
 $this->registerCssFile("@web/css/index.css", [
@@ -10,62 +11,62 @@ $this->registerCssFile("@web/css/index.css", [
   
 ], 'css-print-theme');
 
-$this->title = 'Edificios disponibles';
+$this->title = 'Edificios';
 ?>
 <br>
 <br>
-<a href="../edificio/create" class="btn btn-success d-flex justify-content-around btn-edificio0" role="button">Crear Edificio</a>
-<a href="../edificio/scheduler?id_sede=<?php echo (Html::encode($id));?>"  class="btn btn-primary d-flex justify-content-around btn-edificio0" role="button">Ver eventos por edificio</a>
-<a href="../edificio/restrischeduler?id_sede=<?php echo (Html::encode($id));?>"  class="btn btn-primary d-flex justify-content-around btn-edificio0" role="button">Ver restricciones por edificio</a>
 
-
-
-<center><h3 style="color:black;"><?php if(count($edificio) != 0){
+<center><h2 class=titulo><?php if(count($edificio) != 0){
 echo("Edificios Disponibles en la sede "); echo (Html::encode("{$edificio[0]->sEDE->NOMBRE}"));}
 else{?>
+</h2>
+<div class="container imagenrobot">
+    <div class="row" style= "width:60%;" >
+    <img width="220px" height="220" style= "float:left; margin-lelft:10px;"src="../image/error.png" />
+      <br>
+      <h3 class="titulo" >No hay edificios creados en esta sede</h3>
+      <br><br><br>
+      <a href="../sede/vistav"  class="btn btn-info" style="width:50%" role="button">Volver atras</a>
+    </div>
+</div>
 
-<div class="alert alert-danger" role="alert">
-  <h4 class="alert-heading">ATENCION!</h4>
-  <p>NO HAY EDIFICIOS CREADOS EN ESTA SEDE</p>
-  <hr>
-
-  <a href="../edificio/create" class="btn btn-danger btn-md" role="button">CREA EDIFICIO</a>
 </div>
 
 
 <?php } ?></h3></center>
 
-
-
-
-
-
-
-
 <ul>
-
-
 <?php foreach ($edificio as $edificio): ?>
 
 <div class="row3">
   <div class="col-sm-8 col-md-4">
-    <div class="thumbnail">
+    <div class="thumbnail sede">
       <img src="../image/edi4.png" alt="...">
       <div class="caption">
-        <?= Html::encode("{$edificio->NOMBRE} ") ?>
-        <br></br> 
+        <h4><?= Html::encode("{$edificio->NOMBRE} ") ?></h4>
          <img  src="../image/aulaicon.png" alt="  height="42" width="42"">
         <?= Html::encode("{$edificio->CANTIDAD_AULAS} ") ?>
-        <p><a href="../aula/aulafilter?id=<?= Html::encode("{$edificio->ID}") ?>" class="btn btn-primary" role="button">Entrar</a> <a href="../edificio/update?id=<?= Html::encode("{$edificio->ID}") ?>" class="btn btn-default" role="button">Modificar</a></p>
+        <p><a href="../aula/aulafilter?id=<?= Html::encode("{$edificio->ID}") ?>" class="btn btn-info" role="button">Entrar</a> <a href="../edificio/update?id=<?= Html::encode("{$edificio->ID}") ?>" class="btn btn-primary" role="button">Modificar</a></p>
       </div>
     </div>
   </div>
 </div>
 <?php endforeach; ?>
 
-
-
-
+<div id="sidebar" class="active">
+  <div class="toggle-btn miBoton">
+      <span>&#9776;</span>
+  </div>
+      <ul>
+        <li><a href="../aula/buscador" class="btn miBoton btn-md btn-vistav " role="button">Filtrar aulas <span class="glyphicon glyphicon-search"></span></a>
+        </li>
+        <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
+        <li>
+        <a href="../edificio/create" class="btn miBoton btn-md btn-vistav" role="button">Crear edificio <span class="glyphicon glyphicon-plus"></span></a>
+        </li>
+        <?php endif; ?>
+      </ul>
+</div>
 
 </ul>
 

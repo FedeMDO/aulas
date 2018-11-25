@@ -11,21 +11,20 @@ $this->registerCssFile("@web/css/index.css", [
 $this->title = 'Sedes';
 ?>
 
-          <center><h3>Sedes Disponibles</h3></center>
+          <center><h2 class=titulo>Sedes disponibles</h2></center>
 
 
 <?php foreach ($sede as $sede): ?>
   <div class="row3">
         <div id="columna" class="col-sm-8 col-md-4 active">
-          <div class="thumbnail">
-            <img src="../image/sede_<?=Html::encode("{$sede->ID}")?>.png" alt="...">
+          <div class="thumbnail sede">
+            <img src="../image/sede_<?=Html::encode("{$sede->ID}")?>.png" alt="..." style="width=50px">
             <div class="caption">
-              <?=Html::encode("{$sede->NOMBRE} ")?>
-              <br></br>
-              <?=Html::encode(" {$sede->CALLEYNUM} ")?>
-              <?=Html::encode("{$sede->LOCALIDAD}")?>
-              <p><a href="../edificio/edifilter?id=<?=Html::encode("{$sede->ID}")?>" class="btn btn-primary" role="button">Entrar</a>
-              <a href="../sede/update?id=<?=Html::encode("{$sede->ID}")?>"  class="btn btn-default" role="button">Modificar</a></p>
+            <h4><?=Html::encode("{$sede->NOMBRE} ")?> </h4>
+            <p><?=Html::encode("{$sede->LOCALIDAD}")?> -<?=Html::encode(" {$sede->CALLEYNUM} ")?></p>
+            <p></p>
+            <a href="../edificio/edifilter?id=<?=Html::encode("{$sede->ID}")?>" class="btn btn-info" role="button">Entrar</a>
+            <a href="../sede/update?id=<?=Html::encode("{$sede->ID}")?>"  class="btn btn-primary" role="button">Modificar</a>
             </div>
           </div>
         </div>
@@ -33,38 +32,25 @@ $this->title = 'Sedes';
 <?php endforeach;?>
 
 <div id="sidebar" class="active">
-  <div class="toggle-btn">
+  <div class="toggle-btn miBoton">
       <span>&#9776;</span>
   </div>
       <ul>
-        <li>
-        <a href="../sede/create" class="btn miBoton btn-md btn-vistav" role="button">Crear Sede</a>
+        <li><a href="../aula/buscador" class="btn miBoton btn-md btn-vistav " role="button">Filtrar aulas <span class="glyphicon glyphicon-search"></span></a>
         </li>
+<<<<<<< HEAD
 
         <li><a href="../aula/buscador" class="btn miBoton btn-md btn-vistav" role="button">Filtrar Aulas</a>
+=======
+        <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
+        <li>
+        <a href="../sede/create" class="btn miBoton btn-md btn-vistav" role="button">Crear sede <span class="glyphicon glyphicon-plus"></span></a>
+>>>>>>> 731db0d0c333fc0bde9243f8ecc36cdbeec56973
         </li>
+        <li><a href="../comision/create" class="btn miBoton btn-md btn-vistav" role="button">Crear comisiones <span class="glyphicon glyphicon-plus"></span></a></li>
+        <li><a href="../materia/create" class="btn miBoton btn-md btn-vistav" role="button">Crear materia <span class="glyphicon glyphicon-plus"></span></a></li>
+        <?php endif; ?>
       </ul>
 </div>
 
 
-<div class=""><?=LinkPager::widget(['pagination' => $pagination])?></div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
-</script>
-<script src="my_jquery_functions.js"></script>
- <script>
-  const btnToggle = document.querySelector('.toggle-btn');
-
-  btnToggle.addEventListener('click', function () {
-  document.getElementById("sidebar").classList.toggle('active');});
- </script>
-<script>
-  $(document).ready(function(){
-    $("#sidebar").click(function(){
-      if ($(this).hasClass('active')){
-        $(".col-sm-8").css({"left": "0px", "transition": "all 500ms linear"});
-      }else{
-        $(".col-sm-8").css({"left": "200px", "transition": "all 500ms linear"});
-      }
-    });
-  });
-</script>

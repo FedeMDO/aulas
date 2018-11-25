@@ -4,8 +4,10 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Instituto;
 use dominus77\sweetalert2\Alert;
+use app\assets\RegisterAsset;
 
 $this->title = 'Registro de usuario';
+RegisterAsset::register($this);
 ?>
 
 <br>
@@ -37,16 +39,22 @@ endif; ?>
  <?= $form->field($model, "idInstituto",['labelOptions'=>['style'=>'color:white']])->dropDownList(
             $result, 
             ['prompt'=>'Seleccione un instituto...']
-    )->label('Instituto'); ?>
+        )->label("Seleccione instituto"); ?>
+
+<div class="testing">
+<?= Html::checkbox('checkbox-id', false, ['label' => 'Sin instituto', 'id'=>'checkNoInstituto']) ?>
+</div>
+
 <?php $roles = ['Administrador', 'Usuario', 'Guest']; ?>
- <?= $form->field($model, "rol", ['labelOptions'=>['style'=>'color:white']])->dropDownList(
+<br><p>
+ <?= $form->field($model, "rol", ['labelOptions'=>['style'=>'color:white; margin-top:5px;']])->dropDownList(
             $roles, 
             ['prompt'=>'Seleccione...']
     )->label('Permisos del usuario'); ?>
-
+</p>
  <?= $form->field($model, "password",['labelOptions'=>['style'=>'color:white']])->input("password")->label('Contraseña') ?>   
  <?= $form->field($model, "password_repeat",['labelOptions'=>['style'=>'color:white']])->input("password")->label('Confirme la Contraseña') ?>   
-<?= Html::submitButton("Finalizar Registro", ["class" => "btn btn-suces btn-success btn-block"]) ?>
+<?= Html::submitButton("Finalizar registro", ["class" => "btn btn-suces btn-success btn-block"]) ?>
 <?php $form->end() ?>
 </div>
 </div>

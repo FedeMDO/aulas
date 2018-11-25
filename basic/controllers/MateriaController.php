@@ -8,6 +8,8 @@ use app\models\MateriaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use app\models\User;
 
 /**
  * MateriaController implements the CRUD actions for Materia model.
@@ -20,6 +22,39 @@ class MateriaController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'create', 'update', 'delete'],
+                'rules' => [
+                    [
+                        //El administrador tiene permisos sobre las siguientes acciones
+                        'actions' => ['index','view','create','update','delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserAdmin(Yii::$app->user->identity->id);
+                        },
+                    ],
+                    [
+                       //Los usuarios simples tienen permisos sobre las siguientes acciones
+                       'actions' => [],
+                       'allow' => false,
+                       'roles' => ['@'],
+                       'matchCallback' => function ($rule, $action) {
+                          return User::isUserSimple(Yii::$app->user->identity->id);
+                      },
+                   ],
+                   [
+                    //Los usuarios guest tienen permisos sobre las siguientes acciones
+                    'actions' => [],
+                    'allow' => false,
+                    'roles' => ['@'],
+                    'matchCallback' => function ($rule, $action) {
+                        return User::isUserGuest(Yii::$app->user->identity->id);
+                    },
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -35,6 +70,7 @@ class MateriaController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout = 'LayoutAdmin';
         $searchModel = new MateriaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

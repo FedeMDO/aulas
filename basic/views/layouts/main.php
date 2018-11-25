@@ -17,6 +17,8 @@ $this->registerCssFile("@web/css/index.css", [
     
 ], 'css-print-theme');
 
+$this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '../image/favicon_unaj.png']);
+
 
 AppAsset::register($this);
 
@@ -99,14 +101,25 @@ AppAsset::register($this);
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-home']).' INICIO', 'url' => ['/site/index'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' SEDES', 'url' => ['/sede/vistav'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' INSTITUTOS', 'url' => ['/instituto/institutov'], 'options' => ['style' => 'font-weight: bold;']],
-                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' REGISTRAR USUARIO', 'url' => ['/site/register'], 'options' => ['style' => 'font-weight: bold;']],
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' CARRERAS', 'url' => ['/carrera/carrerav'], 'options' => ['style' => 'font-weight: bold;']],
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' ADMINISTRACION', 'url' => ['/site/register'], 'options' => ['style' => 'font-weight: bold;'],
+
+                    'items' => [
+                    ['label' => '<span></span> Registrar usuario', 'url' => '/site/register'],
+                    ['label' => '<span> Panel de administracion', 'url' => '/admin/panel'],
+                    ['label' => '<span> Gestionar usuarios', 'url' => '/admin/users',],
+                            ],
+                        ]                  
                 ],
             ]);
+        
+
+
             echo Nav::widget([
                 'encodeLabels' => false,
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/admin/noti'], 'options' => ['style' => 'font-weight: bold;']],
+                    ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold;']],
                     Yii::$app->user->isGuest ? (
                         ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login'], 'options' => ['style' => 'font-weight: bold;']]
                     ) : 
@@ -114,7 +127,7 @@ AppAsset::register($this);
                     'items' => [
                     ['label' => '<span class="fa fa-key"></span> Cambiar contraseña', 'url' => '/user/changepw'],
                     ['label' => '<span class="fa fa-book"> Manual de usuario', 'url' => '#'],
-                    ['label' => '<span class="fa fa-info-circle"> Acerca de...', 'url' => '#',],
+                    ['label' => '<span class="fa fa-info-circle"> Acerca de...', 'url' => '/site/about',],
                     ['label' =>'<span class="fa fa-sign-out"></span> Salir (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
                             ],
                         ]                  
@@ -131,6 +144,7 @@ AppAsset::register($this);
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-home']).' INICIO', 'url' => ['/site/index'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' SEDES', 'url' => ['/sede/vistav'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' INSTITUTOS', 'url' => ['/instituto/institutov'], 'options' => ['style' => 'font-weight: bold;']],
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' CARRERAS', 'url' => ['/carrera/carrerav'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' CREAR COMISION', 'url' => ['/comision/create'], 'options' => ['style' => 'font-weight: bold;']],
                 ],
             ]);
@@ -138,7 +152,7 @@ AppAsset::register($this);
                 'encodeLabels' => false,
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/admin/noti'], 'options' => ['style' => 'font-weight: bold;']],
+                    ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold;']],
                     Yii::$app->user->isGuest ? (
                         ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login'], 'options' => ['style' => 'font-weight: bold;']]
                     ) : 
@@ -146,7 +160,38 @@ AppAsset::register($this);
                     'items' => [
                     ['label' => '<span class="fa fa-key"></span> Cambiar contraseña', 'url' => '/user/changepw'],
                     ['label' => '<span class="fa fa-book"> Manual de usuario', 'url' => '#'],
-                    ['label' => '<span class="fa fa-info-circle"> Acerca de...', 'url' => '#',],
+                    ['label' => '<span class="fa fa-info-circle"> Acerca de...', 'url' => '/site/about',],
+                    ['label' =>'<span class="fa fa-sign-out"></span> Salir (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
+                            ],
+                        ]                  
+                ],
+            ]);
+        }
+        if(User::isUserGuest(Yii::$app->user->identity->id))
+        {
+            echo Nav::widget([
+                'encodeLabels' => false, //Esto permite poner los iconos
+                'options' => ['class' => 'navbar-nav navbar-default'],
+                'items' => [
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-home']).' INICIO', 'url' => ['/site/index'], 'options' => ['style' => 'font-weight: bold;']],
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' SEDES', 'url' => ['/sede/vistav'], 'options' => ['style' => 'font-weight: bold;']],
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' INSTITUTOS', 'url' => ['/instituto/institutov'], 'options' => ['style' => 'font-weight: bold;']],
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-chevron-right']).' CARRERAS', 'url' => ['/carrera/carrerav'], 'options' => ['style' => 'font-weight: bold;']],
+                ],
+            ]);
+            echo Nav::widget([
+                'encodeLabels' => false,
+                'options' => ['class' => 'navbar-nav navbar-right'],
+                'items' => [
+                    ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold;']],
+                    Yii::$app->user->isGuest ? (
+                        ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login'], 'options' => ['style' => 'font-weight: bold;']]
+                    ) : 
+                    ['label' =>  Yii::$app->user->identity->username, 'options' => ['style' => 'font-weight: bold;'],
+                    'items' => [
+                    ['label' => '<span class="fa fa-key"></span> Cambiar contraseña', 'url' => '/user/changepw'],
+                    ['label' => '<span class="fa fa-book"> Manual de usuario', 'url' => '#'],
+                    ['label' => '<span class="fa fa-info-circle"> Acerca de...', 'url' => '/site/about',],
                     ['label' =>'<span class="fa fa-sign-out"></span> Salir (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
                             ],
                         ]                  

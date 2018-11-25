@@ -19,17 +19,65 @@ use yii\filters\AccessControl;
  */
 class EdificioController extends Controller
 {
+    
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        //El administrador tiene permisos sobre las siguientes acciones
+                        'actions' => ['edifilter','index','view','create','update','delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserAdmin(Yii::$app->user->identity->id);
+                        },
+                    ],
+                    [
+                       //Los usuarios simples tienen permisos sobre las siguientes acciones
+                       'actions' => ['edifilter'],
+                       'allow' => true,
+                       'roles' => ['@'],
+                       'matchCallback' => function ($rule, $action) {
+                          return User::isUserSimple(Yii::$app->user->identity->id);
+                      },
+                   ],
+                   [
+                        //Los usuarios guest tienen permisos sobre las siguientes acciones
+                        'actions' => ['edifilter'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserGuest(Yii::$app->user->identity->id);
+                        },
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ];
+    }
+
     public function actionScheduler($id_sede)
     {
 
         $sede = Sede::findOne($id_sede);
 
-
-
         return $this->render('schedulerPorSede', [
             'sede' => $sede,
         ]);
     }
+    
     public function actionRestrischeduler($id_sede)
     {
 
@@ -43,17 +91,8 @@ class EdificioController extends Controller
     }
     public function actionEdifilter($id)
     {
-       
-        if (User::isUserAdmin(Yii::$app->user->identity->id)) #si es admin, recibe los enviados y recibidos
-        {
-            $query = Edificio::find()
-            ->where(['ID_SEDE' =>$id]);
-        }
-        elseif (User::isUserSimple(Yii::$app->user->identity->id)) #si es user. recibe los recibidos (no tiene enviados)
-        {
-            $query = Edificio::find()
-            ->where(['ID_SEDE' =>$id]);
-        }
+        $query = Edificio::find()
+        ->where(['ID_SEDE' =>$id]);
 
         $pagination = new Pagination([
             'defaultPageSize' => 5,
@@ -76,58 +115,13 @@ class EdificioController extends Controller
 
     }
 
-
-    public function actionEdificiov()
-    {
-
-        $query = Edificio::find();
-
-
-        $pagination = new Pagination([
-            'defaultPageSize' => 5,
-            'totalCount' => $query->count(),
-        ]);
-
-    
-        $edificio = $query->orderBy('ID')
-            ->offset($pagination->offset)
-            ->limit($pagination->limit)
-            ->all();
-
-       
-
-        return $this->render('edificiov', [
-            'edificio' => $edificio,
-            'pagination' => $pagination,
-            
-        ]);
-
-
-
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all Edificio models.
      * @return mixed
      */
     public function actionIndex()
     {
+        $this->layout='LayoutAdmin';
         $searchModel = new EdificioSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

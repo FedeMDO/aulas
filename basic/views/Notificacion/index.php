@@ -7,27 +7,23 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\NotificacionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Notificacions';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Notificaciones';
+
 ?>
 <div class="notificacion-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Notificacion', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
+    <h1 class= titulo>Panel de notificaciones</h1>
+    <div class="col-xs-offset-1 col-xs-10 col-xs-9 col-lg-9">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'tableOptions'=>['class'=>'table-bordered table-condensed  grid'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'ID',
-            'ID_USER_EMISOR',
-            'ID_USER_RECEPTOR',
+            'uSEREMISOR.username',
+            'uSERRECEPTOR.username',
             'NOTIFICACION',
             'FECHA',
 

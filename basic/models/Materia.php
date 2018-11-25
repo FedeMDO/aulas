@@ -71,19 +71,5 @@ class Materia extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Carrera::className(), ['ID' => 'ID_Carrera']);
     }
-    public function getMateriaCodigo($result, $result1) {
-        $nuevo = array();
-        foreach ($result as $key => $value) {
-            foreach ($result1 as $key1 => $value1) {
-                if ($key == $key1) {
-                    $nombre = $result[$key];
-                    $codigo = $result1[$key1];
-                    $concatenar = $nombre . ' (' . $codigo . ')';
-                    array_push($nuevo, $concatenar);
-                }
-            }
-        }
-        return $nuevo;
-    }
     
 }

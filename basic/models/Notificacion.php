@@ -52,6 +52,8 @@ class Notificacion extends \yii\db\ActiveRecord
             'ID_USER_RECEPTOR' => 'Usuario receptor',
             'NOTIFICACION' => 'Notificacion',
             'FECHA' => 'Fecha',
+            'uSEREMISOR.username' => 'Usuario emisor',
+            'uSERRECEPTOR.username' => 'Usuario receptor',
         ];
     }
 

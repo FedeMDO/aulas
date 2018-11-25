@@ -10,8 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\User;
-use yii\base\Model;
-
+use yii\data\Pagination;
 
 /**
  * CarreraController implements the CRUD actions for Carrera model.
@@ -26,34 +25,33 @@ class CarreraController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                //'only' => ['logout', 'user'],
+                'only' => ['carrerav','index','view','create','update','delete'],
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['index','view','create','update','delete','ofertaacademica','oferta'],
-                        //Esta propiedad establece que tiene permisos
+                        'actions' => ['carrerav','index','view','create','update','delete'],
                         'allow' => true,
-                        //Usuarios autenticados, el signo ? es para invitados
                         'roles' => ['@'],
-                        //Este método nos permite crear un filtro sobre la identidad del usuario
-                        //y así establecer si tiene permisos o no
                         'matchCallback' => function ($rule, $action) {
-                            //Llamada al método que comprueba si es un administrador
                             return User::isUserAdmin(Yii::$app->user->identity->id);
                         },
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['index','view','ofertaacademica','oferta'],
-                       //Esta propiedad establece que tiene permisos
+                       'actions' => ['carrerav'],
                        'allow' => true,
-                       //Usuarios autenticados, el signo ? es para invitados
                        'roles' => ['@'],
-                       //Este método nos permite crear un filtro sobre la identidad del usuario
-                       //y así establecer si tiene permisos o no
                        'matchCallback' => function ($rule, $action) {
-                          //Llamada al método que comprueba si es un usuario simple
                           return User::isUserSimple(Yii::$app->user->identity->id);
+                      },
+                   ],
+                   [
+                       //Los usuarios simples tienen permisos sobre las siguientes acciones
+                       'actions' => ['carrerav'],
+                       'allow' => true,
+                       'roles' => ['@'],
+                       'matchCallback' => function ($rule, $action) {
+                          return User::isUserGuest(Yii::$app->user->identity->id);
                       },
                    ],
                 ],
@@ -92,6 +90,7 @@ class CarreraController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout='LayoutAdmin';
         $searchModel = new CarreraSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -99,6 +98,23 @@ class CarreraController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    public function actionCarrerav()
+    {
+        $query = Carrera::find(); 
+        $pagination = new Pagination([
+            'defaultPageSize' => 5,
+        ]);
+        $carrera = $query->orderBy('ID')
+        ->offset($pagination->offset)
+        ->limit($pagination->limit)
+        ->all();
+        return $this->render('carrerav', [
+            'carrera' => $carrera,
+            'pagination' => $pagination,
+        ]);
+    
+       
     }
 
     /**

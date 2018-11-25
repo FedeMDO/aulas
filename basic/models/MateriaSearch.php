@@ -18,8 +18,8 @@ class MateriaSearch extends Materia
     public function rules()
     {
         return [
-            [['ID', 'ID_Carrera', 'anio'], 'integer'],
-            [['NOMBRE', 'DESC_CORTA'], 'safe'],
+            [['ID'], 'integer'],
+            [['NOMBRE', 'DESC_CORTA','COD_MATERIA'], 'safe'],
         ];
     }
 
@@ -65,7 +65,8 @@ class MateriaSearch extends Materia
         ]);
 
         $query->andFilterWhere(['like', 'NOMBRE', $this->NOMBRE])
-            ->andFilterWhere(['like', 'DESC_CORTA', $this->DESC_CORTA]);
+            ->andFilterWhere(['like', 'DESC_CORTA', $this->DESC_CORTA]
+        );
 
         return $dataProvider;
     }

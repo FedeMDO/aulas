@@ -1,37 +1,35 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\MateriaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Materias';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="materia-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+	<h1 class='titulo'><?=Html::encode($this->title)?></h1>
+	<div class="col-xs-offset-1 col-xs-10 col-xs-9 col-lg-9">
 
     <p>
-        <?= Html::a('Create Materia', ['create'], ['class' => 'btn btn-success']) ?>
+        <?=Html::a('Crear materia', ['create'], ['class' => 'btn btn-success'])?>
     </p>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    <?=GridView::widget([
+	'dataProvider' => $dataProvider,
+	'filterModel' => $searchModel,
+	'tableOptions'=>['class'=>'table-bordered table-condensed  grid'],
+	'columns' => [
+		['class' => 'yii\grid\SerialColumn'],
 
-            'ID',
-            'NOMBRE',
-            'DESC_CORTA',
-            'ID_Carrera',
-            'anio',
+		'NOMBRE',
+		'DESC_CORTA',
+		'COD_MATERIA',
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+		['class' => 'yii\grid\ActionColumn'],
+	],
+]);?>
 </div>

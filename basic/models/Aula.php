@@ -12,6 +12,7 @@ use Yii;
  * @property int $ID_EDIFICIO
  * @property int $PISO
  * @property int $CAPACIDAD
+ * @property string $OBS
  *
  * @property Edificio $eDIFICIO
  * @property AulaRecurso[] $aulaRecursos
@@ -38,6 +39,7 @@ class Aula extends \yii\db\ActiveRecord
             [['NOMBRE', 'ID_EDIFICIO'], 'required'],
             [['ID_EDIFICIO', 'PISO', 'CAPACIDAD'], 'integer'],
             [['NOMBRE'], 'string', 'max' => 40],
+            [['OBS'], 'string', 'max' => 300],
             [['ID_EDIFICIO'], 'exist', 'skipOnError' => true, 'targetClass' => Edificio::className(), 'targetAttribute' => ['ID_EDIFICIO' => 'ID']],
         ];
     }
@@ -53,6 +55,7 @@ class Aula extends \yii\db\ActiveRecord
             'ID_EDIFICIO' => 'Id  Edificio',
             'PISO' => 'Piso',
             'CAPACIDAD' => 'Capacidad',
+            'OBS' => 'Observacion',
         ];
     }
 

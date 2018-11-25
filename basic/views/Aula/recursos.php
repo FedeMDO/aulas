@@ -1,18 +1,14 @@
 <?php
 use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\bootstrap\ActiveForm;
-use yii\data\Pagination;
-
 
 $this->registerCssFile("@web/css/index.css", [
-  'depends' => [\yii\bootstrap\BootstrapAsset::className()],
-  
+	'depends' => [\yii\bootstrap\BootstrapAsset::className()],
+
 ], 'css-print-theme');
 
 ?>
 <div class="col-md-offset-4 col-md-4">
-<h1 style="color:white; text-align:center;">Recursos de aula</h1>
+<h1 class=titulo style="text-align:center;">Recursos de aula</h1>
 
  <div class="loginc">
 <div class="box-body">
@@ -27,11 +23,11 @@ $this->registerCssFile("@web/css/index.css", [
                 <?php foreach ($aula as $aula): ?>
                     <?php foreach ($aula->rECURSOs as $recurso): ?>
 
-                    <td><?= Html::encode("{$recurso->NOMBRE} ") ?>
-                    <td><?= Html::encode("{$recurso->DESCRIPCION} ") ?></td>
+                    <td><?=Html::encode("{$recurso->NOMBRE} ")?>
+                    <td><?=Html::encode("{$recurso->DESCRIPCION} ")?></td>
                     </tr>
-                    <?php endforeach; ?>
-                <?php endforeach; ?>
+                    <?php endforeach;?>
+                <?php endforeach;?>
               </table>
             </div>
 </div>

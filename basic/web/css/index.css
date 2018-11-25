@@ -90,11 +90,10 @@ text-transform: uppercase; */
 
 /* Style the tab content */
 .tabcontent {
-    position: relative !important;
-    margin-left: 10%;
+    /*position: relative !important;*/
     border-collapse: separate;
     float: left;
-    padding: 20px 12px;
+    padding: 10px;
     width: 70%;
     border-left: none;
     max-height: 900px;
@@ -121,15 +120,6 @@ text-transform: uppercase; */
 .gallery img:hover{
   transform: scale(1.2);
 }
-
-h4 { 
-  border:0 solid #fff; 
-  border-bottom-width:1px;
-  padding-bottom:10px;
-  text-align: center;
-  color: white;
- }
-
 
 .form-login {
   background-color: rgb(41, 128, 185);
@@ -200,6 +190,9 @@ th, td {
   border-width: 5px;
   box-shadow:0 1px 0 #cfcfcf;
 }
+.loginc label{
+  color:white;
+}
 
 
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
@@ -215,29 +208,6 @@ th, td {
   width: 100%;
   height: 100%;
  }
-
-
-.imgsede1
-{
-  height: 500px;
-  width: 500px;
-}
-
-.imgsede2
-{
-  height: 500px;
-  width: 500px;
-}
-
-.imgsede3
-{
-  height: 500px;
-  width: 500px;
-}
-/*no se como cambiarle el color a las letras de de <H1> de la vista user y admin */
-.btn btn-link logout{
-  color:#ecf0f1;
-}
 
 .jumbotron2
 {
@@ -259,9 +229,13 @@ text-transform: uppercase;
 
 }
 
+.kv-sidenav{
+  height:1000px;
+}
 .nav-stacked{
-  width: 20%;
+  width: 10%;
   float: left;
+  background-color: white;
 }
 .notiboton{
   background-color:white;
@@ -278,19 +252,8 @@ text-transform: uppercase;
   position: relative;
   bottom: 10px;
 }
-.navbar-inverse{
-  position: fixed;
-  border-top: 2px solid white ;
-  background-color: white;
-  height:100%;
-  width: 10%;
-}
 
-.navbar-inverse>a{
-    color:black;
-    padding-top: 20px;
-  
-}
+
 .carousel-inner > .item > img {
   margin: 0 auto;
 }
@@ -323,20 +286,12 @@ text-transform: uppercase;
 .recibidos{
   border: 1px solid white;
 }
+
 /* arregla margen de aulas*/
 .btn-vistav{
   margin-top: 10px;
 }
-.btn-vistav1{
-  margin-top: 10px;
-  margin-left: 55px;
-}
-.btn-vistav2{
-  margin-top: 10px;
-}
-.formu{
-  margin-top :20px;
-}
+
 
 /*Estilo del placeholder*/
 
@@ -365,13 +320,23 @@ text-transform: uppercase;
   position: relative;
   left: 20px;
 }
+.botton01{
+  padding-top: 5px;
+  min-height: 650px;
+  width: 50%;
+  overflow: hidden;
+  position: relative;
+  left: 20px;
+}
+
+
 
 /*Estilo de scroll solo funciona en crome*/
 
 /* width */
 .tabcontent::-webkit-scrollbar {
   width: 10px;
-  
+
 }
 
 /* Track */
@@ -401,6 +366,7 @@ text-transform: uppercase;
   width: 90%;
   float: center;
   margin: auto; 
+  margin-top: 20px;
   text-align: center;
 }
 
@@ -424,25 +390,44 @@ text-transform: uppercase;
   margin-top: 20px;
   text-align: center;
 }
+
+.panel_a{
+  background-color: #ffffff;
+  border-width: 20px;
+  box-shadow:0 1px 0 #cfcfcf;
+  margin: auto;
+  text-align: left;
+}
+.azul label{
+  color: white;
+  float: left;
+  
+}
+.azul h1{
+  color:white; 
+  border-bottom: 1px solid white;
+}
+.azul p{
+  color:white;
+  font-weight: bold;
+}
 .enviado{
   width: 80%;
 }
 
-/* baja el boton de buscar en la vista buscador*/
-.btn-buscador1{
-  margin-top: 10px;
-}
-
 .miBoton {
 	background-color: #1475b9;
-	color: #fff;
+  color: #fff;
+  text-align: left;
 }
+
 
 
 * {
   margin: 0px;
   padding: 0px;
 }
+
 
 #sidebar {
   position: absolute;
@@ -482,8 +467,177 @@ text-transform: uppercase;
   border: 1px solid #000;
 } 
 
-.btn-edificio0{
- 
-  margin-left: 1%;
+
+/* Barra lateral nueva de notificaciones*/
+.sidenav {
+  position: absolute;
+  width: 180px;
+  height: 145%;
+  left: 0px;
+  top: 50px;
+  background-color: white;
+  overflow-x: hidden; 
+  padding-top: 10px;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: black;
+}
+.main {
+  margin-left: 160px; /* Same as the width of the sidebar */
+  padding: 0px 10px;
+}
+
+
+/*Para hacer mas responsivo notificaciones*/
+
+@media screen and (max-width: 700px) {
+  .sidenav {
+    width: 100%;
+    height: auto;
+    position: relative;
+    top: 0px;
+    text-align: center !important;
+    left: 0px;
+  }
+  .sidenav a {
+    float: none;
+    text-align: center;
+  }
+  .enviado {
+      max-height: auto;
+      width: auto !important;
+      height: auto;
+      position: relative;
+      top: 0px;
+  }
+  .enviado a {
+      float: none;
+      text-align: center;
+  }
+  .main{
+      margin-left: 0px;
+  }
+  .mensaje{
+      margin: 0px ;
+      width: auto !important;
+      float: none !important;
+      left: 0px !important;
+  }
+  .alert{
+    text-align: center;
+  }
+  .tabcontent{
+    float: none;
+  }
+}    
   
+.error{
+  text-align: center;
+  color: white;
+}
+.sede{
+  background-color: #1475b9;
+}
+.sede p{
+  color:#2980b9;
+  text-transform:uppercase;
+  font-weight: bold;
+}
+.sede h4{
+  border:0 solid #2980b9; 
+  border-bottom-width:1px;
+  padding-bottom:10px;
+  color:  #2980b9;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: left;
+}
+.thumbnail{
+  background-color: white;
+  border: 1px solid #2980b9;
+  padding: 0px !important;
+}
+.titulo{
+  font-weight: bold; 
+  color:white; 
+  /*text-decoration: underline;*/
+  text-shadow: 2px 2px grey;
+  text-align: center;
+}
+/* gridView */
+
+.grid{
+  background-color: white;
+  border: 2px solid #2980b9;
+  color:#2980b9 !important;
+  text-transform: uppercase;
+  font-weight: bold;
+
+}
+.grid a{
+  color: white;
+}
+.grid td a{
+  color:#2980b9;
+}
+.grid td{
+  border: 2px solid grey !important;
+}
+.grid th{
+  border: 2px solid grey !important;
+  background-color: #2980b9;
+  color: white;
+}
+
+
+ .button1 {
+
+
+  margin-left: 584px;
+  
+
+  }
+
+/*.grid tr:nth-child(odd){
+  background-color: #4C8BF5;
+  color: #fff;
+}
+.grid tr:nth-child(even){
+  background-color: #4C8BF5;
+  color: #fff;
+}
+*/
+.float-right{
+  text-align: right;
+}
+.notificacion-create{
+  color: white;
+}
+.miPanel{
+  padding-top:15px;
+  padding-bottom: 15px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+  /*background-color: white;
+  color: #1475b9;*/
+}
+
+/*iconos de administracion*/
+.well{
+  width:80%;
+  text-align: center;
+  border:0px;
+  border-radius: 10px;
+}
+
+.testing{
+  margin-top:-10px;
 }

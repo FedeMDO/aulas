@@ -37,7 +37,7 @@ class Comision extends \yii\db\ActiveRecord
             [['NUMERO', 'ID_MATERIA', 'CARGA_HORARIA_SEMANAL', 'ID_Ciclo'], 'integer'],
             [['ID_MATERIA', 'CARGA_HORARIA_SEMANAL'], 'required'],
             [['ID_MATERIA'], 'exist', 'skipOnError' => true, 'targetClass' => Materia::className(), 'targetAttribute' => ['ID_MATERIA' => 'ID']],
-            [['ID_Ciclo'], 'exist', 'skipOnError' => true, 'targetClass' => CicloLectivo::className(), 'targetAttribute' => ['ID_Ciclo' => 'id']],
+            //[['ID_Ciclo'], 'exist', 'skipOnError' => true, 'targetClass' => CicloLectivo::className(), 'targetAttribute' => ['ID_Ciclo' => 'id']],
         ];
     }
 

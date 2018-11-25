@@ -10,8 +10,7 @@ use yii\helpers\Html;
 <div class="col-md-offset-4 col-md-4">
 <div class="loginc azul">
 <div class="comision-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+<h2 style="color:white; border-bottom: 1px solid white; ">Crear comision</h2>
 
     <?= $this->render('_form', [
         'model' => $model,'instituto' => $instituto,'carrera' => $carrera,

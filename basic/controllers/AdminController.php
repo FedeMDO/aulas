@@ -17,98 +17,69 @@ use yii\helpers\Html;
 use app\models\User;
 use yii\data\Pagination;
 use app\models\Notificacion;
+use yii\base\Exception;
 
 class AdminController extends Controller
 {
-    public function actionAdmin()
+    public function behaviors()
     {
-        return $this->render('admin');
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        //Los usuarios simples tienen permisos sobre las siguientes acciones
+                        'actions' => [],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserAdmin(Yii::$app->user->identity->id);
+                        },
+                    ],
+                    [
+                       //Los usuarios simples tienen permisos sobre las siguientes acciones
+                       'actions' => [],
+                       'allow' => false,
+                       'roles' => ['@'],
+                       'matchCallback' => function ($rule, $action) {
+                          return User::isUserSimple(Yii::$app->user->identity->id);
+                      },
+                   ],
+                   [
+                        //Los usuarios guest tienen permisos sobre las siguientes acciones
+                        'actions' => [],
+                        'allow' => false,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserGuest(Yii::$app->user->identity->id);
+                        },
+                    ],
+                ],
+            ],
+        ];
     }
 
-    public function actionSedesv()
-    {
-       
-        return $this->render('sedesv');
+    public function actionPanel(){
+        $this->layout='LayoutAdmin';
+        return $this->render('panel');
     }
 
-    public function actionNoti()
+    public function actionUsers()
     {
-        if (User::isUserAdmin(Yii::$app->user->identity->id))
-        {
-            $query = Notificacion::find()
-            ->where(['ID_USER_EMISOR' => Yii::$app->user->identity->id])
-            ->orWhere(['ID_USER_RECEPTOR' => Yii::$app->user->identity->id]);
-        }
-        elseif (User::isUserSimple(Yii::$app->user->identity->id))
-        {
-            $query = Notificacion::find()
-            ->where(['ID_USER_EMISOR' => Yii::$app->user->identity->id])
-            ->orwhere(['ID_USER_RECEPTOR' => Yii::$app->user->identity->id]);
-        }
-
+        $query = Users::find();
         $pagination = new Pagination([
-            'defaultPageSize' => 20,
+            'defaultPageSize' => 19,
             'totalCount' => $query->count(),
         ]);
-    
-        $notificacion = $query->orderBy(['Fecha'=>SORT_DESC])
-            ->offset($pagination->offset)
-            ->limit($pagination->limit)
-            ->all();
-            
-            if ($_POST != null){
-                $ID_Usuarios =$_POST['Notificacion'];
-                $mensaje = $_POST['Notificacion'];
-                $ID_Usuarios =$ID_Usuarios['ID_USER_RECEPTOR'];
-                $mensaje = $mensaje['NOTIFICACION'];
-                foreach ($ID_Usuarios as $user1){
-                    $model1 = new Notificacion();
-                    $model1->ID_USER_EMISOR = Yii::$app->user->identity->id;
-                    $model1->ID_USER_RECEPTOR = $user1;
-                    $model1->NOTIFICACION = $mensaje;
-                    $model1->FECHA = new \yii\db\Expression('NOW()');
-                    $model1->save();       
-                }
-                if ($model1->save()){
-                    //Enviamos correo
-                    $receptor = Users::findOne($model1->ID_USER_RECEPTOR)->username;
-                    $emisor = Users::findOne($model1->ID_USER_EMISOR)->username;
-                    $mail = Users::findOne($model1->ID_USER_RECEPTOR)->email;
-                    $subject = "Nueva notificación";
-                    $body = "<p>Hola <strong>".$receptor."</strong>, tenes una nueva notificación de <strong>".$emisor."</strong>.</p>" ;
-                    $body .= "<p> Notificación: <i>".$model1->NOTIFICACION."</i></p>";
-                    $body .= "<p><a href='http://yii.local/admin/noti'>Ver notificación</a></p>";
-                    Yii::$app->mailer->compose()
-                        ->setTo($mail)
-                        ->setFrom([Yii::$app->params["adminEmail"] => Yii::$app->params["title"]])
-                        ->setSubject($subject)
-                        ->setHtmlBody($body)
-                        ->send();
-                    $session = Yii::$app->session;
-                    //$session->setFlash('notificacionEnviada', 'Has enviado correctamente la notificacion');
-                    Yii::$app->session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, 'Mensaje enviado!');
-                    return $this->redirect('noti');
-              }
-            }
-         /*   $model = new Notificacion();
-            $model->ID_USER_EMISOR = Yii::$app->user->identity->id;
-            $model->FECHA = new \yii\db\Expression('NOW()');
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                $session = Yii::$app->session;
-                $session->setFlash('notificacionEnviada', 'Has enviado correctamente la notificacion');
-                return $this->redirect('noti');
-            }        */
-       
-        $model = new Notificacion();
-        $usuarios = Users::find()->where(['not', ['username' => Yii::$app->user->identity->username]])
-        ->andWhere(['activate' =>1])->asArray()->all();
-        return $this->render('noti', [
-            'notificacion' => $notificacion,
-            'pagination' => $pagination,
-            'model' => $model,
-            'usuarios' => $usuarios
-            
-        ]);  
+
+        $users = $query->orderBy('id')
+        ->offset($pagination->offset)
+        ->limit($pagination->limit)
+        ->all();
+
+        return $this->render('users', [
+            'users' => $users,
+        ]);
     }
 
 

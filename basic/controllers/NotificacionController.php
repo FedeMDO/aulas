@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
+use app\models\User;
 use app\models\Notificacion;
 use app\models\NotificacionSearch;
 use yii\web\Controller;
@@ -40,9 +42,9 @@ class NotificacionController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['index','view'],
+                       'actions' => [],
                        //Esta propiedad establece que tiene permisos
-                       'allow' => true,
+                       'allow' => false,
                        //Usuarios autenticados, el signo ? es para invitados
                        'roles' => ['@'],
                        //Este método nos permite crear un filtro sobre la identidad del usuario
@@ -69,6 +71,7 @@ class NotificacionController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout='LayoutAdmin';
         $searchModel = new NotificacionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

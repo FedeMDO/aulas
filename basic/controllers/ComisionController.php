@@ -30,32 +30,32 @@ class ComisionController extends Controller
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['index','view','create','update','delete','listcarrera','listmateria'],
-                        //Esta propiedad establece que tiene permisos
+                        'actions' => ['index','view','create','update','delete', 'listmateria', 'listcarrera'],
                         'allow' => true,
-                        //Usuarios autenticados, el signo ? es para invitados
                         'roles' => ['@'],
-                        //Este método nos permite crear un filtro sobre la identidad del usuario
-                        //y así establecer si tiene permisos o no
                         'matchCallback' => function ($rule, $action) {
-                            //Llamada al método que comprueba si es un administrador
                             return User::isUserAdmin(Yii::$app->user->identity->id);
                         },
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['index','view','create','listcarrera', 'listmateria'],
-                       //Esta propiedad establece que tiene permisos
+                       'actions' => ['create', 'listmateria', 'listcarrera'],
                        'allow' => true,
-                       //Usuarios autenticados, el signo ? es para invitados
                        'roles' => ['@'],
-                       //Este método nos permite crear un filtro sobre la identidad del usuario
-                       //y así establecer si tiene permisos o no
                        'matchCallback' => function ($rule, $action) {
-                          //Llamada al método que comprueba si es un usuario simple
                           return User::isUserSimple(Yii::$app->user->identity->id);
                       },
                    ],
+                   [
+                    //Los usuarios guest tienen permisos sobre las siguientes acciones
+                    'actions' => [],
+                    'allow' => false,
+                    'roles' => ['@'],
+                    'matchCallback' => function ($rule, $action) {
+                       return User::isUserGuest(Yii::$app->user->identity->id);
+                   },
+                ],
+                
                 ],
             ],
             'verbs' => [
@@ -73,6 +73,7 @@ class ComisionController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout='LayoutAdmin';
         $searchModel = new ComisionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -146,8 +147,10 @@ class ComisionController extends Controller
             return $this->redirect(['view', 'id' => $model->ID]);
         }
 
+        $instituto = new Instituto();
+        $carrera = new Carrera();
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model, 'instituto' => $instituto,'carrera' => $carrera,
         ]);
     }
 
