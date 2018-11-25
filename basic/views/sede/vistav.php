@@ -24,7 +24,9 @@ $this->title = 'Sedes';
             <p><?=Html::encode("{$sede->LOCALIDAD}")?> -<?=Html::encode(" {$sede->CALLEYNUM} ")?></p>
             <p></p>
             <a href="../edificio/edifilter?id=<?=Html::encode("{$sede->ID}")?>" class="btn btn-info" role="button">Entrar</a>
-            <a href="../sede/update?id=<?=Html::encode("{$sede->ID}")?>"  class="btn btn-primary" role="button">Modificar</a>
+            <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
+              <a href="../sede/update?id=<?=Html::encode("{$sede->ID}")?>"  class="btn btn-primary" role="button">Modificar</a>
+            <?php endif; ?>
             </div>
           </div>
         </div>

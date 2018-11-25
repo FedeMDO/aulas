@@ -46,7 +46,11 @@ else{?>
         <h4><?= Html::encode("{$edificio->NOMBRE} ") ?></h4>
          <img  src="../image/aulaicon.png" alt="  height="42" width="42"">
         <?= Html::encode("{$edificio->CANTIDAD_AULAS} ") ?>
-        <p><a href="../aula/aulafilter?id=<?= Html::encode("{$edificio->ID}") ?>" class="btn btn-info" role="button">Entrar</a> <a href="../edificio/update?id=<?= Html::encode("{$edificio->ID}") ?>" class="btn btn-primary" role="button">Modificar</a></p>
+        <p></p>
+        <a href="../aula/aulafilter?id=<?= Html::encode("{$edificio->ID}") ?>" class="btn btn-info" role="button">Entrar</a>
+        <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
+          <a href="../edificio/update?id=<?= Html::encode("{$edificio->ID}") ?>" class="btn btn-primary" role="button">Modificar</a>
+        <?php endif; ?>
       </div>
     </div>
   </div>
@@ -60,12 +64,15 @@ else{?>
       <ul>
         <li><a href="../aula/buscador" class="btn miBoton btn-md btn-vistav " role="button">Filtrar aulas <span class="glyphicon glyphicon-search"></span></a>
         </li>
+        <li>
+        <a href="../edificio/scheduler?id_sede=<?=Html::encode("{$edificio->sEDE->ID}")?>" class="btn miBoton btn-md btn-vistav" role="button">Ver eventos por edificio <span class="glyphicon glyphicon-search"></span></a>
+        </li>
         <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
         <li>
         <a href="../edificio/create" class="btn miBoton btn-md btn-vistav" role="button">Crear edificio <span class="glyphicon glyphicon-plus"></span></a>
         </li>
         <li>
-        <a href="../edificio/scheduler?id_sede=<?=Html::encode("{$edificio->sEDE->ID}")?>" class="btn miBoton btn-md btn-vistav" role="button">Ver eventos por edificio <span class="glyphicon glyphicon-search"></span></a>
+        <a href="../edificio/restrischeduler?id_sede=<?=Html::encode("{$edificio->sEDE->ID}")?>" class="btn miBoton btn-md btn-vistav" role="button">Restricciones edificios <span class="glyphicon glyphicon-search"></span></a>
         </li>
         <?php endif; ?>
       </ul>
