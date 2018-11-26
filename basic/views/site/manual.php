@@ -35,7 +35,7 @@ $this->title = 'Manual de usuario';
 
 .accordion:after {
     content: '\002B';
-    color: #1E90FF;
+    color: #FDFEFE;
     font-weight: bold;
     float: right;
     margin-left: 5px;
@@ -543,10 +543,75 @@ http://yii.local/site/register </p>
 <button class="accordion">Calendar</button>
 <div class="panel">
 
-<p><b><h3>IS COOMING</h3></p></b>
+<br>
+<p><b>Ir a agenda</b></p>
 
+<p>Para ir a “Agenda” debe ir a “Aulas” perteneciente a el edificio y sede que quiera ir.<p>
+<p>En la siguiente imagen veremos una serie de aulas:<p>
+<img width="1204px" height="693" src="../image/manual/aulasDisp.png" />
+<br><br>
 
+<p>Debemos seleccionar el botón “Agenda” del aula que nosotros queramos crear eventos. Se le dirigirá a la siguiente ventana:</p> 
+<img width="512px" height="220" src="../image/manual/ventanaCalendar.png" />
+<br><br>
+<p>Botones disponibles:</p>
 
+<p><b>Nuevo evento:</b> &nbsp;Si usted selecciona este botón se le direccionará a un formulario.</p>
+<p><b>Día:</b>&nbsp;Si queremos ver los eventos por día debemos seleccionar este botón.</p>
+<p><b>Semana:</b> &nbsp;Si queremos ver los eventos por semana debemos seleccionar este botón.</p>
+<p><b>Mes:</b>&nbsp;Si queremos ver los eventos por mes seleccionar este botón.</b>
+<br>
+<p><b><h3>Crear nuevo evento</p></b></h3>
+<br>
+<p>Debemos dirigirnos donde indica la flecha:</p>
+<br>
+<img width="1281px" height="577" src="../image/manual/newEvent.png" />
+<br><br>
+<p>Una vez hecho esto, nos aparecerá el siguiente formulario:</p>
+<br>
+<img width="867px" height="584" src="../image/manual/formEvent.png" />
+
+<br><br>
+<p>Campos:</p>
+
+<p><b>Carrera:</b>&nbsp;Seleccione la carrera </p>
+<p><b>Materia:</b>&nbsp;Seleccione materia correspondiente a la Carrera elegida previamente</p>
+<p><b>Comisión:</b>&nbsp;Seleccione la comisión perteneciente a la Materia elegida previamente</p>
+<p><b>Dia:</b> &nbsp;Seleccionar el día (Lun a Sab)</p>
+<p><b>Desde las:</b>&nbsp;Seleccione el horario inicial</p>
+<p><b>Hasta las:</b>&nbsp;Seleccione el horario final</p>
+<br>
+Botones disponibles:
+<br>
+<p><b>Guardar:</b>&nbsp;Una vez que lleno el formulario, seleccione este botón para guardar los datos.</p>
+<p><b>Cerrar: </b>&nbsp;Si desea cancelar el evento que está creando, seleccione este botón.</p>
+<br>
+<p>Una vez guardado el evento, usted podrá ver la materia en (Día, Hora y Mes) todo el cuatrimestre:</p>
+<br>
+<p><b>Vista de materia por Día</p></b>
+<br>
+<p>En la siguiente imagen se puede apreciar la vista paronamica del evento por día:
+<br><br>
+<img width="1170px" height="522" src="../image/manual/vistaporDia.png" />
+<br><br>
+
+<p><b>Vista de materia por Semana</p></b>
+<br>
+<p>En la siguientes imágenes se apreciara una vista panorámica por semana, de la planificación que usted eligió para dicha materia. Podrá observar que la materia estará cada semana en el mismo horario elegido.</p>
+<br>
+<p><b>Ejemplo:&nbsp; Semana 19 de noviembre al 24 de noviembre:</p></b> 
+<br>
+<img width="1143px" height="328" src="../image/manual/vistaSemana01.png" />
+<br><br>
+<p><b>Ejemplo:&nbsp; Semana 26 de noviembre al 1 de diciembre:</p></b> 
+<br>
+<img width="1094px" height="555" src="../image/manual/vistaSemana.png" />
+<br><br>
+<p><b>Vista de materia por Mes</p></b>
+<br>
+<p>En la próxima imagen verá con más claridad cómo la materia que eligió está planificada en todo el mes, el mismo día.</p>
+<img width="1244px" height="598" src="../image/manual/vistaporMes.png" />
+<br><br>
 </div>
 
 
