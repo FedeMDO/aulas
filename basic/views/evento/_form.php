@@ -28,7 +28,10 @@ use app\models\Users;
         ['prompt'=>'Seleccionar',
             'onchange'=>'
 				$.post( "'.Yii::$app->urlManager->createUrl('evento/listmateria?id=').'"+$(this).val(), function( data ) {
-				  $( "select#materia-id" ).html( data );
+                  if(data){
+                    $( "select#materia-id" ).html( data );
+                    $("select#materia-id").prop("selectedIndex", 0).change();
+                  }
 				});
             '])->label('Carrera');  ?>
             
@@ -37,7 +40,9 @@ use app\models\Users;
         ['prompt'=>'Seleccionar',
             'onchange'=>'
 				$.post( "'.Yii::$app->urlManager->createUrl('evento/listcomision?id=').'"+$(this).val(), function( data ) {
-				  $( "select#eventocalendar-id_comision" ).html( data );
+                  $( "select#eventocalendar-id_comision" ).html( data );
+                  
+                  
 				});
 			'])->label('Materia'); ?>
 
