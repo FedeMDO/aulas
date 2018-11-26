@@ -32,7 +32,10 @@ endif;
         ['prompt'=>'Seleccione instituto...',
             'onchange'=>'
 				$.post( "'.Yii::$app->urlManager->createUrl('comision/listcarrera?id=').'"+$(this).val(), function( data ) {
-				  $( "select#carrera-id" ).html( data );
+                  if (data){
+                    $( "select#carrera-id" ).html( data );
+                    $( "select#carrera-id" ).prop("selectedIndex", 0).change();
+                  }
 				});
 			'])->label('Instituto');  ?>
 

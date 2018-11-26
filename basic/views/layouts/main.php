@@ -218,7 +218,7 @@ AppAsset::register($this);
         yii\bootstrap\Modal::begin([
             'headerOptions' => ['id' => 'modalHeader'],
             'id' => 'modal',
-            'size' => 'modal-lg',
+            'size' => 'modal-md',
             'clientOptions' => ['backdrop' => True, 'keyboard' => True]
         ]);        echo "<div id='modalContent'></div>";
         yii\bootstrap\Modal::end();
@@ -228,7 +228,7 @@ AppAsset::register($this);
         yii\bootstrap\Modal::begin([
             'headerOptions' => ['id' => 'modalRestriHeader'],
             'id' => 'modalRestri',
-            'size' => 'modal-lg',
+            'size' => 'modal-md',
             'clientOptions' => ['backdrop' => True, 'keyboard' => True]
         ]);        echo "<div id='modalRestriContent'></div>";
         yii\bootstrap\Modal::end();

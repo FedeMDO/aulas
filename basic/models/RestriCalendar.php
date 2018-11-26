@@ -38,6 +38,7 @@ class RestriCalendar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['ID_Ciclo'], 'required'],
             [['ID_Aula', 'ID_User_Asigna', 'ID_Instituto', 'ID_Ciclo'], 'integer'],
             [['Hora_ini', 'Hora_fin', 'momento'], 'safe'],
             [['dow'], 'string', 'max' => 20],

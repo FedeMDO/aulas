@@ -41,7 +41,7 @@ use app\models\CicloLectivo;
          '22:00:00' => '22:00'];
     ?>
 
-        <?php echo $form->field($model, 'ID_Instituto')->dropDownList(
+        <?php echo $form->field($model, 'ID_Instituto', ['labelOptions'=>['style'=>'color:white']])->dropDownList(
         $resultInst, 
         ['prompt'=>'Seleccionar']
         )->label('Instituto');
@@ -56,23 +56,23 @@ use app\models\CicloLectivo;
                             '7' => 'Domingo',
                         ];
     ?>
-    <?php echo $form->field($model, 'dow')->dropDownList(
+    <?php echo $form->field($model, 'dow', ['labelOptions'=>['style'=>'color:white']])->dropDownList(
         $diasdelasemana, 
         ['prompt'=>'Seleccionar']
         )->label('Dia');
         ?>
 
-       <?php echo $form->field($model, 'Hora_ini')->dropDownList(
+       <?php echo $form->field($model, 'Hora_ini', ['labelOptions'=>['style'=>'color:white']])->dropDownList(
         $horas, 
         ['prompt'=>'Seleccionar']
         )->label("Desde las"); ?> 
 
-          <?php echo $form->field($model,'Hora_fin')->dropDownList(
+          <?php echo $form->field($model,'Hora_fin', ['labelOptions'=>['style'=>'color:white']])->dropDownList(
         $horas, 
         ['prompt'=>'Seleccionar']
         )->label("Hasta las"); ?> 
 
-        <?php echo $form->field($model, 'ID_Ciclo')->dropDownList(
+        <?php echo $form->field($model, 'ID_Ciclo', ['labelOptions'=>['style'=>'color:white']])->dropDownList(
         $resultCiclos, 
         ['prompt'=>'Seleccionar']
         )->label('Ciclo Lectivo');

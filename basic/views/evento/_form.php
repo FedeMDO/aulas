@@ -23,7 +23,7 @@ use app\models\Users;
     $resultCarr = ArrayHelper::map($carreras, 'ID', 'NOMBRE');
     ?>
     <h1>Crear evento calendario </h1>
-    <?php echo $form->field($carrera, 'ID')->dropDownList(
+    <?php echo $form->field($carrera, 'ID', ['labelOptions'=>['style'=>'color:white']])->dropDownList(
         $resultCarr,
         ['prompt'=>'Seleccionar',
             'onchange'=>'
@@ -35,7 +35,7 @@ use app\models\Users;
 				});
             '])->label('Carrera');  ?>
             
-    <?php echo $form->field($materia, 'ID')->dropDownList(
+    <?php echo $form->field($materia, 'ID', ['labelOptions'=>['style'=>'color:white']])->dropDownList(
         array(),
         ['prompt'=>'Seleccionar',
             'onchange'=>'
@@ -46,10 +46,10 @@ use app\models\Users;
 				});
 			'])->label('Materia'); ?>
 
-    <?php echo $form->field($model, 'ID_Comision')->dropDownList(
+    <?php echo $form->field($model, 'ID_Comision', ['labelOptions'=>['style'=>'color:white']])->dropDownList(
         array(), 
         ['prompt'=>'Seleccionar']
-        )->label(' COMISION '); ?>
+        )->label(' Comision '); ?>
 
     <?php $diasdelasemana = ['1' => 'Lunes',
                             '2' => 'Martes',
@@ -60,7 +60,7 @@ use app\models\Users;
                             '7' => 'Domingo',
                         ];
     ?>
-    <?php echo $form->field($model, 'dow')->dropDownList(
+    <?php echo $form->field($model, 'dow', ['labelOptions'=>['style'=>'color:white']])->dropDownList(
         $diasdelasemana, 
         ['prompt'=>'Seleccionar']
         )->label('Dia');
@@ -82,12 +82,12 @@ use app\models\Users;
          '21:00:00' => '21:00',
          '22:00:00' => '22:00'];
          ?>
-       <?php echo $form->field($model, 'Hora_ini')->dropDownList(
+       <?php echo $form->field($model, 'Hora_ini', ['labelOptions'=>['style'=>'color:white']])->dropDownList(
         $horas, 
         ['prompt'=>'Seleccionar']
         )->label("Desde las"); ?> 
 
-          <?php echo $form->field($model,'Hora_fin')->dropDownList(
+          <?php echo $form->field($model,'Hora_fin', ['labelOptions'=>['style'=>'color:white']])->dropDownList(
         $horas, 
         ['prompt'=>'Seleccionar']
         )->label("Hasta las"); ?> 
