@@ -35,7 +35,6 @@ $this->title = 'Manual de usuario';
 
 .accordion:after {
     content: '\002B';
-    color: #FDFEFE;
     font-weight: bold;
     float: right;
     margin-left: 5px;
@@ -52,16 +51,21 @@ $this->title = 'Manual de usuario';
     overflow: hidden;
     transition: max-height 0.2s ease-out;
 }
+
 </style>
 </head>
 <body>
 
-<h2>Manual de usuario</h2>
+<h2 class=titulo>Manual de usuario</h2>
 <br>
+<div class=manual>
+<div class="col-md-offset-2 col-md-8 content">
+
 <button class="accordion">Entrada al sistema (Login)</button>
 <div class="panel">
+<h3><b>¿Como ingresar a la aplicacion? </b></h3>
 <p>Para acceder a la aplicación, el usuario debe de hacer uso de sus credenciales de acceso (usuario o Email y contraseña).</p>
-<p> <b>Acceso a la aplicación:</b> </p>
+
 <p>El acceso se otorgara dirigiendose al el siguiente enlace: http://yii.local/site/login</p>
 
 
@@ -70,14 +74,16 @@ $this->title = 'Manual de usuario';
  <br>
 
 <br>
-<p><b>Botones disponibles:</b></p>
-<p><b> Ingresar:</b> Una vez ingresado su usuario y contraseña, pulsa este botón para ingresar al sistema. Si todo sale correctamente, aparecerá en el inicio: </p>
+
+<p>Una vez ingresado su usuario y contraseña, pulse el botón ingresar para ingresar al sistema. Si todo sale correctamente, aparecerá en el inicio: </p>
 
 <img width="900px" height="400" src="../image/manual/inicio.png" />
 <br>
 <br>
 
-<p><b>¿Olvidaste tu contraseña? :</b> Si no recuerda su contraseña, puede pulsar este botón. Le aparecerá la siguiente vista, donde usted debe ingresar su Email.
+<h3><b>Recuperar contraseña:</b></h3> 
+<p>Si no recuerda su contraseña, puede pulsar el boton ¿Olvidaste tu contraseña?. 
+<br>Le aparecerá la siguiente vista, donde usted debe ingresar su Email.
 Se le enviará un enlace a la dirección de Email que usted ingresó y así podrá restablecer su contraseña. </p>
 
 <img width="456px" height="348" src="../image/manual/rec.png" />
@@ -87,8 +93,8 @@ Se le enviará un enlace a la dirección de Email que usted ingresó y así podr
 <button class="accordion">Sedes</button>
 <div class="panel">
 <br>
-<p>Para acceder a el módulo de sedes, se debe ingresar previamente al sistema.<p>.
-<b><p>Acceso a Sedes:</b></p>
+<p>Para acceder a el módulo de sedes, se debe ingresar previamente al sistema.<p>
+<h3><b>¿Como acceder a sedes?</b></h3>
 <p>Para acceder a la aplicación se utilizará el siguiente enlace:</p>
 <p>http://yii.local/sede/vistav </p>
 <img width="1000px" height="300" src="../image/manual/vistasedes.png" />
@@ -96,7 +102,7 @@ Se le enviará un enlace a la dirección de Email que usted ingresó y así podr
 <br>
 <p>En esta vista, nos aparecerá las sedes de la universidad.</p>
 <br>
-<b><h3>Creación de sedes</h3></b>
+<h3><b>Crear sedes</b></h3>
 <br>
 
 <p>Para la creación de sedes presionaremos el botón de la esquina superior izquierda:<p>
@@ -109,136 +115,22 @@ Se le enviará un enlace a la dirección de Email que usted ingresó y así podr
 <p>Nos saldra el siguiente formulario:</b>:</p>
 <img width="500px" height="500" src="../image/manual/crearsede.png" />
 <br><br>
-<p>Campos a rellenar:<p>
-
-<p><b>Nombre de sede:</b>&nbsp; Se deberá poner el nombre de la sede que quiera crear.</p>
-
-<p><b>Calle:</b>&nbsp;Se deberá poner la calle donde está ubicada la sede.</p>
-
-<p><b>Localidad:</b>&nbsp;Localidad donde pertenece la sede.</p>
-
-<p><b>Disponible desde:</b>&nbsp;Aquí debe poner desde cuando esta disponible la sede.</p>
-
-<p><b>Disponible hasta:</b>&nbsp;Aquí debe poner desde cuando hasta cuando estara disponible la sede.</p>
+<ul>
+    <p><b>Campos a rellenar:</b><p>
+    <li><p><b>Nombre de sede:</b>&nbsp; Se deberá poner el nombre de la sede que quiera crear.</p></li>
+    <li><p><b>Calle:</b>&nbsp;Se deberá poner la calle donde está ubicada la sede.</p></li>
+    <li><p><b>Localidad:</b>&nbsp;Localidad donde pertenece la sede.</p></li>
+    <li><p><b>Disponible desde:</b>&nbsp;Aquí debe poner desde cuando esta disponible la sede.</p></li>
+    <li><p><b>Disponible hasta:</b>&nbsp;Aquí debe poner desde cuando hasta cuando estara disponible la sede.</p></li>
+</ul>
 <br>
-<p><b>Botones disponibles:</b></p>
-
-<p><b>Crear:</b>&nbsp; Una vez rellenado los campos deberá seleccionar este botón para guardar los datos. </p>
-
-<br>
-<b><h3>Creación de comisiones</h3></b>
+<ul>
+    <p><b>Botones disponibles:</b></p>
+    <li><p><b>Crear:</b>&nbsp; Una vez rellenado los campos deberá seleccionar este botón para guardar los datos. </p></li>
+</ul>
 <br>
 
-<p>Para la creación de comisiones presionaremos el botón de la esquina superior izquierda:<p>
-<img width="911px" height="490" src="../image/manual/createsedes.png" />
-<br>
 
-<p>Se desplegará el siguiente menú de opciones y seleccionaremos <b>“Creación de comisiones”:</b></p>
-<img width="200px" height="378" src="../image/manual/menu.png" />
-<br><br>
-<p>Nos saldra el siguiente formulario:</b></p>
-<img width="500px" height="500" src="../image/manual/crearcomi.png" />
-<br><br>
-<p>Campos a rellenar:<p>
-
-<p><b>Número:</b>&nbsp; Debe poner el numero de comisión.</p>
-
-<p><b>Instituto:</b>&nbsp;Seleccionará el instituto a la que estará asignada la comisión (Ingeniería, Sociales, Salud)</p>
-
-<p><b>Carrera:</b>&nbsp;Selecciona la carrera a la que estará asignada la comisión</p>
-
-<p><b>Carga Horaria Semanal:</b>&nbsp;Debe poner la carga horaria semanal que tendrá la comisión que desea crear.</p>
-
-<br>
-<p><b>Botones disponibles:</b></p>
-
-<p><b>Crear:</b>&nbsp; Una vez rellenado los campos deberá seleccionar este botón para guardar los datos. </p>
-
-
-<b><h3>Creación de materias</h3></b>
-<br>
-
-<p>Para la creación de materias presionaremos el botón de la esquina superior izquierda:<p>
-<img width="911px" height="490" src="../image/manual/createsedes.png" />
-<br>
-
-<p>Se desplegará el siguiente menú de opciones y seleccionaremos <b>“Crear materia”:</b></p>
-<img width="200px" height="378" src="../image/manual/menu.png" />
-<br><br>
-<p>Nos saldra el siguiente formulario:</b></p>
-<img width="485px" height="428" src="../image/manual/crearmat.png" />
-<br><br>
-<p>Campos a rellenar:<p>
-
-<p><b>Nombre:</b>&nbsp; Nombre de la materia.</p>
-
-<p><b>Descripción corta:</b>&nbsp;Se deberá indicar una descripción corta de la materia.</p>
-
-<p><b>Codigo de materia:</b>&nbsp;Se deberá ingresar código que tendrá asignado la materia.</p>
-
-<br>
-<p><b>Botones disponibles:</b></p>
-
-<p><b>Crear:</b>&nbsp; Una vez rellenado los campos deberá seleccionar este botón para guardar los datos</p>
-
-
-<b><h3>Filtración de aulas</h3></b>
-<br>
-
-<p>Para ingresar al filtro de aulas presionaremos el botón de la esquina superior izquierda:<p>
-<img width="911px" height="490" src="../image/manual/createsedes.png" />
-<br>
-
-<p>Se desplegará el siguiente menú de opciones y seleccionaremos <b>“Filtrar aulas”:</b></p>
-<img width="200px" height="378" src="../image/manual/menu.png" />
-<br><br>
-<p>Nos saldra el siguiente formulario:</b></p>
-<img width="469px" height="508" src="../image/manual/filtrau.png" />
-<br><br>
-<p>Campos a rellenar:<p>
-
-<p><b>Nombre de sede:</b>&nbsp; En este campo se ingresará la sede en la cual se encuentra el aula.</p>
-
-<p><b>Nombre de edificio:</b>&nbsp;El edificio donde se encuentra el aula.</p>
-
-<p><b>Nombre de recurso:</b>&nbsp;En el caso que el aula tenga algún recurso asignado, deberá ponerlo.</p>
-
-<p><b>Piso:</b>&nbsp;Piso donde se encuentra el aula.</p>
-
-<p><b>Capacidad Mínima:</b>&nbsp;Seleccione la capacidad que tiene el aula que desea buscar.</p>
-
-<br>
-<p><b>Botones disponibles:</b></p>
-
-<p><b>Buscar:</b>&nbsp; Una vez rellenado los campos deberá seleccionar este botón para buscar el aula. </p>
-
-
-<b><h3>Modificacion de sedes</h3></b>
-<br>
-
-<p>Si usted desea modificar las sedes disponibles. Deberá ir a la opción “Modificar”:<p>
-<img width="433x" height="420" src="../image/manual/modificar.png" />
-<br>
-
-<p>Una vez seleccionado el botón modificar nos dirigirá a el siguiente formulario:</p>
-<img width="494px" height="534" src="../image/manual/actualizarSede.png" />
-<br><br>
-<p>Campos a rellenar:<p>
-
-<p><b>Nombre de sede:</b>&nbsp; Se deberá poner el nombre de la sede que quiera crear.</p>
-
-<p><b>Calle:</b>&nbsp;Se deberá poner la calle donde está ubicada la sede.</p>
-
-<p><b>Localidad:</b>&nbsp;Localidad donde pertenece la sede.</p>
-
-<p><b>Disponible desde:</b>&nbsp;Aquí debe poner desde cuando esta disponible la sede.</p>
-
-<p><b>Disponible hasta:</b>&nbsp;Aquí debe poner desde cuando hasta cuando estara disponible la sede.</p>
-
-<br>
-<p><b>Botones disponibles:</b></p>
-
-<p><b>Actualizar:</b>&nbsp;Una vez rellenado los campos deberá seleccionar este botón para actualizar los datos de la sede.</p>
 
 
 
@@ -249,22 +141,21 @@ Se le enviará un enlace a la dirección de Email que usted ingresó y así podr
 <div class="panel">
 <br>
 
-<p>Para acceder a "Edificios", se debe ingresar previamente al sistema.<p>.
-<b><p>Acceso a "Edificios":</b></p>
+<p>Para acceder a "Edificios", se debe ingresar previamente al sistema.<p>
+<h3><b>¿Como acceder a "Edificios"?</b></h3>
 <br>
 <p>Deberá ir a sedes, como lo indica la flecha azul:</p>
 <br>
 <img width="1337px" height="682" src="../image/manual/edin.png" />
 <br>
-<
-<p><b>Botones disponibles:</b></p>
-<p><b>Entrar:</b>&nbsp; Una vez entrada a las sedes estas aparecerán con este botón con el cual se podrá ingresar y ver la lista de edificios. </p>
+
+<p><b></b>&nbsp; Una vez entrada a las sedes estas aparecerán al presionar el boton entrar con el cual se podrá ingresar y ver la lista de edificios. </p>
 <br>
 <img width="1097px" height="523" src="../image/manual/edificios.png" />
 <br>
 <br>
 
-<b><h3>Creación de edificios</h3></b>
+<h3><b>Crear Edificios</b></h3>
 <br>
 
 <p>Para la creación de edificios usted deberá ir donde indica la flecha:<p>
@@ -278,20 +169,13 @@ Se le enviará un enlace a la dirección de Email que usted ingresó y así podr
 <p>Nos saldra el siguiente formulario:</b></p>
 <img width="504px" height="417" src="../image/manual/crearEdi.png" />
 <br><br>
-<p>Campos a rellenar:<p>
-
-<p><b>Sede:</b>&nbsp;Se deberá seleccionar la sede a la cual queremos asignarle el edificio.</p>
-
-<p><b>Nombre Edificio:</b>&nbsp; Se deberá escribir el nombre del edificio.</p>
-
-<p><b>Cantidad Aulas:</b>&nbsp; Seleccione la cantidad de aulas que tendrá el edificio.</p>
-
-<br>
-<p><b>Botones disponibles:</b></p>
-
-<p><b>Guardar:</b>&nbsp; Una vez rellenado los campos deberá presionar este botón para guardar los datos</p>
-
- 
+<ul>
+    <p><b>Campos a rellenar:</b><p>
+    <li><p><b>Sede:</b>&nbsp;Se deberá seleccionar la sede a la cual queremos asignarle el edificio.</p></li>
+    <li><p><b>Nombre Edificio:</b>&nbsp; Se deberá escribir el nombre del edificio.</p></li>
+    <li><p><b>Cantidad Aulas:</b>&nbsp; Seleccione la cantidad de aulas que tendrá el edificio.</p></li>
+    <li><p><b>Guardar:</b>&nbsp; Una vez rellenado los campos deberá presionar este botón para guardar los datos</p></li>
+</ul>
 
 </div>
 
@@ -301,8 +185,8 @@ Se le enviará un enlace a la dirección de Email que usted ingresó y así podr
 <div class="panel">
 <br>
 
-<p>Para acceder a "Aulas", se debe ingresar previamente al sistema.<p>.
-<b><p>Acceso a "Aulas":</b></p>
+<p>Para acceder a "Aulas", se debe ingresar previamente al sistema.<p>
+<h3><b>¿Como acceder a "Aulas"?</b></h3>
 <br>
 <p>Deberá ir a sedes, como lo indica la flecha negra:</p>
 <br>
@@ -312,7 +196,8 @@ Se le enviará un enlace a la dirección de Email que usted ingresó y así podr
 <p>Una vez dentro de la vista de sedes debera presionar el botón entrar:</p>
 <img width="1343px" height="586" src="../image/manual/aula02.png" />
 <br><br>
-<p>Para la creación de edificios usted deberá ir donde indica la flecha:</p>
+<h3><b>Crear aulas</b></h3>
+<p>Para la creación de aulas usted deberá ir donde indica la flecha:</p>
 <img width="1266px" height="611" src="../image/manual/aulas.png" />
 <br><br>
 <p>Se desplegará el siguiente menú de opciones y seleccionaremos “Crear aulas”<p>
@@ -320,16 +205,14 @@ Se le enviará un enlace a la dirección de Email que usted ingresó y así podr
 <br><br>
 <p>Se nos abrira el siguiente formulario:<p>
 <img width="449px" height="466" src="../image/manual/CrearAula.png" />
-
-<p>Campos a rellenar:<p>
-
-<p><b>Aula:</b>&nbsp; Ingrese el nombre del aula.</p>
-<p><b>Edificio:</b>&nbsp; Seleccione el edificio al que le quiera asignar el aula.</p>
-<p><b>Piso:</b>&nbsp; Ingrese el piso donde estará ubicada el aula.</p>
-<p><b>Capacidad:</b>&nbsp; Ingrese el piso donde estará ubicada el aula.</p>
-<br>
-<p><b>Botones disponibles:</b></p>
-<p><b>Guardar:</b>&nbsp; Una vez rellenado los campos deberá presionar este botón para guardar los datos</p>
+<ul>
+    <p><b>Campos a rellenar:</b><p>
+    <li><p><b>Aula:</b>&nbsp; Ingrese el nombre del aula.</p></li>
+    <li><p><b>Edificio:</b>&nbsp; Seleccione el edificio al que le quiera asignar el aula.</p></li>
+    <li><p><b>Piso:</b>&nbsp; Ingrese el piso donde estará ubicada el aula.</p></li>
+    <li><p><b>Capacidad:</b>&nbsp; Ingrese el piso donde estará ubicada el aula.</p></li>
+    <li><p><b>Guardar:</b>&nbsp; Una vez rellenado los campos deberá presionar este botón para guardar los datos</p></li>
+</ul>
 <br>
 </div>
 
@@ -520,6 +403,7 @@ http://yii.local/site/register </p>
 <button class="accordion">Cambio de contraseña</button>
 <div class="panel">
 <br>
+ 
 
 <p> Si deseamos cambiar la contraseña debemos ir a la esquina superior izquierda donde se encuentra nuestro nombre de usuario:</p>
 <img width="323px" height="245" src="../image/manual/cambiopw.png" />
