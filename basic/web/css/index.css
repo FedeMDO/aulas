@@ -645,6 +645,7 @@ text-transform: uppercase;
 .manual li{
   margin-left: 32px;
 }
+
 .manual a{
-  color:black;
+  color: #2980b9;
 }

@@ -3,21 +3,22 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 $this->title = 'Manual de usuario';
 
-
 ?>
 
-
 <h2 class=titulo>Manual de usuario</h2>
-<br>
 
 <br>
+<br>
+
+<div class="manual" id="manualcont">
 <div class="col-md-offset-2 col-md-8 content">
 <div class="panel panel-default">
     <div class="panel-heading">
-      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne">
+      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne" class="btn btn-link btn-block" role="button" style=text-align:left>
       Entrada al sistema (Login)
       </a></h4>
     </div>
@@ -45,7 +46,7 @@ $this->title = 'Manual de usuario';
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse2">
+      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse2" class="btn btn-link btn-block" role="button" style=text-align:left>
       Sedes
       </a></h4>
     </div>
@@ -57,7 +58,7 @@ $this->title = 'Manual de usuario';
 
         <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerSedes2">
+              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerSedes2" class="btn btn-link btn-block" role="button" style=text-align:left>
                 ¿Como acceder a sedes?
               </a></h4>
             </div>
@@ -81,7 +82,7 @@ $this->title = 'Manual de usuario';
 
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerSedes3">
+              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerSedes3" class="btn btn-link btn-block" role="button" style=text-align:left>
                 Crear sedes
               </a></h4>
             </div>
@@ -117,7 +118,7 @@ $this->title = 'Manual de usuario';
           </div>
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerSedes4">
+              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerSedes4" class="btn btn-link btn-block" role="button" style=text-align:left>
                 Crear comisiones
               </a></h4>
             </div>
@@ -147,7 +148,7 @@ $this->title = 'Manual de usuario';
           </div>
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerSedes5">
+              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerSedes5" class="btn btn-link btn-block" role="button" style=text-align:left>
                 Crear materias
               </a></h4>
             </div>
@@ -178,7 +179,7 @@ $this->title = 'Manual de usuario';
           
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerSedes6">
+              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerSedes6" class="btn btn-link btn-block" role="button" style=text-align:left>
               Filtrar aulas
               </a></h4>
             </div>
@@ -209,7 +210,7 @@ $this->title = 'Manual de usuario';
           </div>
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerSedes7">
+              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerSedes7" class="btn btn-link btn-block" role="button" style=text-align:left>
                 Modificar sedes
               </a></h4>
             </div>
@@ -253,7 +254,7 @@ $this->title = 'Manual de usuario';
   
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse3">
+      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse3" class="btn btn-link btn-block" role="button" style=text-align:left>
         Edificios
       </a></h4>
     </div>
@@ -265,7 +266,7 @@ $this->title = 'Manual de usuario';
         <div class="panel-group" id="accordion3">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion3" href="#collapseInnerEdificios1">
+              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion3" href="#collapseInnerEdificios1" class="btn btn-link btn-block" role="button" style=text-align:left>
               ¿Como acceder a "Edificios"?
               </a></h4>
             </div>
@@ -276,7 +277,7 @@ $this->title = 'Manual de usuario';
                 <br>
                 <p>Deberá ir a sedes, como lo indica la flecha azul:</p>
                 <br>
-                <img width="1337px" height="682" src="../image/manual/edin.png" />
+                <img width="1097px" height="682" src="../image/manual/edin.png" />
                 <br>
 
                 <p><b></b>&nbsp; Una vez entrada a las sedes estas aparecerán al presionar el boton entrar con el cual se podrá ingresar y ver la lista de edificios. </p>
@@ -289,7 +290,7 @@ $this->title = 'Manual de usuario';
           </div>
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion3" href="#collapseInnerEdificios2">
+              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion3" href="#collapseInnerEdificios2" class="btn btn-link btn-block" role="button" style=text-align:left>
               Crear Edificios
               </a></h4>
             </div>
@@ -326,7 +327,7 @@ $this->title = 'Manual de usuario';
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapseAulas01">
+      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapseAulas01" class="btn btn-link btn-block" role="button" style=text-align:left>
        Aulas
       </a></h4>
     </div>
@@ -338,7 +339,7 @@ $this->title = 'Manual de usuario';
         <div class="panel-group" id="accordionAula">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordionAula" href="#collapseAula02">
+              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordionAula" href="#collapseAula02" class="btn btn-link btn-block" role="button" style=text-align:left>
               ¿Como acceder a "Aulas"?
               </a></h4>
             </div>
@@ -354,7 +355,7 @@ $this->title = 'Manual de usuario';
                 <br>
                 <br>
                 <p>Una vez dentro de la vista de sedes debera presionar el botón entrar:</p>
-                <img width="1343px" height="586" src="../image/manual/aula02.png" />
+                <img width="1097px" height="586" src="../image/manual/aula02.png" />
                
 
               </div>
@@ -362,7 +363,7 @@ $this->title = 'Manual de usuario';
           </div>
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion3" href="#collapseAula03">
+              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion3" href="#collapseAula03" class="btn btn-link btn-block" role="button" style=text-align:left>
               ¿Como crear "Aulas"?
               </a></h4>
             </div>
@@ -372,7 +373,7 @@ $this->title = 'Manual de usuario';
               <h3><b>¿Como crear "Aulas"?</b></h3>
               <br>
               <p>Para la creación de Aulas usted deberá ir donde indica la flecha:</p>
-              <img width="1266px" height="611" src="../image/manual/aulas.png" />
+              <img width="1097px" height="611" src="../image/manual/aulas.png" />
               <br><br>
                           <p>Se desplegará el siguiente menú de opciones y seleccionaremos “Crear aulas”<p>
                           <img width="176px" height="336" src="../image/manual/menuCrearAula.png" />
@@ -412,7 +413,7 @@ $this->title = 'Manual de usuario';
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse5">
+      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse5" class="btn btn-link btn-block" role="button" style=text-align:left>
         Institutos
       </a></h4>
     </div>
@@ -435,7 +436,7 @@ $this->title = 'Manual de usuario';
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse05">
+      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse05" class="btn btn-link btn-block" role="button" style=text-align:left>
         Carreras
       </a></h4>
     </div>
@@ -460,7 +461,7 @@ $this->title = 'Manual de usuario';
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse06">
+      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse06" class="btn btn-link btn-block" role="button" style=text-align:left>
         Administración
       </a></h4>
     </div>
@@ -472,7 +473,7 @@ $this->title = 'Manual de usuario';
         <div class="panel-group" id="accordion06">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion06" href="#collapseInnerAdmin01">
+              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion06" href="#collapseInnerAdmin01" class="btn btn-link btn-block" role="button" style=text-align:left>
               ¿Como acceder a "Administración"?
               </a></h4>
             </div>
@@ -480,7 +481,7 @@ $this->title = 'Manual de usuario';
               <div class="panel-body">
               <h3><b>¿Como acceder a "Administración"? </b></h3>
               <p>Debe ir donde indica la flecha:</p>
-              <img width="1338px" height="146" src="../image/manual/adm.png" />
+              <img width="1097px" height="146" src="../image/manual/adm.png" />
               <br><br>
               <p>Nos aparecera tres modulos en administración: Registro de usuario, Panel de administración y Gestionar Usuarios:</p>
               <img width="243px" height="160" src="../image/manual/menuAdmin.png" />
@@ -491,7 +492,7 @@ $this->title = 'Manual de usuario';
           </div>
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion06" href="#collapseInnerAdmin02">
+              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion06" href="#collapseInnerAdmin02" class="btn btn-link btn-block" role="button" style=text-align:left>
               Registro de usuario
               </a></h4>
             </div>
@@ -529,7 +530,7 @@ $this->title = 'Manual de usuario';
 
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion06" href="#collapseInnerAdmin03">
+              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion06" href="#collapseInnerAdmin03" class="btn btn-link btn-block" role="button" style=text-align:left >
               Panel de administración
               </a></h4>
             </div>
@@ -544,7 +545,7 @@ $this->title = 'Manual de usuario';
                         <h3><b>Paneles</b></h3>
                         <br>
                         <p><b>Panel de aula:</p></b>
-                        <img width="1327px" height="607" src="../image/manual/panelDeAula.png" />
+                        <img width="1097px" height="607" src="../image/manual/panelDeAula.png" />
                         <br><br>
                         <p>En el panel de aulas veremos la lista de todas las aulas que se crearon. Adicionalmente, dispondremos de la opción de “Crear aula”.</p>
                         <br>
@@ -600,7 +601,7 @@ $this->title = 'Manual de usuario';
 
        <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion06" href="#collapseInnerAdmin04">
+              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion06" href="#collapseInnerAdmin04" class="btn btn-link btn-block" role="button" style=text-align:left>
               Gestión de usuarios
               </a></h4>
             </div>
@@ -610,7 +611,7 @@ $this->title = 'Manual de usuario';
                     
                     <p>Si entramos a gestión de usuarios nos aparecera la siguiente ventana:</p>
 
-                    <img width="1198px" height="376" src="../image/manual/gestionDeUsuarios.png" />
+                    <img width="1097px" height="376" src="../image/manual/gestionDeUsuarios.png" />
                     <br>
                     <br>
                     <p> Si presionamos el botón "editar" de cualquier usuario, nos aparecera el siguiente formulario:</p>
@@ -648,7 +649,7 @@ $this->title = 'Manual de usuario';
 
  <div class="panel panel-default">
     <div class="panel-heading">
-      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapseNoti01">
+      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapseNoti01" class="btn btn-link btn-block" role="button" style=text-align:left>
         Notificaciones
       </a></h4>
     </div>
@@ -660,7 +661,7 @@ $this->title = 'Manual de usuario';
         <div class="panel-group" id="accordionNoti01">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordionNoti01" href="#collapseInnerNoti02">
+              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordionNoti01" href="#collapseInnerNoti02" class="btn btn-link btn-block" role="button" style=text-align:left>
               Acceso a las notificaciones
               </a></h4>
             </div>
@@ -682,7 +683,7 @@ $this->title = 'Manual de usuario';
           </div>
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordionNoti01" href="#collapseInnerNoti03">
+              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordionNoti01" href="#collapseInnerNoti03" class="btn btn-link btn-block" role="button" style=text-align:left>
               Envio de notificaciones
               </a></h4>
             </div>
@@ -721,7 +722,7 @@ $this->title = 'Manual de usuario';
 
     <div class="panel panel-default">
     <div class="panel-heading">
-      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse7">
+      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse7" class="btn btn-link btn-block" role="button" style=text-align:left>
        Cambio de contraseña
       </a></h4>
     </div>
@@ -753,7 +754,7 @@ $this->title = 'Manual de usuario';
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse10">
+      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse10" class="btn btn-link btn-block" role="button" style=text-align:left>
         Calendar
       </a></h4>
     </div>
@@ -764,7 +765,7 @@ $this->title = 'Manual de usuario';
         <div class="panel-group" id="accordion2">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerOne">
+              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerOne" class="btn btn-link btn-block" role="button" style=text-align:left>
               Ir a agenda
               </a></h4>
             </div>
@@ -788,7 +789,7 @@ $this->title = 'Manual de usuario';
           </div>
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerTwo">
+              <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerTwo" class="btn btn-link btn-block" role="button" style=text-align:left>
                 Crear evento
               </a></h4>
             </div>
@@ -797,7 +798,7 @@ $this->title = 'Manual de usuario';
 
                             <p>Debemos dirigirnos donde indica la flecha:</p>
                             <br>
-                            <img width="1281px" height="577" src="../image/manual/newEvent.png" />
+                            <img width="1097px" height="577" src="../image/manual/newEvent.png" />
                             <br><br>
                             <p>Una vez hecho esto, nos aparecerá el siguiente formulario:</p>
                             <br>
@@ -840,7 +841,7 @@ $this->title = 'Manual de usuario';
                             <h4><p><b>Vista de materia por Mes</p></b></h4>
                             <br>
                             <p>En la próxima imagen verá con más claridad cómo la materia que eligió está planificada en todo el mes, el mismo día.</p>
-                            <img width="1244px" height="598" src="../image/manual/vistaporMes.png" />
+                            <img width="1097px" height="598" src="../image/manual/vistaporMes.png" />
                             <br><br>
 
                   </div>
@@ -853,6 +854,7 @@ $this->title = 'Manual de usuario';
           </div>
         </div>
         </div>
+</div>
 </div>
 </div>
 
