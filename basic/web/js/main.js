@@ -12,6 +12,15 @@ $(function(){
     });
 });
 
+$(function(){
+  $('#modalLogin').click(function(e){
+      e.preventDefault();
+      $('#modal').modal('show')
+      .find('#modalContent')
+      .load($(this).attr('value'));
+  });
+});
+
 const btnToggle = document.querySelector('.toggle-btn');
 btnToggle.addEventListener('click', function () {
 document.getElementById("sidebar").classList.toggle('active');});
