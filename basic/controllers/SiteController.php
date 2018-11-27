@@ -365,7 +365,7 @@ class SiteController extends Controller
    
         } else 
         {
-            return $this->render('login', [
+            return $this->renderAjax('login', [
                 'model' => $model,]);
         }
     }
