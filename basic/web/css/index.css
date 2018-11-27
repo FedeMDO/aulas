@@ -726,4 +726,36 @@ h3{
 }
 
 
+@media screen and (max-width: 1100px) {
+  .navbar-brand img{
+    display: none;
+  }
+  .navbar-right a{
+    font-size: 13px;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+  .navbar-default a{
+    font-size: 13px;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+  
+}
+
+@media screen and (max-width: 850px) {
+  .navbar-right a{
+    font-size: 13px;
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+  }
+  .navbar-default a{
+    font-size: 13px;
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+  }
+  
+  
+
+}
 
