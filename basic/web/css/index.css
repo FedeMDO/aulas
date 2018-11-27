@@ -598,11 +598,9 @@ text-transform: uppercase;
 
 
  .button1 {
-
-
-  margin-left: 584px;
-  
-
+    float: left;
+    margin-left: 122px;
+    margin-top: 18px;
   }
 
 /*.grid tr:nth-child(odd){

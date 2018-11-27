@@ -30,28 +30,27 @@ $this->title = 'Buscador de aulas';
                 <tbody>
                 <?php foreach ($aulasCumplen as $aula): ?>
                 <tr>
-                  <td><a href="/evento/index?id=<?= Html::encode("{$aula->ID}") ?>" type="button" class="btn btn-primary" >AGENDA</button></td>
+                  <td><a href="/evento/index?id=<?=Html::encode("{$aula->ID}")?>" type="button" class="btn btn-primary" >AGENDA</button></td>
                   <td ><?=Html::encode("{$aula->ID} ")?></span></td>
                   <td><?=Html::encode("{$aula->NOMBRE} ")?> N°<?=Html::encode("{$aula->ID} ")?></td>
                   <td><?=Html::encode("{$aula->PISO} ")?></td>
                   <td><?=Html::encode("{$aula->CAPACIDAD} ")?>
                   <td><?php $n = 0;
-                            foreach ($aula->rECURSOs as $recurso){
-                              $n = $n + 1;
-                              if (count($aula->rECURSOs)==$n){
-                                echo $recurso->NOMBRE;
-                              }
-                              else{
-                                echo $recurso->NOMBRE." - ";
-                              }
-                            }
-                  ?></td>
+	foreach ($aula->rECURSOs as $recurso) {
+		$n = $n + 1;
+		if (count($aula->rECURSOs) == $n) {
+			echo $recurso->NOMBRE;
+		} else {
+			echo $recurso->NOMBRE . " - ";
+		}
+	}
+	?></td>
                   <td>
-                  <?php if ($aula->OBS != null):?> 
+                  <?php if ($aula->OBS != null): ?>
                   <?php echo $aula->OBS ?><a href="../aula/observa?id=<?=Html::encode("{$aula->ID}")?>" class="glyphicon glyphicon-pencil" style="margin-left:4px"></a>
-                  <?php else:?>
+                  <?php else: ?>
                   <p>No hay observacion. <a href="../aula/observa?id=<?=Html::encode("{$aula->ID}")?>" class="glyphicon glyphicon-pencil"></a></p>
-                  <?php endif; ?>
+                  <?php endif;?>
                   </td>
                   </td>
                 </tr>
@@ -61,8 +60,7 @@ $this->title = 'Buscador de aulas';
 </div>
 </div>
 
-
-
+<a href="../aula/buscador" class="btn btn-info button1" role="button">Buscar otra vez</a>
 
 <?php
 } else {?>
