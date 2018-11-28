@@ -36,88 +36,23 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
 
     <style>
-
         .cuerpo{
             display: block;
             margin: auto;
-        }
-
-        .button{
-            background:none;
-            color: white;
-            width: 100px;
-            height: 30px;
-            border: 1px solid #000099;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 4px;
-            transition: .6s;
-            overflow: hidden;
-        }
-
-        .button:focus{
-            outline: none;
-        }
-
-        .button:before{
-            content: '';
-            display: block;
-            position: absolute;
-            background: rgba(255,255,255,.5);
-            width: 20px;
-            height: 100%;
-            left: 0;
-            top: 0;
-            opacity: .5;
-            filter: blur(30px);
-            transform: translate(-130px) skewX(-15deg);
-        }
-
-        .button:after{
-            content: '';
-            display: block;
-            position: absolute;
-            background: rgba(255,255,255,.2);
-            width: 20px;
-            height: 100%;
-            left: 10px;
-            top: 0;
-            opacity: 0;
-            filter: blur(30px);
-            transform: translateX(-100px) scaleX(-15deg);
-        }
-
-        .button:hover{
-            background: #003399;
-            cursor: pointer;
-        }
-
-        .button:hover:before {
-        transform: translateX(300px) skewX(-15deg);
-            opacity: .6;
-            transition: 2s;
-        }
-
-        .button:hover:after {
-        transform: translateX(300px) skewX(-15deg);
-            opacity: 1;
-            transition: 2s;
-        }
-
-        
+        }        
     </style>
 
     <?php $this->head() ?>
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="../../plugins/iCheck/square/blue.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="../../plugins/iCheck/square/blue.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     
 </head>
 
@@ -130,7 +65,8 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => '<img src="../image/logo3.png"; class="img-responsive">'.'',
-        "innerContainerOptions" => ['class' => 'container-fluid']]);
+        "innerContainerOptions" => ['class' => 'container-fluid'],
+        'options' => ['style' => 'height:52px;']]);
 
         // Preguntar aca si user es admin o simple y hacer un echo Nav del q corresponda
         // SI ES GUEST
@@ -139,16 +75,11 @@ AppAsset::register($this);
         echo Nav::widget([
             'encodeLabels' => false,
             'options' => ['class' => 'navbar-nav navbar-right'],
-            'items' => [
-                                
-               //['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-home']).' INICIO', 'url' => ['/site/index'], 'options' => ['style' => 'font-weight: bold;']],
-                ['label' => Html::button('INICIO', ['/site/index', 'class'=>'button'])],
-
-                
-                
+            'items' => [      
+                ['label' => Html::a('<i class="glyphicon glyphicon-home"></i> INICIO', ['/site/index'], ['class'=>'btn btn-add-al', 'style' => 'top: -32px; font-weight: bold;'])],
+                    
                 Yii::$app->user->isGuest ? (
-                    ['label' => Html::button(' INGRESAR', ['value' => Url::to(['/site/login']), 'title' => 'Iniciar Sesion', 'id'=>'modalLogin', 'class'=>'button', 'options' => ['style' => 'font-weight: bold;']])]
-                    //['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login'], 'options' => ['style' => 'font-weight: bold;']]
+                    ['label' => Html::button('<i class="glyphicon glyphicon-log-in"></i> INGRESAR', ['value' => Url::to('/site/loginbox'), 'class' => 'btn btn-add-al', 'id' => 'modalLogin', 'style' => 'position:relative; top:-8px; font-weight: bold; background-color: Transparent;']) ]
                 ) : (
                     '<li>'
                     . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
@@ -198,7 +129,7 @@ AppAsset::register($this);
                 'items' => [
                     ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold;']],
                     Yii::$app->user->isGuest ? (
-                        ['label' => Html::button(' INGRESAR', ['value' => Url::to(['/site/login']), 'title' => 'Iniciar Sesion', 'id'=>'modalLogin', 'class'=>'button', 'options' => ['style' => 'font-weight: bold;']])]
+                        ['label' => Html::button('<i class="glyphicon glyphicon-log-in"></i> INGRESAR', ['value' => Url::to('/site/loginbox'), 'class' => 'btn btn-add-al', 'id' => 'modalLogin', 'style' => 'position:relative; top:-8px; font-weight: bold; background-color: Transparent;']) ]
                         //['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login'], 'options' => ['style' => 'font-weight: bold;']]
                     ) : 
                     ['label' =>  Yii::$app->user->identity->username, 'options' => ['style' => 'font-weight: bold;'],
@@ -233,7 +164,7 @@ AppAsset::register($this);
                 'items' => [
                     ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold;']],
                     Yii::$app->user->isGuest ? (
-                        ['label' => Html::button(' INGRESAR', ['value' => Url::to(['/site/login']), 'title' => 'Iniciar Sesion', 'id'=>'modalLogin', 'class'=>'button', 'options' => ['style' => 'font-weight: bold;']])]
+                        ['label' => Html::button('<i class="glyphicon glyphicon-log-in"></i> INGRESAR', ['value' => Url::to('/site/loginbox'), 'class' => 'btn btn-add-al', 'id' => 'modalLogin', 'style' => 'position:relative; top:-8px; font-weight: bold; background-color: Transparent;']) ]
                         //['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login'], 'options' => ['style' => 'font-weight: bold;']]
                     ) : 
                     ['label' =>  Yii::$app->user->identity->username, 'options' => ['style' => 'font-weight: bold;'],
@@ -265,7 +196,7 @@ AppAsset::register($this);
                 'items' => [
                     ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold;']],
                     Yii::$app->user->isGuest ? (
-                        ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login'], 'options' => ['style' => 'font-weight: bold;']]
+                        ['label' => Html::button('<i class="glyphicon glyphicon-log-in"></i> INGRESAR', ['value' => Url::to('/site/loginbox'), 'class' => 'btn btn-add-al', 'id' => 'modalLogin', 'style' => 'position:relative; top:-8px; font-weight: bold; background-color: Transparent;']) ]
                     ) : 
                     ['label' =>  Yii::$app->user->identity->username, 'options' => ['style' => 'font-weight: bold;'],
                     'items' => [
@@ -294,7 +225,7 @@ AppAsset::register($this);
 
 
     <!-- SLIDER -->
-    <div class="cuerpo">
+    <div class="cuerpo" >
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
@@ -306,7 +237,6 @@ AppAsset::register($this);
 <!-- <div class="footer">
   <p>Proyecto de Software - Universidad Nacional Arturo Jauretche</p>
 </div> -->
-
 
 <?php
         yii\bootstrap\Modal::begin([

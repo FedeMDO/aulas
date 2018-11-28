@@ -343,6 +343,41 @@ class SiteController extends Controller
      *
      * @return Response|string
      */
+
+    public function actionLoginbox()
+    {
+        if (!\Yii::$app->user->isGuest) {
+   
+            return $this->actionIndex();
+        }   
+ 
+        $model = new LoginForm();
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()))
+        {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+
+        if ($model->load(Yii::$app->request->post()) && $model->login()) 
+        {
+   
+            if (User::isUserAdmin(Yii::$app->user->identity->id))
+            {
+                return $this->actionIndex();
+            }
+            else
+            {
+                 return $this->actionIndex();
+            }
+   
+        } else 
+        {
+            return $this->renderAjax('loginbox', [
+                'model' => $model,]);
+        }
+        return $this->renderAjax( 'loginbox', [ 'model' => $model ] );
+    }
+
     public function actionLogin()
     {
         if (!\Yii::$app->user->isGuest) {
@@ -351,6 +386,12 @@ class SiteController extends Controller
         }   
  
         $model = new LoginForm();
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()))
+        {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) 
         {
    
@@ -368,6 +409,7 @@ class SiteController extends Controller
             return $this->renderAjax('login', [
                 'model' => $model,]);
         }
+        return $this->renderAjax( 'login', [ 'model' => $model ] );
     }
 
     /**

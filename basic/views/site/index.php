@@ -16,6 +16,7 @@ $this->registerCssFile("@web/css/inicio.css",
 $this->title = 'Sistema de Gestion de Aulas';
 ?>
 
+<div></div>
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
