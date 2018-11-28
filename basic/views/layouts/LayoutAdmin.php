@@ -103,6 +103,9 @@ AppAsset::register($this);
             ]);
         }
     NavBar::end();
+    ?>
+    <div class='col-md-2' style="padding-left:0px; padding-right:0px; width:10.66666667%" >
+    <?php
     echo SideNav::widget([
         'encodeLabels' => false,
         'type' => SideNav::TYPE_PRIMARY,
@@ -120,15 +123,17 @@ AppAsset::register($this);
             ['label' => 'Panel de sedes', 'url' => '/sede/index','icon' => 'glyphicon glyphicon-chevron-right'],
         ],
     ]);
-     
-
     ?>
+    </div>
+    
     <!-- SLIDER -->
     <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
+        <div class='col-md-10' style="padding-left:30px; padding-right:30px; width:89.33333333%" >
         <?= $content ?>
+        </div>
 </div>
 <!-- footer comentado -->
 <!-- <div class="footer">

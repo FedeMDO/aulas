@@ -232,9 +232,11 @@ text-transform: uppercase;
 .kv-sidenav{
   height:1000px;
 }
+
+.panel-primary{
+  margin-bottom: 0px;
+}
 .nav-stacked{
-  width: 10%;
-  float: left;
   background-color: white;
 }
 .notiboton{
