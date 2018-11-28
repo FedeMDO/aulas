@@ -34,7 +34,7 @@ class Sede extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ID', 'ID_INSTITUCION', 'NOMBRE', 'CALLEYNUM', 'LOCALIDAD', 'DISPONIBLE_DESDE', 'DISPONIBLE_HASTA'], 'required'],
+            [['ID_INSTITUCION', 'NOMBRE', 'CALLEYNUM', 'LOCALIDAD', 'DISPONIBLE_DESDE', 'DISPONIBLE_HASTA'], 'required'],
             [['ID_INSTITUCION'], 'integer'],
             [['DISPONIBLE_DESDE', 'DISPONIBLE_HASTA'], 'safe'],
             [['NOMBRE', 'LOCALIDAD'], 'string', 'max' => 50],

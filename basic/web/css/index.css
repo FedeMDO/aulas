@@ -232,9 +232,11 @@ text-transform: uppercase;
 .kv-sidenav{
   height:1000px;
 }
+
+.panel-primary{
+  margin-bottom: 0px;
+}
 .nav-stacked{
-  width: 10%;
-  float: left;
   background-color: white;
 }
 .notiboton{
@@ -599,7 +601,6 @@ text-transform: uppercase;
 
  .button1 {
     float: left;
-    margin-left: 122px;
     margin-top: 18px;
   }
 
@@ -720,7 +721,6 @@ text-transform: uppercase;
 h3{
   font-size: 3.6vh;
   margin-bottom: 9px;
-  text-transform:uppercase
 }
 
 

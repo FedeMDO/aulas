@@ -60,8 +60,6 @@ endif;
         ['prompt'=>'Seleccione Materia...']
         )->label('Materia'); ?>
 
-    <?= $form->field($model, 'CARGA_HORARIA_SEMANAL',['labelOptions'=>['style'=>'color:white']])->textInput() ?>
-
     <div class="form-group">
         <?= Html::submitButton('Crear', ['class' => 'btn btn-success btn-block']) ?>
     </div>

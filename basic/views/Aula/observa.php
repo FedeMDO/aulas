@@ -17,7 +17,7 @@ $this->registerCssFile("@web/css/index.css", [
 <div class="col-md-offset-4 col-md-4">
 <div class="aula-obs ins loginc azul">
     <?php $form = ActiveForm::begin(); ?>
-    <h1>Observacion de aula <?= Html::encode($aula->ID) ?></h1>
+    <h1>Observacion de aula <?= Html::encode($aula->NOMBRE) ?></h1>
         <p style= "text-align:left; padding-top:5px" >Observacion actual</p> 
         <?php if ($aula->OBS != null): ?>
         <p class= "miPanel" style="font-style:italic; color:#c9d3d3; border: 1px solid white;"> <?=  Html::encode($aula->OBS) ?></p>

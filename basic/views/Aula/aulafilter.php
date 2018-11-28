@@ -27,7 +27,6 @@ $this->title = 'Aulas';
                 <thead>
                 <tr>
                   <th>AGENDA</th>
-                  <th>N°</th>
                   <th>NOMBRE</th>
                   <th>PISO</th>
                   <th>CAPACIDAD</th>
@@ -41,9 +40,8 @@ $this->title = 'Aulas';
                 <tbody>
                 <?php foreach ($aula as $aula): ?>
                 <tr>
-                <td><a href="/evento/index?id=<?= Html::encode("{$aula->ID}") ?>" type="button" class="btn btn-primary" >AGENDA</button></td>
-                  <td ><?=Html::encode("{$aula->ID} ")?></span></td>
-                  <td><?=Html::encode("{$aula->NOMBRE} ")?> N°<?=Html::encode("{$aula->ID} ")?></td>
+                <td><a href="/evento/index?id=<?= Html::encode("{$aula->ID}") ?>" type="button" class="btn btn-primary" >VER</button></td>
+                  <td><?=Html::encode("{$aula->NOMBRE} ")?></td>
                   <td><?=Html::encode("{$aula->PISO} ")?></td>
                   <td><?=Html::encode("{$aula->CAPACIDAD} ")?></td>
                   <td><?php $n = 0;

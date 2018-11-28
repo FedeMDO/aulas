@@ -25,6 +25,7 @@ $this->title = 'Edificios';
   <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Indie+Flower|Lato" rel="stylesheet">
   <script src="main.js"></script>
 
+<<<<<<< HEAD
   <style>
 
     h2{
@@ -100,17 +101,86 @@ $this->title = 'Edificios';
 
   </style>
 
+=======
+   <style>
+
+
+h4{
+  text-align: center;
+}
+
+body{
+  margin:0;
+  padding:0;
+  font-family: sans-serif;
+}
+
+.container{
+  width: 1290px;
+  min-height: 500px;
+  margin: 10px auto 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+ .box{
+  position: relative;
+  background: #ff0;
+  margin: 5px;
+  box-sizing: border-box;
+  display: inline-block;
+  overflow: hidden;
+}
+
+ .box .imgBox{
+  position: relative;
+}
+
+ .box .imgBox img{
+  max-width: 100%;
+  transition: transform 2s;
+}
+
+ .box:hover .imgBox img{
+  transform: scale(1.2);
+}
+
+.box .details{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.8);
+  transform: scaleY(0);
+  transition: transform .5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ .box:hover .details{
+  transform: scaleY(1);
+}
+
+ .box .details .content{
+  text-align: center;
+  padding: 15px;
+  color: #fff;
+}
+
+</style>
+>>>>>>> 917d20364e931dd03393b7cd779131af904749b9
 </head>
 <body>
   <h2 class=titulo><?php if(count($edificio) != 0){
   echo("Edificios Disponibles en la sede "); echo (Html::encode("{$edificio[0]->sEDE->NOMBRE}")); }
   else{}?>
   </h2>
-  
-  <div class="container">
-    
     <?php foreach ($edificio as $edificio): ?>
-        
+    <div class="row3">
+        <div id="columna" class="col-sm-8 col-md-4 active">
       <div class="box">
           
         <div class="imgBox">
@@ -136,12 +206,14 @@ $this->title = 'Edificios';
 
           </div>
         </div>
+        </div>
+        </div>
 
       </div>
 
     <?php endforeach;?>
 
-  </div>
+
 
   <div id="sidebar" class="active">
   <div class="toggle-btn miBoton">
