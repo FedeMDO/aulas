@@ -11,15 +11,14 @@ $this->title = 'Buscador de aulas';
 <center><?php if (count($aulasCumplen) != 0) {
 
 	?>
-<h3 class=titulo>Aulas Disponibles con los parámetros seleccionados en el edificio <?=Html::encode("{$edi->NOMBRE} ")?></h3>
 <div class="col-md-offset-1 col-md-10">
+<h2 class=titulo style="text-align:center;">Aulas disponibles con los parámetros seleccionados en <?=Html::encode("{$edi->NOMBRE} ")?></h2>
 <div class="loginc">
 <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>AGENDA</th>
-                  <th>N°</th>
                   <th>NOMBRE</th>
                   <th>PISO</th>
                   <th>CAPACIDAD</th>
@@ -30,21 +29,20 @@ $this->title = 'Buscador de aulas';
                 <tbody>
                 <?php foreach ($aulasCumplen as $aula): ?>
                 <tr>
-                  <td><a href="/evento/index?id=<?=Html::encode("{$aula->ID}")?>" type="button" class="btn btn-primary" >AGENDA</button></td>
-                  <td ><?=Html::encode("{$aula->ID} ")?></span></td>
-                  <td><?=Html::encode("{$aula->NOMBRE} ")?> N°<?=Html::encode("{$aula->ID} ")?></td>
+                  <td><a href="/evento/index?id=<?=Html::encode("{$aula->ID}")?>" type="button" class="btn btn-primary" >VER</button></td>
+                  <td><?=Html::encode("{$aula->NOMBRE} ")?></td>
                   <td><?=Html::encode("{$aula->PISO} ")?></td>
                   <td><?=Html::encode("{$aula->CAPACIDAD} ")?>
                   <td><?php $n = 0;
-	foreach ($aula->rECURSOs as $recurso) {
-		$n = $n + 1;
-		if (count($aula->rECURSOs) == $n) {
-			echo $recurso->NOMBRE;
-		} else {
-			echo $recurso->NOMBRE . " - ";
-		}
-	}
-	?></td>
+                            foreach ($aula->rECURSOs as $recurso) {
+                              $n = $n + 1;
+                              if (count($aula->rECURSOs) == $n) {
+                                echo $recurso->NOMBRE;
+                              } else {
+                                echo $recurso->NOMBRE . " - ";
+                              }
+                            }
+                   ?></td>
                   <td>
                   <?php if ($aula->OBS != null): ?>
                   <?php echo $aula->OBS ?><a href="../aula/observa?id=<?=Html::encode("{$aula->ID}")?>" class="glyphicon glyphicon-pencil" style="margin-left:4px"></a>
@@ -58,9 +56,8 @@ $this->title = 'Buscador de aulas';
               </table>
             </div>
 </div>
-</div>
-
 <a href="../aula/buscador" class="btn btn-info button1" role="button">Buscar otra vez</a>
+</div>
 
 <?php
 } else {?>

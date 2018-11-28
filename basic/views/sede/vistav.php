@@ -121,7 +121,7 @@ $this->title = 'Sedes';
             <div class="thumbnail sede">
               <div class="caption">
                 <h4 style="text-align:center;"><?=Html::encode("{$sede->NOMBRE} ")?> </h4>
-                <p><?=Html::encode("{$sede->LOCALIDAD}")?> -<?=Html::encode(" {$sede->CALLEYNUM} ")?></p>
+                <p><?=Html::encode("{$sede->CALLEYNUM}")?> -<?=Html::encode(" {$sede->LOCALIDAD} ")?></p>
                 <p></p>
                 <a href="../edificio/edifilter?id=<?=Html::encode("{$sede->ID}")?>" class="btn btn-info" role="button">Entrar</a>
                 <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>

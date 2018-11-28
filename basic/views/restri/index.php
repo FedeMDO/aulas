@@ -26,9 +26,12 @@ $indexMaterias = 1;
         
     <?= Html::button('Nueva restriccion', ['value' => Url::to(['restri/create', 'id_aula' => $id_aula]), 'title' => $id_aula, 'class' => 'showModalButton btn btn-success']); ?>
     <?= Html::a('Ir a calendario', Url::to(['evento/index?id='.$id_aula.'']), ['class' => 'btn btn-primary']); ?>
+    <div style="display:none;">
+    <em id:"id_aula"><?=Html::encode("{$id_aula}")?></em>
+    </div>
 
         <div class="loginc">
-        <h3 style="text-align: center; font-weight: bold;">ASIGNACION DE RESTRICCIONES DE AULA   <em id:"id_aula"><?=Html::encode("{$id_aula}")?></em></h3>
+        <h3 style="text-align: center; font-weight: bold;">ASIGNACION DE RESTRICCIONES DE AULA <i><?= Html::encode("{$aula}") ?></i></h3>
             <div class="evento-index">
 
                 <div class="evento-calendar-index">

@@ -103,9 +103,9 @@ class CarreraController extends Controller
     {
         $query = Carrera::find(); 
         $pagination = new Pagination([
-            'defaultPageSize' => 5,
+            'defaultPageSize' => 20,
         ]);
-        $carrera = $query->orderBy('ID')
+        $carrera = $query->orderBy('ID_INSTITUTO')
         ->offset($pagination->offset)
         ->limit($pagination->limit)
         ->all();

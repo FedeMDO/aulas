@@ -4,6 +4,7 @@ use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use yii\data\Pagination;
 use yii\widgets\LinkPager;
+use app\models\Aula;
 
 
 $this->registerCssFile("@web/css/index.css", [
@@ -110,6 +111,9 @@ $this->title = 'Edificios';
   <div class="container">
     
     <?php foreach ($edificio as $edificio): ?>
+    <?php $aulas = Aula::find()
+                   ->where(['ID_EDIFICIO' => $edificio->ID])
+                   ->count(); ?>
         
       <div class="box">
           
@@ -125,7 +129,7 @@ $this->title = 'Edificios';
               <div class="caption">
                 <h4><?= Html::encode("{$edificio->NOMBRE} ") ?></h4>
                 <img  src="../image/aulaicon.png" alt="  height="50" width="50">
-                <?= Html::encode("{$edificio->CANTIDAD_AULAS} ") ?>
+                <?= Html::encode("{$aulas} ") ?>
                 <p></p>
                 <a href="../aula/aulafilter?id=<?= Html::encode("{$edificio->ID}") ?>" class="btn btn-info" role="button">Entrar</a>
                 <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>

@@ -49,7 +49,7 @@ $resultado = ArrayHelper::map($recurso3, 'ID', 'NOMBRE');
 
 ?>
 
-<?php echo $form->field($sedes, 'ID',['labelOptions'=>['style'=>'color:white']])->widget(Select2::className(),[
+<?php echo $form->field($sedes, 'ID',['labelOptions'=>['style'=>'color:white', 'value' => 'hola']])->widget(Select2::className(),[
         'data'=> $resultado,
         "options" =>[
         'placeholder'=> 'Seleccione sede',
@@ -66,7 +66,6 @@ $resultado = ArrayHelper::map($recurso3, 'ID', 'NOMBRE');
  <?php echo $form->field($edificio, 'ID',['labelOptions'=>['style'=>'color:white']])->widget(Select2::className(),[
         'data'=>$resulta, 
         "options" =>[
-        'placeholder'=> 'Seleccione edificio',
         ]
         ])->label('Nombre de Edificio');
 

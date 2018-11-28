@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Materia;
 use app\models\MateriaSearch;
+use app\models\Carrera;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

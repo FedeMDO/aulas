@@ -16,12 +16,12 @@ use app\models\Instituto;
     <?php $institutos = Instituto::find()->asArray()->all();
     $result = ArrayHelper::map($institutos, 'ID', 'NOMBRE'); ?>
 
-    <?php echo $form->field($model, 'ID_INSTITUTO')->dropDownList(
+    <?php echo $form->field($model, 'ID_INSTITUTO', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->dropDownList(
         $result, 
         ['prompt'=>'Choose...']
         ); ?>
 
-    <?= $form->field($model, 'NOMBRE')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'NOMBRE', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success btn-block']) ?>

@@ -108,15 +108,11 @@ class ComisionController extends Controller
             $request = $_POST['Comision'];
             $help = $request['NUMERO'];
             $materia = $request['ID_MATERIA'];
-            $horas = $request['CARGA_HORARIA_SEMANAL'];
-            //$request = Yaii::$app->request;
-            //$help = $request->post('NUMERO');
-            //var_dump ($help);
             for( $i=0; $i<$help; $i++){
                 $comi = new Comision();
                 $comi->NUMERO = $i + 1;
                 $comi->ID_MATERIA = $materia;
-                $comi->CARGA_HORARIA_SEMANAL = $horas;
+                $comi->CARGA_HORARIA_SEMANAL = NULL;
                 $comi->ID_Ciclo = 1;
                 $comi->save();
                 if ($comi->save()){

@@ -25,7 +25,9 @@ $this->registerCssFile("@web/css/index.css", [
 $this->title = 'Aulas de edificios segun sede seleccionada';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<div style="display:none;">
 <em id:"id_sede"><?=Html::encode("{$sede->ID}")?></em>
+</div>
 <div class="col-md-offset-1 col-md-10">
     <div class="loginc">
         <!-- THE CALENDAR -->
