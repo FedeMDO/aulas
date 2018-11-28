@@ -5,9 +5,7 @@
 
 use app\widgets\Alert;
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\bootstrap\Nav;
-use yii\bootstrap\Modal;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
@@ -24,6 +22,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '../im
 
 AppAsset::register($this);
 
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -34,79 +33,6 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=0">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-
-    <style>
-
-        .cuerpo{
-            display: block;
-            margin: auto;
-        }
-
-        .button{
-            background:none;
-            color: white;
-            width: 100px;
-            height: 30px;
-            border: 1px solid #000099;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 4px;
-            transition: .6s;
-            overflow: hidden;
-        }
-
-        .button:focus{
-            outline: none;
-        }
-
-        .button:before{
-            content: '';
-            display: block;
-            position: absolute;
-            background: rgba(255,255,255,.5);
-            width: 20px;
-            height: 100%;
-            left: 0;
-            top: 0;
-            opacity: .5;
-            filter: blur(30px);
-            transform: translate(-130px) skewX(-15deg);
-        }
-
-        .button:after{
-            content: '';
-            display: block;
-            position: absolute;
-            background: rgba(255,255,255,.2);
-            width: 20px;
-            height: 100%;
-            left: 10px;
-            top: 0;
-            opacity: 0;
-            filter: blur(30px);
-            transform: translateX(-100px) scaleX(-15deg);
-        }
-
-        .button:hover{
-            background: #003399;
-            cursor: pointer;
-        }
-
-        .button:hover:before {
-        transform: translateX(300px) skewX(-15deg);
-            opacity: .6;
-            transition: 2s;
-        }
-
-        .button:hover:after {
-        transform: translateX(300px) skewX(-15deg);
-            opacity: 1;
-            transition: 2s;
-        }
-
-        
-    </style>
-
     <?php $this->head() ?>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -125,13 +51,18 @@ AppAsset::register($this);
 
 <?php $this->beginBody() ?>
 
+
+
+
+
 <div class="wrap">
+
+
 
     <?php
     NavBar::begin([
         'brandLabel' => '<img src="../image/logo3.png"; class="img-responsive">'.'',
         "innerContainerOptions" => ['class' => 'container-fluid']]);
-
         // Preguntar aca si user es admin o simple y hacer un echo Nav del q corresponda
         // SI ES GUEST
         if(Yii::$app->user->isGuest)
@@ -140,15 +71,11 @@ AppAsset::register($this);
             'encodeLabels' => false,
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
-                                
-               //['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-home']).' INICIO', 'url' => ['/site/index'], 'options' => ['style' => 'font-weight: bold;']],
-                ['label' => Html::button('INICIO', ['/site/index', 'class'=>'button'])],
-
                 
+                ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-home']).' INICIO', 'url' => ['/site/index'], 'options' => ['style' => 'font-weight: bold;']],
                 
                 Yii::$app->user->isGuest ? (
-                    ['label' => Html::button(' INGRESAR', ['value' => Url::to(['/site/login']), 'title' => 'Iniciar Sesion', 'id'=>'modalLogin', 'class'=>'button', 'options' => ['style' => 'font-weight: bold;']])]
-                    //['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login'], 'options' => ['style' => 'font-weight: bold;']]
+                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login'], 'options' => ['style' => 'font-weight: bold;']]
                 ) : (
                     '<li>'
                     . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
@@ -161,13 +88,9 @@ AppAsset::register($this);
                 )
             ],
         ]);
-
-        
         }
-        
         else
         {
-
         //SI ES ADMIN
         if(User::isUserAdmin(Yii::$app->user->identity->id)) 
         {
@@ -198,8 +121,7 @@ AppAsset::register($this);
                 'items' => [
                     ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold;']],
                     Yii::$app->user->isGuest ? (
-                        ['label' => Html::button(' INGRESAR', ['value' => Url::to(['/site/login']), 'title' => 'Iniciar Sesion', 'id'=>'modalLogin', 'class'=>'button', 'options' => ['style' => 'font-weight: bold;']])]
-                        //['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login'], 'options' => ['style' => 'font-weight: bold;']]
+                        ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login'], 'options' => ['style' => 'font-weight: bold;']]
                     ) : 
                     ['label' =>  Yii::$app->user->identity->username, 'options' => ['style' => 'font-weight: bold;'],
                     'items' => [
@@ -212,7 +134,6 @@ AppAsset::register($this);
                 ],
             ]);
         }
-
     //si es user
     if(User::isUserSimple(Yii::$app->user->identity->id))
         {
@@ -233,8 +154,7 @@ AppAsset::register($this);
                 'items' => [
                     ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold;']],
                     Yii::$app->user->isGuest ? (
-                        ['label' => Html::button(' INGRESAR', ['value' => Url::to(['/site/login']), 'title' => 'Iniciar Sesion', 'id'=>'modalLogin', 'class'=>'button', 'options' => ['style' => 'font-weight: bold;']])]
-                        //['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login'], 'options' => ['style' => 'font-weight: bold;']]
+                        ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login'], 'options' => ['style' => 'font-weight: bold;']]
                     ) : 
                     ['label' =>  Yii::$app->user->identity->username, 'options' => ['style' => 'font-weight: bold;'],
                     'items' => [
@@ -278,35 +198,21 @@ AppAsset::register($this);
                 ],
             ]);
         }
-        
-        Modal::begin([
-            'header'=>'<h4>Iniciar Sesion</h4>',
-            'id' => 'modalLogin',
-            'size' => 'modal-lg',
-        ]);
-
-        echo "<div id='modalContent'></div>";
-        Modal::end();
     }
 
     NavBar::end();
     ?>
-
-
     <!-- SLIDER -->
-    <div class="cuerpo">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
         <?= $content ?>
-    </div>
 </div>
 <!-- footer comentado -->
 <!-- <div class="footer">
   <p>Proyecto de Software - Universidad Nacional Arturo Jauretche</p>
 </div> -->
-
 
 <?php
         yii\bootstrap\Modal::begin([
@@ -365,8 +271,6 @@ AppAsset::register($this);
       
     </div>
   </div>
-
-
 
 <?php $this->endBody() ?>
 
