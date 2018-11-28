@@ -135,23 +135,6 @@ $this->title = 'Sedes';
 
   </div>
 
-  <div id="sidebar" class="active">
-  <div class="toggle-btn miBoton">
-      <span>&#9776;</span>
-  </div>
-      <ul>
-        <li><a href="../aula/buscador" class="btn miBoton btn-md btn-vistav " role="button">Filtrar aulas <span class="glyphicon glyphicon-search"></span></a>
-        </li>
-        <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
-        <li>
-        <a href="../sede/create" class="btn miBoton btn-md btn-vistav" role="button">Crear sede <span class="glyphicon glyphicon-plus"></span></a>
-        </li>
-        <li><a href="../comision/create" class="btn miBoton btn-md btn-vistav" role="button">Crear comisiones <span class="glyphicon glyphicon-plus"></span></a></li>
-        <li><a href="../materia/create" class="btn miBoton btn-md btn-vistav" role="button">Crear materia <span class="glyphicon glyphicon-plus"></span></a></li>
-        <?php endif; ?>
-      </ul>
-  </div>
-
 </body>
 </html>
 

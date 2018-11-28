@@ -13,153 +13,70 @@ $this->registerCssFile("@web/css/index.css", [
 
 $this->title = 'Edificios';
 ?>
+<br>
+<br>
+
+<center><h2 class=titulo><?php if(count($edificio) != 0){
+echo("Edificios Disponibles en la sede "); echo (Html::encode("{$edificio[0]->sEDE->NOMBRE}"));}
+else{?>
+</h2>
+<div class="container imagenrobot">
+    <div class="row" style= "width:60%;" >
+    <img width="220px" height="220" style= "float:left; margin-lelft:10px;"src="../image/error.png" />
+      <br>
+      <h3 class="titulo" >No hay edificios creados en esta sede</h3>
+      <br><br><br>
+      <a href="../sede/vistav"  class="btn btn-info" style="width:50%" role="button">Volver atras</a>
+    </div>
+</div>
+
+</div>
 
 
+<?php } ?></h3></center>
 
-<!doctype <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <title>Sedes</title>
-  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-  <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Indie+Flower|Lato" rel="stylesheet">
-  <script src="main.js"></script>
+<ul>
+<?php foreach ($edificio as $edificio): ?>
 
-  <style>
-
-    h2{
-      font-family: 'Dancing Script', cursive;
-      font-size: 40px;
-      text-align: center;
-    }
-
-    body{
-      margin:0;
-      padding:0;
-      font-family: sans-serif;
-    }
-    
-    .container{
-      width: 1290px;
-      min-height: 500px;
-      margin: 10px auto 0;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-
-    .container .box{
-      position: relative;
-      width: 400px;
-      height: 380px;
-      background: #ff0;
-      margin: 10px;
-      box-sizing: border-box;
-      display: inline-block;
-      overflow: hidden;
-    }
-
-    .containter .box .imgBox{
-      position: relative;
-    }
-
-    .container .box .imgBox img{
-      max-width: 100%;
-      height:380px;
-      transition: transform 2s;
-    }
-
-    .container .box:hover .imgBox img{
-      transform: scale(1.2);
-    }
-
-    .container .box .details{
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      bottom: 10px;
-      right: 10px;
-      background: rgba(0,0,0,0.8);
-      transform: scaleY(0);
-      transition: transform .5s;
-    }
-
-    .container .box:hover .details{
-      transform: scaleY(1);
-    }
-
-    .container .box .details .content{
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      text-align: center;
-      padding: 15px;
-      color: #fff;
-    }
-    
-
-  </style>
-
-</head>
-<body>
-  <h2 class=titulo><?php if(count($edificio) != 0){
-  echo("Edificios Disponibles en la sede "); echo (Html::encode("{$edificio[0]->sEDE->NOMBRE}")); }
-  else{}?>
-  </h2>
-  
-  <div class="container">
-    
-    <?php foreach ($edificio as $edificio): ?>
-        
-      <div class="box">
-          
-        <div class="imgBox">
-          <img src="../image/edi4.png" alt="...">
-        </div>
-
-        <div class="details">
-
-          <div class="content" style=>
-
-            <div class="thumbnail sede" style="position:relative; left:90px;">
-              <div class="caption">
-                <h4><?= Html::encode("{$edificio->NOMBRE} ") ?></h4>
-                <img  src="../image/aulaicon.png" alt="  height="50" width="50">
-                <?= Html::encode("{$edificio->CANTIDAD_AULAS} ") ?>
-                <p></p>
-                <a href="../aula/aulafilter?id=<?= Html::encode("{$edificio->ID}") ?>" class="btn btn-info" role="button">Entrar</a>
-                <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
-                  <a href="../edificio/update?id=<?= Html::encode("{$edificio->ID}") ?>" class="btn btn-primary" role="button">Modificar</a>
-                <?php endif; ?>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
+<div class="row3">
+  <div class="col-sm-8 col-md-4">
+    <div class="thumbnail sede">
+      <img src="../image/edi4.png" alt="...">
+      <div class="caption">
+        <h4><?= Html::encode("{$edificio->NOMBRE} ") ?></h4>
+         <img  src="../image/aulaicon.png" alt="  height="42" width="42"">
+        <?= Html::encode("{$edificio->CANTIDAD_AULAS} ") ?>
+        <p></p>
+        <a href="../aula/aulafilter?id=<?= Html::encode("{$edificio->ID}") ?>" class="btn btn-info" role="button">Entrar</a>
+        <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
+          <a href="../edificio/update?id=<?= Html::encode("{$edificio->ID}") ?>" class="btn btn-primary" role="button">Modificar</a>
+        <?php endif; ?>
       </div>
-
-    <?php endforeach;?>
-
+    </div>
   </div>
+</div>
+<?php endforeach; ?>
 
-  <div id="sidebar" class="active">
+<div id="sidebar" class="active">
   <div class="toggle-btn miBoton">
       <span>&#9776;</span>
   </div>
       <ul>
         <li><a href="../aula/buscador" class="btn miBoton btn-md btn-vistav " role="button">Filtrar aulas <span class="glyphicon glyphicon-search"></span></a>
         </li>
+        <li>
+        <a href="../edificio/scheduler?id_sede=<?=Html::encode("{$edificio->sEDE->ID}")?>" class="btn miBoton btn-md btn-vistav" role="button">Ver eventos por edificio <span class="glyphicon glyphicon-search"></span></a>
+        </li>
         <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
         <li>
-        <a href="../sede/create" class="btn miBoton btn-md btn-vistav" role="button">Crear sede <span class="glyphicon glyphicon-plus"></span></a>
+        <a href="../edificio/create" class="btn miBoton btn-md btn-vistav" role="button">Crear edificio <span class="glyphicon glyphicon-plus"></span></a>
         </li>
-        <li><a href="../comision/create" class="btn miBoton btn-md btn-vistav" role="button">Crear comisiones <span class="glyphicon glyphicon-plus"></span></a></li>
-        <li><a href="../materia/create" class="btn miBoton btn-md btn-vistav" role="button">Crear materia <span class="glyphicon glyphicon-plus"></span></a></li>
+        <li>
+        <a href="../edificio/restrischeduler?id_sede=<?=Html::encode("{$edificio->sEDE->ID}")?>" class="btn miBoton btn-md btn-vistav" role="button">Restricciones edificios <span class="glyphicon glyphicon-search"></span></a>
+        </li>
         <?php endif; ?>
       </ul>
-  </div>
+</div>
 
-</body>
-</html>
+</ul>
 
