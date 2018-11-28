@@ -5,7 +5,9 @@
 
 use app\widgets\Alert;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\Nav;
+use yii\bootstrap\Modal;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
@@ -62,7 +64,8 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => '<img src="../image/logo3.png"; class="img-responsive">'.'',
-        "innerContainerOptions" => ['class' => 'container-fluid']]);
+        "innerContainerOptions" => ['class' => 'container-fluid'],
+        'options' => ['style' => 'height:52px;']]);
         // Preguntar aca si user es admin o simple y hacer un echo Nav del q corresponda
         // SI ES GUEST
         if(Yii::$app->user->isGuest)
@@ -72,10 +75,10 @@ AppAsset::register($this);
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
                 
-                ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-home']).' INICIO', 'url' => ['/site/index'], 'options' => ['style' => 'font-weight: bold;']],
+                ['label' => Html::a('<i class="glyphicon glyphicon-home"></i> INICIO', ['/site/index'], ['class'=>'btn btn-add-al', 'style' => 'top: -32px; font-weight: bold;'])],
                 
                 Yii::$app->user->isGuest ? (
-                    ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login'], 'options' => ['style' => 'font-weight: bold;']]
+                    ['label' => Html::button('<i class="glyphicon glyphicon-log-in"></i> INGRESAR', ['value' => Url::to('/site/login2'), 'class' => 'btn btn-add-al', 'id' => 'modalLogin', 'style' => 'position:relative; top:-8px; font-weight: bold; background-color: Transparent;']) ]
                 ) : (
                     '<li>'
                     . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
@@ -121,7 +124,7 @@ AppAsset::register($this);
                 'items' => [
                     ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold;']],
                     Yii::$app->user->isGuest ? (
-                        ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login'], 'options' => ['style' => 'font-weight: bold;']]
+                        ['label' => Html::button('<i class="glyphicon glyphicon-log-in"></i> INGRESAR', ['value' => Url::to('/site/login2'), 'class' => 'btn btn-add-al', 'id' => 'modalLogin', 'style' => 'position:relative; top:-8px; font-weight: bold; background-color: Transparent;']) ]
                     ) : 
                     ['label' =>  Yii::$app->user->identity->username, 'options' => ['style' => 'font-weight: bold;'],
                     'items' => [
@@ -134,8 +137,8 @@ AppAsset::register($this);
                 ],
             ]);
         }
-    //si es user
-    if(User::isUserSimple(Yii::$app->user->identity->id))
+         //si es user
+        if(User::isUserSimple(Yii::$app->user->identity->id))
         {
             echo Nav::widget([
                 'encodeLabels' => false, //Esto permite poner los iconos
@@ -154,7 +157,7 @@ AppAsset::register($this);
                 'items' => [
                     ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold;']],
                     Yii::$app->user->isGuest ? (
-                        ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login'], 'options' => ['style' => 'font-weight: bold;']]
+                        ['label' => Html::button('<i class="glyphicon glyphicon-log-in"></i> INGRESAR', ['value' => Url::to('/site/login2'), 'class' => 'btn btn-add-al', 'id' => 'modalLogin', 'style' => 'position:relative; top:-8px; font-weight: bold; background-color: Transparent;']) ]
                     ) : 
                     ['label' =>  Yii::$app->user->identity->username, 'options' => ['style' => 'font-weight: bold;'],
                     'items' => [
@@ -185,7 +188,7 @@ AppAsset::register($this);
                 'items' => [
                     ['label' => Html::tag('span', '', ['class'=>'fa fa-bell']).' NOTIFICACIONES', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold;']],
                     Yii::$app->user->isGuest ? (
-                        ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-log-in']).' LOGIN', 'url' => ['/site/login'], 'options' => ['style' => 'font-weight: bold;']]
+                        ['label' => Html::button('<i class="glyphicon glyphicon-log-in"></i> INGRESAR', ['value' => Url::to('/site/login2'), 'class' => 'btn btn-add-al', 'id' => 'modalLogin', 'style' => 'position:relative; top:-8px; font-weight: bold; background-color: Transparent;']) ]
                     ) : 
                     ['label' =>  Yii::$app->user->identity->username, 'options' => ['style' => 'font-weight: bold;'],
                     'items' => [
@@ -197,17 +200,21 @@ AppAsset::register($this);
                         ]                  
                 ],
             ]);
+            
         }
     }
-
     NavBar::end();
     ?>
+
+
     <!-- SLIDER -->
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+    <?= Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]) ?>
+    <?= Alert::widget() ?>
+    <?= $content ?>
+
+
 </div>
 <!-- footer comentado -->
 <!-- <div class="footer">
@@ -215,6 +222,7 @@ AppAsset::register($this);
 </div> -->
 
 <?php
+
         yii\bootstrap\Modal::begin([
             'headerOptions' => ['id' => 'modalHeader'],
             'id' => 'modal',

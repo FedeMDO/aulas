@@ -45,6 +45,3 @@ $this->registerCssFile("@web/css/index.css", [
     
 
 </div>
-</div>
-
-

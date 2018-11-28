@@ -82,6 +82,9 @@ $this->title = 'Edificios';
       background: rgba(0,0,0,0.8);
       transform: scaleY(0);
       transition: transform .5s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .container .box:hover .details{
@@ -89,9 +92,6 @@ $this->title = 'Edificios';
     }
 
     .container .box .details .content{
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
       text-align: center;
       padding: 15px;
       color: #fff;
@@ -121,9 +121,9 @@ $this->title = 'Edificios';
 
           <div class="content" style=>
 
-            <div class="thumbnail sede" style="position:relative; left:90px;">
+            <div class="thumbnail sede">
               <div class="caption">
-                <h4><?= Html::encode("{$edificio->NOMBRE} ") ?></h4>
+                <h4 style="text-align:center;"><?= Html::encode("{$edificio->NOMBRE} ") ?></h4>
                 <img  src="../image/aulaicon.png" alt="  height="50" width="50">
                 <?= Html::encode("{$edificio->CANTIDAD_AULAS} ") ?>
                 <p></p>
