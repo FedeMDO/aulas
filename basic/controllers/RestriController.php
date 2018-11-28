@@ -87,10 +87,8 @@ class RestriController extends Controller
      */
     public function actionIndex($id)
     {
-        $aula = Aula::findOne($id)->NOMBRE;
         return $this->render('index', [
-            'id_aula'=>$id,
-            'aula' => $aula,
+            'id_aula'=>$id 
         ]);
     }
     /**

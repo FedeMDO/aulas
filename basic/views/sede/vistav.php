@@ -22,83 +22,91 @@ $this->title = 'Sedes';
   <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Indie+Flower|Lato" rel="stylesheet">
   <script src="main.js"></script>
 
-   <style>
+  <style>
 
+    h2{
+      font-family: 'Dancing Script', cursive;
+      font-size: 40px;
+      text-align: center;
+    }
 
-h4{
-  text-align: center;
-}
+    h4{
+      text-align: center;
+    }
 
-body{
-  margin:0;
-  padding:0;
-  font-family: sans-serif;
-}
+    body{
+      margin:0;
+      padding:0;
+      font-family: sans-serif;
+    }
+    
+    .container{
+      width: 1290px;
+      min-height: 500px;
+      margin: 10px auto 0;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
 
-.container{
-  width: 1290px;
-  min-height: 500px;
-  margin: 10px auto 0;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
+    .container .box{
+      position: relative;
+      width: 400px;
+      height: 236px;
+      background: #ff0;
+      margin: 5px;
+      box-sizing: border-box;
+      display: inline-block;
+      overflow: hidden;
+    }
 
- .box{
-  position: relative;
-  background: #ff0;
-  margin: 5px;
-  box-sizing: border-box;
-  display: inline-block;
-  overflow: hidden;
-}
+    .containter .box .imgBox{
+      position: relative;
+    }
 
- .box .imgBox{
-  position: relative;
-}
+    .container .box .imgBox img{
+      max-width: 100%;
+      height: 236px;
+      transition: transform 2s;
+    }
 
- .box .imgBox img{
-  max-width: 100%;
-  transition: transform 2s;
-}
+    .container .box:hover .imgBox img{
+      transform: scale(1.2);
+    }
 
- .box:hover .imgBox img{
-  transform: scale(1.2);
-}
+    .container .box .details{
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(0,0,0,0.8);
+      transform: scaleY(0);
+      transition: transform .5s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-.box .details{
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  bottom: 10px;
-  right: 10px;
-  background: rgba(0,0,0,0.8);
-  transform: scaleY(0);
-  transition: transform .5s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    .container .box:hover .details{
+      transform: scaleY(1);
+    }
 
- .box:hover .details{
-  transform: scaleY(1);
-}
+    .container .box .details .content{
+      text-align: center;
+      padding: 15px;
+      color: #fff;
+    }
 
- .box .details .content{
-  text-align: center;
-  padding: 15px;
-  color: #fff;
-}
-
-</style>
-
+  </style>
 
 </head>
 <body>
   <h2 class=titulo>Sedes Disponibles</h2>
+  
+  <div class="container">
+    
     <?php foreach ($sede as $sede): ?>
-    <div class="row3">
-        <div id="columna" class="col-sm-8 col-md-4 active">
         
       <div class="box">
           
@@ -112,7 +120,7 @@ body{
 
             <div class="thumbnail sede">
               <div class="caption">
-                <h4><?=Html::encode("{$sede->NOMBRE} ")?> </h4>
+                <h4 style="text-align:center;"><?=Html::encode("{$sede->NOMBRE} ")?> </h4>
                 <p><?=Html::encode("{$sede->LOCALIDAD}")?> -<?=Html::encode(" {$sede->CALLEYNUM} ")?></p>
                 <p></p>
                 <a href="../edificio/edifilter?id=<?=Html::encode("{$sede->ID}")?>" class="btn btn-info" role="button">Entrar</a>
@@ -125,7 +133,6 @@ body{
           </div>
         </div>
 
-      </div>
       </div>
 
     <?php endforeach;?>
@@ -151,5 +158,4 @@ body{
 
 </body>
 </html>
-
 
