@@ -16,11 +16,8 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <?= $form->field($model, 'ID') ?>
-<<<<<<< HEAD
-=======
 
     <?= $form->field($model, 'NOMBRE') ?>
->>>>>>> 80578c2026d5725131e792c5a82248ddfc759278
 
     <?= $form->field($model, 'ID_MATERIA') ?>
 

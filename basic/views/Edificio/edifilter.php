@@ -25,83 +25,6 @@ $this->title = 'Edificios';
   <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Indie+Flower|Lato" rel="stylesheet">
   <script src="main.js"></script>
 
-<<<<<<< HEAD
-  <style>
-
-    h2{
-      font-family: 'Dancing Script', cursive;
-      font-size: 40px;
-      text-align: center;
-    }
-
-    body{
-      margin:0;
-      padding:0;
-      font-family: sans-serif;
-    }
-    
-    .container{
-      width: 1290px;
-      min-height: 500px;
-      margin: 10px auto 0;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-
-    .container .box{
-      position: relative;
-      width: 400px;
-      height: 236px;
-      background: #ff0;
-      margin: 5px;
-      box-sizing: border-box;
-      display: inline-block;
-      overflow: hidden;
-    }
-
-    .containter .box .imgBox{
-      position: relative;
-    }
-
-    .container .box .imgBox img{
-      max-width: 100%;
-      height:236px;
-      transition: transform 2s;
-    }
-
-    .container .box:hover .imgBox img{
-      transform: scale(1.2);
-    }
-
-    .container .box .details{
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      bottom: 10px;
-      right: 10px;
-      background: rgba(0,0,0,0.8);
-      transform: scaleY(0);
-      transition: transform .5s;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .container .box:hover .details{
-      transform: scaleY(1);
-    }
-
-    .container .box .details .content{
-      text-align: center;
-      padding: 15px;
-      color: #fff;
-    }
-    
-
-  </style>
-
-=======
    <style>
 
 
@@ -171,7 +94,6 @@ body{
 }
 
 </style>
->>>>>>> 917d20364e931dd03393b7cd779131af904749b9
 </head>
 <body>
   <h2 class=titulo><?php if(count($edificio) != 0){

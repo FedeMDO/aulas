@@ -139,11 +139,11 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-            'only' => ['user', 'admin','aula', 'register'], //acciones que solamente va a verificar permisos
+            'only' => ['register', 'noti'], //acciones que solamente va a verificar permisos
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['logout','admin','register'],
+                        'actions' => [],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
@@ -152,7 +152,7 @@ class SiteController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['logout'],
+                       'actions' => ['noti'],
                        'allow' => true,
                        'roles' => ['@'],
                        'matchCallback' => function ($rule, $action) {
@@ -161,7 +161,7 @@ class SiteController extends Controller
                    ],
                    [
                     //Los usuarios guest tienen permisos sobre las siguientes acciones
-                    'actions' => ['logout'],
+                    'actions' => ['noti'],
                     'allow' => true,
                     'roles' => ['@'],
                     'matchCallback' => function ($rule, $action) {
@@ -344,12 +344,7 @@ class SiteController extends Controller
      * @return Response|string
      */
     public function actionLogin()
-    {
-        if (!\Yii::$app->user->isGuest) {
-   
-            return $this->actionIndex();
-        }   
- 
+    {  
         $model = new LoginForm();
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()))
@@ -360,15 +355,7 @@ class SiteController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->login()) 
         {
-   
-            if (User::isUserAdmin(Yii::$app->user->identity->id))
-            {
-                return $this->actionIndex();
-            }
-            else
-            {
-                 return $this->actionIndex();
-            }
+             return $this->redirect('index');
    
         } else 
         {
@@ -381,11 +368,6 @@ class SiteController extends Controller
 
     public function actionLogin2()
     {
-        if (!\Yii::$app->user->isGuest) {
-   
-            return $this->actionIndex();
-        }   
- 
         $model = new LoginForm();
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()))
@@ -396,15 +378,8 @@ class SiteController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->login()) 
         {
-   
-            if (User::isUserAdmin(Yii::$app->user->identity->id))
-            {
-                return $this->actionIndex();
-            }
-            else
-            {
-                 return $this->actionIndex();
-            }
+
+            return $this->redirect('index');
    
         } else 
         {
