@@ -10,9 +10,7 @@ $this->title = 'Crear Restriccion';
 $this->params['breadcrumbs'][] = ['label' => 'Restri Calendars', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="restri-calendar-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="evento-calendar-create">
 
     <?= $this->render('_form', [
         'model' => $model

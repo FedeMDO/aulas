@@ -243,8 +243,8 @@ AppAsset::register($this);
     ?>
     
      <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-lg">
+     <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
     
       <!-- Modal content-->
       <div class="modal-content">
@@ -252,22 +252,22 @@ AppAsset::register($this);
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Informacion del evento</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-cuerpo">
             <input type="hidden" id="idevento" name="idevento" value="">
             Comision:
-            <div class="well well-sm">
+            <div class="well well-sm weell">
                 <p id="showcomision"></p>
             </div>
             Inicio:
-            <div class="well well-sm">
+            <div class="well well-sm weell">
                 <p id="showini"></p>
             </div>
             Fin:
-            <div class="well well-sm">
+            <div class="well well-sm weell">
                 <p id="showfin"></p>
             </div>
             Ultimo usuario que modifico:
-            <div class="well well-sm">
+            <div class="well well-sm weell">
                 <p id="showusermodifico"></p>
             </div>
         </div>
@@ -276,7 +276,6 @@ AppAsset::register($this);
           <button type="button" class="btn btn-danger" id="btnBorrarEvento">Borrar</button>
         </div>
       </div>
-      
     </div>
   </div>
 

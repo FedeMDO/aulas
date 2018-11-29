@@ -56,9 +56,8 @@ $this->title = 'Acerca de nosotros';
     <div class='div-col4'>
       <p>
         Integrantes 2do cuatrimestre:
-        <br />
-        <br />
-        - Granata Lucas<br> - Méndez Gabriel<br> - Pérez Leandro<br> - Pezet Braian<br> - Piñeiro Juan<br> - Righi Emanuel<br> - Zapata Ivan.
+        <br><br>
+        - Lucas Granata<br> - Gabriel Méndez<br> - Leandro Perez<br> - Braian Pezet<br> - Juan Piñeiro<br> - Emanuel Righi<br> - Iván Zapata.
       </p>
     </div>
     </div>

@@ -19,23 +19,6 @@ else{
     $carreras = Carrera::find()->asArray()->all();
 }
 
-$materias = array();
-$comisiones = array();
-
-/*foreach($carreras as $carrera)
-{
-    foreach($carrera->materias as $mater)
-    {
-        $materias [] = $mater;
-    }
-}
-foreach($materias as $m)
-{
-    foreach ($m->comisions as $comi)
-    {
-        $comisiones [] = $comi;
-    }
-} */
 ?>
 <div class="evento-calendar-create">
     <?= $this->render('_form', [

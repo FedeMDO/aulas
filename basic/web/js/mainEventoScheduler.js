@@ -10,7 +10,7 @@ $(document).ready(function(){
         selectable: true,
         lang: 'es-us',
         minTime: '08:00:00',
-        maxTime: '23:00:00',
+        maxTime: '22:00:00',
         hiddenDays: [0],
         height: 'auto',
         nowIndicator: true,

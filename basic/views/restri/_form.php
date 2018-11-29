@@ -41,6 +41,8 @@ use app\models\CicloLectivo;
          '22:00:00' => '22:00'];
     ?>
 
+    <h1>Crear restriccion</h1>
+
         <?php echo $form->field($model, 'ID_Instituto', ['labelOptions'=>['style'=>'color:white']])->dropDownList(
         $resultInst, 
         ['prompt'=>'Seleccionar']
