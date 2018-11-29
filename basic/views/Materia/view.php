@@ -12,7 +12,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="materia-view">
 
-    <h1><?=Html::encode($this->title)?></h1>
+    <h1 class=titulo><?=Html::encode($this->title)?></h1>
+	<div class="col-md-offset-1 col-md-10">
 
     <p>
         <?=Html::a('Update', ['update', 'id' => $model->ID], ['class' => 'btn btn-primary'])?>
@@ -27,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?=DetailView::widget([
 	'model' => $model,
+	'options' => ['class' => 'table-bordered table-condensded grid'],
 	'attributes' => [
 		'ID',
 		'NOMBRE',

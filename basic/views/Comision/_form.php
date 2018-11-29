@@ -6,6 +6,8 @@ use yii\helpers\ArrayHelper;
 use app\models\Materia;
 use app\models\Instituto;
 use app\models\Carrera;
+use app\models\User;
+use app\models\Users;
 use yii\bootstrap\Alert;
 use dominus77\sweetalert2;
 
@@ -25,8 +27,15 @@ endif;
 
     <?= $form->field($model, 'NUMERO' ,['labelOptions'=>['style'=>'color:white; padding-top:10px;']])->textInput(['maxlength' => true]) ?>
 
-    <?php $institutos = Instituto::find()->asArray()->all();
-    $resultIns = ArrayHelper::map($institutos, 'ID', 'NOMBRE'); ?>
+    <?php if(User::isUserAdmin(Yii::$app->user->identity->id)){
+        $institutos = Instituto::find()->asArray()->all();
+     }
+     else{
+         $query = Users::findOne(Yii::$app->user->identity->id)->instituto;
+         $institutos = array($query);
+     }
+     $resultIns = ArrayHelper::map($institutos, 'ID', 'NOMBRE');
+    ?>
 
     <?php echo $form->field($instituto, 'ID',['labelOptions'=>['style'=>'color:white']])->dropDownList($resultIns,
         ['prompt'=>'Seleccione instituto...',
