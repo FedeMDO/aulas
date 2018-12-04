@@ -53,32 +53,31 @@ AppAsset::register($this);
 
 <?php $this->beginBody() ?>
 
-
-
-
+<style>
+.navlog > li:nth-child(1) > a:nth-child(1){
+    padding-bottom: 16px
+}
+</style>
 
 <div class="wrap">
-
-
-
     <?php
     NavBar::begin([
         'brandLabel' => '<img src="../image/logo3.png"; class="img-responsive">'.'',
-        "innerContainerOptions" => ['class' => 'container-fluid'],
-        'options' => ['style' => 'height:52px;']]);
+        "innerContainerOptions" => ['class' => 'container-fluid']]);
+        
         // Preguntar aca si user es admin o simple y hacer un echo Nav del q corresponda
         // SI ES GUEST
         if(Yii::$app->user->isGuest)
         {
         echo Nav::widget([
             'encodeLabels' => false,
-            'options' => ['class' => 'navbar-nav navbar-right'],
+            'options' => ['class' => 'navbar-nav navbar-right navlog'],
             'items' => [
                 
-                ['label' => Html::a('<i class="glyphicon glyphicon-home"></i> INICIO', ['/site/index'], ['class'=>'btn btn-add-al', 'style' => 'top: -32px; font-weight: bold;'])],
+                ['label' => Html::tag('span', '', ['class'=>'glyphicon glyphicon-home']).' INICIO', 'url' => ['/site/index'], 'options' => ['style' => 'font-weight: bold;']],
                 
                 Yii::$app->user->isGuest ? (
-                    ['label' => Html::button('<i class="glyphicon glyphicon-log-in"></i> INGRESAR', ['value' => Url::to('/site/login2'), 'class' => 'btn btn-add-al', 'id' => 'modalLogin', 'style' => 'position:relative; top:-8px; font-weight: bold; background-color: Transparent;']) ]
+                    ['label' => Html::button('<i class="glyphicon glyphicon-log-in"></i> INGRESAR', ['value' => Url::to('/site/login2'), 'class' => 'btn btn-add-al', 'id' => 'modalLogin', 'style' => 'padding: 0px; font-weight: bold; background-color: Transparent; ;border-bottom-width: 0px;border-top-width: 0px;']) ]
                 ) : (
                     '<li>'
                     . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
@@ -221,16 +220,8 @@ AppAsset::register($this);
   <p>Proyecto de Software - Universidad Nacional Arturo Jauretche</p>
 </div> -->
 
-<?php
 
-        yii\bootstrap\Modal::begin([
-            'headerOptions' => ['id' => 'modalHeader'],
-            'id' => 'modal',
-            'size' => 'modal-md',
-            'clientOptions' => ['backdrop' => True, 'keyboard' => True]
-        ]);        echo "<div id='modalContent'></div>";
-        yii\bootstrap\Modal::end();
-    ?>
+
 
     <?php
         yii\bootstrap\Modal::begin([
@@ -241,7 +232,65 @@ AppAsset::register($this);
         ]);        echo "<div id='modalRestriContent'></div>";
         yii\bootstrap\Modal::end();
     ?>
+
+    <style>
+
+    .log-modal-content
+{
+    border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    background-color: rgb(41, 128, 185);
+    padding-bottom:20px;
+}
+
+.log-modal-content p{
+    color:white;
+}
+
+.log-modal-header
+{
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    -webkit-border-top-left-radius: 25px;
+    -webkit-border-top-right-radius: 25px;
+    -moz-border-radius-topleft: 25px;
+    -moz-border-radius-topright: 25px;
+    background-color: rgb(41, 128, 185);
+    padding-bottom:0px;
+}
+
+.modal-log{
+        width:500px;
+    }
+
+@media screen and (max-width: 850px) {
+    .modal-log{
+        width:auto;
+    }
+ 
+  
+}
+    </style>
+
+
     
+    <!-- Modal login -->
+    <div class="modal fade" id="modal" role="dialog">
+    <div class="modal-dialog modal-md modal-log">
+    
+      <!-- Modal content login-->
+      <div class="modal-content log-modal-content">
+        <div class="modal-header log-modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h1 class="modal-title" style="text-align:center;color:white;">Bienvenido</h1>
+        </div>
+        <div  id='modalContent' class="modal-cuerpo">
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
      <!-- Modal -->
      <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-sm">

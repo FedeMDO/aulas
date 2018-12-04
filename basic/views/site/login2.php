@@ -18,8 +18,19 @@ $this->registerCssFile("@web/css/index.css", [
 
 ?>
 
-<div class="loginc log">
-    <h1><?= Html::encode('Bienvenido') ?></h1>
+<style>
+
+.form-group .btn{
+    max-width: 100%;
+}
+
+.btn{
+    margin-left: 1%; 
+    width: 98%;"
+}
+
+</style>
+
   
     <p>Por favor complete los siguientes campos:</p>
   
@@ -35,13 +46,9 @@ $this->registerCssFile("@web/css/index.css", [
         <a href="/site/recoverpass" style="color:white">¿Olvidaste tu contraseña?</a>
         <?= $form->field($model, 'rememberMe', ['labelOptions'=>['style'=>'color:white']] )->checkbox([
         ])->label('Recordarme') ?>
-        <div class="form-group">
-            <div class="">
-                <?= Html::submitButton('Ingresar', ['class' => 'btn btn-success btn-block', 'name' => 'login-button']) ?>
-            </div>
-        </div>
+        
+        <?= Html::submitButton('Ingresar', ['class' => 'btn btn-success btn-block', 'name' => 'login-button']) ?>
+       
 
     <?php ActiveForm::end(); ?>
     
-
-</div>
