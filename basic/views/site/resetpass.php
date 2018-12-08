@@ -14,11 +14,11 @@ use yii\bootstrap\Alert;
 <div class="col-md-offset-4 col-md-4">
 <div class="loginc log">
 <h1>Recuperar contraseña</h1>
- <?= $form->field($model, "email",['labelOptions'=>['style'=>'color:white']])->input("email")->label("E-mail:") ?>  
- <?= $form->field($model, "password",['labelOptions'=>['style'=>'color:white']])->input("password")->label("Contraseña nueva:") ?>  
- <?= $form->field($model, "password_repeat",['labelOptions'=>['style'=>'color:white']])->input("password")->label("Repita contraseña:") ?>  
- <?= $form->field($model, "verification_code",['labelOptions'=>['style'=>'color:white']])->input("text")->label("Ingrese codigo de verificacion:") ?>  
- <?= $form->field($model, "recover",['labelOptions'=>['style'=>'color:white']])->input("hidden")->label(false) ?>  
+ <?= $form->field($model, "email", ['labelOptions' => ['style' => 'color:white']])->input("email")->label("E-mail:") ?>  
+ <?= $form->field($model, "password", ['labelOptions' => ['style' => 'color:white']])->input("password")->label("Contraseña nueva:") ?>  
+ <?= $form->field($model, "password_repeat", ['labelOptions' => ['style' => 'color:white']])->input("password")->label("Repita contraseña:") ?>  
+ <?= $form->field($model, "verification_code", ['labelOptions' => ['style' => 'color:white']])->input("text")->label("Ingrese codigo de verificacion:") ?>  
+ <?= $form->field($model, "recover", ['labelOptions' => ['style' => 'color:white']])->input("hidden")->label(false) ?>  
  <?= Html::submitButton("Recuperar contraseña", ["class" => "btn btn-success btn-block"]) ?>  
 </div>
 </div>

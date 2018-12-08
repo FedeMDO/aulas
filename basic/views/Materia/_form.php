@@ -11,9 +11,9 @@ use app\models\Carrera;
 ?>
 <div class='materia-form'>
 
-    <?php $form = ActiveForm::begin();?>
+    <?php $form = ActiveForm::begin(); ?>
 
-    <?=$form->field($model, 'NOMBRE', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->textInput(['maxlength' => true])?>
+    <?= $form->field($model, 'NOMBRE', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->textInput(['maxlength' => true]) ?>
 
     <?php $carreras = Carrera::find()->asArray()->all();
     $result = ArrayHelper::map($carreras, 'ID', 'NOMBRE'); ?>
@@ -22,16 +22,16 @@ use app\models\Carrera;
         ['prompt' => 'Seleccione...']
     )->label('Carrera'); ?>
 
-    <?=$form->field($model, 'DESC_CORTA', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->textInput(['maxlength' => true])->label("Descripcion corta")?>
+    <?= $form->field($model, 'DESC_CORTA', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->textInput(['maxlength' => true])->label("Descripcion corta") ?>
 
-    <?=$form->field($model, 'COD_MATERIA', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->textInput(['maxlength' => true])->label("Codigo de materia")?>
+    <?= $form->field($model, 'COD_MATERIA', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->textInput(['maxlength' => true])->label("Codigo de materia") ?>
 
     <?= $form->field($model, 'anio', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->textInput()->label('Año'); ?>
 
     <div class="form-group">
-        <?=Html::submitButton('Crear', ['class' => 'btn btn-success'])?>
+        <?= Html::submitButton('Crear', ['class' => 'btn btn-success']) ?>
     </div>
 
-    <?php ActiveForm::end();?>
+    <?php ActiveForm::end(); ?>
 
 </div>

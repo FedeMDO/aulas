@@ -65,13 +65,18 @@ class EspecialcalendarController extends Controller
     public function actionCreate()
     {
         $model = new EspecialCalendar();
+        $model->ID_UCrea = Yii::$app->user->identity->id;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save()) {
+                return $this->redirect(['index', 'id' => $model->ID_Aula]);
+            } else {
+                return $this->renderAjax('create', ['model' => $model]);
+            }
         }
 
-        return $this->render('create', [
-            'model' => $model,
+        return $this->renderAjax('create', [
+            'model' => $model
         ]);
     }
 
@@ -95,6 +100,32 @@ class EspecialcalendarController extends Controller
         ]);
     }
 
+    public function actionUpd()
+    {
+        $request = Yii::$app->request;
+        $evento = $this->findModel($request->post('id'));
+
+        $evento->inicio = $request->post('ini');
+        $evento->fin = $request->post('fin');
+        $evento->ID_Aula = $request->post('aula_id');
+        if ($evento->save()) {
+            echo ("Actualizacion exitosa");
+        }
+    }
+
+    public function actionUpdscheduler()
+    {
+        $request = Yii::$app->request;
+        $evento = $this->findModel($request->post('id'));
+
+        $evento->inicio = $request->post('ini');
+        $evento->fin = $request->post('fin');
+        $evento->ID_Aula = $request->post('aula_id');
+        if ($evento->save()) {
+            echo ("Actualizacion exitosa");
+        }
+    }
+
     /**
      * Deletes an existing EspecialCalendar model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -104,9 +135,15 @@ class EspecialcalendarController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $request = Yii::$app->request;
+        $this->findModel($request->post('id'))->delete();
+        $id_aula = $request->post('id_aula');
 
-        return $this->redirect(['index']);
+        if ($request->post('scheduler') == 1) {
+            $id_sede = $request->post('id_sede');
+            return $this->redirect(['edificio/scheduler', 'id_sede' => $id_sede]);
+        }
+        return $this->redirect(['index', 'id' => $id_aula]);
     }
 
     /**
@@ -123,5 +160,50 @@ class EspecialcalendarController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    // Servicios CALENDAR
+    public function actionJsoncalendar($id = null, $start = null, $end = null, $_ = null)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $isGuest = User::isUserGuest(Yii::$app->user->identity->id);
+        $isAdmin = User::isUserAdmin(Yii::$app->user->identity->id);
+        if (!$isGuest) {
+            $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
+        }
+
+        $aula = Aula::findOne($id);
+        foreach ($aula->especialCalendars as $eve) {
+            $event = array();
+            // evento especial.
+            $event['especial'] = true;
+            // con sufijo U de unico.
+            $event['id'] = intval($eve->id) . 'U';
+            $event['title'] = $eve->nombre;
+            $event['color'] = '#666666';
+            $event['ajeno'] = true;
+            if ($isGuest) {
+                $event['ajeno'] = true;
+                $event['editable'] = false;
+            }
+            if ($isAdmin) {
+                $event['ajeno'] = false;
+                $event['editable'] = true;
+            }
+            if ($eve->ID_Instituto = !null) {
+                if ($instIdOnSessionUser == $eve->ID_Instituto) {
+                    $event['ajeno'] = false;
+                    $event['editable'] = true;
+                }
+            }
+
+            $event['start'] = $eve->inicio;
+            $event['end'] = $eve->fin;
+            $event['usermodifico'] = $eve->ID_UModifica;
+            $event['usercrea'] = $eve->ID_UCrea;
+            $event['resourceId'] = $eve->ID_Aula;
+            $tasks[] = (object)$event;
+        }
+        return $tasks;
     }
 }

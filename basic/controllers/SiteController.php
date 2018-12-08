@@ -24,27 +24,24 @@ use yii\data\Pagination;
 
 
 class SiteController extends Controller
-{   
+{
     public function actionRecoverpass()
     {
         $model = new FormRecoverPass;
 
         $msg = null;
         $msgi = null;
-  
-        if ($model->load(Yii::$app->request->post()))
-        {
-            if ($model->validate())
-            {
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
                 $table = Users::find()->where("email=:email", [":email" => $model->email]);
-        
-                if ($table->count() == 1)
-                {
+
+                if ($table->count() == 1) {
 
                     $session = new Session;
                     $session->open();
                     $session["recover"] = $this->randKey("abcdef0123456789", 200);
-                    $recover = $session["recover"]; 
+                    $recover = $session["recover"];
                     $table = Users::find()->where("email=:email", [":email" => $model->email])->one();
                     $session["id_recover"] = $table->id;
                     $verification_code = $this->randKey("abcdef0123456789", 8);
@@ -54,84 +51,71 @@ class SiteController extends Controller
                     //Creamos el mensaje que será enviado a la cuenta de correo del usuario
                     $subject = "Recuperar contraseña";
                     $body = "<p>Copie el siguiente código de verificación para restablecer su contraseña ... ";
-                    $body .= "<strong>".$verification_code."</strong></p>";
+                    $body .= "<strong>" . $verification_code . "</strong></p>";
                     $body .= "<p><a href='http://yii.local/site/resetpass'>Recuperar password</a></p>";
 
                     //Enviamos el correo
                     Yii::$app->mailer->compose()
-                    ->setTo($model->email)
-                    ->setFrom([Yii::$app->params["adminEmail"] => Yii::$app->params["title"]])
-                    ->setSubject($subject)
-                    ->setHtmlBody($body)
-                    ->send();
-                    
+                        ->setTo($model->email)
+                        ->setFrom([Yii::$app->params["adminEmail"] => Yii::$app->params["title"]])
+                        ->setSubject($subject)
+                        ->setHtmlBody($body)
+                        ->send();
+
                     $model->email = null;
-                    
-                    $alert=\dominus77\sweetalert2\Alert::TYPE_SUCCESS;
-                    
+
+                    $alert = \dominus77\sweetalert2\Alert::TYPE_SUCCESS;
+
                     $msgi = Yii::$app->session->setFlash($alert, 'Solicitud enviada!');;
-                }
-                else
-                {
-                    $error=\dominus77\sweetalert2\Alert::TYPE_ERROR;
+                } else {
+                    $error = \dominus77\sweetalert2\Alert::TYPE_ERROR;
                     $msg = Yii::$app->session->setFlash($error, 'Error, correo no encontrado.');;
                 }
-            }
-    
-            else
-            {
+            } else {
                 $model->getErrors();
             }
         }
-        return $this->render("recoverpass", ["model" => $model, "msg" => $msg,"msgi" => $msgi]);
+        return $this->render("recoverpass", ["model" => $model, "msg" => $msg, "msgi" => $msgi]);
     }
- 
+
     public function actionResetpass()
     {
-        $model = new FormResetPass; 
+        $model = new FormResetPass;
         $msg = null;
-        
+
         $session = new Session;
         $session->open();
-        
+
         $recover = $session["recover"];
         $model->recover = $recover;
-        
+
         $id_recover = $session["id_recover"];
 
-        if ($model->load(Yii::$app->request->post()))
-        {
-            if ($model->validate())
-            {
-                if ($recover == $model->recover)
-                {
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
+                if ($recover == $model->recover) {
                     $table = Users::findOne(["email" => $model->email, "id" => $id_recover, "verification_code" => $model->verification_code]);
                     $table->password = crypt($model->password, Yii::$app->params["salt"]);
-     
-                    if ($table->save())
-                    {
+
+                    if ($table->save()) {
                         $session->destroy();
-      
+
                         $model->email = null;
                         $model->password = null;
                         $model->password_repeat = null;
                         $model->recover = null;
-                        $model->verification_code = null;   
+                        $model->verification_code = null;
                         $msg = "Password reseteado correctamente, redireccionando a la página de login ...";
-                        $msg .= "<meta http-equiv='refresh' content='5; ".Url::toRoute("site/login")."'>";
-                    }
-                    else
-                    {
+                        $msg .= "<meta http-equiv='refresh' content='5; " . Url::toRoute("site/login") . "'>";
+                    } else {
                         $msg = "Ha ocurrido un error";
                     }
-                }
-                else
-                {
+                } else {
                     $model->getErrors();
                 }
             }
         }
-    return $this->render("resetpass", ["model" => $model, "msg" => $msg]);
+        return $this->render("resetpass", ["model" => $model, "msg" => $msg]);
     }
 
     public function behaviors()
@@ -139,7 +123,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-            'only' => ['register', 'noti'], //acciones que solamente va a verificar permisos
+                'only' => ['register', 'noti'], //acciones que solamente va a verificar permisos
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
@@ -152,22 +136,22 @@ class SiteController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['noti'],
-                       'allow' => true,
-                       'roles' => ['@'],
-                       'matchCallback' => function ($rule, $action) {
-                          return User::isUserSimple(Yii::$app->user->identity->id);
-                      },
-                   ],
-                   [
+                        'actions' => ['noti'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserSimple(Yii::$app->user->identity->id);
+                        },
+                    ],
+                    [
                     //Los usuarios guest tienen permisos sobre las siguientes acciones
-                    'actions' => ['noti'],
-                    'allow' => true,
-                    'roles' => ['@'],
-                    'matchCallback' => function ($rule, $action) {
-                       return User::isUserGuest(Yii::$app->user->identity->id);
-                   },
-                ],
+                        'actions' => ['noti'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserGuest(Yii::$app->user->identity->id);
+                        },
+                    ],
                 ],
             ],
             'verbs' => [
@@ -179,14 +163,13 @@ class SiteController extends Controller
         ];
     }
 
-    private function randKey($str='', $long=0)
+    private function randKey($str = '', $long = 0)
     {
         $key = null;
         $str = str_split($str);
         $start = 0;
-        $limit = count($str)-1;
-        for($x=0; $x<$long; $x++)
-        {
+        $limit = count($str) - 1;
+        for ($x = 0; $x < $long; $x++) {
             $key .= $str[rand($start, $limit)];
         }
         return $key;
@@ -195,28 +178,25 @@ class SiteController extends Controller
     public function actionRegister()
     {
         $model = new FormRegister;
-   
+
         $msg = null;
         
         //Validación mediante ajax
-        if ($model->load(Yii::$app->request->post()) && Yii::$app->request->isAjax)
-        {
+        if ($model->load(Yii::$app->request->post()) && Yii::$app->request->isAjax) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ActiveForm::validate($model);
         }
-   
-        if ($model->load(Yii::$app->request->post()))
-        {
-            if($model->validate())
-            {
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
                 $table = new Users;
-                if($model->rol == 1 || $model->rol == null){ //rol user simple
+                if ($model->rol == 1 || $model->rol == null) { //rol user simple
                     $table->rol = 10;
                 }
-                if($model->rol == 0){ //rol admin
+                if ($model->rol == 0) { //rol admin
                     $table->rol = 20;
                 }
-                if($model->rol == 2){ //rol guest
+                if ($model->rol == 2) { //rol guest
                     $table->rol = 30;
                 }
                 $table->username = $model->username;
@@ -226,24 +206,23 @@ class SiteController extends Controller
                 $table->authKey = $this->randKey("abcdef0123456789", 200);
                 $table->accessToken = $this->randKey("abcdef0123456789", 200);
 
-                if ($table->insert())
-                {
+                if ($table->insert()) {
                     $user = $table->find()->where(["email" => $model->email])->one();
                     $id = urlencode($user->id);
                     $authKey = urlencode($user->authKey);
-                    
+
                     $subject = "Confirmar registro";
                     $body = "<h1>Haga click en el siguiente enlace para finalizar tu registro</h1>";
-                    $body .= "<a href='http://yii.local/site/confirm?id=".$id."&authKey=".$authKey."'>Confirmar</a>";
+                    $body .= "<a href='http://yii.local/site/confirm?id=" . $id . "&authKey=" . $authKey . "'>Confirmar</a>";
                     
                     //Enviamos el correo
                     Yii::$app->mailer->compose()
-                    ->setTo($user->email)
-                    ->setFrom([Yii::$app->params["adminEmail"] => Yii::$app->params["title"]])
-                    ->setSubject($subject)
-                    ->setHtmlBody($body)
-                    ->send();
-                    
+                        ->setTo($user->email)
+                        ->setFrom([Yii::$app->params["adminEmail"] => Yii::$app->params["title"]])
+                        ->setSubject($subject)
+                        ->setHtmlBody($body)
+                        ->send();
+
                     $session = Yii::$app->session;
                     $session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, "Usuario registrado. Sólo falta que confirme desde su correo electrónico");
                     $model->username = null;
@@ -252,14 +231,10 @@ class SiteController extends Controller
                     $model->rol = null;
                     $model->password = null;
                     $model->password_repeat = null;
-                }
-                else
-                {
+                } else {
                     $msg = "Ha ocurrido un error al llevar a cabo el registro";
                 }
-            }
-            else
-            {
+            } else {
                 $model->getErrors();
             }
         }
@@ -271,46 +246,36 @@ class SiteController extends Controller
     public function actionConfirm()
     {
         $table = new Users;
-    
-        if (Yii::$app->request->get())
-        {
+
+        if (Yii::$app->request->get()) {
             $id = Html::encode($_GET["id"]);
             $authKey = $_GET["authKey"];
-        
-            if ((int) $id)
-            {
+
+            if ((int)$id) {
                 $model = $table
-                ->find()
-                ->where("id=:id", [":id" => $id])
-                ->andWhere("authKey=:authKey", [":authKey" => $authKey]);
- 
-                if ($model->count() == 1)
-                {
+                    ->find()
+                    ->where("id=:id", [":id" => $id])
+                    ->andWhere("authKey=:authKey", [":authKey" => $authKey]);
+
+                if ($model->count() == 1) {
                     $activar = Users::findOne($id);
                     $activar->activate = 1;
-                    if ($activar->update())
-                    {
+                    if ($activar->update()) {
                         echo "Registro realizado correctamente, redireccionando ...";
-                        echo "<meta http-equiv='refresh' content='8; ".Url::toRoute("site/login")."'>";
-                    }
-                    else
-                    {
+                        echo "<meta http-equiv='refresh' content='8; " . Url::toRoute("site/login") . "'>";
+                    } else {
                         echo "Ha ocurrido un error, redireccionando ...";
-                        echo "<meta http-equiv='refresh' content='8; ".Url::toRoute("site/login")."'>";
+                        echo "<meta http-equiv='refresh' content='8; " . Url::toRoute("site/login") . "'>";
                     }
-                }
-                else
-                {
+                } else {
                     return $this->redirect(["site/login"]);
                 }
-            }
-            else
-            {
+            } else {
                 return $this->redirect(["site/login"]);
             }
         }
     }
- 
+
     /**
      * {@inheritdoc}
      */
@@ -344,25 +309,23 @@ class SiteController extends Controller
      * @return Response|string
      */
     public function actionLogin()
-    {  
+    {
         $model = new LoginForm();
 
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()))
-        {
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return ActiveForm::validate($model);
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->login()) 
-        {
-             return $this->redirect('index');
-   
-        } else 
-        {
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->redirect('index');
+
+        } else {
             return $this->render('login', [
-                'model' => $model,]);
+                'model' => $model,
+            ]);
         }
-        return $this->render( 'login', [ 'model' => $model ] );
+        return $this->render('login', ['model' => $model]);
     }
 
 
@@ -370,23 +333,21 @@ class SiteController extends Controller
     {
         $model = new LoginForm();
 
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()))
-        {
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return ActiveForm::validate($model);
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->login()) 
-        {
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
 
             return $this->redirect('index');
-   
-        } else 
-        {
+
+        } else {
             return $this->renderAjax('login2', [
-                'model' => $model,]);
+                'model' => $model,
+            ]);
         }
-        return $this->renderAjax( 'login2', [ 'model' => $model ] );
+        return $this->renderAjax('login2', ['model' => $model]);
     }
 
     /**
@@ -433,78 +394,76 @@ class SiteController extends Controller
     {
         return $this->render('manual');
     }
-    
+
     public function actionNoti()
     {
         $query = Notificacion::find()
-        ->where(['ID_USER_EMISOR' => Yii::$app->user->identity->id])
-         ->orwhere(['ID_USER_RECEPTOR' => Yii::$app->user->identity->id]);
+            ->where(['ID_USER_EMISOR' => Yii::$app->user->identity->id])
+            ->orwhere(['ID_USER_RECEPTOR' => Yii::$app->user->identity->id]);
 
         $pagination = new Pagination([
             'defaultPageSize' => 20,
             'totalCount' => $query->count(),
         ]);
-    
-        $notificacion = $query->orderBy(['Fecha'=>SORT_DESC])
+
+        $notificacion = $query->orderBy(['Fecha' => SORT_DESC])
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
-            
-            if ($_POST != null){
-                if ($_POST['Notificacion'] == 'borrar'){
-                    $id = $_POST['id'];
-                    $query = Notificacion::findOne($id);
-                    $query->delete();
-                    $this->redirect('noti');
-                }
-                else{
-                    $ID_Usuarios =$_POST['Notificacion'];
-                    $mensaje = $_POST['Notificacion'];
-                    $ID_Usuarios =$ID_Usuarios['ID_USER_RECEPTOR'];
-                    $mensaje = $mensaje['NOTIFICACION'];
-                    foreach ($ID_Usuarios as $user1){
-                        $model1 = new Notificacion();
-                        $model1->ID_USER_EMISOR = Yii::$app->user->identity->id;
-                        $model1->ID_USER_RECEPTOR = $user1;
-                        $model1->NOTIFICACION = $mensaje;
-                        $model1->FECHA = new \yii\db\Expression('NOW()');
-                        $model1->save();
+
+        if ($_POST != null) {
+            if ($_POST['Notificacion'] == 'borrar') {
+                $id = $_POST['id'];
+                $query = Notificacion::findOne($id);
+                $query->delete();
+                $this->redirect('noti');
+            } else {
+                $ID_Usuarios = $_POST['Notificacion'];
+                $mensaje = $_POST['Notificacion'];
+                $ID_Usuarios = $ID_Usuarios['ID_USER_RECEPTOR'];
+                $mensaje = $mensaje['NOTIFICACION'];
+                foreach ($ID_Usuarios as $user1) {
+                    $model1 = new Notificacion();
+                    $model1->ID_USER_EMISOR = Yii::$app->user->identity->id;
+                    $model1->ID_USER_RECEPTOR = $user1;
+                    $model1->NOTIFICACION = $mensaje;
+                    $model1->FECHA = new \yii\db\Expression('NOW()');
+                    $model1->save();
                         //Enviamos correo
-                        $receptor = Users::findOne($user1)->username;
-                        $emisor = Users::findOne($model1->ID_USER_EMISOR)->username;
-                        $mail = Users::findOne($user1)->email;
-                        $subject = "Nueva notificación";
-                        $body = "<p>Hola <strong>".$receptor."</strong>, tenes una nueva notificación de <strong>".$emisor."</strong>.</p>" ;
-                        $body .= "<p> Notificación: <i>".$model1->NOTIFICACION."</i></p>";
-                        $body .= "<p><a href='http://yii.local/site/noti'>Ver notificación</a></p>";
-                        try {
+                    $receptor = Users::findOne($user1)->username;
+                    $emisor = Users::findOne($model1->ID_USER_EMISOR)->username;
+                    $mail = Users::findOne($user1)->email;
+                    $subject = "Nueva notificación";
+                    $body = "<p>Hola <strong>" . $receptor . "</strong>, tenes una nueva notificación de <strong>" . $emisor . "</strong>.</p>";
+                    $body .= "<p> Notificación: <i>" . $model1->NOTIFICACION . "</i></p>";
+                    $body .= "<p><a href='http://yii.local/site/noti'>Ver notificación</a></p>";
+                    try {
                         Yii::$app->mailer->compose()
                             ->setTo($mail)
                             ->setFrom([Yii::$app->params["adminEmail"] => Yii::$app->params["title"]])
                             ->setSubject($subject)
                             ->setHtmlBody($body)
                             ->send();
-                        }
-                        catch (\Swift_TransportException $e) {
-                        }
-                    }
-                    if ($model1->save()){
-                        $session = Yii::$app->session;
-                        Yii::$app->session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, 'Mensaje enviado!');
-                        return $this->redirect('noti');
+                    } catch (\Swift_TransportException $e) {
                     }
                 }
+                if ($model1->save()) {
+                    $session = Yii::$app->session;
+                    Yii::$app->session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, 'Mensaje enviado!');
+                    return $this->redirect('noti');
+                }
             }
-       
+        }
+
         $model = new Notificacion();
         $usuarios = Users::find()->where(['not', ['username' => Yii::$app->user->identity->username]])
-        ->andWhere(['activate' =>1])->asArray()->all();
+            ->andWhere(['activate' => 1])->asArray()->all();
         return $this->render('noti', [
             'notificacion' => $notificacion,
             'pagination' => $pagination,
             'model' => $model,
             'usuarios' => $usuarios
-            
-        ]);  
+
+        ]);
     }
 }

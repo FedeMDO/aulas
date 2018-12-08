@@ -1,9 +1,9 @@
 <?php
- 
+
 namespace app\assets;
- 
+
 use yii\web\AssetBundle;
- 
+
 class CalendarAsset extends AssetBundle
 {
     public $basePath = '@webroot';
@@ -13,7 +13,7 @@ class CalendarAsset extends AssetBundle
         'css/scheduler.css'
     ];
     public $js = [
-      
+
         'js/moment.min.js',
         'js/fullcalendar.js',
         'js/scheduler.js',

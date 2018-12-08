@@ -30,7 +30,7 @@ class ComisionController extends Controller
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['index','view','create','update','delete', 'listmateria', 'listcarrera'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'listmateria', 'listcarrera'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
@@ -39,23 +39,23 @@ class ComisionController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['create', 'listmateria', 'listcarrera'],
-                       'allow' => true,
-                       'roles' => ['@'],
-                       'matchCallback' => function ($rule, $action) {
-                          return User::isUserSimple(Yii::$app->user->identity->id);
-                      },
-                   ],
-                   [
+                        'actions' => ['create', 'listmateria', 'listcarrera'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserSimple(Yii::$app->user->identity->id);
+                        },
+                    ],
+                    [
                     //Los usuarios guest tienen permisos sobre las siguientes acciones
-                    'actions' => [],
-                    'allow' => false,
-                    'roles' => ['@'],
-                    'matchCallback' => function ($rule, $action) {
-                       return User::isUserGuest(Yii::$app->user->identity->id);
-                   },
-                ],
-                
+                        'actions' => [],
+                        'allow' => false,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserGuest(Yii::$app->user->identity->id);
+                        },
+                    ],
+
                 ],
             ],
             'verbs' => [
@@ -73,7 +73,7 @@ class ComisionController extends Controller
      */
     public function actionIndex()
     {
-        $this->layout='LayoutAdmin';
+        $this->layout = 'LayoutAdmin';
         $searchModel = new ComisionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -104,18 +104,18 @@ class ComisionController extends Controller
     public function actionCreate()
     {
         $model = new Comision();
-        if ($_POST != NULL){
+        if ($_POST != null) {
             $request = $_POST['Comision'];
             $help = $request['NUMERO'];
             $materia = $request['ID_MATERIA'];
-            for( $i=0; $i<$help; $i++){
+            for ($i = 0; $i < $help; $i++) {
                 $comi = new Comision();
                 $comi->NUMERO = $i + 1;
                 $comi->ID_MATERIA = $materia;
-                $comi->CARGA_HORARIA_SEMANAL = NULL;
+                $comi->CARGA_HORARIA_SEMANAL = null;
                 $comi->ID_Ciclo = 1;
                 $comi->save();
-                if ($comi->save()){
+                if ($comi->save()) {
                     $session = Yii::$app->session;
                     $session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, "Se han creado correctamente $help comisiones");
                 }
@@ -124,7 +124,7 @@ class ComisionController extends Controller
         $instituto = new Instituto();
         $carrera = new Carrera();
         return $this->render('create', [
-            'model' => $model,'instituto' => $instituto,'carrera' => $carrera,
+            'model' => $model, 'instituto' => $instituto, 'carrera' => $carrera,
         ]);
     }
 
@@ -146,7 +146,7 @@ class ComisionController extends Controller
         $instituto = new Instituto();
         $carrera = new Carrera();
         return $this->render('update', [
-            'model' => $model, 'instituto' => $instituto,'carrera' => $carrera,
+            'model' => $model, 'instituto' => $instituto, 'carrera' => $carrera,
         ]);
     }
 
@@ -187,8 +187,8 @@ class ComisionController extends Controller
             ->all();
 
         if (!empty($carreras)) {
-            foreach($carreras as $carrera) {
-                echo "<option value='".$carrera->ID."'>".$carrera->NOMBRE."</option>";
+            foreach ($carreras as $carrera) {
+                echo "<option value='" . $carrera->ID . "'>" . $carrera->NOMBRE . "</option>";
             }
         } else {
             echo "<option>-</option>";
@@ -200,8 +200,8 @@ class ComisionController extends Controller
         $materias = Carrera::findone($id)->materias;
 
         if (!empty($materias)) {
-            foreach($materias as $materia) {
-                echo "<option value='".$materia->ID."'>".$materia->NOMBRE." (".$materia->COD_MATERIA.")</option>";
+            foreach ($materias as $materia) {
+                echo "<option value='" . $materia->ID . "'>" . $materia->NOMBRE . " (" . $materia->COD_MATERIA . ")</option>";
             }
         } else {
             echo "<option>-</option>";

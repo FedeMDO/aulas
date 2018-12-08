@@ -7,11 +7,11 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\FormChangePassword */
 /* @var $form ActiveForm */
- 
+
 $this->title = 'Cambiar contraseña';
 $this->params['breadcrumbs'][] = $this->title;
 
-if(Yii::$app->session->hasFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS)):
+if (Yii::$app->session->hasFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS)) :
     \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
 endif;
 ?>
@@ -20,9 +20,9 @@ endif;
 <div class="user-changePassword ins loginc azul">
     <?php $form = ActiveForm::begin(); ?>
     <h1 style="color:white; border-bottom: 1px solid white;">Cambiar contraseña</h1>
-        <?= $form->field($model, 'current_password', ['labelOptions'=>['style'=>'color:white']])->passwordInput()->label('Contraseña actual') ?>
-        <?= $form->field($model, 'password', ['labelOptions'=>['style'=>'color:white']])->passwordInput()->label('Nueva contraseña') ?>
-        <?= $form->field($model, 'confirm_password', ['labelOptions'=>['style'=>'color:white']])->passwordInput()->label('Confirmar contraseña') ?>
+        <?= $form->field($model, 'current_password', ['labelOptions' => ['style' => 'color:white']])->passwordInput()->label('Contraseña actual') ?>
+        <?= $form->field($model, 'password', ['labelOptions' => ['style' => 'color:white']])->passwordInput()->label('Nueva contraseña') ?>
+        <?= $form->field($model, 'confirm_password', ['labelOptions' => ['style' => 'color:white']])->passwordInput()->label('Confirmar contraseña') ?>
  
         <div class="form-group">
             <?= Html::submitButton('Confirmar', ['class' => 'btn btn btn-success btn-block']) ?>

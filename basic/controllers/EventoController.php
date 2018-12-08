@@ -54,10 +54,10 @@ class EventoController extends Controller
     {
         $aula = Aula::findOne($id)->NOMBRE;
         return $this->render('index', [
-        'id_aula'=>$id,
-        'aula' => $aula,
-    ]);
-}
+            'id_aula' => $id,
+            'aula' => $aula,
+        ]);
+    }
 
     /**
      * Displays a single EventoCalendar model.
@@ -90,13 +90,10 @@ class EventoController extends Controller
             $model->ID_Instituto = $institutoID;
             $model->ID_Ciclo = $ciclo;
             $model->ID_Aula = $id_aula;
-            if($model->save())
-            {
-                return $this->redirect(['index','id' =>$model->ID_Aula]);
-            }
-            else
-            {
-                return $this->renderAjax('create', [ 'model' => $model , 'materia' => $materia, 'carrera' => $carrera]);
+            if ($model->save()) {
+                return $this->redirect(['index', 'id' => $model->ID_Aula]);
+            } else {
+                return $this->renderAjax('create', ['model' => $model, 'materia' => $materia, 'carrera' => $carrera]);
             }
         }
 
@@ -104,7 +101,7 @@ class EventoController extends Controller
             'model' => $model, 'materia' => $materia, 'carrera' => $carrera,
         ]);
     }
-    
+
 
     /**
      * Updates an existing EventoCalendar model.
@@ -125,37 +122,19 @@ class EventoController extends Controller
             'model' => $model,
         ]);
     }
+
     public function actionUpd()
     {
         $request = Yii::$app->request;
         $evento = $this->findModel($request->post('id'));
-        $evento ->dow = $request->post('dow');
+        $evento->dow = $request->post('dow');
         $evento->Hora_ini = substr($request->post('ini'), -8);
         $evento->Hora_fin = substr($request->post('fin'), -8);
-        if($evento->save())
-        {
-            echo("Actualizacion exitosa");
+        if ($evento->save()) {
+            echo ("Actualizacion exitosa");
         }
     }
-    public function actionUpd2()
-    {
-        $request = Yii::$app->request;        
-        $evento = $this->findModel($request->post('id'));
 
-        $ini = $request->post('ini');
-        $fin = $request->post('ini');
-
-        $evento->ID_User_Asigna=Yii::$app->user->identity->id;
-        $evento->Hora_ini = substr($request->post('ini'), -8);
-        $evento->Hora_fin = substr($request->post('fin'), -8);
-        $evento->ID_Aula = $request->post('id_aula');
-        if($evento->save())
-        {
-            echo("Actualizacion exitosa");
-        }
-       return $this->redirect(['index','id_aula' =>$id_aula]);
-      
-    }
     public function actionUpdscheduler()
     {
         $request = Yii::$app->request;
@@ -165,9 +144,8 @@ class EventoController extends Controller
         $evento->Hora_fin = substr($request->post('fin'), -8);
         $evento->ID_Aula = $request->post('aula_id');
         $evento->dow = $request->post('dow');
-        if($evento->save())
-        {
-            echo("Actualizacion exitosa");
+        if ($evento->save()) {
+            echo ("Actualizacion exitosa");
         }
     }
 
@@ -182,14 +160,13 @@ class EventoController extends Controller
     {
         $request = Yii::$app->request;
         $this->findModel($request->post('id'))->delete();
-        $id_aula =  $request->post('id_aula');
-        
-        if($request->post('scheduler') == 1)
-        {
+        $id_aula = $request->post('id_aula');
+
+        if ($request->post('scheduler') == 1) {
             $id_sede = $request->post('id_sede');
-            return $this->redirect(['edificio/scheduler','id_sede' => $id_sede]);
+            return $this->redirect(['edificio/scheduler', 'id_sede' => $id_sede]);
         }
-        return $this->redirect(['index','id' =>$id_aula]);
+        return $this->redirect(['index', 'id' => $id_aula]);
     }
 
     /**
@@ -207,258 +184,223 @@ class EventoController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-    public function actionJsonresources($id_sede, $start=NULL,$end=NULL,$_=NULL){
+    public function actionJsonresources($id_sede, $start = null, $end = null, $_ = null)
+    {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $resources = array();
         $sede = Sede::findOne($id_sede);
         $aulas = array();
-        if(!empty($sede->edificios)){
-            foreach($sede->edificios as $edi)
-            {
-                if(!empty($edi->aulas))
-                {
-                    foreach($edi->aulas as $aula)
-                    {
-                        $aulas [] = $aula;
+        if (!empty($sede->edificios)) {
+            foreach ($sede->edificios as $edi) {
+                if (!empty($edi->aulas)) {
+                    foreach ($edi->aulas as $aula) {
+                        $aulas[] = $aula;
                     }
                 }
 
             }
         }
-        if(!empty($aulas))
-        {
-            foreach ($aulas as $aula)
-            {
+        if (!empty($aulas)) {
+            foreach ($aulas as $aula) {
                 $resource = array();
 
                 $arrayRecu = array();
-                foreach($aula->rECURSOs as $recu)
-                {
-                    $arrayRecu [] = '-'.$recu->NOMBRE;
-                    
+                foreach ($aula->rECURSOs as $recu) {
+                    $arrayRecu[] = '-' . $recu->NOMBRE;
+
                 }
-                if(!empty($arrayRecu))
-                {
+                if (!empty($arrayRecu)) {
                     $recursosAula = implode("\n", $arrayRecu);
                     $resource['recursos'] = $recursosAula;
-                }
-                else{
+                } else {
                     $resource['recursos'] = '-';
                 }
                 $resource['id'] = $aula->ID;
                 $resource['title'] = $aula->NOMBRE;
                 $resource['edificio'] = $aula->eDIFICIO->NOMBRE;
-                $resource['url'] = URL::toRoute('evento/index?id=').$aula->ID;
-                $obj = (object) $resource;
+                $resource['url'] = URL::toRoute('evento/index?id=') . $aula->ID;
+                $obj = (object)$resource;
 
-                $resources [] = $obj;
+                $resources[] = $obj;
             }
         }
 
         return $resources;
     }
-    public function actionJsoncalendar($id=NULL, $start=NULL,$end=NULL,$_=NULL){
+    public function actionJsoncalendar($id = null, $start = null, $end = null, $_ = null)
+    {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
         $isGuest = User::isUserGuest(Yii::$app->user->identity->id);
         $isAdmin = User::isUserAdmin(Yii::$app->user->identity->id);
-        if(!$isGuest){
+        if (!$isGuest) {
             $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
         }
-        
+
         $aula = Aula::findOne($id);
         //RESTRICCIONES
-        foreach ($aula->restriCalendars as $cons) 
-        {
-                
+        foreach ($aula->restriCalendars as $cons) {
+
             $begin = new DateTime($cons->ciclo->fecha_inicio);
             $end = new DateTime($cons->ciclo->fecha_fin);
 
             $interval = DateInterval::createFromDateString('1 day');
             $period = new DatePeriod($begin, $interval, $end);
-            
-            foreach ($period as $dia)
-            {
-                if ($dia->format('N') ==  $cons->dow)
-                {
+
+            foreach ($period as $dia) {
+                if ($dia->format('N') == $cons->dow) {
 
                     $restri = array();
-                    $restri['id'] = intval($cons->id).'R';
+                    $restri['id'] = intval($cons->id) . 'R';
                     $restri['title'] = $cons->instituto->ID;
                     $restri['ranges'] = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
-                    $restri['start'] = $dia->format('Y-m-d').'T'.$cons->Hora_ini;
-                    $restri['end'] = $dia->format('Y-m-d').'T'.$cons->Hora_fin;
+                    $restri['start'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_ini;
+                    $restri['end'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_fin;
                     $restri['backgroundColor'] = $cons->instituto->COLOR_HEXA;
                     $restri['rendering'] = 'background';
                     $restri['resourceId'] = $cons->ID_Aula;
                     $restri['ajeno'] = false;
                     $restri['usermodifico'] = $cons->ID_User_Asigna;
-                    if($isGuest)
-                    {
+                    if ($isGuest) {
+                        $restri['ajeno'] = true;
+                        $restri['overlap'] = false;
+                    } else if ($instIdOnSessionUser != $cons->instituto->ID) {
                         $restri['ajeno'] = true;
                         $restri['overlap'] = false;
                     }
-                    else if ($instIdOnSessionUser != $cons->instituto->ID)
-                    {
-                        $restri['ajeno'] = true;
-                        $restri['overlap'] = false;
-                    }
-                    if($isAdmin)
-                    {
+                    if ($isAdmin) {
                         $restri['ajeno'] = false;
                         $restri['overlap'] = true;
                     }
-                    $tasks[] = (object) $restri;
+                    $tasks[] = (object)$restri;
                 }
             }
         }
         //EVENTOS
-        foreach ($aula->eventoCalendars as $eve) 
-        {
+        foreach ($aula->eventoCalendars as $eve) {
             $begin = new DateTime($eve->ciclo->fecha_inicio);
             $end = new DateTime($eve->ciclo->fecha_fin);
 
             $interval = DateInterval::createFromDateString('1 day');
             $period = new DatePeriod($begin, $interval, $end);
 
-            foreach ($period as $dia)
-            {
-                if ($dia->format('N') == $eve->dow)
-                {
+            foreach ($period as $dia) {
+                if ($dia->format('N') == $eve->dow) {
                     $event = array();
-                        
-                    $event['id'] = intval($eve->id).'E';
+                    // Evento NO ESPECIAL (es periodico).
+                    $event['especial'] = false;
+                    $event['id'] = intval($eve->id) . 'E';
                     $event['title'] = $eve->comision->getName();
-                    $event['color'] = $eve->instituto->COLOR_HEXA;                             
+                    $event['color'] = $eve->instituto->COLOR_HEXA;
                     $event['ranges'] = [array('start' => $eve->ciclo->fecha_inicio, 'end' => $eve->ciclo->fecha_fin)];
                     $event['editable'] = true;
                     $event['ajeno'] = false;
-                    if($isGuest)
-                    {
+                    if ($isGuest) {
                         $event['ajeno'] = true;
                         $event['editable'] = false;
                     }
                     //user en session no edita eventos de otros institutos
-                    else if ($instIdOnSessionUser != $eve->instituto->ID)
-                    {
+                    else if ($instIdOnSessionUser != $eve->instituto->ID) {
                         $event['ajeno'] = true;
                         $event['editable'] = false;
                     }
-                    if($isAdmin)
-                    {
+                    if ($isAdmin) {
                         $event['ajeno'] = false;
                         $event['editable'] = true;
                     }
-                    $event['start'] = $dia->format('Y-m-d').'T'.$eve->Hora_ini;
-                    $event['end'] = $dia->format('Y-m-d').'T'.$eve->Hora_fin;
+                    $event['start'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_ini;
+                    $event['end'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_fin;
                     $event['usermodifico'] = $eve->ID_User_Asigna;
                     $event['resourceId'] = $eve->ID_Aula;
-                    $tasks[] = (object) $event;
+                    $tasks[] = (object)$event;
                 }
             }
         }
         return $tasks;
-      }
+    }
 
-    public function actionJsonschedulersede($id_sede, $start,$end=NULL,$_=NULL){
+    public function actionJsonschedulersede($id_sede, $start, $end = null, $_ = null)
+    {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $isGuest = User::isUserGuest(Yii::$app->user->identity->id);
         $isAdmin = User::isUserAdmin(Yii::$app->user->identity->id);
-        if(!$isGuest){
+        if (!$isGuest) {
             $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
         }
         $tasks = array();
         $sede = Sede::findOne($id_sede);
-        $aulas = array();
-        if(!empty($sede->edificios))
-        {
-            foreach($sede->edificios as $edi)
-            {
-                
-                if(!empty($edi->aulas))
-                {
-                    foreach($edi->aulas as $aula)
-                    {                        
+        if (!empty($sede->edificios)) {
+            foreach ($sede->edificios as $edi) {
+
+                if (!empty($edi->aulas)) {
+                    foreach ($edi->aulas as $aula) {                        
                         //RESTRICCIONES
-                        foreach ($aula->restriCalendars as $cons) 
-                        {
+                        foreach ($aula->restriCalendars as $cons) {
                             $begin = new DateTime($cons->ciclo->fecha_inicio);
                             $end = new DateTime($cons->ciclo->fecha_fin);
 
                             $interval = DateInterval::createFromDateString('1 day');
                             $period = new DatePeriod($begin, $interval, $end);
 
-                            foreach ($period as $dia)
-                            {
-                                if ($dia->format('N') == intval($cons->dow))
-                                {
+                            foreach ($period as $dia) {
+                                if ($dia->format('N') == intval($cons->dow)) {
                                     $restri = array();
-                                    $restri['id'] = intval($cons->id).'R';
+                                    $restri['id'] = intval($cons->id) . 'R';
                                     $restri['title'] = $cons->instituto->ID;
                                     $restri['ranges'] = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
-                                    $restri['start'] = $dia->format('Y-m-d').'T'.$cons->Hora_ini;
-                                    $restri['end'] = $dia->format('Y-m-d').'T'.$cons->Hora_fin;
+                                    $restri['start'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_ini;
+                                    $restri['end'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_fin;
                                     $restri['backgroundColor'] = $cons->instituto->COLOR_HEXA;
                                     $restri['rendering'] = 'background';
                                     $restri['usermodifico'] = $cons->ID_User_Asigna;
                                     $restri['ajeno'] = false;
                                     $restri['resourceId'] = $cons->ID_Aula;
-                                    if($isGuest)
-                                    {
+                                    if ($isGuest) {
+                                        $restri['ajeno'] = true;
+                                        $restri['overlap'] = false;
+                                    } else if ($instIdOnSessionUser != $cons->instituto->ID) {
                                         $restri['ajeno'] = true;
                                         $restri['overlap'] = false;
                                     }
-                                    else if ($instIdOnSessionUser != $cons->instituto->ID)
-                                    {
-                                        $restri['ajeno'] = true;
-                                        $restri['overlap'] = false;
-                                    }
-                                    if($isAdmin)
-                                    {
+                                    if ($isAdmin) {
                                         $restri['ajeno'] = false;
                                         $restri['overlap'] = true;
                                     }
-                                    if(User::isUserGuest(Yii::$app->user->identity->id))
-                                    {
+                                    if (User::isUserGuest(Yii::$app->user->identity->id)) {
                                         $restri['ajeno'] = true;
                                         $restri['overlap'] = false;
                                     }
-                                    $tasks[] = (object) $restri;
+                                    $tasks[] = (object)$restri;
                                 }
                             }
                         }
                         //EVENTOS
-                        foreach ($aula->eventoCalendars as $eve) 
-                        {
+                        foreach ($aula->eventoCalendars as $eve) {
                             $begin = new DateTime($eve->ciclo->fecha_inicio);
                             $end = new DateTime($eve->ciclo->fecha_fin);
                             $interval = DateInterval::createFromDateString('1 day');
                             $period = new DatePeriod($begin, $interval, $end);
 
-                            foreach ($period as $dia)
-                            {
-                                if ($dia->format('N') == intval($eve->dow))
-                                {
+                            foreach ($period as $dia) {
+                                if ($dia->format('N') == intval($eve->dow)) {
                                     $event = array();
-                                    
-                                    $event['id'] = intval($eve->id).'E';
+                                    // Evento NO ESPECIAL (es periodico).
+                                    $event['especial'] = false;
+                                    $event['id'] = intval($eve->id) . 'E';
                                     $event['title'] = $eve->comision->getName();
-                                    $event['color'] = $eve->instituto->COLOR_HEXA;                             
+                                    $event['color'] = $eve->instituto->COLOR_HEXA;
                                     $event['ranges'] = [array('start' => $eve->ciclo->fecha_inicio, 'end' => $eve->ciclo->fecha_fin)];
                                     $event['editable'] = true;
                                     $event['ajeno'] = false;
                                     //user en session no edita eventos de otros institutos
-                                    if($isGuest){
+                                    if ($isGuest) {
+                                        $event['ajeno'] = true;
+                                        $event['editable'] = false;
+                                    } else if ($instIdOnSessionUser != $eve->instituto->ID) {
                                         $event['ajeno'] = true;
                                         $event['editable'] = false;
                                     }
-                                    else if ($instIdOnSessionUser != $eve->instituto->ID)
-                                    {
-                                        $event['ajeno'] = true;
-                                        $event['editable'] = false;
-                                    }
-                                    if($isAdmin)
-                                    {
+                                    if ($isAdmin) {
                                         $event['ajeno'] = false;
                                         $event['editable'] = true;
                                     }
@@ -467,11 +409,11 @@ class EventoController extends Controller
                                         $event['ajeno'] = true;
                                         $event['editable'] = false;
                                     }*/
-                                    $event['start'] = $dia->format('Y-m-d').'T'.$eve->Hora_ini;
-                                    $event['end'] = $dia->format('Y-m-d').'T'.$eve->Hora_fin;
+                                    $event['start'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_ini;
+                                    $event['end'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_fin;
                                     $event['resourceId'] = $eve->ID_Aula;
                                     $event['usermodifico'] = $eve->ID_User_Asigna;
-                                    $tasks[] = (object) $event;
+                                    $tasks[] = (object)$event;
                                 }
                             }
                         }
@@ -489,8 +431,8 @@ class EventoController extends Controller
             ->all();
 
         if (!empty($carreras)) {
-            foreach($carreras as $carrera) {
-                echo "<option value='".$carrera->ID."'>".$carrera->NOMBRE."</option>";
+            foreach ($carreras as $carrera) {
+                echo "<option value='" . $carrera->ID . "'>" . $carrera->NOMBRE . "</option>";
             }
         } else {
             echo "<option>-</option>";
@@ -502,8 +444,8 @@ class EventoController extends Controller
         $materias = Carrera::findone($id)->materias;
 
         if (!empty($materias)) {
-            foreach($materias as $materia) {
-                echo "<option value='".$materia->ID."'>".$materia->NOMBRE." (".$materia->COD_MATERIA.")</option>";
+            foreach ($materias as $materia) {
+                echo "<option value='" . $materia->ID . "'>" . $materia->NOMBRE . " (" . $materia->COD_MATERIA . ")</option>";
             }
         } else {
             echo "<option>-</option>";
@@ -515,8 +457,8 @@ class EventoController extends Controller
         $comisiones = $materia->comisions;
 
         if (!empty($comisiones)) {
-            foreach($comisiones as $comision) {
-                echo "<option value='".$comision->ID."'>".$materia->DESC_CORTA.$comision->NUMERO."</option>";
+            foreach ($comisiones as $comision) {
+                echo "<option value='" . $comision->ID . "'>" . $materia->DESC_CORTA . $comision->NUMERO . "</option>";
             }
         } else {
             echo "<option>-</option>";

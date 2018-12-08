@@ -21,14 +21,14 @@ class InstitutoController extends Controller
     public function actionInstitutov()
     {
 
-        $query = Instituto::find(); 
+        $query = Instituto::find();
 
         $pagination = new Pagination([
             'defaultPageSize' => 5,
             'totalCount' => $query->count(),
         ]);
 
-    
+
         $instituto = $query->orderBy('ID')
             ->offset($pagination->offset)
             ->limit($pagination->limit)
@@ -37,11 +37,11 @@ class InstitutoController extends Controller
             'instituto' => $instituto,
             'pagination' => $pagination,
         ]);
-    
-       
+
+
     }
 
-   
+
     /**
      * @inheritdoc
      */
@@ -54,7 +54,7 @@ class InstitutoController extends Controller
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['institutov','index','view','create','update','delete'],
+                        'actions' => ['institutov', 'index', 'view', 'create', 'update', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
@@ -63,21 +63,21 @@ class InstitutoController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['institutov'],
-                       'allow' => true,
-                       'roles' => ['@'],
-                       'matchCallback' => function ($rule, $action) {
-                          return User::isUserSimple(Yii::$app->user->identity->id);
-                      },
-                   ],
-                   [
+                        'actions' => ['institutov'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserSimple(Yii::$app->user->identity->id);
+                        },
+                    ],
+                    [
                     //Los usuarios guest tienen permisos sobre las siguientes acciones
-                    'actions' => ['institutov'],
-                    'allow' => true,
-                    'roles' => ['@'],
-                    'matchCallback' => function ($rule, $action) {
-                        return User::isUserGuest(Yii::$app->user->identity->id);
-                    },
+                        'actions' => ['institutov'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserGuest(Yii::$app->user->identity->id);
+                        },
                     ],
                 ],
             ],
@@ -96,7 +96,7 @@ class InstitutoController extends Controller
      */
     public function actionIndex()
     {
-        $this->layout='LayoutAdmin';
+        $this->layout = 'LayoutAdmin';
         $searchModel = new InstitutoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -187,6 +187,6 @@ class InstitutoController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-   
+
 
 }

@@ -20,7 +20,7 @@ class SedeController extends Controller
 
     public function actionVistav()
     {
-       
+
         $query = Sede::find();
 
         $pagination = new Pagination([
@@ -28,18 +28,18 @@ class SedeController extends Controller
             'totalCount' => $query->count(),
         ]);
 
-    
+
         $sede = $query->orderBy('ID')
             ->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
 
-       
+
 
         return $this->render('vistav', [
             'sede' => $sede,
             'pagination' => $pagination,
-            
+
         ]);
     }
     public function actionScheduler($id_sede)
@@ -70,7 +70,7 @@ class SedeController extends Controller
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['vistav','index','view','create','update','delete'],
+                        'actions' => ['vistav', 'index', 'view', 'create', 'update', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
@@ -79,14 +79,14 @@ class SedeController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['vistav'],
-                       'allow' => true,
-                       'roles' => ['@'],
-                       'matchCallback' => function ($rule, $action) {
-                          return User::isUserSimple(Yii::$app->user->identity->id);
-                      },
-                   ],
-                   [
+                        'actions' => ['vistav'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserSimple(Yii::$app->user->identity->id);
+                        },
+                    ],
+                    [
                         //Los usuarios guest tienen permisos sobre las siguientes acciones
                         'actions' => ['vistav'],
                         'allow' => true,
@@ -112,7 +112,7 @@ class SedeController extends Controller
      */
     public function actionIndex()
     {
-        $this->layout='LayoutAdmin';
+        $this->layout = 'LayoutAdmin';
         $searchModel = new SedeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -147,7 +147,7 @@ class SedeController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->ID]);
         }
-        
+
         return $this->render('create', [
             'model' => $model,
         ]);

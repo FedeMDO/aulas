@@ -54,21 +54,21 @@ class RestriController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => [],
-                       'allow' => false,
-                       'roles' => ['@'],
-                       'matchCallback' => function ($rule, $action) {
-                          return User::isUserSimple(Yii::$app->user->identity->id);
-                      },
-                   ],
-                   [
+                        'actions' => [],
+                        'allow' => false,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserSimple(Yii::$app->user->identity->id);
+                        },
+                    ],
+                    [
                     //Los usuarios guest tienen permisos sobre las siguientes acciones
-                    'actions' => [],
-                    'allow' => false,
-                    'roles' => ['@'],
-                    'matchCallback' => function ($rule, $action) {
-                       return User::isUserGuest(Yii::$app->user->identity->id);
-                    },
+                        'actions' => [],
+                        'allow' => false,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserGuest(Yii::$app->user->identity->id);
+                        },
                     ],
                 ],
             ],
@@ -89,7 +89,7 @@ class RestriController extends Controller
     {
         $aula = Aula::findOne($id)->NOMBRE;
         return $this->render('index', [
-            'id_aula'=>$id,
+            'id_aula' => $id,
             'aula' => $aula,
         ]);
     }
@@ -104,10 +104,9 @@ class RestriController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $model->ID_User_Asigna = Yii::$app->user->identity->id;
-            $model->ID_Aula=$id_aula;
-            if($model->save())
-            {
-                
+            $model->ID_Aula = $id_aula;
+            if ($model->save()) {
+
                 return $this->redirect(['index', 'id' => $model->ID_Aula]);
             }
         }
@@ -115,7 +114,7 @@ class RestriController extends Controller
             'model' => $model,
         ]);
     }
-    
+
 
     /**
      * Updates an existing RestriCalendar model.
@@ -140,32 +139,30 @@ class RestriController extends Controller
     {
         $request = Yii::$app->request;
         $evento = $this->findModel($request->post('id'));
-        $evento ->dow = $request->post('dow');
+        $evento->dow = $request->post('dow');
         $evento->Hora_ini = substr($request->post('ini'), -8);
         $evento->Hora_fin = substr($request->post('fin'), -8);
-        if($evento->save())
-        {
-            echo("Actualizacion exitosa");
+        if ($evento->save()) {
+            echo ("Actualizacion exitosa");
         }
     }
     public function actionUpd2()
     {
-        $request = Yii::$app->request;        
+        $request = Yii::$app->request;
         $evento = $this->findModel($request->post('id'));
 
         $ini = $request->post('ini');
         $fin = $request->post('ini');
 
-        $evento->ID_User_Asigna=Yii::$app->user->identity->id;
+        $evento->ID_User_Asigna = Yii::$app->user->identity->id;
         $evento->Hora_ini = substr($request->post('ini'), -8);
         $evento->Hora_fin = substr($request->post('fin'), -8);
         $evento->ID_Aula = $request->post('id_aula');
-        if($evento->save())
-        {
-            echo("Actualizacion exitosa");
+        if ($evento->save()) {
+            echo ("Actualizacion exitosa");
         }
-       return $this->redirect(['index','id_aula' =>$id_aula]);
-      
+        return $this->redirect(['index', 'id_aula' => $id_aula]);
+
     }
     public function actionUpdscheduler()
     {
@@ -176,9 +173,8 @@ class RestriController extends Controller
         $evento->Hora_fin = substr($request->post('fin'), -8);
         $evento->ID_Aula = $request->post('aula_id');
         $evento->dow = $request->post('dow');
-        if($evento->save())
-        {
-            echo("Actualizacion exitosa");
+        if ($evento->save()) {
+            echo ("Actualizacion exitosa");
         }
     }
 
@@ -193,141 +189,127 @@ class RestriController extends Controller
     {
         $request = Yii::$app->request;
         $this->findModel($request->post('id'))->delete();
-        $id_aula =  $request->post('id_aula');
-        
-        if($request->post('scheduler') == 1)
-        {
+        $id_aula = $request->post('id_aula');
+
+        if ($request->post('scheduler') == 1) {
             $id_sede = $request->post('id_sede');
-            return $this->redirect(['edificio/scheduler','id_sede' => $id_sede]);
+            return $this->redirect(['edificio/scheduler', 'id_sede' => $id_sede]);
         }
-        return $this->redirect(['index','id' =>$id_aula]);
+        return $this->redirect(['index', 'id' => $id_aula]);
     }
 
-    public function actionJsonresources($id_sede, $start=NULL,$end=NULL,$_=NULL){
+    public function actionJsonresources($id_sede, $start = null, $end = null, $_ = null)
+    {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $resources = array();
         $sede = Sede::findOne($id_sede);
         $aulas = array();
-        if(!empty($sede->edificios)){
-            foreach($sede->edificios as $edi)
-            {
-                if(!empty($edi->aulas))
-                {
-                    foreach($edi->aulas as $aula)
-                    {
-                        $aulas [] = $aula;
+        if (!empty($sede->edificios)) {
+            foreach ($sede->edificios as $edi) {
+                if (!empty($edi->aulas)) {
+                    foreach ($edi->aulas as $aula) {
+                        $aulas[] = $aula;
                     }
                 }
             }
         }
-        if(!empty($aulas))
-        {
-            foreach ($aulas as $aula)
-            {
+        if (!empty($aulas)) {
+            foreach ($aulas as $aula) {
                 $resource = array();
 
                 $arrayRecu = array();
-                foreach($aula->rECURSOs as $recu)
-                {
-                    $arrayRecu [] = '-'.$recu->NOMBRE;
-                    
+                foreach ($aula->rECURSOs as $recu) {
+                    $arrayRecu[] = '-' . $recu->NOMBRE;
+
                 }
-                if(!empty($arrayRecu))
-                {
+                if (!empty($arrayRecu)) {
                     $recursosAula = implode("\n", $arrayRecu);
                     $resource['recursos'] = $recursosAula;
-                }
-                else{
+                } else {
                     $resource['recursos'] = '-';
                 }
                 $resource['id'] = $aula->ID;
                 $resource['title'] = $aula->NOMBRE;
                 $resource['edificio'] = $aula->eDIFICIO->NOMBRE;
-                $resource['url'] = URL::toRoute('restri/index?id=').$aula->ID;
-                $obj = (object) $resource;
+                $resource['url'] = URL::toRoute('restri/index?id=') . $aula->ID;
+                $obj = (object)$resource;
 
-                $resources [] = $obj;
+                $resources[] = $obj;
             }
         }
 
         return $resources;
     }
-    public function actionJsoncalendar($id=NULL, $start=NULL,$end=NULL,$_=NULL){
+    public function actionJsoncalendar($id = null, $start = null, $end = null, $_ = null)
+    {
 
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $aula = Aula::findOne($id);
         //RESTRICCIONES
-        foreach ($aula->restriCalendars as $cons) 
-        {
-                
+        foreach ($aula->restriCalendars as $cons) {
+
             $begin = new DateTime($cons->ciclo->fecha_inicio);
             $end = new DateTime($cons->ciclo->fecha_fin);
 
             $interval = DateInterval::createFromDateString('1 day');
             $period = new DatePeriod($begin, $interval, $end);
-            
-            foreach ($period as $dia)
-            {
-                if ($dia->format('N') ==  $cons->dow)
-                {
+
+            foreach ($period as $dia) {
+                if ($dia->format('N') == $cons->dow) {
 
                     $restri = array();
-                    $restri['id'] = intval($cons->id).'R';
+                    $restri['id'] = intval($cons->id) . 'R';
                     $restri['title'] = $cons->instituto->NOMBRE;
                     $restri['ranges'] = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
-                    $restri['start'] = $dia->format('Y-m-d').'T'.$cons->Hora_ini;
-                    $restri['end'] = $dia->format('Y-m-d').'T'.$cons->Hora_fin;
+                    $restri['start'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_ini;
+                    $restri['end'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_fin;
                     $restri['backgroundColor'] = $cons->instituto->COLOR_HEXA;
                     $restri["editable"] = true;
+                    $restri['overlap'] = false;
                     $restri['resourceId'] = $cons->ID_Aula;
                     $restri['usermodifico'] = $cons->ID_User_Asigna;
                     $restri['ajeno'] = false;
-                    $tasks[] = (object) $restri;
+                    $tasks[] = (object)$restri;
                 }
             }
         }
         return $tasks;
-      }
+    }
 
-    public function actionJsonschedulersede($id_sede, $start,$end=NULL,$_=NULL){
+    public function actionJsonschedulersede($id_sede, $start, $end = null, $_ = null)
+    {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $tasks = array();
         $sede = Sede::findOne($id_sede);
         $aulas = array();
-        if(!empty($sede->edificios))
-        {
-            foreach($sede->edificios as $edi)
-            {
-                
-                if(!empty($edi->aulas))
-                {
-                    foreach($edi->aulas as $aula)
-                    {                        
+        if (!empty($sede->edificios)) {
+            foreach ($sede->edificios as $edi) {
+
+                if (!empty($edi->aulas)) {
+                    foreach ($edi->aulas as $aula) {                        
                         //RESTRICCIONES
-                        foreach ($aula->restriCalendars as $cons) 
-                        {
+                        foreach ($aula->restriCalendars as $cons) {
                             $begin = new DateTime($cons->ciclo->fecha_inicio);
                             $end = new DateTime($cons->ciclo->fecha_fin);
 
                             $interval = DateInterval::createFromDateString('1 day');
                             $period = new DatePeriod($begin, $interval, $end);
 
-                            foreach ($period as $dia)
-                            {
-                                if ($dia->format('N') == intval($cons->dow))
-                                {
+                            foreach ($period as $dia) {
+                                if ($dia->format('N') == intval($cons->dow)) {
                                     $restri = array();
-                                    $restri['id'] = intval($cons->id).'R';
+                                    $restri['id'] = intval($cons->id) . 'R';
                                     $restri['title'] = $cons->instituto->NOMBRE;
                                     $restri['ranges'] = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
-                                    $restri['start'] = $dia->format('Y-m-d').'T'.$cons->Hora_ini;
-                                    $restri['end'] = $dia->format('Y-m-d').'T'.$cons->Hora_fin;
+                                    $restri['start'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_ini;
+                                    $restri['end'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_fin;
                                     $restri['backgroundColor'] = $cons->instituto->COLOR_HEXA;
                                     $restri["editable"] = true;
+                                    $restri['overlap'] = false;
                                     $restri['usermodifico'] = $cons->ID_User_Asigna;
                                     $restri['ajeno'] = false;
                                     $restri['resourceId'] = $cons->ID_Aula;
-                                    $tasks[] = (object) $restri;
+                                    $tasks[] = (object)$restri;
                                 }
                             }
                         }

@@ -14,21 +14,21 @@ use app\models\Instituto;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'username',['labelOptions'=>['style'=>'color:white']])->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'username', ['labelOptions' => ['style' => 'color:white']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'email',['labelOptions'=>['style'=>'color:white']])->textInput() ?>
+    <?= $form->field($model, 'email', ['labelOptions' => ['style' => 'color:white']])->textInput() ?>
 
     <?php $institutos = Instituto::find()->asArray()->all();
     $result = ArrayHelper::map($institutos, 'ID', 'NOMBRE'); ?>
 
-    <?= $form->field($model, 'idInstituto',['labelOptions'=>['style'=>'color:white']])->dropdownList(
+    <?= $form->field($model, 'idInstituto', ['labelOptions' => ['style' => 'color:white']])->dropdownList(
         $result,
         ['prompt' => '(sin instituto)']
     )->label('Instituto'); ?>
 
-    <?php $roles = [ 10 => 'Simple', 20 => 'Administrador', 30 => 'Guest']; ?>
+    <?php $roles = [10 => 'Simple', 20 => 'Administrador', 30 => 'Guest']; ?>
 
-    <?= $form->field($model, 'rol',['labelOptions'=>['style'=>'color:white']])->dropdownList(
+    <?= $form->field($model, 'rol', ['labelOptions' => ['style' => 'color:white']])->dropdownList(
         $roles
     ); ?>
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link http://www.yiiframework.com/
  * @copyright Copyright (c) 2008 Yii Software LLC
@@ -19,9 +20,8 @@ class RegisterAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
-    public $css = [
-    ];
-    public $js =[
+    public $css = [];
+    public $js = [
         'js/mainRegister.js',
     ];
     public $depends = [

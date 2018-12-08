@@ -17,6 +17,7 @@ use Yii;
  * @property Edificio $eDIFICIO
  * @property AulaRecurso[] $aulaRecursos
  * @property Recurso[] $rECURSOs
+ * @property EspecialCalendar[] $especialCalendars
  * @property EventoCalendar[] $eventoCalendars
  * @property RestriCalendar[] $restriCalendars
  */
@@ -81,6 +82,14 @@ class Aula extends \yii\db\ActiveRecord
     public function getRECURSOs()
     {
         return $this->hasMany(Recurso::className(), ['ID' => 'ID_RECURSO'])->viaTable('aula_recurso', ['ID_AULA' => 'ID']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEspecialCalendars()
+    {
+        return $this->hasMany(EspecialCalendar::className(), ['ID_Aula' => 'ID']);
     }
 
     /**

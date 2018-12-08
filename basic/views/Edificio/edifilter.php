@@ -8,7 +8,7 @@ use yii\widgets\LinkPager;
 
 $this->registerCssFile("@web/css/index.css", [
   'depends' => [\yii\bootstrap\BootstrapAsset::className()],
-  
+
 ], 'css-print-theme');
 
 $this->title = 'Edificios';
@@ -96,11 +96,13 @@ body{
 </style>
 </head>
 <body>
-  <h2 class=titulo><?php if(count($edificio) != 0){
-  echo("Edificios Disponibles en la sede "); echo (Html::encode("{$edificio[0]->sEDE->NOMBRE}")); }
-  else{}?>
+  <h2 class=titulo><?php if (count($edificio) != 0) {
+                    echo ("Edificios Disponibles en la sede ");
+                    echo (Html::encode("{$edificio[0]->sEDE->NOMBRE}"));
+                  } else {
+                  } ?>
   </h2>
-    <?php foreach ($edificio as $edificio): ?>
+    <?php foreach ($edificio as $edificio) : ?>
     <div class="row3">
         <div id="columna" class="col-sm-8 col-md-4 active">
       <div class="box">
@@ -120,7 +122,7 @@ body{
                 <?= Html::encode("{$edificio->CANTIDAD_AULAS} ") ?>
                 <p></p>
                 <a href="../aula/aulafilter?id=<?= Html::encode("{$edificio->ID}") ?>" class="btn btn-info" role="button">Entrar</a>
-                <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
+                <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
                   <a href="../edificio/update?id=<?= Html::encode("{$edificio->ID}") ?>" class="btn btn-primary" role="button">Modificar</a>
                 <?php endif; ?>
               </div>
@@ -133,7 +135,7 @@ body{
 
       </div>
 
-    <?php endforeach;?>
+    <?php endforeach; ?>
 
 
 
@@ -145,14 +147,14 @@ body{
       <li><a href="../aula/buscador" class="btn miBoton btn-md btn-vistav " role="button">Filtrar aulas <span class="glyphicon glyphicon-search"></span></a>
         </li>
         <li>
-        <a href="../edificio/scheduler?id_sede=<?=Html::encode("{$edificio->sEDE->ID}")?>" class="btn miBoton btn-md btn-vistav" role="button">Ver eventos por edificio <span class="glyphicon glyphicon-search"></span></a>
+        <a href="../edificio/scheduler?id_sede=<?= Html::encode("{$edificio->sEDE->ID}") ?>" class="btn miBoton btn-md btn-vistav" role="button">Ver eventos por edificio <span class="glyphicon glyphicon-search"></span></a>
         </li>
-        <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
+        <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
         <li>
         <a href="../edificio/create" class="btn miBoton btn-md btn-vistav" role="button">Crear edificio <span class="glyphicon glyphicon-plus"></span></a>
         </li>
         <li>
-        <a href="../edificio/restrischeduler?id_sede=<?=Html::encode("{$edificio->sEDE->ID}")?>" class="btn miBoton btn-md btn-vistav" role="button">Restricciones edificios <span class="glyphicon glyphicon-search"></span></a>
+        <a href="../edificio/restrischeduler?id_sede=<?= Html::encode("{$edificio->sEDE->ID}") ?>" class="btn miBoton btn-md btn-vistav" role="button">Restricciones edificios <span class="glyphicon glyphicon-search"></span></a>
         </li>
         <?php endif; ?>
       </ul>

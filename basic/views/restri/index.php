@@ -13,7 +13,7 @@ use app\assets\RestriCalendarAsset;
 RestriCalendarAsset::register($this);
 
 $this->registerCssFile("@web/css/index.css", [
-  'depends' => [\yii\bootstrap\BootstrapAsset::className()],
+    'depends' => [\yii\bootstrap\BootstrapAsset::className()],
 ], 'css-print-theme');
 
 $this->title = 'Calendario de asignacion de restricciones';
@@ -25,9 +25,9 @@ $indexMaterias = 1;
     <div class="col-md-offset-1 col-md-10">
         
     <?= Html::button('Nueva restriccion', ['value' => Url::to(['restri/create', 'id_aula' => $id_aula]), 'title' => $id_aula, 'class' => 'showModalButton btn btn-success']); ?>
-    <?= Html::a('Ir a calendario', Url::to(['evento/index?id='.$id_aula.'']), ['class' => 'btn btn-primary']); ?>
+    <?= Html::a('Ir a calendario', Url::to(['evento/index?id=' . $id_aula . '']), ['class' => 'btn btn-primary']); ?>
     <div style="display:none;">
-    <em id:"id_aula"><?=Html::encode("{$id_aula}")?></em>
+    <em id:"id_aula"><?= Html::encode("{$id_aula}") ?></em>
     </div>
 
         <div class="loginc">

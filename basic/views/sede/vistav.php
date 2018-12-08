@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\LinkPager;
 
 $this->registerCssFile("@web/css/index.css", [
-	'depends' => [\yii\bootstrap\BootstrapAsset::className()],
+  'depends' => [\yii\bootstrap\BootstrapAsset::className()],
 
 ], 'css-print-theme');
 
@@ -96,14 +96,14 @@ body{
 </head>
 <body>
   <h2 class=titulo>Sedes Disponibles</h2>
-    <?php foreach ($sede as $sede): ?>
+    <?php foreach ($sede as $sede) : ?>
     <div class="row3">
         <div id="columna" class="col-sm-8 col-md-4 active">
         
       <div class="box">
           
         <div class="imgBox">
-          <img src="../image/sede_<?=Html::encode("{$sede->ID}")?>.png">
+          <img src="../image/sede_<?= Html::encode("{$sede->ID}") ?>.png">
         </div>
 
         <div class="details">
@@ -112,12 +112,12 @@ body{
 
             <div class="thumbnail sede">
               <div class="caption">
-                <h4><?=Html::encode("{$sede->NOMBRE} ")?> </h4>
-                <p><?=Html::encode("{$sede->CALLEYNUM}")?> -<?=Html::encode(" {$sede->LOCALIDAD} ")?></p>
+                <h4><?= Html::encode("{$sede->NOMBRE} ") ?> </h4>
+                <p><?= Html::encode("{$sede->CALLEYNUM}") ?> -<?= Html::encode(" {$sede->LOCALIDAD} ") ?></p>
                 <p></p>
-                <a href="../edificio/edifilter?id=<?=Html::encode("{$sede->ID}")?>" class="btn btn-info" role="button">Entrar</a>
-                <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
-                  <a href="../sede/update?id=<?=Html::encode("{$sede->ID}")?>"  class="btn btn-primary" role="button">Modificar</a>
+                <a href="../edificio/edifilter?id=<?= Html::encode("{$sede->ID}") ?>" class="btn btn-info" role="button">Entrar</a>
+                <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
+                  <a href="../sede/update?id=<?= Html::encode("{$sede->ID}") ?>"  class="btn btn-primary" role="button">Modificar</a>
                 <?php endif; ?>
               </div>
             </div>
@@ -128,7 +128,7 @@ body{
       </div>
       </div>
 
-    <?php endforeach;?>
+    <?php endforeach; ?>
 
   </div>
 
@@ -139,7 +139,7 @@ body{
       <ul>
         <li><a href="../aula/buscador" class="btn miBoton btn-md btn-vistav " role="button">Filtrar aulas <span class="glyphicon glyphicon-search"></span></a>
         </li>
-        <?php if(app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
+        <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
         <li>
         <a href="../sede/create" class="btn miBoton btn-md btn-vistav" role="button">Crear sede <span class="glyphicon glyphicon-plus"></span></a>
         </li>

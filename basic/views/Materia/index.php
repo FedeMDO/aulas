@@ -11,24 +11,24 @@ $this->title = 'Materias';
 ?>
 <div class="materia-index">
 
-	<h1 class='titulo'><?=Html::encode($this->title)?></h1>
+	<h1 class='titulo'><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?=Html::a('Crear materia', ['create'], ['class' => 'btn btn-success'])?>
+        <?= Html::a('Crear materia', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?=GridView::widget([
-	'dataProvider' => $dataProvider,
-	'filterModel' => $searchModel,
-	'tableOptions'=>['class'=>'table-bordered table-condensed  grid'],
-	'columns' => [
-		['class' => 'yii\grid\SerialColumn'],
+    <?= GridView::widget([
+				'dataProvider' => $dataProvider,
+				'filterModel' => $searchModel,
+				'tableOptions' => ['class' => 'table-bordered table-condensed  grid'],
+				'columns' => [
+					['class' => 'yii\grid\SerialColumn'],
 
-		'NOMBRE',
-		'DESC_CORTA',
-		'COD_MATERIA',
+					'NOMBRE',
+					'DESC_CORTA',
+					'COD_MATERIA',
 
-		['class' => 'yii\grid\ActionColumn'],
-	],
-]);?>
+					['class' => 'yii\grid\ActionColumn'],
+				],
+			]); ?>
 </div>

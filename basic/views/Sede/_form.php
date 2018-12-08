@@ -13,15 +13,15 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'NOMBRE',['labelOptions'=>['style'=>'color:white']])->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'NOMBRE', ['labelOptions' => ['style' => 'color:white']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'CALLEYNUM',['labelOptions'=>['style'=>'color:white']])->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'CALLEYNUM', ['labelOptions' => ['style' => 'color:white']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'LOCALIDAD',['labelOptions'=>['style'=>'color:white']])->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'LOCALIDAD', ['labelOptions' => ['style' => 'color:white']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'DISPONIBLE_DESDE',['labelOptions'=>['style'=>'color:white']])->textInput() ?>
+    <?= $form->field($model, 'DISPONIBLE_DESDE', ['labelOptions' => ['style' => 'color:white']])->textInput() ?>
 
-    <?= $form->field($model, 'DISPONIBLE_HASTA',['labelOptions'=>['style'=>'color:white']])->textInput() ?>
+    <?= $form->field($model, 'DISPONIBLE_HASTA', ['labelOptions' => ['style' => 'color:white']])->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Actualizar', ['class' => 'btn btn-success btn-block']) ?>

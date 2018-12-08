@@ -13,16 +13,16 @@ use app\models\Sede;
 
     <?php $form = ActiveForm::begin(); ?>
     <?php $sedes = Sede::find()->asArray()->all();
-        $result = ArrayHelper::map($sedes, 'ID', 'NOMBRE');
+    $result = ArrayHelper::map($sedes, 'ID', 'NOMBRE');
     ?>
-    <?php echo $form->field($model, 'ID_SEDE',['labelOptions'=>['style'=>'color:white']])->dropDownList(
-            $result, 
-			['prompt'=>'Choose...']
-			); ?>
+    <?php echo $form->field($model, 'ID_SEDE', ['labelOptions' => ['style' => 'color:white']])->dropDownList(
+        $result,
+        ['prompt' => 'Choose...']
+    ); ?>
 
-    <?= $form->field($model, 'NOMBRE',['labelOptions'=>['style'=>'color:white']])->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'NOMBRE', ['labelOptions' => ['style' => 'color:white']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'CANTIDAD_AULAS',['labelOptions'=>['style'=>'color:white']])->textInput() ?>
+    <?= $form->field($model, 'CANTIDAD_AULAS', ['labelOptions' => ['style' => 'color:white']])->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success btn-block']) ?>

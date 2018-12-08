@@ -20,7 +20,7 @@ use app\assets\DatatablesAsset;
 DatatablesAsset::register($this);
 
 $this->registerCssFile("@web/css/index.css", [
-  'depends' => [\yii\bootstrap\BootstrapAsset::className()],
+    'depends' => [\yii\bootstrap\BootstrapAsset::className()],
 ], 'css-print-theme');
 
 $this->title = 'Oferta academica';
@@ -49,24 +49,30 @@ $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
     <div class="col-md-offset-1 col-md-10">
         <div class="row">
             <div class="col-sm-4">
-            <?php echo $form->field($instituto, 'ID',['labelOptions'=>['style'=>'color:white']])->dropDownList($resultIns,
-                    ['prompt'=>'Seleccione...',
-                        'onchange'=>'
-                            $.post( "'.Yii::$app->urlManager->createUrl('comision/listcarrera?id=').'"+$(this).val(), function( data ) {
+            <?php echo $form->field($instituto, 'ID', ['labelOptions' => ['style' => 'color:white']])->dropDownList(
+                $resultIns,
+                [
+                    'prompt' => 'Seleccione...',
+                    'onchange' => '
+                            $.post( "' . Yii::$app->urlManager->createUrl('comision/listcarrera?id=') . '"+$(this).val(), function( data ) {
                             $( "select#carrera-id" ).html( data );
                             });
-                        '])->label('Instituto');  ?>
+                        '
+                ]
+            )->label('Instituto'); ?>
         </div>
             <div class="col-sm-4">
-            <?php echo $form->field($carrera, 'ID',['labelOptions'=>['style'=>'color:white']])->dropDownList(
-                    array(),
-                    ['prompt'=>'Seleccione...'])->label('Carrera'); ?>
+            <?php echo $form->field($carrera, 'ID', ['labelOptions' => ['style' => 'color:white']])->dropDownList(
+                array(),
+                ['prompt' => 'Seleccione...']
+            )->label('Carrera'); ?>
         </div>
         <div class="col-xs-3">
-        <?php echo $form->field($ciclo, 'id',['labelOptions'=>['style'=>'color:white']])->dropDownList(
-                    $resultCiclos,
-                    ['prompt'=>'Seleccione...',
-                        ])->label('Ciclo'); ?>
+        <?php echo $form->field($ciclo, 'id', ['labelOptions' => ['style' => 'color:white']])->dropDownList(
+            $resultCiclos,
+            ['prompt' => 'Seleccione...',
+            ]
+        )->label('Ciclo'); ?>
         </div>
         <div class="col-xs">
             <button id="btnBuscar" type="button" class="btn btn-secondary">Buscar</button>

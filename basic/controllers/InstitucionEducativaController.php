@@ -28,7 +28,7 @@ class InstitucionEducativaController extends Controller
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['index','view','create','update','delete'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
                         //Esta propiedad establece que tiene permisos
                         'allow' => true,
                         //Usuarios autenticados, el signo ? es para invitados
@@ -42,18 +42,18 @@ class InstitucionEducativaController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['index','view'],
+                        'actions' => ['index', 'view'],
                        //Esta propiedad establece que tiene permisos
-                       'allow' => true,
+                        'allow' => true,
                        //Usuarios autenticados, el signo ? es para invitados
-                       'roles' => ['@'],
+                        'roles' => ['@'],
                        //Este método nos permite crear un filtro sobre la identidad del usuario
                        //y así establecer si tiene permisos o no
-                       'matchCallback' => function ($rule, $action) {
+                        'matchCallback' => function ($rule, $action) {
                           //Llamada al método que comprueba si es un usuario simple
-                          return User::isUserSimple(Yii::$app->user->identity->id);
-                      },
-                   ],
+                            return User::isUserSimple(Yii::$app->user->identity->id);
+                        },
+                    ],
                 ],
             ],
             'verbs' => [

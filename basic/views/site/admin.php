@@ -6,14 +6,15 @@ use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 
 
-$this->registerCssFile("@web/css/inicio.css", 
-[
-    'depends' => [\yii\bootstrap\BootstrapAsset::className()
-]
-    ,
-], 'css-print-theme');
+$this->registerCssFile(
+    "@web/css/inicio.css",
+    [
+        'depends' => [\yii\bootstrap\BootstrapAsset::className()],
+    ],
+    'css-print-theme'
+);
 
-    
+
 $this->title = 'Genio';
 ?>
 <div class='jumbotron2'>

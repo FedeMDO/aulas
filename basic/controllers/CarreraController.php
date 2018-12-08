@@ -25,11 +25,11 @@ class CarreraController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['carrerav','index','view','create','update','delete'],
+                'only' => ['carrerav', 'index', 'view', 'create', 'update', 'delete'],
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['carrerav','index','view','create','update','delete'],
+                        'actions' => ['carrerav', 'index', 'view', 'create', 'update', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
@@ -38,22 +38,22 @@ class CarreraController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['carrerav'],
-                       'allow' => true,
-                       'roles' => ['@'],
-                       'matchCallback' => function ($rule, $action) {
-                          return User::isUserSimple(Yii::$app->user->identity->id);
-                      },
-                   ],
-                   [
+                        'actions' => ['carrerav'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserSimple(Yii::$app->user->identity->id);
+                        },
+                    ],
+                    [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['carrerav'],
-                       'allow' => true,
-                       'roles' => ['@'],
-                       'matchCallback' => function ($rule, $action) {
-                          return User::isUserGuest(Yii::$app->user->identity->id);
-                      },
-                   ],
+                        'actions' => ['carrerav'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserGuest(Yii::$app->user->identity->id);
+                        },
+                    ],
                 ],
             ],
             'verbs' => [
@@ -76,8 +76,8 @@ class CarreraController extends Controller
             ->all();
 
         if (!empty($carreras)) {
-            foreach($carreras as $carrera) {
-                echo "<option value='".$carrera->ID."'>".$carrera->NOMBRE."</option>";
+            foreach ($carreras as $carrera) {
+                echo "<option value='" . $carrera->ID . "'>" . $carrera->NOMBRE . "</option>";
             }
         } else {
             echo "<option>-</option>";
@@ -90,7 +90,7 @@ class CarreraController extends Controller
      */
     public function actionIndex()
     {
-        $this->layout='LayoutAdmin';
+        $this->layout = 'LayoutAdmin';
         $searchModel = new CarreraSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -101,20 +101,20 @@ class CarreraController extends Controller
     }
     public function actionCarrerav()
     {
-        $query = Carrera::find(); 
+        $query = Carrera::find();
         $pagination = new Pagination([
             'defaultPageSize' => 20,
         ]);
         $carrera = $query->orderBy('ID_INSTITUTO')
-        ->offset($pagination->offset)
-        ->limit($pagination->limit)
-        ->all();
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
         return $this->render('carrerav', [
             'carrera' => $carrera,
             'pagination' => $pagination,
         ]);
-    
-       
+
+
     }
 
     /**
@@ -200,7 +200,7 @@ class CarreraController extends Controller
 
     public function actionOferta()
     {
-        
+
 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, "http://045846bd.ngrok.io/api/ofertas");
@@ -219,10 +219,9 @@ class CarreraController extends Controller
 
     function CallAPI($method, $url, $data = false)
     {
-        
 
-        switch ($method)
-        {
+
+        switch ($method) {
             case "POST":
                 curl_setopt($curl, CURLOPT_POST, 1);
 
@@ -244,7 +243,7 @@ class CarreraController extends Controller
         // curl_setopt($curl, CURLOPT_URL, $url);
         // curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
-        
+
 
         return $result;
     }

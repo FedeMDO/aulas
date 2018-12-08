@@ -19,7 +19,7 @@ use yii\filters\AccessControl;
  */
 class EdificioController extends Controller
 {
-    
+
 
     /**
      * @inheritdoc
@@ -32,7 +32,7 @@ class EdificioController extends Controller
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['edifilter','index','view','create','update','delete','scheduler','restrischeduler'],
+                        'actions' => ['edifilter', 'index', 'view', 'create', 'update', 'delete', 'scheduler', 'restrischeduler'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
@@ -41,16 +41,16 @@ class EdificioController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['edifilter','scheduler'],
-                       'allow' => true,
-                       'roles' => ['@'],
-                       'matchCallback' => function ($rule, $action) {
-                          return User::isUserSimple(Yii::$app->user->identity->id);
-                      },
-                   ],
-                   [
+                        'actions' => ['edifilter', 'scheduler'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserSimple(Yii::$app->user->identity->id);
+                        },
+                    ],
+                    [
                         //Los usuarios guest tienen permisos sobre las siguientes acciones
-                        'actions' => ['edifilter','scheduler'],
+                        'actions' => ['edifilter', 'scheduler'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
@@ -77,7 +77,7 @@ class EdificioController extends Controller
             'sede' => $sede,
         ]);
     }
-    
+
     public function actionRestrischeduler($id_sede)
     {
 
@@ -92,7 +92,7 @@ class EdificioController extends Controller
     public function actionEdifilter($id)
     {
         $query = Edificio::find()
-        ->where(['ID_SEDE' =>$id]);
+            ->where(['ID_SEDE' => $id]);
 
         $pagination = new Pagination([
             'defaultPageSize' => 5,
@@ -100,17 +100,17 @@ class EdificioController extends Controller
         ]);
 
         $edificio = $query->orderBy('ID')
-        ->offset($pagination->offset)
-        ->limit($pagination->limit)
-        ->all();
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
 
-   
 
-    return $this->render('edifilter', [
-        'edificio' => $edificio,
-        'pagination' => $pagination,
-        'id' => $id,
-    ]);
+
+        return $this->render('edifilter', [
+            'edificio' => $edificio,
+            'pagination' => $pagination,
+            'id' => $id,
+        ]);
 
 
     }
@@ -121,7 +121,7 @@ class EdificioController extends Controller
      */
     public function actionIndex()
     {
-        $this->layout='LayoutAdmin';
+        $this->layout = 'LayoutAdmin';
         $searchModel = new EdificioSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

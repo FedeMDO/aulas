@@ -14,7 +14,7 @@ use kartik\select2\Select2;
 
 $this->registerCssFile("@web/css/index.css", [
     'depends' => [\yii\bootstrap\BootstrapAsset::className()],
-    
+
 ], 'css-print-theme');
 
 $this->registerJsFile(
@@ -49,55 +49,58 @@ $resultado = ArrayHelper::map($recurso3, 'ID', 'NOMBRE');
 
 ?>
 
-<?php echo $form->field($sedes, 'ID',['labelOptions'=>['style'=>'color:white', 'value' => 'hola']])->widget(Select2::className(),[
-        'data'=> $resultado,
-        "options" =>[
-        'placeholder'=> 'Seleccione sede',
-        'onchange' => 
-            '$.post( "'.Yii::$app->urlManager->createUrl('aula/listedificio?id=').'"+$(this).val(), function( data ) {
+<?php echo $form->field($sedes, 'ID', ['labelOptions' => ['style' => 'color:white', 'value' => 'hola']])->widget(Select2::className(), [
+    'data' => $resultado,
+    "options" => [
+        'placeholder' => 'Seleccione sede',
+        'onchange' =>
+            '$.post( "' . Yii::$app->urlManager->createUrl('aula/listedificio?id=') . '"+$(this).val(), function( data ) {
             $( "select#edificio-id" ).html( data );
             });'
-        ],
-        'pluginOptions' => [
-            'allowClear' => true,
-        ]])->label('Nombre de Sede');
+    ],
+    'pluginOptions' => [
+        'allowClear' => true,
+    ]
+])->label('Nombre de Sede');
 ?>
 
- <?php echo $form->field($edificio, 'ID',['labelOptions'=>['style'=>'color:white']])->widget(Select2::className(),[
-        'data'=>$resulta, 
-        "options" =>[
-        ]
-        ])->label('Nombre de Edificio');
+ <?php echo $form->field($edificio, 'ID', ['labelOptions' => ['style' => 'color:white']])->widget(Select2::className(), [
+    'data' => $resulta,
+    "options" => []
+])->label('Nombre de Edificio');
 
 ?>
 
-<?php echo $form->field($model, "ID",['labelOptions'=>['style'=>'color:white']])->widget(Select2::className(),[
-        'data' => $result,
-        "options" => ['multiple'=> true, 
+<?php echo $form->field($model, "ID", ['labelOptions' => ['style' => 'color:white']])->widget(Select2::className(), [
+    'data' => $result,
+    "options" => [
+        'multiple' => true,
         'placeholder' => 'Seleccione recurso'
-        ]
-    ])->label("Nombre de recurso");
+    ]
+])->label("Nombre de recurso");
 ?>
 
-<?= $form->field($buscador, 'PISO',['labelOptions' => ['encode' => false]])->textInput(['maxlength' => true])
-                                  ->label('Piso <i class="glyphicon glyphicon-question-sign"></i>',[
-                                    'class' => 'dashed-line',
-                                    'data-toggle' => 'popover',
-                                    'data-content' => 'Por favor deje este campo vacio si quiere buscar aulas con cualquier piso',
-                                    'data-placement' => 'right',
-                                    'encode' => false,]) ?>
+<?= $form->field($buscador, 'PISO', ['labelOptions' => ['encode' => false]])->textInput(['maxlength' => true])
+    ->label('Piso <i class="glyphicon glyphicon-question-sign"></i>', [
+        'class' => 'dashed-line',
+        'data-toggle' => 'popover',
+        'data-content' => 'Por favor deje este campo vacio si quiere buscar aulas con cualquier piso',
+        'data-placement' => 'right',
+        'encode' => false,
+    ]) ?>
 
-<?= $form->field($buscador, 'CAPACIDAD',['labelOptions' => ['encode' => false]])->textInput(['maxlength' => true])
-                                  ->label('Capacidad minima <i class="glyphicon glyphicon-question-sign"></i>',[
-                                    'class' => 'dashed-line',
-                                    'data-toggle' => 'popover',
-                                    'data-content' => 'Por favor deje este campo vacio si quiere buscar aulas de cualquier capacidad',
-                                    'data-placement' => 'right',
-                                    'encode' => false,]) ?>
+<?= $form->field($buscador, 'CAPACIDAD', ['labelOptions' => ['encode' => false]])->textInput(['maxlength' => true])
+    ->label('Capacidad minima <i class="glyphicon glyphicon-question-sign"></i>', [
+        'class' => 'dashed-line',
+        'data-toggle' => 'popover',
+        'data-content' => 'Por favor deje este campo vacio si quiere buscar aulas de cualquier capacidad',
+        'data-placement' => 'right',
+        'encode' => false,
+    ]) ?>
 
 <?= Html::submitButton("Buscar", [
     "class" => "btn btn-success btn-block",
-    ]) ?>  
+]) ?>  
 
 
 <?php $form->end() ?>

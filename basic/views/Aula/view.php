@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Actualizar', ['update', 'id' => $model->ID], ['class' => 'btn btn-info']) ?>
         <?= Html::a('Borrar', ['delete', 'id' => $model->ID], [
             'class' => 'btn btn-danger',
-            'options'=>['class'=>'table-bordered table-condensed  grid'],
+            'options' => ['class' => 'table-bordered table-condensed  grid'],
             'data' => [
                 'confirm' => 'Estas seguro de querer borrar este item?',
                 'method' => 'post',
@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
-        'options'=>['class'=>'table-bordered table-condensed  grid'],
+        'options' => ['class' => 'table-bordered table-condensed  grid'],
         'attributes' => [
             'NOMBRE',
             'eDIFICIO.NOMBRE',

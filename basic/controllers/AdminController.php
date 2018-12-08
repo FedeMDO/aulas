@@ -38,14 +38,14 @@ class AdminController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => [],
-                       'allow' => false,
-                       'roles' => ['@'],
-                       'matchCallback' => function ($rule, $action) {
-                          return User::isUserSimple(Yii::$app->user->identity->id);
-                      },
-                   ],
-                   [
+                        'actions' => [],
+                        'allow' => false,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserSimple(Yii::$app->user->identity->id);
+                        },
+                    ],
+                    [
                         //Los usuarios guest tienen permisos sobre las siguientes acciones
                         'actions' => [],
                         'allow' => false,
@@ -59,8 +59,9 @@ class AdminController extends Controller
         ];
     }
 
-    public function actionPanel(){
-        $this->layout='LayoutAdmin';
+    public function actionPanel()
+    {
+        $this->layout = 'LayoutAdmin';
         return $this->render('panel');
     }
 
@@ -73,9 +74,9 @@ class AdminController extends Controller
         ]);
 
         $users = $query->orderBy('id')
-        ->offset($pagination->offset)
-        ->limit($pagination->limit)
-        ->all();
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
 
         return $this->render('users', [
             'users' => $users,

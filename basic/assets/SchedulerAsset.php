@@ -13,7 +13,7 @@ class SchedulerAsset extends AssetBundle
         'css/scheduler.css'
     ];
     public $js = [
-        
+
         'js/moment.min.js',
         'js/fullcalendar.js',
         'js/scheduler.js',

@@ -7,9 +7,9 @@ use yii\widgets\LinkPager;
 
 $this->registerCssFile("@web/css/index.css", [
   'depends' => [\yii\bootstrap\BootstrapAsset::className()],
-  
 
-  
+
+
 ], 'css-print-theme');
 $this->title = 'Gestionar usuarios';
 ?>
@@ -30,26 +30,25 @@ $this->title = 'Gestionar usuarios';
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($users as $user): ?>
+                <?php foreach ($users as $user) : ?>
                 <tr>
-                  <td ><?=Html::encode("{$user->username} ")?></span></td>
-                  <td><?=Html::encode("{$user->email} ")?></td>
-                  <td> <?php if($user->instituto != NULL){
-                            echo $user->instituto->NOMBRE;
-                        }
-                        else{
-                            echo "(sin instituto)";
-                        }
-                  ?></td>
-                  <td><?php if ($user->rol == 10): ?>
+                  <td ><?= Html::encode("{$user->username} ") ?></span></td>
+                  <td><?= Html::encode("{$user->email} ") ?></td>
+                  <td> <?php if ($user->instituto != null) {
+                        echo $user->instituto->NOMBRE;
+                      } else {
+                        echo "(sin instituto)";
+                      }
+                      ?></td>
+                  <td><?php if ($user->rol == 10) : ?>
                             <?= Html::encode("Simple") ?>
-                    <?php elseif ($user->rol == 20): ?>
+                    <?php elseif ($user->rol == 20) : ?>
                             <?= Html::encode("Administrador") ?>
-                    <?php elseif ($user->rol == 30): ?>
+                    <?php elseif ($user->rol == 30) : ?>
                             <?= Html::encode("Guest") ?>
                     <?php endif; ?>
                     </td>
-                    <td><a href="/user/update?id=<?=Html::encode("{$user->id}")?>"  class="btn btn-warning" role="button">Editar</a></td>
+                    <td><a href="/user/update?id=<?= Html::encode("{$user->id}") ?>"  class="btn btn-warning" role="button">Editar</a></td>
                 </tr>
                 <?php endforeach; ?>
               </table>

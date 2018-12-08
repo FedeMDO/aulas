@@ -20,7 +20,7 @@ $this->title = 'Sedes';
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'tableOptions'=>['class'=>'table-bordered table-condensed  grid'],
+        'tableOptions' => ['class' => 'table-bordered table-condensed  grid'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

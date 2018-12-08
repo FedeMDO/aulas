@@ -29,8 +29,8 @@ class AulaController extends Controller
 
     public function actionAulafilter($id)
     {
-         $query = Aula::find()
-        ->where(['ID_EDIFICIO' =>$id]);
+        $query = Aula::find()
+            ->where(['ID_EDIFICIO' => $id]);
 
         $pagination = new Pagination([
             'defaultPageSize' => 19,
@@ -38,37 +38,37 @@ class AulaController extends Controller
         ]);
 
         $aula = $query->orderBy('ID')
-        ->offset($pagination->offset)
-        ->limit($pagination->limit)
-        ->all();
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
 
-   
 
-    return $this->render('aulafilter', [
-        'aula' => $aula,
-        'pagination' => $pagination,
-        
-    ]);
+
+        return $this->render('aulafilter', [
+            'aula' => $aula,
+            'pagination' => $pagination,
+
+        ]);
     }
     public function actionRecursos($id)
     {
         $query = Aula::find()
-        ->where(['ID' =>$id]);
-        
-            $pagination = new Pagination([
+            ->where(['ID' => $id]);
+
+        $pagination = new Pagination([
             'defaultPageSize' => 5,
             'totalCount' => $query->count(),
         ]);
 
         $aula = $query->orderBy('ID')
-        ->offset($pagination->offset)
-        ->limit($pagination->limit)
-        ->all();
-   
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
 
-    return $this->render('recursos', [
-        'aula' => $aula,
-        'pagination' => $pagination,
+
+        return $this->render('recursos', [
+            'aula' => $aula,
+            'pagination' => $pagination,
         ]);
 
     }
@@ -80,7 +80,7 @@ class AulaController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index','view','create','update','delete','aulafilter', 'observa', 'buscador'],
+                'only' => ['index', 'view', 'create', 'update', 'delete', 'aulafilter', 'observa', 'buscador'],
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
@@ -89,26 +89,26 @@ class AulaController extends Controller
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
                             return User::isUserAdmin(Yii::$app->user->identity->id);
-                            },
+                        },
                     ],
                     [
                         //Los usuarios simples tiene permisos sobre las siguientes acciones
-                       'actions' => ['aulafilter', 'buscador', 'observa'],
-                       'allow' => true,
-                       'roles' => ['@'],
-                       'matchCallback' => function ($rule, $action) {
-                          return User::isUserSimple(Yii::$app->user->identity->id);
+                        'actions' => ['aulafilter', 'buscador', 'observa'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserSimple(Yii::$app->user->identity->id);
                         },
-                   ],
-                   [
+                    ],
+                    [
                     //Los usuarios guest tienen permisos sobre las siguientes acciones
-                    'actions' => ['aulafilter', 'buscador'],
-                    'allow' => true,
-                    'roles' => ['@'],
-                    'matchCallback' => function ($rule, $action) {
-                        return User::isUserGuest(Yii::$app->user->identity->id);
-                    },
-                ],
+                        'actions' => ['aulafilter', 'buscador'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserGuest(Yii::$app->user->identity->id);
+                        },
+                    ],
                 ],
             ],
             'verbs' => [
@@ -127,7 +127,7 @@ class AulaController extends Controller
      */
     public function actionIndex()
     {
-        $this->layout="LayoutAdmin";
+        $this->layout = "LayoutAdmin";
         $searchModel = new AulaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -220,68 +220,66 @@ class AulaController extends Controller
     public function actionBuscador()
     {
 
-        if($_POST!= null){
-            $aux=0;
+        if ($_POST != null) {
+            $aux = 0;
             $aulasCumplen = array();
-            $ID_recursos =$_POST['Recurso'];
-            $ID_recursos =$ID_recursos['ID'];
-            $ID_edificio =$_POST['Edificio'];
-            $buscador =$_POST['BuscadorModel'];
+            $ID_recursos = $_POST['Recurso'];
+            $ID_recursos = $ID_recursos['ID'];
+            $ID_edificio = $_POST['Edificio'];
+            $buscador = $_POST['BuscadorModel'];
             $capacidad = $buscador['CAPACIDAD'];
-            $piso=$buscador["PISO"];
-            $edi= Edificio::findOne($ID_edificio);
+            $piso = $buscador["PISO"];
+            $edi = Edificio::findOne($ID_edificio);
             $aulasEdificio = $edi->aulas;
-            foreach($aulasEdificio as $aula){
+            foreach ($aulasEdificio as $aula) {
                 $result = ArrayHelper::map($aula->rECURSOs, 'ID', 'NOMBRE');
-                if ($ID_recursos != ""){
-                foreach ($result  as $recurso => $key1){
-                    for ($i = 0; $i <= $contadorRecursos = count($ID_recursos)-1; $i++) {
-                        if($recurso == $ID_recursos[$i]){
-                            $aux++;
+                if ($ID_recursos != "") {
+                    foreach ($result as $recurso => $key1) {
+                        for ($i = 0; $i <= $contadorRecursos = count($ID_recursos) - 1; $i++) {
+                            if ($recurso == $ID_recursos[$i]) {
+                                $aux++;
                             }
-                        if($aux == count($ID_recursos)){
-                            if(count($ID_recursos) <= count($result)){
-                                $aux = 0;
-                                if($piso !="" && $capacidad !=""){
-                                    if ($aula->PISO == $piso){
-                                        if ($aula->CAPACIDAD >= $capacidad){
+                            if ($aux == count($ID_recursos)) {
+                                if (count($ID_recursos) <= count($result)) {
+                                    $aux = 0;
+                                    if ($piso != "" && $capacidad != "") {
+                                        if ($aula->PISO == $piso) {
+                                            if ($aula->CAPACIDAD >= $capacidad) {
+                                                $aulasCumplen[] = $aula;
+                                            }
+
+                                        }
+                                    }
+                                    if ($capacidad == "" & $piso == "") {
+                                        $aulasCumplen[] = $aula;
+                                    }
+                                    if ($capacidad == "" & $piso != "") {
+                                        if ($aula->PISO == $piso) {
                                             $aulasCumplen[] = $aula;
                                         }
-                                    
                                     }
-                                }
-                                if($capacidad=="" & $piso==""){
-                                    $aulasCumplen[] = $aula;
-                                }
-                                if($capacidad=="" & $piso!=""){
-                                    if ($aula->PISO == $piso){
-                                        $aulasCumplen[] = $aula;
+                                    if ($capacidad != "" && $piso == "") {
+                                        if ($aula->CAPACIDAD >= $capacidad) {
+                                            $aulasCumplen[] = $aula;
+                                        }
                                     }
+                                } else {
+                                    $aux = 0;
                                 }
-                                if($capacidad!="" && $piso==""){
-                                    if ($aula->CAPACIDAD >= $capacidad){
-                                        $aulasCumplen[] = $aula;
-                                    }
-                                }
-                            }
-                            else{
-                                $aux=0;
-                            }
                             }
                         }
-                }
-                }
-                else{
-                    if($capacidad=="" & $piso==""){
+                    }
+                } else {
+                    if ($capacidad == "" & $piso == "") {
                         $aulasCumplen[] = $aula;
                     }
-                    if($capacidad=="" & $piso!=""){
-                        if ($aula->PISO == $piso){
+                    if ($capacidad == "" & $piso != "") {
+                        if ($aula->PISO == $piso) {
                             $aulasCumplen[] = $aula;
                         }
                     }
-                    if($capacidad!="" && $piso==""){
-                        if ($aula->CAPACIDAD >= $capacidad){
+                    if ($capacidad != "" && $piso == "") {
+                        if ($aula->CAPACIDAD >= $capacidad) {
                             $aulasCumplen[] = $aula;
                         }
                     }
@@ -291,29 +289,29 @@ class AulaController extends Controller
                 'aulasCumplen' => $aulasCumplen,
                 'edi' => $edi
             ]);
-            
-           
+
+
         }
 
-        $recursos= new Recurso();
+        $recursos = new Recurso();
         $edificio = new Edificio();
-        $sedes= new Sede();
+        $sedes = new Sede();
         $buscador = new BuscadorModel();
 
         $query = Recurso::find();
-        
-            $pagination = new Pagination([
+
+        $pagination = new Pagination([
             'defaultPageSize' => 5,
             'totalCount' => $query->count(),
         ]);
 
 
-    return $this->render('Buscador', [
-        'model' => $recursos,
-        'pagination' => $pagination,
-        'edificio'=> $edificio,
-        'sedes'=> $sedes,
-        'buscador'=> $buscador,
+        return $this->render('Buscador', [
+            'model' => $recursos,
+            'pagination' => $pagination,
+            'edificio' => $edificio,
+            'sedes' => $sedes,
+            'buscador' => $buscador,
         ]);
 
     }
@@ -326,23 +324,23 @@ class AulaController extends Controller
             ->all();
 
         if (!empty($edificios)) {
-            foreach($edificios as $edificio) {
-                echo "<option value='".$edificio->ID."'>".$edificio->NOMBRE."</option>";
+            foreach ($edificios as $edificio) {
+                echo "<option value='" . $edificio->ID . "'>" . $edificio->NOMBRE . "</option>";
             }
         } else {
             echo "<option>-</option>";
         }
 
     }
-    public function actionObserva($id){
+    public function actionObserva($id)
+    {
         $model = new Aula();
         $aula = Aula::findOne($id);
-        if ($_POST != null){
-            if ($_POST['Aula'] == 'borrar'){
-                $aula->OBS = NULL;
+        if ($_POST != null) {
+            if ($_POST['Aula'] == 'borrar') {
+                $aula->OBS = null;
                 $aula->save();
-            }
-            else{
+            } else {
                 $aula1 = $_POST['Aula'];
                 $obs = $aula1['OBS'];
                 $aula->OBS = $obs;

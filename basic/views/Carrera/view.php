@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
-        'options'=>['class'=>'table-bordered table-condensed  grid'],
+        'options' => ['class' => 'table-bordered table-condensed  grid'],
         'attributes' => [
             'iNSTITUTO.NOMBRE',
             'NOMBRE',

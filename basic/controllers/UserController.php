@@ -39,22 +39,22 @@ class UserController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                       'actions' => ['getunamebyid','currentuserisguest'],
-                       'allow' => true,
-                       'roles' => ['@'],
-                       'matchCallback' => function ($rule, $action) {
-                          return User::isUserSimple(Yii::$app->user->identity->id);
-                      },
-                   ],
-                   [
+                        'actions' => ['getunamebyid', 'currentuserisguest'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserSimple(Yii::$app->user->identity->id);
+                        },
+                    ],
+                    [
                     //Los usuarios guest tienen permisos sobre las siguientes acciones
-                    'actions' => ['getunamebyid','currentuserisguest'],
-                    'allow' => true,
-                    'roles' => ['@'],
-                    'matchCallback' => function ($rule, $action) {
-                       return User::isUserGuest(Yii::$app->user->identity->id);
-                   },
-                ],
+                        'actions' => ['getunamebyid', 'currentuserisguest'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserGuest(Yii::$app->user->identity->id);
+                        },
+                    ],
                 ],
             ],
             'verbs' => [
@@ -66,25 +66,27 @@ class UserController extends Controller
         ];
     }
 
-    public function actionGetunamebyid($id){
+    public function actionGetunamebyid($id)
+    {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $username = Users::findOne($id)->username;
         return $username;
     }
-    public function actionCurrentuserisguest(){
+    public function actionCurrentuserisguest()
+    {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        
-        if(User::isUserGuest(Yii::$app->user->identity->id))
-        {
+
+        if (User::isUserGuest(Yii::$app->user->identity->id)) {
             return "true";
         }
         return "false";
     }
 
-    public function actionChangepw(){
+    public function actionChangepw()
+    {
 
         $id = Yii::$app->user->identity->id;
- 
+
         $model = new FormChangePassword($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->changePassword()) {
@@ -93,7 +95,7 @@ class UserController extends Controller
             $model->password = null;
             $model->confirm_password = null;
         }
- 
+
         return $this->render('changepw', [
             'model' => $model,
         ]);
@@ -106,11 +108,12 @@ class UserController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-    public function actionUpdate($id){
+    public function actionUpdate($id)
+    {
 
         $model = $this->findModel($id);
 
-        if ($_POST != NULL){
+        if ($_POST != null) {
             $user = $_POST['Users'];
             $username = $user['username'];
             $email = $user['email'];
@@ -121,7 +124,7 @@ class UserController extends Controller
             $model->idInstituto = $instituto;
             $model->rol = $rol;
             $model->save();
-            if ($model->save()){
+            if ($model->save()) {
                 return $this->redirect('../admin/users');
             }
         }

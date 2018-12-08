@@ -17,9 +17,9 @@ use app\models\Instituto;
     $result = ArrayHelper::map($institutos, 'ID', 'NOMBRE'); ?>
 
     <?php echo $form->field($model, 'ID_INSTITUTO', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->dropDownList(
-        $result, 
-        ['prompt'=>'Choose...']
-        ); ?>
+        $result,
+        ['prompt' => 'Choose...']
+    ); ?>
 
     <?= $form->field($model, 'NOMBRE', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->textInput(['maxlength' => true]) ?>
 

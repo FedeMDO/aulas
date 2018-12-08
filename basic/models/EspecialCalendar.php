@@ -9,13 +9,14 @@ use Yii;
  *
  * @property string $id
  * @property int $ID_Aula
- * @property string $dt_inicio
- * @property string $dt_fin
+ * @property string $inicio
+ * @property string $fin
  * @property string $nombre
  * @property string $descripcion
  * @property string $momento
  * @property int $ID_UCrea
  * @property int $ID_UModifica
+ * @property int $ID_Instituto
  *
  * @property Aula $aula
  * @property Users $uCrea
@@ -37,8 +38,9 @@ class EspecialCalendar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ID_Aula', 'ID_UCrea', 'ID_UModifica'], 'integer'],
-            [['dt_inicio', 'dt_fin', 'momento'], 'safe'],
+            [['ID_Aula', 'ID_UCrea', 'ID_UModifica', 'ID_Instituto'], 'integer'],
+            [['momento'], 'safe'],
+            [['inicio', 'fin'], 'string', 'max' => 30],
             [['nombre'], 'string', 'max' => 40],
             [['descripcion'], 'string', 'max' => 180],
             [['ID_Aula'], 'exist', 'skipOnError' => true, 'targetClass' => Aula::className(), 'targetAttribute' => ['ID_Aula' => 'ID']],
@@ -55,13 +57,14 @@ class EspecialCalendar extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'ID_Aula' => 'Id  Aula',
-            'dt_inicio' => 'Dt Inicio',
-            'dt_fin' => 'Dt Fin',
+            'inicio' => 'Inicio',
+            'fin' => 'Fin',
             'nombre' => 'Nombre',
             'descripcion' => 'Descripcion',
             'momento' => 'Momento',
             'ID_UCrea' => 'Id  Ucrea',
             'ID_UModifica' => 'Id  Umodifica',
+            'ID_Instituto' => 'Id  Instituto',
         ];
     }
 

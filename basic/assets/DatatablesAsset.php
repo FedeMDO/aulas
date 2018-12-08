@@ -1,9 +1,9 @@
 <?php
- 
+
 namespace app\assets;
- 
+
 use yii\web\AssetBundle;
- 
+
 class DatatablesAsset extends AssetBundle
 {
     public $basePath = '@webroot';
@@ -14,7 +14,7 @@ class DatatablesAsset extends AssetBundle
         'css/buttons.dataTables.min.css'
     ];
     public $js = [
-        
+
         'js/jquery-3.3.1.min.js',
         'js/datatables.js',
         'js/dataTables.buttons.min.js',
