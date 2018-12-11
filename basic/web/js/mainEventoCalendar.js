@@ -7,7 +7,7 @@ $(document).ready(function () {
             center: 'title',
             right: 'agendaDay,agendaWeek,month'
         },
-        columnHeaderFormat:'ddd D/M',
+        columnHeaderFormat: 'ddd D/M',
         defaultView: 'agendaWeek',
         selectable: true,
         lang: 'es-us',
@@ -47,17 +47,17 @@ $(document).ready(function () {
 
         eventRender: function (event, element, view) {
 
-            if(!event.especial){
+            if (!event.especial) {
                 return (event.ranges.filter(function (range) { // test event against all the ranges
 
                     return (event.start.isBefore(range.end) &&
                         event.end.isAfter(range.start));
-    
+
                 }).length) > 0; //if it isn't in one of the ranges, don't render it (by returning false)
             }
-            else{
-                if(event.description != null){
-                    element.find('.fc-title').append('<div class="hr-line-solid-no-margin"></div><span style="font-size: 10px">'+event.description+'</span></div>');
+            else {
+                if (event.description != null) {
+                    element.find('.fc-title').append('<div class="hr-line-solid-no-margin"></div><span style="font-size: 10px">' + event.description + '</span></div>');
                 }
                 return true;
             }
@@ -77,60 +77,95 @@ $(document).ready(function () {
                 revertFunc();
             }
             else {
-                if(!event.especial){
+                if (!event.especial) {
                     $.post("/evento/upd",
-                    {
-                        id: id,
-                        ini: ini,
-                        fin: fin,
-                        dow: dow
-                    },
-                    function (data) {
-                        if (!data) {
-                            alert("error");
-                        }
-                    });
+                        {
+                            id: id,
+                            ini: ini,
+                            fin: fin,
+                            dow: dow
+                        },
+                        function (data) {
+                            if (!data) {
+                                alert("error");
+                            }
+                        });
                 }
-                else{
+                else {
                     $.post("/especialcalendar/upd",
-                    {
-                        id: id,
-                        ini: ini,
-                        fin: fin,
-                    },
-                    function (data) {
-                        if (!data) {
-                            alert("error");
-                        }
-                    });
+                        {
+                            id: id,
+                            ini: ini,
+                            fin: fin,
+                        },
+                        function (data) {
+                            if (!data) {
+                                alert("error");
+                            }
+                        });
                 }
             }
         },
 
         select: function (startDate, endDate) {
+
             if (esUserGuest == "false") {
                 if (startDate.isoWeekday() != endDate.isoWeekday()) {
                     alert("Por ahora no se permiten eventos que duren mas de un dia");
                     return;
                 }
-
-                let url = "/evento/create?id_aula=" + $("em").text();
-                $("#modalContent").load(url, function () {
-                    $("#modalEvento").modal("show");
-                    //DIA
-                    $('#eventocalendar-dow').val(startDate.isoWeekday());
-
-                    //HORA INI
-                    $('#eventocalendar-hora_ini').val(startDate.format('HH:mm:ss'));
-
-                    //HORA FIN
-                    $('#eventocalendar-hora_fin').val(endDate.format('HH:mm:ss'));
-
-                    $('#carrera-id').val('');
-
-                    $("#eventocalendar-hora_ini option[value='22:00:00']").remove();
-                    $("#eventocalendar-hora_fin option[value='08:00:00']").remove();
+                $("#dialog-confirm").dialog({
+                    resizable: false,
+                    height: "auto",
+                    width: 400,
+                    modal: true,
+                    buttons: {
+                        "Evento periódico": function () {
+                            let url = "/evento/create?id_aula=" + $("em").text();
+                            $("#modalContent").load(url, function () {
+                                $("#modalEvento").modal("show");
+                                //DIA
+                                $('#eventocalendar-dow').val(startDate.isoWeekday());
+            
+                                //HORA INI
+                                $('#eventocalendar-hora_ini').val(startDate.format('HH:mm:ss'));
+            
+                                //HORA FIN
+                                $('#eventocalendar-hora_fin').val(endDate.format('HH:mm:ss'));
+            
+                                $('#carrera-id').val('');
+            
+                                $("#eventocalendar-hora_ini option[value='22:00:00']").remove();
+                                $("#eventocalendar-hora_fin option[value='08:00:00']").remove();
+                            });
+                            $(this).dialog("close");
+                        },
+                        "Evento especial": function () {
+                            let url = "/especialcalendar/create?id_aula=" + $("em").text();
+                            $("#modalContent").load(url, function () {
+                                $("#modalEvento").modal("show");
+                                //FECHA INICIO
+                                $('#dynamicmodel-fecha_inicio').val(startDate.format("DD/MM/YYYY"));
+            
+                                //HORA INI
+                                $('#dynamicmodel-hora_inicio').val(startDate.format('HH:mm:ss'));
+            
+                                //HORA FIN
+                                $('#dynamicmodel-hora_fin').val(endDate.format('HH:mm:ss'));
+            
+                                $('#carrera-id').val('');
+            
+                                $("#dynamicmodel-hora_inicio option[value='22:00:00']").remove();
+                                $("#dynamicmodel-hora_fin option[value='08:00:00']").remove();
+                            });
+                            $(this).dialog("close");
+                        },
+                        "Cancelar": function () {
+                            $(this).dialog("close");
+                        }
+                    }
                 });
+                
             }
         },
 
@@ -164,7 +199,7 @@ $(document).ready(function () {
                 $('#myModal').find('#showfin').text(dowFin);
                 $('#myModal').find('#idevento').val(event.id.replace('E', ''));
                 $('#myModal').find('#tipo').val('periodico');
-                if(event.especial){
+                if (event.especial) {
                     $('#myModal').find('#idevento').val(event.id.replace('U', ''));
                     $('#myModal').find('#tipo').val('especial');
                 }
@@ -182,33 +217,32 @@ $(document).ready(function () {
                 revertFunc();
             }
             else {
-                if(!event.especial)
-                {
+                if (!event.especial) {
                     $.post("/evento/upd",
-                    {
-                        id: id,
-                        ini: ini,
-                        fin: fin,
-                        dow: dow
-                    },
-                    function (data) {
-                        if (!data) {
-                            alert("error");
-                        }
-                    });
+                        {
+                            id: id,
+                            ini: ini,
+                            fin: fin,
+                            dow: dow
+                        },
+                        function (data) {
+                            if (!data) {
+                                alert("error");
+                            }
+                        });
                 }
-                else{
+                else {
                     $.post("/especialcalendar/upd",
-                    {
-                        id: id,
-                        ini: ini,
-                        fin: fin,
-                    },
-                    function (data) {
-                        if (!data) {
-                            alert("error");
-                        }
-                    });
+                        {
+                            id: id,
+                            ini: ini,
+                            fin: fin,
+                        },
+                        function (data) {
+                            if (!data) {
+                                alert("error");
+                            }
+                        });
                 }
             }
         }

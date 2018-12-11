@@ -19,13 +19,68 @@ $this->registerCssFile("@web/css/index.css", [
 $this->title = 'Calendario de asignacion';
 
 $this->params['breadcrumbs'][] = $this->title;
+
 $indexMaterias = 1;
 ?>
-    
+<style>
+/* Style The Dropdown Button */
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+</style>
+
+
     <div class="col-md-offset-1 col-md-10">
+    
+
     <?php if (!app\models\User::isUserGuest(Yii::$app->user->identity->id)) : ?>    
-    <?= Html::button('Nuevo evento periodico', ['value' => Url::to(['evento/create', 'id_aula' => $id_aula]), 'title' => 'Crear eventos que se repiten cada semana', 'class' => 'showModalButton btn btn-success']); ?>
-    <?= Html::button('Nuevo evento especial', ['value' => Url::to(['especialcalendar/create', 'id_aula' => $id_aula]), 'title' => 'Crear un evento no periódico', 'class' => 'showModalButton btn btn-success']); ?>
+    <div class="dropdown">
+            <button class="btn btn-success">Nuevo evento</button>
+            <div class="dropdown-content">
+                <a href="#"><?= Html::button('Nuevo evento periodico', ['value' => Url::to(['evento/create', 'id_aula' => $id_aula]), 'title' => 'Crear eventos que se repiten cada semana', 'class' => 'showModalButton btn ']); ?></a>
+                <a href="#"><?= Html::button('Nuevo evento especial', ['value' => Url::to(['especialcalendar/create', 'id_aula' => $id_aula]), 'title' => 'Crear un evento no periódico', 'class' => 'showModalButton btn ']); ?></a>
+            </div>
+        </div>
     <?php endif; ?>
     <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
     <?= Html::a('Ir a restriccion', Url::to(['restri/index?id=' . $id_aula . '']), ['class' => 'btn btn-primary']); ?>
@@ -49,6 +104,9 @@ $indexMaterias = 1;
         </div>
     </div>
     
+<div id="dialog-confirm" title="Tipo de evento" style="display: none">
+  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Seleccione el tipo de evento que quiere crear</p>
+</div>
 
 <?php
 

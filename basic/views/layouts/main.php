@@ -210,22 +210,22 @@ AppAsset::register($this);
 
     <?php
     yii\bootstrap\Modal::begin([
-        'headerOptions' => ['id' => 'modalRestriHeader'],
+        'headerOptions' => ['id' => 'modalRestriHeader', 'style' => 'display: none'],
         'id' => 'modalRestri',
         'size' => 'modal-md',
         'clientOptions' => ['backdrop' => true, 'keyboard' => true]
     ]);
-    echo "<div id='modalRestriContent'></div>";
+    echo "<div id='modalRestriContent' class='modal-cuerpo'></div>";
     yii\bootstrap\Modal::end();
     ?>
     <?php
     yii\bootstrap\Modal::begin([
-        'headerOptions' => ['id' => 'modalHeader'],
+        'headerOptions' => ['id' => 'modalHeader','style' => 'display: none'],
         'id' => 'modalEvento',
         'size' => 'modal-md',
         'clientOptions' => ['backdrop' => true, 'keyboard' => true]
     ]);
-    echo "<div id='modalContent'></div>";
+    echo "<div id='modalContent' class='modal-cuerpo'></div>";
     yii\bootstrap\Modal::end();
     ?>
 

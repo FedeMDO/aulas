@@ -12,10 +12,10 @@ use yii\jui\DatePicker;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class='loginc azul'>
+
 
 <div class="evento-calendar-form">
-
+<div class='loginc azul'>
     <?php $modelHelper = new \yii\base\DynamicModel(['fecha_inicio',  'hora_inicio', 'hora_fin']);
     $modelHelper->addRule(['fecha_inicio', 'hora_inicio', 'hora_fin'], 'required', null);
     $form = ActiveForm::begin([

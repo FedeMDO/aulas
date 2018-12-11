@@ -24,5 +24,6 @@ class CalendarAsset extends AssetBundle
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
+        'yii\jui\JuiAsset'
     ];
 }

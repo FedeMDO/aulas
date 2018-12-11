@@ -4,7 +4,6 @@ $(function () {
         if ($('#modalEvento').data('bs.modal').isShown) {
             $('#modalEvento').find('#modalContent')
                 .load($(this).attr('value'));
-            document.getElementById('modalHeader').innerHTML = '<h4>' + $(this).attr('title') + '</h4>';
             $('#modalHeader').hide();
 
         } else {
@@ -13,7 +12,6 @@ $(function () {
                 .find('#modalContent')
                 .load($(this).attr('value'));
             //dynamiclly set the header for the modal
-            document.getElementById('modalHeader').innerHTML = '<h4>' + $(this).attr('title') + '</h4>';
             $('#modalHeader').hide();
         }
     });
@@ -47,7 +45,4 @@ $('#btnBorrarEvento').click(function () {
     }
 })
 
-$(document).ready(function () {
-
-
-});
+      

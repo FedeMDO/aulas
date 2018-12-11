@@ -8,8 +8,6 @@ use app\models\Carrera;
 use yii\jui\DatePicker;
 /* @var $this yii\web\View */
 /* @var $model app\models\EspecialCalendar */
-
-$this->title = 'Create Especial Calendar';
 $this->params['breadcrumbs'][] = ['label' => 'Especial Calendars', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $carrera = new Carrera();
