@@ -222,6 +222,16 @@ AppAsset::register($this);
     echo "<div id='modalRestriContent'></div>";
     yii\bootstrap\Modal::end();
     ?>
+    <?php
+    yii\bootstrap\Modal::begin([
+        'headerOptions' => ['id' => 'modalHeader'],
+        'id' => 'modalEvento',
+        'size' => 'modal-md',
+        'clientOptions' => ['backdrop' => true, 'keyboard' => true]
+    ]);
+    echo "<div id='modalContent'></div>";
+    yii\bootstrap\Modal::end();
+    ?>
 
     <style>
 
@@ -293,6 +303,7 @@ AppAsset::register($this);
         </div>
         <div class="modal-cuerpo">
             <input type="hidden" id="idevento" name="idevento" value="">
+            <input type="hidden" id="tipo" name="tipo" value="">
             Comision:
             <div class="well well-sm weell">
                 <p id="showcomision"></p>

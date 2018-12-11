@@ -130,6 +130,7 @@ class EventoController extends Controller
         $evento->dow = $request->post('dow');
         $evento->Hora_ini = substr($request->post('ini'), -8);
         $evento->Hora_fin = substr($request->post('fin'), -8);
+        $evento->ID_User_Asigna = Yii::$app->user->identity->id;
         if ($evento->save()) {
             echo ("Actualizacion exitosa");
         }
@@ -144,6 +145,7 @@ class EventoController extends Controller
         $evento->Hora_fin = substr($request->post('fin'), -8);
         $evento->ID_Aula = $request->post('aula_id');
         $evento->dow = $request->post('dow');
+        $evento->ID_User_Asigna = Yii::$app->user->identity->id;
         if ($evento->save()) {
             echo ("Actualizacion exitosa");
         }

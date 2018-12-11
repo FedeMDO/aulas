@@ -24,13 +24,15 @@ $indexMaterias = 1;
     
     <div class="col-md-offset-1 col-md-10">
     <?php if (!app\models\User::isUserGuest(Yii::$app->user->identity->id)) : ?>    
-    <?= Html::button('Nuevo evento', ['value' => Url::to(['evento/create', 'id_aula' => $id_aula]), 'title' => $id_aula, 'class' => 'showModalButton btn btn-success']); ?>
+    <?= Html::button('Nuevo evento periodico', ['value' => Url::to(['evento/create', 'id_aula' => $id_aula]), 'title' => 'Crear eventos que se repiten cada semana', 'class' => 'showModalButton btn btn-success']); ?>
+    <?= Html::button('Nuevo evento especial', ['value' => Url::to(['especialcalendar/create', 'id_aula' => $id_aula]), 'title' => 'Crear un evento no periódico', 'class' => 'showModalButton btn btn-success']); ?>
     <?php endif; ?>
     <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
     <?= Html::a('Ir a restriccion', Url::to(['restri/index?id=' . $id_aula . '']), ['class' => 'btn btn-primary']); ?>
     <?php endif; ?>
     <div style="display:none;">
     <em id:"id_aula"><?= Html::encode("{$id_aula}") ?></em>
+
     </div>
 
         <div class="loginc">

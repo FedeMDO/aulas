@@ -8,6 +8,12 @@ use app\models\EspecialcalendarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Materia;
+use app\models\Carrera;
+use app\models\Users;
+use app\models\User;
+use app\models\Aula;
+use app\models\Sede;
 
 /**
  * EspecialcalendarController implements the CRUD actions for EspecialCalendar model.
@@ -62,21 +68,30 @@ class EspecialcalendarController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id_aula)
     {
+
+        $materia = new Materia();
+        $carrera = new Carrera();
         $model = new EspecialCalendar();
         $model->ID_UCrea = Yii::$app->user->identity->id;
-
+        $model->ID_UModifica = Yii::$app->user->identity->id;
+        $r = Yii::$app->request;
+        
         if ($model->load(Yii::$app->request->post())) {
+            $dynmodel = $r->post('DynamicModel');
+            $model->inicio = $dynmodel['fecha_inicio'].'T'.$dynmodel['hora_inicio'];
+            $model->fin = $dynmodel['fecha_inicio'].'T'.$dynmodel['hora_fin'];
+            $model->ID_Aula = $id_aula;
             if ($model->save()) {
-                return $this->redirect(['index', 'id' => $model->ID_Aula]);
+                return $this->redirect(['evento/index', 'id' => $model->ID_Aula]);
             } else {
-                return $this->renderAjax('create', ['model' => $model]);
+                return $this->renderAjax('create', ['model' => $model, 'materia' => $materia, 'carrera' => $carrera]);
             }
         }
 
         return $this->renderAjax('create', [
-            'model' => $model
+            'model' => $model, 'materia' => $materia, 'carrera' => $carrera
         ]);
     }
 
@@ -107,7 +122,7 @@ class EspecialcalendarController extends Controller
 
         $evento->inicio = $request->post('ini');
         $evento->fin = $request->post('fin');
-        $evento->ID_Aula = $request->post('aula_id');
+        $evento->ID_UModifica = Yii::$app->user->identity->id;
         if ($evento->save()) {
             echo ("Actualizacion exitosa");
         }
@@ -121,6 +136,7 @@ class EspecialcalendarController extends Controller
         $evento->inicio = $request->post('ini');
         $evento->fin = $request->post('fin');
         $evento->ID_Aula = $request->post('aula_id');
+        $evento->ID_UModifica = Yii::$app->user->identity->id;
         if ($evento->save()) {
             echo ("Actualizacion exitosa");
         }
@@ -133,7 +149,7 @@ class EspecialcalendarController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete()
     {
         $request = Yii::$app->request;
         $this->findModel($request->post('id'))->delete();
@@ -143,7 +159,7 @@ class EspecialcalendarController extends Controller
             $id_sede = $request->post('id_sede');
             return $this->redirect(['edificio/scheduler', 'id_sede' => $id_sede]);
         }
-        return $this->redirect(['index', 'id' => $id_aula]);
+        return $this->redirect(['evento/index', 'id' => $id_aula]);
     }
 
     /**
@@ -190,11 +206,15 @@ class EspecialcalendarController extends Controller
                 $event['ajeno'] = false;
                 $event['editable'] = true;
             }
-            if ($eve->ID_Instituto = !null) {
-                if ($instIdOnSessionUser == $eve->ID_Instituto) {
+            if ($eve->carrera != null) {
+                $event['color'] = $eve->carrera->iNSTITUTO->COLOR_HEXA;
+                if ($instIdOnSessionUser == $eve->carrera->iNSTITUTO->ID) {
                     $event['ajeno'] = false;
                     $event['editable'] = true;
                 }
+            }
+            if($eve->descripcion != null){
+                $event['description'] = $eve->descripcion;
             }
 
             $event['start'] = $eve->inicio;

@@ -106,7 +106,7 @@ $(document).ready(function () {
 
             if (esUserGuest == "false") {
                 if (startDate.isoWeekday() != endDate.isoWeekday()) {
-                    alert("Por ahora no se permiten eventos que duren mas un dia");
+                    alert("Por ahora no se permiten eventos que duren mas de un dia");
                     return;
                 }
 

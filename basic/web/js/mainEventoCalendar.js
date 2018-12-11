@@ -7,16 +7,19 @@ $(document).ready(function () {
             center: 'title',
             right: 'agendaDay,agendaWeek,month'
         },
+        columnHeaderFormat:'ddd D/M',
         defaultView: 'agendaWeek',
         selectable: true,
         lang: 'es-us',
         minTime: '08:00:00',
         maxTime: '22:00:00',
-        hiddenDays: [0],
+        hiddenDays: [0], // Domingo escondido
         height: 'auto',
         nowIndicator: true,
         slotDuration: '01:00:00',
         allDaySlot: false,
+        eventLimit: 4,
+        dayPopoverFormat: 'dddd DD [de] MMMM', // ej lunes 26 de noviembre 
         selectMinDistance: 15, //el usuario tiene que mover al menos 15 pixeles el mouse para seleccionar
         //EVENTOS
         eventSources: [
@@ -42,13 +45,22 @@ $(document).ready(function () {
         //licencia scheduler
         schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
 
-        eventRender: function (event) {
-            return (event.ranges.filter(function (range) { // test event against all the ranges
+        eventRender: function (event, element, view) {
 
-                return (event.start.isBefore(range.end) &&
-                    event.end.isAfter(range.start));
+            if(!event.especial){
+                return (event.ranges.filter(function (range) { // test event against all the ranges
 
-            }).length) > 0; //if it isn't in one of the ranges, don't render it (by returning false)
+                    return (event.start.isBefore(range.end) &&
+                        event.end.isAfter(range.start));
+    
+                }).length) > 0; //if it isn't in one of the ranges, don't render it (by returning false)
+            }
+            else{
+                if(event.description != null){
+                    element.find('.fc-title').append('<div class="hr-line-solid-no-margin"></div><span style="font-size: 10px">'+event.description+'</span></div>');
+                }
+                return true;
+            }
         },
 
         selectOverlap: function (event) {
@@ -65,7 +77,8 @@ $(document).ready(function () {
                 revertFunc();
             }
             else {
-                $.post("/evento/upd",
+                if(!event.especial){
+                    $.post("/evento/upd",
                     {
                         id: id,
                         ini: ini,
@@ -77,19 +90,33 @@ $(document).ready(function () {
                             alert("error");
                         }
                     });
+                }
+                else{
+                    $.post("/especialcalendar/upd",
+                    {
+                        id: id,
+                        ini: ini,
+                        fin: fin,
+                    },
+                    function (data) {
+                        if (!data) {
+                            alert("error");
+                        }
+                    });
+                }
             }
         },
 
         select: function (startDate, endDate) {
             if (esUserGuest == "false") {
                 if (startDate.isoWeekday() != endDate.isoWeekday()) {
-                    alert("Por ahora no se permiten eventos que duren mas un dia");
+                    alert("Por ahora no se permiten eventos que duren mas de un dia");
                     return;
                 }
 
                 let url = "/evento/create?id_aula=" + $("em").text();
                 $("#modalContent").load(url, function () {
-                    $("#modal").modal("show");
+                    $("#modalEvento").modal("show");
                     //DIA
                     $('#eventocalendar-dow').val(startDate.isoWeekday());
 
@@ -136,6 +163,11 @@ $(document).ready(function () {
                 $('#myModal').find('#showini').text(dowIni);
                 $('#myModal').find('#showfin').text(dowFin);
                 $('#myModal').find('#idevento').val(event.id.replace('E', ''));
+                $('#myModal').find('#tipo').val('periodico');
+                if(event.especial){
+                    $('#myModal').find('#idevento').val(event.id.replace('U', ''));
+                    $('#myModal').find('#tipo').val('especial');
+                }
             }
         },
 
@@ -150,7 +182,9 @@ $(document).ready(function () {
                 revertFunc();
             }
             else {
-                $.post("/evento/upd",
+                if(!event.especial)
+                {
+                    $.post("/evento/upd",
                     {
                         id: id,
                         ini: ini,
@@ -162,6 +196,20 @@ $(document).ready(function () {
                             alert("error");
                         }
                     });
+                }
+                else{
+                    $.post("/especialcalendar/upd",
+                    {
+                        id: id,
+                        ini: ini,
+                        fin: fin,
+                    },
+                    function (data) {
+                        if (!data) {
+                            alert("error");
+                        }
+                    });
+                }
             }
         }
 

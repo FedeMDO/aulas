@@ -13,6 +13,7 @@ use app\models\Users;
 ?>
 
 <div class='loginc azul'>
+
 <div class="evento-calendar-form">
 
     <?php $form = ActiveForm::begin([

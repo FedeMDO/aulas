@@ -16,9 +16,10 @@ use Yii;
  * @property string $momento
  * @property int $ID_UCrea
  * @property int $ID_UModifica
- * @property int $ID_Instituto
+ * @property int $ID_Carrera
  *
  * @property Aula $aula
+ * @property Carrera $carrera
  * @property Users $uCrea
  * @property Users $uModifica
  */
@@ -38,12 +39,13 @@ class EspecialCalendar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ID_Aula', 'ID_UCrea', 'ID_UModifica', 'ID_Instituto'], 'integer'],
+            [['ID_Aula', 'ID_UCrea', 'ID_UModifica', 'ID_Carrera'], 'integer'],
             [['momento'], 'safe'],
             [['inicio', 'fin'], 'string', 'max' => 30],
-            [['nombre'], 'string', 'max' => 40],
+            [['nombre'], 'string', 'max' => 100],
             [['descripcion'], 'string', 'max' => 180],
             [['ID_Aula'], 'exist', 'skipOnError' => true, 'targetClass' => Aula::className(), 'targetAttribute' => ['ID_Aula' => 'ID']],
+            [['ID_Carrera'], 'exist', 'skipOnError' => true, 'targetClass' => Carrera::className(), 'targetAttribute' => ['ID_Carrera' => 'ID']],
             [['ID_UCrea'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['ID_UCrea' => 'id']],
             [['ID_UModifica'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['ID_UModifica' => 'id']],
         ];
@@ -64,7 +66,7 @@ class EspecialCalendar extends \yii\db\ActiveRecord
             'momento' => 'Momento',
             'ID_UCrea' => 'Id  Ucrea',
             'ID_UModifica' => 'Id  Umodifica',
-            'ID_Instituto' => 'Id  Instituto',
+            'ID_Carrera' => 'Id  Carrera',
         ];
     }
 
@@ -74,6 +76,14 @@ class EspecialCalendar extends \yii\db\ActiveRecord
     public function getAula()
     {
         return $this->hasOne(Aula::className(), ['ID' => 'ID_Aula']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCarrera()
+    {
+        return $this->hasOne(Carrera::className(), ['ID' => 'ID_Carrera']);
     }
 
     /**
