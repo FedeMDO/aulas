@@ -22,9 +22,11 @@ $(function () {
 });
 
 const btnToggle = document.querySelector('.toggle-btn');
-btnToggle.addEventListener('click', function () {
-  document.getElementById("sidebar").classList.toggle('active');
-});
+if(btnToggle != null){
+  btnToggle.addEventListener('click', function () {
+    document.getElementById("sidebar").classList.toggle('active');
+  });
+}
 
 $(document).ready(function () {
   $("#sidebar").click(function () {
