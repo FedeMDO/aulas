@@ -228,49 +228,6 @@ AppAsset::register($this);
     echo "<div id='modalContent' class='modal-cuerpo'></div>";
     yii\bootstrap\Modal::end();
     ?>
-
-    <style>
-
-    .log-modal-content
-{
-    border-radius: 25px;
-    -webkit-border-radius: 25px;
-    -moz-border-radius: 25px;
-    background-color: rgb(41, 128, 185);
-    padding-bottom:20px;
-}
-
-.log-modal-content p{
-    color:white;
-}
-
-.log-modal-header
-{
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
-    -webkit-border-top-left-radius: 25px;
-    -webkit-border-top-right-radius: 25px;
-    -moz-border-radius-topleft: 25px;
-    -moz-border-radius-topright: 25px;
-    background-color: rgb(41, 128, 185);
-    padding-bottom:0px;
-}
-
-.modal-log{
-        width:500px;
-    }
-
-@media screen and (max-width: 850px) {
-    .modal-log{
-        width:auto;
-    }
- 
-  
-}
-    </style>
-
-
-    
     <!-- Modal login -->
     <div class="modal fade" id="modal" role="dialog">
     <div class="modal-dialog modal-md modal-log">

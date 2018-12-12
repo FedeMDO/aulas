@@ -100,7 +100,8 @@ AppAsset::register($this);
     }
     NavBar::end();
     ?>
-    <div class='col-md-2' style="padding-left:0px; padding-right:0px; width:10.66666667%" >
+    <div class='col-md-2' style="padding-left:0px; padding-right:0px;" >
+    <div class='col-md-7' style="padding-left:0px; padding-right:0px;" >
     <?php
     echo SideNav::widget([
         'encodeLabels' => false,
@@ -121,14 +122,17 @@ AppAsset::register($this);
     ]);
     ?>
     </div>
+    </div>
     
     <!-- SLIDER -->
     <?= Breadcrumbs::widget([
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
         <?= Alert::widget() ?>
-        <div class='col-md-10' style="padding-left:30px; padding-right:30px; width:89.33333333%" >
+        <div class='col-md-10'>
+        <div class='col-md-11'>
         <?= $content ?>
+        
         </div>
 </div>
 <!-- footer comentado -->

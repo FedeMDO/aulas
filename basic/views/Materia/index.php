@@ -21,6 +21,9 @@ $this->title = 'Materias';
 				'dataProvider' => $dataProvider,
 				'filterModel' => $searchModel,
 				'tableOptions' => ['class' => 'table-bordered table-condensed  grid'],
+				'options' => [
+					'class' => 'table-responsive',
+				],
 				'columns' => [
 					['class' => 'yii\grid\SerialColumn'],
 

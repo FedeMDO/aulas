@@ -19,7 +19,8 @@ $this->title = 'Gestionar usuarios';
 <h2 class=titulo style="text-align:center;">Gestión de usuarios</h2>
 <div class="loginc">
 <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
+                <div class="table-responsive">          
+                  <table class="table table-bordered">
                 <thead>
                 <tr>
                   <th>USERNAME</th>
@@ -53,6 +54,7 @@ $this->title = 'Gestionar usuarios';
                 <?php endforeach; ?>
               </table>
             </div>
+          </div>
             
 </div>
 </div>

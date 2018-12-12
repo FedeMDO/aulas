@@ -23,7 +23,8 @@ $this->title = 'Aulas';
 <h2 class=titulo style="text-align:center;">Aulas disponibles en <?= Html::encode("{$aula[0]->eDIFICIO->NOMBRE}") ?></h2>
 <div class="loginc">
 <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
+                <div class="table-responsive">          
+                  <table class="table table-bordered">
                 <thead>
                 <tr>
                   <th>AGENDA</th>
@@ -68,6 +69,7 @@ $this->title = 'Aulas';
                 <?php endforeach; ?>
               </table>
             </div>
+          </div>
             
 </div>
 </div>
