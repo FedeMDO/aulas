@@ -457,7 +457,6 @@ class EventoController extends Controller
     {
         $materia = Materia::findOne($id);
         $comisiones = $materia->comisions;
-
         if (!empty($comisiones)) {
             foreach ($comisiones as $comision) {
                 echo "<option value='" . $comision->ID . "'>" . $materia->DESC_CORTA . $comision->NUMERO . "</option>";
