@@ -8,7 +8,11 @@ use yii\widgets\ActiveForm;
 $this->title = 'Manual de usuario';
 
 ?>
-
+<style>
+.manual img{
+  max-width:100%;
+}
+</style>
 <h2 class=titulo>Manual de usuario</h2>
 
 <br>
