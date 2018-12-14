@@ -135,10 +135,7 @@ AppAsset::register($this);
         
         </div>
 </div>
-<!-- footer comentado -->
-<!-- <div class="footer">
-  <p>Proyecto de Software - Universidad Nacional Arturo Jauretche</p>
-</div> -->
+
 
 
 <?php $this->endBody() ?>
@@ -146,7 +143,10 @@ AppAsset::register($this);
 
 
 </body>
-
+<!-- footer comentado -->
+<footer>
+  <p>Proyecto de Software - Universidad Nacional Arturo Jauretche</p>
+</footer>
 
 
 </html>

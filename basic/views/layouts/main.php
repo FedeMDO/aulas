@@ -200,10 +200,6 @@ AppAsset::register($this);
 
 
 </div>
-<!-- footer comentado -->
-<!-- <div class="footer">
-  <p>Proyecto de Software - Universidad Nacional Arturo Jauretche</p>
-</div> -->
 
 
 
@@ -288,6 +284,10 @@ AppAsset::register($this);
 
 </body>
 
+<!-- footer comentado -->
+<footer>
+  <p>Proyecto de Software - Universidad Nacional Arturo Jauretche</p>
+</footer>
 
 
 </html>
