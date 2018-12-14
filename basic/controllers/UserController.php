@@ -135,6 +135,9 @@ class UserController extends Controller
             'model' => $model,
         ]);
     }
+
+
+
     public function actionPerfil()
     {
 
@@ -155,6 +158,28 @@ class UserController extends Controller
         return $this->render('perfil', [
             'model' => $model,
             'usuario' => $usuario,
+        ]);
+    }
+
+    public function actionUpdateprofile($id)
+    {
+
+        $model = $this->findModel($id);
+
+        if ($_POST != null) {
+            $user = $_POST['Users'];
+            $username = $user['username'];
+            $email = $user['email'];
+            $model->username = $username;
+            $model->email = $email;
+            $model->save();
+            if ($model->save()) {
+                return $this->redirect('../site/index');
+            }
+        }
+
+        return $this->render('updateperfil', [
+            'model' => $model,
         ]);
     }
 
