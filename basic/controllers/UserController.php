@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
@@ -12,6 +13,7 @@ use app\models\ContactForm;
 use app\models\FormRegister;
 use app\models\Users;
 use app\models\FormChangePassword;
+use app\models\FormPerfil;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 use yii\helpers\Html;
@@ -131,6 +133,28 @@ class UserController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+        ]);
+    }
+    public function actionPerfil()
+    {
+
+        $id = Yii::$app->user->identity->id;
+
+        $model = new FormPerfil($id);
+        $usuario = Users::findOne($id);
+        if ($model->load(Yii::$app->request->post())) {
+            Yii::$app->session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, 'se ha subido correctamente la foto'); 
+            $imageName = $usuario->username; /*nombre de la foto es el username*/
+            $model->file = UploadedFile::getInstance($model,'file'); 
+            $model->file->saveAs('uploads/'.$imageName.'.'.$model->file->extension);
+            $usuario->profile_picture = '../uploads/'.$imageName.'.'.$model->file->extension; /*guardo ruta en db*/
+            $usuario->save();
+
+        }
+
+        return $this->render('perfil', [
+            'model' => $model,
+            'usuario' => $usuario,
         ]);
     }
 
