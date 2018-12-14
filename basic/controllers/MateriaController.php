@@ -11,6 +11,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\User;
+use app\models\Sede;
+use app\models\Edificio;
 
 /**
  * MateriaController implements the CRUD actions for Materia model.
@@ -160,5 +162,16 @@ class MateriaController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionBuscador(){
+        $materias = new Materia();
+        $sedes = new Sede();
+        $edificio = new Edificio();
+        return $this->render('buscador', [
+            'materias' => $materias,
+            'sedes' => $sedes,
+            'edificio' => $edificio,
+        ]);
     }
 }
