@@ -23,6 +23,12 @@ $this->params['breadcrumbs'][] = $this->title;
 $indexMaterias = 1;
 ?>
 <style>
+.ui-widget-header {
+    border: 1px solid #337ab7;
+    background: #337ab7;
+    color: #ffffff;
+    font-weight: bold;
+}
 /* Style The Dropdown Button */
 .dropbtn {
   background-color: #4CAF50;

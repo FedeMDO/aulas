@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('#calendar').fullCalendar({
-
+        themeSystem:'bootstrap4',
         //VIEW
         header: {
             left: 'today prev,next',
@@ -13,10 +13,12 @@ $(document).ready(function () {
         lang: 'es-us',
         minTime: '08:00:00',
         maxTime: '22:00:00',
+        timeFormat: 'H:mm',
         hiddenDays: [0], // Domingo escondido
         height: 'auto',
         nowIndicator: true,
         slotDuration: '01:00:00',
+        slotLabelFormat: 'H:mm',
         allDaySlot: false,
         eventLimit: 4,
         dayPopoverFormat: 'dddd DD [de] MMMM', // ej lunes 26 de noviembre 
@@ -120,50 +122,64 @@ $(document).ready(function () {
                     width: 400,
                     modal: true,
                     buttons: {
-                        "Evento periódico": function () {
-                            let url = "/evento/create?id_aula=" + $("em").text();
-                            $("#modalContent").load(url, function () {
-                                $("#modalEvento").modal("show");
-                                //DIA
-                                $('#eventocalendar-dow').val(startDate.isoWeekday());
-            
-                                //HORA INI
-                                $('#eventocalendar-hora_ini').val(startDate.format('HH:mm:ss'));
-            
-                                //HORA FIN
-                                $('#eventocalendar-hora_fin').val(endDate.format('HH:mm:ss'));
-            
-                                $('#carrera-id').val('');
-            
-                                $("#eventocalendar-hora_ini option[value='22:00:00']").remove();
-                                $("#eventocalendar-hora_fin option[value='08:00:00']").remove();
-                            });
-                            $(this).dialog("close");
+                        "Evento periódico": {
+                            click: function () {
+                                let url = "/evento/create?id_aula=" + $("em").text();
+                                $("#modalContent").load(url, function () {
+                                    $("#modalEvento").modal("show");
+                                    //DIA
+                                    $('#eventocalendar-dow').val(startDate.isoWeekday());
+                
+                                    //HORA INI
+                                    $('#eventocalendar-hora_ini').val(startDate.format('HH:mm:ss'));
+                
+                                    //HORA FIN
+                                    $('#eventocalendar-hora_fin').val(endDate.format('HH:mm:ss'));
+                
+                                    $('#carrera-id').val('');
+                
+                                    $("#eventocalendar-hora_ini option[value='22:00:00']").remove();
+                                    $("#eventocalendar-hora_fin option[value='08:00:00']").remove();
+                                    $(this).dialog("close");
+                                });
+                                
+                            },
+                            text: 'Periódico',
+                            class: 'btn btn-primary'
                         },
-                        "Evento especial": function () {
-                            let url = "/especialcalendar/create?id_aula=" + $("em").text();
-                            $("#modalContent").load(url, function () {
-                                $("#modalEvento").modal("show");
-                                //FECHA INICIO
-                                $('#dynamicmodel-fecha_inicio').val(startDate.format("DD/MM/YYYY"));
-            
-                                //HORA INI
-                                $('#dynamicmodel-hora_inicio').val(startDate.format('HH:mm:ss'));
-            
-                                //HORA FIN
-                                $('#dynamicmodel-hora_fin').val(endDate.format('HH:mm:ss'));
-            
-                                $('#carrera-id').val('');
-            
-                                $("#dynamicmodel-hora_inicio option[value='22:00:00']").remove();
-                                $("#dynamicmodel-hora_fin option[value='08:00:00']").remove();
-                            });
-                            $(this).dialog("close");
+                        "Evento especial": {
+                            click: function () {
+                                let url = "/especialcalendar/create?id_aula=" + $("em").text();
+                                $("#modalContent").load(url, function () {
+                                    $("#modalEvento").modal("show");
+                                    //FECHA INICIO
+                                    $('#dynamicmodel-fecha_inicio').val(startDate.format("YYYY-MM-DD"));
+                
+                                    //HORA INI
+                                    $('#dynamicmodel-hora_inicio').val(startDate.format('HH:mm:ss'));
+                
+                                    //HORA FIN
+                                    $('#dynamicmodel-hora_fin').val(endDate.format('HH:mm:ss'));
+                
+                                    $('#carrera-id').val('');
+                
+                                    $("#dynamicmodel-hora_inicio option[value='22:00:00']").remove();
+                                    $("#dynamicmodel-hora_fin option[value='08:00:00']").remove();
+                                    $(this).dialog("close");
+                                });
+                                
+                            },
+                            text: 'Especial',
+                            class: 'btn btn-primary'
                         },
-                        "Cancelar": function () {
-                            $(this).dialog("close");
+                        "Cancel": {
+                            click: function () {
+                                $(this).dialog("close");
+                            },
+                            text: 'Cancelar',
+                            class: 'btn btn-secondary'
                         }
-                    }
+                    },
                 });
                 
             }
