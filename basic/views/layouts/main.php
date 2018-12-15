@@ -53,6 +53,14 @@ AppAsset::register($this);
 .navlog > li:nth-child(1) > a:nth-child(1){
     padding-bottom: 16px
 }
+li.dropdown:nth-child(2) > a:nth-child(1){
+    padding-bottom:5px !important;
+}
+.navDerecha p{
+    margin-bottom:0px;
+
+}
+
 </style>
 
 <div class="wrap">
@@ -61,6 +69,8 @@ AppAsset::register($this);
         'brandLabel' => '<img src="../image/logo3.png"; class="img-responsive">' . '',
         "innerContainerOptions" => ['class' => 'container-fluid']
     ]);
+
+  
         
         // Preguntar aca si user es admin o simple y hacer un echo Nav del q corresponda
         // SI ES GUEST
@@ -83,6 +93,13 @@ AppAsset::register($this);
             ],
         ]);
     } else {
+        // cambia la foto de acuerdo si tiene o no imagen cargada//
+        if (Yii::$app->user->identity->profile_picture == ''){
+            $urlImagen= "../image/admin_icon.png";
+        }
+        else{
+        $urlImagen = Yii::$app->user->identity->profile_picture;
+        }
         //SI ES ADMIN
         if (User::isUserAdmin(Yii::$app->user->identity->id)) {
             echo Nav::widget([
@@ -104,14 +121,15 @@ AppAsset::register($this);
                     ]
                 ],
             ]);
+           
             echo Nav::widget([
                 'encodeLabels' => false,
-                'options' => ['class' => 'navbar-nav navbar-right'],
+                'options' => ['class' => 'navbar-nav navbar-right navDerecha'],
                 'items' => [
                     ['label' => Html::tag('span', '', ['class' => 'fa fa-bell']) . ' NOTIFICACIONES', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold;']],
                     Yii::$app->user->isGuest ? (['label' => Html::button('<i class="glyphicon glyphicon-log-in"></i> INGRESAR', ['value' => Url::to('/site/login2'), 'class' => 'btn btn-add-al', 'id' => 'modalLogin', 'style' => 'position:relative; top:-8px; font-weight: bold; background-color: Transparent;'])]) :
                         [
-                        'label' => Yii::$app->user->identity->username, 'options' => ['style' => 'font-weight: bold;'],
+                        'label' => '<img class= "imagenPerfil" src=' . $urlImagen .'><span style="margin-botom:0px; bottom:3px; position: relative; margin-left:4px">' . Yii::$app->user->identity->username .'</sman> ', 'options' => ['style' => 'font-weight: bold;'],
                         'items' => [
                             ['label' => '<span class="glyphicon glyphicon-user"></span> Cuenta', 'url' =>'/user/updateprofile?id=' . Yii::$app->user->identity->id],
                             ['label' => '<span class="fa fa-lock"></span> Cambiar contraseña', 'url' => '/user/changepw'],
@@ -143,7 +161,7 @@ AppAsset::register($this);
                     ['label' => Html::tag('span', '', ['class' => 'fa fa-bell']) . ' NOTIFICACIONES', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold;']],
                     Yii::$app->user->isGuest ? (['label' => Html::button('<i class="glyphicon glyphicon-log-in"></i> INGRESAR', ['value' => Url::to('/site/login2'), 'class' => 'btn btn-add-al', 'id' => 'modalLogin', 'style' => 'position:relative; top:-8px; font-weight: bold; background-color: Transparent;'])]) :
                         [
-                        'label' => Yii::$app->user->identity->username, 'options' => ['style' => 'font-weight: bold;'],
+                        'label' => '<img class= "imagenPerfil" src=' . $urlImagen .'><span style="margin-botom:0px; bottom:3px; position: relative; margin-left:4px">' . Yii::$app->user->identity->username .'</sman> ', 'options' => ['style' => 'font-weight: bold;'],
                         'items' => [
                             ['label' => '<span class="glyphicon glyphicon-user"></span> Cuenta', 'url' =>'/user/updateprofile?id=' . Yii::$app->user->identity->id],
                             ['label' => '<span class="fa fa-lock"></span> Cambiar contraseña', 'url' => '/user/changepw'],
@@ -173,7 +191,7 @@ AppAsset::register($this);
                     ['label' => Html::tag('span', '', ['class' => 'fa fa-bell']) . ' NOTIFICACIONES', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold;']],
                     Yii::$app->user->isGuest ? (['label' => Html::button('<i class="glyphicon glyphicon-log-in"></i> INGRESAR', ['value' => Url::to('/site/login2'), 'class' => 'btn btn-add-al', 'id' => 'modalLogin', 'style' => 'position:relative; top:-8px; font-weight: bold; background-color: Transparent;'])]) :
                         [
-                        'label' => Yii::$app->user->identity->username, 'options' => ['style' => 'font-weight: bold;'],
+                        'label' => '<img class= "imagenPerfil" src=' . $urlImagen .'><span style="margin-botom:0px; bottom:3px; position: relative; margin-left:4px">' . Yii::$app->user->identity->username .'</sman> ', 'options' => ['style' => 'font-weight: bold;'],
                         'items' => [
                             ['label' => '<span class="glyphicon glyphicon-user"></span> Cuenta', 'url' =>'/user/updateprofile?id=' . Yii::$app->user->identity->id],
                             ['label' => '<span class="fa fa-lock"></span> Cambiar contraseña', 'url' => '/user/changepw'],
