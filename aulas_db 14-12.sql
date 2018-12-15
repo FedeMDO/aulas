@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-11-2018 a las 17:58:50
+-- Tiempo de generación: 14-12-2018 a las 00:25:34
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -58,14 +58,14 @@ INSERT INTO `aula` (`ID`, `NOMBRE`, `ID_EDIFICIO`, `PISO`, `CAPACIDAD`, `OBS`) V
 (2, 'UNI21', 1, 0, 0, NULL),
 (3, 'UNI2', 1, 1, 34, NULL),
 (4, 'SAV25', 2, 0, 33, NULL),
-(5, 'FRI16', 3, 1, 12, NULL),
+(5, 'MOS16', 3, 1, 12, NULL),
 (6, 'SAV4', 2, 1, 23, NULL),
 (7, 'LA 24', 4, 1, 12, NULL),
 (8, 'UNI8', 1, 2, 12, NULL),
 (9, 'UN 15', 5, 0, 33, NULL),
 (10, 'LA 25', 4, 1, 33, NULL),
 (11, 'UNI6', 1, 1, 34, NULL),
-(12, 'FRI4', 3, 2, 12, NULL),
+(12, 'MOS4', 3, 2, 12, NULL),
 (13, 'LA 25', 4, 1, 23, NULL),
 (14, 'SAV15', 2, 0, 34, NULL),
 (15, 'UN 22', 5, 0, 34, NULL),
@@ -73,7 +73,7 @@ INSERT INTO `aula` (`ID`, `NOMBRE`, `ID_EDIFICIO`, `PISO`, `CAPACIDAD`, `OBS`) V
 (17, 'SAV11', 2, 1, 23, NULL),
 (18, 'SAV8', 2, 0, 12, NULL),
 (19, 'LA 7', 4, 2, 12, NULL),
-(20, 'FRI10', 3, 0, 34, NULL),
+(20, 'MOS10', 3, 0, 34, NULL),
 (21, 'UNI3', 1, 2, 12, NULL),
 (22, 'SAV10', 2, 2, 40, NULL),
 (23, 'UN 14', 5, 1, 23, NULL),
@@ -155,10 +155,11 @@ CREATE TABLE `carrera` (
 INSERT INTO `carrera` (`ID`, `ID_INSTITUTO`, `NOMBRE`) VALUES
 (1, 1, 'INFORMATICA'),
 (2, 1, 'ELECTROMECANICA'),
-(3, 2, 'MEDICINA'),
-(4, 4, 'PSICOLOGIA'),
-(5, 4, 'LICENECIATURA EN LETRAS'),
-(6, 4, 'HISTORIA');
+(3, 3, 'MEDICINA'),
+(5, 4, 'MATERIAS COMUNES'),
+(7, 3, 'LIC. EN ENFERMERIA'),
+(8, 2, 'LIC. TRABAJO SOCIAL'),
+(9, 2, 'LIC. RELACIONES DE TRABAJO');
 
 -- --------------------------------------------------------
 
@@ -179,7 +180,7 @@ CREATE TABLE `ciclo_lectivo` (
 --
 
 INSERT INTO `ciclo_lectivo` (`id`, `nombre`, `fecha_inicio`, `fecha_fin`, `estado`) VALUES
-(1, '2018-1C', '2018-08-01', '2018-12-01', 'Abierto');
+(1, '2018-1C', '2018-08-01', '2019-01-01', 'Abierto');
 
 -- --------------------------------------------------------
 
@@ -218,7 +219,8 @@ INSERT INTO `comision` (`ID`, `NUMERO`, `ID_MATERIA`, `CARGA_HORARIA_SEMANAL`, `
 (22, 2, 1, 6, 1),
 (23, 3, 1, 6, 1),
 (24, 4, 1, 6, 1),
-(25, 5, 1, 6, 1);
+(25, 7, 1, 6, 1),
+(26, 1, 8, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -240,10 +242,34 @@ CREATE TABLE `edificio` (
 INSERT INTO `edificio` (`ID`, `ID_SEDE`, `NOMBRE`, `CANTIDAD_AULAS`) VALUES
 (1, 1, 'UNICO', 3),
 (2, 2, 'SAVIO', 7),
-(3, 1, 'FRIULI', 4),
-(4, 3, 'LA FEA', 9),
+(3, 2, 'MOSCONI', 4),
+(4, 3, 'EDIFICIO 1', 9),
 (5, 4, 'UN NOMBRE', NULL),
 (6, 4, 'OTRO NOMBRE', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `especial_calendar`
+--
+
+CREATE TABLE `especial_calendar` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `ID_Aula` int(11) DEFAULT NULL,
+  `inicio` varchar(30) DEFAULT NULL,
+  `fin` varchar(30) DEFAULT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
+  `descripcion` varchar(180) DEFAULT NULL,
+  `momento` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ID_UCrea` int(11) DEFAULT NULL,
+  `ID_UModifica` int(11) DEFAULT NULL,
+  `ID_Carrera` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tabla para evento especial de calendario (no periodico)';
+
+--
+-- Volcado de datos para la tabla `especial_calendar`
+--
+
 
 -- --------------------------------------------------------
 
@@ -309,7 +335,7 @@ INSERT INTO `instituto` (`ID`, `ID_INSTITUCION`, `NOMBRE`, `COLOR_HEXA`) VALUES
 (1, 1, 'INGENIERIA', '#A63322'),
 (2, 1, 'SOCIALES', '#283A8A'),
 (3, 2, 'SALUD', '#8ab03f'),
-(4, 2, 'sociales', '0');
+(4, 1, 'ESTUDIOS INICIALES', '#FFA500');
 
 -- --------------------------------------------------------
 
@@ -331,20 +357,24 @@ CREATE TABLE `materia` (
 --
 
 INSERT INTO `materia` (`ID`, `NOMBRE`, `DESC_CORTA`, `ID_Carrera`, `anio`, `COD_MATERIA`) VALUES
-(1, 'MATEMATICA', 'MATE', 1, 2, 'CI002'),
-(2, 'FISICA', 'FISI', 2, 2, 'CI025'),
-(3, 'FUNDAMENTOS EN INFORMATICA', 'FUND', 1, 1, 'CI010'),
-(4, 'INTRODUCCION A LA PSICOLOGIA', 'INTR', 4, 2, NULL),
-(5, 'COMO GANAR EL LOTO', 'COMO', 5, 1, NULL),
-(6, 'HISTORIA ARGENTINA', 'HIST', 6, 2, 'CI004'),
-(7, 'SEGURIDAD EN INFORMATICA', 'SEGU', 1, 3, NULL),
-(8, 'BIOLOGIA', 'BIOL', 3, 2, NULL),
-(9, 'MATERIALES', 'MATE', 2, 3, NULL),
-(10, 'ANALISIS MATEMATICO', 'ANAL', 2, 2, NULL),
-(11, 'LENGUA', 'LENG', 5, 2, NULL),
-(12, 'INGLES', 'INGL', 3, 3, NULL),
-(13, 'FISICA 2', 'FISI', 1, 4, 'CI027'),
-(14, 'PROBABILIDAD Y ESTADISTICAS', 'PROB', 2, 4, 'CI029');
+(1, 'MATEMATICA I', 'MATI', 1, 1, 'CI012'),
+(2, 'FISICA I', 'FISI', 2, 2, 'CI025'),
+(3, 'ALGORITMOS Y PROGRAMACION', 'AyP', 1, 1, 'I3001'),
+(4, 'INTRODUCCION A LA PSICOLOGIA', 'PSIC', 8, 2, '11'),
+(5, 'PROBLEMAS DE HISTORIA ARGENTINA', 'PHA', 5, 1, 'CI004'),
+(7, 'SEGURIDAD DE LA INFORMACION', 'SEGU', 1, 3, 'I3013'),
+(8, 'SALUD PUBLICA', 'SALP', 3, 2, '08'),
+(9, 'MATERIALES', 'MATE', 2, 3, 'CI024'),
+(10, 'MATEMATICA II', 'MATII', 2, 2, 'CI022'),
+(11, 'TALLER DE LECTURA Y ESCRITURA', 'TLE', 5, 1, NULL),
+(12, 'NUTRICION Y REGULACION', 'NyR', 3, 3, '10'),
+(13, 'FISICA II', 'FISI', 1, 4, 'CI027'),
+(14, 'PROBABILIDAD Y ESTADISTICA', 'PROB', 2, 4, 'CI029'),
+(15, 'ANATOMIA HUMANA', 'AnHu', 7, 2, '10'),
+(16, 'EPIDEMIOLOGIA', 'EPI', 7, 2, '13'),
+(17, 'INTRODUCCION A LA SOCIOLOGIA', 'SOC', 8, 2, '9'),
+(18, 'INTRODUCCION AL DERECHO', 'DER', 9, 2, '5'),
+(19, 'PSICOLOGIA LABORAL', 'PSLAB', 9, 4, '20');
 
 -- --------------------------------------------------------
 
@@ -402,9 +432,9 @@ CREATE TABLE `recurso` (
 
 INSERT INTO `recurso` (`ID`, `NOMBRE`, `DESCRIPCION`) VALUES
 (1, 'computarizada', 'tiene computadoras'),
-(2, 'aire acondicionado', 'si tenes frio tira aire caliente, si tenes calor aire frio. '),
-(3, 'laboratorio quimico', 'todo lo que necesita un quimico'),
-(4, 'proyector', 'viste un cine?, bueno algo asi pero en un aula');
+(2, 'aire acondicionado', 'recurso de aire acondicionado'),
+(3, 'laboratorio quimico', 'laboratorio quimico para las carreras que lo necesiten'),
+(4, 'proyector', 'recurso de proyector en las aulas');
 
 -- --------------------------------------------------------
 
@@ -450,11 +480,11 @@ CREATE TABLE `sede` (
 --
 
 INSERT INTO `sede` (`ID`, `ID_INSTITUCION`, `NOMBRE`, `CALLEYNUM`, `LOCALIDAD`, `DISPONIBLE_DESDE`, `DISPONIBLE_HASTA`) VALUES
-(1, 1, 'HEC', 'calle 222 n 1223', 'florencio varela', '08:00:00', '22:00:00'),
-(2, 1, 'UNICA', 'calle falsa 123', 'FLORENCIO VARELA', '08:00:00', '22:00:00'),
-(3, 2, 'SEDE 1', 'calle 21 num 12323', 'quilmes', '08:00:00', '22:00:00'),
-(4, 2, 'SEDE 2', 'c 3 num 345', 'quilmes', '08:00:00', '22:00:00'),
-(5, 1, 'berasategui', 'calle 334 num 345', 'berasategui', '08:00:00', '22:00:00'),
+(1, 1, 'HEC', 'Félix Lope De Vega y Calle 141', 'Florencio Varela', '08:00:00', '22:00:00'),
+(2, 1, 'YPF', 'Av. Calchaquí 6200', 'Florencio Varela', '08:00:00', '22:00:00'),
+(3, 2, 'SEDE 1', 'calle 21 num 12323', 'Quilmes', '08:00:00', '22:00:00'),
+(4, 2, 'SEDE 2', 'c 3 num 345', 'Quilmes', '08:00:00', '22:00:00'),
+(5, 1, 'Berazategui', 'calle 334 num 345', 'Berazategui', '08:00:00', '22:00:00'),
 (6, 1, 'Sede Test', 'false street 123', 'Florencio Varela', '08:00:00', '21:00:00');
 
 -- --------------------------------------------------------
@@ -560,6 +590,16 @@ ALTER TABLE `edificio`
   ADD KEY `ID_SEDE` (`ID_SEDE`);
 
 --
+-- Indices de la tabla `especial_calendar`
+--
+ALTER TABLE `especial_calendar`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_ID_UCrea` (`ID_UCrea`),
+  ADD KEY `fk_ID_UModifica` (`ID_UModifica`),
+  ADD KEY `fk_IDAula` (`ID_Aula`),
+  ADD KEY `fk_IDCarrera` (`ID_Carrera`);
+
+--
 -- Indices de la tabla `evento_calendar`
 --
 ALTER TABLE `evento_calendar`
@@ -648,7 +688,7 @@ ALTER TABLE `aula`
 -- AUTO_INCREMENT de la tabla `carrera`
 --
 ALTER TABLE `carrera`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `ciclo_lectivo`
@@ -660,7 +700,7 @@ ALTER TABLE `ciclo_lectivo`
 -- AUTO_INCREMENT de la tabla `comision`
 --
 ALTER TABLE `comision`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `edificio`
@@ -669,10 +709,16 @@ ALTER TABLE `edificio`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT de la tabla `especial_calendar`
+--
+ALTER TABLE `especial_calendar`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
 -- AUTO_INCREMENT de la tabla `evento_calendar`
 --
 ALTER TABLE `evento_calendar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `institucion_educativa`
@@ -690,13 +736,13 @@ ALTER TABLE `instituto`
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `notificacion`
 --
 ALTER TABLE `notificacion`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `recurso`
@@ -708,7 +754,7 @@ ALTER TABLE `recurso`
 -- AUTO_INCREMENT de la tabla `restri_calendar`
 --
 ALTER TABLE `restri_calendar`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `sede`
@@ -763,6 +809,15 @@ ALTER TABLE `comision`
 --
 ALTER TABLE `edificio`
   ADD CONSTRAINT `edificio_ibfk_1` FOREIGN KEY (`ID_SEDE`) REFERENCES `sede` (`ID`);
+
+--
+-- Filtros para la tabla `especial_calendar`
+--
+ALTER TABLE `especial_calendar`
+  ADD CONSTRAINT `fk_IDAula` FOREIGN KEY (`ID_Aula`) REFERENCES `aula` (`ID`),
+  ADD CONSTRAINT `fk_IDCarrera` FOREIGN KEY (`ID_Carrera`) REFERENCES `carrera` (`ID`),
+  ADD CONSTRAINT `fk_ID_UCrea` FOREIGN KEY (`ID_UCrea`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `fk_ID_UModifica` FOREIGN KEY (`ID_UModifica`) REFERENCES `users` (`id`);
 
 --
 -- Filtros para la tabla `evento_calendar`

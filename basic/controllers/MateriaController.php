@@ -13,6 +13,8 @@ use yii\filters\AccessControl;
 use app\models\User;
 use app\models\Sede;
 use app\models\Edificio;
+use app\models\EventoCalendar;
+use app\models\Instituto;
 
 /**
  * MateriaController implements the CRUD actions for Materia model.
@@ -164,14 +166,65 @@ class MateriaController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionBuscador(){
+    public function actionBuscador()
+    {
+        if ($_POST != null){
+            $eventos = EventoCalendar::find()->all();
+            $idmat = $_POST['Materia'];
+            $idsede = $_POST['Sede'];
+            if (isset($_POST['Edificio'])){
+                $idedi = $_POST['Edificio'];
+                $edif = $idedi['ID'];
+            }
+            else{
+                $edif = "";
+            }
+            $result = $idmat['ID'];
+            $sede = $idsede['ID'];
+            $nombre = $this->findModel($result)->NOMBRE;
+            $matched = array();
+            foreach ($eventos as $evento){
+                if ($sede == "" && $edif == "" && $evento->comision->mATERIA->ID == $result){
+                    $matched[] = $evento;
+                }
+                if ($edif == "" && $evento->aula->eDIFICIO->sEDE->ID == $sede){
+                    if ($evento->comision->mATERIA->ID == $result){
+                        $matched[] = $evento;
+                    }
+                }
+                if ($evento->aula->eDIFICIO->ID == $edif){
+                    if ($evento->comision->mATERIA->ID == $result){
+                        $matched[] = $evento;
+                    }
+                }
+            }
+            return $this->render('resultado', [
+                'matched' => $matched,
+                'nombre' => $nombre,
+            ]);
+        }
+        $institutos = new Instituto();
+        $carreras = new Carrera();
         $materias = new Materia();
         $sedes = new Sede();
         $edificio = new Edificio();
+        $inst = Instituto::find()->asArray()->all();
+        $carr = Carrera::find()->asArray()->all();
+        $mat = Materia::find()->asArray()->all();
+        $edi = Edificio::find()->asArray()->all();
+        $sede = Sede::find()->asArray()->all();
         return $this->render('buscador', [
+            'institutos' => $institutos,
+            'carreras' => $carreras,
             'materias' => $materias,
             'sedes' => $sedes,
             'edificio' => $edificio,
+            'inst' => $inst,
+            'carr' => $carr,
+            'mat' => $mat,
+            'edi' => $edi,
+            'sede' => $sede,
         ]);
     }
+
 }

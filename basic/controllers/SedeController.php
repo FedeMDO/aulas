@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
 use app\models\User;
+use app\models\Edificio;
 
 /**
  * SedeController implements the CRUD actions for Sede model.
@@ -70,7 +71,7 @@ class SedeController extends Controller
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['vistav', 'index', 'view', 'create', 'update', 'delete'],
+                        'actions' => [],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
@@ -79,7 +80,7 @@ class SedeController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                        'actions' => ['vistav'],
+                        'actions' => ['vistav', 'listedificio'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
@@ -88,7 +89,7 @@ class SedeController extends Controller
                     ],
                     [
                         //Los usuarios guest tienen permisos sobre las siguientes acciones
-                        'actions' => ['vistav'],
+                        'actions' => ['vistav', 'listedificio'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
@@ -201,5 +202,20 @@ class SedeController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    public function actionListedificio($id)
+    {
+        $edificios = Edificio::find()
+            ->where(['ID_SEDE' => $id])
+            ->orderBy('id DESC')
+            ->all();
+
+        if (!empty($edificios)) {
+            foreach ($edificios as $edificio) {
+                echo "<option value='" . $edificio->ID . "'>" . $edificio->NOMBRE . "</option>";
+            }
+        } else {
+            echo "<option>-</option>";
+        }
     }
 }

@@ -4,7 +4,7 @@ llamada (por convencion) 'aulas_db'
 corresponde al comando:
 CREATE DATABASE aulas_db;
 
-Luego copiar el texto de aulas_db 22-11.sql y ya estaría la base funcionando.
+Luego copiar el texto de aulas_db 14-12.sql y ya estaría la base funcionando.
 
 Para ingresar al sistema hay un usuario por defecto:
 

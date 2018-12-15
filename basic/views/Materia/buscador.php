@@ -36,38 +36,44 @@ $this->title = 'Buscador de materias';
 
 ]);
 
-$recurso = Materia::find()->asArray()->all();
-$result = ArrayHelper::map($recurso, 'ID', 'NOMBRE');
-
-$recurso2 = Edificio::find()->asArray()->all();
-$resulta = ArrayHelper::map($recurso2, 'ID', 'NOMBRE');
-
-$recurso3 = Sede::find()->asArray()->all();
-$resultado = ArrayHelper::map($recurso3, 'ID', 'NOMBRE');
+$result1 = ArrayHelper::map($inst, 'ID', 'NOMBRE');
+$result2 = ArrayHelper::map($carr, 'ID', 'NOMBRE');
+$result = ArrayHelper::map($mat, 'ID', 'NOMBRE');
+$resulta = ArrayHelper::map($edi, 'ID', 'NOMBRE');
+$resultado = ArrayHelper::map($sede, 'ID', 'NOMBRE');
 
 
 ?>
 
 <?php echo $form->field($materias, 'ID', ['labelOptions' => ['style' => 'color:white']])->widget(Select2::className(), [
-    'data' => $result,
-    "options" => []
-])->label('Seleccione materia'); ?>
+        'data' => $result,
+        'options' => [
+        ]
+    ])->label('Materia'); ?>
 
 <?php echo $form->field($sedes, 'ID', ['labelOptions' => ['style' => 'color:white']])->widget(Select2::className(), [
     'data' => $resultado,
     "options" => [
-        'placeholder' => 'Seleccione sede',
+        'placeholder' => 'Seleccione sede...',
+        'onchange' => '$.post( "' . Yii::$app->urlManager->createUrl('sede/listedificio?id=') . '"+$(this).val(), function( data ) {
+            $( "select#edificio-id" ).html( data );
+            });'
     ],
     'pluginOptions' => [
         'allowClear' => true,
     ]
-])->label('Nombre de Sede');
+])->label('Sede');
 ?>
 
  <?php echo $form->field($edificio, 'ID', ['labelOptions' => ['style' => 'color:white']])->widget(Select2::className(), [
     'data' => $resulta,
-    "options" => []
-])->label('Nombre de Edificio');
+    "options" => [
+        'placeholder' => 'Seleccione edificio...',
+    ],
+    'pluginOptions' => [
+        'allowClear' => true,
+    ]
+])->label('Edificio');
 
 ?>
 
