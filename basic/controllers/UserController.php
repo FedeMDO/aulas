@@ -135,51 +135,32 @@ class UserController extends Controller
             'model' => $model,
         ]);
     }
-
-
-
-    public function actionPerfil()
-    {
-
-        $id = Yii::$app->user->identity->id;
-
-        $model = new FormPerfil($id);
-        $usuario = Users::findOne($id);
-        if ($model->load(Yii::$app->request->post())) {
-            Yii::$app->session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, 'se ha subido correctamente la foto'); 
-            $imageName = $usuario->username; /*nombre de la foto es el username*/
-            $model->file = UploadedFile::getInstance($model,'file'); 
-            $model->file->saveAs('uploads/'.$imageName.'.'.$model->file->extension);
-            $usuario->profile_picture = '../uploads/'.$imageName.'.'.$model->file->extension; /*guardo ruta en db*/
-            $usuario->save();
-
-        }
-
-        return $this->render('perfil', [
-            'model' => $model,
-            'usuario' => $usuario,
-        ]);
-    }
-
     public function actionUpdateprofile($id)
     {
-
+       
         $model = $this->findModel($id);
-
+         $model1 = new FormPerfil($id);
+        $usuario = Users::findOne($id);
         if ($_POST != null) {
+            $imageName = $usuario->username; /*nombre de la foto es el username*/
+            $model1->file = UploadedFile::getInstance($model1,'file');
+            if ($model1->file !=null){
+            $model1->file->saveAs('uploads/'.$imageName.'.'.$model1->file->extension);
+            $usuario->profile_picture = '../uploads/'.$imageName.'.'.$model1->file->extension; /*guardo ruta en db*/
+            $usuario->save();
+            }
             $user = $_POST['Users'];
             $username = $user['username'];
             $email = $user['email'];
             $model->username = $username;
             $model->email = $email;
             $model->save();
-            if ($model->save()) {
-                return $this->redirect('../site/index');
-            }
         }
 
         return $this->render('updateperfil', [
+            'usuario' => $usuario,
             'model' => $model,
+            'model1' => $model1,
         ]);
     }
 

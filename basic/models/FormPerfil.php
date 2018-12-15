@@ -46,8 +46,7 @@ class FormPerfil extends Model
     {
         return [
             ['profile_picture','string','max'=>100],
-            ['file', 'file'],
-            [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            [['file'], 'file','maxSize' => 2097152,  'skipOnEmpty' => true, 'extensions' => 'png, jpg' ,],
         ];
     }
 

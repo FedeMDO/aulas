@@ -14,6 +14,10 @@ $this->title = 'Modificar perfil';
 
     <?= $this->render('_formperfil', [
         'model' => $model,
+        'model1' => $model1,
+        'usuario' => $usuario,
     ]) ?>
 
+</div>
+</div>
 </div>

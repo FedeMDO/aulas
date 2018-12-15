@@ -104,9 +104,6 @@ AppAsset::register($this);
                     ]
                 ],
             ]);
-
-
-
             echo Nav::widget([
                 'encodeLabels' => false,
                 'options' => ['class' => 'navbar-nav navbar-right'],
@@ -116,9 +113,10 @@ AppAsset::register($this);
                         [
                         'label' => Yii::$app->user->identity->username, 'options' => ['style' => 'font-weight: bold;'],
                         'items' => [
-                            ['label' => '<span class="fa fa-key"></span> Cambiar contraseña', 'url' => '/user/changepw'],
-                            ['label' => '<span class="fa fa-book"> Manual de usuario', 'url' => '/site/manual'],
-                            ['label' => '<span class="fa fa-info-circle"> Acerca de...', 'url' => '/site/about', ],
+                            ['label' => '<span class="glyphicon glyphicon-user"></span> Cuenta', 'url' =>'/user/updateprofile?id=' . Yii::$app->user->identity->id],
+                            ['label' => '<span class="fa fa-lock"></span> Cambiar contraseña', 'url' => '/user/changepw'],
+                            ['label' => '<span class="fa fa-book"></span> Manual de usuario', 'url' => '/site/manual'],
+                            ['label' => '<span class="fa fa-info-circle"></span> Acerca de...', 'url' => '/site/about', ],
                             ['label' => '<span class="fa fa-sign-out"></span> Salir (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
                         ],
                     ]
@@ -147,7 +145,8 @@ AppAsset::register($this);
                         [
                         'label' => Yii::$app->user->identity->username, 'options' => ['style' => 'font-weight: bold;'],
                         'items' => [
-                            ['label' => '<span class="fa fa-key"></span> Cambiar contraseña', 'url' => '/user/changepw'],
+                            ['label' => '<span class="glyphicon glyphicon-user"></span> Cuenta', 'url' =>'/user/updateprofile?id=' . Yii::$app->user->identity->id],
+                            ['label' => '<span class="fa fa-lock"></span> Cambiar contraseña', 'url' => '/user/changepw'],
                             ['label' => '<span class="fa fa-book"> Manual de usuario', 'url' => '/site/manual'],
                             ['label' => '<span class="fa fa-info-circle"> Acerca de...', 'url' => '/site/about', ],
                             ['label' => '<span class="fa fa-sign-out"></span> Salir (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
@@ -176,7 +175,8 @@ AppAsset::register($this);
                         [
                         'label' => Yii::$app->user->identity->username, 'options' => ['style' => 'font-weight: bold;'],
                         'items' => [
-                            ['label' => '<span class="fa fa-key"></span> Cambiar contraseña', 'url' => '/user/changepw'],
+                            ['label' => '<span class="glyphicon glyphicon-user"></span> Cuenta', 'url' =>'/user/updateprofile?id=' . Yii::$app->user->identity->id],
+                            ['label' => '<span class="fa fa-lock"></span> Cambiar contraseña', 'url' => '/user/changepw'],
                             ['label' => '<span class="fa fa-book"> Manual de usuario', 'url' => '/site/manual'],
                             ['label' => '<span class="fa fa-info-circle"> Acerca de...', 'url' => '/site/about', ],
                             ['label' => '<span class="fa fa-sign-out"></span> Salir (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
@@ -199,7 +199,7 @@ AppAsset::register($this);
     <?= $content ?>
 
 
-</div>
+
 
 
 
@@ -284,11 +284,11 @@ AppAsset::register($this);
 
 </body>
 
-<!-- footer comentado -->
+<!-- footer comentado 
 <footer>
   <p>Proyecto de Software - Universidad Nacional Arturo Jauretche</p>
 </footer>
-
+-->
 
 </html>
 
