@@ -1,12 +1,10 @@
 .iniciocs{
   background-image: url(../image/background-blur-6.png);
- 
     background-size: cover; 
     -ms-background-size: cover; 
     -o-background-size: cover;
     -moz-background-size: cover; 
     -webkit-background-size: cover;
-
     background-repeat: no-repeat;
     background-attachment: fixed;
 
@@ -882,7 +880,11 @@ h3{
     .modal-log{
         width:auto;
     }
- 
-  
+}
+.imagenPerfil{
+  height: 28px;
+  border-radius: 50%;
+  position:relative;
+  bottom: 3px;
 }
 

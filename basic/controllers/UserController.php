@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
@@ -12,6 +13,7 @@ use app\models\ContactForm;
 use app\models\FormRegister;
 use app\models\Users;
 use app\models\FormChangePassword;
+use app\models\FormPerfil;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 use yii\helpers\Html;
@@ -131,6 +133,34 @@ class UserController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+        ]);
+    }
+    public function actionUpdateprofile($id)
+    {
+       
+        $model = $this->findModel($id);
+         $model1 = new FormPerfil($id);
+        $usuario = Users::findOne($id);
+        if ($_POST != null) {
+            $imageName = $usuario->username; /*nombre de la foto es el username*/
+            $model1->file = UploadedFile::getInstance($model1,'file');
+            if ($model1->file !=null){
+            $model1->file->saveAs('uploads/'.$imageName.'.'.$model1->file->extension);
+            $usuario->profile_picture = '../uploads/'.$imageName.'.'.$model1->file->extension; /*guardo ruta en db*/
+            $usuario->save();
+            }
+            $user = $_POST['Users'];
+            $username = $user['username'];
+            $email = $user['email'];
+            $model->username = $username;
+            $model->email = $email;
+            $model->save();
+        }
+
+        return $this->render('updateperfil', [
+            'usuario' => $usuario,
+            'model' => $model,
+            'model1' => $model1,
         ]);
     }
 

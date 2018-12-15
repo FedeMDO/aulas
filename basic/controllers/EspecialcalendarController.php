@@ -68,7 +68,7 @@ class EspecialcalendarController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id_aula)
+    public function actionCreate($id_aula, $sch = NULL)
     {
 
         $materia = new Materia();
@@ -77,14 +77,20 @@ class EspecialcalendarController extends Controller
         $model->ID_UCrea = Yii::$app->user->identity->id;
         $model->ID_UModifica = Yii::$app->user->identity->id;
         $r = Yii::$app->request;
-        
+
         if ($model->load(Yii::$app->request->post())) {
             $dynmodel = $r->post('DynamicModel');
-            $model->inicio = $dynmodel['fecha_inicio'].'T'.$dynmodel['hora_inicio'];
-            $model->fin = $dynmodel['fecha_inicio'].'T'.$dynmodel['hora_fin'];
+            $model->inicio = $dynmodel['fecha_inicio'] . 'T' . $dynmodel['hora_inicio'];
+            $model->fin = $dynmodel['fecha_inicio'] . 'T' . $dynmodel['hora_fin'];
             $model->ID_Aula = $id_aula;
             if ($model->save()) {
-                return $this->redirect(['evento/index', 'id' => $model->ID_Aula]);
+                if($sch != NULL){
+                    return $this->redirect(['edificio/scheduler', 'id' => Aula::findOne($model->ID_Aula)->eDIFICIO->sEDE->ID]);
+                }
+                else{
+                    return $this->redirect(['evento/index', 'id' => $model->ID_Aula]);
+                }
+                
             } else {
                 return $this->renderAjax('create', ['model' => $model, 'materia' => $materia, 'carrera' => $carrera]);
             }
@@ -213,7 +219,7 @@ class EspecialcalendarController extends Controller
                     $event['editable'] = true;
                 }
             }
-            if($eve->descripcion != null){
+            if ($eve->descripcion != null) {
                 $event['description'] = $eve->descripcion;
             }
 
@@ -223,6 +229,65 @@ class EspecialcalendarController extends Controller
             $event['usercrea'] = $eve->ID_UCrea;
             $event['resourceId'] = $eve->ID_Aula;
             $tasks[] = (object)$event;
+        }
+        return $tasks;
+    }
+
+    public function actionJsonschedulersede($id_sede, $start, $end = null, $_ = null)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $isGuest = User::isUserGuest(Yii::$app->user->identity->id);
+        $isAdmin = User::isUserAdmin(Yii::$app->user->identity->id);
+        if (!$isGuest) {
+            $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
+        }
+
+        $tasks = array();
+        $sede = Sede::findOne($id_sede);
+        if (!empty($sede->edificios)) {
+            foreach ($sede->edificios as $edi) {
+
+                if (!empty($edi->aulas)) {
+                    foreach ($edi->aulas as $aula) {                        
+                        //EVENTOS
+                        foreach ($aula->especialCalendars as $eve) {
+                            $event = array();
+                            // evento especial.
+                            $event['especial'] = true;
+                            // con sufijo U de unico.
+                            $event['id'] = intval($eve->id) . 'U';
+                            $event['title'] = $eve->nombre;
+                            $event['color'] = '#666666';
+                            $event['ajeno'] = true;
+                            if ($isGuest) {
+                                $event['ajeno'] = true;
+                                $event['editable'] = false;
+                            }
+                            if ($isAdmin) {
+                                $event['ajeno'] = false;
+                                $event['editable'] = true;
+                            }
+                            if ($eve->carrera != null) {
+                                $event['color'] = $eve->carrera->iNSTITUTO->COLOR_HEXA;
+                                if ($instIdOnSessionUser == $eve->carrera->iNSTITUTO->ID) {
+                                    $event['ajeno'] = false;
+                                    $event['editable'] = true;
+                                }
+                            }
+                            if ($eve->descripcion != null) {
+                                $event['description'] = $eve->descripcion;
+                            }
+
+                            $event['start'] = $eve->inicio;
+                            $event['end'] = $eve->fin;
+                            $event['usermodifico'] = $eve->ID_UModifica;
+                            $event['usercrea'] = $eve->ID_UCrea;
+                            $event['resourceId'] = $eve->ID_Aula;
+                            $tasks[] = (object)$event;
+                        }
+                    }
+                }
+            }
         }
         return $tasks;
     }

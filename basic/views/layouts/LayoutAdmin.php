@@ -48,6 +48,20 @@ AppAsset::register($this);
 
 <?php $this->beginBody() ?>
 
+<style>
+.navlog > li:nth-child(1) > a:nth-child(1){
+    padding-bottom: 16px
+}
+li.dropdown:nth-child(2) > a:nth-child(1){
+    padding-bottom:5px !important;
+}
+.navDerecha p{
+    margin-bottom:0px;
+
+}
+
+</style>
+
 <div class="wrap">
     <?php
     NavBar::begin([
@@ -57,6 +71,14 @@ AppAsset::register($this);
         // Preguntar aca si user es admin o simple y hacer un echo Nav del q corresponda
         // SI ES GUEST
         //SI ES ADMIN
+
+     // cambia la foto de acuerdo si tiene o no imagen cargada//
+     if (Yii::$app->user->identity->profile_picture == ''){
+        $urlImagen= "../image/admin_icon.png";
+    }
+    else{
+    $urlImagen = Yii::$app->user->identity->profile_picture;
+    }
     if (User::isUserAdmin(Yii::$app->user->identity->id)) {
         echo Nav::widget([
             'encodeLabels' => false,
@@ -87,12 +109,13 @@ AppAsset::register($this);
                 ['label' => Html::tag('span', '', ['class' => 'fa fa-bell']) . ' NOTIFICACIONES', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold;']],
                 Yii::$app->user->isGuest ? (['label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-log-in']) . ' LOGIN', 'url' => ['/site/login'], 'options' => ['style' => 'font-weight: bold;']]) :
                     [
-                    'label' => Yii::$app->user->identity->username, 'options' => ['style' => 'font-weight: bold;'],
+                        'label' => '<img class= "imagenPerfil" src=' . $urlImagen .'><span style="margin-botom:0px; bottom:3px; position: relative; margin-left:4px">' . Yii::$app->user->identity->username .'</sman> ', 'options' => ['style' => 'font-weight: bold;'],
                     'items' => [
-                        ['label' => '<span class="fa fa-key"></span> Cambiar contraseña', 'url' => '/user/changepw'],
-                        ['label' => '<span class="fa fa-book"> Manual de usuario', 'url' => '/site/manual'],
-                        ['label' => '<span class="fa fa-info-circle"> Acerca de...', 'url' => '/site/about', ],
-                        ['label' => '<span class="fa fa-sign-out"></span> Salir (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
+                        ['label' => '<span class="glyphicon glyphicon-user"></span> Cuenta', 'url' =>'/user/updateprofile?id=' . Yii::$app->user->identity->id],
+                            ['label' => '<span class="fa fa-lock"></span> Cambiar contraseña', 'url' => '/user/changepw'],
+                            ['label' => '<span class="fa fa-book"></span> Manual de usuario', 'url' => '/site/manual'],
+                            ['label' => '<span class="fa fa-info-circle"></span> Acerca de...', 'url' => '/site/about', ],
+                            ['label' => '<span class="fa fa-sign-out"></span> Salir (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
                     ],
                 ]
             ],
@@ -135,10 +158,7 @@ AppAsset::register($this);
         
         </div>
 </div>
-<!-- footer comentado -->
-<!-- <div class="footer">
-  <p>Proyecto de Software - Universidad Nacional Arturo Jauretche</p>
-</div> -->
+
 
 
 <?php $this->endBody() ?>
@@ -146,7 +166,10 @@ AppAsset::register($this);
 
 
 </body>
-
+<!-- footer comentado -->
+<footer>
+  <p>Proyecto de Software - Universidad Nacional Arturo Jauretche</p>
+</footer>
 
 
 </html>
