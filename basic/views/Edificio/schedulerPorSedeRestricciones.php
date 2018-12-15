@@ -29,7 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div style="display:none;">
 <em id:"id_sede"><?= Html::encode("{$sede->ID}") ?></em>
 </div>
+
 <div class="col-md-offset-1 col-md-10">
+<?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
+    <?= Html::a('Ir a eventos', Url::to(['edificio/scheduler?id_sede=' . $sede->ID. '']), ['class' => 'btn btn-primary']); ?>
+    <?php endif; ?>
     <div class="loginc">
         <!-- THE CALENDAR -->
         <div class="evento-index">

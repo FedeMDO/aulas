@@ -140,9 +140,9 @@ $(document).ready(function () {
                 
                                     $("#eventocalendar-hora_ini option[value='22:00:00']").remove();
                                     $("#eventocalendar-hora_fin option[value='08:00:00']").remove();
-                                    $(this).dialog("close");
+                                    
                                 });
-                                
+                                $(this).dialog("close");
                             },
                             text: 'Periódico',
                             class: 'btn btn-primary'
@@ -165,9 +165,9 @@ $(document).ready(function () {
                 
                                     $("#dynamicmodel-hora_inicio option[value='22:00:00']").remove();
                                     $("#dynamicmodel-hora_fin option[value='08:00:00']").remove();
-                                    $(this).dialog("close");
+                                    
                                 });
-                                
+                                $(this).dialog("close");
                             },
                             text: 'Especial',
                             class: 'btn btn-primary'
