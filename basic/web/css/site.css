@@ -292,7 +292,7 @@ a.article:hover {
   #sidebar {
       margin-left: -250px;
   }
-  #sidebar.active {
+  #sidebar {
       margin-left: 0;
   }
   #sidebarCollapse span {
