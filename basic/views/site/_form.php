@@ -19,7 +19,7 @@ $form = ActiveForm::begin(
 		],
 	]
 );
-echo '<div class= " col-md-8">'
+echo '<div class= "col-md-8" style="margin-top:20px">'
 ?>
 	<?php $result = ArrayHelper::map($usuarios, 'id', 'username');?>
     <?php echo $form->field($model, 'ID_USER_RECEPTOR', ['labelOptions'=>['style'=>'color:white']])->widget(Select2::className(), [

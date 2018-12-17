@@ -5,6 +5,7 @@ use dominus77\sweetalert2;
 use yii\bootstrap\Alert;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\models\Users;
 
 ?>
 
@@ -52,7 +53,12 @@ use yii\helpers\Url;
             <?php foreach ($notificacion as $n) :
                 if ($n->uSERRECEPTOR->id == Yii::$app->user->identity->id) : ?>
 					<?php $entro = true; ?>
-					<img src="../image/admin_icon.png" class="admin" style="width:60px; margin-left:10px; margin-bottom:10px;";>
+                    <?php $usuario1 = Users::findOne($n->uSEREMISOR->id); ?>
+                    <?php if ($usuario1->profile_picture ==""):?>
+                        <img src="../image/admin_icon.png" class="admin" style="width:60px; margin-left:10px; margin-bottom:10px;";>
+                    <?php else: ?>
+					    <img src="<?= $usuario1->profile_picture ?>" class="admin" style="width:60px; margin-left:10px; margin-bottom:10px;";>
+                    <?php endif ?>
 					<div class="media-body">
 					    <h4><?= Html::encode("{$n->uSEREMISOR->username} ") ?> <small><i>Fecha: <?= Html::encode("{$n->FECHA} ") ?></i></small></h4>
 					    <p><?= $n->NOTIFICACION ?></p>
@@ -71,7 +77,11 @@ use yii\helpers\Url;
             <?php foreach ($notificacion as $n) :
                 if ($n->uSEREMISOR->id == Yii::$app->user->identity->id) : ?>
 				    <?php $entro = true; ?>
-					<img src="../image/admin_icon.png" class="admin" style="width:60px; margin-left:10px; margin-bottom:10px;";>
+                    <?php if (Yii::$app->user->identity->profile_picture ==""):?>
+                        <img src="../image/admin_icon.png" class="admin" style="width:60px; margin-left:10px; margin-bottom:10px;";>
+                    <?php else: ?>
+					    <img src= "<?= Yii::$app->user->identity->profile_picture ?>" class="admin" style="width:60px; margin-left:10px; margin-bottom:10px;";>
+                    <?php endif ?>
 					<div class="media-body">
 					    <h4>Para: <?= Html::encode("{$n->uSERRECEPTOR->username} ") ?>
 					    <small><i>Fecha: <?= Html::encode("{$n->FECHA} ") ?></i></small>
