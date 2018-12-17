@@ -343,10 +343,12 @@ th, td {
 /*iconos de administracion*/
 .well{
   margin-top: 20px;
-  width:80%;
+  width:100%;
   text-align: center;
   border:0px;
   border-radius: 10px;
+  border: 1px solid aliceblue;
+  box-shadow: 10px 10px 5px #49657e;
 }
 
 .weell{

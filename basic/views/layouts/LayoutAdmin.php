@@ -59,7 +59,21 @@ li.dropdown:nth-child(2) > a:nth-child(1){
     margin-bottom:0px;
 
 }
+#sidebar ul li a {
+    text-align:left;
+}
 
+@media (max-width: 768px) {
+            #sidebar {
+                margin-left: -250px;
+            }
+            #sidebar.active {
+                margin-left: 0;
+            }
+            #sidebarCollapse span {
+                display: none;
+            }
+        }
 </style>
 
 <div class="wrap">
@@ -123,42 +137,47 @@ li.dropdown:nth-child(2) > a:nth-child(1){
     }
     NavBar::end();
     ?>
-    <div class='col-md-2' style="padding-left:0px; padding-right:0px;" >
-    <div class='col-md-7' style="padding-left:0px; padding-right:0px;" >
-    <?php
-    echo SideNav::widget([
-        'encodeLabels' => false,
-        'type' => SideNav::TYPE_PRIMARY,
-        'heading' => false,
-        'items' => [
+        <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header" style= "border-bottom:1px solid #47748b">
+                <h3 style="text-align:center">Panel de administracion</h3>
+            </div>
 
-            ['label' => 'Panel de aulas', 'url' => '/aula/index', 'icon' => 'glyphicon glyphicon-chevron-right'],
-            ['label' => 'Panel de carreras', 'url' => '/carrera/index', 'icon' => 'glyphicon glyphicon-chevron-right'],
-            ['label' => 'Panel de comisiones', 'url' => '/comision/index', 'icon' => 'glyphicon glyphicon-chevron-right'],
-            ['label' => 'Panel de edificios', 'url' => '/edificio/index', 'icon' => 'glyphicon glyphicon-chevron-right'],
-            ['label' => 'Panel de institutos', 'url' => '/instituto/index', 'icon' => 'glyphicon glyphicon-chevron-right'],
-            ['label' => 'Panel de materias', 'url' => '/materia/index', 'icon' => 'glyphicon glyphicon-chevron-right'],
-            ['label' => 'Panel de notificaciones', 'url' => '/notificacion/index', 'icon' => 'glyphicon glyphicon-chevron-right'],
-            ['label' => 'Panel de recursos', 'url' => '/recurso/index', 'icon' => 'glyphicon glyphicon-chevron-right'],
-            ['label' => 'Panel de sedes', 'url' => '/sede/index', 'icon' => 'glyphicon glyphicon-chevron-right'],
-        ],
-    ]);
-    ?>
-    </div>
-    </div>
-    
-    <!-- SLIDER -->
-    <?= Breadcrumbs::widget([
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]) ?>
-        <?= Alert::widget() ?>
-        <div class='col-md-10'>
-        <div class='col-md-11'>
-        <?= $content ?>
-        
-        </div>
+            <ul class="list-unstyled components">
+                <li><a href='/aula/index'><i class = "glyphicon glyphicon-chevron-right"></i> Panel de aulas</a></li>
+                <li><a href="/carrera/index"><i class = "glyphicon glyphicon-chevron-right"></i> Panel de carreras</a></li>
+                <li><a href="/comision/index"><i class = "glyphicon glyphicon-chevron-right"></i> Panel de comisiones</a></li>
+                <li><a href='/edificio/index'><i class = "glyphicon glyphicon-chevron-right"></i> Panel de edificios</a></li>
+                <li><a href='/instituto/index'><i class = "glyphicon glyphicon-chevron-right"></i> Panel de institutos</a></li>
+                <li><a href='/materia/index'><i class = "glyphicon glyphicon-chevron-right"></i> Panel de materias</a></li>
+                <li><a href='/notificacion/index'><i class = "glyphicon glyphicon-chevron-right"></i> Panel de notificaciones</a></li>
+                <li><a href='/recurso/index'><i class = "glyphicon glyphicon-chevron-right"></i> Panel de recursos</a></li>
+                <li><a href='/sede/index'><i class = "glyphicon glyphicon-chevron-right"></i> Panel de sedes</a></li>
+            </ul>
+            <ul class="list-unstyled CTAs">
+                <li><a href="/admin/panel" class="download" style="text-align:center">Estadisticas</a></li>
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+            <button type="button" id="sidebarCollapse" class="btn btn-primary"><i class="glyphicon glyphicon-align-justify"></i><span></span></button>
+            <?= $content ?>
+</div>
 </div>
 
+
+
+  <!-- jQuery CDN - Slim version (=without AJAX) -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
 
 
 <?php $this->endBody() ?>
