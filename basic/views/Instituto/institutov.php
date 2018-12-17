@@ -55,5 +55,6 @@ $this->title = 'Institutos';
   </div>
   <?php endforeach; ?>
   </div>
+</div>
   
 </div>

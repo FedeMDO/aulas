@@ -7,6 +7,85 @@ use yii\helpers\Html;
 $this->title = 'Acerca de nosotros';
 
 ?>
+
+<style>
+
+
+/*Acerca de*/
+.site-about img{
+  max-width: 100%;
+}
+
+.blacktopline{
+  height: 20px;
+  background-color:black;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+#datacontenido{
+  margin: 0 auto;
+}
+.namenews{
+  font-size: 14vh;
+  margin: 0 auto;
+  width: 100%;
+  text-align:center;
+  font-family: 'Tangerine', cursive;
+  color:#000000;
+}
+.datanews{
+  height: 40px;
+  border: solid 1px gray;
+  width:100%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.datanews ul{
+  width: 100%;
+  margin-left:-40px;
+}
+.datanews ul li {
+  display: inline-flex;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.titleplana{
+  margin: 0 auto;
+  text-align:center;
+  width:100%;
+  text-transform: uppercase;
+  font-size: 6.4vh;
+  margin-bottom:10px;
+}
+
+.body-contnent1{
+  width:100%;
+  display:block;
+  margin-left:25%;
+}
+.body-contnent2{
+  width:100%;
+  display:block;
+  margin-left:27%;
+}
+
+.div-col4{
+  width: 33.33%;
+  display:inline-flex;
+  padding:10px;
+}
+.div-col3{
+  width:25%;
+  display:inline-flex;
+  padding:10px;
+}
+
+
+
+
+</style>
 <div class="col-md-offset-2 col-md-8 content">
 <div class="loginc" style="margin-top:0px; border-radius:0px;  height:1300px; padding:0px;">
 <div class="box-body">

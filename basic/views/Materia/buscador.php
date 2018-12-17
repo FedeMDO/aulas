@@ -83,3 +83,5 @@ $resultado = ArrayHelper::map($sede, 'ID', 'NOMBRE');
 
 
 <?php $form->end() ?>
+</div>
+</div>

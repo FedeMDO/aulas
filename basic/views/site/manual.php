@@ -12,7 +12,17 @@ $this->title = 'Manual de usuario';
 .manual img{
   max-width:100%;
 }
+
+.manual li{
+  margin-left: 32px;
+}
+
+.manual a{
+  color: #2980b9;
+}
 </style>
+
+
 <h2 class=titulo>Manual de usuario</h2>
 
 <br>

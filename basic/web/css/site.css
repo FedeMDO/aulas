@@ -1,7 +1,34 @@
 html,
 body {
-    min-height: 100%;
+    height: 100%;
+    
 }
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+
+.wrap {
+  min-height: 100%;
+  height: auto;
+  margin: 0 auto;
+  padding: 0 0 0px;
+}
+
+
+.wrap > .container {
+    padding: 70px 15px 20px;
+}
+
+.footer {
+    height: 60px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
 
 footer {
   position: relative;
@@ -79,6 +106,7 @@ a.desc:after {
 .navbar-default {
     background-color: #1475b9;
     border-color: #1c2331;
+    margin-bottom: 0px;
   }
   .navbar-default .btn-link {
     color: #ecf0f1;
@@ -150,3 +178,163 @@ a.desc:after {
       background-color: #1c2331;
     }
   }
+
+
+  /* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+}
+
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  background-color: #2980b9;
+  color: white;
+  transition: all 0.3s;
+}
+
+#sidebar.active {
+  margin-left: -250px;
+}
+
+#sidebar .sidebar-header {
+  padding: 20px;
+  background-color: #2980b9;
+}
+
+#sidebar ul.components {
+  padding: 20px 0;
+  border-bottom: 1px solid #47748b;
+}
+
+#sidebar ul p {
+  color: white;
+  padding: 10px;
+}
+
+#sidebar ul li a {
+  padding: 10px;
+  font-size: 1.1em;
+  display: block;
+  color:white;
+  text-align:center;
+}
+
+#sidebar ul li a:hover {
+  color: #7386D5;
+  background: #fff;
+}
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+  color: #7386D5;
+  background: white;
+}
+
+a[data-toggle="collapse"] {
+  position: relative;
+}
+
+.dropdown-toggle::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+
+
+ul.CTAs {
+  padding: 20px;
+}
+
+ul.CTAs a {
+  text-align: center;
+  font-size: 0.9em !important;
+  display: block;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+a.download {
+  background: #7386D5;
+  color: #7386D5;
+}
+
+a.article,
+a.article:hover {
+  background: #6d7fcc !important;
+  color: #fff !important;
+}
+
+/* ---------------------------------------------------
+  CONTENT STYLE
+----------------------------------------------------- */
+
+#content {
+  width: 100%;
+  padding: 20px;
+  min-height: 100vh;
+  transition: all 0.3s;
+}
+
+/* ---------------------------------------------------
+  MEDIAQUERIES
+----------------------------------------------------- */
+
+@media (max-width: 768px) {
+  #sidebar {
+      margin-left: -250px;
+  }
+  #sidebar.active {
+      margin-left: 0;
+  }
+  #sidebarCollapse span {
+      display: none;
+  }
+}
+
+.kv-sidenav{
+  height:1000px;
+}
+
+@media screen and (max-width: 998px) {
+  .kv-sidenav {
+    height: auto;
+  }
+}
+
+/* logo de la unaj*/
+.navbar-brand {
+  padding: 0px; /* firefox bug fix */
+}
+.navbar-brand>img {
+  float: top;
+  height: 130%;
+  padding: 15px; /* firefox bug fix */
+  width: auto;
+  position: relative;
+  bottom: 10px;
+}
+
+/* carousle de inicio*/
+
+.carousel-inner > .item > img {
+  margin: 0 auto;
+}
+
+/* para que quede bien la imagen de perfil*/
+
+.imagenPerfil{
+  height: 28px;
+  border-radius: 50%;
+  position:relative;
+  bottom: 3px;
+}
+

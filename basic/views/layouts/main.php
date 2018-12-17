@@ -64,6 +64,7 @@ li.dropdown:nth-child(2) > a:nth-child(1){
 </style>
 
 <div class="wrap">
+    
     <?php
     NavBar::begin([
         'brandLabel' => '<img src="../image/logo3.png"; class="img-responsive">' . '',
@@ -298,15 +299,15 @@ li.dropdown:nth-child(2) > a:nth-child(1){
 
 <?php $this->endBody() ?>
 
+<footer>
+  <p>Proyecto de Software - Universidad Nacional Arturo Jauretche</p>
+</footer>
 
 
 </body>
 
-<!-- footer comentado 
-<footer>
-  <p>Proyecto de Software - Universidad Nacional Arturo Jauretche</p>
-</footer>
--->
+
+
 
 </html>
 

@@ -1,3 +1,4 @@
+/*este es el estilo del body*/
 .iniciocs{
   background-image: url(../image/background-blur-6.png);
     background-size: cover; 
@@ -10,12 +11,21 @@
 
 }
 
+h3{
+  font-size: 3.6vh;
+  margin-bottom: 9px;
+}
+
 .switch {
   position: relative;
   display: inline-block;
   width: 60px;
   height: 34px;
 }
+
+
+
+/* estas cosas no se que son */
 
 /* Hide default HTML checkbox */
 .switch input {
@@ -92,165 +102,9 @@ input:checked + .slider:before {
   text-align: center;
 }
 
-.jumbotron
-{
-  font-family: "Arial Black", Gadget, sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  -webkit-background-clip: text;
-  color: #2f3640;
+/**/
 
-  /* background: -webkit-linear-gradient(rgb(41, 128, 185),rgb(52, 152, 219));
-  -webkit-background-clip: text; 
-  -webkit-text-fill-color: transparent;
- 
-    
-font-family: "Arial Black", Gadget, sans-serif;
-font-size: 30px;
-letter-spacing: 2.8px;
-word-spacing: 5.8px;
-color: rgb(255, 255, 255);
-font-weight: 700;
-text-decoration: none;
-font-style: normal;
-font-variant: normal;
-text-transform: uppercase; */
-
-}
-.jumbutron #textoBienvenida{
-  color: red;
-}
-.wrap
-{
-  width: 100%;
-  height: 100%;
-}
-
-* {box-sizing: border-box}
-
-
-/* Style the tab */
-.tab {
-    float: left;
-    background-color: #f1f1f1;
-    width: 30%;
-    height: relative;
-}
-
-/* Style the buttons inside the tab */
-.tab button {
-    display: block;
-    background-color: inherit;
-    color: black;
-    padding: 22px 16px;
-    width: 100%;
-    border: none;
-    outline: none;
-    text-align: left;
-    cursor: pointer;
-    transition: 0.3s;
-    font-size: 17px;
-}
-
-/* Change background color of buttons on hover */
-.tab button:hover {
-    background-color: #ddd;
-}
-
-/* Create an active/current "tab button" class */
-.tab button.active {
-    background-color: #ccc;
-}
-
-/* Style the tab content */
-.tabcontent {
-    /*position: relative !important;*/
-    border-collapse: separate;
-    float: left;
-    padding: 10px;
-    width: 70%;
-    border-left: none;
-    max-height: 900px;
-    overflow: auto;
-    overflow-x: hidden;
-}
-
-.gallery{
-  margin: 10px 50px;
-}
-
-.gallery img{
-  width: 340px;
-  height: 240px;
-
-  transition: 0.5s;
-
-  -webkit-border-radius: 15px;
-  border-radius: 15px;
-  
-}
-
-
-.gallery img:hover{
-  transform: scale(1.2);
-}
-
-.form-login {
-  background-color: rgb(41, 128, 185);
-  padding-top: 10px;
-  padding-bottom: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-radius: 15px;
-  border-color:#d2d2d2;
-  border-width: 5px;
-  box-shadow:0 1px 0 #cfcfcf;
-
-  -webkit-box-shadow: 10px 10px 20px -8px rgba(0,0,0,0.75);
--moz-box-shadow: 10px 10px 20px -8px rgba(0,0,0,0.75);
-box-shadow: 10px 10px 20px -8px rgba(0,0,0,0.75);
-}
-
-
-.navbar-default {
-  margin-bottom: 0px;
-}
-
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-th, td {
-  text-align: left;
-  padding: 8px;
-}
-
-
-.form-control {
-  display: block;
-  width: 100%;
-  height: 34px;
-  padding: 6px 12px;
-  font-size: 14px;
-}
-
-
-.regis
-{
-  background-color: #ecf0f1;
-  padding-top: 10px;
-  padding-bottom: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-radius: 9px;
-  border-color:#d2d2d2;
-  border-width: 5px;
-  box-shadow:0 1px 0 #cfcfcf;
-
-}
-
-
+/* esto se usa en algunas tablas */
 .loginc
 {
   margin-top:20px;
@@ -268,94 +122,27 @@ th, td {
   color:white;
 }
 
-
-.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
-  z-index: 2;
-  color: #fff;
-  background-color: #2980b9;
-  border-color: #2980b9;
-}
-
-
-.maininsti
- {
-  width: 100%;
-  height: 100%;
- }
-
-.jumbotron2
-{
-  background: -webkit-linear-gradient(rgb(41, 128, 185),rgb(52, 152, 219));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
- 
-    
-font-family: "Arial Black", Gadget, sans-serif;
-font-size: 30px;
-letter-spacing: 2.8px;
-word-spacing: 5.8px;
-color: rgb(236, 17, 10);
-font-weight: 700;
-text-decoration: none;
-font-style: normal;
-font-variant: normal;
-text-transform: uppercase;
-
-}
-
-.kv-sidenav{
-  height:1000px;
-}
-
-@media screen and (max-width: 998px) {
-  .kv-sidenav {
-    height: auto;
-  }
-}
-
-
-
-.panel-primary{
-  margin-bottom: 0px;
-}
-.nav-stacked{
-  background-color: white;
-}
-.notiboton{
-  background-color:white;
-}
-
-.navbar-brand {
-  padding: 0px; /* firefox bug fix */
-}
-.navbar-brand>img {
-  float: top;
-  height: 130%;
-  padding: 15px; /* firefox bug fix */
-  width: auto;
-  position: relative;
-  bottom: 10px;
-}
-
-
-.carousel-inner > .item > img {
-  margin: 0 auto;
-}
-
-.media{
-  position: relative;
-  left:10px;
-  width: 30%;
-  padding-right: 50px;
-  height:auto;
-}
+/*esto es de notificaciones*/
 .media-body{
+  display:block;
   position: relative;
-  left: 100px;
+  left: 90px;
   bottom: 80px;
 }
 .admin{
   border-radius: 250px;
+}
+
+.enviado{
+  padding-top: 20px;
+  width: 100%;
+}
+
+.float-right{
+  text-align: right;
+}
+.notificacion-create{
+  color: white;
 }
 
 /*esto es el texto de arriba de notificaciones*/
@@ -370,12 +157,6 @@ text-transform: uppercase;
 .recibidos{
   border: 1px solid white;
 }
-
-/* arregla margen de aulas*/
-.btn-vistav{
-  margin-top: 10px;
-}
-
 
 /*Estilo del placeholder*/
 
@@ -395,24 +176,6 @@ text-transform: uppercase;
   opacity: 0.2;
   font-style: italic;
 }
-
-.mensaje{
-  padding-top: 5px;
-  min-height: 650px;
-  width: 50%;
-  overflow: hidden;
-  position: relative;
-  left: 20px;
-}
-.botton01{
-  padding-top: 5px;
-  min-height: 650px;
-  width: 50%;
-  overflow: hidden;
-  position: relative;
-  left: 20px;
-}
-
 
 
 /*Estilo de scroll solo funciona en crome*/
@@ -475,13 +238,6 @@ text-transform: uppercase;
   text-align: center;
 }
 
-.panel_a{
-  background-color: #ffffff;
-  border-width: 20px;
-  box-shadow:0 1px 0 #cfcfcf;
-  margin: auto;
-  text-align: left;
-}
 .azul label{
   color: white;
   float: left;
@@ -495,140 +251,20 @@ text-transform: uppercase;
   color:white;
   font-weight: bold;
 }
-.enviado{
-  width: 80%;
-}
-
-.miBoton {
-	background-color: #1475b9;
-  color: #fff;
-  text-align: left;
-}
 
 
+/* pantalla de error*/
 
-* {
-  margin: 0px;
-  padding: 0px;
-}
-
-
-#sidebar {
-  position: absolute;
-  width: 200px;
-  height: 145%;
-  background: #1475b9;
-  left: 0px;
-  transition: all 500ms linear;
-  top: 50px;
-}
-
-#sidebar.active {
-  left: -200px;
-}
-
-#sidebar ul li {
-  color: rgba(230, 230, 230, .9);
-  list-style: none;
-  padding: 15px 10px;
-  border-bottom: 1px solid rgba(100, 100, 100, .3);
-  text-align: center;
-}
-
-#sidebar .toggle-btn {
-  position: absolute;
-  left: 200px;
-  top: 0px;
-  cursor: pointer;
-}
-
-#sidebar .toggle-btn span {
-  background-color: #1475b9;
-  display: block;
-  width: 30px;
-  text-align: center;
-  font-size: 18px;
-  border: 1px solid #000;
-} 
-
-
-/* Barra lateral nueva de notificaciones*/
-.sidenav {
-  position: absolute;
-  width: 180px;
-  height: 145%;
-  left: 0px;
-  top: 50px;
-  background-color: white;
-  overflow-x: hidden; 
-  padding-top: 10px;
-}
-
-.sidenav a {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.sidenav a:hover {
-  color: black;
-}
-.main {
-  margin-left: 160px; /* Same as the width of the sidebar */
-  padding: 0px 10px;
-}
-
-
-/*Para hacer mas responsivo notificaciones*/
-
-@media screen and (max-width: 700px) {
-  .sidenav {
-    width: 100%;
-    height: auto;
-    position: relative;
-    top: 0px;
-    text-align: center !important;
-    left: 0px;
-  }
-  .sidenav a {
-    float: none;
-    text-align: center;
-  }
-  .enviado {
-      max-height: auto;
-      width: auto !important;
-      height: auto;
-      position: relative;
-      top: 0px;
-  }
-  .enviado a {
-      float: none;
-      text-align: center;
-  }
-  .main{
-      margin-left: 0px;
-  }
-  .mensaje{
-      margin: 0px ;
-      width: auto !important;
-      float: none !important;
-      left: 0px !important;
-  }
-  .alert{
-    text-align: center;
-  }
-  .tabcontent{
-    float: none;
-  }
-}    
-  
 .error{
   text-align: center;
   color: white;
 }
+
+/* estilo de sedes */
 .sede{
   background-color: #1475b9;
 }
+
 .sede p{
   color:#2980b9;
   text-transform:uppercase;
@@ -648,6 +284,9 @@ text-transform: uppercase;
   border: 1px solid #2980b9;
   padding: 0px !important;
 }
+
+/* titulo que se usa habitualmente*/
+
 .titulo{
   font-weight: bold; 
   color:white; 
@@ -655,7 +294,18 @@ text-transform: uppercase;
   text-shadow: 2px 2px grey;
   text-align: center;
 }
-/* gridView */
+
+
+/* gridView, esto es el estilo de paneles de admin */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
 
 .grid{
   background-color: white;
@@ -680,12 +330,6 @@ text-transform: uppercase;
   color: white;
 }
 
-
- .button1 {
-    float: left;
-    margin-top: 18px;
-  }
-
 /*.grid tr:nth-child(odd){
   background-color: #4C8BF5;
   color: #fff;
@@ -695,21 +339,6 @@ text-transform: uppercase;
   color: #fff;
 }
 */
-.float-right{
-  text-align: right;
-}
-.notificacion-create{
-  color: white;
-}
-.miPanel{
-  padding-top:15px;
-  padding-bottom: 15px;
-  border-radius: 10px;
-  text-align: center;
-  font-weight: bold;
-  /*background-color: white;
-  color: #1475b9;*/
-}
 
 /*iconos de administracion*/
 .well{
@@ -728,93 +357,32 @@ text-transform: uppercase;
   border-radius: 10px;
 }
 
+
+.button1 {
+  float: left;
+  margin-top: 18px;
+}
+
+/* esto es para observaciones*/
+.miPanel{
+  padding-top:15px;
+  padding-bottom: 15px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+  /*background-color: white;
+  color: #1475b9;*/
+}
+
 .testing{
   margin-top:-10px;
 }
 
-.manual li{
-  margin-left: 32px;
-}
-
-.manual a{
-  color: #2980b9;
-}
-.site-about img{
-  max-width: 100%;
-}
-
-/*Acerca de*/
-.blacktopline{
-  height: 20px;
-  background-color:black;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-#datacontenido{
-  margin: 0 auto;
-}
-.namenews{
-  font-size: 14vh;
-  margin: 0 auto;
-  width: 100%;
-  text-align:center;
-  font-family: 'Tangerine', cursive;
-  color:#000000;
-}
-.datanews{
-  height: 40px;
-  border: solid 1px gray;
-  width:100%;
-  margin: 0 auto;
-  margin-bottom: 20px;
-  text-align: center;
-}
-.datanews ul{
-  width: 100%;
-  margin-left:-40px;
-}
-.datanews ul li {
-  display: inline-flex;
-  margin: 0 auto;
-  padding: 10px;
-}
-
-.titleplana{
-  margin: 0 auto;
-  text-align:center;
-  width:100%;
-  text-transform: uppercase;
-  font-size: 6.4vh;
-  margin-bottom:10px;
-}
-
-.body-contnent1{
-  width:100%;
-  display:block;
-  margin-left:25%;
-}
-.body-contnent2{
-  width:100%;
-  display:block;
-  margin-left:27%;
-}
-
-.div-col4{
-  width: 33.33%;
-  display:inline-flex;
-  padding:10px;
-}
-.div-col3{
-  width:25%;
-  display:inline-flex;
-  padding:10px;
-}
-h3{
-  font-size: 3.6vh;
-  margin-bottom: 9px;
-}
 
 
+
+
+/* Esto es para que no se deforme el navbar al achicarlo*/
 @media screen and (max-width: 1100px) {
   .navbar-brand img{
     display: none;
@@ -881,10 +449,47 @@ h3{
         width:auto;
     }
 }
-.imagenPerfil{
-  height: 28px;
-  border-radius: 50%;
-  position:relative;
-  bottom: 3px;
+
+/* esto afecta a sedes y a edificios*/
+
+.box{
+  position: relative;
+  background: #ff0;
+  margin: 5px;
+  box-sizing: border-box;
+  display: inline-block;
+  overflow: hidden;
 }
+ .box .imgBox{
+  position: relative;
+}
+ .box .imgBox img{
+  max-width: 100%;
+  transition: transform 2s;
+}
+ .box:hover .imgBox img{
+  transform: scale(1.2);
+}
+.box .details{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.8);
+  transform: scaleY(0);
+  transition: transform .5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+ .box:hover .details{
+  transform: scaleY(1);
+}
+ .box .details .content{
+  text-align: center;
+  padding: 15px;
+  color: #fff;
+}
+
 

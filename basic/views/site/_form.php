@@ -19,6 +19,7 @@ $form = ActiveForm::begin(
 		],
 	]
 );
+echo '<div class= " col-md-8">'
 ?>
 	<?php $result = ArrayHelper::map($usuarios, 'id', 'username');?>
     <?php echo $form->field($model, 'ID_USER_RECEPTOR', ['labelOptions'=>['style'=>'color:white']])->widget(Select2::className(), [
@@ -27,6 +28,7 @@ $form = ActiveForm::begin(
 		'placeholder' => 'Seleccione un usuario...',
 	],
 ])->label('Usuario receptor');
+
 ?>
    <?=$form->field($model, 'NOTIFICACION', ['labelOptions'=>['style'=>'color:white']])->widget(CKEditor::className(), [
 	'options' => ['rows' => 6],

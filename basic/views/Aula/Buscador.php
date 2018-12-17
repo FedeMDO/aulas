@@ -103,4 +103,6 @@ $resultado = ArrayHelper::map($recurso3, 'ID', 'NOMBRE');
 ]) ?>  
 
 
+</div>
+</div>
 <?php $form->end() ?>

@@ -1,102 +1,48 @@
+
 <?php
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use yii\data\Pagination;
 use yii\widgets\LinkPager;
-
-
-$this->registerCssFile("@web/css/index.css", [
-  'depends' => [\yii\bootstrap\BootstrapAsset::className()],
-
-], 'css-print-theme');
-
-$this->title = 'Edificios';
 ?>
 
+<header>
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
+</header>
 
-<!doctype <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <title>Sedes</title>
-  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-  <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Indie+Flower|Lato" rel="stylesheet">
-  <script src="main.js"></script>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar" class="active">
+        <!-- header -->
+        <!--<div class="sidebar-header">
+        </div> -->
+        <ul class="list-unstyled components">
+            <li><a href="../aula/buscador">Filtrar aulas <span class="glyphicon glyphicon-search"></span></a></li>
+            <li><a href="../materia/buscador">Filtrar materias <span class="glyphicon glyphicon-search"></span></a></li>
+            <li><a href="../edificio/scheduler?id_sede=<?= Html::encode("{$idsede}") ?>" class="btn miBoton btn-md btn-vistav" role="button">Ver eventos por edificio</a></li>
+            <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
+            <li><a href="../edificio/create">Crear edificio <span class="glyphicon glyphicon-plus"></span></a></li>
+            <li><a href="../edificio/restrischeduler?id_sede=<?= Html::encode("{$idsede}") ?>" class="btn miBoton btn-md btn-vistav" role="button">Restricciones edificios</a></li>
+            <?php endif; ?>
+        </ul>
+        <!-- Parte de abajo de sidenav -->
+        <ul class="list-unstyled CTAs">
+            <li><a href="../sede/vistav" class="download">Volver a sedes</a></li>
+            </ul>
+    </nav>
+    <!--termina sidebar-->
+    
 
-   <style>
-
-
-h4{
-  text-align: center;
-}
-
-body{
-  margin:0;
-  padding:0;
-  font-family: sans-serif;
-}
-
-.container{
-  width: 1290px;
-  min-height: 500px;
-  margin: 10px auto 0;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
- .box{
-  position: relative;
-  background: #ff0;
-  margin: 5px;
-  box-sizing: border-box;
-  display: inline-block;
-  overflow: hidden;
-}
-
- .box .imgBox{
-  position: relative;
-}
-
- .box .imgBox img{
-  max-width: 100%;
-  transition: transform 2s;
-}
-
- .box:hover .imgBox img{
-  transform: scale(1.2);
-}
-
-.box .details{
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  bottom: 10px;
-  right: 10px;
-  background: rgba(0,0,0,0.8);
-  transform: scaleY(0);
-  transition: transform .5s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
- .box:hover .details{
-  transform: scaleY(1);
-}
-
- .box .details .content{
-  text-align: center;
-  padding: 15px;
-  color: #fff;
-}
-
-</style>
-</head>
-<body>
-  <h2 class=titulo><?php if (count($edificio) != 0) {
+    <div id="content">
+        <!-- boton de sidebar-->
+        <div class="container-fluid">
+            <button type="button" id="sidebarCollapse" class="btn btn-primary"><i class="glyphicon glyphicon-align-justify"></i><span> Menu</span></button>
+        </div>
+        <!-- Contenido de la pagina -->
+        <h2 class=titulo><?php if (count($edificio) != 0) {
                     echo ("Edificios Disponibles en la sede ");
                     echo (Html::encode("{$edificio[0]->sEDE->NOMBRE}"));
                   } else {
@@ -127,39 +73,22 @@ body{
                 <?php endif; ?>
               </div>
             </div>
-
           </div>
         </div>
         </div>
         </div>
-
       </div>
-
     <?php endforeach; ?>
 
+     </div> <!-- final del contenido-->
+</div> <!-- final del wraper-->
 
-
-  <div id="sidebar" class="active">
-  <div class="toggle-btn miBoton">
-      <span>&#9776;</span>
-  </div>
-      <ul>
-      <li><a href="../aula/buscador" class="btn miBoton btn-md btn-vistav " role="button">Filtrar aulas <span class="glyphicon glyphicon-search"></span></a>
-        </li>
-        <li>
-        <a href="../edificio/scheduler?id_sede=<?= Html::encode("{$edificio->sEDE->ID}") ?>" class="btn miBoton btn-md btn-vistav" role="button">Ver eventos por edificio <span class="glyphicon glyphicon-search"></span></a>
-        </li>
-        <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
-        <li>
-        <a href="../edificio/create" class="btn miBoton btn-md btn-vistav" role="button">Crear edificio <span class="glyphicon glyphicon-plus"></span></a>
-        </li>
-        <li>
-        <a href="../edificio/restrischeduler?id_sede=<?= Html::encode("{$edificio->sEDE->ID}") ?>" class="btn miBoton btn-md btn-vistav" role="button">Restricciones edificios <span class="glyphicon glyphicon-search"></span></a>
-        </li>
-        <?php endif; ?>
-      </ul>
-  </div>
-
-</body>
+<!-- script para sidebar -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
 </html>
-

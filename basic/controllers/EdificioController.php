@@ -91,6 +91,7 @@ class EdificioController extends Controller
     }
     public function actionEdifilter($id)
     {
+        $idsede =$id;
         $query = Edificio::find()
             ->where(['ID_SEDE' => $id]);
 
@@ -110,6 +111,7 @@ class EdificioController extends Controller
             'edificio' => $edificio,
             'pagination' => $pagination,
             'id' => $id,
+            'idsede' => $id,
         ]);
 
 
