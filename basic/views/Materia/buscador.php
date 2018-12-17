@@ -45,6 +45,35 @@ $resultado = ArrayHelper::map($sede, 'ID', 'NOMBRE');
 
 ?>
 
+<?php echo $form->field($institutos, 'ID', ['labelOptions' => ['style' => 'color:white']])->widget(Select2::className(), [
+        'data' => $result1,
+        'options' =>
+        [
+            'placeholder' => 'Seleccione instituto...',
+            'onchange' => '
+				$.post( "' . Yii::$app->urlManager->createUrl('comision/listcarrera?id=') . '"+$(this).val(), function( data ) {
+                  if (data){
+                    $( "select#carrera-id" ).html( data );
+                    $( "select#carrera-id" ).prop("selectedIndex", 0).change();
+                  }
+				});
+			'
+        ]
+    ])->label('Instituto'); ?>
+
+<?php echo $form->field($carreras, 'ID', ['labelOptions' => ['style' => 'color:white']])->widget(Select2::className(), [
+        'data' => $result2,
+        'options' =>
+        [
+            'placeholder' => 'Seleccione carrera...',
+            'onchange' => '
+				$.post( "' . Yii::$app->urlManager->createUrl('comision/listmateria?id=') . '"+$(this).val(), function( data ) {
+				  $( "select#materia-id" ).html( data );
+				});
+			'
+        ]
+    ])->label('Carrera'); ?>
+
 <?php echo $form->field($materias, 'ID', ['labelOptions' => ['style' => 'color:white']])->widget(Select2::className(), [
         'data' => $result,
         'options' => [
