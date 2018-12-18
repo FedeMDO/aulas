@@ -17,20 +17,70 @@ $this->title = 'Manual de usuario';
   margin-left: 32px;
 }
 
-.manual a{
-  color: #2980b9;
+
+
+.videos{
+  margin-bottom:10px;
 }
+
+.videoContent{
+  max-width:100%
+ 
+  
+}
+
+.ytp-cued-thumbnail-overlay-image{
+  display:flex;
+  justify-content:center;
+}
+
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
 </style>
 
 
-<h2 class=titulo>Manual de usuario</h2>
+<h2 class=titulo>¿En que podemos ayudarte?</h2>
 
 <br>
 <br>
 
 <div class="manual" id="manualcont">
 <div class="col-md-offset-2 col-md-8 content">
-<div class="panel panel-default">
+<div class="panel panel-default" style=margin-bottom:0px>
     <div class="panel-heading">
       <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne" class="btn btn-link btn-block" role="button" style=text-align:left>
       Entrada al sistema (Login)
@@ -58,7 +108,7 @@ $this->title = 'Manual de usuario';
   </div>
 
 
-  <div class="panel panel-default">
+  <div class="panel panel-default" style=margin-bottom:0px>
     <div class="panel-heading">
       <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse2" class="btn btn-link btn-block" role="button" style=text-align:left>
       Sedes
@@ -191,7 +241,7 @@ $this->title = 'Manual de usuario';
             </div>
           </div>
           
-          <div class="panel panel-default">
+          <div class="panel panel-default" style=margin-bottom:0px>
             <div class="panel-heading">
               <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerSedes6" class="btn btn-link btn-block" role="button" style=text-align:left>
               Filtrar aulas
@@ -222,7 +272,7 @@ $this->title = 'Manual de usuario';
               </div>
             </div>
           </div>
-          <div class="panel panel-default">
+          <div class="panel panel-default" style=margin-bottom:0px>
             <div class="panel-heading">
               <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerSedes7" class="btn btn-link btn-block" role="button" style=text-align:left>
                 Modificar sedes
@@ -266,7 +316,7 @@ $this->title = 'Manual de usuario';
 
 
   
-  <div class="panel panel-default">
+  <div class="panel panel-default" style=margin-bottom:0px>
     <div class="panel-heading">
       <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse3" class="btn btn-link btn-block" role="button" style=text-align:left>
         Edificios
@@ -339,7 +389,7 @@ $this->title = 'Manual de usuario';
   </div>
 
 
-  <div class="panel panel-default">
+  <div class="panel panel-default" style=margin-bottom:0px>
     <div class="panel-heading">
       <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapseAulas01" class="btn btn-link btn-block" role="button" style=text-align:left>
        Aulas
@@ -418,14 +468,7 @@ $this->title = 'Manual de usuario';
 
 
 
-
-
-
-
-
-
-
-  <div class="panel panel-default">
+  <div class="panel panel-default" style=margin-bottom:0px>
     <div class="panel-heading">
       <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse5" class="btn btn-link btn-block" role="button" style=text-align:left>
         Institutos
@@ -448,7 +491,7 @@ $this->title = 'Manual de usuario';
     </div>
   </div>
 
-  <div class="panel panel-default">
+  <div class="panel panel-default " style=margin-bottom:0px>
     <div class="panel-heading">
       <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse05" class="btn btn-link btn-block" role="button" style=text-align:left>
         Carreras
@@ -473,7 +516,7 @@ $this->title = 'Manual de usuario';
 
 
 
-  <div class="panel panel-default">
+  <div class="panel panel-default" style=margin-bottom:0px>
     <div class="panel-heading">
       <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse06" class="btn btn-link btn-block" role="button" style=text-align:left>
         Administración
@@ -542,7 +585,7 @@ $this->title = 'Manual de usuario';
           </div>
 
 
-          <div class="panel panel-default">
+          <div class="panel panel-default" style=margin-bottom:0px>
             <div class="panel-heading">
               <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion06" href="#collapseInnerAdmin03" class="btn btn-link btn-block" role="button" style=text-align:left >
               Panel de administración
@@ -661,7 +704,7 @@ $this->title = 'Manual de usuario';
 
 
 
- <div class="panel panel-default">
+ <div class="panel panel-default" style=margin-bottom:0px>
     <div class="panel-heading">
       <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapseNoti01" class="btn btn-link btn-block" role="button" style=text-align:left>
         Notificaciones
@@ -734,7 +777,7 @@ $this->title = 'Manual de usuario';
 
   
 
-    <div class="panel panel-default">
+    <div class="panel panel-default" style=margin-bottom:0px>
     <div class="panel-heading">
       <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse7" class="btn btn-link btn-block" role="button" style=text-align:left>
        Cambio de contraseña
@@ -766,7 +809,7 @@ $this->title = 'Manual de usuario';
   </div>
 
 
-  <div class="panel panel-default">
+  <div class="panel panel-default" style=margin-bottom:0px>
     <div class="panel-heading">
       <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse10" class="btn btn-link btn-block" role="button" style=text-align:left>
         Calendar
@@ -869,8 +912,118 @@ $this->title = 'Manual de usuario';
         </div>
         </div>
 </div>
+<div class="col-md-offset-2 col-md-8 content">
+<h3 class="titulo">Videos que te ayudaran con lo basico</h3>
+<div class=videos >
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'Sedes')" id="defaultOpen">Sedes</button>
+  <button class="tablinks" onclick="openCity(event, 'Edificios')">Edificios</button>
+  <button class="tablinks" onclick="openCity(event, 'Aulas')">Aulas</button>
+  <button class="tablinks" onclick="openCity(event, 'Institutos')" id="defaultOpen">Institutos</button>
+  <button class="tablinks" onclick="openCity(event, 'Carreras')">Carreras</button>
+  <button class="tablinks" onclick="openCity(event, 'Administracion')">Administracion</button>
+</div>
+
+
+<div id="Sedes" class="tabcontent">
+
+  <iframe width="400" height="315" class="videoContent"
+    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+<iframe width="400" height="315" class="videoContent"
+    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+<iframe width="400" height="315" class="videoContent"
+    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+
+</div>
+
+<div id="Edificios" class="tabcontent">
+<iframe width="400" height="315" class="videoContent"
+    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+<iframe width="400" height="315" class="videoContent"
+    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+<iframe width="400" height="315" class="videoContent"
+    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+
+</div>
+
+<div id="Aulas" class="tabcontent">
+<iframe width="400" height="315" class="videoContent"
+    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+<iframe width="400" height="315" class="videoContent"
+    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+<iframe width="400" height="315" class="videoContent"
+    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+
+</div>
+
+<div id="Institutos" class="tabcontent">
+<iframe width="400" height="315" class="videoContent"
+    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+<iframe width="400" height="315" class="videoContent"
+    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+<iframe width="400" height="315" class="videoContent"
+    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+
+</div>
+
+<div id="Carreras" class="tabcontent">
+<iframe width="400" height="315" class="videoContent"
+    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+<iframe width="400" height="315" class="videoContent"
+    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+<iframe width="400" height="315" class="videoContent"
+    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+
+</div>
+
+<div id="Administracion" class="tabcontent">
+<iframe width="400" height="315" class="videoContent"
+    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+<iframe width="400" height="315" class="videoContent"
+    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+<iframe width="400" height="315" class="videoContent"
+    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+
+</div>
+
 </div>
 </div>
 
+</div>
+</div>
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
 
-
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>

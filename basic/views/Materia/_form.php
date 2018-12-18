@@ -29,7 +29,7 @@ use app\models\Carrera;
     <?= $form->field($model, 'anio', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->textInput()->label('Año'); ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Crear', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Crear', ['class' => 'btn btn-success btn-block']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

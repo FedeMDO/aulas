@@ -158,11 +158,7 @@ class AulaController extends Controller
     public function actionCreate()
     {
         $model = new Aula();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID]);
-        }
-
+        
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -180,7 +176,7 @@ class AulaController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID]);
+            return $this->goBack();
         }
 
         return $this->render('update', [
@@ -345,6 +341,7 @@ class AulaController extends Controller
                 $obs = $aula1['OBS'];
                 $aula->OBS = $obs;
                 $aula->save();
+                /* return $this->goBack();*/ /*comento porque no anda en buscador*/
             }
         }
         return $this->render('observa', [

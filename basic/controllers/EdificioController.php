@@ -13,7 +13,6 @@ use yii\filters\VerbFilter;
 use yii\data\Pagination;
 use app\models\User;
 use yii\filters\AccessControl;
-
 /**
  * EdificioController implements the CRUD actions for Edificio model.
  */
@@ -155,9 +154,7 @@ class EdificioController extends Controller
     {
         $model = new Edificio();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID]);
-        }
+       
 
         return $this->render('create', [
             'model' => $model,
@@ -176,7 +173,7 @@ class EdificioController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID]);
+            return $this->goBack();
         }
 
         return $this->render('update', [

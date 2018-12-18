@@ -30,4 +30,5 @@ $this->title = $name;
     </div>
     </div>
 <?php endif; ?>
+</div>
 

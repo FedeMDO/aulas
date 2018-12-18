@@ -13,6 +13,8 @@ use yii\widgets\LinkPager;
 
 </header>
 
+<?= \yii\helpers\Url::remember(); ?>
+
 <div class="wrapper">
     <!-- Sidebar  -->
     <nav id="sidebar" class="active">
@@ -28,7 +30,7 @@ use yii\widgets\LinkPager;
         </ul>
         <!-- Parte de abajo de sidenav -->
         <ul class="list-unstyled CTAs">
-            <li><a href="#" class="download">Volver a atras</a></li>
+            <li><a href="<?= Yii::$app->request->referrer ?>" class="download">Volver a atras</a></li>
             <li><a href="../sede/vistav" class="download">Volver a sedes</a></li>
             </ul>
     </nav>

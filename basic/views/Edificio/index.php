@@ -10,6 +10,7 @@ use yii\grid\GridView;
 $this->title = 'Edificios';
 
 ?>
+<?= \yii\helpers\Url::remember(); ?>
 <div class="edificio-index">
 
     <h1 class=titulo>Panel de edificios</h1>

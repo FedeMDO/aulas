@@ -7,7 +7,7 @@ $this->registerCssFile("@web/css/index.css", [
 ], 'css-print-theme');
 $this->title = 'Buscador de aulas';
 ?>
-
+<?= \yii\helpers\Url::remember(); ?>
 <center><?php if (count($aulasCumplen) != 0) {
 
           ?>

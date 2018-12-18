@@ -7,8 +7,10 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\AulaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+
 $this->title = 'Aulas';
 ?>
+<?= \yii\helpers\Url::remember(); ?>
 <div class="aula-index">
     <h1 class=titulo>Panel de <?= Html::encode($this->title) ?></h1>
     <p>

@@ -27,7 +27,6 @@ use app\models\Sede;
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success btn-block']) ?>
     </div>
-
     <?php ActiveForm::end(); ?>
 
 </div>

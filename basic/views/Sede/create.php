@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $form->field($model, "DISPONIBLE_DESDE",['labelOptions'=>['style'=>'color:white']])->label("Disponible desde") ?>  
 <?= $form->field($model, "DISPONIBLE_HASTA",['labelOptions'=>['style'=>'color:white']]) ->label("Disponible hasta") ?>  
 <?= Html::submitButton("Crear", ["class" => "btn btn-success btn-block"]) ?>  
+<?= \yii\helpers\Url::remember(); ?>
 <?php $form->end() ?>
 </div>
 </div>

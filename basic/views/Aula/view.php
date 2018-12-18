@@ -6,10 +6,13 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Aula */
 
+
 $this->title = $model->ID;
 $this->params['breadcrumbs'][] = ['label' => 'Aulas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
+<?= \yii\helpers\Url::remember(); ?>
 <div class="aula-view">
     <div class="col-md-offset-1 col-md-10">
     <h1 class=titulo><?= Html::encode($this->title) ?></h1>
@@ -37,4 +40,5 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+</div>
 </div>

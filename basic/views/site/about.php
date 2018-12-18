@@ -87,7 +87,7 @@ $this->title = 'Acerca de nosotros';
 
 </style>
 <div class="col-md-offset-2 col-md-8 content">
-<div class="loginc" style="margin-top:0px; border-radius:0px;  height:1300px; padding:0px;">
+<div class="loginc" style="margin-top:0px; border-radius:0px;  height:100%; padding:0px;">
 <div class="box-body">
 <div class="site-about">
     <img width="1500px" height="348" src="../image/teamwork.jpg" />

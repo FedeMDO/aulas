@@ -115,10 +115,6 @@ class ComisionController extends Controller
                 $comi->CARGA_HORARIA_SEMANAL = null;
                 $comi->ID_Ciclo = 1;
                 $comi->save();
-                if ($comi->save()) {
-                    $session = Yii::$app->session;
-                    $session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, "Se han creado correctamente $help comisiones");
-                }
             }
         }
         $instituto = new Instituto();

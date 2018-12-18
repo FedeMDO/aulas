@@ -9,6 +9,7 @@ use yii\grid\GridView;
 
 $this->title = 'Comisiones';
 ?>
+<?= \yii\helpers\Url::remember(); ?>
 <div class="comision-index">
 
     <h1 class=titulo>Panel de comisiones</h1>
