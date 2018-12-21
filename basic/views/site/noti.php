@@ -27,6 +27,11 @@ $this->title = 'Notificaciones';
                 display: none;
             }
         }
+        .boxMensaje{
+            max-width: 500px;
+        }
+        
+      
     </style>
 </header>
 
@@ -57,15 +62,21 @@ $this->title = 'Notificaciones';
                 if ($n->uSERRECEPTOR->id == Yii::$app->user->identity->id) : ?>
 					<?php $entro = true; ?>
                     <?php $usuario1 = Users::findOne($n->uSEREMISOR->id); ?>
+                    <div class="boxMensaje">
                     <?php if ($usuario1->profile_picture ==""):?>
                         <img src="../image/admin_icon.png" class="admin" style=" height:60px; width:60px; margin-left:10px; margin-bottom:10px;";>
                     <?php else: ?>
 					    <img src="<?= $usuario1->profile_picture ?>" class="admin" style=" height:60px; width:60px; margin-left:10px; margin-bottom:10px;";>
                     <?php endif ?>
 					<div class="media-body">
-					    <h4><?= Html::encode("{$n->uSEREMISOR->username} ") ?> <small><i>Fecha: <?= Html::encode("{$n->FECHA} ") ?></i></small></h4>
-					    <p><?= SiteController::encrypt_decrypt('decrypt', $n->NOTIFICACION) ?></p>
+                        <h4><?= Html::encode("{$n->uSEREMISOR->username} ") ?> <small><i>Fecha: <?= Html::encode("{$n->FECHA} ") ?></i></small>
+                        <a href="#"onclick="openCity(event, 'Enviar notificacion')" title="Responder"class="glyphicon glyphicon-share-alt" style="margin-left:5px" ></a></h4>
+                        <p><?= SiteController::encrypt_decrypt('decrypt', $n->NOTIFICACION) ?></p>
+                        <?php $n->visto = "true" ?>
+                        <?php $n->save(); ?>
 					</div>
+                    </div>
+
 				<?php endif; ?>
             <?php endforeach; ?>
                 <?php if ($entro == false) : ?>
@@ -88,7 +99,7 @@ $this->title = 'Notificaciones';
 					<div class="media-body">
 					    <h4>Para: <?= Html::encode("{$n->uSERRECEPTOR->username} ") ?>
 					    <small><i>Fecha: <?= Html::encode("{$n->FECHA} ") ?></i></small>
-					    <small><?= Html::a('borrar', Url::to(['site/noti']), ['data' => ['confirm' => 'Estas seguro?', 'method' => 'post', 'params' => ['Notificacion' => 'borrar', 'id' => $n->ID]]]) ?></small></h4>
+                        <small> <?= Html::a('<i class="glyphicon glyphicon-trash"></i>', Url::to(['site/noti']),  ['data' => ['confirm' => 'Estas seguro?', 'method' => 'post', 'params' => ['Notificacion' => 'borrar', 'id' => $n->ID]]]) ?></small></h4>
 					    <p><?= SiteController::encrypt_decrypt('decrypt', $n->NOTIFICACION) ?></p>
 					</div>
 				<?php endif; ?>

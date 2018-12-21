@@ -124,7 +124,6 @@ input:checked + .slider:before {
 
 /*esto es de notificaciones*/
 .media-body{
-  display:block;
   position: relative;
   left: 90px;
   bottom: 80px;
@@ -214,6 +213,7 @@ input:checked + .slider:before {
   float: center;
   margin: auto; 
   margin-top: 20px;
+  
   text-align: center;
 }
 
@@ -235,6 +235,7 @@ input:checked + .slider:before {
   box-shadow:0 1px 0 #cfcfcf;
   margin: auto; 
   margin-top: 20px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -445,7 +446,13 @@ th, td {
         width:500px;
     }
 
+/* fix en culular*/
+@media (max-width: 768px) {
+  .modal-log{
+    width:auto;
+}
 
+  }
 
 /* esto afecta a sedes y a edificios*/
 

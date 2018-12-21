@@ -14,11 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
   \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
 
 endif; ?>
-<?php if (Yii::$app->session->hasFlash(\dominus77\sweetalert2\Alert::TYPE_ERROR)) :
-
-  \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
-
-endif; ?>
 
 
  

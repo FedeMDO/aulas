@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "notificacion".
  *
  * @property int $ID
+ * @property string $visto
  * @property int $ID_USER_EMISOR
  * @property int $ID_USER_RECEPTOR
  * @property string $NOTIFICACION

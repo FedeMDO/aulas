@@ -17,7 +17,7 @@ $this->registerCssFile("@web/css/index.css", [
 ]);
 
 ?>
-
+<div class="col-md-offset-4 col-md-4">
 <div class="loginc log">
     <h1><?= Html::encode('Bienvenido') ?></h1>
   
@@ -44,5 +44,6 @@ $this->registerCssFile("@web/css/index.css", [
 
 </div>
 </div>
+
 
 
