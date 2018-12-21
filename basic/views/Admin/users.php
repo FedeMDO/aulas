@@ -17,6 +17,9 @@ $this->title = 'Gestionar usuarios';
 
 <div class="col-md-offset-1 col-md-10">
 <h2 class=titulo style="text-align:center;">Gestión de usuarios</h2>
+<p>
+  <?= Html::a('Nuevo usuario', ['site/register'], ['class' => 'btn btn-success']) ?>
+</p>
 <div class="loginc">
 <div class="box-body">
                 <div class="table-responsive">          

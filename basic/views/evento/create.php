@@ -5,6 +5,7 @@ use app\models\Comision;
 use app\models\Users;
 use app\models\User;
 use app\models\Carrera;
+use app\models\Instituto;
 /* @var $this yii\web\View */
 /* @var $model app\models\EventoCalendar */
 
@@ -19,10 +20,13 @@ else{
     $carreras = Carrera::find()->asArray()->all();
 }
 
+$institutos = Instituto::find()->asArray()->all();
+
 ?>
 <div class="evento-calendar-create">
     <?= $this->render('_form', [
-        'model' => $model,'materia' => $materia,'carrera' => $carrera, 'carreras' => $carreras,
+        'model' => $model,'materia' => $materia,'carrera' => $carrera, 
+        'carreras' => $carreras, 'instituto' => $instituto, 'institutos' => $institutos,
     ]) ?>
 
 </div>

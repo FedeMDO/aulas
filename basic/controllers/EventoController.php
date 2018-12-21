@@ -81,6 +81,7 @@ class EventoController extends Controller
     {
         $materia = new Materia();
         $carrera = new Carrera();
+        $instituto = new Instituto();
         $model = new EventoCalendar();
         $model->ID_User_Asigna = Yii::$app->user->identity->id;
 
@@ -93,12 +94,12 @@ class EventoController extends Controller
             if ($model->save()) {
                 return $this->redirect(['index', 'id' => $model->ID_Aula]);
             } else {
-                return $this->renderAjax('create', ['model' => $model, 'materia' => $materia, 'carrera' => $carrera]);
+                return $this->renderAjax('create', ['model' => $model, 'materia' => $materia, 'carrera' => $carrera, 'instituto' => $instituto,]);
             }
         }
 
         return $this->renderAjax('create', [
-            'model' => $model, 'materia' => $materia, 'carrera' => $carrera,
+            'model' => $model, 'materia' => $materia, 'carrera' => $carrera, 'instituto' => $instituto,
         ]);
     }
 

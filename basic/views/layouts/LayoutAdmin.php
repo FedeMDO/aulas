@@ -177,7 +177,6 @@ li.dropdown:nth-child(2) > a:nth-child(1){
                 <li><a href='/edificio/index'><i class = "glyphicon glyphicon-chevron-right"></i> Panel de edificios</a></li>
                 <li><a href='/instituto/index'><i class = "glyphicon glyphicon-chevron-right"></i> Panel de institutos</a></li>
                 <li><a href='/materia/index'><i class = "glyphicon glyphicon-chevron-right"></i> Panel de materias</a></li>
-                <li><a href='/notificacion/index'><i class = "glyphicon glyphicon-chevron-right"></i> Panel de notificaciones</a></li>
                 <li><a href='/recurso/index'><i class = "glyphicon glyphicon-chevron-right"></i> Panel de recursos</a></li>
                 <li><a href='/sede/index'><i class = "glyphicon glyphicon-chevron-right"></i> Panel de sedes</a></li>
             </ul>

@@ -22,8 +22,27 @@ use app\models\Users;
         ]
     ]);
     $resultCarr = ArrayHelper::map($carreras, 'ID', 'NOMBRE');
+    $resultInst = ArrayHelper::map($institutos, 'ID', 'NOMBRE');
     ?>
     <h1>Crear evento calendario </h1>
+
+    <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)): ?>
+    <?php echo $form->field($instituto, 'ID', ['labelOptions' => ['style' => 'color:white']])->dropDownList(
+        $resultInst,
+        [
+            'prompt' => 'Seleccionar',
+            'onchange' => '
+				$.post( "' . Yii::$app->urlManager->createUrl('comision/listcarrera?id=') . '"+$(this).val(), function( data ) {
+                  if(data){
+                    $( "select#carrera-id" ).html( data );
+                    $("select#carrera-id").prop("selectedIndex", 0).change();
+                  }
+				});
+            '
+        ]
+    )->label('Instituto'); ?>
+    <?php endif; ?>
+
     <?php echo $form->field($carrera, 'ID', ['labelOptions' => ['style' => 'color:white']])->dropDownList(
         $resultCarr,
         [
