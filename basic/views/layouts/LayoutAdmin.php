@@ -11,6 +11,7 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\models\User;
 use kartik\sidenav\SideNav;
+use app\models\Notificacion;
 
 
 $this->registerCssFile("@web/css/index.css", [
@@ -88,6 +89,23 @@ li.dropdown:nth-child(2) > a:nth-child(1){
 
      // cambia la foto de acuerdo si tiene o no imagen cargada//
      if (Yii::$app->user->identity->profile_picture == ''){
+        $urlImagen= "../image/admin_icon.png";
+    }
+    else{
+    $urlImagen = Yii::$app->user->identity->profile_picture;
+    }
+    $queryContador = Notificacion::find()
+    ->where(['ID_USER_RECEPTOR' => Yii::$app->user->identity->id])
+    ->andwhere(['visto' => false]) ->asArray()->all();
+
+    $contador = count($queryContador);
+    $display = "";
+    if ($contador == 0){
+        $display = "display:none;";
+        $contador ="";
+    }
+
+    if (Yii::$app->user->identity->profile_picture == ''){
         $urlImagen= "../image/admin_icon.png";
     }
     else{
