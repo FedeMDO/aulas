@@ -430,22 +430,22 @@ class SiteController extends Controller
                     $model1->FECHA = new \yii\db\Expression('NOW()');
                     $model1->save();
                         //Enviamos correo
-                    // $receptor = Users::findOne($user1)->username;
-                    // $emisor = Users::findOne($model1->ID_USER_EMISOR)->username;
-                    // $mail = Users::findOne($user1)->email;
-                    // $subject = "Nueva notificación";
-                    // $body = "<p>Hola <strong>" . $receptor . "</strong>, tenes una nueva notificación de <strong>" . $emisor . "</strong>.</p>";
-                    // $body .= "<p> Notificación: <i>" . $mensaje . "</i></p>";
-                    // $body .= "<p><a href='http://yii.local/site/noti'>Ver notificación</a></p>";
-                    // try {
-                    //     Yii::$app->mailer->compose()
-                    //         ->setTo($mail)
-                    //         ->setFrom([Yii::$app->params["adminEmail"] => Yii::$app->params["title"]])
-                    //         ->setSubject($subject)
-                    //         ->setHtmlBody($body)
-                    //         ->send();
-                    // } catch (\Swift_TransportException $e) {
-                    // }
+                     $receptor = Users::findOne($user1)->username;
+                     $emisor = Users::findOne($model1->ID_USER_EMISOR)->username;
+                     $mail = Users::findOne($user1)->email;
+                     $subject = "Nueva notificación";
+                     $body = "<p>Hola <strong>" . $receptor . "</strong>, tenes una nueva notificación de <strong>" . $emisor . "</strong>.</p>";
+                     $body .= "<p> Notificación: <i>" . $mensaje . "</i></p>";
+                     $body .= "<p><a href='http://yii.local/site/noti'>Ver notificación</a></p>";
+                     try {
+                         Yii::$app->mailer->compose()
+                             ->setTo($mail)
+                             ->setFrom([Yii::$app->params["adminEmail"] => Yii::$app->params["title"]])
+                             ->setSubject($subject)
+                             ->setHtmlBody($body)
+                             ->send();
+                     } catch (\Swift_TransportException $e) {
+                     }
                 }
                 if ($model1->save()) {
                     $session = Yii::$app->session;
