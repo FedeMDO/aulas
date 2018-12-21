@@ -127,7 +127,7 @@ li.dropdown:nth-child(2) > a:nth-child(1){
             'encodeLabels' => false,
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
-                ['label' => Html::tag('span', '', ['class' => 'fa fa-bell']) . ' ', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold; font-size:20px']],
+                ['label' => Html::tag('span', '', ['class' => 'fa fa-bell']) .  '<span class="badge"' . "style=" . $display . ">  $contador   </span>" . '</span>', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold; font-size:20px']],
                 Yii::$app->user->isGuest ? (['label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-log-in']) . ' LOGIN', 'url' => ['/site/login'], 'options' => ['style' => 'font-weight: bold;']]) :
                     [
                         'label' => '<img class= "imagenPerfil" src=' . $urlImagen .'><span style="margin-botom:0px; bottom:3px; position: relative; margin-left:4px">' . Yii::$app->user->identity->username .'</sman> ', 'options' => ['style' => 'font-weight: bold;'],

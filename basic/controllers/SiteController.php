@@ -414,6 +414,8 @@ class SiteController extends Controller
             ->where(['ID_USER_EMISOR' => Yii::$app->user->identity->id])
             ->orwhere(['ID_USER_RECEPTOR' => Yii::$app->user->identity->id]);
 
+       
+
         $pagination = new Pagination([
             'defaultPageSize' => 20,
             'totalCount' => $query->count(),
@@ -475,8 +477,7 @@ class SiteController extends Controller
             'notificacion' => $notificacion,
             'pagination' => $pagination,
             'model' => $model,
-            'usuarios' => $usuarios
-
+            'usuarios' => $usuarios,
         ]);
     }
 
