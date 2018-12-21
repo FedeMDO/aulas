@@ -33,7 +33,7 @@ class MateriaController extends Controller
                 'rules' => [
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                        'actions' => [],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {

@@ -41,7 +41,7 @@ class UserController extends Controller
                     ],
                     [
                        //Los usuarios simples tienen permisos sobre las siguientes acciones
-                        'actions' => ['getunamebyid', 'currentuserisguest'],
+                        'actions' => ['getunamebyid', 'currentuserisguest', 'changepw', 'updateprofile'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
@@ -50,7 +50,7 @@ class UserController extends Controller
                     ],
                     [
                     //Los usuarios guest tienen permisos sobre las siguientes acciones
-                        'actions' => ['getunamebyid', 'currentuserisguest'],
+                        'actions' => ['getunamebyid', 'currentuserisguest', 'changepw', 'updateprofile'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {

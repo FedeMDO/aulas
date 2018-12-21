@@ -5,6 +5,9 @@ use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use yii\data\Pagination;
 use yii\widgets\LinkPager;
+
+$this->title = 'Edificios';
+
 ?>
 
 <header>
