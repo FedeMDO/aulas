@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Carrera;
 use app\models\CarreraSearch;
+use app\models\OfertaAcademica;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -68,6 +69,37 @@ class CarreraController extends Controller
     {
         return $this->render('ofertaacademica');
     }
+
+    public function actionOfertabyparams($idCiclo, $strCarrera)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $oferta = OfertaAcademica::find()
+            ->where(['Ciclo' => $idCiclo])
+            ->andWhere(['Carrera' => $strCarrera])->all();
+
+        $obj = array();
+        $rowData = array();
+        foreach($oferta as $row)
+        {
+            unset($rowData);
+            $rowData[] = $row->Carrera;
+            $rowData[] = $row->Anio;
+            $rowData[] = $row->Materia;
+            $rowData[] = $row->Comision;
+            $rowData[] = $row->Dia;
+            $rowData[] = $row->HoraInicio;
+            $rowData[] = $row->HoraFin;
+            $rowData[] = $row->Sede;
+            $rowData[] = $row->Edificio;
+            $rowData[] = $row->Aula;
+            $obj["data"][] = $rowData;
+        }
+
+        return (object)$obj;
+
+    }
+
     public function actionListcarrera($id)
     {
         $carreras = Carrera::find()
@@ -194,53 +226,4 @@ class CarreraController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionOferta()
-    {
-
-
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, "http://045846bd.ngrok.io/api/ofertas");
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        $result = curl_exec($curl);
-
-        curl_close($curl);
-
-        // $result = $this->CallAPI("GET", "http://045846bd.ngrok.io/api/ofertas");
-        $json = json_decode($result);
-        return $json;
-    }
-
-    // Method: POST, PUT, GET etc
-    // Data: array("param" => "value") ==> index.php?param=value
-
-    function CallAPI($method, $url, $data = false)
-    {
-
-
-        switch ($method) {
-            case "POST":
-                curl_setopt($curl, CURLOPT_POST, 1);
-
-                if ($data)
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-                break;
-            case "PUT":
-                curl_setopt($curl, CURLOPT_PUT, 1);
-                break;
-            default:
-                if ($data)
-                    $url = sprintf("%s?%s", $url, http_build_query($data));
-        }
-
-        // // Optional Authentication:
-        // curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        // curl_setopt($curl, CURLOPT_USERPWD, "username:password");
-
-        // curl_setopt($curl, CURLOPT_URL, $url);
-        // curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-
-
-
-        return $result;
-    }
 }

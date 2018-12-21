@@ -78,32 +78,33 @@ $indexMaterias = 1;
 
     <div class="col-md-offset-1 col-md-10">
     
-
-    <?php if (!app\models\User::isUserGuest(Yii::$app->user->identity->id)) : ?>    
-    <div class="dropdown">
-            <button class="btn btn-success">Nuevo evento</button>
-            <div class="dropdown-content">
-                <a href="#"><?= Html::button('Nuevo evento periodico', ['value' => Url::to(['evento/create', 'id_aula' => $id_aula]), 'title' => 'Crear eventos que se repiten cada semana', 'class' => 'showModalButton btn ']); ?></a>
-                <a href="#"><?= Html::button('Nuevo evento especial', ['value' => Url::to(['especialcalendar/create', 'id_aula' => $id_aula]), 'title' => 'Crear un evento no periódico', 'class' => 'showModalButton btn ']); ?></a>
-            </div>
+        <?php if (!app\models\User::isUserGuest(Yii::$app->user->identity->id)) : ?>    
+        <div class="dropdown">
+                <button class="btn btn-success">Nuevo evento</button>
+                <div class="dropdown-content">
+                    <a href="#"><?= Html::button('Nuevo evento periodico', ['value' => Url::to(['evento/create', 'id_aula' => $id_aula]), 'title' => 'Crear eventos que se repiten cada semana', 'class' => 'showModalButton btn ']); ?></a>
+                    <a href="#"><?= Html::button('Nuevo evento especial', ['value' => Url::to(['especialcalendar/create', 'id_aula' => $id_aula]), 'title' => 'Crear un evento no periódico', 'class' => 'showModalButton btn ']); ?></a>
+                </div>
         </div>
-    <?php endif; ?>
-    <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
-    <?= Html::a('Ir a restriccion', Url::to(['restri/index?id=' . $id_aula . '']), ['class' => 'btn btn-primary']); ?>
-    <?php endif; ?>
-    <div style="display:none;">
-    <em id:"id_aula"><?= Html::encode("{$id_aula}") ?></em>
+        <?php endif; ?>
 
-    </div>
+        <?= Html::a('Ver en scheduler', Url::to(['edificio/scheduler?id_sede=' . $aula->eDIFICIO->sEDE->ID . '']), ['class' => 'btn btn-primary']); ?>  
+
+
+        <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
+        <?= Html::a('Ir a restriccion', Url::to(['restri/index?id=' . $id_aula . '']), ['class' => 'btn btn-primary']); ?>
+        <?php endif; ?>
+
+        <div style="display:none;">
+            <em id:"id_aula"><?= Html::encode("{$id_aula}") ?></em>
+        </div>
 
         <div class="loginc">
-        <h3 style="text-align: center; font-weight: bold;">ASIGNACION COMISIONES DE AULA <i><?= Html::encode("{$aula}") ?></i></h3>
+            <h3 style="text-align: center; font-weight: bold;">ASIGNACION COMISIONES DE AULA <i><?= Html::encode("{$aula->NOMBRE}") ?></i></h3>
             <div class="evento-index">
-
                 <div class="evento-calendar-index">
-                
                     <div class="evento-index">
-                            <div id='calendar'></div>
+                        <div id='calendar'></div>
                     </div>
                 </div>
             </div>

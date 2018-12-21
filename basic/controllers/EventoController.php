@@ -52,7 +52,7 @@ class EventoController extends Controller
      */
     public function actionIndex($id)
     {
-        $aula = Aula::findOne($id)->NOMBRE;
+        $aula = Aula::findOne($id);
         return $this->render('index', [
             'id_aula' => $id,
             'aula' => $aula,

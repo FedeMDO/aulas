@@ -1,6 +1,7 @@
 //MAIN VISTA CALENDARIO DE RESTRICCIONES
 $(document).ready(function () {
     $('#calendar').fullCalendar({
+        themeSystem: 'bootstrap4',
         //VIEW
         header: {
             left: 'today prev,next',

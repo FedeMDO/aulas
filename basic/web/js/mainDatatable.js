@@ -4,7 +4,7 @@ $('#btnBuscar').click(function () {
     let idCarrera = $('#carrera-id option:selected').text();
     let idCiclo = parseInt($('#ciclolectivo-id').val());
 
-    var url = "http://ae930764.ngrok.io/api/ofertas/ciclo/" + idCiclo + "/carrera/" + idCarrera;
+    var url = "/carrera/ofertabyparams?idCiclo=" + idCiclo + "&strCarrera=" + idCarrera;
 
     $('#example').DataTable({
         dom: 'Bfrtip',
