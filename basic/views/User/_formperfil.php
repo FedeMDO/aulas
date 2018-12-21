@@ -9,18 +9,31 @@ use app\models\Instituto;
 /* @var $model app\models\Aula */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+<style>
 
+
+
+.box1{
+    display:flex;
+    justify-content:center;
+    margin-left:50px;
+}
+
+
+</style>
 <div class="user-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
     <?php if ($usuario->profile_picture == ""): ?>
-    <img src="../image/admin_icon.png" id=#avatar height=200px; width=200px; alt="Avatar" style="margin-bottom:20px; border-radius: 50%" >
+    <img src="../image/admin_icon.png" id=#avatar  alt="Avatar" style="margin-bottom:20px; border-radius: 50%; ">
     <?php else : ?>
-    <img src=<?php echo $usuario->profile_picture ?> height=200px;  alt="Avatar" style="margin-bottom:20px; border-radius: 50%"> 
+    <img src=<?php echo $usuario->profile_picture ?>   alt="Avatar" style="margin-bottom:20px; border-radius: 50%; width: 200px; height:200px; border: 5px solid lavender; "> 
     <?php endif ?>
-        <p style="text-align:left">Cambiar foto de perfil:</p>
-        <?= $form->field($model1, "file")->fileInput()->label("") ?>
+        <div class = "box1">
+            <?= $form->field($model1, "file")->fileInput()->label("") ?>
+        </div>
+
         <div class="form-group">
     <?= $form->field($model, 'username', ['labelOptions' => ['style' => 'color:white']])->textInput(['maxlength' => true]) ?>
 

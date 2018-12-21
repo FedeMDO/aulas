@@ -11,15 +11,16 @@ $this->params['breadcrumbs'][] = ['label' => 'Ciclo Lectivos', 'url' => ['index'
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="ciclo-lectivo-view">
+<div class="col-md-offset-1 col-md-10">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 class=titulo><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Borrar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Estas seguro que queres borrar este item?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -27,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
+        'options'=>['class'=>'table-bordered table-condensed  grid'],
         'attributes' => [
             'id',
             'nombre',
@@ -36,4 +38,5 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+</div>
 </div>

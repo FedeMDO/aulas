@@ -12,16 +12,20 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="ciclo-lectivo-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 class=titulo>Panel de <?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Ciclo Lectivo', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Crear ciclo lectivo', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'tableOptions' => ['class' => 'table-bordered table-condensed  grid'],
+        'options' => [
+            'class' => 'table-responsive',
+        ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

@@ -6,13 +6,7 @@ use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 
 
-$this->registerCssFile(
-  "@web/css/inicio.css",
-  [
-    'depends' => [\yii\bootstrap\BootstrapAsset::className()],
-  ],
-  'css-print-theme'
-);
+
 
 
 $this->title = 'Sistema de Gestion de Aulas';

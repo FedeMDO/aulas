@@ -55,9 +55,9 @@ use app\models\Users;
 					<?php $entro = true; ?>
                     <?php $usuario1 = Users::findOne($n->uSEREMISOR->id); ?>
                     <?php if ($usuario1->profile_picture ==""):?>
-                        <img src="../image/admin_icon.png" class="admin" style="width:60px; margin-left:10px; margin-bottom:10px;";>
+                        <img src="../image/admin_icon.png" class="admin" style=" height:60px; width:60px; margin-left:10px; margin-bottom:10px;";>
                     <?php else: ?>
-					    <img src="<?= $usuario1->profile_picture ?>" class="admin" style="width:60px; margin-left:10px; margin-bottom:10px;";>
+					    <img src="<?= $usuario1->profile_picture ?>" class="admin" style=" height:60px; width:60px; margin-left:10px; margin-bottom:10px;";>
                     <?php endif ?>
 					<div class="media-body">
 					    <h4><?= Html::encode("{$n->uSEREMISOR->username} ") ?> <small><i>Fecha: <?= Html::encode("{$n->FECHA} ") ?></i></small></h4>
@@ -78,9 +78,9 @@ use app\models\Users;
                 if ($n->uSEREMISOR->id == Yii::$app->user->identity->id) : ?>
 				    <?php $entro = true; ?>
                     <?php if (Yii::$app->user->identity->profile_picture ==""):?>
-                        <img src="../image/admin_icon.png" class="admin" style="width:60px; margin-left:10px; margin-bottom:10px;";>
+                        <img src="../image/admin_icon.png" class="admin" style="height:60px; width:60px; margin-left:10px; margin-bottom:10px;";>
                     <?php else: ?>
-					    <img src= "<?= Yii::$app->user->identity->profile_picture ?>" class="admin" style="width:60px; margin-left:10px; margin-bottom:10px;";>
+					    <img src= "<?= Yii::$app->user->identity->profile_picture ?>" class="admin" style="height:60px; width:60px; margin-left:10px; margin-bottom:10px;";>
                     <?php endif ?>
 					<div class="media-body">
 					    <h4>Para: <?= Html::encode("{$n->uSERRECEPTOR->username} ") ?>

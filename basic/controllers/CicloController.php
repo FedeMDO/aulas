@@ -37,7 +37,7 @@ class CicloController extends Controller
     {
         $searchModel = new CicloLectivoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $this->layout = 'LayoutAdmin';
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

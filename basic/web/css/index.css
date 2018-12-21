@@ -385,7 +385,7 @@ th, td {
 
 
 /* Esto es para que no se deforme el navbar al achicarlo*/
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1106px) {
   .navbar-brand img{
     display: none;
   }
@@ -399,7 +399,6 @@ th, td {
     padding-left: 8px !important;
     padding-right: 8px !important;
   }
-  
 }
 
 @media screen and (max-width: 850px) {
@@ -446,17 +445,12 @@ th, td {
         width:500px;
     }
 
-@media screen and (max-width: 850px) {
-    .modal-log{
-        width:auto;
-    }
-}
+
 
 /* esto afecta a sedes y a edificios*/
 
 .box{
   position: relative;
-  background: #ff0;
   margin: 5px;
   box-sizing: border-box;
   display: inline-block;

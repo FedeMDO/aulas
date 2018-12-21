@@ -6,7 +6,8 @@ use yii\bootstrap\ActiveForm;
 
 ?>
 
-
+<div class="col-md-offset-4 col-md-4">
+<div class="loginc log">
 <form>
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
@@ -21,9 +22,10 @@ use yii\bootstrap\ActiveForm;
     <input type="checkbox" class="form-check-input" id="exampleCheck1">
     <label class="form-check-label" for="exampleCheck1">Check me out</label>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-success btn-block">Submit</button>
 </form>
-
+</div>
+</div>
 
 
 

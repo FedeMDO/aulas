@@ -101,7 +101,14 @@ li.dropdown:nth-child(2) > a:nth-child(1){
                 ['label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-home']) . ' INICIO', 'url' => ['/site/index'], 'options' => ['style' => 'font-weight: bold;']],
                 ['label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-chevron-right']) . ' SEDES', 'url' => ['/sede/vistav'], 'options' => ['style' => 'font-weight: bold;']],
                 ['label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-chevron-right']) . ' INSTITUTOS', 'url' => ['/instituto/institutov'], 'options' => ['style' => 'font-weight: bold;']],
-                ['label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-chevron-right']) . ' CARRERAS', 'url' => ['/carrera/carrerav'], 'options' => ['style' => 'font-weight: bold;']],
+                [
+                    'label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-chevron-right']) . ' CARRERAS', 'options' => ['style' => 'font-weight: bold;'],
+
+                    'items' => [
+                        ['label' => '<span></span> Informacion de carreras', 'url' => '/carrera/carrerav'],
+                        ['label' => '<span> Oferta academica', 'url' => '/carrera/ofertaacademica'],
+                    ],
+                ],
                 [
                     'label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-chevron-right']) . ' ADMINISTRACION', 'url' => ['/site/register'], 'options' => ['style' => 'font-weight: bold;'],
 
@@ -147,6 +154,7 @@ li.dropdown:nth-child(2) > a:nth-child(1){
             <ul class="list-unstyled components">
                 <li><a href='/aula/index'><i class = "glyphicon glyphicon-chevron-right"></i> Panel de aulas</a></li>
                 <li><a href="/carrera/index"><i class = "glyphicon glyphicon-chevron-right"></i> Panel de carreras</a></li>
+                <li><a href='/ciclo/index'><i class = "glyphicon glyphicon-chevron-right"></i> Panel de ciclo lectivo</a></li>
                 <li><a href="/comision/index"><i class = "glyphicon glyphicon-chevron-right"></i> Panel de comisiones</a></li>
                 <li><a href='/edificio/index'><i class = "glyphicon glyphicon-chevron-right"></i> Panel de edificios</a></li>
                 <li><a href='/instituto/index'><i class = "glyphicon glyphicon-chevron-right"></i> Panel de institutos</a></li>
@@ -187,7 +195,7 @@ li.dropdown:nth-child(2) > a:nth-child(1){
 </body>
 <!-- footer comentado -->
 <footer>
-  <p>Proyecto de Software - Universidad Nacional Arturo Jauretche</p>
+  <p>Universidad Nacional Arturo Jauretche</p>
 </footer>
 
 

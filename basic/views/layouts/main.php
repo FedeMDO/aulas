@@ -110,9 +110,16 @@ li.dropdown:nth-child(2) > a:nth-child(1){
                     ['label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-home']) . ' INICIO', 'url' => ['/site/index'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-chevron-right']) . ' SEDES', 'url' => ['/sede/vistav'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-chevron-right']) . ' INSTITUTOS', 'url' => ['/instituto/institutov'], 'options' => ['style' => 'font-weight: bold;']],
-                    ['label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-chevron-right']) . ' CARRERAS', 'url' => ['/carrera/carrerav'], 'options' => ['style' => 'font-weight: bold;']],
                     [
-                        'label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-chevron-right']) . ' ADMINISTRACION', 'url' => ['/site/register'], 'options' => ['style' => 'font-weight: bold;'],
+                        'label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-chevron-right']) . ' CARRERAS', 'options' => ['style' => 'font-weight: bold;'],
+
+                        'items' => [
+                            ['label' => '<span></span> Informacion de carreras', 'url' => '/carrera/carrerav'],
+                            ['label' => '<span> Oferta academica', 'url' => '/carrera/ofertaacademica'],
+                        ],
+                    ],
+                    [
+                        'label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-chevron-right']) . ' ADMINISTRACION', 'options' => ['style' => 'font-weight: bold;'],
 
                         'items' => [
                             ['label' => '<span></span> Registrar usuario', 'url' => '/site/register'],
@@ -151,7 +158,14 @@ li.dropdown:nth-child(2) > a:nth-child(1){
                     ['label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-home']) . ' INICIO', 'url' => ['/site/index'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-chevron-right']) . ' SEDES', 'url' => ['/sede/vistav'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-chevron-right']) . ' INSTITUTOS', 'url' => ['/instituto/institutov'], 'options' => ['style' => 'font-weight: bold;']],
-                    ['label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-chevron-right']) . ' CARRERAS', 'url' => ['/carrera/carrerav'], 'options' => ['style' => 'font-weight: bold;']],
+                    [
+                        'label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-chevron-right']) . ' CARRERAS', 'options' => ['style' => 'font-weight: bold;'],
+
+                        'items' => [
+                            ['label' => '<span></span> Informacion de carreras', 'url' => '/carrera/carrerav'],
+                            ['label' => '<span> Oferta academica', 'url' => '/carrera/ofertaacademica'],
+                        ],
+                    ],
                     ['label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-chevron-right']) . ' CREAR COMISION', 'url' => ['/comision/create'], 'options' => ['style' => 'font-weight: bold;']],
                 ],
             ]);
@@ -182,7 +196,14 @@ li.dropdown:nth-child(2) > a:nth-child(1){
                     ['label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-home']) . ' INICIO', 'url' => ['/site/index'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-chevron-right']) . ' SEDES', 'url' => ['/sede/vistav'], 'options' => ['style' => 'font-weight: bold;']],
                     ['label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-chevron-right']) . ' INSTITUTOS', 'url' => ['/instituto/institutov'], 'options' => ['style' => 'font-weight: bold;']],
-                    ['label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-chevron-right']) . ' CARRERAS', 'url' => ['/carrera/carrerav'], 'options' => ['style' => 'font-weight: bold;']],
+                    [
+                        'label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-chevron-right']) . ' CARRERAS', 'options' => ['style' => 'font-weight: bold;'],
+
+                        'items' => [
+                            ['label' => '<span></span> Informacion de carreras', 'url' => '/carrera/carrerav'],
+                            ['label' => '<span> Oferta academica', 'url' => '/carrera/ofertaacademica'],
+                        ],
+                    ],
                 ],
             ]);
             echo Nav::widget([
@@ -300,7 +321,7 @@ li.dropdown:nth-child(2) > a:nth-child(1){
 <?php $this->endBody() ?>
 
 <footer>
-  <p>Proyecto de Software - Universidad Nacional Arturo Jauretche</p>
+  <p>Universidad Nacional Arturo Jauretche</p>
 </footer>
 
 

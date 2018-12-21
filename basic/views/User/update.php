@@ -17,3 +17,4 @@ $this->title = 'Actualizar usuario';
     ]) ?>
 
 </div>
+</div>

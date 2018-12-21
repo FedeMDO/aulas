@@ -141,7 +141,6 @@ $this->title = 'Acerca de nosotros';
     </div>
     </div>
   </aside>
-    </p>
 </div>
 </div>
 </div>

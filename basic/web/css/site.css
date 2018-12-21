@@ -333,8 +333,10 @@ a.article:hover {
 
 .imagenPerfil{
   height: 28px;
+  width: 28px;
   border-radius: 50%;
   position:relative;
   bottom: 3px;
+  
 }
 
