@@ -95,7 +95,7 @@ class SiteController extends Controller
             if ($model->validate()) {
                 if ($recover == $model->recover) {
                     $table = Users::findOne(["email" => $model->email, "id" => $id_recover, "verification_code" => $model->verification_code]);
-                    $table->password = crypt($model->password, Yii::$app->params["salt"]);
+                    $table->password = $this->encrypt_decrypt('encrypt', $model->password);
 
                     if ($table->save()) {
                         $session->destroy();
@@ -202,7 +202,7 @@ class SiteController extends Controller
                 $table->username = $model->username;
                 $table->email = $model->email;
                 $table->idInstituto = $model->idInstituto;
-                $table->password = crypt($model->password, Yii::$app->params["salt"]);
+                $table->password = $this->encrypt_decrypt('encrypt', $model->password);
                 $table->authKey = $this->randKey("abcdef0123456789", 200);
                 $table->accessToken = $this->randKey("abcdef0123456789", 200);
 
@@ -426,26 +426,26 @@ class SiteController extends Controller
                     $model1 = new Notificacion();
                     $model1->ID_USER_EMISOR = Yii::$app->user->identity->id;
                     $model1->ID_USER_RECEPTOR = $user1;
-                    $model1->NOTIFICACION = $mensaje;
+                    $model1->NOTIFICACION = $this->encrypt_decrypt('encrypt', $mensaje);
                     $model1->FECHA = new \yii\db\Expression('NOW()');
                     $model1->save();
                         //Enviamos correo
-                    $receptor = Users::findOne($user1)->username;
-                    $emisor = Users::findOne($model1->ID_USER_EMISOR)->username;
-                    $mail = Users::findOne($user1)->email;
-                    $subject = "Nueva notificación";
-                    $body = "<p>Hola <strong>" . $receptor . "</strong>, tenes una nueva notificación de <strong>" . $emisor . "</strong>.</p>";
-                    $body .= "<p> Notificación: <i>" . $model1->NOTIFICACION . "</i></p>";
-                    $body .= "<p><a href='http://yii.local/site/noti'>Ver notificación</a></p>";
-                    try {
-                        Yii::$app->mailer->compose()
-                            ->setTo($mail)
-                            ->setFrom([Yii::$app->params["adminEmail"] => Yii::$app->params["title"]])
-                            ->setSubject($subject)
-                            ->setHtmlBody($body)
-                            ->send();
-                    } catch (\Swift_TransportException $e) {
-                    }
+                    // $receptor = Users::findOne($user1)->username;
+                    // $emisor = Users::findOne($model1->ID_USER_EMISOR)->username;
+                    // $mail = Users::findOne($user1)->email;
+                    // $subject = "Nueva notificación";
+                    // $body = "<p>Hola <strong>" . $receptor . "</strong>, tenes una nueva notificación de <strong>" . $emisor . "</strong>.</p>";
+                    // $body .= "<p> Notificación: <i>" . $mensaje . "</i></p>";
+                    // $body .= "<p><a href='http://yii.local/site/noti'>Ver notificación</a></p>";
+                    // try {
+                    //     Yii::$app->mailer->compose()
+                    //         ->setTo($mail)
+                    //         ->setFrom([Yii::$app->params["adminEmail"] => Yii::$app->params["title"]])
+                    //         ->setSubject($subject)
+                    //         ->setHtmlBody($body)
+                    //         ->send();
+                    // } catch (\Swift_TransportException $e) {
+                    // }
                 }
                 if ($model1->save()) {
                     $session = Yii::$app->session;
@@ -465,5 +465,24 @@ class SiteController extends Controller
             'usuarios' => $usuarios
 
         ]);
+    }
+
+    public function encrypt_decrypt($action, $string)
+    {
+        $output = false;
+        $encrypt_method = "AES-256-CBC";
+        $secret_key = 'jtdsy8j1elj8gi25';
+        $secret_iv = 'qp8ybcpablf2e6rk';
+        // hash
+        $key = hash('sha256', $secret_key);
+        //iv
+        $iv = substr(hash('sha256', $secret_iv), 0, 16);
+        if ( $action == 'encrypt' ) {
+            $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+            $output = base64_encode($output);
+        } else if( $action == 'decrypt' ) {
+            $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+        }
+        return $output;
     }
 }

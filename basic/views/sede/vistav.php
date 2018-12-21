@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
 
+$this->title = 'Sedes';
+
 ?>
 <?= \yii\helpers\Url::remember(); ?>
 <header>

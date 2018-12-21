@@ -6,6 +6,7 @@ use Yii;
 use yii\base\InvalidParamException;
 use yii\base\model;
 use app\models\User;
+use app\controllers\SiteController;
  
 /**
  * Change password form for current user only
@@ -67,7 +68,7 @@ class FormChangePassword extends Model
     {
         $id = $this->_user->id;
         $table = Users::findOne(["id" => $id]);
-        $table->password = crypt($this->password, Yii::$app->params["salt"]);
+        $table->password = Sitecontroller::encrypt_decrypt('encrypt', $this->password);
  
         return $table->save();
     }

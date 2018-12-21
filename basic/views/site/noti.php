@@ -6,6 +6,9 @@ use yii\bootstrap\Alert;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use app\models\Users;
+use app\controllers\SiteController;
+
+$this->title = 'Notificaciones';
 
 ?>
 
@@ -61,7 +64,7 @@ use app\models\Users;
                     <?php endif ?>
 					<div class="media-body">
 					    <h4><?= Html::encode("{$n->uSEREMISOR->username} ") ?> <small><i>Fecha: <?= Html::encode("{$n->FECHA} ") ?></i></small></h4>
-					    <p><?= $n->NOTIFICACION ?></p>
+					    <p><?= SiteController::encrypt_decrypt('decrypt', $n->NOTIFICACION) ?></p>
 					</div>
 				<?php endif; ?>
             <?php endforeach; ?>
@@ -86,7 +89,7 @@ use app\models\Users;
 					    <h4>Para: <?= Html::encode("{$n->uSERRECEPTOR->username} ") ?>
 					    <small><i>Fecha: <?= Html::encode("{$n->FECHA} ") ?></i></small>
 					    <small><?= Html::a('borrar', Url::to(['site/noti']), ['data' => ['confirm' => 'Estas seguro?', 'method' => 'post', 'params' => ['Notificacion' => 'borrar', 'id' => $n->ID]]]) ?></small></h4>
-					    <p><?= $n->NOTIFICACION ?></p>
+					    <p><?= SiteController::encrypt_decrypt('decrypt', $n->NOTIFICACION) ?></p>
 					</div>
 				<?php endif; ?>
             <?php endforeach; ?>

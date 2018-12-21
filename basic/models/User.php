@@ -2,6 +2,7 @@
 
 namespace app\models;
 use yii\web\IdentityInterface;
+use app\controllers\SiteController;
 
 
 class User extends \yii\base\baseObject implements \yii\web\IdentityInterface
@@ -194,7 +195,7 @@ class User extends \yii\base\baseObject implements \yii\web\IdentityInterface
     public function validatePassword($password)
     {
         /* Valida el password */
-        if (crypt($password, $this->password) == $this->password)
+        if (SiteController::encrypt_decrypt('encrypt', $password) == $this->password)
         {
         return $password === $password;
         }
