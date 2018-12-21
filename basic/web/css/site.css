@@ -341,3 +341,25 @@ a.article:hover {
   
 }
 
+/* esto es para el icono de nueva noti */
+
+.badge {
+  position: absolute;
+  top: 10%;
+  right: 8%;
+  border-radius: 50%;
+  background: red;
+  color: white;
+}
+
+@media (max-width: 767px) {
+  .badge {
+    position: static;
+    margin-bottom: 3px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+  }  
+}
+
+

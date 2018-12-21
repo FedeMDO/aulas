@@ -12,6 +12,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\models\User;
+use app\models\Notificacion;
 
 
 $this->registerCssFile("@web/css/index.css", [
@@ -66,6 +67,8 @@ li.dropdown:nth-child(2) > a:nth-child(1){
 <div class="wrap">
     
     <?php
+       
+
     NavBar::begin([
         'brandLabel' => '<img src="../image/logo3.png"; class="img-responsive">' . '',
         "innerContainerOptions" => ['class' => 'container-fluid']
@@ -95,6 +98,18 @@ li.dropdown:nth-child(2) > a:nth-child(1){
         ]);
     } else {
         // cambia la foto de acuerdo si tiene o no imagen cargada//
+
+        $queryContador = Notificacion::find()
+        ->where(['ID_USER_RECEPTOR' => Yii::$app->user->identity->id])
+        ->andwhere(['visto' => false]) ->asArray()->all();
+    
+        $contador = count($queryContador);
+        $display = "";
+        if ($contador == 0){
+            $display = "display:none;";
+            $contador ="";
+        }
+
         if (Yii::$app->user->identity->profile_picture == ''){
             $urlImagen= "../image/admin_icon.png";
         }
@@ -103,6 +118,7 @@ li.dropdown:nth-child(2) > a:nth-child(1){
         }
         //SI ES ADMIN
         if (User::isUserAdmin(Yii::$app->user->identity->id)) {
+        
             echo Nav::widget([
                 'encodeLabels' => false,
                 'options' => ['class' => 'navbar-nav navbar-default'],
@@ -129,12 +145,11 @@ li.dropdown:nth-child(2) > a:nth-child(1){
                     ]
                 ],
             ]);
-           
             echo Nav::widget([
                 'encodeLabels' => false,
                 'options' => ['class' => 'navbar-nav navbar-right navDerecha'],
                 'items' => [
-                    ['label' => Html::tag('span', '', ['class' => 'fa fa-bell']) . ' ', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold; font-size:20px']],
+                    ['label' => Html::tag('span', '', ['class' => 'fa fa-bell']) .  '<span class="badge"' . "style=" . $display . ">  $contador   </span>" . '</span>', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold; font-size:20px']],
                     Yii::$app->user->isGuest ? (['label' => Html::button('<i class="glyphicon glyphicon-log-in"></i> INGRESAR', ['value' => Url::to('/site/login2'), 'class' => 'btn btn-add-al', 'id' => 'modalLogin', 'style' => 'position:relative; top:-8px; font-weight: bold; background-color: Transparent;'])]) :
                         [
                         'label' => '<img class= "imagenPerfil" src=' . $urlImagen .'><span style="margin-botom:0px; bottom:3px; position: relative; margin-left:4px">' . Yii::$app->user->identity->username .'</sman> ', 'options' => ['style' => 'font-weight: bold;'],
@@ -149,6 +164,7 @@ li.dropdown:nth-child(2) > a:nth-child(1){
                 ],
             ]);
         }
+
          //si es user
         if (User::isUserSimple(Yii::$app->user->identity->id)) {
             echo Nav::widget([
@@ -173,7 +189,7 @@ li.dropdown:nth-child(2) > a:nth-child(1){
                 'encodeLabels' => false,
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => Html::tag('span', '', ['class' => 'fa fa-bell']) . ' ', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold;']],
+                    ['label' => Html::tag('span', '', ['class' => 'fa fa-bell']) .  '<span class="badge"' . "style=" . $display . ">  $contador   </span>" . '</span>', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold; font-size:20px']],
                     Yii::$app->user->isGuest ? (['label' => Html::button('<i class="glyphicon glyphicon-log-in"></i> INGRESAR', ['value' => Url::to('/site/login2'), 'class' => 'btn btn-add-al', 'id' => 'modalLogin', 'style' => 'position:relative; top:-8px; font-weight: bold; background-color: Transparent;'])]) :
                         [
                         'label' => '<img class= "imagenPerfil" src=' . $urlImagen .'><span style="margin-botom:0px; bottom:3px; position: relative; margin-left:4px">' . Yii::$app->user->identity->username .'</sman> ', 'options' => ['style' => 'font-weight: bold;'],
@@ -210,7 +226,7 @@ li.dropdown:nth-child(2) > a:nth-child(1){
                 'encodeLabels' => false,
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => Html::tag('span', '', ['class' => 'fa fa-bell']) . ' ', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold;']],
+                    ['label' => Html::tag('span', '', ['class' => 'fa fa-bell']) .  '<span class="badge"' . "style=" . $display . ">  $contador   </span>" . '</span>', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold; font-size:20px']],
                     Yii::$app->user->isGuest ? (['label' => Html::button('<i class="glyphicon glyphicon-log-in"></i> INGRESAR', ['value' => Url::to('/site/login2'), 'class' => 'btn btn-add-al', 'id' => 'modalLogin', 'style' => 'position:relative; top:-8px; font-weight: bold; background-color: Transparent;'])]) :
                         [
                         'label' => '<img class= "imagenPerfil" src=' . $urlImagen .'><span style="margin-botom:0px; bottom:3px; position: relative; margin-left:4px">' . Yii::$app->user->identity->username .'</sman> ', 'options' => ['style' => 'font-weight: bold;'],
