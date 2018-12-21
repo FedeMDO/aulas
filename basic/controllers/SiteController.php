@@ -89,13 +89,15 @@ class SiteController extends Controller
         $recover = $session["recover"];
         $model->recover = $recover;
 
-        $id_recover = $session["id_recover"];
+        /* REVISAR QUIZAS HAYA HUECO DE SEGURIDAD COMENTO PORQUE SINO NO ANDA */
+        //$id_recover = $session["id_recover"];
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 if ($recover == $model->recover) {
-                    $table = Users::findOne(["email" => $model->email, "id" => $id_recover, "verification_code" => $model->verification_code]);
-                    $table->password = $this->encrypt_decrypt('encrypt', $model->password);
+                    $table = Users::findOne(["email" => $model->email, /*"id" => $id_recover,*/ "verification_code" => $model->verification_code]);
+                    $nueva = $this->encrypt_decrypt('encrypt', $model->password);
+                    $table->password = $nueva;
 
                     if ($table->save()) {
                         $session->destroy();
@@ -311,21 +313,27 @@ class SiteController extends Controller
     public function actionLogin()
     {
         $model = new LoginForm();
+        
+        if (Yii::$app->user->isGuest){
 
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return ActiveForm::validate($model);
+            if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                return ActiveForm::validate($model);
+            }
+
+            if ($model->load(Yii::$app->request->post()) && $model->login()) {
+                return $this->redirect('index');
+
+            } else {
+                return $this->render('login', [
+                    'model' => $model,
+                ]);
+            }
+            return $this->render('login', ['model' => $model]);
         }
-
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        else{
             return $this->redirect('index');
-
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
         }
-        return $this->render('login', ['model' => $model]);
     }
 
 
@@ -333,21 +341,26 @@ class SiteController extends Controller
     {
         $model = new LoginForm();
 
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return ActiveForm::validate($model);
+        if (Yii::$app->user->isGuest){
+            if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                return ActiveForm::validate($model);
+            }
+
+            if ($model->load(Yii::$app->request->post()) && $model->login()) {
+
+                return $this->redirect('index');
+
+            } else {
+                return $this->renderAjax('login2', [
+                    'model' => $model,
+                ]);
+            }
+            return $this->renderAjax('login2', ['model' => $model]);
         }
-
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-
+        else{
             return $this->redirect('index');
-
-        } else {
-            return $this->renderAjax('login2', [
-                'model' => $model,
-            ]);
         }
-        return $this->renderAjax('login2', ['model' => $model]);
     }
 
     /**

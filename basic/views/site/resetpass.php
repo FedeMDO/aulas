@@ -2,6 +2,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\bootstrap\Alert;
+
+$this->title = 'Restaurar contraseña';
 ?>
 
  <h3><?= $msg ?></h3>
@@ -13,7 +15,7 @@ use yii\bootstrap\Alert;
 ?>
 <div class="col-md-offset-4 col-md-4">
 <div class="loginc log">
-<h1>Recuperar contraseña</h1>
+<h1>Restaurar contraseña</h1>
  <?= $form->field($model, "email", ['labelOptions' => ['style' => 'color:white']])->input("email")->label("E-mail:") ?>  
  <?= $form->field($model, "password", ['labelOptions' => ['style' => 'color:white']])->input("password")->label("Contraseña nueva:") ?>  
  <?= $form->field($model, "password_repeat", ['labelOptions' => ['style' => 'color:white']])->input("password")->label("Repita contraseña:") ?>  
