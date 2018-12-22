@@ -7,6 +7,13 @@ use yii\helpers\Html;
 /* @var $model app\models\Comision */
 
 ?>
+
+<?php if (Yii::$app->session->hasFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS)) :
+
+\dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
+
+endif; ?>
+
 <div class="col-md-offset-4 col-md-4">
 <div class="loginc azul">
 <div class="comision-create">

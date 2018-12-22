@@ -15,7 +15,7 @@ RegisterAsset::register($this);
 <div class="col-md-offset-4 col-md-4">
 <div class="loginc azul">
     
-<?php if (Yii::$app->session->hasFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS)) :
+<?php if (Yii::$app->session->hasFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS) || Yii::$app->session->hasFlash(\dominus77\sweetalert2\Alert::TYPE_ERROR)) :
 
     \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
 
@@ -31,7 +31,7 @@ endif; ?>
 
 <h2 style="color:white; border-bottom: 1px solid white;">Registrar usuario</h2>
 <?= $form->field($model, "username", ['labelOptions' => ['style' => 'color:white; padding-top:10px']])->input("text")->label('Nombre de usuario') ?>   
-<?= $form->field($model, "email", ['labelOptions' => ['style' => 'color:white']])->input("email")->label('E-mail') ?>   
+<?= $form->field($model, "email", ['labelOptions' => ['style' => 'color:white']])->input("email")->label('Email') ?>   
 <!-- despliego institutos  -->
 <?php $institutos = Instituto::find()->asArray()->all();
 $result = ArrayHelper::map($institutos, 'ID', 'NOMBRE'); ?>
@@ -48,8 +48,7 @@ $result = ArrayHelper::map($institutos, 'ID', 'NOMBRE'); ?>
 <?php $roles = ['Administrador', 'Usuario', 'Guest']; ?>
 <br><p>
  <?= $form->field($model, "rol", ['labelOptions' => ['style' => 'color:white; margin-top:5px;']])->dropDownList(
-    $roles,
-    ['prompt' => 'Seleccione...']
+    $roles
 )->label('Permisos del usuario'); ?>
 </p>
  <?= $form->field($model, "password", ['labelOptions' => ['style' => 'color:white']])->input("password")->label('Contraseña') ?>   

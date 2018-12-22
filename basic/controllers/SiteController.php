@@ -25,6 +25,51 @@ use yii\data\Pagination;
 
 class SiteController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['register', 'noti'], //acciones que solamente va a verificar permisos
+                'rules' => [
+                    [
+                        //El administrador tiene permisos sobre las siguientes acciones
+                        'actions' => [],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserAdmin(Yii::$app->user->identity->id);
+                        },
+                    ],
+                    [
+                       //Los usuarios simples tienen permisos sobre las siguientes acciones
+                        'actions' => ['noti'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserSimple(Yii::$app->user->identity->id);
+                        },
+                    ],
+                    [
+                    //Los usuarios guest tienen permisos sobre las siguientes acciones
+                        'actions' => ['noti'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserGuest(Yii::$app->user->identity->id);
+                        },
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
+    
     public function actionRecoverpass()
     {
         $model = new FormRecoverPass;
@@ -89,13 +134,18 @@ class SiteController extends Controller
         $recover = $session["recover"];
         $model->recover = $recover;
 
-        /* REVISAR QUIZAS HAYA HUECO DE SEGURIDAD COMENTO PORQUE SINO NO ANDA */
-        //$id_recover = $session["id_recover"];
+        /* FUNCIONA SOLO CUANDO SE ENVIA MAIL DE RECUPERACION Y ACTO SEGUIDO SE RESETEA, SINO NO */
+        $id_recover = $session["id_recover"];
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 if ($recover == $model->recover) {
-                    $table = Users::findOne(["email" => $model->email, /*"id" => $id_recover,*/ "verification_code" => $model->verification_code]);
+                    $table = Users::findOne(["email" => $model->email, "id" => $id_recover, "verification_code" => $model->verification_code]);
+                    if (empty($table) && $recover == null){
+                        $session = Yii::$app->session;
+                        $session->setFlash(\dominus77\sweetalert2\Alert::TYPE_ERROR, "Ha ocurrido un error. Intente enviar nuevamente el mail de recuperación");
+                        return $this->redirect('resetpass');
+                    }
                     $nueva = $this->encrypt_decrypt('encrypt', $model->password);
                     $table->password = $nueva;
 
@@ -107,8 +157,13 @@ class SiteController extends Controller
                         $model->password_repeat = null;
                         $model->recover = null;
                         $model->verification_code = null;
-                        $msg = "Password reseteado correctamente, redireccionando a la página de login ...";
-                        $msg .= "<meta http-equiv='refresh' content='5; " . Url::toRoute("site/login") . "'>";
+                        $msg = $session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, [
+                            [
+                                'text' => 'Password reseteado correctamente, redireccionando a la página de login...'
+                            ]
+                        ]);
+                        $msg .= "<meta http-equiv='refresh' content='3; " . Url::toRoute("site/login") . "'>";
+                        
                     } else {
                         $msg = "Ha ocurrido un error";
                     }
@@ -118,51 +173,6 @@ class SiteController extends Controller
             }
         }
         return $this->render("resetpass", ["model" => $model, "msg" => $msg]);
-    }
-
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['register', 'noti'], //acciones que solamente va a verificar permisos
-                'rules' => [
-                    [
-                        //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => [],
-                        'allow' => true,
-                        'roles' => ['@'],
-                        'matchCallback' => function ($rule, $action) {
-                            return User::isUserAdmin(Yii::$app->user->identity->id);
-                        },
-                    ],
-                    [
-                       //Los usuarios simples tienen permisos sobre las siguientes acciones
-                        'actions' => ['noti'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                        'matchCallback' => function ($rule, $action) {
-                            return User::isUserSimple(Yii::$app->user->identity->id);
-                        },
-                    ],
-                    [
-                    //Los usuarios guest tienen permisos sobre las siguientes acciones
-                        'actions' => ['noti'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                        'matchCallback' => function ($rule, $action) {
-                            return User::isUserGuest(Yii::$app->user->identity->id);
-                        },
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
     }
 
     private function randKey($str = '', $long = 0)
@@ -192,14 +202,27 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 $table = new Users;
-                if ($model->rol == 1 || $model->rol == null) { //rol user simple
-                    $table->rol = 10;
+                switch ($model->rol){
+                    case 0:     //rol admin
+                        $table->rol = 20;
+                        break;
+                    case 1:     //rol user simple
+                        $table->rol = 10;
+                        break;
+                    case 2:     //rol guest
+                        $table->rol = 30;
+                        break;
                 }
-                if ($model->rol == 0) { //rol admin
-                    $table->rol = 20;
+
+                if ($model->idInstituto == null && $model->rol == null){
+                    $session = Yii::$app->session;
+                    $session->setFlash(\dominus77\sweetalert2\Alert::TYPE_ERROR, "Los campos de instituto y rol no pueden estar ambos vacios");
+                    return $this->redirect('register');
                 }
-                if ($model->rol == 2) { //rol guest
-                    $table->rol = 30;
+                else if ($model->rol == 1 && $model->idInstituto == null){
+                    $session = Yii::$app->session;
+                    $session->setFlash(\dominus77\sweetalert2\Alert::TYPE_ERROR, "Un usuario simple debe tener un instituto");
+                    return $this->redirect('register');
                 }
                 $table->username = $model->username;
                 $table->email = $model->email;
