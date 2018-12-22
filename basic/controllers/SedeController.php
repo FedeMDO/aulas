@@ -145,7 +145,10 @@ class SedeController extends Controller
     {
         $model = new Sede();
         $model->ID_INSTITUCION = 1; #forzo a que apunte a la unaj.
-        
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->ID]);
+        }
+
         return $this->render('create', [
             'model' => $model,
         ]);

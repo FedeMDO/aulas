@@ -73,47 +73,108 @@ $indexMaterias = 1;
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
 }
+
+.breadcrumb{
+    margin-bottom: 0px;
+}
 </style>
 
+<header>
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+</header>
 
-    <div class="col-md-offset-1 col-md-10">
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar" class="active">
+        <!-- header -->
+        <div class="sidebar-header" style= "border-bottom:1px solid #47748b">
+                <h3>Calendario</h3>
+            </div>
+        <ul >
+            <p>Aulas por edificio</p>
+            <?php foreach ($aula->eDIFICIO->sEDE->edificios as $edificio):?>
+                    <?php if(count($edificio->aulas) !=0): ?>
+                    <li>
+                        <a href="#pageSubmenu<?php echo $edificio->ID ?>" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="text-align:left"><?php echo $edificio->NOMBRE?><i class="glyphicon glyphicon-chevron-down" style="float:right"></i></a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu<?php echo $edificio->ID ?>">
+</li>
+                    <?php foreach ($edificio->aulas as $aula): ?>
+                        <li><a style="text-align:left" href="/evento/index?id=<?= Html::encode("{$aula->ID}") ?>"><?= Html::encode("{$aula->NOMBRE}") ?></a></li>
+                <?php endforeach ?>
+                </ul>
+                </li>
+                <?php endif?>
+                <?php endforeach ?>
+                <p></p>
+                <li><a href="../aula/buscador" style="text-align:left"><span class="glyphicon glyphicon-search"></span> Filtrar aulas </a></li>
+                <li><a href="../materia/buscador" style="text-align:left"><span class="glyphicon glyphicon-search"></span> Filtrar materias </a></li>
+                <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
+                <li><a href="../materia/create" style="text-align:left"><span class="glyphicon glyphicon-plus"></span> Crear materias </a></li>
+                <?php endif ?>
+                <ul class="list-unstyled CTAs" style="border-top: 1px solid #47748b;">
+                <li><a href="../edificio/scheduler?id_sede= <?=$aula->eDIFICIO->sEDE->ID?>"   class="article">Scheduler</a></li>
+                <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
+                <li><a href="../restri/index?id= <?=$id_aula?>"   class="article">Restricciones</a></li>
+                <?php endif; ?>
+                    
+            </ul>
+        </ul>
+    </nav>
+    <!--termina sidebar-->
+    <div id="content">
+        <!-- boton de sidebar-->
+        <div class="container-fluid">
+            <button type="button" id="sidebarCollapse" class="btn btn-primary" style="margin-botom:20px"><i class="glyphicon glyphicon-align-justify"></i> Menu</button>
+            <?php if (!app\models\User::isUserGuest(Yii::$app->user->identity->id)) : ?> 
+            <div class="dropdown">
+            <button class="btn btn-success">Nuevo evento</button>
+            <div class="dropdown-content">
+                <a href="#"><?= Html::button('Nuevo evento periodico', ['value' => Url::to(['evento/create', 'id_aula' => $id_aula]), 'title' => 'Crear eventos que se repiten cada semana', 'class' => 'showModalButton btn ']); ?></a>
+                <a href="#"><?= Html::button('Nuevo evento especial', ['value' => Url::to(['especialcalendar/create', 'id_aula' => $id_aula]), 'title' => 'Crear un evento no periódico', 'class' => 'showModalButton btn ']); ?></a>
+            </div>
+            <?php endif; ?>
+    </div>
+            
+        </div>
+ 
+        <!-- Contenido de la pagina -->
+        <div class="col-md-12">
     
-        <?php if (!app\models\User::isUserGuest(Yii::$app->user->identity->id)) : ?>    
-        <div class="dropdown">
-                <button class="btn btn-success">Nuevo evento</button>
-                <div class="dropdown-content">
-                    <a href="#"><?= Html::button('Nuevo evento periodico', ['value' => Url::to(['evento/create', 'id_aula' => $id_aula]), 'title' => 'Crear eventos que se repiten cada semana', 'class' => 'showModalButton btn ']); ?></a>
-                    <a href="#"><?= Html::button('Nuevo evento especial', ['value' => Url::to(['especialcalendar/create', 'id_aula' => $id_aula]), 'title' => 'Crear un evento no periódico', 'class' => 'showModalButton btn ']); ?></a>
-                </div>
-        </div>
-        <?php endif; ?>
+   
 
-        <?= Html::a('Ver en scheduler', Url::to(['edificio/scheduler?id_sede=' . $aula->eDIFICIO->sEDE->ID . '']), ['class' => 'btn btn-primary']); ?>  
+    <div style="display:none;">
+        <em id="id_aula"><?= Html::encode("{$id_aula}") ?></em>
+    </div>
 
-
-        <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
-        <?= Html::a('Ir a restriccion', Url::to(['restri/index?id=' . $id_aula . '']), ['class' => 'btn btn-primary']); ?>
-        <?php endif; ?>
-
-        <div style="display:none;">
-            <em id:"id_aula"><?= Html::encode("{$id_aula}") ?></em>
-        </div>
-
-        <div class="loginc">
-            <h3 style="text-align: center; font-weight: bold;">ASIGNACION COMISIONES DE AULA <i><?= Html::encode("{$aula->NOMBRE}") ?></i></h3>
-            <div class="evento-index">
-                <div class="evento-calendar-index">
-                    <div class="evento-index">
-                        <div id='calendar'></div>
-                    </div>
+    <div class="loginc">
+        <h3 style="text-align: center; font-weight: bold;">ASIGNACION COMISIONES DE AULA <i><?= Html::encode("{$aula->NOMBRE}") ?></i></h3>
+        <div class="evento-index">
+            <div class="evento-calendar-index">
+                <div class="evento-index">
+                    <div id='calendar'></div>
                 </div>
             </div>
         </div>
     </div>
-    
-<div id="dialog-confirm" title="Tipo de evento" style="display: none">
-  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Seleccione el tipo de evento que quiere crear</p>
 </div>
 
+<div id="dialog-confirm" title="Tipo de evento" style="display: none">
+<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Seleccione el tipo de evento que quiere crear</p>
+</div>
+
+  </div> <!-- final del contenido-->
+</div> <!-- final del wraper-->
+<!-- script para sidebar -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
+</html>
+
+   
 <?php
 

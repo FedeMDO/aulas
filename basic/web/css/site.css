@@ -184,7 +184,16 @@ a.desc:after {
   /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
-
+#sidebar p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+    margin-bottom: 10px !important;
+    border-bottom: 1px solid #47748b;
+    
+}
 .wrapper {
   display: flex;
   width: 100%;
@@ -218,6 +227,12 @@ a.desc:after {
   padding: 10px;
 }
 
+#sidebar ul ul a {
+  font-size: 0.9em !important;
+  padding-left: 30px !important;
+  background: #2980b9;;
+}
+
 #sidebar ul li a {
   padding: 10px;
   font-size: 1.1em;
@@ -233,8 +248,8 @@ a.desc:after {
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
-  color: #7386D5;
-  background: white;
+  color: #fff;
+  background: #7386D5;;
 }
 
 a[data-toggle="collapse"] {
