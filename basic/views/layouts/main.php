@@ -27,9 +27,13 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '../im
 
 AppAsset::register($this);
 
+
 $ciclos = CicloLectivo::find()->where(['estado' => 'Abierto'])->asArray()->all();
 $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
-$cicloSelected = CicloLectivo::find();
+$session = Yii::$app->session;
+if ($session->get('cicloID') == null && sizeof($resultCiclos) > 0){
+    $session->set('cicloID', array_keys($resultCiclos)[0]);
+}
 
 ?>
 <?php $this->beginPage() ?>

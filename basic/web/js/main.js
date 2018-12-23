@@ -21,30 +21,27 @@ $(function () {
   });
 });
 
-$("#ddlCicloID").change(function () {
-  var ciclo = this.value;
-  $.post("/site/ciclosession",
-    {
-        cicloID: ciclo,
-    },
-    function (data) {
-        if (!data) {
-            alert("error");
-        }
-    });
-  location.reload();
-});
 
 $( document ).ready(function() {
-  console.log( "ready!" );
   $.get("/site/getcicloid",
-    function (data) {
+  function (data) {
+    $("#ddlCicloID").val(data);
+  });
+  $("#ddlCicloID").change(function () {
+    var ciclo = this.value;
+    $.post("/site/ciclosession",
+      {
+        cicloID: ciclo,
+      },
+      function (data) {
         if (!data) {
-          $("#ddlCicloID").val($("#ddlCicloID option:first").val());
-          $('#ddlCicloID').trigger('change');
+          alert("error");
         }
         else{
-          $("#ddlCicloID").val(data);
+          location.reload();
         }
-    });
+      });
+  });
+
+  console.log( "ready!" );
 });

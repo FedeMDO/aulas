@@ -528,7 +528,7 @@ class SiteController extends Controller
         $request = Yii::$app->request;
         $session->set('cicloID', $request->post('cicloID'));
         if ($session->has('cicloID')){
-            return true;
+            return $session->has('cicloID');
         }
     }
 
@@ -536,6 +536,9 @@ class SiteController extends Controller
         $session = Yii::$app->session;
         if ($session->has('cicloID')){
             return $session->get('cicloID');
+        }
+        else{
+            return 0;
         }
     }
 }
