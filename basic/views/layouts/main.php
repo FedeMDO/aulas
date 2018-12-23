@@ -29,6 +29,7 @@ AppAsset::register($this);
 
 $ciclos = CicloLectivo::find()->where(['estado' => 'Abierto'])->asArray()->all();
 $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
+$cicloSelected = CicloLectivo::find();
 
 ?>
 <?php $this->beginPage() ?>

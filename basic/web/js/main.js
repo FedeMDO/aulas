@@ -32,4 +32,18 @@ $("#ddlCicloID").change(function () {
             alert("error");
         }
     });
+  location.reload();
+});
+
+$( document ).ready(function() {
+  console.log( "ready!" );
+  $.get("/site/getcicloid",
+    function (data) {
+        if (!data) {
+          $("#ddlCicloID").val($("#ddlCicloID option:first").val());
+        }
+        else{
+          $("#ddlCicloID").val(data);
+        }
+    });
 });

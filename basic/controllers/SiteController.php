@@ -531,4 +531,14 @@ class SiteController extends Controller
             return true;
         }
     }
+
+    public function actionGetcicloid(){
+        $session = Yii::$app->session;
+        if ($session->has('cicloID')){
+            return $session->get('cicloID');
+        }
+        else{
+            return 0;
+        }
+    }
 }
