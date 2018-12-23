@@ -5,6 +5,7 @@
 
 use app\widgets\Alert;
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\Modal;
@@ -13,6 +14,7 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\models\User;
 use app\models\Notificacion;
+use app\models\CicloLectivo;
 
 
 $this->registerCssFile("@web/css/index.css", [
@@ -25,6 +27,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '../im
 
 AppAsset::register($this);
 
+$ciclos = CicloLectivo::find()->where(['estado' => 'Abierto'])->asArray()->all();
+$resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
 
 ?>
 <?php $this->beginPage() ?>
@@ -149,6 +153,8 @@ li.dropdown:nth-child(2) > a:nth-child(1){
                 'encodeLabels' => false,
                 'options' => ['class' => 'navbar-nav navbar-right navDerecha'],
                 'items' => [
+                    ['label' => Html::dropDownList('ciclo', null, $resultCiclos, ['class' => 'braian_hace_tu_magia', 'id' => 'ddlCicloID'])],
+
                     ['label' => Html::tag('span', '', ['class' => 'fa fa-bell']) .  '<span class="badge"' . "style=" . $display . ">  $contador   </span>" . '</span>', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold; font-size:20px']],
                     Yii::$app->user->isGuest ? (['label' => Html::button('<i class="glyphicon glyphicon-log-in"></i> INGRESAR', ['value' => Url::to('/site/login2'), 'class' => 'btn btn-add-al', 'id' => 'modalLogin', 'style' => 'position:relative; top:-8px; font-weight: bold; background-color: Transparent;'])]) :
                         [

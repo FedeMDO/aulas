@@ -522,4 +522,13 @@ class SiteController extends Controller
         }
         return $output;
     }
+
+    public function actionCiclosession(){
+        $session = Yii::$app->session;
+        $request = Yii::$app->request;
+        $session->set('cicloID', $request->post('cicloID'));
+        if ($session->has('cicloID')){
+            return true;
+        }
+    }
 }
