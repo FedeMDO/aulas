@@ -27,6 +27,8 @@ use app\models\CarreraMateria;
 use yii\helpers\VarDumper;
 use yii\helpers\Url;
 use app\models\EventoCalendarSearch;
+use app\models\CicloLectivo;
+use yii\base\DynamicModel;
 
 /**
  * RestriController implements the CRUD actions for RestriCalendar model.
@@ -318,6 +320,42 @@ class RestriController extends Controller
             }
         }
         return $tasks;
+    }
+
+    public function actionMigrar()
+    {
+        $request = Yii::$app->request;
+        if($request->post('DynamicModel') != null){
+            $dynmodel = $request->post('DynamicModel');
+
+            $cicloFrom = CicloLectivo::findOne($dynmodel['fromCicloID']);
+            $cicloTo = CicloLectivo::findOne($dynmodel['toCicloID']);
+
+            $result = array();
+        
+            $search = RestriCalendar::find()->where(['ID_Ciclo' => $cicloFrom->id])->all();
+    
+            if(sizeof($search) > 0){
+                foreach($search as $restri){
+                    $clon = new RestriCalendar();
+                    $clon->attributes = $restri->attributes;
+                    $clon->ID_Ciclo = $cicloTo->id;
+                    $result[] = $clon;
+                }
+            }
+            if(sizeof($result) > 0){
+                foreach($result as $restriClon){
+                    $restriClon->save();
+                }
+                $aula = Aula::findOne($result[0]->ID_Aula);
+                return $this->render('index', [
+                    'id_aula' =>$aula->ID,
+                    'aula' => $aula,
+                ]);
+            }
+        }
+        return $this->render('migrar');
+
     }
 
     /**

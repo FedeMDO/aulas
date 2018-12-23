@@ -114,6 +114,7 @@ $indexMaterias = 1;
                 <li><a href="../materia/buscador" style="text-align:left"><span class="glyphicon glyphicon-search"></span> Filtrar materias </a></li>
                 <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
                 <li><a href="../materia/create" style="text-align:left"><span class="glyphicon glyphicon-plus"></span> Crear materias </a></li>
+                <li><a href="../restri/migrar" style="text-align:left"><span class="glyphicon glyphicon-plus"></span> Migrar restricciones </a></li>
                 <?php endif ?>
                 <ul class="list-unstyled CTAs" style="border-top: 1px solid #47748b;">
                 <li><a href="../edificio/scheduler?id_sede= <?=$aula->eDIFICIO->sEDE->ID?>"   class="article">Scheduler</a></li>
