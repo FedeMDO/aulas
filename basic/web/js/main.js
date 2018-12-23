@@ -41,6 +41,7 @@ $( document ).ready(function() {
     function (data) {
         if (!data) {
           $("#ddlCicloID").val($("#ddlCicloID option:first").val());
+          $('#ddlCicloID').trigger('change');
         }
         else{
           $("#ddlCicloID").val(data);
