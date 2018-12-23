@@ -12,6 +12,12 @@ $config = [
         '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
+        'reCaptcha' => [
+            'name' => 'reCaptcha',
+            'class' => 'himiklab\yii2\recaptcha\ReCaptcha',
+            'siteKey' => '6LeTZ4QUAAAAAHHMKY3N6ZeZdIl9WVTRMmAxTQwv',
+            'secret' => '6LeTZ4QUAAAAAIFDHHD4F6uWk3tOGKAGB3UHURYg',
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'wLLlXPhuiwybBr41Qn4sTvpW8Hnm1RVf',

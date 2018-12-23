@@ -19,12 +19,14 @@ class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
+
     public $css = [
         'css/site.css',
         'css/index.css',
     ];
     public $js =[
         'js/main.js',
+        'https://www.google.com/recaptcha/api.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

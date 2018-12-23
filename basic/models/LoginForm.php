@@ -17,6 +17,7 @@ class LoginForm extends Model
     public $password;
     public $rememberMe = true;
     private $_user = false;
+    public $reCaptcha;
 
 
     /**
@@ -31,6 +32,8 @@ class LoginForm extends Model
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
+            [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator::className(), 'secret' => '6LeTZ4QUAAAAAIFDHHD4F6uWk3tOGKAGB3UHURYg', 'uncheckedMessage' => 'Please confirm that you are not a bot.']
+
         ];
     }
 

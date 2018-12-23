@@ -37,12 +37,15 @@ $this->registerCssFile("@web/css/index.css", [
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
         'layout' => 'horizontal',
-        'enableAjaxValidation' => true
+        'enableAjaxValidation'   => false,
+        'enableClientValidation' => true,
+        
         ]); ?>
 
        <?= $form->field($model, 'username', ['labelOptions'=>['style'=>'color:white'],'inputTemplate' => '<div class="input-group"><span class="input-group-addon"><i class="fa fa-user"></i></span>{input}</div>'
 ])->textInput()->label('') ?>
         <?= $form->field($model, 'password', ['labelOptions'=>['style'=>'color:white'],'inputTemplate' => '<div class="input-group"><span class="input-group-addon"><i class="fa fa-lock"></i></span>{input}</div>'] )->passwordInput()->label('') ?>
+        <?= $form->field($model, 'reCaptcha')->widget(\himiklab\yii2\recaptcha\ReCaptcha::className())->label('') ?>
         <a href="/site/recoverpass" style="color:white">¿Olvidaste tu contraseña?</a>
         <?= $form->field($model, 'rememberMe', ['labelOptions'=>['style'=>'color:white']] )->checkbox([
         ])->label('Recordarme') ?>
