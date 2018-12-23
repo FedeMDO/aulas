@@ -537,8 +537,5 @@ class SiteController extends Controller
         if ($session->has('cicloID')){
             return $session->get('cicloID');
         }
-        else{
-            return 0;
-        }
     }
 }
