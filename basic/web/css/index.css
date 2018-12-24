@@ -342,7 +342,7 @@ th, td {
 */
 
 /*iconos de administracion*/
-.well{
+.boxAdminl{
   margin-top: 20px;
   width:100%;
   text-align: center;
@@ -352,7 +352,7 @@ th, td {
   box-shadow: 10px 10px 5px #49657e;
 }
 
-.weell{
+.boxAdmin{
   margin-top: 0px;
   width:100%;
   text-align: center;
