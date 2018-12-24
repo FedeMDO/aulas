@@ -42,6 +42,12 @@ $( document ).ready(function() {
         }
       });
   });
+  $("#dynamicmodel-tocicloid").change(function () {
+    if(this.value === $("#dynamicmodel-fromcicloid").val()){
+      $("#dynamicmodel-tocicloid").val('');
+      alert("Seleccionar distintos ciclos.")
+    }
+  });
 
   console.log( "ready!" );
 });

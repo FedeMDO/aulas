@@ -77,7 +77,15 @@ class CarreraController extends Controller
         $oferta = OfertaAcademica::find()
             ->where(['Ciclo' => $idCiclo])
             ->andWhere(['Carrera' => $strCarrera])->all();
-
+        $dias = array(
+            0 => "Domingo",
+            1 => "Lunes",
+            2 => "Martes",
+            3 => "Miércoles",
+            4 => "Jueves",
+            5 => "Viernes",
+            6 => "Sabado",
+        );
         $obj = array();
         $rowData = array();
         foreach($oferta as $row)
@@ -87,7 +95,7 @@ class CarreraController extends Controller
             $rowData[] = $row->Anio;
             $rowData[] = $row->Materia;
             $rowData[] = $row->Comision;
-            $rowData[] = $row->Dia;
+            $rowData[] = $dias[$row->Dia];
             $rowData[] = $row->HoraInicio;
             $rowData[] = $row->HoraFin;
             $rowData[] = $row->Sede;

@@ -322,41 +322,87 @@ class RestriController extends Controller
         return $tasks;
     }
 
+    /**
+     * Encuentra similitudes de una RestriCalendar con otra
+     */
+    protected function validar($objA, $objB)
+    {
+        if ($objA->ID_Aula === $objB->ID_Aula &&
+            $objA->Hora_ini === $objB->Hora_ini &&
+            $objA->Hora_fin === $objB->Hora_fin &&
+            $objA->dow === $objB->dow &&
+            $objA->ID_Instituto === $objB->ID_Instituto) {
+            return false;
+        }
+        return true;
+    }
+
     public function actionMigrar()
     {
+        $contador = 0;
         $request = Yii::$app->request;
-        if($request->post('DynamicModel') != null){
+        if ($request->post('DynamicModel') != null) {
             $dynmodel = $request->post('DynamicModel');
 
             $cicloFrom = CicloLectivo::findOne($dynmodel['fromCicloID']);
             $cicloTo = CicloLectivo::findOne($dynmodel['toCicloID']);
 
             $result = array();
-        
+
             $search = RestriCalendar::find()->where(['ID_Ciclo' => $cicloFrom->id])->all();
-    
-            if(sizeof($search) > 0){
-                foreach($search as $restri){
-                    $clon = new RestriCalendar();
-                    $clon->attributes = $restri->attributes;
-                    $clon->ID_Ciclo = $cicloTo->id;
-                    $result[] = $clon;
+            $alreadyInDB = RestriCalendar::find()->where(['ID_Ciclo' => $cicloTo->id])->all();
+
+            if (sizeof($search) > 0) {
+                foreach ($search as $restri) {
+                    $seguir = true;
+                    foreach ($alreadyInDB as $record) {
+                        if ($record->ID_Aula == $restri->ID_Aula &&
+                            $record->Hora_ini == $restri->Hora_ini &&
+                            $record->dow == $restri->dow) {
+                            $seguir = false;
+                        }
+                    }
+                    if ($seguir) {
+                        $clon = new RestriCalendar();
+                        $clon->attributes = $restri->attributes;
+                        $clon->momento = null;
+                        $clon->ID_User_Asigna = Yii::$app->user->identity->id;
+                        $clon->ID_Ciclo = $cicloTo->id;
+                        $result[] = $clon;
+                    }
                 }
             }
-            if(sizeof($result) > 0){
-                foreach($result as $restriClon){
+
+            if (sizeof($result) > 0) {
+
+                foreach ($result as $restriClon) {
                     $restriClon->save();
+                    $contador++;
                 }
+
                 $aula = Aula::findOne($result[0]->ID_Aula);
+                $result = array();
+                $session = Yii::$app->session;
+                $session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, 
+                    "Se migraron <strong>$contador</strong> restricciones de <strong>$cicloFrom->nombre</strong> a <strong>$cicloTo->nombre</strong>.");
+                unset($contador);
                 return $this->render('index', [
-                    'id_aula' =>$aula->ID,
+                    'id_aula' => $aula->ID,
                     'aula' => $aula,
                 ]);
+            }
+            else{
+                $session = Yii::$app->session;
+                $session->setFlash(\dominus77\sweetalert2\Alert::TYPE_ERROR, 
+                    "El ciclo lectivo <strong>$cicloFrom->nombre</strong> no posee restricciones o ya has realizado una migración de <strong>$cicloFrom->nombre</strong> a <strong>$cicloTo->nombre</strong> anteriormente.");
             }
         }
         return $this->render('migrar');
 
     }
+
+
+
 
     /**
      * Finds the RestriCalendar model based on its primary key value.
