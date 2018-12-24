@@ -386,7 +386,7 @@ th, td {
 
 
 /* Esto es para que no se deforme el navbar al achicarlo*/
-@media screen and (max-width: 1106px) {
+@media screen and (max-width: 1150px) {
   .navbar-brand img{
     display: none;
   }
@@ -402,14 +402,14 @@ th, td {
   }
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 900px) {
   .navbar-right a{
     font-size: 13px;
     padding-left: 4px !important;
     padding-right: 4px !important;
   }
   .navbar-default a{
-    font-size: 13px;
+    font-size: 12px;
     padding-left: 4px !important;
     padding-right: 4px !important;
   }

@@ -316,15 +316,7 @@ a.article:hover {
   }
 }
 
-.kv-sidenav{
-  height:1000px;
-}
 
-@media screen and (max-width: 998px) {
-  .kv-sidenav {
-    height: auto;
-  }
-}
 
 /* logo de la unaj*/
 .navbar-brand {
@@ -376,5 +368,76 @@ a.article:hover {
     color: white;
   }  
 }
+
+/*ddl*/
+
+.cambiarCiclo{
+  -webkit-appearance: none; 
+  -moz-appearance: none;
+  appearance: none;       /* remove default arrow */
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  height: 29px;
+  width: 268px;
+  color:black; 
+}
+
+
+.styled-select a{
+  background: url(../image/downArrow.png) no-repeat right;
+  background-color: white;
+  padding: 0px !important;
+  margin-top:10px;
+  margin-right: 15px;
+  -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;
+   border: 1px solid white;
+}
+
+.styled-select a:hover{
+  background: url(../image/downArrow.png) no-repeat right !important;
+  background-color: white !important;
+  -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;
+}
+
+
+@media (max-width: 768px) {
+
+  .styled-select a{
+    margin-top:0px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    width: 100px;
+  }
+  
+  .cambiarCiclo{
+    height: auto;
+    width: auto;
+  }
+  
+}
+  
+@media (max-width: 1400px)  and (min-width: 768px){
+
+  .styled-select a{
+    width: 100px;
+    margin-top:14px;
+    margin-right : 0px;
+    font-size: 10px;
+  }
+  
+  .cambiarCiclo{
+    height: auto;
+    width: auto;
+  }
+  
+}
+
+
+
 
 

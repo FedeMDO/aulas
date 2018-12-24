@@ -63,13 +63,14 @@ if ($session->get('cicloID') == null && sizeof($resultCiclos) > 0){
 .navlog > li:nth-child(1) > a:nth-child(1){
     padding-bottom: 16px
 }
-li.dropdown:nth-child(2) > a:nth-child(1){
+li.dropdown:nth-child(3) > a:nth-child(1){
     padding-bottom:5px !important;
 }
 .navDerecha p{
     margin-bottom:0px;
 
 }
+
 
 </style>
 
@@ -158,8 +159,7 @@ li.dropdown:nth-child(2) > a:nth-child(1){
                 'encodeLabels' => false,
                 'options' => ['class' => 'navbar-nav navbar-right navDerecha'],
                 'items' => [
-                    ['label' => Html::dropDownList('ciclo', null, $resultCiclos, ['class' => 'braian_hace_tu_magia', 'id' => 'ddlCicloID'])],
-
+                    ['label' => Html::dropDownList('ciclo', null, $resultCiclos, ['class' => 'cambiarCiclo', 'id' => 'ddlCicloID']),'options' => ['class' => 'styled-select'],],
                     ['label' => Html::tag('span', '', ['class' => 'fa fa-bell']) .  '<span class="badge"' . "style=" . $display . ">  $contador   </span>" . '</span>', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold; font-size:20px']],
                     Yii::$app->user->isGuest ? (['label' => Html::button('<i class="glyphicon glyphicon-log-in"></i> INGRESAR', ['value' => Url::to('/site/login2'), 'class' => 'btn btn-add-al', 'id' => 'modalLogin', 'style' => 'position:relative; top:-8px; font-weight: bold; background-color: Transparent;'])]) :
                         [
