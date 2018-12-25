@@ -8,6 +8,7 @@ use app\models\Instituto;
 use app\models\Carrera;
 use app\models\CicloLectivo;
 use yii\helpers\ArrayHelper;
+use miloschuman\highcharts\Highcharts;
 
 use yii\bootstrap\ActiveForm;
 /* @var $this yii\web\View */
@@ -101,6 +102,25 @@ $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
         
     </table>
         </div>
+        <br>
+        <?php 
+            echo Highcharts::widget([
+                'options' => [
+                   'title' => ['text' => 'Uso del espacio por día'],
+                   'xAxis' => [
+                      'categories' => ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes','Sabado']
+                   ],
+                   'yAxis' => [
+                      'title' => ['text' => 'Horas de aula']
+                   ],
+                   'series' => [
+                      ['name' => 'Comisiones', 'data' => [$comisiones["Lunes"], $comisiones["Martes"], $comisiones["Miercoles"], $comisiones["Jueves"], $comisiones["Viernes"], $comisiones["Sabado"]]],
+                      ['name' => 'Especiales', 'data' => [$especiales["Lunes"], $especiales["Martes"], $especiales["Miercoles"], $especiales["Jueves"], $especiales["Viernes"], $especiales["Sabado"]]]
+                   ]
+                ]
+             ]);
+            
+        ?>
     </div>
+    
 <?php
-

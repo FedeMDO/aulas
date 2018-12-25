@@ -12,6 +12,8 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\User;
 use yii\data\Pagination;
+use app\models\EventoCalendar;
+use app\models\EspecialCalendar;
 
 /**
  * CarreraController implements the CRUD actions for Carrera model.
@@ -67,7 +69,114 @@ class CarreraController extends Controller
     }
     public function actionOfertaacademica()
     {
-        return $this->render('ofertaacademica');
+        //reporting test
+        $eventos = EventoCalendar::find()->all();
+
+        $comisiones = array(
+            "Lunes" => 0,
+            "Martes" => 0,
+            "Miercoles" => 0,
+            "Jueves" => 0,
+            "Viernes" => 0,
+            "Sabado" => 0,
+        );
+
+        foreach ($eventos as $evento) {
+            // aca preguntar por ciclo en sesion.
+            switch ($evento->dow) {
+                case 1:
+                    $hora_fin_int = intval(substr($evento->Hora_fin, 0, 2));
+                    $hora_ini_int = intval(substr($evento->Hora_ini, 0, 2));
+                    $res = $hora_fin_int - $hora_ini_int;
+                    $comisiones["Lunes"] += $res;
+                    break;
+                case 2:
+                    $hora_fin_int = intval(substr($evento->Hora_fin, 0, 2));
+                    $hora_ini_int = intval(substr($evento->Hora_ini, 0, 2));
+                    $res = $hora_fin_int - $hora_ini_int;
+                    $comisiones["Martes"] += $res;
+                    break;
+                case 3:
+                    $hora_fin_int = intval(substr($evento->Hora_fin, 0, 2));
+                    $hora_ini_int = intval(substr($evento->Hora_ini, 0, 2));
+                    $res = $hora_fin_int - $hora_ini_int;
+                    $comisiones["Miercoles"] += $res;
+                    break;
+                case 4:
+                    $hora_fin_int = intval(substr($evento->Hora_fin, 0, 2));
+                    $hora_ini_int = intval(substr($evento->Hora_ini, 0, 2));
+                    $res = $hora_fin_int - $hora_ini_int;
+                    $comisiones["Jueves"] += $res;
+                    break;
+                case 5:
+                    $hora_fin_int = intval(substr($evento->Hora_fin, 0, 2));
+                    $hora_ini_int = intval(substr($evento->Hora_ini, 0, 2));
+                    $res = $hora_fin_int - $hora_ini_int;
+                    $comisiones["Viernes"] += $res;
+                    break;
+                case 6:
+                    $hora_fin_int = intval(substr($evento->Hora_fin, 0, 2));
+                    $hora_ini_int = intval(substr($evento->Hora_ini, 0, 2));
+                    $res = $hora_fin_int - $hora_ini_int;
+                    $comisiones["Sabado"] += $res;
+                    break;
+            }
+        }
+        $evesespes = EspecialCalendar::find()->all();
+
+        $especiales = array(
+            "Lunes" => 0,
+            "Martes" => 0,
+            "Miercoles" => 0,
+            "Jueves" => 0,
+            "Viernes" => 0,
+            "Sabado" => 0,
+        );
+
+        foreach ($evesespes as $espe) {
+            $dow = date('w', strtotime(substr($espe->inicio, 0, 10)));
+            // aca preguntar por ciclo en sesion.
+            switch ($dow) {
+                case 1:
+                    $hora_fin_int = intval(substr($espe->fin, 11, 2));
+                    $hora_ini_int = intval(substr($espe->inicio, 11, 2));
+                    $res = $hora_fin_int - $hora_ini_int;
+                    $especiales["Lunes"] += $res;
+                    break;
+                case 2:
+                    $hora_fin_int = intval(substr($espe->fin, 11, 2));
+                    $hora_ini_int = intval(substr($espe->inicio, 11, 2));
+                    $res = $hora_fin_int - $hora_ini_int;
+                    $especiales["Martes"] += $res;
+                    break;
+                case 3:
+                    $hora_fin_int = intval(substr($espe->fin, 11, 2));
+                    $hora_ini_int = intval(substr($espe->inicio, 11, 2));
+                    $res = $hora_fin_int - $hora_ini_int;
+                    $especiales["Miercoles"] += $res;
+                    break;
+                case 4:
+                    $hora_fin_int = intval(substr($espe->fin, 11, 2));
+                    $hora_ini_int = intval(substr($espe->inicio, 11, 2));
+                    $res = $hora_fin_int - $hora_ini_int;
+                    $especiales["Jueves"] += $res;
+                    break;
+                case 5:
+                    $hora_fin_int = intval(substr($espe->fin, 11, 2));
+                    $hora_ini_int = intval(substr($espe->inicio, 11, 2));
+                    $res = $hora_fin_int - $hora_ini_int;
+                    $especiales["Viernes"] += $res;
+                    break;
+                case 6:
+                    $hora_fin_int = intval(substr($espe->fin, 11, 2));
+                    $hora_ini_int = intval(substr($espe->inicio, 11, 2));
+                    $res = $hora_fin_int - $hora_ini_int;
+                    $especiales["Sabado"] += $res;
+                    break;
+            }
+        }
+
+        return $this->render('ofertaacademica', ['comisiones' => $comisiones, 'especiales' => $especiales]);
     }
 
     public function actionOfertabyparams($idCiclo, $strCarrera)
@@ -88,8 +197,7 @@ class CarreraController extends Controller
         );
         $obj = array();
         $rowData = array();
-        foreach($oferta as $row)
-        {
+        foreach ($oferta as $row) {
             unset($rowData);
             $rowData[] = $row->Carrera;
             $rowData[] = $row->Anio;
