@@ -159,7 +159,7 @@ class AulaController extends Controller
     {
         $model = new Aula();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ID]);
+            return $this->redirect(['../evento/index?id='.$model->ID.'']);
         }
         
         return $this->render('create', [

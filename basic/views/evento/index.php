@@ -99,8 +99,8 @@ $indexMaterias = 1;
                         <a href="#pageSubmenu<?php echo $edificio->ID ?>" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="text-align:left"><?php echo $edificio->NOMBRE?><i class="glyphicon glyphicon-chevron-down" style="float:right"></i></a>
                     <ul class="collapse list-unstyled" id="pageSubmenu<?php echo $edificio->ID ?>">
 </li>
-                    <?php foreach ($edificio->aulas as $aula): ?>
-                        <li><a style="text-align:left" href="/evento/index?id=<?= Html::encode("{$aula->ID}") ?>"><?= Html::encode("{$aula->NOMBRE}") ?></a></li>
+                    <?php foreach ($edificio->aulas as $aula1): ?>
+                        <li><a style="text-align:left" href="/evento/index?id=<?= Html::encode("{$aula1->ID}") ?>"><?= Html::encode("{$aula1->NOMBRE}") ?></a></li>
                 <?php endforeach ?>
                 </ul>
                 </li>
@@ -113,9 +113,9 @@ $indexMaterias = 1;
                 <li><a href="../materia/create" style="text-align:left"><span class="glyphicon glyphicon-plus"></span> Crear materias </a></li>
                 <?php endif ?>
                 <ul class="list-unstyled CTAs" style="border-top: 1px solid #47748b;">
-                <li><a href="../edificio/scheduler?id_sede= <?=$aula->eDIFICIO->sEDE->ID?>"   class="article">Scheduler</a></li>
+                <li><a href="../edificio/scheduler?id_sede=<?=$aula->eDIFICIO->sEDE->ID?>"   class="article">Scheduler</a></li>
                 <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
-                <li><a href="../restri/index?id= <?=$id_aula?>"   class="article">Restricciones</a></li>
+                <li><a href="../restri/index?id=<?=$id_aula?>"   class="article">Restricciones</a></li>
                 <?php endif; ?>
                     
             </ul>

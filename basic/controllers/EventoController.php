@@ -208,9 +208,15 @@ class EventoController extends Controller
                 $resource = array();
 
                 $arrayRecu = array();
+                $n = 0;
                 foreach ($aula->rECURSOs as $recu) {
-                    $arrayRecu[] = '-' . $recu->NOMBRE;
-
+                    $n = $n + 1;
+                    if (count($aula->rECURSOs) == $n) {
+                        $arrayRecu[] = $recu->NOMBRE;
+                    }
+                    else{
+                        $arrayRecu[] = $recu->NOMBRE . ' -';
+                    }
                 }
                 if (!empty($arrayRecu)) {
                     $recursosAula = implode("\n", $arrayRecu);
