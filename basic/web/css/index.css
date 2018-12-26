@@ -342,7 +342,7 @@ th, td {
 */
 
 /*iconos de administracion*/
-.boxAdminl{
+.boxAdmin{
   margin-top: 20px;
   width:100%;
   text-align: center;
@@ -380,9 +380,6 @@ th, td {
 .testing{
   margin-top:-10px;
 }
-
-
-
 
 
 /* Esto es para que no se deforme el navbar al achicarlo*/
