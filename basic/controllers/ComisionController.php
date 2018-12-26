@@ -108,14 +108,17 @@ class ComisionController extends Controller
             $request = $_POST['Comision'];
             $help = $request['NUMERO'];
             $materia = $request['ID_MATERIA'];
-            $com = Comision::find()->where(['ID_MATERIA' => $materia])->count();
+            $ciclo = Yii::$app->session['cicloID'];
+            $com = Comision::find()->where(['ID_MATERIA' => $materia])->andWhere(['ID_CICLO' => $ciclo])->max('NUMERO');
+            /* VERSION ANTERIOR  
+            $com = Comision::find()->where(['ID_MATERIA' => $materia])->andWhere(['ID_CICLO' => $ciclo])->count(); */
             $help1 = $help + $com;
             for ($i = $com; $i < $help1; $i++) {
                 $comi = new Comision();
                 $comi->NUMERO = $i + 1;
                 $comi->ID_MATERIA = $materia;
                 $comi->CARGA_HORARIA_SEMANAL = null;
-                $comi->ID_Ciclo = 1;
+                $comi->ID_Ciclo = $ciclo;
                 if($comi->save()){
                     $session = Yii::$app->session;
                     $session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, "Se han creado correctamente $help comisiones");
