@@ -134,6 +134,7 @@ li.dropdown:nth-child(2) > a:nth-child(1){
                         ['label' => '<span></span> Registrar usuario', 'url' => '/site/register'],
                         ['label' => '<span> Panel de administracion', 'url' => '/admin/panel'],
                         ['label' => '<span> Gestionar usuarios', 'url' => '/admin/users', ],
+                        ['label' => '<span> Reportes', 'url' => '/admin/reportes'],
                     ],
                 ]
             ],
