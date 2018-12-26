@@ -52,6 +52,7 @@ $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
         echo Highcharts::widget([
             'scripts' => [
                 'modules/exporting',
+                'modules/export-data'
             ],
             'options' => [
                 'title' => ['text' => 'Uso del espacio por día'],
@@ -78,6 +79,7 @@ $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
         echo Highcharts::widget([
             'scripts' => [
                 'modules/exporting',
+                'modules/export-data'
             ],
             'options' => [
                 'title' => ['text' => '% de utilización total por institutos'],
@@ -121,6 +123,7 @@ $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
         echo Highcharts::widget([
             'scripts' => [
                 'modules/exporting',
+                'modules/export-data'
             ],
             'options' => [
                 'title' => ['text' => 'Actividad de usuarios'],
