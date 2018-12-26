@@ -119,7 +119,7 @@ $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
                 ],
                 'series' => [
                     ['type' => 'column', 'name' => 'Horas por Comisiones', 'data' => [$comisiones["Lunes"], $comisiones["Martes"], $comisiones["Miercoles"], $comisiones["Jueves"], $comisiones["Viernes"], $comisiones["Sabado"]]],
-                    ['type' => 'column', 'name' => 'Horas por Especiales', 'data' => [$especiales["Lunes"], $especiales["Martes"], $especiales["Miercoles"], $especiales["Jueves"], $especiales["Viernes"], $especiales["Sabado"]]],
+                    ['type' => 'column', 'name' => 'Horas por Eventos Especiales', 'data' => [$especiales["Lunes"], $especiales["Martes"], $especiales["Miercoles"], $especiales["Jueves"], $especiales["Viernes"], $especiales["Sabado"]]],
                 ],
                 'credits' => [
                     'enabled' => false
