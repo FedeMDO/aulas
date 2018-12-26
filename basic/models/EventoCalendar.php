@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property int $ID_Aula
  * @property int $ID_Comision
+ * @property int $ID_UModifica
  * @property int $ID_User_Asigna
  * @property string $Hora_ini
  * @property string $Hora_fin
@@ -23,6 +24,7 @@ use Yii;
  * @property Comision $comision
  * @property Instituto $instituto
  * @property Users $userAsigna
+ * @property Users $uModifica
  */
 class EventoCalendar extends \yii\db\ActiveRecord
 {
@@ -40,8 +42,7 @@ class EventoCalendar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ID_Aula', 'ID_Comision', 'ID_User_Asigna', 'Hora_ini', 'Hora_fin', 'dow', 'ID_Instituto', 'ID_Ciclo'], 'required'],
-            [['ID_Aula', 'ID_Comision', 'ID_User_Asigna', 'ID_Instituto', 'ID_Ciclo'], 'integer'],
+            [['ID_Aula', 'ID_Comision', 'ID_UModifica', 'ID_User_Asigna', 'ID_Instituto', 'ID_Ciclo'], 'integer'],
             [['Hora_ini', 'Hora_fin', 'momento'], 'safe'],
             [['dow'], 'string', 'max' => 20],
             [['ID_Aula'], 'exist', 'skipOnError' => true, 'targetClass' => Aula::className(), 'targetAttribute' => ['ID_Aula' => 'ID']],
@@ -49,6 +50,7 @@ class EventoCalendar extends \yii\db\ActiveRecord
             [['ID_Comision'], 'exist', 'skipOnError' => true, 'targetClass' => Comision::className(), 'targetAttribute' => ['ID_Comision' => 'ID']],
             [['ID_Instituto'], 'exist', 'skipOnError' => true, 'targetClass' => Instituto::className(), 'targetAttribute' => ['ID_Instituto' => 'ID']],
             [['ID_User_Asigna'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['ID_User_Asigna' => 'id']],
+            [['ID_UModifica'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['ID_UModifica' => 'id']],
         ];
     }
 
@@ -61,6 +63,7 @@ class EventoCalendar extends \yii\db\ActiveRecord
             'id' => 'ID',
             'ID_Aula' => 'Id  Aula',
             'ID_Comision' => 'Id  Comision',
+            'ID_UModifica' => 'Id  Umodifica',
             'ID_User_Asigna' => 'Id  User  Asigna',
             'Hora_ini' => 'Hora Ini',
             'Hora_fin' => 'Hora Fin',
@@ -109,5 +112,13 @@ class EventoCalendar extends \yii\db\ActiveRecord
     public function getUserAsigna()
     {
         return $this->hasOne(Users::className(), ['id' => 'ID_User_Asigna']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUModifica()
+    {
+        return $this->hasOne(Users::className(), ['id' => 'ID_UModifica']);
     }
 }

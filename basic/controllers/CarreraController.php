@@ -15,6 +15,7 @@ use yii\data\Pagination;
 use app\models\EventoCalendar;
 use app\models\EspecialCalendar;
 use app\models\Instituto;
+use app\models\Users;
 
 /**
  * CarreraController implements the CRUD actions for Carrera model.
@@ -71,6 +72,8 @@ class CarreraController extends Controller
     public function actionOfertaacademica()
     {
         //reporting test
+
+        // REPORTE USO DEL ESPACIO POR DIA
         $eventos = EventoCalendar::find()->all();
 
         $comisiones = array(
@@ -177,7 +180,7 @@ class CarreraController extends Controller
             }
         }
 
-        // PORCENTAJE POR INSTITUTO
+        // REPORTE PORCENTAJE POR INSTITUTO
         $porcentajePorInstitutoComision = array();
         $porcentajePorInstitutoEspecial = array();
         $institutos = Instituto::find()->all();
@@ -220,7 +223,7 @@ class CarreraController extends Controller
             $otrosEspe = array(
                 'name' => 'SIN INSTITUTO',
                 'y' => 0,
-                'color' => '#E0E0E0'
+                'color' => 'black'
             );
             foreach ($evesespes as $evEspe) {
                 if ($evEspe->ID_Carrera == null) {
@@ -232,13 +235,65 @@ class CarreraController extends Controller
             $porcentajePorInstitutoEspecial[] = $otrosEspe;
         }
 
+        // REPORTE ACTIVIDAD DE LOS USUARIOS CREANDO
+        $usuarios = Users::find()->all();
+        $actividadCreando = array();
+        
+        if (sizeof($usuarios) > 0) {
+            foreach($usuarios as $user){
+                $cantidadComisiones = 0;
+
+                foreach($eventos as $eve){
+                    if($eve->ID_User_Asigna == $user->id){
+                        $cantidadComisiones++;
+                    }
+                }
+                $actividadCreando["Comisiones"][$user->username] = $cantidadComisiones;
+
+                $cantidadEspeciales = 0;
+
+                foreach($evesespes as $espe){
+                    if($espe->ID_UCrea == $user->id){
+                        $cantidadEspeciales++;
+                    }
+                }
+                $actividadCreando["Especiales"][$user->username] = $cantidadEspeciales;
+            }
+        }
+        $actividadModificando = array();
+        
+        if (sizeof($usuarios) > 0) {
+            foreach($usuarios as $user){
+                $cantidadComisiones = 0;
+
+                foreach($eventos as $eve){
+                    if($eve->ID_UModifica == $user->id){
+                        $cantidadComisiones++;
+                    }
+                }
+                $actividadModificando["Comisiones"][$user->username] = $cantidadComisiones;
+
+                $cantidadEspeciales = 0;
+
+                foreach($evesespes as $espe){
+                    if($espe->ID_UModifica == $user->id){
+                        $cantidadEspeciales++;
+                    }
+                }
+                $actividadModificando["Especiales"][$user->username] = $cantidadEspeciales;
+            }
+        }
+
+
         return $this->render(
             'ofertaacademica',
             [
                 'comisiones' => $comisiones,
                 'especiales' => $especiales,
                 'porcentajePorInstitutoComision' => $porcentajePorInstitutoComision,
-                'porcentajePorInstitutoEspecial' => $porcentajePorInstitutoEspecial
+                'porcentajePorInstitutoEspecial' => $porcentajePorInstitutoEspecial,
+                'actividadCreando' => $actividadCreando,
+                'actividadModificando' => $actividadModificando
             ]
         );
     }

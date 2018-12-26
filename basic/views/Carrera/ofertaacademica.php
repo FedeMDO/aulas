@@ -163,13 +163,39 @@ $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
                         'data' => $porcentajePorInstitutoEspecial,
                         'center' => ["75%", "50%"]
                     ]
-                    ],
-                    'credits' => [
-                        'enabled' => false
-                    ]
+                ],
+                'credits' => [
+                    'enabled' => false
+                ]
             ]
         ]);
 
+        ?>
+        <br>
+        <?php 
+        echo Highcharts::widget([
+            'scripts' => [
+                'modules/exporting',
+            ],
+            'options' => [
+                'title' => ['text' => 'Actividad de usuarios'],
+                'xAxis' => [
+                    'categories' => array_keys($actividadCreando["Especiales"])
+                ],
+                'yAxis' => [
+                    'title' => ['text' => 'Cantidad de eventos'],
+                ],
+                'series' => [
+                    ['type' => 'column', 'name' => 'Eventos de comisiones creados', 'data' => array_values($actividadCreando["Comisiones"])],
+                    ['type' => 'column', 'name' => 'Eventos de comisiones modificados', 'data' => array_values($actividadModificando["Comisiones"])],
+                    ['type' => 'column', 'name' => 'Eventos especales creados', 'data' => array_values($actividadCreando["Especiales"])],
+                    ['type' => 'column', 'name' => 'Eventos especiales modificados', 'data' => array_values($actividadModificando["Especiales"])]
+                ],
+                'credits' => [
+                    'enabled' => false
+                ]
+            ]
+        ]);
         ?>
     </div>
     
