@@ -14,6 +14,7 @@ use app\models\User;
 use yii\data\Pagination;
 use app\models\EventoCalendar;
 use app\models\EspecialCalendar;
+use app\models\Instituto;
 
 /**
  * CarreraController implements the CRUD actions for Carrera model.
@@ -176,7 +177,79 @@ class CarreraController extends Controller
             }
         }
 
-        return $this->render('ofertaacademica', ['comisiones' => $comisiones, 'especiales' => $especiales]);
+        // PORCENTAJE POR INSTITUTO
+        $porcentajePorInstitutoComision = array();
+        $porcentajePorInstitutoEspecial = array();
+        $institutos = Instituto::find()->all();
+
+        if (sizeof($institutos) > 0) {
+            // template result
+            foreach ($institutos as $instituto) {
+                $eachComis = array(
+                    'name' => $instituto->NOMBRE,
+                    'y' => 0,
+                    'color' => $instituto->COLOR_HEXA
+                );
+                foreach ($eventos as $eve) {
+                    if ($eve->comision->mATERIA->carrera->iNSTITUTO->ID == $instituto->ID) {
+                        $hora_fin_int = intval(substr($eve->Hora_fin, 0, 2));
+                        $hora_ini_int = intval(substr($eve->Hora_ini, 0, 2));
+                        $eachComis['y'] += $hora_fin_int - $hora_ini_int;
+                    }
+                }
+                $porcentajePorInstitutoComision[] = $eachComis;
+
+                $eachEspes = array(
+                    'name' => $instituto->NOMBRE,
+                    'y' => 0,
+                    'color' => $instituto->COLOR_HEXA
+                );
+                foreach ($evesespes as $evEspe) {
+                    if ($evEspe->ID_Carrera != null && $evEspe->carrera->iNSTITUTO->ID == $instituto->ID) {
+                        $hora_fin_int = intval(substr($evEspe->fin, 11, 2));
+                        $hora_ini_int = intval(substr($evEspe->inicio, 11, 2));
+                        $eachEspes['y'] += $hora_fin_int - $hora_ini_int;
+                    }
+                }
+
+                $porcentajePorInstitutoEspecial[] = $eachEspes;
+            }
+        }
+        // ESPECIALES SIN INSTITUTO
+        if (sizeof($evesespes) > 0) {
+            $otrosEspe = array(
+                'name' => 'SIN INSTITUTO',
+                'y' => 0,
+                'color' => '#E0E0E0'
+            );
+            foreach ($evesespes as $evEspe) {
+                if ($evEspe->ID_Carrera == null) {
+                    $hora_fin_int = intval(substr($evEspe->fin, 11, 2));
+                    $hora_ini_int = intval(substr($evEspe->inicio, 11, 2));
+                    $otrosEspe['y'] += $hora_fin_int - $hora_ini_int;
+                }
+            }
+            $porcentajePorInstitutoEspecial[] = $otrosEspe;
+        }
+
+        return $this->render(
+            'ofertaacademica',
+            [
+                'comisiones' => $comisiones,
+                'especiales' => $especiales,
+                'porcentajePorInstitutoComision' => $porcentajePorInstitutoComision,
+                'porcentajePorInstitutoEspecial' => $porcentajePorInstitutoEspecial
+            ]
+        );
+    }
+
+    private function sumarHoras($array)
+    {
+        $resultado = 0;
+        foreach ($array as $e) {
+            $resultado += $e;
+        }
+        return $resultado;
     }
 
     public function actionOfertabyparams($idCiclo, $strCarrera)

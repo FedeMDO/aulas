@@ -104,22 +104,72 @@ $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
         </div>
         <br>
         <?php 
-            echo Highcharts::widget([
-                'options' => [
-                   'title' => ['text' => 'Uso del espacio por día'],
-                   'xAxis' => [
-                      'categories' => ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes','Sabado']
-                   ],
-                   'yAxis' => [
-                      'title' => ['text' => 'Horas de aula']
-                   ],
-                   'series' => [
-                      ['name' => 'Comisiones', 'data' => [$comisiones["Lunes"], $comisiones["Martes"], $comisiones["Miercoles"], $comisiones["Jueves"], $comisiones["Viernes"], $comisiones["Sabado"]]],
-                      ['name' => 'Especiales', 'data' => [$especiales["Lunes"], $especiales["Martes"], $especiales["Miercoles"], $especiales["Jueves"], $especiales["Viernes"], $especiales["Sabado"]]]
-                   ]
+        echo Highcharts::widget([
+            'scripts' => [
+                'modules/exporting',
+            ],
+            'options' => [
+                'title' => ['text' => 'Uso del espacio por día'],
+                'xAxis' => [
+                    'categories' => ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado']
+                ],
+                'yAxis' => [
+                    'title' => ['text' => 'Horas de aula'],
+                    'labels' => ['format' => '{value} hs']
+                ],
+                'series' => [
+                    ['type' => 'column', 'name' => 'Horas por Comisiones', 'data' => [$comisiones["Lunes"], $comisiones["Martes"], $comisiones["Miercoles"], $comisiones["Jueves"], $comisiones["Viernes"], $comisiones["Sabado"]]],
+                    ['type' => 'column', 'name' => 'Horas por Especiales', 'data' => [$especiales["Lunes"], $especiales["Martes"], $especiales["Miercoles"], $especiales["Jueves"], $especiales["Viernes"], $especiales["Sabado"]]],
+                ],
+                'credits' => [
+                    'enabled' => false
                 ]
-             ]);
-            
+            ]
+        ]);
+
+        ?>
+        <br>
+        <?php 
+        echo Highcharts::widget([
+            'scripts' => [
+                'modules/exporting',
+            ],
+            'options' => [
+                'title' => ['text' => '% de utilización total por institutos'],
+                'subtitle' => ['text' => 'Comisiones (izquierda) - Eventos especiales (derecha)'],
+                'chart' => [
+                    'plotBackgroundColor' => null,
+                    'potBorderWidth' => null,
+                    'plotShadow' => false,
+                    'type' => 'pie'
+                ],
+                'plotOptions' => [
+                    'pie' => [
+                        //'size' => '60%',
+                        'allowPointSelect' => true,
+                        'cursor' => 'pointer',
+                    ]
+                ],
+                'series' => [
+                    [
+                        'type' => 'pie',
+                        'name' => 'Total Horas de comision',
+                        'data' => $porcentajePorInstitutoComision,
+                        'center' => ["25%", "50%"],
+                    ],
+                    [
+                        'type' => 'pie',
+                        'name' => 'Total Horas de ev. especial',
+                        'data' => $porcentajePorInstitutoEspecial,
+                        'center' => ["75%", "50%"]
+                    ]
+                    ],
+                    'credits' => [
+                        'enabled' => false
+                    ]
+            ]
+        ]);
+
         ?>
     </div>
     
