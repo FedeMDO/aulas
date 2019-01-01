@@ -1,6 +1,8 @@
+
+
 $(document).ready(function () {
     $('#calendar').fullCalendar({
-        themeSystem:'bootstrap4',
+        themeSystem: 'bootstrap4',
         //VIEW
         header: {
             left: 'today prev,next',
@@ -8,6 +10,20 @@ $(document).ready(function () {
             right: 'agendaDay,agendaWeek,month'
         },
         columnHeaderFormat: 'ddd D/M',
+        views: {
+            agendaDay: {
+                validRange: {
+                    start: rangeStart,
+                    end: rangeEnd
+                }
+            },
+            agendaWeek: {
+                validRange: {
+                    start: rangeStart,
+                    end: rangeEnd
+                }
+            }
+        },
         defaultView: 'agendaWeek',
         selectable: true,
         lang: 'es-us',
@@ -129,18 +145,18 @@ $(document).ready(function () {
                                     $("#modalEvento").modal("show");
                                     //DIA
                                     $('#eventocalendar-dow').val(startDate.isoWeekday());
-                
+
                                     //HORA INI
                                     $('#eventocalendar-hora_ini').val(startDate.format('HH:mm:ss'));
-                
+
                                     //HORA FIN
                                     $('#eventocalendar-hora_fin').val(endDate.format('HH:mm:ss'));
-                
+
                                     $('#carrera-id').val('');
-                
+
                                     $("#eventocalendar-hora_ini option[value='22:00:00']").remove();
                                     $("#eventocalendar-hora_fin option[value='08:00:00']").remove();
-                                    
+
                                 });
                                 $(this).dialog("close");
                             },
@@ -154,18 +170,18 @@ $(document).ready(function () {
                                     $("#modalEvento").modal("show");
                                     //FECHA INICIO
                                     $('#dynamicmodel-fecha_inicio').val(startDate.format("YYYY-MM-DD"));
-                
+
                                     //HORA INI
                                     $('#dynamicmodel-hora_inicio').val(startDate.format('HH:mm:ss'));
-                
+
                                     //HORA FIN
                                     $('#dynamicmodel-hora_fin').val(endDate.format('HH:mm:ss'));
-                
+
                                     $('#carrera-id').val('');
-                
+
                                     $("#dynamicmodel-hora_inicio option[value='22:00:00']").remove();
                                     $("#dynamicmodel-hora_fin option[value='08:00:00']").remove();
-                                    
+
                                 });
                                 $(this).dialog("close");
                             },
@@ -181,7 +197,7 @@ $(document).ready(function () {
                         }
                     },
                 });
-                
+
             }
         },
 
@@ -278,3 +294,12 @@ var esUserGuest;
 $.get("/user/currentuserisguest", function (data) {
     esUserGuest = data;
 })
+
+var rangeStart;
+var rangeEnd;
+$.get("/site/getcicloranges",
+    function (data) {
+        rangeStart = data.fecha_inicio,
+        rangeEnd = data.fecha_fin
+    }
+);

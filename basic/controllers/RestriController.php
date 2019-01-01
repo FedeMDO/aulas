@@ -107,6 +107,7 @@ class RestriController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->ID_User_Asigna = Yii::$app->user->identity->id;
             $model->ID_Aula = $id_aula;
+            $model->ID_Ciclo = Yii::$app->session->get('cicloID');
             if ($model->save()) {
 
                 return $this->redirect(['index', 'id' => $model->ID_Aula]);
@@ -246,32 +247,36 @@ class RestriController extends Controller
     {
 
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $cicloSessID = Yii::$app->session->get('cicloID');
+
         $aula = Aula::findOne($id);
         //RESTRICCIONES
         foreach ($aula->restriCalendars as $cons) {
 
-            $begin = new DateTime($cons->ciclo->fecha_inicio);
-            $end = new DateTime($cons->ciclo->fecha_fin);
+            if ($cons->ID_Ciclo == $cicloSessID) {
+                $begin = new DateTime($cons->ciclo->fecha_inicio);
+                $end = new DateTime($cons->ciclo->fecha_fin);
 
-            $interval = DateInterval::createFromDateString('1 day');
-            $period = new DatePeriod($begin, $interval, $end);
+                $interval = DateInterval::createFromDateString('1 day');
+                $period = new DatePeriod($begin, $interval, $end);
 
-            foreach ($period as $dia) {
-                if ($dia->format('N') == $cons->dow) {
+                foreach ($period as $dia) {
+                    if ($dia->format('N') == $cons->dow) {
 
-                    $restri = array();
-                    $restri['id'] = intval($cons->id) . 'R';
-                    $restri['title'] = $cons->instituto->NOMBRE;
-                    $restri['ranges'] = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
-                    $restri['start'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_ini;
-                    $restri['end'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_fin;
-                    $restri['backgroundColor'] = $cons->instituto->COLOR_HEXA;
-                    $restri["editable"] = true;
-                    $restri['overlap'] = false;
-                    $restri['resourceId'] = $cons->ID_Aula;
-                    $restri['usermodifico'] = $cons->ID_User_Asigna;
-                    $restri['ajeno'] = false;
-                    $tasks[] = (object)$restri;
+                        $restri = array();
+                        $restri['id'] = intval($cons->id) . 'R';
+                        $restri['title'] = $cons->instituto->NOMBRE;
+                        $restri['ranges'] = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
+                        $restri['start'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_ini;
+                        $restri['end'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_fin;
+                        $restri['backgroundColor'] = $cons->instituto->COLOR_HEXA;
+                        $restri["editable"] = true;
+                        $restri['overlap'] = false;
+                        $restri['resourceId'] = $cons->ID_Aula;
+                        $restri['usermodifico'] = $cons->ID_User_Asigna;
+                        $restri['ajeno'] = false;
+                        $tasks[] = (object)$restri;
+                    }
                 }
             }
         }
@@ -281,6 +286,9 @@ class RestriController extends Controller
     public function actionJsonschedulersede($id_sede, $start, $end = null, $_ = null)
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        //Ciclo en sesion
+        $cicloSessID = Yii::$app->session->get('cicloID');
+
         $tasks = array();
         $sede = Sede::findOne($id_sede);
         $aulas = array();
@@ -291,27 +299,30 @@ class RestriController extends Controller
                     foreach ($edi->aulas as $aula) {                        
                         //RESTRICCIONES
                         foreach ($aula->restriCalendars as $cons) {
-                            $begin = new DateTime($cons->ciclo->fecha_inicio);
-                            $end = new DateTime($cons->ciclo->fecha_fin);
+                            //CHECKEO CICLO EN SESION
+                            if ($cons->ID_Ciclo == $cicloSessID) {
+                                $begin = new DateTime($cons->ciclo->fecha_inicio);
+                                $end = new DateTime($cons->ciclo->fecha_fin);
 
-                            $interval = DateInterval::createFromDateString('1 day');
-                            $period = new DatePeriod($begin, $interval, $end);
+                                $interval = DateInterval::createFromDateString('1 day');
+                                $period = new DatePeriod($begin, $interval, $end);
 
-                            foreach ($period as $dia) {
-                                if ($dia->format('N') == intval($cons->dow)) {
-                                    $restri = array();
-                                    $restri['id'] = intval($cons->id) . 'R';
-                                    $restri['title'] = $cons->instituto->NOMBRE;
-                                    $restri['ranges'] = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
-                                    $restri['start'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_ini;
-                                    $restri['end'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_fin;
-                                    $restri['backgroundColor'] = $cons->instituto->COLOR_HEXA;
-                                    $restri["editable"] = true;
-                                    $restri['overlap'] = false;
-                                    $restri['usermodifico'] = $cons->ID_User_Asigna;
-                                    $restri['ajeno'] = false;
-                                    $restri['resourceId'] = $cons->ID_Aula;
-                                    $tasks[] = (object)$restri;
+                                foreach ($period as $dia) {
+                                    if ($dia->format('N') == intval($cons->dow)) {
+                                        $restri = array();
+                                        $restri['id'] = intval($cons->id) . 'R';
+                                        $restri['title'] = $cons->instituto->NOMBRE;
+                                        $restri['ranges'] = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
+                                        $restri['start'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_ini;
+                                        $restri['end'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_fin;
+                                        $restri['backgroundColor'] = $cons->instituto->COLOR_HEXA;
+                                        $restri["editable"] = true;
+                                        $restri['overlap'] = false;
+                                        $restri['usermodifico'] = $cons->ID_User_Asigna;
+                                        $restri['ajeno'] = false;
+                                        $restri['resourceId'] = $cons->ID_Aula;
+                                        $tasks[] = (object)$restri;
+                                    }
                                 }
                             }
                         }
@@ -383,18 +394,21 @@ class RestriController extends Controller
                 $aula = Aula::findOne($result[0]->ID_Aula);
                 $result = array();
                 $session = Yii::$app->session;
-                $session->setFlash(\dominus77\sweetalert2\Alert::TYPE_SUCCESS, 
-                    "Se migraron <strong>$contador</strong> restricciones de <strong>$cicloFrom->nombre</strong> a <strong>$cicloTo->nombre</strong>.");
+                $session->setFlash(
+                    \dominus77\sweetalert2\Alert::TYPE_SUCCESS,
+                    "Se migraron <strong>$contador</strong> restricciones de <strong>$cicloFrom->nombre</strong> a <strong>$cicloTo->nombre</strong>."
+                );
                 unset($contador);
                 return $this->render('index', [
                     'id_aula' => $aula->ID,
                     'aula' => $aula,
                 ]);
-            }
-            else{
+            } else {
                 $session = Yii::$app->session;
-                $session->setFlash(\dominus77\sweetalert2\Alert::TYPE_ERROR, 
-                    "El ciclo lectivo <strong>$cicloFrom->nombre</strong> no posee restricciones o ya has realizado una migración de <strong>$cicloFrom->nombre</strong> a <strong>$cicloTo->nombre</strong> anteriormente.");
+                $session->setFlash(
+                    \dominus77\sweetalert2\Alert::TYPE_ERROR,
+                    "El ciclo lectivo <strong>$cicloFrom->nombre</strong> no posee restricciones o ya has realizado una migración de <strong>$cicloFrom->nombre</strong> a <strong>$cicloTo->nombre</strong> anteriormente."
+                );
             }
         }
         return $this->render('migrar');

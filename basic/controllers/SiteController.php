@@ -21,6 +21,7 @@ use app\models\FormRecoverPass;
 use app\models\FormResetPass;
 use dominus77\sweetalert2;
 use yii\data\Pagination;
+use app\models\CicloLectivo;
 
 
 class SiteController extends Controller
@@ -536,6 +537,20 @@ class SiteController extends Controller
         $session = Yii::$app->session;
         if ($session->has('cicloID')){
             return $session->get('cicloID');
+        }
+        else{
+            return 0;
+        }
+    }
+    public function actionGetcicloranges(){
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $session = Yii::$app->session;
+        $resultado = array();
+        if ($session->has('cicloID')){
+            $ciclo = CicloLectivo::findOne($session->get('cicloID'));
+            $resultado["fecha_inicio"] = $ciclo->fecha_inicio;
+            $resultado["fecha_fin"] = $ciclo->fecha_fin;
+            return (object)$resultado;
         }
         else{
             return 0;

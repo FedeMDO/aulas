@@ -94,7 +94,7 @@ class EventoController extends Controller
             if ($model->save()) {
                 return $this->redirect(['index', 'id' => $model->ID_Aula]);
             } else {
-                return $this->renderAjax('create', ['model' => $model, 'materia' => $materia, 'carrera' => $carrera, 'instituto' => $instituto,]);
+                return $this->renderAjax('create', ['model' => $model, 'materia' => $materia, 'carrera' => $carrera, 'instituto' => $instituto, ]);
             }
         }
 
@@ -213,8 +213,7 @@ class EventoController extends Controller
                     $n = $n + 1;
                     if (count($aula->rECURSOs) == $n) {
                         $arrayRecu[] = $recu->NOMBRE;
-                    }
-                    else{
+                    } else {
                         $arrayRecu[] = $recu->NOMBRE . ' -';
                     }
                 }
@@ -239,6 +238,9 @@ class EventoController extends Controller
     public function actionJsoncalendar($id = null, $start = null, $end = null, $_ = null)
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        //Ciclo en sesion
+        $cicloSessID = Yii::$app->session->get('cicloID');
 
         $isGuest = User::isUserGuest(Yii::$app->user->identity->id);
         $isAdmin = User::isUserAdmin(Yii::$app->user->identity->id);
@@ -250,78 +252,85 @@ class EventoController extends Controller
         //RESTRICCIONES
         foreach ($aula->restriCalendars as $cons) {
 
-            $begin = new DateTime($cons->ciclo->fecha_inicio);
-            $end = new DateTime($cons->ciclo->fecha_fin);
+            //CHECKEO CICLO EN SESION
+            if ($cons->ID_Ciclo == $cicloSessID) {
+                $begin = new DateTime($cons->ciclo->fecha_inicio);
+                $end = new DateTime($cons->ciclo->fecha_fin);
 
-            $interval = DateInterval::createFromDateString('1 day');
-            $period = new DatePeriod($begin, $interval, $end);
+                $interval = DateInterval::createFromDateString('1 day');
+                $period = new DatePeriod($begin, $interval, $end);
 
-            foreach ($period as $dia) {
-                if ($dia->format('N') == $cons->dow) {
+                foreach ($period as $dia) {
+                    if ($dia->format('N') == $cons->dow) {
 
-                    $restri = array();
-                    $restri['id'] = intval($cons->id) . 'R';
-                    $restri['title'] = $cons->instituto->ID;
-                    $restri['ranges'] = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
-                    $restri['start'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_ini;
-                    $restri['end'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_fin;
-                    $restri['backgroundColor'] = $cons->instituto->COLOR_HEXA;
-                    $restri['rendering'] = 'background';
-                    $restri['resourceId'] = $cons->ID_Aula;
-                    $restri['ajeno'] = false;
-                    $restri['usermodifico'] = $cons->ID_User_Asigna;
-                    if ($isGuest) {
-                        $restri['ajeno'] = true;
-                        $restri['overlap'] = false;
-                    } else if ($instIdOnSessionUser != $cons->instituto->ID) {
-                        $restri['ajeno'] = true;
-                        $restri['overlap'] = false;
-                    }
-                    if ($isAdmin) {
+                        $restri = array();
+                        $restri['id'] = intval($cons->id) . 'R';
+                        $restri['title'] = $cons->instituto->ID;
+                        $restri['ranges'] = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
+                        $restri['start'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_ini;
+                        $restri['end'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_fin;
+                        $restri['backgroundColor'] = $cons->instituto->COLOR_HEXA;
+                        $restri['rendering'] = 'background';
+                        $restri['resourceId'] = $cons->ID_Aula;
                         $restri['ajeno'] = false;
-                        $restri['overlap'] = true;
+                        $restri['usermodifico'] = $cons->ID_User_Asigna;
+                        if ($isGuest) {
+                            $restri['ajeno'] = true;
+                            $restri['overlap'] = false;
+                        } else if ($instIdOnSessionUser != $cons->instituto->ID) {
+                            $restri['ajeno'] = true;
+                            $restri['overlap'] = false;
+                        }
+                        if ($isAdmin) {
+                            $restri['ajeno'] = false;
+                            $restri['overlap'] = true;
+                        }
+                        $tasks[] = (object)$restri;
                     }
-                    $tasks[] = (object)$restri;
                 }
             }
+
         }
         //EVENTOS
         foreach ($aula->eventoCalendars as $eve) {
-            $begin = new DateTime($eve->ciclo->fecha_inicio);
-            $end = new DateTime($eve->ciclo->fecha_fin);
+            //CHECKEO CICLO EN SESION
+            if ($eve->ID_Ciclo == $cicloSessID) {
+                $begin = new DateTime($eve->ciclo->fecha_inicio);
+                $end = new DateTime($eve->ciclo->fecha_fin);
 
-            $interval = DateInterval::createFromDateString('1 day');
-            $period = new DatePeriod($begin, $interval, $end);
+                $interval = DateInterval::createFromDateString('1 day');
+                $period = new DatePeriod($begin, $interval, $end);
 
-            foreach ($period as $dia) {
-                if ($dia->format('N') == $eve->dow) {
-                    $event = array();
+                foreach ($period as $dia) {
+                    if ($dia->format('N') == $eve->dow) {
+                        $event = array();
                     // Evento NO ESPECIAL (es periodico).
-                    $event['especial'] = false;
-                    $event['id'] = intval($eve->id) . 'E';
-                    $event['title'] = $eve->comision->getName();
-                    $event['color'] = $eve->instituto->COLOR_HEXA;
-                    $event['ranges'] = [array('start' => $eve->ciclo->fecha_inicio, 'end' => $eve->ciclo->fecha_fin)];
-                    $event['editable'] = true;
-                    $event['ajeno'] = false;
-                    if ($isGuest) {
-                        $event['ajeno'] = true;
-                        $event['editable'] = false;
-                    }
-                    //user en session no edita eventos de otros institutos
-                    else if ($instIdOnSessionUser != $eve->instituto->ID) {
-                        $event['ajeno'] = true;
-                        $event['editable'] = false;
-                    }
-                    if ($isAdmin) {
-                        $event['ajeno'] = false;
+                        $event['especial'] = false;
+                        $event['id'] = intval($eve->id) . 'E';
+                        $event['title'] = $eve->comision->getName();
+                        $event['color'] = $eve->instituto->COLOR_HEXA;
+                        $event['ranges'] = [array('start' => $eve->ciclo->fecha_inicio, 'end' => $eve->ciclo->fecha_fin)];
                         $event['editable'] = true;
+                        $event['ajeno'] = false;
+                        if ($isGuest) {
+                            $event['ajeno'] = true;
+                            $event['editable'] = false;
+                        }
+                    //user en session no edita eventos de otros institutos
+                        else if ($instIdOnSessionUser != $eve->instituto->ID) {
+                            $event['ajeno'] = true;
+                            $event['editable'] = false;
+                        }
+                        if ($isAdmin) {
+                            $event['ajeno'] = false;
+                            $event['editable'] = true;
+                        }
+                        $event['start'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_ini;
+                        $event['end'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_fin;
+                        $event['usermodifico'] = $eve->ID_User_Asigna;
+                        $event['resourceId'] = $eve->ID_Aula;
+                        $tasks[] = (object)$event;
                     }
-                    $event['start'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_ini;
-                    $event['end'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_fin;
-                    $event['usermodifico'] = $eve->ID_User_Asigna;
-                    $event['resourceId'] = $eve->ID_Aula;
-                    $tasks[] = (object)$event;
                 }
             }
         }
@@ -331,6 +340,10 @@ class EventoController extends Controller
     public function actionJsonschedulersede($id_sede, $start, $end = null, $_ = null)
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        //Ciclo en sesion
+        $cicloSessID = Yii::$app->session->get('cicloID');
+
         $isGuest = User::isUserGuest(Yii::$app->user->identity->id);
         $isAdmin = User::isUserAdmin(Yii::$app->user->identity->id);
         if (!$isGuest) {
@@ -345,84 +358,85 @@ class EventoController extends Controller
                     foreach ($edi->aulas as $aula) {                        
                         //RESTRICCIONES
                         foreach ($aula->restriCalendars as $cons) {
-                            $begin = new DateTime($cons->ciclo->fecha_inicio);
-                            $end = new DateTime($cons->ciclo->fecha_fin);
+                            //CICLO EN SESION
+                            if ($cons->ID_Ciclo == $cicloSessID) {
+                                $begin = new DateTime($cons->ciclo->fecha_inicio);
+                                $end = new DateTime($cons->ciclo->fecha_fin);
 
-                            $interval = DateInterval::createFromDateString('1 day');
-                            $period = new DatePeriod($begin, $interval, $end);
+                                $interval = DateInterval::createFromDateString('1 day');
+                                $period = new DatePeriod($begin, $interval, $end);
 
-                            foreach ($period as $dia) {
-                                if ($dia->format('N') == intval($cons->dow)) {
-                                    $restri = array();
-                                    $restri['id'] = intval($cons->id) . 'R';
-                                    $restri['title'] = $cons->instituto->ID;
-                                    $restri['ranges'] = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
-                                    $restri['start'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_ini;
-                                    $restri['end'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_fin;
-                                    $restri['backgroundColor'] = $cons->instituto->COLOR_HEXA;
-                                    $restri['rendering'] = 'background';
-                                    $restri['usermodifico'] = $cons->ID_User_Asigna;
-                                    $restri['ajeno'] = false;
-                                    $restri['resourceId'] = $cons->ID_Aula;
-                                    if ($isGuest) {
-                                        $restri['ajeno'] = true;
-                                        $restri['overlap'] = false;
-                                    } else if ($instIdOnSessionUser != $cons->instituto->ID) {
-                                        $restri['ajeno'] = true;
-                                        $restri['overlap'] = false;
-                                    }
-                                    if ($isAdmin) {
+                                foreach ($period as $dia) {
+                                    if ($dia->format('N') == intval($cons->dow)) {
+                                        $restri = array();
+                                        $restri['id'] = intval($cons->id) . 'R';
+                                        $restri['title'] = $cons->instituto->ID;
+                                        $restri['ranges'] = [array('start' => $cons->ciclo->fecha_inicio, 'end' => $cons->ciclo->fecha_fin)];
+                                        $restri['start'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_ini;
+                                        $restri['end'] = $dia->format('Y-m-d') . 'T' . $cons->Hora_fin;
+                                        $restri['backgroundColor'] = $cons->instituto->COLOR_HEXA;
+                                        $restri['rendering'] = 'background';
+                                        $restri['usermodifico'] = $cons->ID_User_Asigna;
                                         $restri['ajeno'] = false;
-                                        $restri['overlap'] = true;
+                                        $restri['resourceId'] = $cons->ID_Aula;
+                                        if ($isGuest) {
+                                            $restri['ajeno'] = true;
+                                            $restri['overlap'] = false;
+                                        } else if ($instIdOnSessionUser != $cons->instituto->ID) {
+                                            $restri['ajeno'] = true;
+                                            $restri['overlap'] = false;
+                                        }
+                                        if ($isAdmin) {
+                                            $restri['ajeno'] = false;
+                                            $restri['overlap'] = true;
+                                        }
+                                        if (User::isUserGuest(Yii::$app->user->identity->id)) {
+                                            $restri['ajeno'] = true;
+                                            $restri['overlap'] = false;
+                                        }
+                                        $tasks[] = (object)$restri;
                                     }
-                                    if (User::isUserGuest(Yii::$app->user->identity->id)) {
-                                        $restri['ajeno'] = true;
-                                        $restri['overlap'] = false;
-                                    }
-                                    $tasks[] = (object)$restri;
                                 }
                             }
                         }
                         //EVENTOS
                         foreach ($aula->eventoCalendars as $eve) {
-                            $begin = new DateTime($eve->ciclo->fecha_inicio);
-                            $end = new DateTime($eve->ciclo->fecha_fin);
-                            $interval = DateInterval::createFromDateString('1 day');
-                            $period = new DatePeriod($begin, $interval, $end);
+                            //CICLO EN SESION
+                            if ($eve->ID_Ciclo == $cicloSessID) {
+                                $begin = new DateTime($eve->ciclo->fecha_inicio);
+                                $end = new DateTime($eve->ciclo->fecha_fin);
+                                $interval = DateInterval::createFromDateString('1 day');
+                                $period = new DatePeriod($begin, $interval, $end);
 
-                            foreach ($period as $dia) {
-                                if ($dia->format('N') == intval($eve->dow)) {
-                                    $event = array();
+                                foreach ($period as $dia) {
+                                    if ($dia->format('N') == intval($eve->dow)) {
+                                        $event = array();
                                     // Evento NO ESPECIAL (es periodico).
-                                    $event['especial'] = false;
-                                    $event['id'] = intval($eve->id) . 'E';
-                                    $event['title'] = $eve->comision->getName();
-                                    $event['color'] = $eve->instituto->COLOR_HEXA;
-                                    $event['ranges'] = [array('start' => $eve->ciclo->fecha_inicio, 'end' => $eve->ciclo->fecha_fin)];
-                                    $event['editable'] = true;
-                                    $event['ajeno'] = false;
-                                    //user en session no edita eventos de otros institutos
-                                    if ($isGuest) {
-                                        $event['ajeno'] = true;
-                                        $event['editable'] = false;
-                                    } else if ($instIdOnSessionUser != $eve->instituto->ID) {
-                                        $event['ajeno'] = true;
-                                        $event['editable'] = false;
-                                    }
-                                    if ($isAdmin) {
-                                        $event['ajeno'] = false;
+                                        $event['especial'] = false;
+                                        $event['id'] = intval($eve->id) . 'E';
+                                        $event['title'] = $eve->comision->getName();
+                                        $event['color'] = $eve->instituto->COLOR_HEXA;
+                                        $event['ranges'] = [array('start' => $eve->ciclo->fecha_inicio, 'end' => $eve->ciclo->fecha_fin)];
                                         $event['editable'] = true;
+                                        $event['ajeno'] = false;
+                                    //user en session no edita eventos de otros institutos
+                                        if ($isGuest) {
+                                            $event['ajeno'] = true;
+                                            $event['editable'] = false;
+                                        } else if ($instIdOnSessionUser != $eve->instituto->ID) {
+                                            $event['ajeno'] = true;
+                                            $event['editable'] = false;
+                                        }
+                                        if ($isAdmin) {
+                                            $event['ajeno'] = false;
+                                            $event['editable'] = true;
+                                        }
+                                        $event['start'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_ini;
+                                        $event['end'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_fin;
+                                        $event['resourceId'] = $eve->ID_Aula;
+                                        $event['usermodifico'] = $eve->ID_User_Asigna;
+                                        $tasks[] = (object)$event;
                                     }
-                                    /*if(User::isUserGuest(Yii::$app->user->identity->id))
-                                    {
-                                        $event['ajeno'] = true;
-                                        $event['editable'] = false;
-                                    }*/
-                                    $event['start'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_ini;
-                                    $event['end'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_fin;
-                                    $event['resourceId'] = $eve->ID_Aula;
-                                    $event['usermodifico'] = $eve->ID_User_Asigna;
-                                    $tasks[] = (object)$event;
                                 }
                             }
                         }
@@ -462,15 +476,19 @@ class EventoController extends Controller
     }
     public function actionListcomision($id)
     {
+        //Ciclo en sesion
+        $cicloSessID = Yii::$app->session->get('cicloID');
         $materia = Materia::findOne($id);
         $comisiones = $materia->comisions;
         if (!empty($comisiones)) {
             foreach ($comisiones as $comision) {
-                echo "<option value='" . $comision->ID . "'>" . $materia->DESC_CORTA . $comision->NUMERO . "</option>";
+                //CHECKEO CICLO EN SESION
+                if ($comision->ID_Ciclo == $cicloSessID) {
+                    echo "<option value='" . $comision->ID . "'>" . $materia->DESC_CORTA . $comision->NUMERO . "</option>";
+                }
             }
         } else {
             echo "<option>-</option>";
         }
-
     }
 }

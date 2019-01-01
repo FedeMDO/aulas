@@ -22,8 +22,6 @@ use app\models\CicloLectivo;
 
     $insitutos = Instituto::find()->asArray()->all();
     $resultInst = ArrayHelper::map($insitutos, 'ID', 'NOMBRE');
-    $ciclos = CicloLectivo::find()->asArray()->all();
-    $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
     $horas = [
         '08:00:00' => '08:00',
         '09:00:00' => '09:00',
@@ -76,12 +74,6 @@ use app\models\CicloLectivo;
                 $horas,
                 ['prompt' => 'Seleccionar']
             )->label("Hasta las"); ?> 
-
-        <?php echo $form->field($model, 'ID_Ciclo', ['labelOptions' => ['style' => 'color:white']])->dropDownList(
-            $resultCiclos,
-            ['prompt' => 'Seleccionar']
-        )->label('Ciclo Lectivo');
-        ?>
 
     <div class="form-group">
         <?= Html::submitButton('GUARDAR', ['class' => 'btn btn-success']) ?>
