@@ -21,6 +21,7 @@ use yii\base\Exception;
 use app\models\Instituto;
 use app\models\EventoCalendar;
 use app\models\EspecialCalendar;
+use app\models\CicloLectivo;
 
 
 class AdminController extends Controller
@@ -68,9 +69,14 @@ class AdminController extends Controller
         $this->layout = 'LayoutAdmin';
         return $this->render('panel');
     }
-    public function actionReportes(){
+    public function actionReportes()
+    {
+        //Ciclo en Sesion
+        $cicloSessID = Yii::$app->session->get('cicloID');
+        $cicloSess = CicloLectivo::findOne($cicloSessID);
+
          // REPORTE USO DEL ESPACIO POR DIA
-        $eventos = EventoCalendar::find()->all();
+        $eventos = EventoCalendar::find()->where(['ID_Ciclo' => $cicloSessID])->all();
 
         $comisiones = array(
             "Lunes" => 0,
@@ -234,13 +240,13 @@ class AdminController extends Controller
         // REPORTE ACTIVIDAD DE LOS USUARIOS CREANDO
         $usuarios = Users::find()->all();
         $actividadCreando = array();
-        
+
         if (sizeof($usuarios) > 0) {
-            foreach($usuarios as $user){
+            foreach ($usuarios as $user) {
                 $cantidadComisiones = 0;
 
-                foreach($eventos as $eve){
-                    if($eve->ID_User_Asigna == $user->id){
+                foreach ($eventos as $eve) {
+                    if ($eve->ID_User_Asigna == $user->id) {
                         $cantidadComisiones++;
                     }
                 }
@@ -248,8 +254,8 @@ class AdminController extends Controller
 
                 $cantidadEspeciales = 0;
 
-                foreach($evesespes as $espe){
-                    if($espe->ID_UCrea == $user->id){
+                foreach ($evesespes as $espe) {
+                    if ($espe->ID_UCrea == $user->id) {
                         $cantidadEspeciales++;
                     }
                 }
@@ -257,13 +263,13 @@ class AdminController extends Controller
             }
         }
         $actividadModificando = array();
-        
+
         if (sizeof($usuarios) > 0) {
-            foreach($usuarios as $user){
+            foreach ($usuarios as $user) {
                 $cantidadComisiones = 0;
 
-                foreach($eventos as $eve){
-                    if($eve->ID_UModifica == $user->id){
+                foreach ($eventos as $eve) {
+                    if ($eve->ID_UModifica == $user->id) {
                         $cantidadComisiones++;
                     }
                 }
@@ -271,8 +277,8 @@ class AdminController extends Controller
 
                 $cantidadEspeciales = 0;
 
-                foreach($evesespes as $espe){
-                    if($espe->ID_UModifica == $user->id){
+                foreach ($evesespes as $espe) {
+                    if ($espe->ID_UModifica == $user->id) {
                         $cantidadEspeciales++;
                     }
                 }
@@ -282,9 +288,10 @@ class AdminController extends Controller
 
 
 
-         return $this->render(
+        return $this->render(
             'reportes',
             [
+                'cicloSess' => $cicloSess,
                 'comisiones' => $comisiones,
                 'especiales' => $especiales,
                 'porcentajePorInstitutoComision' => $porcentajePorInstitutoComision,
@@ -293,8 +300,8 @@ class AdminController extends Controller
                 'actividadModificando' => $actividadModificando
             ]
         );
- 
- 
+
+
     }
     public function actionUsers()
     {

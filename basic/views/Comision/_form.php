@@ -25,7 +25,7 @@ endif;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'NUMERO', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->textInput(['maxlength' => true])->label('Cantidad'); ?>
+    <?= $form->field($model, 'NUMERO', ['labelOptions' => ['style' => 'color:white; padding-top:10px;']])->textInput(['maxlength' => true, 'type' => 'number', 'min' => 1])->label('Cantidad'); ?>
 
     <?php if (User::isUserAdmin(Yii::$app->user->identity->id)) {
         $institutos = Instituto::find()->asArray()->all();
