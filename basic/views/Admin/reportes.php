@@ -64,8 +64,8 @@ $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
                     'labels' => ['format' => '{value} hs']
                 ],
                 'series' => [
-                    ['type' => 'column', 'name' => 'Horas por Comisiones', 'data' => [$comisiones["Lunes"], $comisiones["Martes"], $comisiones["Miercoles"], $comisiones["Jueves"], $comisiones["Viernes"], $comisiones["Sabado"]]],
-                    ['type' => 'column', 'name' => 'Horas por Eventos Especiales', 'data' => [$especiales["Lunes"], $especiales["Martes"], $especiales["Miercoles"], $especiales["Jueves"], $especiales["Viernes"], $especiales["Sabado"]]],
+                    ['type' => 'column', 'name' => 'Horas por Comisiones (' . $cicloSess->nombre . ")", 'data' => [$comisiones["Lunes"], $comisiones["Martes"], $comisiones["Miercoles"], $comisiones["Jueves"], $comisiones["Viernes"], $comisiones["Sabado"]]],
+                    ['type' => 'column', 'name' => 'Horas por Eventos Especiales (Histórico)', 'data' => [$especiales["Lunes"], $especiales["Martes"], $especiales["Miercoles"], $especiales["Jueves"], $especiales["Viernes"], $especiales["Sabado"]]],
                 ],
                 'credits' => [
                     'enabled' => false
@@ -83,7 +83,7 @@ $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
             ],
             'options' => [
                 'title' => ['text' => '% de utilización total por institutos'],
-                'subtitle' => ['text' => 'Comisiones (izquierda) - Eventos especiales (derecha)'],
+                'subtitle' => ['text' => 'Comisiones del ciclo lectivo '.$cicloSess->nombre.' (izquierda) - Eventos especiales (derecha)'],
                 'chart' => [
                     'plotBackgroundColor' => null,
                     'potBorderWidth' => null,
@@ -134,10 +134,10 @@ $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
                     'title' => ['text' => 'Cantidad de eventos'],
                 ],
                 'series' => [
-                    ['type' => 'column', 'name' => 'Eventos de comisiones creados', 'data' => array_values($actividadCreando["Comisiones"])],
-                    ['type' => 'column', 'name' => 'Eventos de comisiones modificados', 'data' => array_values($actividadModificando["Comisiones"])],
+                    ['type' => 'column', 'name' => 'Eventos de comision creados ('.$cicloSess->nombre.')', 'data' => array_values($actividadCreando["Comisiones"])],
+                    ['type' => 'column', 'name' => 'Eventos de comision modif. ('.$cicloSess->nombre.')', 'data' => array_values($actividadModificando["Comisiones"])],
                     ['type' => 'column', 'name' => 'Eventos especales creados', 'data' => array_values($actividadCreando["Especiales"])],
-                    ['type' => 'column', 'name' => 'Eventos especiales modificados', 'data' => array_values($actividadModificando["Especiales"])]
+                    ['type' => 'column', 'name' => 'Eventos especiales modif.', 'data' => array_values($actividadModificando["Especiales"])]
                 ],
                 'credits' => [
                     'enabled' => false
