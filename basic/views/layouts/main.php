@@ -66,6 +66,9 @@ if ($session->get('cicloID') == null && sizeof($resultCiclos) > 0){
 li.dropdown:nth-child(3) > a:nth-child(1){
     padding-bottom:5px !important;
 }
+li.dropdown:nth-child(2) > a:nth-child(1){
+    padding-bottom:5px !important;
+}
 .navDerecha p{
     margin-bottom:0px;
 

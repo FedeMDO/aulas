@@ -260,7 +260,7 @@ a.desc:after {
 }
 
 #sidebar ul li.active>a,
-a[aria-expanded="true"] {
+#sidebar a[aria-expanded="true"] {
   color: #fff;
   background: #7386D5;;
 }
