@@ -390,6 +390,7 @@ a.article:hover {
   appearance: none;       /* remove default arrow */
   background: transparent;
   border: none;
+  padding-right: 33px;
   font-size: 14px;
   height: 29px;
   width: 268px;

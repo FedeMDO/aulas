@@ -10,20 +10,6 @@ $(document).ready(function () {
             right: 'agendaDay,agendaWeek,month'
         },
         columnHeaderFormat: 'ddd D/M',
-        views: {
-            agendaDay: {
-                validRange: {
-                    start: rangeStart,
-                    end: rangeEnd
-                }
-            },
-            agendaWeek: {
-                validRange: {
-                    start: rangeStart,
-                    end: rangeEnd
-                }
-            }
-        },
         defaultView: 'agendaWeek',
         selectable: true,
         lang: 'es-us',
@@ -294,12 +280,3 @@ var esUserGuest;
 $.get("/user/currentuserisguest", function (data) {
     esUserGuest = data;
 })
-
-var rangeStart;
-var rangeEnd;
-$.get("/site/getcicloranges",
-    function (data) {
-        rangeStart = data.fecha_inicio,
-        rangeEnd = data.fecha_fin
-    }
-);

@@ -476,6 +476,7 @@ class EventoController extends Controller
     }
     public function actionListcomision($id)
     {
+        $vacio = true;
         //Ciclo en sesion
         $cicloSessID = Yii::$app->session->get('cicloID');
         $materia = Materia::findOne($id);
@@ -484,10 +485,14 @@ class EventoController extends Controller
             foreach ($comisiones as $comision) {
                 //CHECKEO CICLO EN SESION
                 if ($comision->ID_Ciclo == $cicloSessID) {
+                    $vacio = false;
                     echo "<option value='" . $comision->ID . "'>" . $materia->DESC_CORTA . $comision->NUMERO . "</option>";
                 }
             }
         } else {
+            echo "<option>-</option>";
+        }
+        if($vacio){
             echo "<option>-</option>";
         }
     }

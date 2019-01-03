@@ -45,27 +45,9 @@ $(document).ready(function () {
     $("#dynamicmodel-tocicloid").change(function () {
         if (this.value === $("#dynamicmodel-fromcicloid").val()) {
             $("#dynamicmodel-tocicloid").val('');
-            alert("Seleccionar distintos ciclos.")
         }
     });
-    $.get("/site/getcicloranges",
-        function (data) {
-            $('#calendar').fullCalendar('option', 'views', {
-                agendaDay: {
-                    validRange: {
-                        start: data.fecha_inicio,
-                        end: data.fecha_fin
-                    }
-                },
-                agendaWeek: {
-                    validRange: {
-                        start: data.fecha_inicio,
-                        end: data.fecha_fin
-                    }
-                },
-            });
-        }
-    );
+
     console.log("ready!");
 });
 $(this).tooltip();
