@@ -337,15 +337,15 @@ class SiteController extends Controller
     public function actionLogin()
     {
         $model = new LoginForm();
-        
-        if (Yii::$app->user->isGuest){
 
+        if (Yii::$app->user->isGuest){
             if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
                 Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
                 return ActiveForm::validate($model);
             }
 
             if ($model->load(Yii::$app->request->post()) && $model->login()) {
+
                 return $this->redirect('index');
 
             } else {
@@ -364,7 +364,6 @@ class SiteController extends Controller
     public function actionLogin2()
     {
         $model = new LoginForm();
-
         if (Yii::$app->user->isGuest){
             if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
                 Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -376,7 +375,7 @@ class SiteController extends Controller
                 return $this->redirect('index');
 
             } else {
-                return $this->renderAjax('login2', [
+                return $this->render('login2', [
                     'model' => $model,
                 ]);
             }
