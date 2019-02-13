@@ -26,7 +26,6 @@ class AppAsset extends AssetBundle
     ];
     public $js =[
         'js/main.js',
-        'https://www.google.com/recaptcha/api.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
