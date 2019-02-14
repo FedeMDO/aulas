@@ -308,7 +308,7 @@ th, td {
   padding: 8px;
 }
 
-/*.grid{
+.grid{
   background-color: white;
   border: 2px solid #2980b9;
   color:#2980b9 !important;
@@ -331,15 +331,6 @@ th, td {
   color: white;
 }
 
-/*.grid tr:nth-child(odd){
-  background-color: #4C8BF5;
-  color: #fff;
-}
-.grid tr:nth-child(even){
-  background-color: #4C8BF5;
-  color: #fff;
-}
-*/
 
 /*iconos de administracion*/
 .boxAdmin{
@@ -411,45 +402,6 @@ th, td {
     padding-right: 4px !important;
   }
 }
-
-/* estilo de pop up*/
-
-.log-modal-content
-{
-    border-radius: 25px;
-    -webkit-border-radius: 25px;
-    -moz-border-radius: 25px;
-    background-color: rgb(41, 128, 185);
-    padding-bottom:20px;
-}
-
-.log-modal-content p{
-    color:white;
-}
-
-.log-modal-header
-{
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
-    -webkit-border-top-left-radius: 25px;
-    -webkit-border-top-right-radius: 25px;
-    -moz-border-radius-topleft: 25px;
-    -moz-border-radius-topright: 25px;
-    background-color: rgb(41, 128, 185);
-    padding-bottom:0px;
-}
-
-.modal-log{
-        width:500px;
-    }
-
-/* fix en culular*/
-@media (max-width: 768px) {
-  .modal-log{
-    width:auto;
-}
-
-  }
 
 /* esto afecta a sedes y a edificios*/
 

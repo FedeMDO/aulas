@@ -26,7 +26,7 @@ use app\models\Instituto;
     <?php $form = ActiveForm::begin(); ?>
 
     <?php if ($usuario->profile_picture == ""): ?>
-    <img src="../image/admin_icon.png" id=#avatar  alt="Avatar" style="margin-bottom:20px; border-radius: 50%; ">
+    <img src="../image/admin_icon.png" id=#avatar  alt="Avatar" style="margin-bottom:20px; border-radius: 50%; width: 200px; height:200px; border: 5px solid lavender;">
     <?php else : ?>
     <img src=<?php echo $usuario->profile_picture ?>   alt="Avatar" style="margin-bottom:20px; border-radius: 50%; width: 200px; height:200px; border: 5px solid lavender; "> 
     <?php endif ?>

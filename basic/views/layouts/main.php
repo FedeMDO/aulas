@@ -91,22 +91,12 @@ li.dropdown:nth-child(2) > a:nth-child(1){
         
         // Preguntar aca si user es admin o simple y hacer un echo Nav del q corresponda
         // SI ES GUEST
-    if (Yii::$app->user->isGuest) {
+        if(Yii::$app->user->isGuest)
+        {
         echo Nav::widget([
             'encodeLabels' => false,
-            'options' => ['class' => 'navbar-nav navbar-right navlog'],
+            'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
-
-                ['label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-home']) . ' INICIO', 'url' => ['/site/index'], 'options' => ['style' => 'font-weight: bold;']],
-
-                Yii::$app->user->isGuest ? (['label' => Html::button('<i class="glyphicon glyphicon-log-in"></i> INGRESAR', ['value' => Url::to('/site/login2'), 'class' => 'btn btn-add-al', 'id' => 'modalLogin', 'style' => 'padding: 0px; font-weight: bold; background-color: Transparent; ;border-bottom-width: 0px;border-top-width: 0px;'])]) : ('<li>'
-                    . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
-                    . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link']
-                )
-                    . Html::endForm()
-                    . '</li>')
             ],
         ]);
     } else {

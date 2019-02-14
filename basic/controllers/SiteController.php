@@ -336,33 +336,7 @@ class SiteController extends Controller
      *
      * @return Response|string
      */
-    public function actionLogin()
-    {
-        $model = new LoginForm();
-
-        if (Yii::$app->user->isGuest){
-            if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-                return ActiveForm::validate($model);
-            }
-
-            if ($model->load(Yii::$app->request->post()) && $model->login()) {
-
-                return $this->redirect('index');
-
-            } else {
-                return $this->render('login', [
-                    'model' => $model,
-                ]);
-            }
-            return $this->render('login', ['model' => $model]);
-        }
-        else{
-            return $this->redirect('index');
-        }
-    }
-
-
+    
     public function actionLogin2()
     {
         $model = new LoginForm();
