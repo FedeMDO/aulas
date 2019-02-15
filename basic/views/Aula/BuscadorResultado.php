@@ -7,15 +7,38 @@ $this->registerCssFile("@web/css/index.css", [
 ], 'css-print-theme');
 $this->title = 'Buscador de aulas';
 ?>
+
+<style>
+
+thead{
+    background-color: #2980b9;
+    border:0px;
+}
+th{
+    border:0px;
+    color:white;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+.table-responsive{
+    margin-top:20px;
+}
+
+
+</style>
+
+
 <?= \yii\helpers\Url::remember(); ?>
 <center><?php if (count($aulasCumplen) != 0) {
 
           ?>
 <div class="col-md-offset-1 col-md-10">
 <h2 class=titulo style="text-align:center;">Aulas disponibles con los parámetros seleccionados en <?= Html::encode("{$edi->NOMBRE} ") ?></h2>
-<div class="loginc">
+<div class="caja aulafilter">
 <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
+  <div class="table-responsive">
+    <table class="table" style="margin-bottom:0px">
                 <thead>
                 <tr>
                   <th>AGENDA</th>

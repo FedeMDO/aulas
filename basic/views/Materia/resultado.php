@@ -8,14 +8,35 @@ $this->registerCssFile("@web/css/index.css", [
 $this->title = 'Buscador de aulas';
 ?>
 
+<style>
+
+thead{
+    background-color: #2980b9;
+    border:0px;
+}
+th{
+    border:0px;
+    color:white;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+.table-responsive{
+    margin-top:20px;
+}
+
+
+</style>
+
 <center><?php if (!empty($matched)) {
 
           ?>
 <div class="col-md-offset-1 col-md-10">
 <h2 class=titulo style="text-align:center;">Horarios encontrados de la materia <?= Html::encode("{$nombre} ") ?></h2>
-<div class="loginc">
-<div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
+  <div class="caja aulafilter" style="background-color:white">
+    <div class="box-body">
+      <div class="table-responsive">          
+        <table class="table" style="margin-bottom:0px">
                 <thead>
                 <tr>
                   <th>AGENDA</th>
@@ -68,6 +89,7 @@ $this->title = 'Buscador de aulas';
             </div>
 </div>
 <a href="../materia/buscador" class="btn btn-info button1" role="button">Buscar otra vez</a>
+</div>
 </div>
 
 <?php

@@ -8,6 +8,7 @@ use yii\widgets\LinkPager;
 
 $this->title = 'Aulas';
 
+
 ?>
 
 <header>
@@ -15,6 +16,27 @@ $this->title = 'Aulas';
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
 </header>
+
+<style>
+
+thead{
+    background-color: #2980b9;
+    border:0px;
+}
+th{
+    border:0px;
+    color:white;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+.table-responsive{
+    margin-top:20px;
+}
+
+
+</style>
+
 
 <?= \yii\helpers\Url::remember(); ?>
 
@@ -47,11 +69,11 @@ $this->title = 'Aulas';
             <!-- boton de sidebar-->
             <button type="button" id="sidebarCollapse" class="btn btn-primary"><i class="glyphicon glyphicon-align-justify"></i><span> Menu</span></button>
                 <h2 class=titulo style="text-align:center;">Aulas disponibles en <?= Html::encode("{$aula[0]->eDIFICIO->NOMBRE}") ?></h2>
-                <div class="loginc"> <!--panel-->
+                <div class="caja aulafilter" style="background-color:white"> <!--panel-->
                     <!--tabla-->
                     <div class="box-body">
                         <div class="table-responsive">          
-                            <table class="table table-bordered">
+                            <table class="table" style="margin-bottom:0px">
                                 <thead>
                                     <tr>
                                         <th>AGENDA</th>

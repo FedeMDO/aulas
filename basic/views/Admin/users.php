@@ -14,13 +14,33 @@ $this->registerCssFile("@web/css/index.css", [
 $this->title = 'Gestionar usuarios';
 ?>
 
+<style>
+
+thead{
+    background-color: #2980b9;
+    border:0px;
+}
+th{
+    border:0px;
+    color:white;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+.table-responsive{
+    margin-top:20px;
+}
+
+
+</style>
+
 
 <div class="col-md-offset-1 col-md-10">
 <h2 class=titulo style="text-align:center;">Gestión de usuarios</h2>
 <p>
   <?= Html::a('Nuevo usuario', ['site/register'], ['class' => 'btn btn-success']) ?>
 </p>
-<div class="loginc">
+<div class="caja aulafilter" style="background-color:white">
 <div class="box-body">
                 <div class="table-responsive">          
                   <table class="table table-bordered">
