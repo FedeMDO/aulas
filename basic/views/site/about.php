@@ -82,8 +82,42 @@ $this->title = 'Acerca de nosotros';
   padding:10px;
 }
 
+.about{
+
+}
 
 
+@media only screen and (max-width: 768px) {
+
+  .div-col4{
+    width:100%;
+    padding: 0px;
+    display:flex;
+    justify-content:center;
+    margin: auto;
+
+  }
+  .div-col3{
+  width:100%;
+  padding: 0px ;
+  display:flex;
+  justify-content:center;
+}
+.body-contnent1{
+    margin-left: 0px;
+    padding: 15px;
+  }
+  .body-contnent2{
+  width:100%;
+  display:block;
+  margin-left:0px;
+  text-align:center;
+}
+.content{
+  padding: 0px !important;
+}
+
+}
 
 </style>
 <div class="col-md-offset-2 col-md-8 content">
@@ -108,17 +142,23 @@ $this->title = 'Acerca de nosotros';
     <div class='div-col3'>
       <div>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere excepturi eligendi tenetur obcaecati aliquid. Voluptatum labore excepturi doloremque adipisci modi non numquam dolorum asperiores quisquam perspiciatis iure
+        Sistema Web de Gestión para el proceso administrativo de asignación de aulas a cursos, comisiones, exámenes finales y eventos especiales en el ámbito de Universidades, Facultades e Institutos, donde la distribución del espacio conlleve una tarea crucial. 
+Nos enfocamos en el óptimo aprovechamiento del espacio público.
+
+
         </p> 
       </div>
     </div>
     <div class='div-col4'>
       <p>
-       Ullam consectetur perferendis ipsa eos repudiandae, possimus amet rem, odio enim accusantium cum nobis voluptatibus consequuntur tempora fugiat. In culpa rerum, asperiores ullam nihil blanditiis aliquam molestias fuga voluptatem accusamus.
+      Desarrollado por estudiantes avanzados de Ingeniería Informática de la Universidad Nacional Arturo Jauretche.
         <br />
         <br />
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates.
-      </p>
+        Este programa es software libre: puedes redistribuirlo y/o modificarlo bajo los términos de la Licencia Pública General GNU tal como fue publicada por la Free Software Foundation.
+        <br/> 
+        <br/> 
+        Para mas informacion visite <br/> <a> https://www.gnu.org/licenses/gpl.html. </a> </p>
+      
     </div>
     </div>
     <h1 class='namenews'>Integrantes del equipo</h1>
@@ -128,7 +168,7 @@ $this->title = 'Acerca de nosotros';
   <div class='div-col3'>
       <div>
         <p style>Integrantes 1er cuatrimestre:</p>
-        <p> - Gustavo Albornoz<br> - Gabriel Benítez<br> - Lucas Granata<br> - Nicolás Lescano<br> - Federico Montes de Oca<br> - Cristian Pinto<br> - Iván Zapata
+        <p> - Federico Montes de Oca<br> - Gustavo Albornoz<br> - Gabriel Benítez<br> - Lucas Granata<br> - Nicolás Lescano<br>  - Cristian Pinto<br> - Iván Zapata
         </p>
       </div>
     </div>
@@ -136,7 +176,7 @@ $this->title = 'Acerca de nosotros';
       <p>
         Integrantes 2do cuatrimestre:
         <br><br>
-        - Lucas Granata<br> - Gabriel Méndez<br> - Leandro Perez<br> - Braian Pezet<br> - Juan Piñeiro<br> - Emanuel Righi<br> - Iván Zapata.
+        - Lucas Granata<br> - Braian Pezet<br>  - Gabriel Méndez<br> - Leandro Perez<br> - Juan Piñeiro<br> - Emanuel Righi<br> - Iván Zapata.
       </p>
     </div>
     </div>
