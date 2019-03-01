@@ -127,6 +127,7 @@ $this->title = 'Manual de usuario';
 
 <div class="manual" id="manualcont">
 <div class="col-md-offset-2 col-md-8 content">
+<?php if(Yii::$app->user->isGuest): ?>
 <div class="panel panel-default" style=margin-bottom:0px>
     <div class="panel-heading">
       <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne" class="btn btn-link btn-block" role="button" style=text-align:left>
@@ -153,8 +154,9 @@ $this->title = 'Manual de usuario';
       </div>
     </div>
   </div>
+  
 
-
+<?php else: ?>
   <div class="panel panel-default" style=margin-bottom:0px>
     <div class="panel-heading">
       <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse2" class="btn btn-link btn-block" role="button" style=text-align:left>
@@ -184,7 +186,7 @@ $this->title = 'Manual de usuario';
               </div>
             </div>
           </div>
-          <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?> <!--Un usuario comun no puede crear -->
+          
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerSedes3" class="btn btn-link btn-block" role="button" style=text-align:left>
@@ -277,7 +279,7 @@ $this->title = 'Manual de usuario';
               </div>
             </div>
           </div>
-          <?php endif; ?>
+          
           
           <div class="panel panel-default" style=margin-bottom:0px>
             <div class="panel-heading">
@@ -309,7 +311,7 @@ $this->title = 'Manual de usuario';
               </div>
             </div>
           </div>
-          <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
+          
           <div class="panel panel-default" style=margin-bottom:0px>
             <div class="panel-heading">
               <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseInnerSedes7" class="btn btn-link btn-block" role="button" style=text-align:left>
@@ -341,7 +343,7 @@ $this->title = 'Manual de usuario';
               </div>
             </div>
           </div>
-          <?php endif; ?>
+          
         </div>
 
         <!-- Inner accordion ends here -->
@@ -385,7 +387,7 @@ $this->title = 'Manual de usuario';
               </div>
             </div>
           </div>
-          <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
+          
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion3" href="#collapseInnerEdificios2" class="btn btn-link btn-block" role="button" style=text-align:left>
@@ -415,7 +417,7 @@ $this->title = 'Manual de usuario';
               </div>
             </div>
           </div>
-          <?php endif; ?>
+         
         </div>
 
         <!-- Inner accordion ends here -->
@@ -457,7 +459,7 @@ $this->title = 'Manual de usuario';
               </div>
             </div>
           </div>
-          <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?> <!--Un usuario comun no puede crear -->
+         
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion3" href="#collapseAula03" class="btn btn-link btn-block" role="button" style=text-align:left>
@@ -488,7 +490,7 @@ $this->title = 'Manual de usuario';
               </div>
             </div>
           </div>
-          <?php endif; ?>
+          
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion3" href="#collapseAula04" class="btn btn-link btn-block" role="button" style=text-align:left>
@@ -569,7 +571,7 @@ $this->title = 'Manual de usuario';
   </div>
 
 
-  <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
+  
   <div class="panel panel-default" style=margin-bottom:0px>
     <div class="panel-heading">
       <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse06" class="btn btn-link btn-block" role="button" style=text-align:left>
@@ -749,7 +751,7 @@ $this->title = 'Manual de usuario';
       </div>
     </div>
   </div>
-  <?php endif; ?>
+  
  <div class="panel panel-default" style=margin-bottom:0px>
     <div class="panel-heading">
       <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapseNoti01" class="btn btn-link btn-block" role="button" style=text-align:left>
@@ -950,6 +952,8 @@ $this->title = 'Manual de usuario';
         </div>
         </div>
 </div>
+
+
 <div class="col-md-offset-2 col-md-8 content">
 <h2 class="titulo">Videos que te ayudaran con lo basico</h2>
 <div class=videos >
@@ -962,7 +966,7 @@ $this->title = 'Manual de usuario';
   <button class="tablinks" onclick="openCity(event, 'Administracion')">Administracion</button>
 </div>
 
-
+<?php endif ?>
 <div id="Sedes" class="tabcontent">
 
 <div class= "box2 col-md-4" >
@@ -1084,7 +1088,9 @@ $this->title = 'Manual de usuario';
 </div>
 
 </div>
+
 </div>
+
 <script>
 function openCity(evt, cityName) {
   var i, tabcontent, tablinks;

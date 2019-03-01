@@ -88,6 +88,14 @@ $this->registerCssFile("@web/css/index.css", [
   display:none;
 }
 
+.carousel-caption {
+    text-align:left;
+    float:left;
+    left:2%;
+    margin-bottom: 45vh;
+    }
+
+
 /* texto de error de captcha centrado*/
 
 .help-block{
@@ -118,17 +126,34 @@ $this->registerCssFile("@web/css/index.css", [
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
     <div class="item active">
-      <img src="../image/banner_site0.png" alt="Los Angeles" style="height:100vh; width:100%;" >
+      <img src="../image/index_background_desenfoque.png" alt="Los Angeles" style="height:100vh; width:100%; " >
+      <div class="carousel-caption">
+          <h1 style="text-shadow: 1px 1px 4px #000">Bienvenido</h2>
+          <h4 style="text-shadow: 0px 0px 8px #000">Sistema de Gestión de aulas</h4>
+          <h4 ><a href="../site/about" style="color:white; text-decoration:underline; text-shadow: 0px 0px 4px #000" >Conocé más</a></h4>
+        
+        </div>
       
     </div>
 
     <div class="item">
-      <img src="../image/banner_site2.png" alt="Chicago" style="height:100vh; width:100%;">
+      <img src="../image/7.png" alt="Chicago" style="height:100vh; width:100%;">
+      <div class="carousel-caption">
+          <h1 style="text-shadow: 1px 1px 4px #000">Bienvenido</h2>
+          <h4 style="text-shadow: 0px 0px 8px #000">Desarrollado por estudiantes de ing. en informatica</h4>
+          <h4 ><a href="../site/about" style="color:white; text-decoration:underline; text-shadow: 0px 0px 4px #000" >Conocé más</a></h4>
+        </div>
     </div>
 
     <div class="item">
-      <img src="../image/banner_site3.png" alt="New York" style="height:100vh; width:100%;">
+      <img src="../image/9.png" alt="New York" style="height:100vh; width:100%;">
+      <div class="carousel-caption">
+          <h1 style="text-shadow: 1px 1px 4px #000">¿Necesitas ayuda para ingresar?</h2>
+          <h4 style="text-shadow: 0px 0px 8px #000">Consulta el manual de usuario</h4>
+          <h4 ><a href="../site/manual" style="color:white; text-decoration:underline; text-shadow: 0px 0px 4px #000" >Aquí</a></h4>
+        </div>
     </div>
+    
   </div>
 
   <!-- Left and right controls -->
