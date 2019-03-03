@@ -32,8 +32,7 @@ class AulaRecurso extends \yii\db\ActiveRecord
             [['ID_RECURSO', 'ID_AULA'], 'required'],
             [['ID_RECURSO', 'ID_AULA'], 'integer'],
             [['ID_RECURSO', 'ID_AULA'], 'unique', 'targetAttribute' => ['ID_RECURSO', 'ID_AULA']],
-            [['ID_RECURSO'], 'skipOnError' => true, 'targetClass' => Recurso::className(), 'targetAttribute' => ['ID_RECURSO' => 'ID']],
-            [['ID_AULA'], 'exist', 'skipOnError' => true, 'targetClass' => Aula::className(), 'targetAttribute' => ['ID_AULA' => 'ID']],
+           
         ];
     }
 

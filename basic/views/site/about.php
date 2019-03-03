@@ -161,7 +161,7 @@ Nos enfocamos en el óptimo aprovechamiento del espacio público.
       
     </div>
     </div>
-    <h1 class='namenews'>Integrantes del equipo</h1>
+    <h1 class='namenews'>Colaboradores</h1>
     <h4 style="text-align:center">Docente a cargo Ing. Óscar Cortés Bracho</h4>
     </header>
   <aside class='body-contnent2'>

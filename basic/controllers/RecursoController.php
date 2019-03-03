@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Recurso;
+use app\models\AulaRecurso;
+use app\models\Aula;
 use app\models\RecursoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -79,6 +81,25 @@ class RecursoController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+    public function actionAsignar(){
+        $model1 = new AulaRecurso();
+        $aulaResultado = Aula::find()->all();
+        $aulaRecurso = Recurso::find()->all();
+        if ($_POST != null) {
+            $aux =  $_POST['AulaRecurso'];
+            $model1->ID_AULA = $aux['ID_AULA'];
+            $model1->ID_RECURSO = $aux['ID_RECURSO'];
+            $model1->save();
+
+
+        }
+        return $this->render('asignar', [
+            'model1' => $model1,
+            'aulaResultado' => $aulaResultado,
+            'aulaRecurso' => $aulaRecurso,
+        ]);
+
+    }
 
     /**
      * Displays a single Recurso model.
@@ -144,6 +165,8 @@ class RecursoController extends Controller
 
         return $this->redirect(['index']);
     }
+
+    
 
     /**
      * Finds the Recurso model based on its primary key value.

@@ -82,6 +82,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
                                         <th>CAPACIDAD</th>
                                         <th>RECURSOS</th>
                                         <th>OBSERVACION</th>
+                                        
                                         <!-- si es admin puede editar-->
                                         <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?> 
                                         <th>EDITAR</th>
@@ -91,19 +92,27 @@ tr:nth-child(even) {background-color: #f2f2f2;}
                                 <tbody> <!-- contenido de la tablas -->
                                     <?php foreach ($aula as $aula) : ?> <!--recorro las aulas-->
                                     <tr>
+                                    
                                         <td><a href="/evento/index?id=<?= Html::encode("{$aula->ID}") ?>" type="button" class="btn btn-primary" >VER</button></td>
                                         <td><?= Html::encode("{$aula->NOMBRE} ") ?></td>
                                         <td><?= Html::encode("{$aula->PISO} ") ?></td>
                                         <td><?= Html::encode("{$aula->CAPACIDAD} ") ?></td>
-                                        <td><?php $n = 0;
+                                        <td><a href="../aula/recursos?id=<?= Html::encode("{$aula->ID}") ?>" style="color:black" ><?php $n = 0;
                                                 foreach ($aula->rECURSOs as $recurso) {
                                                     $n = $n + 1;
                                                 if (count($aula->rECURSOs) == $n) {
                                                     echo $recurso->NOMBRE;
+                                                     
                                                 } else {
                                                     echo $recurso->NOMBRE . " - ";
                                                 }
-                                            }?> 
+                                            }?>
+                                            </a>
+                                            <?php if(count($aula->rECURSOs) == 0):?>
+                                            <p>No hay recursos:<a href="/recurso/asignar" style="text-decoration:underline">Asignar Recurso</button></p></td>
+                                            <?php endif ?>
+                                            
+                                            
                                         </td>
                                         <td>
                                             <?php if ($aula->OBS != null) : ?> 

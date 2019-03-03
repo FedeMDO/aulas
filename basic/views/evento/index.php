@@ -77,6 +77,13 @@ $indexMaterias = 1;
 .breadcrumb{
     margin-bottom: 0px;
 }
+
+.calendario{
+    background-color:white; 
+    padding:15px; 
+    margin-top:20px; 
+    border-radius:5px; 
+}
 </style>
 
 <header>
@@ -147,8 +154,8 @@ $indexMaterias = 1;
         <em id="id_aula"><?= Html::encode("{$id_aula}") ?></em>
     </div>
 
-    <div class="loginc">
-        <h3 style="text-align: center; font-weight: bold;">ASIGNACION COMISIONES DE AULA <i><?= Html::encode("{$aula->NOMBRE}") ?></i></h3>
+    <div class="calendario">
+        <h3 style="text-align:center; ">ASIGNACION COMISIONES DE AULA <i><?= Html::encode("{$aula->NOMBRE}") ?></i></h3>
         <div class="evento-index">
             <div class="evento-calendar-index">
                 <div class="evento-index">

@@ -246,7 +246,12 @@ a[data-goto]:hover {
   border-left: 0 hidden transparent;
   border-right: 0 hidden transparent;
   /* no bottom borders on rows */
-  border-bottom: 0 hidden transparent; }
+  border-bottom: 0 hidden transparent; 
+  background-color: #2980b9;
+  color:white;
+
+}
+
 
 .fc-row:first-child table {
   border-top: 0 hidden transparent;

@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Recurso */
 
-$this->title = 'Crear recurso';
+$this->title = 'Asignar recurso a aula';
 $this->params['breadcrumbs'][] = ['label' => 'Recursos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,8 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
-        'model' => $model,
+    <?= $this->render('_formAsignar', [
+        'model1' => $model1,
+        'aulaResultado'   => $aulaResultado,
+        'aulaRecurso' => $aulaRecurso,
     ]) ?>
 
 </div>

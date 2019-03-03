@@ -16,6 +16,7 @@ $institutos = Instituto::find()->count();
 $carreras = Carrera::find()->count();
 $materias = Materia::find()->count();
 
+
 ?>
 
 
