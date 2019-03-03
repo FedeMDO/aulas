@@ -238,7 +238,9 @@ a[data-goto]:hover {
   /* extra precedence to overcome themes w/ .ui-widget-content forcing a 1px border */
   /* no visible border by default. but make available if need be (scrollbar width compensation) */
   border-style: solid;
-  border-width: 0; }
+  border-width: 0; 
+  
+}
 
 .fc-row table {
   /* don't put left/right border on anything within a fake row.
@@ -247,8 +249,7 @@ a[data-goto]:hover {
   border-right: 0 hidden transparent;
   /* no bottom borders on rows */
   border-bottom: 0 hidden transparent; 
-  background-color: #2980b9;
-  color:white;
+ 
 
 }
 
