@@ -1,9 +1,9 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-12-2018 a las 00:25:34
+-- Tiempo de generación: 10-04-2019 a las 00:33:21
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -180,7 +180,9 @@ CREATE TABLE `ciclo_lectivo` (
 --
 
 INSERT INTO `ciclo_lectivo` (`id`, `nombre`, `fecha_inicio`, `fecha_fin`, `estado`) VALUES
-(1, '2018-1C', '2018-08-01', '2019-01-01', 'Abierto');
+(1, '2018-1C', '2018-08-01', '2019-01-01', 'Abierto'),
+(2, 'CPU 2019', '2019-01-03', '2019-03-31', 'Abierto'),
+(3, '2019-1C', '2019-04-03', '2019-07-22', 'Abierto');
 
 -- --------------------------------------------------------
 
@@ -266,10 +268,6 @@ CREATE TABLE `especial_calendar` (
   `ID_Carrera` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tabla para evento especial de calendario (no periodico)';
 
---
--- Volcado de datos para la tabla `especial_calendar`
---
-
 
 -- --------------------------------------------------------
 
@@ -282,6 +280,7 @@ CREATE TABLE `evento_calendar` (
   `ID_Aula` int(11) DEFAULT NULL,
   `ID_Comision` int(11) DEFAULT NULL,
   `ID_User_Asigna` int(11) DEFAULT NULL,
+  `ID_UModifica` int(11) DEFAULT NULL,
   `Hora_ini` time DEFAULT NULL,
   `Hora_fin` time DEFAULT NULL,
   `dow` varchar(20) DEFAULT NULL,
@@ -289,10 +288,6 @@ CREATE TABLE `evento_calendar` (
   `ID_Ciclo` int(11) DEFAULT NULL,
   `momento` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `evento_calendar`
---
 
 
 -- --------------------------------------------------------
@@ -387,12 +382,9 @@ CREATE TABLE `notificacion` (
   `ID_USER_EMISOR` int(11) NOT NULL,
   `ID_USER_RECEPTOR` int(11) NOT NULL,
   `NOTIFICACION` varchar(300) DEFAULT NULL,
-  `FECHA` datetime NOT NULL
+  `FECHA` datetime NOT NULL,
+  `visto` bit(1) DEFAULT b'0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `notificacion`
---
 
 
 -- --------------------------------------------------------
@@ -402,16 +394,18 @@ CREATE TABLE `notificacion` (
 -- (Véase abajo para la vista actual)
 --
 CREATE TABLE `oferta_academica` (
-`Carrera` varchar(40)
-,`Año` int(11)
+`id` int(11)
+,`Carrera` varchar(40)
+,`Anio` int(11)
 ,`Materia` varchar(40)
 ,`Comision` int(10) unsigned
 ,`Dia` varchar(20)
-,`Hora Inicio` varchar(7)
-,`Hora Fin` varchar(7)
+,`HoraInicio` varchar(7)
+,`HoraFin` varchar(7)
 ,`Edificio` varchar(40)
 ,`Sede` varchar(50)
 ,`Aula` varchar(40)
+,`Ciclo` int(11)
 );
 
 -- --------------------------------------------------------
@@ -453,10 +447,6 @@ CREATE TABLE `restri_calendar` (
   `ID_Ciclo` int(11) DEFAULT NULL,
   `momento` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `restri_calendar`
---
 
 
 -- --------------------------------------------------------
@@ -519,6 +509,7 @@ CREATE TABLE `users` (
   `username` varchar(50) NOT NULL,
   `email` varchar(80) NOT NULL,
   `password` varchar(250) NOT NULL,
+  `profile_picture` varchar(200) DEFAULT NULL,
   `authKey` varchar(250) NOT NULL,
   `accessToken` varchar(250) NOT NULL,
   `activate` tinyint(1) NOT NULL DEFAULT '0',
@@ -531,8 +522,8 @@ CREATE TABLE `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `authKey`, `accessToken`, `activate`, `idInstituto`, `rol`, `verification_code`) VALUES
-(1, 'defaultUser', 'pds2018unaj@gmail.com', 'maM50xBabOXqs', 'e9ff4f229f0673c2213d6648d70df9de787d156f06b59021d48a464ad50d485578beff315c0f8857ca1f04b1a8921e8340e501a98439227d9b9134ca32e526302f5d9ba63be580b3eb2563971bad523a65b89280161a16846f8e4de6487c8372a276de93', '714eff2fe0c3a0edc98440bef3f25cf1390c597d6c4e577d4f442fbfe14dfd86888465c97d76f009d7c9984333e1534f355405ff63bc17420d1cf5de7a4db4c99fec9006c3fa8953e598c9059630729e4ec2f50f44d38969c079fb7c816134896c7ba5c2', 1, 1, 20, '');
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `profile_picture`, `authKey`, `accessToken`, `activate`, `idInstituto`, `rol`, `verification_code`) VALUES
+(1, 'defaultUser', 'pds2018unaj@gmail.com', 'cXBUOHhVT2Z5RGxVSk1JbHo2a0RNQT09', NULL, '87402016eb57c4fd27bd534f564cf7d583be764c991e43dfbaa5455b5bd79ce8f91c830ed80647fe1357199f972a97dd988e9a5b3433de9c745ae3604d7a3c490561cebf877657ff00784ff383a62c9112350a12c3ab494306fdee9c92a3a6cf09e5c4da', 'd95cd9ea25a26d96ec5ebc96b0e356a1e3975d0c2da0132ab5c6295231b31723826c350fed4cf1ca049d3f1e48bd712c128b4076a4d1836c4e1002239cf41113f0bf210fefdd954f204eb97fdf4f95729aca36a3b98080465e552128d2d914abc21e0bab', 1, NULL, 20, '');
 
 -- --------------------------------------------------------
 
@@ -541,7 +532,7 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `authKey`, `accessTo
 --
 DROP TABLE IF EXISTS `oferta_academica`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `oferta_academica`  AS  select `carrera`.`NOMBRE` AS `Carrera`,`materia`.`anio` AS `Año`,`materia`.`NOMBRE` AS `Materia`,`comision`.`NUMERO` AS `Comision`,`evento_calendar`.`dow` AS `Dia`,concat(left(`evento_calendar`.`Hora_ini`,5),'Hs') AS `Hora Inicio`,concat(left(`evento_calendar`.`Hora_fin`,5),'Hs') AS `Hora Fin`,`edificio`.`NOMBRE` AS `Edificio`,`sede`.`NOMBRE` AS `Sede`,`aula`.`NOMBRE` AS `Aula` from ((((((`carrera` join `materia` on((`materia`.`ID_Carrera` = `carrera`.`ID`))) join `comision` on((`materia`.`ID` = `comision`.`ID_MATERIA`))) join `evento_calendar` on((`comision`.`ID` = `evento_calendar`.`ID_Comision`))) join `sede` on((`sede`.`ID_INSTITUCION` = 1))) join `edificio` on((`edificio`.`ID_SEDE` = `sede`.`ID`))) join `aula` on((`aula`.`ID_EDIFICIO` = `edificio`.`ID`))) where (`aula`.`ID` = `evento_calendar`.`ID_Aula`) order by `carrera`.`NOMBRE` desc,`materia`.`anio`,`evento_calendar`.`dow` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `oferta_academica`  AS  select `evento_calendar`.`id` AS `id`,`carrera`.`NOMBRE` AS `Carrera`,`materia`.`anio` AS `Anio`,`materia`.`NOMBRE` AS `Materia`,`comision`.`NUMERO` AS `Comision`,`evento_calendar`.`dow` AS `Dia`,concat(left(`evento_calendar`.`Hora_ini`,5),'hs') AS `HoraInicio`,concat(left(`evento_calendar`.`Hora_fin`,5),'hs') AS `HoraFin`,`edificio`.`NOMBRE` AS `Edificio`,`sede`.`NOMBRE` AS `Sede`,`aula`.`NOMBRE` AS `Aula`,`evento_calendar`.`ID_Ciclo` AS `Ciclo` from ((((((`carrera` join `materia` on((`materia`.`ID_Carrera` = `carrera`.`ID`))) join `comision` on((`materia`.`ID` = `comision`.`ID_MATERIA`))) join `evento_calendar` on((`comision`.`ID` = `evento_calendar`.`ID_Comision`))) join `sede` on((`sede`.`ID_INSTITUCION` = 1))) join `edificio` on((`edificio`.`ID_SEDE` = `sede`.`ID`))) join `aula` on((`aula`.`ID_EDIFICIO` = `edificio`.`ID`))) where (`aula`.`ID` = `evento_calendar`.`ID_Aula`) order by `carrera`.`NOMBRE` desc,`materia`.`anio`,`evento_calendar`.`dow` ;
 
 --
 -- Índices para tablas volcadas
@@ -608,7 +599,8 @@ ALTER TABLE `evento_calendar`
   ADD KEY `fk_ID_Comision` (`ID_Comision`),
   ADD KEY `fk_ID_Instituto` (`ID_Instituto`),
   ADD KEY `fk_ID_User_Asigna` (`ID_User_Asigna`),
-  ADD KEY `fk_ID_Ciclo` (`ID_Ciclo`);
+  ADD KEY `fk_ID_Ciclo` (`ID_Ciclo`),
+  ADD KEY `fk_ID_User_Crea` (`ID_UModifica`);
 
 --
 -- Indices de la tabla `institucion_educativa`
@@ -694,7 +686,7 @@ ALTER TABLE `carrera`
 -- AUTO_INCREMENT de la tabla `ciclo_lectivo`
 --
 ALTER TABLE `ciclo_lectivo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `comision`
@@ -742,7 +734,7 @@ ALTER TABLE `materia`
 -- AUTO_INCREMENT de la tabla `notificacion`
 --
 ALTER TABLE `notificacion`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `recurso`
@@ -754,7 +746,7 @@ ALTER TABLE `recurso`
 -- AUTO_INCREMENT de la tabla `restri_calendar`
 --
 ALTER TABLE `restri_calendar`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
 
 --
 -- AUTO_INCREMENT de la tabla `sede`
@@ -827,7 +819,8 @@ ALTER TABLE `evento_calendar`
   ADD CONSTRAINT `fk_ID_Ciclo` FOREIGN KEY (`ID_Ciclo`) REFERENCES `ciclo_lectivo` (`id`),
   ADD CONSTRAINT `fk_ID_Comision` FOREIGN KEY (`ID_Comision`) REFERENCES `comision` (`ID`),
   ADD CONSTRAINT `fk_ID_Instituto` FOREIGN KEY (`ID_Instituto`) REFERENCES `instituto` (`ID`),
-  ADD CONSTRAINT `fk_ID_User_Asigna` FOREIGN KEY (`ID_User_Asigna`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `fk_ID_User_Asigna` FOREIGN KEY (`ID_User_Asigna`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `fk_ID_User_Crea` FOREIGN KEY (`ID_UModifica`) REFERENCES `users` (`id`);
 
 --
 -- Filtros para la tabla `instituto`

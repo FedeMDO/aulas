@@ -163,7 +163,7 @@ class SiteController extends Controller
                                 'text' => 'Password reseteado correctamente, redireccionando a la página de login...'
                             ]
                         ]);
-                        $msg .= "<meta http-equiv='refresh' content='3; " . Url::toRoute("site/login") . "'>";
+                        $msg .= "<meta http-equiv='refresh' content='3; " . Url::toRoute("site/login2") . "'>";
                         
                     } else {
                         $msg = "Ha ocurrido un error";
@@ -288,16 +288,16 @@ class SiteController extends Controller
                     $activar->activate = 1;
                     if ($activar->update()) {
                         echo "Registro realizado correctamente, redireccionando ...";
-                        echo "<meta http-equiv='refresh' content='8; " . Url::toRoute("site/login") . "'>";
+                        echo "<meta http-equiv='refresh' content='8; " . Url::toRoute("site/login2") . "'>";
                     } else {
                         echo "Ha ocurrido un error, redireccionando ...";
-                        echo "<meta http-equiv='refresh' content='8; " . Url::toRoute("site/login") . "'>";
+                        echo "<meta http-equiv='refresh' content='8; " . Url::toRoute("site/login2") . "'>";
                     }
                 } else {
-                    return $this->redirect(["site/login"]);
+                    return $this->redirect(["site/login2"]);
                 }
             } else {
-                return $this->redirect(["site/login"]);
+                return $this->redirect(["site/login2"]);
             }
         }
     }
