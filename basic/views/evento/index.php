@@ -85,6 +85,17 @@ $indexMaterias = 1;
     border-radius:5px; 
 }
 
+.btn-nuevoEvento{
+
+    background-color:white;
+    color:black;
+    border-radius:0px;
+}
+
+.btn-nuevoEvento:hover{
+    background-color:#e6ecf0;
+
+}
 </style>
 
 <header>
@@ -121,9 +132,9 @@ $indexMaterias = 1;
                 <li><a href="../materia/create" style="text-align:left"><span class="glyphicon glyphicon-plus"></span> Crear materias </a></li>
                 <?php endif ?>
                 <ul class="list-unstyled CTAs" style="border-top: 1px solid #47748b;">
-                <li><a href="../edificio/scheduler?id_sede=<?=$aula->eDIFICIO->sEDE->ID?>"   class="article">Scheduler</a></li>
+                <li><a href="../edificio/scheduler?id_sede=<?=$aula->eDIFICIO->sEDE->ID?>"   class="article" style="padding-left:10px !important">Scheduler</a></li>
                 <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
-                <li><a href="../restri/index?id=<?=$id_aula?>"   class="article">Restricciones</a></li>
+                <li><a href="../restri/index?id=<?=$id_aula?>"   class="article" style="padding-left:10px !important">Restricciones</a></li>
                 <?php endif; ?>
                     
             </ul>
@@ -136,10 +147,11 @@ $indexMaterias = 1;
             <button type="button" id="sidebarCollapse" class="btn btn-primary" style="margin-botom:20px"><i class="glyphicon glyphicon-align-justify"></i> Menu</button>
             <?php if (!app\models\User::isUserGuest(Yii::$app->user->identity->id)) : ?> 
             <div class="dropdown">
-            <button class="btn btn-success">Nuevo evento</button>
-            <div class="dropdown-content">
-                <a href="#"><?= Html::button('Nuevo evento periodico', ['value' => Url::to(['evento/create', 'id_aula' => $id_aula]), 'title' => 'Crear eventos que se repiten cada semana', 'class' => 'showModalButton btn ']); ?></a>
-                <a href="#"><?= Html::button('Nuevo evento especial', ['value' => Url::to(['especialcalendar/create', 'id_aula' => $id_aula]), 'title' => 'Crear un evento no periódico', 'class' => 'showModalButton btn ']); ?></a>
+            <button class="btn btn-success dropdown-toggle" data-toggle="popover" data-placement="bottom">Nuevo evento
+            <span class="caret"></span></button>
+            <div class="dropdown-content"  style="background-color:white;" >
+                <a href="#"><?= Html::button('Nuevo evento periodico', ['value' => Url::to(['evento/create', 'id_aula' => $id_aula]), 'title' => 'Crear eventos que se repiten cada semana', 'class' => 'showModalButton btn btn-nuevoEvento   btn-block']); ?></a>
+                <a href="#"><?= Html::button('Nuevo evento especial', ['value' => Url::to(['especialcalendar/create', 'id_aula' => $id_aula]), 'title' => 'Crear un evento no periódico', 'class' => 'showModalButton btn btn-nuevoEvento btn-block ']); ?></a>
             </div>
             <?php endif; ?>
     </div>

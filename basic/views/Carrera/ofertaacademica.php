@@ -47,10 +47,37 @@ $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
         ],
     ],
 ]); ?>
+
+<style>
+label{
+    color:black !important;
+}
+
+@media (max-width: 768px){
+    .col-xs-3{
+        width:100% !important;
+    }
+    .btn-buscar{
+
+        margin-left:15px;
+        margin-right:15px;
+        
+    }
+}
+
+@media (max-width: 1024px){
+    .btn-buscar{
+        margin-left:15px;
+        margin-right:15px;
+        
+    }
+}
+
+</style>
     <div class="col-md-offset-1 col-md-10">
         <div class="row">
             <div class="col-sm-4">
-            <?php echo $form->field($instituto, 'ID', ['labelOptions' => ['style' => 'color:white']])->dropDownList(
+            <?php echo $form->field($instituto, 'ID', ['labelOptions' => ['style' => 'color:white !important']])->dropDownList(
                 $resultIns,
                 [
                     'prompt' => 'Seleccione...',
@@ -63,20 +90,20 @@ $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
             )->label('Instituto'); ?>
         </div>
             <div class="col-sm-4">
-            <?php echo $form->field($carrera, 'ID', ['labelOptions' => ['style' => 'color:white']])->dropDownList(
+            <?php echo $form->field($carrera, 'ID', ['labelOptions' => ['style' => 'color:white !important']])->dropDownList(
                 array(),
                 ['prompt' => 'Seleccione...']
             )->label('Carrera'); ?>
         </div>
         <div class="col-xs-3">
-        <?php echo $form->field($ciclo, 'id', ['labelOptions' => ['style' => 'color:white']])->dropDownList(
+        <?php echo $form->field($ciclo, 'id', ['labelOptions' => ['style' => 'color:white !important']])->dropDownList(
             $resultCiclos,
             ['prompt' => 'Seleccione...',
             ]
         )->label('Ciclo'); ?>
         </div>
         <div class="col-xs">
-            <button id="btnBuscar" type="button" class="btn btn-secondary">Buscar</button>
+            <button id="btnBuscar" type="button" class="btn btn-secondary btn-buscar">Buscar</button>
         </div>
 
         </div>
@@ -84,6 +111,7 @@ $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
 
         <div class="loginc">
         <h4 style="text-align: center; font-weight: bold; color: black;">OFERTA ACADEMICA</h4>
+        <div class="table-responsive">  
         <table id="example" class="cell-border compact stripe hover" style="width:100%">
         <thead>
             <tr>
@@ -101,6 +129,7 @@ $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
         </thead>
         
     </table>
+    </div>
     </div>
     </div>
     

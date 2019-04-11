@@ -117,9 +117,9 @@ $indexMaterias = 1;
                 <li><a href="../restri/migrar" style="text-align:left"><span class="glyphicon glyphicon-plus"></span> Migrar restricciones </a></li>
                 <?php endif ?>
                 <ul class="list-unstyled CTAs" style="border-top: 1px solid #47748b;">
-                <li><a href="../edificio/scheduler?id_sede=<?=$aula->eDIFICIO->sEDE->ID?>"   class="article">Scheduler</a></li>
+                <li><a href="../edificio/scheduler?id_sede=<?=$aula->eDIFICIO->sEDE->ID ?>"   class="article" style="padding-left:10px !important">Scheduler</a></li>
                 <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
-                <li><a href="../evento/index?id=<?=$id_aula?>"   class="article">Ir a calendario</a></li>
+                <li><a href="../evento/index?id=<?=$id_aula?>"   class="article" style="padding-left:10px !important">Ir a calendario</a></li>
                 <?php endif; ?>
                     
             </ul>
