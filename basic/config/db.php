@@ -2,9 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=aulasinstance.chu699oskawz.sa-east-1.rds.amazonaws.com;dbname=aulas_db',
+    'dsn' => 'mysql:host=awshost=aulas_db',
     'username' => 'root',
-    'password' => 'aulas2018+-',
+    'password' => '',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)
