@@ -57,7 +57,8 @@ $this->title = 'Edificios';
       <div class="box">
           
         <div class="imgBox">
-          <img src="../image/edi4.png" alt="...">
+          <img src="../image/edi_<?= Html::encode("{$edificio->ID}") ?>.png">
+          
         </div>
 
         <div class="details">

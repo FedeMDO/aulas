@@ -451,6 +451,12 @@ a.article:hover {
   
 }
 
+/*paginacion*/
+
+.pagination{
+  float: right;
+}
+
 
 
 

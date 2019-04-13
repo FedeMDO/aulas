@@ -35,7 +35,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
           ?>
 <div class="col-md-offset-1 col-md-10">
 <h2 class=titulo style="text-align:center;">Aulas disponibles con los parámetros seleccionados en <?= Html::encode("{$edi->NOMBRE} ") ?></h2>
-<div class="caja aulafilter">
+<div class="caja aulafilter" style="background-color:white">
 <div class="box-body">
   <div class="table-responsive">
     <table class="table" style="margin-bottom:0px">

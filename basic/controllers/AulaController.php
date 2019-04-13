@@ -36,7 +36,7 @@ class AulaController extends Controller
             'defaultPageSize' => 19,
             'totalCount' => $query->count(),
         ]);
-
+      
         $aula = $query->orderBy('ID')
             ->offset($pagination->offset)
             ->limit($pagination->limit)

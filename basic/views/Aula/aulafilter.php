@@ -132,6 +132,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
                         </div> <!-- cierre de table responsive -->
                     </div> <!-- cierre de box body -->
                 </div> <!-- cierre de loginc -->
+                <?= LinkPager::widget(['pagination' => $pagination,]) ?>
             </div> <!-- cierre de grid -->
         <?php } else { ?> <!-- si no tiene aulas -->
             <div class="alert alert-danger" role="alert">
