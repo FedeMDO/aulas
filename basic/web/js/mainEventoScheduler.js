@@ -19,7 +19,6 @@ $(document).ready(function () {
         nowIndicator: true,
         selectMinDistance: 15, //el usuario tiene que mover al menos 15 pixeles el mouse para seleccionar
         slotDuration: '01:00:00',
-        slotLabelFormat: 'H:mm',
         allDaySlot: false,
         eventLimit: 4,
         dayPopoverFormat: 'dddd DD [de] MMMM',
