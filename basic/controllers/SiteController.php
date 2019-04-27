@@ -426,12 +426,21 @@ class SiteController extends Controller
             ->all();
 
         if ($_POST != null) {
-            if ($_POST['Notificacion'] == 'borrar') {
+            if ($_POST['Notificacion'] == 'borrarE') {
                 $id = $_POST['id'];
                 $query = Notificacion::findOne($id);
-                $query->delete();
+                $query->BORRA_E = "true";
+                $query->save();
                 $this->redirect('noti');
-            } else {
+            }
+            if ($_POST['Notificacion'] == 'borrarR') {
+                $id = $_POST['id'];
+                $query = Notificacion::findOne($id);
+                $query->BORRA_R = "true";
+                $query->save();
+                $this->redirect('noti');
+            }
+            else {
                 $ID_Usuarios = $_POST['Notificacion'];
                 $mensaje = $_POST['Notificacion'];
                 $ID_Usuarios = $ID_Usuarios['ID_USER_RECEPTOR'];
