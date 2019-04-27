@@ -13,6 +13,8 @@ use Yii;
  * @property int $ID_USER_RECEPTOR
  * @property string $NOTIFICACION
  * @property string $FECHA
+ * @property string $BORRA_E
+ * @property string $BORRA_R
  *
  * @property Users $uSEREMISOR
  * @property Users $uSERRECEPTOR

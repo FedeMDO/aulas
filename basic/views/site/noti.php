@@ -59,7 +59,8 @@ $this->title = 'Notificaciones';
         <div id="Recibido" class="tabcontent media border p-3 enviado">
             <?php $entro = false; ?>
             <?php foreach ($notificacion as $n) :
-                if ($n->uSERRECEPTOR->id == Yii::$app->user->identity->id) : ?>
+                if ($n->uSERRECEPTOR->id == Yii::$app->user->identity->id) :
+                    if ($n->BORRA_R == 0) : ?>
 					<?php $entro = true; ?>
                     <?php $usuario1 = Users::findOne($n->uSEREMISOR->id); ?>
                     <div class="boxMensaje">
@@ -70,7 +71,9 @@ $this->title = 'Notificaciones';
                     <?php endif ?>
 					<div class="media-body">
                         <h4><?= Html::encode("{$n->uSEREMISOR->username} ") ?> <small><i>Fecha: <?= Html::encode("{$n->FECHA} ") ?></i></small>
-                        <a href="#"onclick="openCity(event, 'Enviar notificacion')" title="Responder"class="glyphicon glyphicon-share-alt" style="margin-left:5px" ></a></h4>
+                        <small> <?= Html::a('<i class="glyphicon glyphicon-trash"></i>', Url::to(['site/noti']),  ['data' => ['confirm' => 'Estas seguro?', 'method' => 'post', 'params' => ['Notificacion' => 'borrarR', 'id' => $n->ID]]]) ?></small>
+                        <a href="#"onclick="openCity(event, 'Enviar notificacion')" title="Responder"class="glyphicon glyphicon-share-alt" style="margin-left:5px" ></a>
+                        </h4>
                         <p><?= SiteController::encrypt_decrypt('decrypt', $n->NOTIFICACION) ?></p>
                         <?php $n->visto = "true" ?>
                         <?php $n->save(); ?>
@@ -78,6 +81,7 @@ $this->title = 'Notificaciones';
                     </div>
 
 				<?php endif; ?>
+                <?php endif; ?>
             <?php endforeach; ?>
                 <?php if ($entro == false) : ?>
                     <div class="alert alert-danger">
@@ -89,7 +93,8 @@ $this->title = 'Notificaciones';
         <div id="Enviado" class="tabcontent media border p-3 enviado">
             <?php $entro = false; ?>
             <?php foreach ($notificacion as $n) :
-                if ($n->uSEREMISOR->id == Yii::$app->user->identity->id) : ?>
+                if ($n->uSEREMISOR->id == Yii::$app->user->identity->id) : 
+                    if ($n->BORRA_E == 0) : ?>
 				    <?php $entro = true; ?>
                     <?php if (Yii::$app->user->identity->profile_picture ==""):?>
                         <img src="../image/admin_icon.png" class="admin" style="height:60px; width:60px; margin-left:10px; margin-bottom:10px;";>
@@ -99,10 +104,11 @@ $this->title = 'Notificaciones';
 					<div class="media-body">
 					    <h4>Para: <?= Html::encode("{$n->uSERRECEPTOR->username} ") ?>
 					    <small><i>Fecha: <?= Html::encode("{$n->FECHA} ") ?></i></small>
-                        <small> <?= Html::a('<i class="glyphicon glyphicon-trash"></i>', Url::to(['site/noti']),  ['data' => ['confirm' => 'Estas seguro?', 'method' => 'post', 'params' => ['Notificacion' => 'borrar', 'id' => $n->ID]]]) ?></small></h4>
+                        <small> <?= Html::a('<i class="glyphicon glyphicon-trash"></i>', Url::to(['site/noti']),  ['data' => ['confirm' => 'Estas seguro?', 'method' => 'post', 'params' => ['Notificacion' => 'borrarE', 'id' => $n->ID]]]) ?></small></h4>
 					    <p><?= SiteController::encrypt_decrypt('decrypt', $n->NOTIFICACION) ?></p>
 					</div>
 				<?php endif; ?>
+                <?php endif; ?>
             <?php endforeach; ?>
             <?php if ($entro == false) : ?>
                 <div class="alert alert-danger">
