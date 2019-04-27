@@ -1,5 +1,6 @@
 //MAIN VISTA CALENDARIO DE RESTRICCIONES
 $(document).ready(function () {
+    
     $('#calendar').fullCalendar({
         themeSystem: 'bootstrap4',
         //VIEW
@@ -7,6 +8,12 @@ $(document).ready(function () {
             left: 'today prev,next',
             center: 'title',
             right: 'agendaDay,agendaWeek,month'
+        },
+        loading: function(bool){
+            $("#LoadingImage").show();
+        },
+        eventAfterAllRender: function (view) {
+            $("#LoadingImage").hide();
         },
         defaultView: 'agendaWeek',
         selectable: true,

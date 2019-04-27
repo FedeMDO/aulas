@@ -99,6 +99,18 @@ $indexMaterias = 1;
         background-color: #e6ecf0;
 
     }
+
+    .loader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 9999;
+    }
+
+    .loader img {
+        width: 30%;
+        height: 30%;
+    }
 </style>
 
 <header>
@@ -192,6 +204,7 @@ $indexMaterias = 1;
                         </div>
                     </div>
                 </div>
+
                 <!-- final del registro de actividad -->
                 <div id="dialog-confirm" title="Tipo de evento" style="display: none">
                     <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Seleccione el tipo de evento que quiere crear</p>
@@ -200,7 +213,10 @@ $indexMaterias = 1;
         </div>
     </div> <!-- final del contenido-->
 </div> <!-- final del wraper-->
-
+<div id="LoadingImage" class="loader" style="display:none; text-align:center">
+    <img src="../image/waitingAjax.gif">
+    <p >Cargando...</p>
+</div>
 <!-- script para sidebar -->
 <script type="text/javascript">
     $(document).ready(function() {

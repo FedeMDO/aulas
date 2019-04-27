@@ -1,5 +1,7 @@
 var eventType;
+
 $(document).ready(function () {
+    
     $('#calendar').fullCalendar({
         themeSystem: 'bootstrap4',
         //VIEW
@@ -7,6 +9,12 @@ $(document).ready(function () {
             left: 'today prev,next',
             center: 'title',
             right: 'timelineDay,timelineWeek'
+        },
+        loading: function(bool){
+            $("#LoadingImage").show();
+        },
+        eventAfterAllRender: function (view) {
+            $("#LoadingImage").hide();
         },
         defaultView: 'timelineWeek',
         selectable: true,
@@ -25,6 +33,16 @@ $(document).ready(function () {
         //SCHEDULER
         schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
         resourceGroupField: 'edificio',
+        resourceColumns: [
+            {
+              labelText: 'Edificio',
+              field: 'edificio'
+            },
+            {
+              labelText: 'Capacidad',
+              field: 'capacidad'
+            }
+          ],
         resourceAreaWidth: '23%',
         resourceRender: function (resourceObj, $th, $body) {
             var title = 'Recursos: ' + '\n' + resourceObj.recursos;

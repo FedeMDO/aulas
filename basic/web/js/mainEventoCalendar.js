@@ -9,6 +9,12 @@ $(document).ready(function () {
             center: 'title',
             right: 'agendaDay,agendaWeek,month'
         },
+        loading: function(bool){
+            $("#LoadingImage").show();
+        },
+        eventAfterAllRender: function (view) {
+            $("#LoadingImage").hide();
+        },
         columnHeaderFormat: 'ddd D/M',
         defaultView: 'agendaWeek',
         selectable: true,

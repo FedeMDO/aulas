@@ -1,5 +1,10 @@
 //MAIN VISTA SCHEDULER DE RESTRICCIONES
 $(document).ready(function () {
+    $('#loading-image').bind('ajaxStart', function(){
+        $(this).show();
+    }).bind('ajaxStop', function(){
+        $(this).hide();
+    });
     $('#calendar').fullCalendar({
         themeSystem: 'bootstrap4',
         //VIEW
@@ -7,6 +12,12 @@ $(document).ready(function () {
             left: 'today prev,next',
             center: 'title',
             right: 'timelineDay,timelineWeek'
+        },
+        loading: function(bool){
+            $("#LoadingImage").show();
+        },
+        eventAfterAllRender: function (view) {
+            $("#LoadingImage").hide();
         },
         defaultView: 'timelineWeek',
         selectable: true,

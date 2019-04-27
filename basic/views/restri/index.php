@@ -84,8 +84,22 @@ $indexMaterias = 1;
 .breadcrumb{
     margin-bottom: 0px;
 }
-</style>
+.loader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 9999;
+    }
 
+    .loader img {
+        width: 30%;
+        height: 30%;
+    }
+</style>
+<div id="LoadingImage" class="loader" style="display:none; text-align:center">
+    <img src="../image/waitingAjax.gif">
+    <p >Cargando...</p>
+</div>
 
 <div class="wrapper">
     <!-- Sidebar  -->
@@ -129,7 +143,7 @@ $indexMaterias = 1;
     <div id="content">
         <!-- boton de sidebar-->
         <div class="container-fluid">
-            <button type="button" id="sidebarCollapse" class="btn btn-primary" style="margin-botom:20px"><i class="glyphicon glyphicon-align-justify"></i> Menu</button>
+            <button type="button" id="sidebarCollapse" class="btn btn-primary" style="margin-bottom:20px"><i class="glyphicon glyphicon-align-justify"></i> Menu</button>
             <?php if (!app\models\User::isUserGuest(Yii::$app->user->identity->id)) : ?> 
             <?= Html::button('Nueva restriccion', ['value' => Url::to(['restri/create', 'id_aula' => $id_aula]), 'title' => $id_aula, 'class' => 'showModalButton btn btn-success']); ?>
             <?php endif; ?>
