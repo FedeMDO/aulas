@@ -77,7 +77,7 @@ class EventoController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id_aula)
+    public function actionCreate($id_aula, $sch = "false")
     {
         $materia = new Materia();
         $carrera = new Carrera();
@@ -92,7 +92,14 @@ class EventoController extends Controller
             $model->ID_Ciclo = $ciclo;
             $model->ID_Aula = $id_aula;
             if ($model->save()) {
-                return $this->redirect(['index', 'id' => $model->ID_Aula]);
+                if($sch === "false")
+                {
+                    return $this->redirect(['index', 'id' => $model->ID_Aula]);
+                }
+                else
+                {
+                    return $this->redirect(['edificio/scheduler', 'id_sede' => $model->aula->eDIFICIO->sEDE->ID]);
+                }
             } else {
                 return $this->renderAjax('create', ['model' => $model, 'materia' => $materia, 'carrera' => $carrera, 'instituto' => $instituto, ]);
             }
@@ -226,6 +233,7 @@ class EventoController extends Controller
                 $resource['id'] = $aula->ID;
                 $resource['title'] = $aula->NOMBRE;
                 $resource['edificio'] = $aula->eDIFICIO->NOMBRE;
+                $resource['capacidad'] = $aula->CAPACIDAD;
                 $resource['url'] = URL::toRoute('evento/index?id=') . $aula->ID;
                 $obj = (object)$resource;
 

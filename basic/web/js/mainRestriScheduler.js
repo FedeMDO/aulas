@@ -21,13 +21,23 @@ $(document).ready(function () {
         //SCHEDULER
         schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
         resourceGroupField: 'edificio',
+        resourceColumns: [
+            {
+              labelText: 'Edificio',
+              field: 'edificio'
+            },
+            {
+              labelText: 'Capacidad',
+              field: 'capacidad'
+            }
+          ],
         resourceAreaWidth: '23%',
         resourceRender: function (resourceObj, $th, $body) {
             var title = 'Recursos: ' + '\n' + resourceObj.recursos;
-            $th.find('.fc-cell-text').text('');
-            $th.find('.fc-cell-text').append('<a href="http://yii.local' + resourceObj.url + '">' + resourceObj.title + '</a>');
-            $th.attr('title', title);
-
+            var first_text = $th.find('.fc-cell-text').first();
+            first_text.text('');
+            first_text.append('<a href="http://yii.local' + resourceObj.url + '">' + resourceObj.title + '</a>');
+            first_text.attr('title', title);
         },
         resources:
         {
@@ -103,7 +113,7 @@ $(document).ready(function () {
                     return;
                 }
 
-                let url = "/restri/create?id_aula=" + resource.id;
+                let url = "/restri/create?id_aula=" + resource.id + "&sch=true";
                 $("#modalRestriContent").load(url, function () {
                     $("#modalRestri").modal("show");
                     //DIA

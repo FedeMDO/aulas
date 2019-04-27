@@ -100,7 +100,7 @@ class RestriController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id_aula)
+    public function actionCreate($id_aula, $sch = "false")
     {
         $model = new RestriCalendar();
 
@@ -109,8 +109,14 @@ class RestriController extends Controller
             $model->ID_Aula = $id_aula;
             $model->ID_Ciclo = Yii::$app->session->get('cicloID');
             if ($model->save()) {
-
-                return $this->redirect(['index', 'id' => $model->ID_Aula]);
+                if($sch === "false")
+                {
+                    return $this->redirect(['index', 'id' => $model->ID_Aula]);
+                }
+                else
+                {
+                    return $this->redirect(['edificio/restrischeduler', 'id_sede' => $model->aula->eDIFICIO->sEDE->ID]);
+                }
             }
         }
         return $this->renderAjax('create', [
@@ -234,6 +240,7 @@ class RestriController extends Controller
                 $resource['id'] = $aula->ID;
                 $resource['title'] = $aula->NOMBRE;
                 $resource['edificio'] = $aula->eDIFICIO->NOMBRE;
+                $resource['capacidad'] = $aula->CAPACIDAD;
                 $resource['url'] = URL::toRoute('restri/index?id=') . $aula->ID;
                 $obj = (object)$resource;
 

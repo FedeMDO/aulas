@@ -28,10 +28,10 @@ $(document).ready(function () {
         resourceAreaWidth: '23%',
         resourceRender: function (resourceObj, $th, $body) {
             var title = 'Recursos: ' + '\n' + resourceObj.recursos;
-            $th.find('.fc-cell-text').text('');
-            $th.find('.fc-cell-text').append('<a href="http://yii.local' + resourceObj.url + '">' + resourceObj.title + '</a>');
-            $th.attr('title', title);
-
+            var first_text = $th.find('.fc-cell-text').first();
+            first_text.text('');
+            first_text.append('<a href="http://yii.local' + resourceObj.url + '">' + resourceObj.title + '</a>');
+            first_text.attr('title', title);
         },
 
         resources:
