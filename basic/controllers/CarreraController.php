@@ -103,22 +103,26 @@ class CarreraController extends Controller
             6 => "Sabado",
         );
         $obj = array();
-        $rowData = array();
-        foreach ($oferta as $row) {
-            unset($rowData);
-            $rowData[] = $row->Carrera;
-            $rowData[] = $row->Anio;
-            $rowData[] = $row->Materia;
-            $rowData[] = $row->Comision;
-            $rowData[] = $dias[$row->Dia];
-            $rowData[] = $row->HoraInicio;
-            $rowData[] = $row->HoraFin;
-            $rowData[] = $row->Sede;
-            $rowData[] = $row->Edificio;
-            $rowData[] = $row->Aula;
-            $obj["data"][] = $rowData;
+        if(!empty($oferta)){
+            foreach ($oferta as $row) {
+                unset($rowData);
+                $rowData[] = $row->Carrera;
+                $rowData[] = $row->Anio;
+                $rowData[] = $row->Materia;
+                $rowData[] = $row->Comision;
+                $rowData[] = $dias[$row->Dia];
+                $rowData[] = $row->HoraInicio;
+                $rowData[] = $row->HoraFin;
+                $rowData[] = $row->Sede;
+                $rowData[] = $row->Edificio;
+                $rowData[] = $row->Aula;
+                $obj["data"][] = $rowData;
+            }
         }
-
+        else{
+            $obj["data"] = array();
+        }
+        
         return (object)$obj;
 
     }

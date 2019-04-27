@@ -200,6 +200,7 @@ $indexMaterias = 1;
         </div>
     </div> <!-- final del contenido-->
 </div> <!-- final del wraper-->
+
 <!-- script para sidebar -->
 <script type="text/javascript">
     $(document).ready(function() {
@@ -212,4 +213,4 @@ $indexMaterias = 1;
 </html>
 
 
-<? php;
+<?php

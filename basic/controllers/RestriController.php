@@ -170,7 +170,7 @@ class RestriController extends Controller
         if ($evento->save()) {
             echo ("Actualizacion exitosa");
         }
-        return $this->redirect(['index', 'id_aula' => $id_aula]);
+        return $this->redirect(['index', 'id_aula' => $evento->ID_Aula]);
 
     }
     public function actionUpdscheduler()

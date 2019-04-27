@@ -9,14 +9,14 @@ class DatatablesAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/datatables.css',
-        'css/jquery.dataTables.min.css',
+        'css/datatables.bootstrap4.min.css',
         'css/buttons.dataTables.min.css'
     ];
     public $js = [
 
         'js/jquery-3.3.1.min.js',
-        'js/datatables.js',
+        'js/datatables.min.js',
+        'js/dataTables.bootstrap4.min.js',
         'js/dataTables.buttons.min.js',
         'js/buttons.flash.min.js',
         'js/jszip.min.js',
