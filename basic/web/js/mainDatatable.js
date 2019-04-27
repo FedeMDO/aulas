@@ -23,19 +23,16 @@ $('#btnBuscar').click(function () {
     }
 })
 
-$("#carrera-id").change(function (e) {
+$(".form-control").change(function (e) {
     e.preventDefault();
-    if ($('#ciclolectivo-id').val() != NaN) {
+    if($("#instituto-id").val() == "" || $("#carrera-id").val() == "" || $("#ciclolectivo-id").val() == ""){
+        $("#btnBuscar").attr("disabled", true);
+    }
+    else{
         $("#btnBuscar").attr("disabled", false);
     }
 });
 
-$("#ciclolectivo-id").change(function (e) {
-    e.preventDefault();
-    if ($('#carrera-id').val() != NaN) {
-        $("#btnBuscar").attr("disabled", false);
-    }
-});
 
 jQuery.fn.dataTableExt.aTypes.push(
     function (sData) {
@@ -44,7 +41,6 @@ jQuery.fn.dataTableExt.aTypes.push(
         if (sValidStrings.indexOf(sData.toLowerCase()) >= 0) {
             return 'weekdays-sort';
         }
-
         return null;
     }
 );
