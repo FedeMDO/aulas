@@ -236,7 +236,6 @@ class EventoController extends Controller
                 $resource['capacidad'] = $aula->CAPACIDAD;
                 $resource['url'] = URL::toRoute('evento/index?id=') . $aula->ID;
                 $obj = (object)$resource;
-
                 $resources[] = $obj;
             }
         }
@@ -263,10 +262,10 @@ class EventoController extends Controller
             //CHECKEO CICLO EN SESION
             if ($cons->ID_Ciclo == $cicloSessID) {
                 $begin = new DateTime($cons->ciclo->fecha_inicio);
-                $end = new DateTime($cons->ciclo->fecha_fin);
+                $endItrvl = new DateTime($cons->ciclo->fecha_fin);
 
                 $interval = DateInterval::createFromDateString('1 day');
-                $period = new DatePeriod($begin, $interval, $end);
+                $period = new DatePeriod($begin, $interval, $endItrvl);
 
                 foreach ($period as $dia) {
                     if ($dia->format('N') == $cons->dow) {
@@ -304,10 +303,10 @@ class EventoController extends Controller
             //CHECKEO CICLO EN SESION
             if ($eve->ID_Ciclo == $cicloSessID) {
                 $begin = new DateTime($eve->ciclo->fecha_inicio);
-                $end = new DateTime($eve->ciclo->fecha_fin);
+                $endItrvl = new DateTime($eve->ciclo->fecha_fin);
 
                 $interval = DateInterval::createFromDateString('1 day');
-                $period = new DatePeriod($begin, $interval, $end);
+                $period = new DatePeriod($begin, $interval, $endItrvl);
 
                 foreach ($period as $dia) {
                     if ($dia->format('N') == $eve->dow) {
@@ -345,7 +344,7 @@ class EventoController extends Controller
         return $tasks;
     }
 
-    public function actionJsonschedulersede($id_sede, $start, $end = null, $_ = null)
+    public function actionJsonschedulersede($id_sede, $start = null, $end = null, $_ = null)
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
@@ -369,10 +368,10 @@ class EventoController extends Controller
                             //CICLO EN SESION
                             if ($cons->ID_Ciclo == $cicloSessID) {
                                 $begin = new DateTime($cons->ciclo->fecha_inicio);
-                                $end = new DateTime($cons->ciclo->fecha_fin);
+                                $endItrvl = new DateTime($cons->ciclo->fecha_fin);
 
                                 $interval = DateInterval::createFromDateString('1 day');
-                                $period = new DatePeriod($begin, $interval, $end);
+                                $period = new DatePeriod($begin, $interval, $endItrvl);
 
                                 foreach ($period as $dia) {
                                     if ($dia->format('N') == intval($cons->dow)) {
@@ -412,7 +411,7 @@ class EventoController extends Controller
                             //CICLO EN SESION
                             if ($eve->ID_Ciclo == $cicloSessID) {
                                 $begin = new DateTime($eve->ciclo->fecha_inicio);
-                                $end = new DateTime($eve->ciclo->fecha_fin);
+                                $endItrvl = new DateTime($eve->ciclo->fecha_fin);
                                 $interval = DateInterval::createFromDateString('1 day');
                                 $period = new DatePeriod($begin, $interval, $end);
 

@@ -257,15 +257,20 @@ class RestriController extends Controller
         $cicloSessID = Yii::$app->session->get('cicloID');
 
         $aula = Aula::findOne($id);
+        $sql = "SELECT * FROM 'restri_calendar' WHERE ID_Aula=:id_aula"; // SELECT * FROM customer WHERE status=:status
+        $restricciones = RestriCalendar::findBySql(
+            $sql,
+            $params = ["id_aula", $aula->ID]
+        )->all();
         //RESTRICCIONES
-        foreach ($aula->restriCalendars as $cons) {
+        foreach ($restricciones as $cons) {
 
             if ($cons->ID_Ciclo == $cicloSessID) {
                 $begin = new DateTime($cons->ciclo->fecha_inicio);
-                $end = new DateTime($cons->ciclo->fecha_fin);
+                $endIntrvl = new DateTime($cons->ciclo->fecha_fin);
 
                 $interval = DateInterval::createFromDateString('1 day');
-                $period = new DatePeriod($begin, $interval, $end);
+                $period = new DatePeriod($begin, $interval, $endIntrvl);
 
                 foreach ($period as $dia) {
                     if ($dia->format('N') == $cons->dow) {
@@ -290,7 +295,7 @@ class RestriController extends Controller
         return $tasks;
     }
 
-    public function actionJsonschedulersede($id_sede, $start, $end = null, $_ = null)
+    public function actionJsonschedulersede($id_sede, $start = null, $end = null, $_ = null)
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         //Ciclo en sesion
@@ -309,10 +314,10 @@ class RestriController extends Controller
                             //CHECKEO CICLO EN SESION
                             if ($cons->ID_Ciclo == $cicloSessID) {
                                 $begin = new DateTime($cons->ciclo->fecha_inicio);
-                                $end = new DateTime($cons->ciclo->fecha_fin);
+                                $endIntrvl = new DateTime($cons->ciclo->fecha_fin);
 
                                 $interval = DateInterval::createFromDateString('1 day');
-                                $period = new DatePeriod($begin, $interval, $end);
+                                $period = new DatePeriod($begin, $interval, $endIntrvl);
 
                                 foreach ($period as $dia) {
                                     if ($dia->format('N') == intval($cons->dow)) {
