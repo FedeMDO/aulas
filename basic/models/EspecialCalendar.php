@@ -17,7 +17,7 @@ use Yii;
  * @property int $ID_UCrea
  * @property int $ID_UModifica
  * @property int $ID_Carrera
- *
+ * @property bool $Examen_Final
  * @property Aula $aula
  * @property Carrera $carrera
  * @property Users $uCrea

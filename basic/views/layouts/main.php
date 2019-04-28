@@ -314,7 +314,7 @@ li.dropdown:nth-child(2) > a:nth-child(1){
         <div class="modal-cuerpo">
             <input type="hidden" id="idevento" name="idevento" value="">
             <input type="hidden" id="tipo" name="tipo" value="">
-            Comision:
+            Nombre:
             <div class="well well-sm weell">
                 <p id="showcomision"></p>
             </div>
