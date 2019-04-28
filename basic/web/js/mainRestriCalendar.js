@@ -143,7 +143,7 @@ $(document).ready(function () {
             var fin = event.end.format();
             var dow = event.start.isoWeekday();
 
-            if (!confirm("Esta seguro??")) {
+            if (!confirm("¿Está seguro?")) {
                 revertFunc();
             }
             else {

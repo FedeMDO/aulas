@@ -17,7 +17,7 @@ use Yii;
  * @property int $ID_UCrea
  * @property int $ID_UModifica
  * @property int $ID_Carrera
- * @property bool $Examen_Final
+ * @property int $EXAMEN_FINAL
  * @property Aula $aula
  * @property Carrera $carrera
  * @property Users $uCrea
@@ -39,7 +39,7 @@ class EspecialCalendar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ID_Aula', 'ID_UCrea', 'ID_UModifica', 'ID_Carrera'], 'integer'],
+            [['ID_Aula', 'ID_UCrea', 'ID_UModifica', 'ID_Carrera','EXAMEN_FINAL'], 'integer'],
             [['momento'], 'safe'],
             [['inicio', 'fin'], 'string', 'max' => 30],
             [['nombre'], 'string', 'max' => 100],

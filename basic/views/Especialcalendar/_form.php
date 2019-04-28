@@ -29,9 +29,7 @@ use yii\jui\DatePicker;
 
         <?= $form->field($model, 'nombre', ['labelOptions' => ['style' => 'color:white']])->textInput(['maxlength' => true]) ?>
 
-        <!-- @braianpezet Checkbox que se posiciona mal aiuda -->
-        <?= $form->field($model, 'Examen_Final', ['options' =>['tag' => 'div','class' => 'checkbox icheck']])->checkbox(['label' => 'Es examen final']); ?>
-
+        <?= $form->field($model, 'EXAMEN_FINAL', ['options' =>['tag' => 'div','class' => 'checkbox icheck', 'style' => 'padding-bottom:10px']])->checkbox(['label' => 'Es examen final']); ?>
         <?= $form->field($model, 'descripcion', ['labelOptions' => ['style' => 'color:white']])->textInput(['maxlength' => true]) ?>
 
         <?php echo $form->field($model, 'ID_Carrera', ['labelOptions' => ['style' => 'color:white']])->dropDownList(

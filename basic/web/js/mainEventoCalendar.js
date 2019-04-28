@@ -9,7 +9,7 @@ $(document).ready(function () {
             center: 'title',
             right: 'agendaDay,agendaWeek,month'
         },
-        loading: function(bool){
+        loading: function (bool) {
             $("#LoadingImage").show();
         },
         eventAfterAllRender: function (view) {
@@ -214,6 +214,7 @@ $(document).ready(function () {
 
                 $.get("/user/getunamebyid", { id: event.usermodifico },
                     function (data) {
+                        $('#myModal').find('#showusermodifico').text('');
                         $('#myModal').find('#showusermodifico').text(data);
                     }
                 );
@@ -237,7 +238,7 @@ $(document).ready(function () {
             var fin = event.end.format();
             var dow = event.start.isoWeekday();
 
-            if (!confirm("Esta seguro??")) {
+            if (!confirm("¿Está seguro?")) {
                 revertFunc();
             }
             else {

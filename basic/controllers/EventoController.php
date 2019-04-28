@@ -84,6 +84,7 @@ class EventoController extends Controller
         $instituto = new Instituto();
         $model = new EventoCalendar();
         $model->ID_User_Asigna = Yii::$app->user->identity->id;
+        $model->ID_UModifica = Yii::$app->user->identity->id;
 
         if ($model->load(Yii::$app->request->post())) {
             $institutoID = $model->comision->mATERIA->carrera->iNSTITUTO->ID;
@@ -334,7 +335,7 @@ class EventoController extends Controller
                         }
                         $event['start'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_ini;
                         $event['end'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_fin;
-                        $event['usermodifico'] = $eve->ID_User_Asigna;
+                        $event['usermodifico'] = $eve->ID_UModifica;
                         $event['resourceId'] = $eve->ID_Aula;
                         $tasks[] = (object)$event;
                     }
@@ -441,7 +442,7 @@ class EventoController extends Controller
                                         $event['start'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_ini;
                                         $event['end'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_fin;
                                         $event['resourceId'] = $eve->ID_Aula;
-                                        $event['usermodifico'] = $eve->ID_User_Asigna;
+                                        $event['usermodifico'] = $eve->ID_UModifica;
                                         $tasks[] = (object)$event;
                                     }
                                 }

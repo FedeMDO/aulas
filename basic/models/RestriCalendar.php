@@ -10,6 +10,7 @@ use Yii;
  * @property string $id
  * @property int $ID_Aula
  * @property int $ID_User_Asigna
+ * @property int $ID_UModifica
  * @property string $Hora_ini
  * @property string $Hora_fin
  * @property string $dow
@@ -19,6 +20,7 @@ use Yii;
  *
  * @property Aula $aula
  * @property Users $userAsigna
+ * @property Users $uModifica
  * @property Instituto $instituto
  * @property CicloLectivo $ciclo
  */
@@ -39,9 +41,10 @@ class RestriCalendar extends \yii\db\ActiveRecord
     {
         return [
             [['ID_Ciclo'], 'required'],
-            [['ID_Aula', 'ID_User_Asigna', 'ID_Instituto', 'ID_Ciclo'], 'integer'],
+            [['ID_Aula', 'ID_User_Asigna', 'ID_Instituto', 'ID_Ciclo', 'ID_UModifica'], 'integer'],
             [['Hora_ini', 'Hora_fin', 'momento'], 'safe'],
             [['dow'], 'string', 'max' => 20],
+            [['ID_UModifica'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['ID_UModifica' => 'ID']],
             [['ID_Aula'], 'exist', 'skipOnError' => true, 'targetClass' => Aula::className(), 'targetAttribute' => ['ID_Aula' => 'ID']],
             [['ID_User_Asigna'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['ID_User_Asigna' => 'id']],
             [['ID_Instituto'], 'exist', 'skipOnError' => true, 'targetClass' => Instituto::className(), 'targetAttribute' => ['ID_Instituto' => 'ID']],

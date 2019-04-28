@@ -106,6 +106,7 @@ class RestriController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $model->ID_User_Asigna = Yii::$app->user->identity->id;
+            $model->ID_UModifica = Yii::$app->user->identity->id;
             $model->ID_Aula = $id_aula;
             $model->ID_Ciclo = Yii::$app->session->get('cicloID');
             if ($model->save()) {
@@ -257,13 +258,8 @@ class RestriController extends Controller
         $cicloSessID = Yii::$app->session->get('cicloID');
 
         $aula = Aula::findOne($id);
-        $sql = "SELECT * FROM 'restri_calendar' WHERE ID_Aula=:id_aula"; // SELECT * FROM customer WHERE status=:status
-        $restricciones = RestriCalendar::findBySql(
-            $sql,
-            $params = ["id_aula", $aula->ID]
-        )->all();
         //RESTRICCIONES
-        foreach ($restricciones as $cons) {
+        foreach ($aula->restriCalendars as $cons) {
 
             if ($cons->ID_Ciclo == $cicloSessID) {
                 $begin = new DateTime($cons->ciclo->fecha_inicio);
