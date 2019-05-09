@@ -43,8 +43,8 @@ $this->title = 'Notificaciones';
         </div> -->
         <ul class="list-unstyled components">
           <li><a href="#"onclick="openCity(event, 'Recibido')" id="defaultOpen"><i class="glyphicon glyphicon-inbox"></i>  Recibidas</a></li>
-          <li><a href="#"onclick="openCity(event, 'Enviado')"><i class="glyphicon glyphicon-envelope"></i>  Enviadas</a></li>
-          <li><a href="#"onclick="openCity(event, 'Enviar notificacion')"><i class="glyphicon glyphicon-plus"></i> Nueva notificacion</a></li>
+          <li><a href="#"onclick="openCity(event, 'Enviado')" id="enviadas"><i class="glyphicon glyphicon-envelope"></i>  Enviadas</a></li>
+          <li><a href="#"onclick="openCity(event, 'Enviar notificacion')" id="enviar"><i class="glyphicon glyphicon-plus"></i> Nueva notificacion</a></li>
         </ul>
         <!-- Parte de abajo de sidenav -->
         <ul class="list-unstyled CTAs">
@@ -72,7 +72,7 @@ $this->title = 'Notificaciones';
 					<div class="media-body">
                         <h4><?= Html::encode("{$n->uSEREMISOR->username} ") ?> <small><i>Fecha: <?= Html::encode("{$n->FECHA} ") ?></i></small>
                         <small> <?= Html::a('<i class="glyphicon glyphicon-trash"></i>', Url::to(['site/noti']),  ['data' => ['confirm' => 'Estas seguro?', 'method' => 'post', 'params' => ['Notificacion' => 'borrarR', 'id' => $n->ID]]]) ?></small>
-                        <a href="#"onclick="openCity(event, 'Enviar notificacion')" title="Responder"class="glyphicon glyphicon-share-alt" style="margin-left:5px" ></a>
+                        <a href="#"onclick='responder(<?= Html::encode("{$n->uSEREMISOR->id}")?>)' title="Responder"class="glyphicon glyphicon-share-alt" style="margin-left:5px" ></a>
                         </h4>
                         <p><?= SiteController::encrypt_decrypt('decrypt', $n->NOTIFICACION) ?></p>
                         <?php $n->visto = "true" ?>
@@ -129,24 +129,41 @@ $this->title = 'Notificaciones';
 <!-- script para sidebar -->
 <script type="text/javascript">
     $(document).ready(function () {
+        var url = $(location).attr('href');
+        if (url.includes('#enviadas')){
+            $("#enviadas").click();
+        }
+        if (url.includes('#enviar')){
+            $('#enviar').click();
+        }
+        else{
+            $("#defaultOpen").click();
+        }
+
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
     });
+
     function openCity(evt, cityName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
     }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
+
+    function responder(id){
+        $("#notificacion-id_user_receptor").val(id);
+        $("#notificacion-id_user_receptor").change();
+        $("#enviar").click();
     }
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
-}
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
+
 </script>
 </html>

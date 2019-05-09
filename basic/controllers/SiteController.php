@@ -26,6 +26,7 @@ use app\models\CicloLectivo;
 
 class SiteController extends Controller
 {
+
     public function behaviors()
     {
         return [
@@ -95,10 +96,11 @@ class SiteController extends Controller
                     $table->save();
                     
                     //Creamos el mensaje que será enviado a la cuenta de correo del usuario
+                    $url = Url::base(true);
                     $subject = "Recuperar contraseña";
                     $body = "<p>Copie el siguiente código de verificación para restablecer su contraseña ... ";
                     $body .= "<strong>" . $verification_code . "</strong></p>";
-                    $body .= "<p><a href='http://yii.local/site/resetpass'>Recuperar password</a></p>";
+                    $body .= "<p><a href=".$url."/site/resetpass>Recuperar password</a></p>";
 
                     //Enviamos el correo
                     Yii::$app->mailer->compose()
@@ -239,7 +241,7 @@ class SiteController extends Controller
 
                     $subject = "Confirmar registro";
                     $body = "<h1>Haga click en el siguiente enlace para finalizar tu registro</h1>";
-                    $body .= "<a href='http://yii.local/site/confirm?id=" . $id . "&authKey=" . $authKey . "'>Confirmar</a>";
+                    $body .= "<a href=".Url::base(true)."/site/confirm?id=" . $id . "&authKey=" . $authKey . ">Confirmar</a>";
                     
                     //Enviamos el correo
                     Yii::$app->mailer->compose()
@@ -440,7 +442,7 @@ class SiteController extends Controller
                 $query->save();
                 $this->redirect('noti');
             }
-            else {
+            if ($_POST['Notificacion'] != 'borrarE' && $_POST['Notificacion'] != 'borrarR'){
                 $ID_Usuarios = $_POST['Notificacion'];
                 $mensaje = $_POST['Notificacion'];
                 $ID_Usuarios = $ID_Usuarios['ID_USER_RECEPTOR'];
@@ -459,7 +461,7 @@ class SiteController extends Controller
                      $subject = "Nueva notificación";
                      $body = "<p>Hola <strong>" . $receptor . "</strong>, tenes una nueva notificación de <strong>" . $emisor . "</strong>.</p>";
                      $body .= "<p> Notificación: <i>" . $mensaje . "</i></p>";
-                     $body .= "<p><a href='http://yii.local/site/noti'>Ver notificación</a></p>";
+                     $body .= "<p><a href=".Url::base(true)."/site/noti>Ver notificación</a></p>";
                      try {
                          Yii::$app->mailer->compose()
                              ->setTo($mail)
