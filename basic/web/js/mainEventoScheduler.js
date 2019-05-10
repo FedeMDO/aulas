@@ -48,7 +48,7 @@ $(document).ready(function () {
             var title = 'Recursos: ' + '\n' + resourceObj.recursos;
             var first_text = $th.find('.fc-cell-text').first();
             first_text.text('');
-            first_text.append('<a href="http://yii.local' + resourceObj.url + '">' + resourceObj.title + '</a>');
+            first_text.append('<a href=' + resourceObj.url + '>' + resourceObj.title + '</a>');
             first_text.attr('title', title);
         },
 
