@@ -193,7 +193,7 @@ class EspecialcalendarController extends Controller
         if (!$isGuest) {
             $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
         }
-
+        $tasks = array();
         $aula = Aula::findOne($id);
         foreach ($aula->especialCalendars as $eve) {
             $event = array();

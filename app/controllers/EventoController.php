@@ -255,7 +255,7 @@ class EventoController extends Controller
         if (!$isGuest) {
             $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
         }
-
+        $tasks = array();
         $aula = Aula::findOne($id);
         //RESTRICCIONES
         foreach ($aula->restriCalendars as $cons) {
