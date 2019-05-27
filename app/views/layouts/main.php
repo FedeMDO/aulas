@@ -341,10 +341,6 @@ li.dropdown:nth-child(2) > a:nth-child(1){
 
 <?php $this->endBody() ?>
 
-<footer>
-  <p>Universidad Nacional Arturo Jauretche</p>
-</footer>
-
 
 </body>
 

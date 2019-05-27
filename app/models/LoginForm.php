@@ -30,7 +30,14 @@ class LoginForm extends Model
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword']
-            // RECAPTCHA VALIDATION - SET MESSAGE
+        ];
+    }
+
+    public function label()
+    {
+        return[
+            ['username', 'usuario'],
+            ['password', 'contraseña']
         ];
     }
 

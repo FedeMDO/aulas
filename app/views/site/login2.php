@@ -52,12 +52,9 @@ $this->registerCssFile("@web/css/index.css", [
 }
 
 .ingreso{
-  padding: 57px;
+  padding: 64px;
   justify-self:end;
-  
 }
-
-
 
 .control-label{
   display:none;
@@ -108,6 +105,10 @@ $this->registerCssFile("@web/css/index.css", [
   display:flex; 
   justify-content:center;
 }
+.image {
+  background-color: rgba(0,0,0,0.8);
+  filter:brightness(0.4);
+}
 </style>
 
 <!--Corresponde al carousel ocupa 75% de la pantalla -->
@@ -126,31 +127,29 @@ $this->registerCssFile("@web/css/index.css", [
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
     <div class="item active">
-      <img src="../image/index_background_desenfoque.png" alt="Los Angeles" style="height:100vh; width:100%; " >
+      <img src="../image/index_background_desenfoque.png" class="image" alt="Los Angeles" style="height:100vh; width:100%;">
       <div class="carousel-caption">
-          <h1 style="text-shadow: 1px 1px 4px #000">Bienvenido</h2>
-          <h4 style="text-shadow: 0px 0px 8px #000">Sistema de Gestión de aulas</h4>
-          <h4 ><a href="../site/about" style="color:white; text-decoration:underline; text-shadow: 0px 0px 4px #000" >Conocé más</a></h4>
-        
-        </div>
-      
-    </div>
-
-    <div class="item">
-      <img src="../image/7.png" alt="Chicago" style="height:100vh; width:100%;">
-      <div class="carousel-caption">
-          <h1 style="text-shadow: 1px 1px 4px #000">Bienvenido</h2>
-          <h4 style="text-shadow: 0px 0px 8px #000">Desarrollado por estudiantes de ing. en informatica</h4>
-          <h4 ><a href="../site/about" style="color:white; text-decoration:underline; text-shadow: 0px 0px 4px #000" >Conocé más</a></h4>
+          <h1 style="text-shadow: 1px 1px 4px #000"><strong>Bienvenido</strong></h2>
+          <h4 style="text-shadow: 0px 0px 8px #000">Sistema de Gestión de Aulas</h4>
+          <h5><a href="../site/about" style="color:white; text-decoration:underline; text-shadow: 0px 0px 4px #000" >Conocé más</a></h4>
         </div>
     </div>
 
     <div class="item">
-      <img src="../image/9.png" alt="New York" style="height:100vh; width:100%;">
+      <img src="../image/7.png" alt="Chicago" class="image" style="height:100vh; width:100%;">
       <div class="carousel-caption">
-          <h1 style="text-shadow: 1px 1px 4px #000">¿Necesitas ayuda para ingresar?</h2>
+          <h1 style="text-shadow: 1px 1px 4px #000"><strong>Bienvenido</strong></h2>
+          <h4 style="text-shadow: 0px 0px 8px #000">Desarrollado por estudiantes de la UNAJ</h4>
+          <h5><a href="../site/about" style="color:white; text-decoration:underline; text-shadow: 0px 0px 4px #000" >Conocé más</a></h4>
+        </div>
+    </div>
+
+    <div class="item">
+      <img src="../image/9.png" alt="New York" class="image" style="height:100vh; width:100%;">
+      <div class="carousel-caption">
+          <h1 style="text-shadow: 1px 1px 4px #000"><strong>¿Necesitas ayuda?</strong></h2>
           <h4 style="text-shadow: 0px 0px 8px #000">Consulta el manual de usuario</h4>
-          <h4 ><a href="../site/manual" style="color:white; text-decoration:underline; text-shadow: 0px 0px 4px #000" >Aquí</a></h4>
+          <h5><a href="../site/manual" style="color:white; text-decoration:underline; text-shadow: 0px 0px 4px #000" >Aquí</a></h4>
         </div>
     </div>
     
@@ -172,7 +171,7 @@ $this->registerCssFile("@web/css/index.css", [
 <!-- Corresponde al login ocupa 25% de la pantalla -->
 
     <div class="caja ingreso" style="background-color:white" >
-      <h1 style=padding-bottom:20px;>Por favor complete los siguientes campos:</h1>
+      <h1 style=padding-bottom:20px;>Login</h1>
   
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
@@ -185,11 +184,11 @@ $this->registerCssFile("@web/css/index.css", [
      <?= $form->field($model, 'password', ['labelOptions'=>['style'=>''],'inputTemplate' => '<div class="input-group input-group-lg"><span class="input-group-addon "><i class="fa fa-lock"></i></span>{input}</div>'] )->passwordInput( ['placeholder' => "Ingresa tu contraseña"])->label(null) ?>
 
 
-      <div class="centrado">
+      <div>
         <a href="/site/recoverpass" style="color:black">¿Olvidaste tu contraseña?</a>
       </div>
 
-      <div class="centrado">
+      <div>
         <?= $form->field($model, 'rememberMe', ['labelOptions'=>['style'=>'text-align:center']] )->checkbox([
         ])->label('Recordarme') ?>
       </div>
