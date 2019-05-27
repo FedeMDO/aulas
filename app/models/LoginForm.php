@@ -31,7 +31,6 @@ class LoginForm extends Model
             // password is validated by validatePassword()
             ['password', 'validatePassword']
             // RECAPTCHA VALIDATION - SET MESSAGE
-
         ];
     }
 
