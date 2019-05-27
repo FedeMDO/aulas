@@ -491,7 +491,7 @@ class SiteController extends Controller
         ]);
     }
 
-    public function encrypt_decrypt($action, $string)
+    public static function encrypt_decrypt($action, $string)
     {
         $output = false;
         $encrypt_method = "AES-256-CBC";

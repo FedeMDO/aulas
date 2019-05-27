@@ -184,7 +184,6 @@ $this->registerCssFile("@web/css/index.css", [
 
      <?= $form->field($model, 'password', ['labelOptions'=>['style'=>''],'inputTemplate' => '<div class="input-group input-group-lg"><span class="input-group-addon "><i class="fa fa-lock"></i></span>{input}</div>'] )->passwordInput( ['placeholder' => "Ingresa tu contraseña"])->label(null) ?>
 
-      <?= $form->field($model, 'reCaptcha')->widget(\himiklab\yii2\recaptcha\ReCaptcha::className())->label('') ?>
 
       <div class="centrado">
         <a href="/site/recoverpass" style="color:black">¿Olvidaste tu contraseña?</a>
