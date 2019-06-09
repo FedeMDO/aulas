@@ -12,10 +12,12 @@ use Yii;
  * @property int $ID_MATERIA
  * @property int $CARGA_HORARIA_SEMANAL
  * @property int $ID_Ciclo
+ * @property int $ID_Turno
  *
  * @property AgendaAsigComision[] $agendaAsigComisions
  * @property Materia $mATERIA
  * @property CicloLectivo $ciclo
+ * @property Turno $turno
  * @property EventoCalendar[] $eventoCalendars
  */
 class Comision extends \yii\db\ActiveRecord
@@ -37,7 +39,8 @@ class Comision extends \yii\db\ActiveRecord
             [['NUMERO', 'ID_MATERIA', 'CARGA_HORARIA_SEMANAL', 'ID_Ciclo'], 'integer'],
             [['ID_MATERIA', 'NUMERO'], 'required'],
             [['ID_MATERIA'], 'exist', 'skipOnError' => true, 'targetClass' => Materia::className(), 'targetAttribute' => ['ID_MATERIA' => 'ID']],
-            //[['ID_Ciclo'], 'exist', 'skipOnError' => true, 'targetClass' => CicloLectivo::className(), 'targetAttribute' => ['ID_Ciclo' => 'id']],
+            [['ID_Ciclo'], 'exist', 'skipOnError' => true, 'targetClass' => CicloLectivo::className(), 'targetAttribute' => ['ID_Ciclo' => 'id']],
+            [['ID_Turno'], 'exist', 'skipOnError' => true, 'targetClass' => Turno::className(), 'targetAttribute' => ['ID_Turno' => 'ID']],
         ];
     }
 
@@ -77,6 +80,14 @@ class Comision extends \yii\db\ActiveRecord
     public function getCiclo()
     {
         return $this->hasOne(CicloLectivo::className(), ['id' => 'ID_Ciclo']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTurno()
+    {
+        return $this->hasOne(Turno::className(), ['ID' => 'ID_Turno']);
     }
 
     /**

@@ -33,12 +33,13 @@ class LoginForm extends Model
         ];
     }
 
-    public function label()
+    public function attributeLabels()
     {
         return[
-            ['username', 'usuario'],
-            ['password', 'contraseña']
-        ];
+            'username' => 'Usuario',
+            'password' => 'Contraseña',
+            'rememberMe' => 'Recuerdame'
+        ];   
     }
 
     /**

@@ -53,6 +53,7 @@ $this->registerCssFile("@web/css/index.css", [
 
 .ingreso{
   padding: 64px;
+  width: 100%;
   justify-self:end;
 }
 
@@ -148,8 +149,7 @@ $this->registerCssFile("@web/css/index.css", [
       <img src="../image/9.png" alt="New York" class="image" style="height:100vh; width:100%;">
       <div class="carousel-caption">
           <h1 style="text-shadow: 1px 1px 4px #000"><strong>¿Necesitas ayuda?</strong></h2>
-          <h4 style="text-shadow: 0px 0px 8px #000">Consulta el manual de usuario</h4>
-          <h5><a href="../site/manual" style="color:white; text-decoration:underline; text-shadow: 0px 0px 4px #000" >Aquí</a></h4>
+          <h4 style="text-shadow: 0px 0px 8px #000">Consulta el manual de usuario <a href="../site/manual" style="color:white; text-decoration:underline; text-shadow: 0px 0px 4px #000" >aquí</a></h4>
         </div>
     </div>
     
