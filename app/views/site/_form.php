@@ -21,25 +21,26 @@ $form = ActiveForm::begin(
 );
 echo '<div class= "col-md-8" style="margin-top:20px">'
 ?>
-	<?php $result = ArrayHelper::map($usuarios, 'id', 'username');?>
-    <?php echo $form->field($model, 'ID_USER_RECEPTOR', ['labelOptions'=>['style'=>'color:white']])->widget(Select2::className(), [
+<?php $result = ArrayHelper::map($usuarios, 'id', 'username'); ?>
+<?php echo $form->field($model, 'ID_USER_RECEPTOR', ['labelOptions' => ['style' => 'color:white']])->widget(Select2::className(), [
 	'data' => $result,
-	"options" => ['multiple' => true,
+	"options" => [
+		'multiple' => true,
 		'placeholder' => 'Seleccione un usuario...',
 	],
 ])->label('Usuario receptor');
 
 ?>
-   <?=$form->field($model, 'NOTIFICACION', ['labelOptions'=>['style'=>'color:white']])->widget(CKEditor::className(), [
+<?= $form->field($model, 'NOTIFICACION', ['labelOptions' => ['style' => 'color:white']])->widget(CKEditor::className(), [
 	'options' => ['rows' => 6],
-	'preset' => 'advanced',
-])->label('Notificacion');?>
-    <div class="form-group">
-        <div class="float-right">
-            <?=Html::submitButton('Enviar', ['class' => "btn btn-primary mb1 bg-blue"])?>
-        </div>
-    </div>
+	'preset' => 'basic',
+])->label('Notificacion'); ?>
+<div class="form-group">
+	<div class="float-right">
+		<?= Html::submitButton('Enviar', ['class' => "btn btn-primary btn-lg", 'style' => "width: 100%"]) ?>
+	</div>
+</div>
 
-    <?php ActiveForm::end();?>
+<?php ActiveForm::end(); ?>
 
 </div>
