@@ -18,8 +18,12 @@ use Yii;
  * @property int $ID_UModifica
  * @property int $ID_Carrera
  * @property int $EXAMEN_FINAL
+ * @property int $ID_Instituto
+ * @property int $ID_Materia
  * @property Aula $aula
  * @property Carrera $carrera
+ * @property Materia $materia
+ * @property Instituto $instituto
  * @property Users $uCrea
  * @property Users $uModifica
  */
@@ -39,13 +43,15 @@ class EspecialCalendar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ID_Aula', 'ID_UCrea', 'ID_UModifica', 'ID_Carrera','EXAMEN_FINAL'], 'integer'],
-            [['momento'], 'safe'],
+            [['ID_Aula', 'ID_UCrea', 'ID_UModifica', 'ID_Carrera'], 'integer'],
+            [['momento', 'EXAMEN_FINAL'], 'safe'],
             [['inicio', 'fin'], 'string', 'max' => 30],
             [['nombre'], 'string', 'max' => 100],
             [['descripcion'], 'string', 'max' => 180],
             [['ID_Aula'], 'exist', 'skipOnError' => true, 'targetClass' => Aula::className(), 'targetAttribute' => ['ID_Aula' => 'ID']],
             [['ID_Carrera'], 'exist', 'skipOnError' => true, 'targetClass' => Carrera::className(), 'targetAttribute' => ['ID_Carrera' => 'ID']],
+            [['ID_Instituto'], 'exist', 'skipOnError' => true, 'targetClass' => Instituto::className(), 'targetAttribute' => ['ID_Instituto' => 'ID']],
+            [['ID_Materia'], 'exist', 'skipOnError' => true, 'targetClass' => Materia::className(), 'targetAttribute' => ['ID_Materia' => 'ID']],
             [['ID_UCrea'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['ID_UCrea' => 'id']],
             [['ID_UModifica'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['ID_UModifica' => 'id']],
         ];
@@ -58,15 +64,18 @@ class EspecialCalendar extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'ID_Aula' => 'Id  Aula',
+            'ID_Aula' => 'Aula',
+            'EXAMEN_FINAL' => 'Es examen final',
             'inicio' => 'Inicio',
             'fin' => 'Fin',
             'nombre' => 'Nombre',
             'descripcion' => 'Descripcion',
             'momento' => 'Momento',
-            'ID_UCrea' => 'Id  Ucrea',
-            'ID_UModifica' => 'Id  Umodifica',
-            'ID_Carrera' => 'Id  Carrera',
+            'ID_UCrea' => 'Creador',
+            'ID_UModifica' => 'Ultimo en modificar',
+            'ID_Materia' => 'Materia',
+            'ID_Instituto' => 'Instituto',
+            'ID_Carrera' => 'Carrera',
         ];
     }
 
@@ -77,6 +86,23 @@ class EspecialCalendar extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Aula::className(), ['ID' => 'ID_Aula']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInstituto()
+    {
+        return $this->hasOne(Instituto::className(), ['ID' => 'ID_Instituto']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMateria()
+    {
+        return $this->hasOne(Materia::className(), ['ID' => 'ID_Materia']);
+    }
+
 
     /**
      * @return \yii\db\ActiveQuery

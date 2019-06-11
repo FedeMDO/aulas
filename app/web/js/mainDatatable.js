@@ -1,3 +1,29 @@
+$('#btnBuscarFinales').click(function () {
+    let idCarrera = $('#carrera-id option:selected').text();
+    let from = $('#dynamicmodel-fecha_desde').val();
+    let to = $('#dynamicmodel-fecha_hasta').val();
+    if (idCarrera != "Seleccione...") {
+        $('#OfertaFinales').DataTable().clear();
+        $('#OfertaFinales').DataTable().destroy();
+        var url = "/carrera/ofertaexamenbyparams?strCarrera=" + idCarrera + "&from=" + from + "&to=" + to;
+
+        $('#OfertaFinales').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
+            "ajax": url,
+
+            columnDefs: [
+                {
+                    targets: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                    className: 'dt-center'
+                }
+            ]
+        });
+    }
+})
+
 $('#btnBuscar').click(function () {
     let idCarrera = $('#carrera-id option:selected').text();
     let idCiclo = parseInt($('#ciclolectivo-id').val());
@@ -25,11 +51,21 @@ $('#btnBuscar').click(function () {
 
 $(".form-control").change(function (e) {
     e.preventDefault();
-    if($("#instituto-id").val() == "" || $("#carrera-id").val() == "" || $("#ciclolectivo-id").val() == ""){
-        $("#btnBuscar").attr("disabled", true);
+    if($("#example").length){
+        if($("#instituto-id").val() == "" || $("#carrera-id").val() == "" || $("#ciclolectivo-id").val() == ""){
+            $("#btnBuscar").attr("disabled", true);
+        }
+        else{
+            $("#btnBuscar").attr("disabled", false);
+        }
     }
-    else{
-        $("#btnBuscar").attr("disabled", false);
+    else if($("#OfertaFinales").length){
+        if($("#instituto-id").val() == "" || $("#carrera-id").val() == ""){
+            $("#btnBuscarFinales").attr("disabled", true);
+        }
+        else{
+            $("#btnBuscarFinales").attr("disabled", false);
+        }
     }
 });
 

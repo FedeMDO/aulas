@@ -125,6 +125,7 @@ li.dropdown:nth-child(2) > a:nth-child(1){
                     'items' => [
                         ['label' => '<span></span> Informacion de carreras', 'url' => '/carrera/carrerav'],
                         ['label' => '<span> Oferta academica', 'url' => '/carrera/ofertaacademica'],
+                        ['label' => '<span> Oferta de examenes', 'url' => '/carrera/ofertaexamenes'],
                     ],
                 ],
                 [

@@ -11,9 +11,6 @@ use yii\jui\DatePicker;
 /* @var $model app\models\EspecialCalendar */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
-
-
 <div class="evento-calendar-form">
     <div class='loginc azul'>
         <?php $modelHelper = new \yii\base\DynamicModel(['fecha_inicio',  'hora_inicio', 'hora_fin']);
@@ -24,21 +21,62 @@ use yii\jui\DatePicker;
             ]
         ]);
         $resultCarr = ArrayHelper::map($carreras, 'ID', 'NOMBRE');
+        $resultInst = ArrayHelper::map($institutos, 'ID', 'NOMBRE');
         ?>
         <h1>Crear evento calendario </h1>
 
         <?= $form->field($model, 'nombre', ['labelOptions' => ['style' => 'color:white']])->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'EXAMEN_FINAL', ['options' =>['tag' => 'div','class' => 'checkbox icheck', 'style' => 'padding-bottom:10px']])->checkbox(['label' => 'Es examen final']); ?>
         <?= $form->field($model, 'descripcion', ['labelOptions' => ['style' => 'color:white']])->textInput(['maxlength' => true]) ?>
+
+        <?php if (app\models\User::isUserAdmin(Yii::$app->user->identity->id)) : ?>
+            <?php echo $form->field($model, 'ID_Instituto', ['labelOptions' => ['style' => 'color:white']])->dropDownList(
+                $resultInst,
+                [
+                    'prompt' => 'Seleccionar',
+                    'onchange' => '
+				$.post( "' . Yii::$app->urlManager->createUrl('comision/listcarrera?id=') . '"+$(this).val(), function( data ) {
+                  if(data){
+                    $( "select#especialcalendar-id_carrera" ).html( data );
+                    $("select#especialcalendar-id_carrera").prop("selectedIndex", 0).change();
+                  }
+				});
+            '
+                ]
+            )->label('Instituto'); ?>
+        <?php endif; ?>
 
         <?php echo $form->field($model, 'ID_Carrera', ['labelOptions' => ['style' => 'color:white']])->dropDownList(
             $resultCarr,
             [
-                'prompt' => 'Seleccionar'
+                'prompt' => 'Seleccionar',
+                'onchange' => '
+				$.post( "' . Yii::$app->urlManager->createUrl('evento/listmateria?id=') . '"+$(this).val(), function( data ) {
+                  if(data){
+                    $( "select#especialcalendar-id_materia" ).html( data );
+                    $("select#especialcalendar-id_materia").prop("selectedIndex", 0).change();
+                  }
+				});
+            '
             ]
         )->label('Carrera'); ?>
 
+        <?php echo $form->field($model, 'ID_Materia', ['labelOptions' => ['style' => 'color:white']])->dropDownList(
+            array(),
+            [
+                'prompt' => 'Seleccionar'
+            ]
+        )->label('Materia'); ?>
+
+        <?= $form->field(
+            $model,
+            'EXAMEN_FINAL',
+            [
+                'options' =>
+                ['tag' => 'div', 'class' => 'checkbox icheck',['labelOptions' => ['style' => 'color:white']], 'style' => 'padding-bottom:15px']
+            ]
+        )
+            ->checkbox(['label' => 'Es examen final']); ?>
 
         <?php $diasdelasemana = [
             '1' => 'Lunes',
@@ -93,3 +131,19 @@ use yii\jui\DatePicker;
 
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $("#especialcalendar-examen_final").attr("disabled", true);
+        $("#especialcalendar-id_materia").change(function() {
+            if ($("#especialcalendar-id_materia").val() && $("#especialcalendar-id_materia option:selected").text() != "-") {
+                $("#especialcalendar-examen_final").removeAttr("disabled");
+            }
+            else{
+                $("#especialcalendar-examen_final").prop('checked', false);
+                $("#especialcalendar-examen_final").attr("disabled", true);
+            }
+        })
+    })
+
+</script>

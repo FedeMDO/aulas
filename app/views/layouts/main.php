@@ -135,6 +135,7 @@ li.dropdown:nth-child(2) > a:nth-child(1){
                         'items' => [
                             ['label' => '<span></span> Informacion de carreras', 'url' => '/carrera/carrerav'],
                             ['label' => '<span> Oferta academica', 'url' => '/carrera/ofertaacademica'],
+                            ['label' => '<span> Oferta de examenes', 'url' => '/carrera/ofertaexamenes'],
                         ],
                     ],
                     [
@@ -185,6 +186,7 @@ li.dropdown:nth-child(2) > a:nth-child(1){
                         'items' => [
                             ['label' => '<span></span> Informacion de carreras', 'url' => '/carrera/carrerav'],
                             ['label' => '<span> Oferta academica', 'url' => '/carrera/ofertaacademica'],
+                            ['label' => '<span> Oferta de examenes', 'url' => '/carrera/ofertaexamenes'],
                         ],
                     ],
                     ['label' => Html::tag('span', '', ['class' => 'glyphicon glyphicon-chevron-right']) . ' CREAR COMISION', 'url' => ['/comision/create'], 'options' => ['style' => 'font-weight: bold;']],
@@ -194,6 +196,7 @@ li.dropdown:nth-child(2) > a:nth-child(1){
                 'encodeLabels' => false,
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
+                    ['label' => Html::dropDownList('ciclo', null, $resultCiclos, ['class' => 'cambiarCiclo', 'id' => 'ddlCicloID']),'options' => ['class' => 'styled-select'],],
                     ['label' => Html::tag('span', '', ['class' => 'fa fa-bell']) .  '<span class="badge"' . "style=" . $display . ">  $contador   </span>" . '</span>', 'url' => ['/site/noti'], 'options' => ['style' => 'font-weight: bold; font-size:20px']],
                     Yii::$app->user->isGuest ? (['label' => Html::button('<i class="glyphicon glyphicon-log-in"></i> INGRESAR', ['value' => Url::to('/site/login2'), 'class' => 'btn btn-add-al', 'id' => 'modalLogin', 'style' => 'position:relative; top:-8px; font-weight: bold; background-color: Transparent;'])]) :
                         [

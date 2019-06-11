@@ -14,6 +14,7 @@ use app\models\Users;
 use app\models\User;
 use app\models\Aula;
 use app\models\Sede;
+use app\models\Instituto;
 
 /**
  * EspecialcalendarController implements the CRUD actions for EspecialCalendar model.
@@ -70,14 +71,13 @@ class EspecialcalendarController extends Controller
      */
     public function actionCreate($id_aula, $sch = NULL)
     {
-
         $materia = new Materia();
         $carrera = new Carrera();
+        $instituto = new Instituto();
         $model = new EspecialCalendar();
         $model->ID_UCrea = Yii::$app->user->identity->id;
         $model->ID_UModifica = Yii::$app->user->identity->id;
         $r = Yii::$app->request;
-
         if ($model->load(Yii::$app->request->post())) {
             $dynmodel = $r->post('DynamicModel');
             $model->inicio = $dynmodel['fecha_inicio'] . 'T' . $dynmodel['hora_inicio'];
@@ -92,7 +92,7 @@ class EspecialcalendarController extends Controller
                 }
                 
             } else {
-                return $this->renderAjax('create', ['model' => $model, 'materia' => $materia, 'carrera' => $carrera]);
+                return $this->renderAjax('create', ['model' => $model, 'materia' => $materia, 'carrera' => $carrera, 'instituto' => $instituto ]);
             }
         }
 

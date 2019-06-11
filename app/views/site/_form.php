@@ -37,7 +37,7 @@ echo '<div class= "col-md-8" style="margin-top:20px">'
 ])->label('Notificacion'); ?>
 <div class="form-group">
 	<div class="float-right">
-		<?= Html::submitButton('Enviar', ['class' => "btn btn-primary btn-lg", 'style' => "width: 100%"]) ?>
+		<?= Html::submitButton('Enviar', ['class' => "btn btn-primary btn-lg"]) ?>
 	</div>
 </div>
 

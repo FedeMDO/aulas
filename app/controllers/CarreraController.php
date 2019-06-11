@@ -6,17 +6,13 @@ use Yii;
 use app\models\Carrera;
 use app\models\CarreraSearch;
 use app\models\OfertaAcademica;
+use app\models\OfertaAcademicaFinales;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\User;
 use yii\data\Pagination;
-use app\models\EventoCalendar;
-use app\models\EspecialCalendar;
-use app\models\Instituto;
-use app\models\Users;
-use app\models\CicloLectivo;
 
 /**
  * CarreraController implements the CRUD actions for Carrera model.
@@ -77,6 +73,13 @@ class CarreraController extends Controller
         );
     }
 
+    public function actionOfertaexamenes()
+    {
+        return $this->render(
+            'ofertaexamenes'
+        );
+    }
+
     private function sumarHoras($array)
     {
         $resultado = 0;
@@ -84,6 +87,49 @@ class CarreraController extends Controller
             $resultado += $e;
         }
         return $resultado;
+    }
+
+    public function actionOfertaexamenbyparams($from = false, $to = false, $strCarrera)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $niceFrom = ($from === "" || $from === false) ? "1111-11-11" : $from;
+        $niceTo = ($to === "" || $to === false) ? "9999-99-99" : $to;
+        $obj = array();
+        $oferta = OfertaAcademicaFinales::find()
+            ->where(["Carrera" => $strCarrera])
+            ->andWhere("Fecha>=:from")
+            ->andWhere("Fecha<=:to")
+            ->addParams([":from" => $niceFrom, ":to" => $niceTo])
+            ->all();
+
+        $dias = array(
+            0 => "Domingo",
+            1 => "Lunes",
+            2 => "Martes",
+            3 => "Miércoles",
+            4 => "Jueves",
+            5 => "Viernes",
+            6 => "Sabado",
+        );
+
+        if (!empty($oferta)) {
+            foreach ($oferta as $row) {
+                unset($rowData);
+                $rowData[] = $row->Carrera;
+                $rowData[] = $row->Final;
+                $rowData[] = $row->Descripcion;
+                $rowData[] = $row->Fecha;
+                $rowData[] = $row->Inicio;
+                $rowData[] = $row->Fin;
+                $rowData[] = $row->Sede;
+                $rowData[] = $row->Edificio;
+                $rowData[] = $row->Aula;
+                $obj["data"][] = $rowData;
+            }
+        } else {
+            $obj["data"] = array();
+        }
+        return (object)$obj;
     }
 
     public function actionOfertabyparams($idCiclo, $strCarrera)

@@ -148,6 +148,22 @@ $this->title = 'Notificaciones';
 
     <!-- script para sidebar -->
     <script type="text/javascript">
+        $(document).ready(function() {
+            var url = $(location).attr('href');
+            if (url.includes('#enviadas')) {
+                $("#enviadas").click();
+            }
+            if (url.includes('#enviar')) {
+                $('#enviar').click();
+            } else {
+                $("#defaultOpen").click();
+            }
+
+            $('#sidebarCollapse').on('click', function() {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+
         function openCity(evt, cityName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabcontent");
