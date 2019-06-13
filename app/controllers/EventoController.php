@@ -9,6 +9,7 @@ use app\models\Sede;
 use app\models\Comision;
 use app\models\Carrera;
 use app\models\Users;
+use app\models\Actividad;
 use app\models\User;
 use app\models\Instituto;
 use app\models\Materia;
@@ -82,6 +83,7 @@ class EventoController extends Controller
         $materia = new Materia();
         $carrera = new Carrera();
         $instituto = new Instituto();
+        $actividad = new Actividad();
         $model = new EventoCalendar();
         $model->ID_User_Asigna = Yii::$app->user->identity->id;
         $model->ID_UModifica = Yii::$app->user->identity->id;
@@ -92,6 +94,15 @@ class EventoController extends Controller
             $model->ID_Instituto = $institutoID;
             $model->ID_Ciclo = $ciclo;
             $model->ID_Aula = $id_aula;
+            //guardo registro de la actividad
+            $request = $_POST['EventoCalendar'];
+            $ini = $request["Hora_ini"];;
+            $fin = $request["Hora_fin"];;
+            $actividad->ID_USUARIO = Yii::$app->user->identity->id;
+            $actividad->ACCION = "creó el evento para ".$model->comision->mATERIA->NOMBRE." comisión ".$model->comision->NUMERO." de ".substr($ini, 0, 2)." a ".substr($fin,0,2)." hs";
+            $actividad->USER_REALIZA = Yii::$app->user->identity->username;
+            $actividad->ID_AULA = $id_aula;
+            $actividad->save();
             if ($model->save()) {
                 if($sch === "false")
                 {
