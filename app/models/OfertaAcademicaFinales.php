@@ -9,7 +9,7 @@ use Yii;
  *
  * @property string $ID
  * @property string $Carrera
- * @property string $Final
+ * @property string $Nombre
  * @property string $Descripcion
  * @property string $Fecha
  * @property string $Inicio
@@ -37,7 +37,7 @@ class OfertaAcademicaFinales extends \yii\db\ActiveRecord
             [['ID'], 'integer'],
             [['Carrera', 'Aula', 'Edificio', 'Sede'], 'required'],
             [['Carrera', 'Aula', 'Edificio'], 'string', 'max' => 40],
-            [['Final'], 'string', 'max' => 100],
+            [['Nombre'], 'string', 'max' => 100],
             [['Descripcion'], 'string', 'max' => 180],
             [['Fecha'], 'string', 'max' => 10],
             [['Inicio', 'Fin'], 'string', 'max' => 7],
@@ -53,7 +53,7 @@ class OfertaAcademicaFinales extends \yii\db\ActiveRecord
         return [
             'ID' => 'ID',
             'Carrera' => 'Carrera',
-            'Final' => 'Final',
+            'Nombre' => 'Nombre',
             'Descripcion' => 'Descripcion',
             'Fecha' => 'Fecha',
             'Inicio' => 'Inicio',

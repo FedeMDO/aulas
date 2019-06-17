@@ -9,15 +9,21 @@ use yii\jui\DatePicker;
 use app\models\Instituto;
 /* @var $this yii\web\View */
 /* @var $model app\models\EspecialCalendar */
+
 $this->params['breadcrumbs'][] = ['label' => 'Especial Calendars', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+if (User::isUserAdmin(Yii::$app->user->identity->id)) {
+    $carreras = (Yii::$app->user->identity->idInstituto != null) 
+        ? Users::findOne(Yii::$app->user->identity->id)->instituto->carreras 
+        : array();
+} else {
+    $carreras = (Yii::$app->user->identity->idInstituto != null) 
+        ? Users::findOne(Yii::$app->user->identity->id)->instituto->carreras 
+        : Carrera::find()->asArray()->all();
+}
+
 $carrera = new Carrera();
-if (!User::isUserAdmin(Yii::$app->user->identity->id)){
-    $carreras = Users::findOne(Yii::$app->user->identity->id)->instituto->carreras;
-}
-else{
-    $carreras = array();
-}
 $instituto = new Instituto();
 $institutos = Instituto::find()->asArray()->all();
 
@@ -27,7 +33,7 @@ $institutos = Instituto::find()->asArray()->all();
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
-        'model' => $model,'materia' => $materia, 'carrera' => $carrera, 'carreras' => $carreras,
+        'model' => $model, 'materia' => $materia, 'carrera' => $carrera, 'carreras' => $carreras,
         'instituto' => $instituto, 'institutos' => $institutos,
     ]) ?>
 

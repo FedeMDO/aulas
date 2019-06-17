@@ -20,7 +20,7 @@ use yii\jui\DatePicker;
                 'id' => 'crear-evento-form'
             ]
         ]);
-        $resultCarr = ArrayHelper::map($carreras, 'ID', 'NOMBRE');
+        $resultCarr = (!empty($carreras > 0)) ? ArrayHelper::map($carreras, 'ID', 'NOMBRE') : array();
         $resultInst = ArrayHelper::map($institutos, 'ID', 'NOMBRE');
         ?>
         <h1>Crear evento calendario </h1>

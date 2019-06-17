@@ -124,7 +124,7 @@ $form = ActiveForm::begin([
             <table id="OfertaFinales" class="table table-striped table-bordered hover" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Carrera</th>
+                        <th>Materia</th>
                         <th>Final</th>
                         <th>Descripcion</th>
                         <th>Fecha</th>

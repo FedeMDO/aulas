@@ -115,8 +115,8 @@ class CarreraController extends Controller
         if (!empty($oferta)) {
             foreach ($oferta as $row) {
                 unset($rowData);
-                $rowData[] = $row->Carrera;
-                $rowData[] = $row->Final;
+                $rowData[] = $row->Materia;
+                $rowData[] = $row->Nombre;
                 $rowData[] = $row->Descripcion;
                 $rowData[] = $row->Fecha;
                 $rowData[] = $row->Inicio;

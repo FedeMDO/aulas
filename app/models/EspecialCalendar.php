@@ -45,6 +45,7 @@ class EspecialCalendar extends \yii\db\ActiveRecord
         return [
             [['ID_Aula', 'ID_UCrea', 'ID_UModifica', 'ID_Carrera'], 'integer'],
             [['momento', 'EXAMEN_FINAL'], 'safe'],
+            ['nombre', 'required'],
             [['inicio', 'fin'], 'string', 'max' => 30],
             [['nombre'], 'string', 'max' => 100],
             [['descripcion'], 'string', 'max' => 180],
