@@ -23,6 +23,7 @@ use app\models\EventoCalendarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\Pagination;
 use DateTime;
 use DatePeriod;
 use DateInterval;
@@ -54,9 +55,20 @@ class EventoController extends Controller
     public function actionIndex($id)
     {
         $aula = Aula::findOne($id);
+        $actividades = Actividad::find()->where(['ID_AULA' => $id]);
+        $pagination = new Pagination([
+            'defaultPageSize' => 20,
+            'totalCount' => $actividades->count(),
+        ]);
+
+        $act = $actividades->orderBy(['MOMENTO' => SORT_DESC])
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
         return $this->render('index', [
             'id_aula' => $id,
             'aula' => $aula,
+            'actividades' => $act
         ]);
     }
 
@@ -96,10 +108,12 @@ class EventoController extends Controller
             $model->ID_Aula = $id_aula;
             //guardo registro de la actividad
             $request = $_POST['EventoCalendar'];
-            $ini = $request["Hora_ini"];;
-            $fin = $request["Hora_fin"];;
+            $ini = $request["Hora_ini"];
+            $fin = $request["Hora_fin"];
+            $dow = $request["dow"];
+            $dias_semana = [1 => "lunes", 2 => "martes", 3 => "miércoles", 4 => "jueves", 5 => "viernes", 6 => "sabado"];
             $actividad->ID_USUARIO = Yii::$app->user->identity->id;
-            $actividad->ACCION = "creó el evento para ".$model->comision->mATERIA->NOMBRE." comisión ".$model->comision->NUMERO." de ".substr($ini, 0, 2)." a ".substr($fin,0,2)." hs";
+            $actividad->ACCION = "creó el evento ".$model->comision->mATERIA->NOMBRE." comisión ".$model->comision->NUMERO." el ".$dias_semana[$dow]." de ".substr($ini, 0, 2)." a ".substr($fin,0,2)." hs";
             $actividad->USER_REALIZA = Yii::$app->user->identity->username;
             $actividad->ID_AULA = $id_aula;
             $actividad->save();
@@ -146,11 +160,18 @@ class EventoController extends Controller
     public function actionUpd()
     {
         $request = Yii::$app->request;
+        $dias_semana = [1 => "lunes", 2 => "martes", 3 => "miércoles", 4 => "jueves", 5 => "viernes", 6 => "sabado"];
         $evento = $this->findModel($request->post('id'));
         $evento->dow = $request->post('dow');
         $evento->Hora_ini = substr($request->post('ini'), -8);
         $evento->Hora_fin = substr($request->post('fin'), -8);
         $evento->ID_UModifica = Yii::$app->user->identity->id;
+        $actividad = new Actividad();
+        $actividad->ACCION = "modificó el evento ".$evento->comision->mATERIA->NOMBRE." comisión ".$evento->comision->NUMERO.". Ahora  es el ".$dias_semana[$evento->dow]." de ".substr($evento->Hora_ini, 0, 2)." a ".substr($evento->Hora_fin,0,2)." hs";
+        $actividad->ID_USUARIO = $evento->ID_UModifica;
+        $actividad->USER_REALIZA = Yii::$app->user->identity->username;
+        $actividad->ID_AULA = $evento->ID_Aula;
+        $actividad->save();
         if ($evento->save()) {
             echo ("Actualizacion exitosa");
         }
@@ -181,9 +202,19 @@ class EventoController extends Controller
     public function actionDelete()
     {
         $request = Yii::$app->request;
-        $this->findModel($request->post('id'))->delete();
+        $evento = $this->findModel($request->post('id'));
+        $dias_semana = [1 => "lunes", 2 => "martes", 3 => "miércoles", 4 => "jueves", 5 => "viernes", 6 => "sabado"];
+        $dow = $evento->dow;
+        $ini = $evento->Hora_ini;
+        $fin = $evento->Hora_fin;
+        $actividad = new Actividad();
+        $actividad->ACCION = "borró el evento ".$evento->comision->mATERIA->NOMBRE." comisión ".$evento->comision->NUMERO." el ".$dias_semana[$dow]." de ".substr($ini, 0, 2)." a ".substr($fin,0,2)." hs";
+        $actividad->ID_USUARIO = Yii::$app->user->identity->id;
+        $actividad->USER_REALIZA = Yii::$app->user->identity->username;
+        $actividad->ID_AULA = $evento->ID_Aula;
+        $actividad->save();
+        $evento->delete();
         $id_aula = $request->post('id_aula');
-
         if ($request->post('scheduler') == 1) {
             $id_sede = $request->post('id_sede');
             return $this->redirect(['edificio/scheduler', 'id_sede' => $id_sede]);

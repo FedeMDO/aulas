@@ -195,11 +195,15 @@ $indexMaterias = 1;
                         <div class="panel-heading">
                             <h3 class="panel-title" style="text-align:center">Actividad</h3>
                         </div>
-                        <div class="panel-body" style="font-size:0.75em">
+                        <div class="panel-body" style="font-size:0.75em; max-height: 495px; overflow-y: scroll;">
                             <ul>
-                                <li>24/04/2019 19:42 - Algo que hicieron</li>
+                               <!-- <li>24/04/2019 19:42 - Algo que hicieron</li>
                                 <li>20/04/2019 15:33 - Otra cosa que hicieron</li>
-                                <li>11/04/2019 08:50 - Algo habrán hecho</li>
+                                <li>11/04/2019 08:50 - Algo habrán hecho</li> -->
+                                <?php foreach ($actividades as $actividad): ?>
+                                <?php $fecha = DateTime::createFromFormat('Y-m-d H:i:s', $actividad->MOMENTO); ?>
+                                    <li><?= Html::encode("{$fecha->format('d-m-Y H:i')}")?> - <?= Html::encode($actividad->USER_REALIZA) ." ". Html::encode($actividad->ACCION)?></li>
+                                <?php endforeach; ?>
                             </ul>
                         </div>
                     </div>
