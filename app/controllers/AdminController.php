@@ -19,6 +19,7 @@ use yii\data\Pagination;
 use app\models\Notificacion;
 use yii\base\Exception;
 use app\models\Instituto;
+use app\models\Aula;
 use app\models\EventoCalendar;
 use app\models\EspecialCalendar;
 use app\models\CicloLectivo;
@@ -181,8 +182,9 @@ class AdminController extends Controller
                     break;
             }
         }
+        
 
-        // REPORTE PORCENTAJE POR INSTITUTO
+        // REPORTE PORCENTAJE TOTAL POR INSTITUTO
         $porcentajePorInstitutoComision = array();
         $porcentajePorInstitutoEspecial = array();
         $institutos = Instituto::find()->all();
@@ -235,6 +237,90 @@ class AdminController extends Controller
                 }
             }
             $porcentajePorInstitutoEspecial[] = $otrosEspe;
+        }
+
+        // REPORTE PORCENTAJE POR INSTITITUTO POR DIA
+        // OBTENER HORAS TOTALES PARA EL CICLO (Hora por aula es 22-8 = 14hs)
+        $cantHorasPorDia = sizeof(Aula::find()->all()) * 14;
+        $resulta2 = array();
+        foreach($institutos as $ins){
+            $insArray = array(
+                "Lunes" => 0,
+                "Martes" => 0,
+                "Miercoles" => 0,
+                "Jueves" => 0,
+                "Viernes" => 0,
+                "Sabado" => 0,
+            );
+            $colors[$ins->NOMBRE] = $ins->COLOR_HEXA;
+            foreach($ins->carreras as $carr){
+
+                // por dia
+                foreach($carr->materias as $mat){
+                    foreach($mat->comisions as $comi){
+                        foreach ($comi->eventoCalendars as $event) {
+                            switch ($event->dow) {
+                                case 1:
+                                    $hora_fin_int = intval(substr($event->Hora_fin, 0, 2));
+                                    $hora_ini_int = intval(substr($event->Hora_ini, 0, 2));
+                                    $insArray["Lunes"] += $hora_fin_int - $hora_ini_int;
+                                    break;
+                                case 2:
+                                    $hora_fin_int = intval(substr($event->Hora_fin, 0, 2));
+                                    $hora_ini_int = intval(substr($event->Hora_ini, 0, 2));
+                                    $insArray["Martes"] += $hora_fin_int - $hora_ini_int;
+                                    break;
+                                case 3:
+                                    $hora_fin_int = intval(substr($event->Hora_fin, 0, 2));
+                                    $hora_ini_int = intval(substr($event->Hora_ini, 0, 2));
+                                    $insArray["Miercoles"] += $hora_fin_int - $hora_ini_int;
+                                    break;
+                                case 4:
+                                    $hora_fin_int = intval(substr($event->Hora_fin, 0, 2));
+                                    $hora_ini_int = intval(substr($event->Hora_ini, 0, 2));
+                                    $insArray["Jueves"] += $hora_fin_int - $hora_ini_int;
+                                    break;
+                                case 5:
+                                    $hora_fin_int = intval(substr($event->Hora_fin, 0, 2));
+                                    $hora_ini_int = intval(substr($event->Hora_ini, 0, 2));
+                                    $insArray["Viernes"] += $hora_fin_int - $hora_ini_int;
+                                    break;
+                                case 6:
+                                    $hora_fin_int = intval(substr($event->Hora_fin, 0, 2));
+                                    $hora_ini_int = intval(substr($event->Hora_ini, 0, 2));
+                                    $insArray["Sabado"] += $hora_fin_int - $hora_ini_int;
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+            $resulta2[$ins->NOMBRE] = $insArray;
+        }
+        $colors["LIBRE"] = "grey";
+        $resulta2["LIBRE"] = array(
+            "Lunes" => $cantHorasPorDia,
+            "Martes" => $cantHorasPorDia,
+            "Miercoles" => $cantHorasPorDia,
+            "Jueves" => $cantHorasPorDia,
+            "Viernes" => $cantHorasPorDia,
+            "Sabado" => $cantHorasPorDia,
+        );
+        // Agrego tiempo ocioso
+        foreach ($resulta2 as $k1 => $insArray) {
+            // REGLA DE 3 $cantHorasPorDia => 100%
+            if ($k1 != "LIBRE") {
+                foreach ($insArray as $k => $v) {
+                    $resulta2["LIBRE"][$k] -= $v;
+                    // Lo paso a porcentaje
+                }
+            }
+        }
+
+        foreach($resulta2 as &$k){
+            foreach($k as &$v){
+                $v = ($v * 100) / $cantHorasPorDia;
+            }
         }
 
         // REPORTE ACTIVIDAD DE LOS USUARIOS CREANDO
@@ -297,7 +383,9 @@ class AdminController extends Controller
                 'porcentajePorInstitutoComision' => $porcentajePorInstitutoComision,
                 'porcentajePorInstitutoEspecial' => $porcentajePorInstitutoEspecial,
                 'actividadCreando' => $actividadCreando,
-                'actividadModificando' => $actividadModificando
+                'actividadModificando' => $actividadModificando,
+                'porcentajePorDiaPorInstituto' => $resulta2,
+                'colors' => $colors
             ]
         );
 

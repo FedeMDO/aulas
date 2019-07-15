@@ -60,26 +60,19 @@ $resultIns = ArrayHelper::map($institutos, 'ID', 'NOMBRE');
         }
     }
 </style>
-<?php $form = ActiveForm::begin([
-    'layout' => 'horizontal',
-    'fieldConfig' => [
-        'horizontalCssClasses' => [
-            'label' => 'col-md-2',
-            'wrapper' => 'col-sm-9',
-        ],
-    ],
-]); ?>
+
 <?php $modelHelper = new \yii\base\DynamicModel(['fecha_desde',  'fecha_hasta']);
 $form = ActiveForm::begin([
     'options' => [
-        'id' => 'crear-evento-form'
+        'id' => 'crear-evento-form',
+        'class' => 'form-inline'
     ]
 ]);
 ?>
 
 <div class="col-md-offset-1 col-md-10">
-    <div class="row">
-        <div class="col-sm-4">
+    <div class="row" style="text-align:right">
+        <div class="form-group">
             <?php echo $form->field($instituto, 'ID', ['labelOptions' => ['style' => 'color:white !important']])->dropDownList(
                 $resultIns,
                 [
@@ -87,33 +80,34 @@ $form = ActiveForm::begin([
                     'onchange' => '
                             $.post( "' . Yii::$app->urlManager->createUrl('comision/listcarrera?id=') . '"+$(this).val(), function( data ) {
                             $( "select#carrera-id" ).html( data );
+                            $("select#carrera-id").change();
                             });'
                 ]
             )->label('Instituto'); ?>
         </div>
-        <div class="col-sm-4">
+        <div class="form-group">
             <?php echo $form->field($carrera, 'ID', ['labelOptions' => ['style' => 'color:white !important']])->dropDownList(
                 array(),
                 ['prompt' => 'Seleccione...']
             )->label('Carrera'); ?>
         </div>
-        <div class="col-xs-3">
+        <div class="form-group">
             <?= $form->field($modelHelper, 'fecha_desde', ['labelOptions' => ['style' => 'color:white']])->widget(\yii\jui\DatePicker::class, [
                 'language' => 'es',
                 'dateFormat' => 'yyyy-MM-dd',
                 'options' => ['autocomplete' => 'off', 'readOnly' => true]
             ])->label("Desde"); ?>
         </div>
-        <div class="col-xs-3">
+        <div class="form-group">
             <?= $form->field($modelHelper, 'fecha_hasta', ['labelOptions' => ['style' => 'color:white']])->widget(\yii\jui\DatePicker::class, [
                 'language' => 'es',
                 'dateFormat' => 'yyyy-MM-dd',
                 'options' => ['autocomplete' => 'off', 'readOnly' => true]
             ])->label("Hasta"); ?>
         </div>
-        <div class="col-xs">
-            <button id="btnBuscarFinales" type="button" disabled class="btn btn-default btn-buscar">Buscar</button>
-        </div>
+        <span>
+            <button id="btnBuscarFinales" class="form-control" type="button" disabled class="btn btn-default btn-buscar">Buscar</button>
+        </span>
 
     </div>
     <?php ActiveForm::end() ?>

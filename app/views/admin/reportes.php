@@ -9,6 +9,8 @@ use app\models\Carrera;
 use app\models\CicloLectivo;
 use yii\helpers\ArrayHelper;
 use miloschuman\highcharts\Highcharts;
+use app\models\Users;
+use app\models\Materia;
 
 use yii\bootstrap\ActiveForm;
 /* @var $this yii\web\View */
@@ -38,6 +40,15 @@ $ciclos = CicloLectivo::find()->asArray()->all();
 $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
 ?>
 
+<?php
+
+$usuarios = Users::find()->count();
+$institutos = Instituto::find()->count();
+$carreras = Carrera::find()->count();
+$materias = Materia::find()->count();
+?>
+
+
 <?php $form = ActiveForm::begin([
     'layout' => 'horizontal',
     'fieldConfig' => [
@@ -47,7 +58,37 @@ $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
         ],
     ],
 ]); ?>
-    <div class="col-md-offset-1 col-md-10">
+    <div class="container">
+    <div class="row">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <div class="well dash-box boxAdmin">
+                    <h2><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?= Html::encode("{$usuarios} ") ?></h2>
+                    <h4>Usuarios</h4>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <div class="well dash-box boxAdmin">
+                    <h2><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> <?= Html::encode("{$carreras} ") ?></h2>
+                    <h4>Carreras</h4>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <div class="well dash-box boxAdmin">
+                    <h2><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> <?= Html::encode("{$materias} ") ?></h2>
+                    <h4>Materias</h4>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <div class="well dash-box boxAdmin">
+                    <h2><span class="glyphicon glyphicon-home" aria-hidden="true"></span> <?= Html::encode("{$institutos} ") ?></h2>
+                    <h4>Institutos</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="col-md-offset-1 col-md-9">
         <?php 
         echo Highcharts::widget([
             'scripts' => [
@@ -55,7 +96,7 @@ $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
                 'modules/export-data'
             ],
             'options' => [
-                'title' => ['text' => 'Uso del espacio por día'],
+                'title' => ['text' => 'Uso del espacio por día (horas)'],
                 'xAxis' => [
                     'categories' => ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado']
                 ],
@@ -74,6 +115,40 @@ $resultCiclos = ArrayHelper::map($ciclos, 'id', 'nombre');
         ]);
 
         ?>
+        <br>
+        <?php 
+        $seriesJson = '';
+        $days = array("Lunes", "Martes", "Miercoles", "Jueves","Viernes","Sabado");
+        foreach($porcentajePorDiaPorInstituto as $k => $v){
+            $seriesJson .= '{"type": "column", "name": "'.$k.'" ';
+            $seriesJson .= ', "color": "'.$colors[$k].'" ';
+            $seriesJson .= ', "data": [ ';
+            for($i = 0; $i < 6; $i++){
+                $seriesJson .= ($i < 5) ? $v[$days[$i]] . ', ': $v[$days[$i]];
+            }
+            $seriesJson .= ' ]},';
+        }
+        
+        $seriesJson = mb_substr($seriesJson , 0, -1);
+
+        echo Highcharts::widget([
+            'scripts' => ["modules/exporting", "modules/export-data"],
+            'options'=>'{
+               "title": { "text": "Uso del espacio de comisiones por Instituto y por día (porcentaje) para el ciclo '. $cicloSess->nombre .'" },
+               "xAxis": {
+                  "categories": ["Lunes", "Martes", "Miercoles", "Jueves","Viernes","Sabado"]
+               },
+               "yAxis": {
+                  "title": { "text": "Porcentaje de horas" },
+                  "labels": {"format": "{value}%"}
+               },
+               "series": ['.$seriesJson.'],
+               "plotOptions": {"column": {"stacking": "percent"}},
+               "credits": {"enabled": false}
+            }'
+         ]);
+        ?>
+        
         <br>
         <?php 
         echo Highcharts::widget([

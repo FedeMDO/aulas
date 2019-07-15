@@ -56,15 +56,11 @@ class EventoController extends Controller
     {
         $aula = Aula::findOne($id);
         $actividades = Actividad::find()->where(['ID_AULA' => $id]);
-        $pagination = new Pagination([
-            'defaultPageSize' => 20,
-            'totalCount' => $actividades->count(),
-        ]);
 
         $act = $actividades->orderBy(['MOMENTO' => SORT_DESC])
-            ->offset($pagination->offset)
-            ->limit($pagination->limit)
+            ->limit(300)
             ->all();
+
         return $this->render('index', [
             'id_aula' => $id,
             'aula' => $aula,
