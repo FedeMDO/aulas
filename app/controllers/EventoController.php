@@ -45,6 +45,49 @@ class EventoController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            [
+                'class' => 'yii\filters\PageCache',
+                'only' => ['actionJsonschedulersede', 'actionJsoncalendar'],
+                'duration' => 180,
+                'dependency' => [
+                    'class' => 'yii\caching\DbDependency',
+                    'sql' => 'SELECT COUNT(*) FROM evento_calendar',
+                ],
+            ],
+            [
+                'class' => 'yii\filters\PageCache',
+                'only' => ['actionJsonschedulerseder', 'actionJsoncalendarr'],
+                'duration' => 180,
+                'dependency' => [
+                    'class' => 'yii\caching\DbDependency',
+                    'sql' => 'SELECT COUNT(*) FROM restri_calendar',
+                ],
+            ],
+            [
+                'class' => 'yii\filters\PageCache',
+                'only' => ['actionJsonresources'],
+                'duration' => 180,
+                'dependency' => [
+                    'class' => 'yii\caching\DbDependency',
+                    'sql' => 'SELECT COUNT(*) FROM aula',
+                ],
+            ],
+            [
+                'class' => 'yii\filters\HttpCache',
+                'only' => ['actionJsonschedulersede', 'actionJsoncalendar'],
+                'lastModified' => function ($action, $params) {
+                    $q = new \yii\db\Query();
+                    return $q->from('evento_calendar')->max('updated_at');
+                },
+            ],
+            [
+                'class' => 'yii\filters\HttpCache',
+                'only' => ['actionJsonschedulerseder', 'actionJsoncalendarr'],
+                'lastModified' => function ($action, $params) {
+                    $q = new \yii\db\Query();
+                    return $q->from('evento_calendar')->max('updated_at');
+                },
+            ],
         ];
     }
 
@@ -281,7 +324,70 @@ class EventoController extends Controller
 
         return $resources;
     }
+
+
     public function actionJsoncalendar($id = null, $start = null, $end = null, $_ = null)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        //Ciclo en sesion
+        $cicloSessID = Yii::$app->session->get('cicloID');
+
+        $isGuest = User::isUserGuest(Yii::$app->user->identity->id);
+        $isAdmin = User::isUserAdmin(Yii::$app->user->identity->id);
+        if (!$isGuest) {
+            $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
+        }
+        $tasks = array();
+        $aula = Aula::findOne($id);
+
+        //EVENTOS
+        foreach ($aula->eventoCalendars as $eve) {
+            //CHECKEO CICLO EN SESION
+            if ($eve->ID_Ciclo == $cicloSessID) {
+                $begin = new DateTime($eve->ciclo->fecha_inicio);
+                $endItrvl = new DateTime($eve->ciclo->fecha_fin);
+
+                $interval = DateInterval::createFromDateString('1 day');
+                $period = new DatePeriod($begin, $interval, $endItrvl);
+
+                foreach ($period as $dia) {
+                    if ($dia->format('N') == $eve->dow) {
+                        $event = array();
+                    // Evento NO ESPECIAL (es periodico).
+                        $event['especial'] = false;
+                        $event['id'] = intval($eve->id) . 'E';
+                        $event['title'] = $eve->comision->getName();
+                        $event['color'] = $eve->instituto->COLOR_HEXA;
+                        $event['ranges'] = [array('start' => $eve->ciclo->fecha_inicio, 'end' => $eve->ciclo->fecha_fin)];
+                        $event['editable'] = true;
+                        $event['ajeno'] = false;
+                        if ($isGuest) {
+                            $event['ajeno'] = true;
+                            $event['editable'] = false;
+                        }
+                    //user en session no edita eventos de otros institutos
+                        else if ($instIdOnSessionUser != $eve->instituto->ID) {
+                            $event['ajeno'] = true;
+                            $event['editable'] = false;
+                        }
+                        if ($isAdmin) {
+                            $event['ajeno'] = false;
+                            $event['editable'] = true;
+                        }
+                        $event['start'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_ini;
+                        $event['end'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_fin;
+                        $event['usermodifico'] = $eve->ID_UModifica;
+                        $event['resourceId'] = $eve->ID_Aula;
+                        $tasks[] = (object)$event;
+                    }
+                }
+            }
+        }
+        return $tasks;
+    }
+
+    public function actionJsoncalendarr($id = null, $start = null, $end = null, $_ = null)
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         
@@ -337,49 +443,7 @@ class EventoController extends Controller
             }
 
         }
-        //EVENTOS
-        foreach ($aula->eventoCalendars as $eve) {
-            //CHECKEO CICLO EN SESION
-            if ($eve->ID_Ciclo == $cicloSessID) {
-                $begin = new DateTime($eve->ciclo->fecha_inicio);
-                $endItrvl = new DateTime($eve->ciclo->fecha_fin);
-
-                $interval = DateInterval::createFromDateString('1 day');
-                $period = new DatePeriod($begin, $interval, $endItrvl);
-
-                foreach ($period as $dia) {
-                    if ($dia->format('N') == $eve->dow) {
-                        $event = array();
-                    // Evento NO ESPECIAL (es periodico).
-                        $event['especial'] = false;
-                        $event['id'] = intval($eve->id) . 'E';
-                        $event['title'] = $eve->comision->getName();
-                        $event['color'] = $eve->instituto->COLOR_HEXA;
-                        $event['ranges'] = [array('start' => $eve->ciclo->fecha_inicio, 'end' => $eve->ciclo->fecha_fin)];
-                        $event['editable'] = true;
-                        $event['ajeno'] = false;
-                        if ($isGuest) {
-                            $event['ajeno'] = true;
-                            $event['editable'] = false;
-                        }
-                    //user en session no edita eventos de otros institutos
-                        else if ($instIdOnSessionUser != $eve->instituto->ID) {
-                            $event['ajeno'] = true;
-                            $event['editable'] = false;
-                        }
-                        if ($isAdmin) {
-                            $event['ajeno'] = false;
-                            $event['editable'] = true;
-                        }
-                        $event['start'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_ini;
-                        $event['end'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_fin;
-                        $event['usermodifico'] = $eve->ID_UModifica;
-                        $event['resourceId'] = $eve->ID_Aula;
-                        $tasks[] = (object)$event;
-                    }
-                }
-            }
-        }
+        
         return $tasks;
     }
 
@@ -402,8 +466,77 @@ class EventoController extends Controller
 
                 if (!empty($edi->aulas)) {
                     foreach ($edi->aulas as $aula) {                        
+                        //EVENTOS
+                        $eves = EventoCalendar::find()->where(["ID_Aula" => $aula->ID, "ID_Ciclo" => $cicloSessID])->all();
+                        foreach ($eves as $eve) {
+                            //CICLO EN SESION
+                            if ($eve->ID_Ciclo == $cicloSessID) {
+                                $begin = new DateTime($eve->ciclo->fecha_inicio);
+                                $endItrvl = new DateTime($eve->ciclo->fecha_fin);
+                                $interval = DateInterval::createFromDateString('1 day');
+                                $period = new DatePeriod($begin, $interval, $endItrvl);
+
+                                foreach ($period as $dia) {
+                                    if ($dia->format('N') == intval($eve->dow)) {
+                                        $event = array();
+                                    // Evento NO ESPECIAL (es periodico).
+                                        $event['especial'] = false;
+                                        $event['id'] = intval($eve->id) . 'E';
+                                        $event['title'] = $eve->comision->getName();
+                                        $event['color'] = $eve->instituto->COLOR_HEXA;
+                                        $event['ranges'] = [array('start' => $eve->ciclo->fecha_inicio, 'end' => $eve->ciclo->fecha_fin)];
+                                        $event['editable'] = true;
+                                        $event['ajeno'] = false;
+                                    //user en session no edita eventos de otros institutos
+                                        if ($isGuest) {
+                                            $event['ajeno'] = true;
+                                            $event['editable'] = false;
+                                        } else if ($instIdOnSessionUser != $eve->instituto->ID) {
+                                            $event['ajeno'] = true;
+                                            $event['editable'] = false;
+                                        }
+                                        if ($isAdmin) {
+                                            $event['ajeno'] = false;
+                                            $event['editable'] = true;
+                                        }
+                                        $event['start'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_ini;
+                                        $event['end'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_fin;
+                                        $event['resourceId'] = $eve->ID_Aula;
+                                        $event['usermodifico'] = $eve->ID_UModifica;
+                                        $tasks[] = (object)$event;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return $tasks;
+    }
+
+    public function actionJsonschedulerseder($id_sede, $start = null, $end = null, $_ = null)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        //Ciclo en sesion
+        $cicloSessID = Yii::$app->session->get('cicloID');
+
+        $isGuest = User::isUserGuest(Yii::$app->user->identity->id);
+        $isAdmin = User::isUserAdmin(Yii::$app->user->identity->id);
+        if (!$isGuest) {
+            $instIdOnSessionUser = Users::findOne(Yii::$app->user->identity->id)->idInstituto;
+        }
+        $tasks = array();
+        $sede = Sede::findOne($id_sede);
+        if (!empty($sede->edificios)) {
+            foreach ($sede->edificios as $edi) {
+
+                if (!empty($edi->aulas)) {
+                    foreach ($edi->aulas as $aula) {                        
                         //RESTRICCIONES
-                        foreach ($aula->restriCalendars as $cons) {
+                        $restris = RestriCalendar::find()->where(["ID_Aula" => $aula->ID, "ID_Ciclo" => $cicloSessID])->all();
+                        foreach ($restris as $cons) {
                             //CICLO EN SESION
                             if ($cons->ID_Ciclo == $cicloSessID) {
                                 $begin = new DateTime($cons->ciclo->fecha_inicio);
@@ -445,53 +578,13 @@ class EventoController extends Controller
                                 }
                             }
                         }
-                        //EVENTOS
-                        foreach ($aula->eventoCalendars as $eve) {
-                            //CICLO EN SESION
-                            if ($eve->ID_Ciclo == $cicloSessID) {
-                                $begin = new DateTime($eve->ciclo->fecha_inicio);
-                                $endItrvl = new DateTime($eve->ciclo->fecha_fin);
-                                $interval = DateInterval::createFromDateString('1 day');
-                                $period = new DatePeriod($begin, $interval, $end);
-
-                                foreach ($period as $dia) {
-                                    if ($dia->format('N') == intval($eve->dow)) {
-                                        $event = array();
-                                    // Evento NO ESPECIAL (es periodico).
-                                        $event['especial'] = false;
-                                        $event['id'] = intval($eve->id) . 'E';
-                                        $event['title'] = $eve->comision->getName();
-                                        $event['color'] = $eve->instituto->COLOR_HEXA;
-                                        $event['ranges'] = [array('start' => $eve->ciclo->fecha_inicio, 'end' => $eve->ciclo->fecha_fin)];
-                                        $event['editable'] = true;
-                                        $event['ajeno'] = false;
-                                    //user en session no edita eventos de otros institutos
-                                        if ($isGuest) {
-                                            $event['ajeno'] = true;
-                                            $event['editable'] = false;
-                                        } else if ($instIdOnSessionUser != $eve->instituto->ID) {
-                                            $event['ajeno'] = true;
-                                            $event['editable'] = false;
-                                        }
-                                        if ($isAdmin) {
-                                            $event['ajeno'] = false;
-                                            $event['editable'] = true;
-                                        }
-                                        $event['start'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_ini;
-                                        $event['end'] = $dia->format('Y-m-d') . 'T' . $eve->Hora_fin;
-                                        $event['resourceId'] = $eve->ID_Aula;
-                                        $event['usermodifico'] = $eve->ID_UModifica;
-                                        $tasks[] = (object)$event;
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
             }
         }
         return $tasks;
     }
+
     public function actionListcarrera($id)
     {
         $carreras = Carrera::find()

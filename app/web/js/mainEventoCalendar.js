@@ -43,6 +43,15 @@ $(document).ready(function () {
                 },
             },
             {
+                url: '/evento/jsoncalendarr', // use the `url` property
+                type: 'GET',
+                data: {
+                    id: function () {
+                        return $("em").text()
+                    },
+                },
+            },
+            {
                 url: '/especialcalendar/jsoncalendar', // use the `url` property
                 type: 'GET',
                 data: {

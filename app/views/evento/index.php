@@ -81,6 +81,14 @@ $indexMaterias = 1;
         margin-bottom: 0px;
     }
 
+    .collapse.width {
+    height: auto;
+    -webkit-transition: width 0.35s ease;
+    -moz-transition: width 0.35s ease;
+    -o-transition: width 0.35s ease;
+    transition: width 0.35s ease;
+    }
+
     .calendario {
         background-color: white;
         padding: 15px;
@@ -190,19 +198,16 @@ $indexMaterias = 1;
                     </div>
                 </div>
                 <!-- registro de actividad -->
-                <div class="col-sm-2">
+                <div class="col-sm-2 ">
                     <div class="panel panel-default" style="padding: 15px;margin-top: 20px;border-radius: 5px;">
                         <div class="panel-heading">
                             <h3 class="panel-title" style="text-align:center">Actividad</h3>
                         </div>
                         <div class="panel-body" style="font-size:0.75em; max-height: 495px; overflow-y: scroll;">
                             <ul>
-                               <!-- <li>24/04/2019 19:42 - Algo que hicieron</li>
-                                <li>20/04/2019 15:33 - Otra cosa que hicieron</li>
-                                <li>11/04/2019 08:50 - Algo habrán hecho</li> -->
                                 <?php foreach ($actividades as $actividad): ?>
                                 <?php $fecha = DateTime::createFromFormat('Y-m-d H:i:s', $actividad->MOMENTO); ?>
-                                    <li><?= Html::encode("{$fecha->format('d-m-Y H:i')}")?> - <?= Html::encode($actividad->USER_REALIZA) ." ". Html::encode($actividad->ACCION)?></li>
+                                    <li style="padding-bottom:1em"><strong><?= Html::encode("{$fecha->format('d-m-Y H:i')}")?>hs</strong> - <strong><?= Html::encode($actividad->USER_REALIZA) ?></strong> <?= Html::encode($actividad->ACCION)?></li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>

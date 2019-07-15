@@ -8,6 +8,6 @@ return [
 
     // Schema cache options (for production environment)
     'enableSchemaCache' => true,
-    'schemaCacheDuration' => 60,
+    'schemaCacheDuration' => 180,
     'schemaCache' => 'cache',
 ];

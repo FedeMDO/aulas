@@ -80,6 +80,16 @@ $(document).ready(function () {
                 data: {
                     id_sede: $("em").text(),
                 },
+            },
+            {
+                url: '/evento/jsonschedulerseder', // use the `url` property
+                type: 'GET',
+                data: {
+                    id_sede: $("em").text(),
+                },
+                error: function () {
+                    alert('there was an error while fetching events!');
+                },
             }
         ],
         eventRender: function (event, element, view) {

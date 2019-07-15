@@ -33,6 +33,23 @@ class EspecialcalendarController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            [
+                'class' => 'yii\filters\PageCache',
+                'only' => ['actionJsonschedulersede', 'actionJsoncalendar'],
+                'duration' => 180,
+                'dependency' => [
+                    'class' => 'yii\caching\DbDependency',
+                    'sql' => 'SELECT COUNT(*) FROM especial_calendar',
+                ],
+            ],
+            [
+                'class' => 'yii\filters\HttpCache',
+                'only' => ['actionJsonschedulersede', 'actionJsoncalendar'],
+                'lastModified' => function ($action, $params) {
+                    $q = new \yii\db\Query();
+                    return $q->from('especial_calendar')->max('updated_at');
+                },
+            ],
         ];
     }
 
@@ -244,10 +261,10 @@ class EspecialcalendarController extends Controller
 
         $tasks = array();
         $sede = Sede::findOne($id_sede);
-        if (!empty($sede->edificios)) {
+
             foreach ($sede->edificios as $edi) {
 
-                if (!empty($edi->aulas)) {
+
                     foreach ($edi->aulas as $aula) {                        
                         //EVENTOS
                         foreach ($aula->especialCalendars as $eve) {
@@ -286,9 +303,9 @@ class EspecialcalendarController extends Controller
                             $tasks[] = (object)$event;
                         }
                     }
-                }
+                
             }
-        }
+        
         return $tasks;
     }
 }

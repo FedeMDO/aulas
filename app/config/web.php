@@ -6,6 +6,7 @@ $db = require __DIR__ . '/db.php';
 $config = [
     'id' => 'basic',
     'name'=>'Gestion de Aulas',
+    'timeZone' => 'America/Argentina/Buenos_Aires',
     'language' => 'es-US', // Set the language here
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
@@ -14,12 +15,6 @@ $config = [
         '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
-        'reCaptcha' => [
-            'name' => 'reCaptcha',
-            'class' => 'himiklab\yii2\recaptcha\ReCaptcha',
-            'siteKey' => '6LeTZ4QUAAAAAHHMKY3N6ZeZdIl9WVTRMmAxTQwv',
-            'secret' => '6LeTZ4QUAAAAAIFDHHD4F6uWk3tOGKAGB3UHURYg',
-        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'wLLlXPhuiwybBr41Qn4sTvpW8Hnm1RVf',
@@ -50,8 +45,6 @@ $config = [
                 'encryption' => 'tls',
             ],
         ],
-
-
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -62,7 +55,6 @@ $config = [
             ],
         ],
         'db' => $db,
-
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
